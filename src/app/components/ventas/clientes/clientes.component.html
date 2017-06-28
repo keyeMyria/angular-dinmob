@@ -1,0 +1,74 @@
+<div class="row">
+  <div class="col s12">
+
+    <h1>Acordeón</h1>
+
+    <p-accordion>
+      <p-accordionTab header="Header 1">
+        Content 1
+      </p-accordionTab>
+      <p-accordionTab header="Header 2">
+        Content 2
+      </p-accordionTab>
+      <p-accordionTab header="Header 3">
+        Content 3
+      </p-accordionTab>
+    </p-accordion>
+    <br>
+
+    <p-treeTable [value]="manzanas" selectionMode="checkbox">
+      <p-column field="nombre" header="Nombre"></p-column>
+      <p-column field="id" header="ID"></p-column>
+      <p-column field="code" header="Código"></p-column>
+    </p-treeTable>
+
+
+    <mz-collapsible [mode]="'expandable'" [onClose]="closeFunctionCallback" [onOpen]="openFunctionCallback" [popout]="false">
+      <mz-collapsible-item [active]="false">
+        <mz-collapsible-item-header>
+          <i mz-icon [align]="'left'" [icon]="'done_all'"></i> Manzana 1
+        </mz-collapsible-item-header>
+        <mz-collapsible-item-body>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </mz-collapsible-item-body>
+      </mz-collapsible-item>
+
+      <mz-collapsible-item [active]="false">
+        <mz-collapsible-item-header>
+          <i mz-icon [align]="'left'" [icon]="'3d_rotation'"></i> Manzana 2
+        </mz-collapsible-item-header>
+        <mz-collapsible-item-body>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </mz-collapsible-item-body>
+      </mz-collapsible-item>
+
+      <mz-collapsible-item [active]="false">
+        <mz-collapsible-item-header>
+
+          <md-checkbox (click)="cbClick($event)">Manzana 1</md-checkbox>
+
+        </mz-collapsible-item-header>
+        <mz-collapsible-item-body>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </mz-collapsible-item-body>
+      </mz-collapsible-item>
+    </mz-collapsible>
+
+
+    <h3 class="first">Basic</h3>
+    <p-dataTable [value]="lotes" selectionMode="single" [(selection)]="loteSelected" [contextMenu]="cm">
+      <p-column field="id_lote" header="ID" [filter]="true"></p-column>
+      <p-column field="nombre" header="Lote" sortable="true"></p-column>
+      <p-column field="code" header="Código"></p-column>
+    </p-dataTable>
+
+    <p-contextMenu #cm [appendTo]="body" [model]="acciones"></p-contextMenu>
+
+    <!--<h3>Dynamic Columns</h3>
+          <p-dataTable [value]="lotes">
+            <p-column *ngFor="let lote of lotes" [field]="col.field" [header]="col.header"></p-column>
+          </p-dataTable>-->
+    <br>
+
+  </div>
+</div>

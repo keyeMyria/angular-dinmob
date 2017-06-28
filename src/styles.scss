@@ -1,0 +1,45 @@
+
+/*@import "~materialize-css/sass/materialize.scss";*/
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+/*@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic");*/
+
+/*@import "~materialize-css/dist/css/materialize.css";*/
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~font-awesome/css/font-awesome.css";
+@import "~primeng/resources/primeng.css";
+@import "~primeng/resources/themes/bootstrap/theme.css";
+
+
+html, body, app-root, md-sidenav-container, .my-content {
+    margin:0;
+    width: 100%;
+    height: 100%;
+}
+
+/*body {
+    font-family:Roboto, sans-serif;
+}*/
+
+.spacer{
+    flex: 1 1 auto;
+}
+/* fix: materialize.css cambia el color */
+button:focus{
+    background-color: transparent !important;
+}
+
+md-sidenav-container {
+    height: 100vh;
+}
+
+md-sidenav {
+    width: 300px;
+}
+
+.icon-20 {
+    font-size: 20px;
+}
+
+/*md-toolbar-row {
+    justify-content: space-between;
+}*/

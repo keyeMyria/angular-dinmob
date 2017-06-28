@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+// Mixins
+@import "~materialize-css/sass/components/mixins";
+@import "~materialize-css/sass/components/color";
+
+// Variables;
+@import "~materialize-css/sass/components/variables";
+
+// Reset
+@import "~materialize-css/sass/components/normalize";
+
+
+
+// Text Styles
+em { font-style: italic; }
+strong { font-weight: 500; }
+small { font-size: 75%; }
+.light { font-weight: 300; }
+.thin { font-weight: 200; }
+
+
+
+// components
+@import "~materialize-css/sass/components/global";
+
+@import "~materialize-css/sass/components/grid";
+@import "~materialize-css/sass/components/toast";
+
+@import "~materialize-css/sass/components/waves";
+
+@import "~materialize-css/sass/components/collapsible";
+
+@import "~materialize-css/sass/components/table_of_contents";
+
+@import "~materialize-css/sass/components/carousel";
+
+

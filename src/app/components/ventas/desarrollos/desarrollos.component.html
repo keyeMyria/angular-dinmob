@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col s12">
+    <h1>Desarrollos</h1>
+    
+    <table class="striped responsive-table">
+      <thead>
+        <tr>
+          <th>Manzana</th>
+          <th>Lote</th>
+          <th>Precio</th>
+          <th>Estado</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let lote of lotes">
+          <td>{{lote.manzana}}</td>
+          <td>{{lote.nombre}}</td>
+          <td>{{lote.precio|currency}}</td>
+          <td>{{lote.estado}}</td>
+          <td>
+            <button md-icon-button>
+              <md-icon>zoom_in</md-icon>
+            </button>
+          </td>
+          <td>
+            <button md-icon-button>
+              <md-icon>mode_edit</md-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
