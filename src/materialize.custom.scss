@@ -24,15 +24,17 @@ small { font-size: 75%; }
 // components
 @import "~materialize-css/sass/components/global";
 
-@import "~materialize-css/sass/components/grid";
-@import "~materialize-css/sass/components/toast";
+//fix tables
+td, th {
+    /*padding: 8px;*/
+    border-radius: 0;
+}
 
-@import "~materialize-css/sass/components/waves";
+/*@import "~materialize-css/sass/components/grid";*/
+
 
 @import "~materialize-css/sass/components/collapsible";
 
-@import "~materialize-css/sass/components/table_of_contents";
 
-@import "~materialize-css/sass/components/carousel";
 
 

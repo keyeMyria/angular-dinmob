@@ -1,7 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { MdMenuModule,MdCheckboxModule, MdIconModule, MdToolbarModule, MdSidenavModule, MdButtonModule, MdTabsModule, MdListModule } from "@angular/material";
-import "hammerjs";
+import { FlexLayoutModule } from "@angular/flex-layout";
+import { 
+  MdMenuModule, 
+  MdCheckboxModule, 
+  MdRadioModule, 
+  MdIconModule, 
+  MdToolbarModule, 
+  MdSidenavModule, 
+  MdButtonModule, 
+  MdTabsModule, 
+  MdListModule 
+} from "@angular/material";
+/*import "hammerjs";*/
 
 import { AccordionModule } from "primeng/components/accordion/accordion";
 import { DataTableModule } from "primeng/components/datatable/datatable";
@@ -11,7 +22,7 @@ import { MenuModule } from "primeng/components/menu/menu";
 import { TreeTableModule } from "primeng/components/treetable/treetable";
 
 
-import { MaterializeModule } from "ng2-materialize";
+//import { MaterializeModule } from "angular2-materialize";
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -19,7 +30,9 @@ import { ClientesComponent } from './components/ventas/clientes/clientes.compone
 import { DesarrollosComponent } from './components/ventas/desarrollos/desarrollos.component';
 import { NuevoClienteComponent } from './components/ventas/nuevo-cliente/nuevo-cliente.component';
 import { ClienteComponent } from './components/ventas/cliente/cliente.component';
-import { ROUTING } from "app/app.routing";
+import { RoutingModule } from "app/app.routing";
+import { ClientesService } from "app/services/clientes.service";
+import { HttpModule } from "@angular/http";
 
 @NgModule({
   declarations: [
@@ -31,8 +44,10 @@ import { ROUTING } from "app/app.routing";
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     BrowserAnimationsModule,
-    MaterializeModule.forRoot(),
+    FlexLayoutModule,
+    //MaterializeModule,
     MdMenuModule,
     MdIconModule,
     MdToolbarModule,
@@ -41,7 +56,8 @@ import { ROUTING } from "app/app.routing";
     MdTabsModule,
     MdListModule,
     MdCheckboxModule,
-    
+    MdRadioModule,
+
     AccordionModule,
     DataTableModule,
     ContextMenuModule,
@@ -49,10 +65,13 @@ import { ROUTING } from "app/app.routing";
     TreeTableModule,
     SharedModule,
 
-      ROUTING
+    RoutingModule
 
   ],
-  providers: [],
+  providers: [
+   
+    ClientesService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

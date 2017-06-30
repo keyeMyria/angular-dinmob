@@ -9,7 +9,7 @@ import { ClienteComponent } from './components/ventas/cliente/cliente.component'
 
 
 export const ROUTES: Routes = [
-    { path: '', redirectTo: 'clientes', pathMatch: 'full' },
+    { path: '', redirectTo: 'desarrollos', pathMatch: 'full' },
 /*    { path: 'home', component: HomeComponent },
     { path: 'about', component: AboutComponent },*/
 
@@ -17,10 +17,10 @@ export const ROUTES: Routes = [
     { path: 'clientes', component: ClientesComponent },
     { path: 'desarrollos', component: DesarrollosComponent },
     { path: 'nuevo-cliente', component: NuevoClienteComponent },
-    { path: 'cliente', component: ClienteComponent }
+    { path: 'cliente/:id', component: ClienteComponent }
 
 
 
 ];
 
-export const ROUTING: ModuleWithProviders = RouterModule.forRoot(ROUTES);
+export const RoutingModule: ModuleWithProviders = RouterModule.forRoot(ROUTES);

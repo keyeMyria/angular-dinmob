@@ -1,9 +1,8 @@
 
-/*@import "~materialize-css/sass/materialize.scss";*/
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
-/*@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic");*/
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic");
 
-/*@import "~materialize-css/dist/css/materialize.css";*/
+
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "~font-awesome/css/font-awesome.css";
 @import "~primeng/resources/primeng.css";
@@ -16,9 +15,9 @@ html, body, app-root, md-sidenav-container, .my-content {
     height: 100%;
 }
 
-/*body {
+body {
     font-family:Roboto, sans-serif;
-}*/
+}
 
 .spacer{
     flex: 1 1 auto;
@@ -32,8 +31,16 @@ md-sidenav-container {
     height: 100vh;
 }
 
-md-sidenav {
+/*md-sidenav {
     width: 300px;
+}*/
+
+.sidenav-start {
+    width: 200px;
+}
+
+.sidenav-end {
+    width: 250px;
 }
 
 .icon-20 {
