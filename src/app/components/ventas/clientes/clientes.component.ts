@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { trigger, state, style, transition, animate, keyframes } from "@angular/animations";
+import {  AUTO_STYLE, trigger, state, style, transition, animate, keyframes } from "@angular/animations";
 import { MenuItem, TreeNode } from "primeng/components/common/api";
 import { ClientesService } from "app/services/clientes.service";
 import { Router } from "@angular/router";
@@ -31,6 +31,29 @@ import { Router } from "@angular/router";
       )),
 
     ]),
+    trigger('rjaCollapse', [
+      state('expand', style({
+        height: '*',
+        color:'blue',
+        //display:'block'
+        //transform:'scale(1)'
+        //opacity:1
+      })),
+      state('collapse', style({
+        height: '0px',
+        color:'red',
+        //display:'none'
+        //transform:'scale(1.3)'
+        //opacity:0
+      })),
+
+      transition('expand <=> collapse', [        
+        animate('350ms')
+      ]),
+     
+
+
+    ])
   ]
 })
 export class ClientesComponent implements OnInit {
@@ -95,6 +118,8 @@ export class ClientesComponent implements OnInit {
 
   state: string = "small";
 
+  estado: string = "expand";
+
   clientes: any[];
 
   constructor(
@@ -103,7 +128,7 @@ export class ClientesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.clientesService.getClientes()
+    this.clientesService.getNombresClientesVenta()
       .subscribe(res => this.clientes = res);
   }
 
@@ -124,6 +149,13 @@ export class ClientesComponent implements OnInit {
 
   animar() {
     this.state = (this.state === "small" ? "large" : "small");
+  }
+
+  toggle() {
+    //console.log("toggle expand:collapse");
+    //this.estado = (this.estado === "expand" ? "void" : "expand");
+    this.estado = (this.estado === "expand" ? "collapse" : "expand");
+    console.log(this.estado);
   }
 
   gotoCliente(cliente) {

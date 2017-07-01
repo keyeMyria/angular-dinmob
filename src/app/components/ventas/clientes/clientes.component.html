@@ -6,6 +6,7 @@
 
       <a href="" *ngFor="let cliente of clientes" [routerLink]="['/cliente', cliente.id_cliente]"></a>
 
+
       <div class="table-responsive">
         <table class="table table-striped">
           <thead>
@@ -31,57 +32,70 @@
 
 
 
-      <div class="table-responsive">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th></th>
-              <th>Lote</th>
-              <th>Código</th>
-              <th>Precio</th>
-              <th>Valor</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="bg-primary">
-              <td>
-                <md-checkbox (click)="cbClick($event)"></md-checkbox>
-              </td>
-              <td>Lote 1</td>
-              <td>M1L1</td>
-              <td>2,000,000.00</td>
-              <td>1,000,000.00</td>
-            </tr>
-            <tr>
-              <td>
-                <md-checkbox (click)="cbClick($event)"></md-checkbox>
-              </td>
-              <td>Lote 1</td>
-              <td>M1L1</td>
-              <td>2,000,000.00</td>
-              <td>1,000,000.00</td>
-            </tr>
-            <tr>
-              <td>
-                <md-checkbox (click)="cbClick($event)"></md-checkbox>
-              </td>
-              <td>Lote 1</td>
-              <td>M1L1</td>
-              <td>2,000,000.00</td>
-              <td>1,000,000.00</td>
-            </tr>
-            <tr>
-              <td>
-                <md-checkbox (click)="cbClick($event)"></md-checkbox>
-              </td>
-              <td>Lote 1</td>
-              <td>M1L1</td>
-              <td>2,000,000.00</td>
-              <td>1,000,000.00</td>
-            </tr>
-          </tbody>
-        </table>
+      <button (click)="toggle()">Toggle</button>
+
+
+   <!--   <div [@rjaCollapse]="estado">
+        <p>Hola mundo!!!</p>
+      </div>-->
+
+
+      <div [@rjaCollapse]="estado" style="overflow:hidden">
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Lote</th>
+                <th>Código</th>
+                <th>Precio</th>
+                <th>Valor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <md-checkbox (click)="cbClick($event)"></md-checkbox>
+                </td>
+                <td>Lote 1</td>
+                <td>M1L1</td>
+                <td>2,000,000.00</td>
+                <td>1,000,000.00</td>
+              </tr>
+              <tr>
+                <td>
+                  <md-checkbox (click)="cbClick($event)"></md-checkbox>
+                </td>
+                <td>Lote 1</td>
+                <td>M1L1</td>
+                <td>2,000,000.00</td>
+                <td>1,000,000.00</td>
+              </tr>
+              <tr>
+                <td>
+                  <md-checkbox (click)="cbClick($event)"></md-checkbox>
+                </td>
+                <td>Lote 1</td>
+                <td>M1L1</td>
+                <td>2,000,000.00</td>
+                <td>1,000,000.00</td>
+              </tr>
+              <tr>
+                <td>
+                  <md-checkbox (click)="cbClick($event)"></md-checkbox>
+                </td>
+                <td>Lote 1</td>
+                <td>M1L1</td>
+                <td>2,000,000.00</td>
+                <td>1,000,000.00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
+
+      <!--<div style="background-color:white; height:500px;"></div>-->
+
       <h1>Acordeón</h1>
 
       <p-accordion>

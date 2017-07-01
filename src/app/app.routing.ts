@@ -6,6 +6,8 @@ import { ClientesComponent } from './components/ventas/clientes/clientes.compone
 import { DesarrollosComponent } from './components/ventas/desarrollos/desarrollos.component';
 import { NuevoClienteComponent } from './components/ventas/nuevo-cliente/nuevo-cliente.component';
 import { ClienteComponent } from './components/ventas/cliente/cliente.component';
+//admin
+import { ObrasComponent } from "app/components/admin/obras/obras.component";
 
 
 export const ROUTES: Routes = [
@@ -13,11 +15,14 @@ export const ROUTES: Routes = [
 /*    { path: 'home', component: HomeComponent },
     { path: 'about', component: AboutComponent },*/
 
-
+    //ventas
     { path: 'clientes', component: ClientesComponent },
     { path: 'desarrollos', component: DesarrollosComponent },
     { path: 'nuevo-cliente', component: NuevoClienteComponent },
-    { path: 'cliente/:id', component: ClienteComponent }
+    { path: 'cliente/:id', component: ClienteComponent },
+
+    //admin
+     { path: 'obras', component: ObrasComponent }
 
 
 

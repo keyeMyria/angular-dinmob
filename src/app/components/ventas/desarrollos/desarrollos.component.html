@@ -2,7 +2,9 @@
   <div class="col-12">
     <h1>Desarrollos</h1>
 
-    <div class="table-responsive">
+    <button md-raised-button (click)="collapse=!collapse">Collapse</button>
+
+    <div [@miAnimacion]="state" (click)="animar()" class="table-responsive" [myCollapse]="collapse">
       <table class="table table-striped">
         <thead>
           <tr>
