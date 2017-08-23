@@ -48,6 +48,11 @@ import { ObrasComponent } from './components/admin/obras/obras.component';
 
 //directives
 import { MyCollapseDirective } from './directives/my-collapse.directive';
+import { LoginComponent } from './components/login/login.component';
+import { LayoutComponent } from './components/layout/layout.component';
+import { TableroComponent } from './components/tablero/tablero.component';
+import { AngularMaterialModule } from "app/modules/angular-material.module";
+import { AuthService } from "app/services/auth.service";
 
 @NgModule({
   declarations: [
@@ -57,7 +62,10 @@ import { MyCollapseDirective } from './directives/my-collapse.directive';
     NuevoClienteComponent,
     ClienteComponent,
     ObrasComponent,
-    MyCollapseDirective
+    MyCollapseDirective,
+    LoginComponent,
+    LayoutComponent,
+    TableroComponent
   ],
   imports: [
     BrowserModule,
@@ -66,17 +74,7 @@ import { MyCollapseDirective } from './directives/my-collapse.directive';
     BrowserAnimationsModule,
     FlexLayoutModule,
     //MaterializeModule,
-    MdMenuModule,
-    MdIconModule,
-    MdToolbarModule,
-    MdSidenavModule,
-    MdButtonModule,
-    MdTabsModule,
-    MdListModule,
-    MdCheckboxModule,
-    MdRadioModule,
-    MdExpansionModule,
-    MdSlideToggleModule,
+    AngularMaterialModule,
 
     AccordionModule,
     DataTableModule,
@@ -89,6 +87,7 @@ import { MyCollapseDirective } from './directives/my-collapse.directive';
 
   ],
   providers: [
+    AuthService,
     ObrasService,
     ClientesService
   ],
