@@ -53,6 +53,22 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { TableroComponent } from './components/tablero/tablero.component';
 import { AngularMaterialModule } from "app/modules/angular-material.module";
 import { AuthService } from "app/services/auth.service";
+import { PerfilComponent } from './components/perfil/perfil.component';
+import { MapasVentasComponent } from './components/ventas/mapas-ventas/mapas-ventas.component';
+import { AvancesComponent } from './components/residente/avances/avances.component';
+import { MapasAvancesComponent } from './components/residente/mapas-avances/mapas-avances.component';
+import { EstructuraObraComponent } from './components/admin/estructura-obra/estructura-obra.component';
+import { PrototiposComponent } from './components/admin/prototipos/prototipos.component';
+import { EditarPrototipoComponent } from './components/admin/editar-prototipo/editar-prototipo.component';
+import { UsuariosComponent } from './components/admin/usuarios/usuarios.component';
+import { CrearUsuarioComponent } from './components/admin/crear-usuario/crear-usuario.component';
+import { UsuarioService } from "app/services/usuario.service";
+import { AuthModule } from "app/modules/auth.module";
+import { CambiarPasswordDialogoComponent } from './components/admin/cambiar-password-dialogo/cambiar-password-dialogo.component';
+import { ConfirmarBorradoDialogoComponent } from './components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
+import { EditarUsuarioDialogoComponent } from './components/admin/editar-usuario-dialogo/editar-usuario-dialogo.component';
+import { EditarClienteDialogoComponent } from './components/ventas/editar-cliente-dialogo/editar-cliente-dialogo.component';
+
 
 @NgModule({
   declarations: [
@@ -65,7 +81,21 @@ import { AuthService } from "app/services/auth.service";
     MyCollapseDirective,
     LoginComponent,
     LayoutComponent,
-    TableroComponent
+    TableroComponent,
+    PerfilComponent,
+    MapasVentasComponent,
+    AvancesComponent,
+    MapasAvancesComponent,
+    EstructuraObraComponent,
+    PrototiposComponent,
+    EditarPrototipoComponent,
+    UsuariosComponent,
+    CrearUsuarioComponent,
+    CambiarPasswordDialogoComponent,
+    ConfirmarBorradoDialogoComponent,
+    EditarUsuarioDialogoComponent,
+    EditarClienteDialogoComponent,
+   
   ],
   imports: [
     BrowserModule,
@@ -73,6 +103,7 @@ import { AuthService } from "app/services/auth.service";
     FormsModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
+    AuthModule,
     //MaterializeModule,
     AngularMaterialModule,
 
@@ -86,10 +117,18 @@ import { AuthService } from "app/services/auth.service";
     RoutingModule
 
   ],
+
+  entryComponents:[
+    EditarUsuarioDialogoComponent,
+    CambiarPasswordDialogoComponent,
+    ConfirmarBorradoDialogoComponent
+  ],
+
   providers: [
     AuthService,
     ObrasService,
-    ClientesService
+    ClientesService,
+    UsuarioService
   ],
   bootstrap: [AppComponent]
 })

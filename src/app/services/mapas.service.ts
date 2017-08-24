@@ -6,8 +6,33 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class MapasService {
+  url: string = "http://localhost:8080/barroco/api/index.php/usuarios/";
 
-  constructor() { }
+  constructor(private http: Http) { }
+
+  getMapaObra(path) {
+    return this.http.get('mapas/'+ path)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  getLotesObra(id_obra) {
+    return this.http.get(this.url + 'mapas/get_lotes_obra/' + id_obra)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  getValorAvanceLotesObra(id_obra) {
+    return this.http.get(this.url + 'mapas/get_valor_avance_lotes_obra/' + id_obra)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  getValues(id_obra) {
+    return this.http.get(this.url + 'obras/estado_lotes/' + id_obra)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
 
   private extractData(res: Response) {
     console.log("response", res);

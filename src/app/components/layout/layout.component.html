@@ -8,6 +8,14 @@
 
       <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/clientes']" routerLinkActive="active">Clientes</a>
 
+      <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/usuarios']" routerLinkActive="active">Usuarios</a>
+
+      <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/crear-usuario']" routerLinkActive="active">Crear Usuario</a>
+
+      <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/obras']" routerLinkActive="active">Obras</a>
+
+      <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/prototipos']" routerLinkActive="active">Prototipos</a>
+
       <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/desarollos']" routerLinkActive="active">Desarrollos</a>
 
       <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/nuevo-cliente']" routerLinkActive="active">Nuevo cliente</a>
@@ -34,6 +42,8 @@
 
       <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/nuevo-cliente']" routerLinkActive="active">Nuevo cliente</a>
 
+      <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/mapas-ventas']" routerLinkActive="active">Mapas Ventas</a>
+
       <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/cliente']" routerLinkActive="active">Cliente</a>
 
       <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/obras']" routerLinkActive="active">Obras</a>
@@ -59,6 +69,21 @@
       <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/obras']" routerLinkActive="active">Obras</a>
 
       <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/tablero']" routerLinkActive="active">Tablero</a>
+
+
+    </md-nav-list>
+
+    <md-nav-list> <!-- *ngIf= "auth.hasRole([auth.Rol.Residente])" -->
+      <h3 class="sidenav-title">Residente</h3>
+
+
+      <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/avances']" routerLinkActive="active">Avances</a>
+
+      <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/mapas-avances']" routerLinkActive="active">Mapas avances</a>
+
+      
+
+      
 
 
     </md-nav-list>
@@ -106,7 +131,7 @@
         </button>
 
       <md-menu #userMenu="mdMenu">
-        <button md-menu-item routerLink="/perfil-usuario"> Perfil </button>
+        <button md-menu-item routerLink="/perfil"> Perfil </button>
         <button md-menu-item (click)="logout()"> Cerrar sesión </button>
       </md-menu>
 

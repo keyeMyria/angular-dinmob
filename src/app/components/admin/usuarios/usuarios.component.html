@@ -7,9 +7,10 @@
     <div class="row">
       <div class="col-12">
   
+  
         <div class="card my-5">
           <div class="card-header">
-            Lista de clientes
+            Usuarios
           </div>
           <div>
             <div class="table-responsive">
@@ -19,27 +20,31 @@
                     <th>Id</th>
                     <th>Nombre</th>
                     <th>Email</th>
-                    <th>RFC</th>
+                    <th>Rol</th>
                     <th></th>
                   </tr>
                 </thead>
   
                 <tbody>
-                  <tr *ngFor="let cliente of clientes">
-                    <td>{{cliente.id_cliente}}</td>
-                    <td>{{cliente.nombre}}</td>
-                    <td>{{cliente.email}}</td>
-                    <td>{{cliente.rfc}}</td>
+                  <tr *ngFor="let usuario of usuarios; let i = index">
+                    <td>{{usuario.id_usuario}}</td>
+                    <td>{{usuario.nombre}}</td>
+                    <td>{{usuario.email}}</td>
+                    <td>{{usuario.rol}}</td>
                     <td>
                       <button md-icon-button [mdMenuTriggerFor]="menu">
                         <md-icon>more_vert</md-icon>
                       </button>
                       <md-menu #menu="mdMenu">
-                        <button md-menu-item (click)="editarCliente(cliente)">
+                        <button md-menu-item (click)="editarUsuario(usuario)">
                           <md-icon>create</md-icon>
                           <span>Editar</span>
                         </button>
-                        <button md-menu-item (click)="delCliente(cliente)">
+                        <button md-menu-item (click)="changePassword(usuario)">
+                          <md-icon>lock</md-icon>
+                          <span>Cambiar contraseña</span>
+                        </button>
+                        <button md-menu-item (click)="delUsuario(usuario)">
                           <md-icon>delete</md-icon>
                           <span>Eliminar</span>
                         </button>

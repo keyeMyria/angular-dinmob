@@ -19,34 +19,34 @@ body {
     font-family:Roboto, sans-serif;
 }
 
-.spacer{
-    flex: 1 1 auto;
-}
 /* fix: materialize.css cambia el color */
 button:focus{
     background-color: transparent !important;
 }
 
-md-sidenav-container {
-    height: 100vh;
-}
-
-/*md-sidenav {
-    width: 300px;
-}*/
-
-.sidenav-start {
-    width: 200px;
-}
-
-.sidenav-end {
-    width: 250px;
-}
-
-.icon-20 {
-    font-size: 20px;
-}
-
-/*md-toolbar-row {
-    justify-content: space-between;
-}*/
+/* Absolute Center Spinner */
+.loading {
+    position: fixed;
+    z-index: 999;
+    //height: 2em;
+    //width: 2em;
+    overflow: show;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+  
+  /* Transparent Overlay */
+  .loading:before {
+    content: '';
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    //opacity: .48;
+    //background-color: rgba(0,0,0,0.6);
+  }

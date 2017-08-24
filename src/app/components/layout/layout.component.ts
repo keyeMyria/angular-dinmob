@@ -16,9 +16,9 @@ export class LayoutComponent implements OnInit {
   constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
-    this.usuario = new Usuario(); //this.auth.getUsuario();
-    this.usuario.nombre = "Nuevo usuario";
-    this.usuario.id_rol = 1;
+    this.usuario = /* new Usuario();  */ this.auth.getUsuario();
+    /* this.usuario.nombre = "Nuevo usuario";
+    this.usuario.id_rol = 1; */
     this.username = this.usuario.nombre.split(" ")[0];
   }
 

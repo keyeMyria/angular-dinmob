@@ -1,53 +1,52 @@
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
 import { Injectable } from '@angular/core';
 import { Http, Response } from "@angular/http";
 import { Observable } from "rxjs/Observable";
-import { of } from "rxjs/observable/of";
-
+import { Usuario } from "app/model/usuario";
+import { AuthHttp } from "angular2-jwt/angular2-jwt";
 
 @Injectable()
-export class ClientesService {
-  //url: string = "http://192.168.0.107:8080/barroco/api/index.php/clientes/";
-  url: string = "http://localhost:8080/barroco/api/index.php/clientes/";
+export class UsuarioService {
+  
+  url: string = "http://localhost:8080/barroco/api/index.php/usuarios/";
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private authHttp:AuthHttp) { }
 
-
-  getClientes() {
+  getUsuarios(): Observable<Usuario[]> {
     return this.http.get(this.url)
       .map(this.extractData)
       .catch(this.handleError);
   }
 
-  createCliente(cliente) {
-    return this.http.post(this.url + 'create_cliente', { cliente: cliente })
-      .map(this.extractData)
-      .catch(this.handleError);
-
-  }
-
-  updateCliente(id, cliente) {
-    return this.http.post(this.url + 'update_cliente/' + id, { cliente: cliente })
+  getRoles() {
+    return this.http.get(this.url + 'get_roles')
       .map(this.extractData)
       .catch(this.handleError);
   }
 
-  delCliente(id) {
-    return this.http.post(this.url + 'del_cliente/' + id, {})
+
+
+  createUsuario(usuario) {
+    return this.http.post(this.url + 'create_usuario', { usuario: usuario })
       .map(this.extractData)
       .catch(this.handleError);
   }
 
-  searchCliente(term: string) {
-    if (term === "") {
-      return of.call([]);
-    }
-
-    return this.http.get(this.url + "search_cliente/" + term)
+  updateUsuario(id, usuario) {
+    return this.http.post(this.url + 'update_usuario/' + id, { usuario: usuario })
       .map(this.extractData)
       .catch(this.handleError);
+  }
 
+  updatePassword(id, password) {
+    return this.http.post(this.url + 'update_password/' + id, { password: password })
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  delUsuario(id) {
+    return this.http.post(this.url + 'del_usuario/' + id, {})
+      .map(this.extractData)
+      .catch(this.handleError);
   }
 
 

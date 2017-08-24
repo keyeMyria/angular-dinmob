@@ -1,173 +1,113 @@
 import { Component, OnInit } from '@angular/core';
-import {  AUTO_STYLE, trigger, state, style, transition, animate, keyframes } from "@angular/animations";
-import { MenuItem, TreeNode } from "primeng/components/common/api";
+import { MdDialog, MdSnackBar } from '@angular/material';
+import { EditarClienteDialogoComponent } from "app/components/ventas/editar-cliente-dialogo/editar-cliente-dialogo.component";
+import { Cliente } from "app/model/cliente";
 import { ClientesService } from "app/services/clientes.service";
-import { Router } from "@angular/router";
+import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component";
 
 @Component({
   selector: 'app-clientes',
   templateUrl: './clientes.component.html',
   styleUrls: ['./clientes.component.scss'],
-  animations: [
-    trigger('miAnimacion', [
-
-      state('small', style({
-        transform: 'scale(1)',
-      })),
-      state('large', style({
-        transform: 'scale(1.5)',
-      })),
-
-      transition('small <=> large', animate('300ms ease-in', keyframes([
-        style({ opacity: 0, transform: 'translateY(-75%)', offset: 0 }),
-        style({ opacity: 1, transform: 'translateY(35%)', offset: 0.5 }),
-        style({ opacity: 1, transform: 'translateY(0)', offset: 1 }),
-      ])
-
-        /*  style({
-            transform: 'translateY(40px)'
-          })*/
-
-      )),
-
-    ]),
-    trigger('rjaCollapse', [
-      state('expand', style({
-        height: '*',
-        color:'blue',
-        //display:'block'
-        //transform:'scale(1)'
-        //opacity:1
-      })),
-      state('collapse', style({
-        height: '0px',
-        color:'red',
-        //display:'none'
-        //transform:'scale(1.3)'
-        //opacity:0
-      })),
-
-      transition('expand <=> collapse', [        
-        animate('350ms')
-      ]),
-     
-
-
-    ])
-  ]
 })
+
 export class ClientesComponent implements OnInit {
+  loading: boolean;
+  clientes: Cliente[];
 
-  lotes: Lote[] = [
-    { id_lote: 1, nombre: "Lote 1", code: "M1L1" },
-    { id_lote: 2, nombre: "Lote 2", code: "M1L2" },
-    { id_lote: 3, nombre: "Lote 3", code: "M1L3" },
-    { id_lote: 4, nombre: "Lote 4", code: "M1L4" },
-    { id_lote: 5, nombre: "Lote 5", code: "M1L5" }
-  ];
 
-  manzanas = [
-    {
-      data: {
-        nombre: "Manzana 1",
-        id_manzana: "1234"
-      },
-      children: [
-        {
-          data: {
-            nombre: "Lote 1",
-            id: "1",
-            code: "M1L1"
-          }
-        },
-        {
-          data: {
-            nombre: "Lote 2",
-            id: "2",
-            code: "M1L2"
-          }
-        }
-      ]
-    },
-    {
-      data: {
-        nombre: "Manzana 2",
-        id_manzana: "1234"
-      },
-      children: [
-        {
-          data: {
-            nombre: "Lote 1",
-            id: "1",
-            code: "M1L1"
-          }
-        },
-        {
-          data: {
-            nombre: "Lote 2",
-            id: "2",
-            code: "M1L2"
-          }
-        }
-      ]
-    }
-
-  ];
-
-  loteSelected: Lote = null;
-
-  state: string = "small";
-
-  estado: string = "expand";
-
-  clientes: any[];
-
-  constructor(
-    private router: Router,
-    private clientesService: ClientesService
+  constructor(private clienteSrv: ClientesService, public dialog: MdDialog, public snackBar: MdSnackBar
   ) { }
 
   ngOnInit() {
-    this.clientesService.getNombresClientesVenta()
-      .subscribe(res => this.clientes = res);
+    this.loading = true;
+    this.clienteSrv.getClientes()
+      .subscribe(res => {
+        this.clientes = res;
+        this.loading = false;
+      });
+    
   }
 
-
-
-  acciones: MenuItem = [
-    { label: 'View', icon: 'fa-search', command: (event) => this.alertLote(this.loteSelected) },
-    { label: 'Delete', icon: 'fa-close', command: (event) => this.alertLote(this.loteSelected) }
-  ];
-
-  alertLote(lote) {
-    alert(lote.nombre);
-  }
-
-  cbClick(event) {
-    event.stopPropagation();
-  }
-
-  animar() {
-    this.state = (this.state === "small" ? "large" : "small");
-  }
-
-  toggle() {
-    //console.log("toggle expand:collapse");
-    //this.estado = (this.estado === "expand" ? "void" : "expand");
-    this.estado = (this.estado === "expand" ? "collapse" : "expand");
-    console.log(this.estado);
-  }
-
-  gotoCliente(cliente) {
-    this.router.navigate(['/cliente', cliente.id_cliente]);
-  }
+  editarCliente(cliente: Cliente) {
+    
+    
+        let copia = Cliente.copiar(cliente);
+    
+        let dialogRef = this.dialog.open(EditarClienteDialogoComponent, {
+          data: { cliente: copia }
+        });
+    
+        dialogRef.afterClosed().subscribe(result => {
+    
+          if (result === true) {
+            this.loading = true;
+    
+            this.clienteSrv.updateCliente(cliente.id_cliente, copia)
+              .subscribe(res => {
+    
+                let i = this.clientes.indexOf(cliente);
+                this.clientes[i] = res;
+                this.loading = false;
+                this.snackBar.open("Cliente Actualizado", "Cerrar", {
+                  duration: 2000
+                });
+    
+              });
+    
+    
+          }
+    
+        });
+      }
+    
+    
+      delCliente(cliente: Cliente) {
+    
+        let newpassword: string;
+    
+        let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
+          data: {
+            title: "Eliminar cliente",
+            content: `¿Desea eliminar el cliente: ${cliente.nombre}?`
+          }
+        });
+    
+        dialogRef.afterClosed().subscribe(result => {
+    
+          if (result === true) {
+            this.loading = true;
+    
+            this.clienteSrv.delCliente(cliente.id_cliente)
+              .subscribe(res => {
+    
+                if (res.count === 1) {
+                  let i = this.clientes.indexOf(cliente);
+                  this.clientes.splice(i, 1);
+    
+    
+                  this.loading = false;
+                  this.snackBar.open("Cliente Eliminado", "Cerrar", {
+                    duration: 2000
+                  });
+    
+                } else {
+                  this.snackBar.open("Ha ocurrido un error", "Cerrar", {
+                    duration: 2000
+                  });
+                }
+    
+              });
+    
+    
+          }
+    
+        });
+    
+      }
+    
 
 }
 
 
 
-export interface Lote {
-  nombre: string;
-  code: string;
-  id_lote: number;
-}
