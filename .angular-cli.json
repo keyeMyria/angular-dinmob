@@ -19,14 +19,17 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-    
+        
        "materialize.custom.scss",
        "bootstrap.custom.scss",
+       "jquery-jvectormap.css",
        "styles.scss"
       
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.js",
+        "../node_modules/jvectormap/jquery-jvectormap.min.js",
+
         "../node_modules/materialize-css/dist/js/materialize.js"
       ],
       "environmentSource": "environments/environment.ts",
