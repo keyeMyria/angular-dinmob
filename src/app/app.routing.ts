@@ -61,7 +61,7 @@ export const ROUTES: Routes = [
     { path: 'login', component: LoginComponent },
 
     //not found
-    { path: '**', redirectTo: 'login' }
+    { path: '**', redirectTo: 'tablero' }
 
 
 ];
