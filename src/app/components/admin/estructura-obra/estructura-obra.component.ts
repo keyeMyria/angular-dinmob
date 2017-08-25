@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ObrasService } from "app/services/obras.service";
 
 @Component({
   selector: 'app-estructura-obra',
@@ -7,29 +8,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EstructuraObraComponent implements OnInit {
 
-  obras:any = [
-    {
-      id_obra:1,
-      nombre:"obra 1",
-      datos:{nombre:"obra 1"},
-      manzanas:[
-        {id_manzana:1,nombre:"Manzana 1", lotes:[
-          {id_lote:1,nombre:"Lote 1"},
-          {id_lote:2,nombre:"Lote 2"},
-          {id_lote:3,nombre:"Lote 3"},
-          {id_lote:4,nombre:"Lote 4"}
-        ]}
-    
-      ]
-    }, 
-    {id_obra:2,nombre:"obra 2"}
-  ];
+  obras: any = [];
+  obra: any = {};
+  obras_selected: any = {};
 
-  obra=this.obras[0];
-
-  constructor() { }
+  constructor(private obraSrv: ObrasService) { }
 
   ngOnInit() {
+    this.obraSrv.loadFullObra(58)
+      .subscribe(response => {
+        this.obra = response;
+      });
+
+    this.obraSrv.getObrasUsuario(18)
+      .subscribe(response => {
+        this.obras = response;
+      });
   }
+
+  toggleSelectionLote(manzana, lote) {
+    lote.selected = !lote.selected;
+
+  /*   var allSelected = _.find(manzana.lotes, function (lote) {
+      return !_.has(lote, 'selected') || lote.selected === false;
+    });
+
+    if (_.isUndefined(allSelected)) {
+      manzana.selected = true;
+    } else {
+      manzana.selected = false;
+    } */
+
+
+
+  };
 
 }
