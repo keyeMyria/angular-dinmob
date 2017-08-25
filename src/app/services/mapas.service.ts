@@ -11,7 +11,7 @@ export class MapasService {
   constructor(private http: Http) { }
 
   getMapaObra(path) {
-    return this.http.get('mapas/'+ path)
+    return this.http.get('./assets/mapas/'+ path)
       .map(this.extractData)
       .catch(this.handleError);
   }

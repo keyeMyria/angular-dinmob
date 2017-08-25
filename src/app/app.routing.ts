@@ -23,6 +23,7 @@ import { CambiarPasswordDialogoComponent } from "app/components/admin/cambiar-pa
 import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component";
 import { EditarUsuarioDialogoComponent } from "app/components/admin/editar-usuario-dialogo/editar-usuario-dialogo.component";
 import { EditarClienteDialogoComponent } from "app/components/ventas/editar-cliente-dialogo/editar-cliente-dialogo.component";
+import { MapasVentasComponent } from "app/components/ventas/mapas-ventas/mapas-ventas.component";
 
 
 export const ROUTES: Routes = [
@@ -42,7 +43,8 @@ export const ROUTES: Routes = [
             { path: 'prototipos', component: PrototiposComponent },
             { path: 'perfil', component: PerfilComponent },
             { path: 'avances', component: AvancesComponent },
-            { path: 'mapas_avances', component: MapasAvancesComponent },
+            { path: 'mapas-avances', component: MapasAvancesComponent },
+            { path: 'mapas-ventas', component: MapasVentasComponent },
             { path: 'usuarios', component: UsuariosComponent },
             { path: 'crear-usuario', component: CrearUsuarioComponent },
             { path: 'cambiar-password-dialogo', component: CambiarPasswordDialogoComponent },

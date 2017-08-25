@@ -68,6 +68,7 @@ import { CambiarPasswordDialogoComponent } from './components/admin/cambiar-pass
 import { ConfirmarBorradoDialogoComponent } from './components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
 import { EditarUsuarioDialogoComponent } from './components/admin/editar-usuario-dialogo/editar-usuario-dialogo.component';
 import { EditarClienteDialogoComponent } from './components/ventas/editar-cliente-dialogo/editar-cliente-dialogo.component';
+import { MapasService } from "app/services/mapas.service";
 
 
 @NgModule({
@@ -128,7 +129,8 @@ import { EditarClienteDialogoComponent } from './components/ventas/editar-client
     AuthService,
     ObrasService,
     ClientesService,
-    UsuarioService
+    UsuarioService,
+    MapasService
   ],
   bootstrap: [AppComponent]
 })
