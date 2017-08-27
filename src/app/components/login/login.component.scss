@@ -1,8 +1,17 @@
+.login-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background-color: lightskyblue;
+}
 
 .form-signin {
     max-width: 330px;
     padding: 15px;
-    margin: 0 auto;
+    //margin: 0 auto;
   }
   .form-signin .form-signin-heading,
   .form-signin .checkbox {

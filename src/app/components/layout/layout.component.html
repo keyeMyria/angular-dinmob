@@ -1,7 +1,38 @@
+<md-toolbar color="primary">
+
+  <button md-icon-button (click)="navLeft.toggle()">
+            <md-icon>menu</md-icon>
+          </button>
+
+  <!--<md-icon class="icon-20">pets</md-icon>-->
+
+  <span>Dinmob</span>
+
+  <span class="spacer"></span>
+
+  <span class="hidden-xs-down">{{username}}</span>
+  <button md-icon-button [mdMenuTriggerFor]="userMenu">          
+            <md-icon>person</md-icon>
+          </button>
+
+  <button md-icon-button (click)="navRight.toggle()">
+            <md-icon>more_vert</md-icon>
+          </button>
+
+  <md-menu #userMenu="mdMenu">
+    <button md-menu-item routerLink="/perfil"> Perfil </button>
+    <button md-menu-item (click)="logout()"> Cerrar sesión </button>
+  </md-menu>
+
+  <!-- <router-outlet name="toolbar"></router-outlet> -->
+
+</md-toolbar>
+
 <md-sidenav-container>
   <md-sidenav #navLeft class="sidenav-start" mode="over" align="start" opened="false">
 
-    <md-nav-list > <!-- *ngIf="auth.hasRole([auth.Rol.Administrador])" -->
+    <md-nav-list>
+      <!-- *ngIf="auth.hasRole([auth.Rol.Administrador])" -->
       <h3 class="sidenav-title">Administración</h3>
 
       <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/login']" routerLinkActive="active">Login</a>
@@ -32,7 +63,8 @@
 
     </md-nav-list>
 
-    <md-nav-list > <!-- *ngIf="auth.hasRole([auth.Rol.Ventas])" -->
+    <md-nav-list>
+      <!-- *ngIf="auth.hasRole([auth.Rol.Ventas])" -->
       <h3 class="sidenav-title">Ventas</h3>
 
 
@@ -54,7 +86,8 @@
 
     </md-nav-list>
 
-    <md-nav-list> <!-- *ngIf= "auth.hasRole([auth.Rol.Almacen])" -->
+    <md-nav-list>
+      <!-- *ngIf= "auth.hasRole([auth.Rol.Almacen])" -->
       <h3 class="sidenav-title">Almacén</h3>
 
 
@@ -75,7 +108,8 @@
 
     </md-nav-list>
 
-    <md-nav-list> <!-- *ngIf= "auth.hasRole([auth.Rol.Residente])" -->
+    <md-nav-list>
+      <!-- *ngIf= "auth.hasRole([auth.Rol.Residente])" -->
       <h3 class="sidenav-title">Residente</h3>
 
 
@@ -83,9 +117,9 @@
 
       <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/mapas-avances']" routerLinkActive="active">Mapas avances</a>
 
-      
 
-      
+
+
 
 
     </md-nav-list>
@@ -111,32 +145,8 @@
 
   <div class="my-content">
 
-    <md-toolbar color="primary">
-
-      <button md-icon-button (click)="navLeft.toggle()">
-          <md-icon>menu</md-icon>
-        </button>
-
-      <!--<md-icon class="icon-20">pets</md-icon>-->
-
-      <span>Dinmob</span>
-
-      <span class="spacer"></span>
-
-      <span class="hidden-xs-down">{{username}}</span>
-      <button md-icon-button [mdMenuTriggerFor]="userMenu">          
-          <md-icon>person</md-icon>
-        </button>
-
-      <button md-icon-button (click)="navRight.toggle()">
-          <md-icon>more_vert</md-icon>
-        </button>
-
-      <md-menu #userMenu="mdMenu">
-        <button md-menu-item routerLink="/perfil"> Perfil </button>
-        <button md-menu-item (click)="logout()"> Cerrar sesión </button>
-      </md-menu>
-
+    <md-toolbar color="accent">
+      <span>Título</span>
     </md-toolbar>
 
     <router-outlet></router-outlet>

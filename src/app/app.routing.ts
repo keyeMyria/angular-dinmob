@@ -24,12 +24,14 @@ import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar
 import { EditarUsuarioDialogoComponent } from "app/components/admin/editar-usuario-dialogo/editar-usuario-dialogo.component";
 import { EditarClienteDialogoComponent } from "app/components/ventas/editar-cliente-dialogo/editar-cliente-dialogo.component";
 import { MapasVentasComponent } from "app/components/ventas/mapas-ventas/mapas-ventas.component";
+import { AuthGuard } from "app/guards/auth.guard";
 
 
 export const ROUTES: Routes = [
     {
         path: '',
         component: LayoutComponent,
+        canActivate:[AuthGuard],
         children: [
             { path: '', redirectTo: 'tablero', pathMatch: 'full' },
             { path: 'clientes', component: ClientesComponent },

@@ -1,11 +1,11 @@
-<div class="container">
+<div class="login-container">
   <div *ngIf="loading">
     <md-spinner class="loading"></md-spinner>
   </div>
   <div class="row">
     <div class="col-12">
       <form class="form-signin" (ngSubmit)="login(usuario)">
-        <h3 class="form-signin-heading">Control de inventario</h3>
+        <h4 class="form-signin-heading">Comercializadora Barroco</h4>
         <label for="email" class="sr-only">Email</label>
         <input type="email" id="email" name="email" class="form-control" placeholder="Email" [(ngModel)]="usuario.email" required
           autofocus>

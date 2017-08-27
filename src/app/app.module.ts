@@ -69,6 +69,7 @@ import { ConfirmarBorradoDialogoComponent } from './components/admin/confirmar-b
 import { EditarUsuarioDialogoComponent } from './components/admin/editar-usuario-dialogo/editar-usuario-dialogo.component';
 import { EditarClienteDialogoComponent } from './components/ventas/editar-cliente-dialogo/editar-cliente-dialogo.component';
 import { MapasService } from "app/services/mapas.service";
+import { AuthGuard } from "app/guards/auth.guard";
 
 
 @NgModule({
@@ -126,6 +127,7 @@ import { MapasService } from "app/services/mapas.service";
   ],
 
   providers: [
+    AuthGuard,
     AuthService,
     ObrasService,
     ClientesService,

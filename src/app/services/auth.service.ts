@@ -21,6 +21,7 @@ export class AuthService {
     Almacen: 3
   }
 
+  redirectUrl:string;
 
   constructor(private http: Http) { }
 

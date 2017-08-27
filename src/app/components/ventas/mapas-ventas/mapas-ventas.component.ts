@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MapasService } from "app/services/mapas.service";
 import 'jvectormap';
 declare var jQuery: any;
@@ -9,7 +9,7 @@ declare var $: any;
   templateUrl: './mapas-ventas.component.html',
   styleUrls: ['./mapas-ventas.component.scss']
 })
-export class MapasVentasComponent implements OnInit {
+export class MapasVentasComponent implements OnInit, OnDestroy {
   map: any;
   loteSelected: any;
   compras: any;
@@ -21,6 +21,12 @@ export class MapasVentasComponent implements OnInit {
   constructor(private mapaSrv: MapasService) { }
 
   ngOnInit() {
+  }
+
+  ngOnDestroy() {
+    if (this.map) {
+      this.map.remove();
+    }
   }
 
   getMapa() {
