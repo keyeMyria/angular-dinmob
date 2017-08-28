@@ -43,7 +43,7 @@
                                             <table id='idTablaManzana{{manzana.id_manzana}}' class='table table-striped'>
                                                 <thead>
                                                     <tr>
-                                                        <th (click)="selectAllLotes(manzana)" style="cursor: pointer; width:30px;"><span style="" [ngClass]="{
+                                                        <th (click)="selectAllLotes(manzana)" style="cursor: pointer; width:30px;"><span  [ngClass]="{
                                                           'fa fa-check-square-o'
                                                           :manzana.selected, 'fa fa-square-o': !manzana.selected}"></span></th>
                                                         <th>Lote</th>
