@@ -1,96 +1,129 @@
-export class Cliente {
-    
+export class Cliente {   
+        
+
         id_cliente?: number;
-        nombre: string
-        email?: string;
-        telefono?: string;
-        contacto?: string;
-        rfc?: string;
-        calle_fiscal?: string;
-        num_ext_fiscal?: string;
-        num_int_fiscal?: string;
-        colonia_fiscal?: string;
-        cp_fiscal?: string;
-        municipio_fiscal?: string;
-        estado_fiscal?: string;
-        calle_envio?: string;
-        num_ext_envio?: string;
-        num_int_envio?: string;
-        colonia_envio?: string;
-        cp_envio: string;
-        municipio_envio?: string;
-        estado_envio?: string;
+        persona_moral?: string;
+        nombre_persona_fisica?: string;
+        nacionalidad_persona_fisica?: string;
+        lugar_nacimiento_persona_fisica ?: string;
+        fecha_nacimiento_persona_fisica ?: string;
+        pais_nacimiento_persona_fisica ?: string;
+        lugar_residencia_persona_fisica ?: string;
+        domicilio_persona_fisica?: string;
+        cp_persona_fisica ?: string;
+        ciudad_persona_fisica ?: string;
+        telefono_persona_fisica ?: string;
+        celular_persona_fisica ?: string;
+        email_persona_fisica ?: string;
+        identificacion_oficial_persona_fisica ?: string;
+        num_identificacion_persona_fisica ?: string;
+        rfc_persona_fisica ?: string;
+        curp_persona_fisica?: string;
+        estado_civil_persona_fisica?: string;
+        regimen_conyugal_persona_fisica?: string;
+        df_calle_persona_fisica100?: string;
+        df_num_interior_persona_fisica?: string;
+        df_num_exterior_persona_fisica?: string;
+        df_cp_persona_fisica?: string;
+        df_localidad_persona_fisica?: string;
+        df_municipio_persona_fisica?: string;
+        df_estado_persona_fisica?: string;
+        df_colonia_persona_fisica?: string;
+        razon_social_persona_moral?: string;
+        nacionalidad_persona_moral?: string;
+        fecha_constitucion_persona_moral?: string;
+        actividad_persona_moral?: string;
+        telefono_persona_moral?: string;
+        email_persona_moral?: string;
+        rfc_persona_moral?: string;
+        apoderado_legal_persona_moral?: string;
+        instrumento_publico_persona_moral?: string;
+        poderes_representante_persona_moral?: string;
+        df_calle_persona_moral?: string;
+        df_num_interior_persona_moral?: string;
+        df_num_exterior_persona_moral?: string;
+        df_cp_persona_moral?: string;
+        df_localidad_persona_moral?: string;
+        df_municipio_persona_moral?: string;
+        df_estado_persona_moral?: string;
+        df_colonia_persona_moral?: string;
+        profesion_laboral?: string;
+        ocupacion_laboral?: string;
+        empresa_laboral?: string;
+        puesto_laboral?: string;
+        jefe_inmediato_laboral?: string;
+        giro_empresa_laboral?: string;
+        domicilio_empresa_laboral?: string;
+        cp_laboral?: string;
+        ciudad_laboral?: string;
+        telefono_laboral?: string;
+        nombre_conyuge?: string;
+        nacionalidad_conyuge?: string;
+        lugar_nacimiento_conyuge?: string;
+        fecha_nacimiento_conyuge?: string;
+        pais_nacimiento_conyuge?: string;
+        lugar_residencia_conyuge?: string;
+        domicilio_conyuge?: string;
+        cp_conyuge?: string;
+        ciudad_conyuge?: string;
+        telefono_conyuge?: string;
+        celular_conyuge?: string;
+        email_conyuge?: string;
+        identificacion_oficial_conyuge?: string;
+        rfc_conyuge?: string;
+        curp_conyuge?: string;
+        df_calle_conyuge?: string;
+        df_num_interior_conyuge?: string;
+        df_num_exterior_conyuge?: string;
+        df_cp_conyuge?: string;
+        df_localidad_conyuge?: string;
+        df_municipio_conyuge?: string;
+        df_estado_conyuge?: string;
+        df_colonia_conyuge?: string;
+        nombre_apoderado?: string;
+        nacionalidad_apoderado?: string;
+        lugar_nacimiento_apoderado?: string;
+        fecha_nacimiento_apoderado?: string;
+        pais_nacimiento_apoderado?: string;
+        lugar_residencia_apoderado?: string;
+        domicilio_apoderado?: string;
+        cp_apoderado?: string;
+        ciudad_apoderado?: string;
+        telefono_apoderado?: string;
+        celular_apoderado?: string;
+        email_apoderado?: string;
+        identificacion_oficial_apoderado?: string;
+        num_identificacion_apoderado?: string;
+        rfc_apoderado?: string;
+        curp_apoderado?: string;
+        file_comprobante_domicilio_cliente?: string;
+        file_constancia_laboral_cliente?: string;
+        file_curp_cliente?: string;
+        file_identificacion_cliente?: string;
+        file_acta_nacimiento_cliente?: string;
+        file_rfc_cliente?: string;
+        file_comprobante_domicilio_conyuge?: string;
+        file_curp_conyuge?: string;
+        file_identificacion_conyuge?: string;
+        file_acta_nacimiento_conyuge?: string;
+        file_rfc_conyuge?: string;
+        file_acta_matrimonio_cliente?: string;
+        file_cuenta_bancaria_cliente?: string;
+        alerta_activada?: string;
+        mensaje_alerta?: string;
+        fecha_modificacion?: string;
+
+        /* propiedad añadida */
+
+        nombre?: string;
     
         constructor() {
-            this.nombre = null;
-            //direccion fiscal
-            this.calle_fiscal = null;
-            this.num_ext_fiscal = null;
-            this.num_int_fiscal = null;
-            this.colonia_fiscal = null;
-            this.cp_fiscal = null;
-            this.municipio_fiscal = null;
-            this.estado_fiscal = null;
-            //direccion envio
-            this.calle_envio = null;
-            this.num_ext_envio = null;
-            this.num_int_envio = null;
-            this.colonia_envio = null;
-            this.cp_envio = null;
-            this.municipio_envio = null;
-            this.estado_envio = null;
+           
         }
     
-    
-    
-        public static getDireccionFiscal(cliente: Cliente): string {
-            if (cliente.id_cliente) {
-                //return `CALLE: ${cliente.calle_fiscal} NÚMERO: ${cliente.num_ext_fiscal}`;
-                return (cliente.calle_fiscal === null ? "" : cliente.calle_fiscal) + " " + (cliente.num_ext_fiscal === null ? "" : cliente.num_ext_fiscal) + " " + (cliente.num_int_fiscal === null ? "" : cliente.num_int_fiscal) + "\r" +
-                    (cliente.colonia_fiscal === null ? "" : cliente.colonia_fiscal) + "\r" +
-                    (cliente.municipio_fiscal === null ? "" : cliente.municipio_fiscal) + " " + (cliente.estado_fiscal === null ? "" : cliente.estado_fiscal) + "\r" +
-                    (cliente.cp_fiscal === null ? "" : cliente.cp_fiscal);
-            } else {
-                return "";
-            }
-        }
-    
-        public static getDireccionEnvio(cliente: Cliente): string {
-            if (cliente.id_cliente) {
-                return (cliente.calle_envio === null ? "" : cliente.calle_envio) + " " + (cliente.num_ext_envio === null ? "" : cliente.num_ext_envio) + " " + (cliente.num_int_envio === null ? "" : cliente.num_int_envio) + "\r" +
-                    (cliente.colonia_envio === null ? "" : cliente.colonia_envio) + "\r" +
-                    (cliente.municipio_envio === null ? "" : cliente.municipio_envio) + " " + (cliente.estado_envio === null ? "" : cliente.estado_envio) + "\r" +
-                    (cliente.cp_envio === null ? "" : cliente.cp_envio);
-            } else {
-                return "";
-            }
-        }
     
         public static copiar(cliente: Cliente): Cliente {
             let copia = new Cliente();
-    
-            copia.nombre = cliente.nombre;
-            copia.email = cliente.email;
-            copia.telefono = cliente.telefono;
-            copia.contacto = cliente.contacto;
-            copia.rfc = cliente.rfc;
-            copia.calle_fiscal = cliente.calle_fiscal;
-            copia.num_ext_fiscal = cliente.num_ext_fiscal;
-            copia.num_int_fiscal = cliente.num_int_fiscal;
-            copia.colonia_fiscal = cliente.colonia_fiscal;
-            copia.cp_fiscal = cliente.cp_fiscal;
-            copia.municipio_fiscal = cliente.municipio_fiscal;
-            copia.estado_fiscal = cliente.estado_fiscal;
-            copia.calle_envio = cliente.calle_envio;
-            copia.num_ext_envio = cliente.num_ext_envio;
-            copia.num_int_envio = cliente.num_int_envio;
-            copia.colonia_envio = cliente.colonia_envio;
-            copia.cp_envio = cliente.cp_envio;
-            copia.municipio_envio = cliente.municipio_envio;
-            copia.estado_envio = cliente.estado_envio;
-    
-    
-    
     
             return copia;
         }
