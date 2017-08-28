@@ -15,14 +15,18 @@ html, body, app-root, md-sidenav-container, .my-content {
     height: 100%;
 }
 
+md-sidenav-container {
+    height: 100vh;
+}
+
 body {
     font-family:Roboto, sans-serif;
 }
 
 /* fix: materialize.css cambia el color */
-button:focus{
+/* button:focus{
     background-color: transparent !important;
-}
+} */
 
 /* Absolute Center Spinner */
 .loading {

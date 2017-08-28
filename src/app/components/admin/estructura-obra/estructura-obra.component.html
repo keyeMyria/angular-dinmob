@@ -2,12 +2,14 @@
     <section class="content">
 
         <div class="row">
-            <div class="col-xs-12 col-md-8">
+            <div class="col-12 col-md-8">
                 <!-- Seleccionar Obra -->
-                <select class="form-control" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)">
-                          <option value="">Seleccionar...</option>
-                          <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>                                     
-                      </select>
+                <div class="my-2">
+                    <select class="form-control" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)">
+                        <option value="">Seleccionar...</option>
+                        <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>                                     
+                    </select>
+                </div>
 
                 <!-- Manzanas y Lotes -->
                 <div class="card">
@@ -93,7 +95,7 @@
 
             </div>
 
-            <div class="col-xs-12 col-md-4">
+            <div class="col-12 col-md-4">
                 <!-- Datos Obra -->
 
                 <!--      <div class="box box-primary">

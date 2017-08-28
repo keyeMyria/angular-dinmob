@@ -105,6 +105,7 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
 
         });
 
+        this.map = $("#map").vectorMap('get', 'mapObject');
 
 
 

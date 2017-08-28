@@ -31,7 +31,7 @@
 <md-sidenav-container>
   <md-sidenav #navLeft class="sidenav-start" mode="over" align="start" opened="false">
 
-    <md-nav-list>
+    <md-nav-list class="mb-5">
       <!-- *ngIf="auth.hasRole([auth.Rol.Administrador])" -->
       <h3 class="sidenav-title">Administración</h3>
 
@@ -63,7 +63,7 @@
 
     </md-nav-list>
 
-    <md-nav-list>
+    <md-nav-list class="mb-5">
       <!-- *ngIf="auth.hasRole([auth.Rol.Ventas])" -->
       <h3 class="sidenav-title">Ventas</h3>
 
@@ -86,7 +86,7 @@
 
     </md-nav-list>
 
-    <md-nav-list>
+    <md-nav-list class="mb-5">
       <!-- *ngIf= "auth.hasRole([auth.Rol.Almacen])" -->
       <h3 class="sidenav-title">Almacén</h3>
 
@@ -108,13 +108,10 @@
 
     </md-nav-list>
 
-    <md-nav-list>
+    <md-nav-list style="margin-bottom:112px"><!-- 64 + 48 -->
       <!-- *ngIf= "auth.hasRole([auth.Rol.Residente])" -->
       <h3 class="sidenav-title">Residente</h3>
-
-
       <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/avances']" routerLinkActive="active">Avances</a>
-
       <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/mapas-avances']" routerLinkActive="active">Mapas avances</a>
 
 

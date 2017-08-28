@@ -4,7 +4,7 @@ import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class PrototiposService {
-   url: string = "http://localhost:8080/controldeobras_api/index.php/";
+   url: string = "http://localhost:8080/control/api/index.php/prototipos/";
 
   constructor() { }
 

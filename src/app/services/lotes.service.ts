@@ -6,7 +6,7 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class LotesService {
-  url: string = "http://localhost:8080/controldeobras_api/index.php/";
+  url: string = "http://localhost:8080/control/api/index.php/lotes/";
 
   constructor(private http: Http) { }
 

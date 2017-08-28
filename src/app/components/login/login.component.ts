@@ -24,25 +24,32 @@ export class LoginComponent implements OnInit {
   login(usuario) {
     
         this.loading = true;
-        /* this.router.navigate(['/tablero']); */
+        
         this.auth.login(usuario)
           .subscribe(res => {
+
             this.loading = false;
+            
             if (res.error) {
               this.alert = res.error;
             } else {
+              
+              
               console.log("login", res);
               localStorage.setItem('token', res.token);
               localStorage.setItem('usuario', JSON.stringify(res.usuario));
+              
+              // reset form properties
               this.usuario = { email: "", password: "" };
               this.alert = "";
     
+              //la pagina principal cambia de acuerdo al rol de usuario
               if (Number(res.usuario.id_rol) === this.auth.Rol.Administrador) {
                 this.router.navigate(['/tablero']);
               } else if (Number(res.usuario.id_rol) === this.auth.Rol.Ventas) {
-                this.router.navigate(['/ordenes']);
+                this.router.navigate(['/tablero']);
               } else if (Number(res.usuario.id_rol) === this.auth.Rol.Almacen) {
-                this.router.navigate(['/inventario']);
+                this.router.navigate(['/tablero']);
               } else {
                 //rol no valido
               }
