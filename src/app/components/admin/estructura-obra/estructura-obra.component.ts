@@ -9,15 +9,45 @@ import { ObrasService } from "app/services/obras.service";
 export class EstructuraObraComponent implements OnInit {
 
   obras: any = [];
-  obra: any = {};
+  obra: any = {
+    datos: {}
+  };
   obras_selected: any = {};
+  residente: any = {};
+  addManzanaOptions: any = {
+    by: ""
+  };
+  nuevaManzana: any = {
+    nombre: ""
+  };
+
+  addLoteOptions: any = {
+    by: ""
+  };
+
+  nuevoLote: any = {
+    nombre:""
+  };
+
+  op: any = {
+    prototipo:""
+  };
+
+  manzanaSelected: any ={
+    nombre:""
+  };
+
+
 
   constructor(private obraSrv: ObrasService) { }
+
+
 
   ngOnInit() {
     this.obraSrv.loadFullObra(58)
       .subscribe(response => {
         this.obra = response;
+        console.log("obra", this.obra);
       });
 
     this.obraSrv.getObrasUsuario(18)
@@ -29,18 +59,31 @@ export class EstructuraObraComponent implements OnInit {
   toggleSelectionLote(manzana, lote) {
     lote.selected = !lote.selected;
 
-  /*   var allSelected = _.find(manzana.lotes, function (lote) {
-      return !_.has(lote, 'selected') || lote.selected === false;
-    });
+    /*   var allSelected = _.find(manzana.lotes, function (lote) {
+        return !_.has(lote, 'selected') || lote.selected === false;
+      });
+  
+      if (_.isUndefined(allSelected)) {
+        manzana.selected = true;
+      } else {
+        manzana.selected = false;
+      } */
 
-    if (_.isUndefined(allSelected)) {
-      manzana.selected = true;
-    } else {
-      manzana.selected = false;
-    } */
 
 
+  }
 
-  };
+  residentesRepetidos() {
+    return true;
+  }
+
+  controlAlmacenRepetidos() {
+    return true;
+  }
+
+  num_lotes_selected() {
+    return 0;
+  }
+
 
 }

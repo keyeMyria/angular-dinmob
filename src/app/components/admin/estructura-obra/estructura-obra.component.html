@@ -1,8 +1,8 @@
 <div class="content-wrapper">
     <section class="content">
-
         <div class="row">
             <div class="col-12 col-md-8">
+
                 <!-- Seleccionar Obra -->
                 <div class="my-2">
                     <select class="form-control" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)">
@@ -12,117 +12,104 @@
                 </div>
 
                 <!-- Manzanas y Lotes -->
-                <div class="card">
-                    <div class="card-header">
-                        <h4>{{obra.datos?.nombre|uppercase}}</h4>
-                    </div>
-                    <div class="card-block">
-                        <div id="acordeon" role="tablist" aria-multiselectable="true">
 
+                <h4>{{obra.datos?.nombre|uppercase}}</h4>
 
+                <md-accordion>
+                    <md-expansion-panel [hideToggle]="true" *ngFor="let manzana of obra.manzanas">
+                        <md-expansion-panel-header class="bg-primary text-white">
 
+                            <!-- <a data-toggle="collapse" data-target="#manzana{{manzana.id_manzana}}" class="collapse-header"> -->
+                            <span>{{manzana.nombre}}</span>
+                            <div class="spacer"></div>
+                            <div class="collapse-header-btns">
+                                <i class="fa fa-pencil"></i>
+                                <i class="fa fa-times"></i>
+                                <span class="badge badge-pill badge-primary">5</span>
+                            </div>
+                            <!--  </a> -->
 
-                            <div class="card mb-1" *ngFor="let manzana of obra.manzanas">
-                                <div class="card-header bg-primary text-white" role="tad">
-                                    <!--   <h5 class="mb-0">
-                                        <a data-toggle="collapse" data-parent="#acordeon"  href="#manzana{{manzana.id_manzana}}" class="collapse-header">{{manzana.nombre}}</a>
-                                    </h5> -->
-                                    <a data-toggle="collapse" data-parent="#acordeon" href="#manzana{{manzana.id_manzana}}" class="collapse-header">
-                                        <span>{{manzana.nombre}}</span>
-                                        <div class="spacer"></div>
-                                        <div class="collapse-header-btns">
-                                          <i class="fa fa-pencil"></i>
-                                          <i class="fa fa-times"></i>
-                                          <span class="badge badge-pill badge-primary">5</span>
-                                        </div>
-                                       </a>
-                                </div>
-                                <div id="manzana{{manzana.id_manzana}}" class="collapse">
-                                    <div class="card-block">
-                                        <div class="table-responsive">
-                                            <table id='idTablaManzana{{manzana.id_manzana}}' class='table table-striped'>
-                                                <thead>
-                                                    <tr>
-                                                        <th (click)="selectAllLotes(manzana)" style="cursor: pointer; width:30px;"><span [ngClass]="{
-                                                          'fa fa-check-square-o'
-                                                          :manzana.selected, 'fa fa-square-o': !manzana.selected}"></span></th>
-                                                        <th>Lote</th>
-                                                        <th class="hidden-xs hidden-sm hidden-md">Código</th>
-                                                        <th>Prototipo</th>
-                                                        <th>Base</th>
-                                                        <th>Ampliación</th>
-                                                        <th>En Venta</th>
-                                                        <th></th>
+                        </md-expansion-panel-header>
 
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr *ngFor="let lote of manzana.lotes" (click)="toggleSelectionLote(manzana, lote)" style="cursor: pointer;" [ngClass]="{
-                                                      'bg-primary text-white'
-                                                      :lote.selected}">
-                                                        <td><i class="fa" [ngClass]="{
-                                                          'fa-check-square-o'
-                                                          :lote.selected, 'fa-square-o': !lote.selected}"></i></td>
-                                                        <td>{{ lote.nombre}}</td>
-                                                        <td class="hidden-xs hidden-sm hidden-md">{{lote.code}}</td>
-                                                        <td>
-                                                            <span *ngFor="let prototipo of lote.prototipos"><a class="link-del-prototipo" (click)="pre_delPrototipo(lote, prototipo, $event)">{{prototipo.nombre}}</a> <br></span>
-                                                        </td>
-                                                        <td>{{lote.valor_base|currency:'USD':true}}</td>
-                                                        <td>{{lote.valor_ampliacion|currency :'USD':true}}</td>
-                                                        <td>{{lote.en_venta}}</td>
-                                                        <!-- {{lote.en_venta|loteEnVenta}} -->
-                                                        <td>
-                                                            <button class="btn btn-secondary btn-sm" (click)="pre_editLote(manzana, lote, $event)"><i class="fa fa-pencil"></i></button>
-                                                            <button class="btn btn-secondary btn-sm" (click)="pre_delLote(manzana, lote, $event)"><i class="fa fa-times"></i></button>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div id="manzana{{manzana.id_manzana}}">
+
+                            <div class="table-responsive">
+                                <table id='idTablaManzana{{manzana.id_manzana}}' class='table table-striped'>
+                                    <thead>
+                                        <tr>
+                                            <th (click)="selectAllLotes(manzana)" style="cursor: pointer; width:30px;"><span [ngClass]="{
+                                                      'fa fa-check-square-o'
+                                                      :manzana.selected, 'fa fa-square-o': !manzana.selected}"></span></th>
+                                            <th>Lote</th>
+                                            <th class="hidden-xs hidden-sm hidden-md">Código</th>
+                                            <th>Prototipo</th>
+                                            <th>Base</th>
+                                            <th>Ampliación</th>
+                                            <th>En Venta</th>
+                                            <th></th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let lote of manzana.lotes" (click)="toggleSelectionLote(manzana, lote)" style="cursor: pointer;" [ngClass]="{
+                                                  'bg-primary text-white'
+                                                  :lote.selected}">
+                                            <td><i class="fa" [ngClass]="{
+                                                      'fa-check-square-o'
+                                                      :lote.selected, 'fa-square-o': !lote.selected}"></i></td>
+                                            <td>{{ lote.nombre}}</td>
+                                            <td class="hidden-xs hidden-sm hidden-md">{{lote.code}}</td>
+                                            <td>
+                                                <span *ngFor="let prototipo of lote.prototipos"><a class="link-del-prototipo" (click)="pre_delPrototipo(lote, prototipo, $event)">{{prototipo.nombre}}</a> <br></span>
+                                            </td>
+                                            <td>{{lote.valor_base|currency:'USD':true}}</td>
+                                            <td>{{lote.valor_ampliacion|currency :'USD':true}}</td>
+                                            <td>{{lote.en_venta}}</td>
+                                            <!-- {{lote.en_venta|loteEnVenta}} -->
+                                            <td>
+                                                <button class="btn btn-outline-dark btn-sm" (click)="pre_editLote(manzana, lote, $event)"><i class="fa fa-pencil"></i></button>
+                                                <button class="btn btn-outline-dark btn-sm" (click)="pre_delLote(manzana, lote, $event)"><i class="fa fa-times"></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
 
-
-
-
-
-
                         </div>
-                    </div>
-                </div>
+
+                    </md-expansion-panel>
+                </md-accordion>
 
             </div>
 
             <div class="col-12 col-md-4">
                 <!-- Datos Obra -->
+                <md-expansion-panel>
 
-                <div class="card">
-
-                    <div class="card-header">
-                        <h4>Datos Obra </h4>
-                    </div>
+                    <md-expansion-panel-header class="bg-info text-white">
+                        Datos Obra
+                    </md-expansion-panel-header>
                     <form name="formDatosObra" id="formDatosObra" (ngSubmit)="obra && !residentesRepetidos() && !controlAlmacenRepetidos() && formDatosObra.$valid && cambiarDatosObra(formDatosObra)"
                         novalidate>
                         <div class="card-block">
                             <div class="row">
                                 <div class="col-12 col-sm-12">
                                     <div class="form-group" [ngClass]="{
-                                          'has-error'
-                                          :(formDatosObra.$submitted || formDatosObra.nombre.$touched) && formDatosObra.nombre.$error.required }">
+                                          'has-danger'
+                                          :( nombre.invalid && (nombre.dirty || nombre.touched ))}">
                                         <label class="control-label">Nombre</label>
-                                        <input type="text" class="form-control" name="nombre" [(ngModel)]="obra.datos.nombre" required>
+                                        <input #nombre="ngModel" type="text" class="form-control" name="nombre" [(ngModel)]="obra.datos.nombre" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-12 col-sm-12">
                                     <div class="form-group" [ngClass]="{
-                                          'has-error'
-                                          :(formDatosObra.$submitted || formDatosObra.fecha.$touched) && formDatosObra.fecha.$error.required }">
+                                          'has-danger'
+                                          :( fecha.invalid && (fecha.dirty || fecha.touched ))}">
                                         <label class="control-label">Fecha Inicio</label>
-                                        <input type="text" class="form-control" id="fecha_ini" name="fecha" [(ngModel)]="obra.datos.fecha_ini" date-picker required>
+                                        <input #fecha="ngModel" type="text" class="form-control" id="fecha_ini" name="fecha" [(ngModel)]="obra.datos.fecha_ini" date-picker
+                                            required>
                                     </div>
                                 </div>
                             </div>
@@ -139,7 +126,7 @@
                                 <div class="col-12 col-sm-12">
                                     <div class="form-group">
                                         <label class="control-label">Almacenista</label>
-                                        <select class="form-control" [(ngModel)]="obra.datos.id_almacenista">
+                                        <select name="id_almacenista" class="form-control" [(ngModel)]="obra.datos.id_almacenista">
                                   <option value="">Elegir almacenista</option>
                                   <option [value]="a.value" *ngFor="let a of almacenistas ">{{a.text}}</option>                                                 
                               </select>
@@ -147,7 +134,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-default" (click)="addResidente($event)"><span class="glyphicon glyphicon-plus"></span> Residentes</button>
+                                <button class="btn btn-default" (click)="addResidente($event)"><i class="fa fa-plus" aria-hidden="true"></i> Residentes</button>
                             </div>
 
                             <div class="row" *ngFor="let residente of obra.residentes">
@@ -156,10 +143,10 @@
                                         <div class="input-group">
                                             <select class="form-control" name="res_{{$index}}" [(ngModel)]="residente.id_residente" selectval>
                                       <option value="0">Elegir residente</option>
-                                              <option *ngFor="let res of residentes" [value]="res.value">{{res.text}}</option>
+                                              <option *ngFor="let res of residentes" [value]="res.value">{{res.text}}</option> 
                                           </select>
                                             <span class="input-group-btn">
-                                              <button class="btn btn-default" (click)="delResidente($event, residente)"><span class="glyphicon glyphicon-minus"></span></button>
+                                              <button class="btn btn-default" (click)="delResidente($event, residente)"><i class="fa fa-minus" aria-hidden="true"></i></button>
                                             </span>
                                         </div>
                                         <p *ngIf="(residente.id_residente === '0' || !residente.id_residente)" class="text-danger">Selecciona un residente para poder guardar los cambios</p>
@@ -168,7 +155,7 @@
                             </div>
                             <p *ngIf="residentesRepetidos()" class="text-danger">Tiene algún residente repetido</p>
                             <div class="form-group">
-                                <button class="btn btn-default" (click)="addControlAlmacen($event)"><span class="glyphicon glyphicon-plus"></span> Control Almacén</button>
+                                <button class="btn btn-default" (click)="addControlAlmacen($event)"><i class="fa fa-plus" aria-hidden="true"></i> Control Almacén</button>
                             </div>
 
                             <div class="row" *ngFor="let encargado of obra.control_almacen">
@@ -180,7 +167,7 @@
                                               <option *ngFor="let alm of control_almacen" value="{{alm.value}}">{{alm.text}}</option>
                                           </select>
                                             <span class="input-group-btn">
-                                              <button class="btn btn-default" (click)="delControlAlmacen($event, encargado)"><span class="glyphicon glyphicon-minus"></span></button>
+                                              <button class="btn btn-default" (click)="delControlAlmacen($event, encargado)"><i class="fa fa-minus" aria-hidden="true"></i></button>
                                             </span>
                                         </div>
                                         <p *ngIf="(encargado.id_usuario === '0' || !encargado.id_usuario)" class="text-danger">Selecciona un encargado para poder guardar los cambios</p>
@@ -189,18 +176,19 @@
                             </div>
                             <p *ngIf="controlAlmacenRepetidos()" class="text-danger">Tiene algún encargado de almacén repetido</p>
                         </div>
-                        <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">Guardar</button>
-                            <span *ngIf="formDatosObra.$dirty" class="text-muted"> <i class="fa fa-hand-o-left text-primary"></i> cambios pendientes</span>
-                        </div>
                     </form>
-                </div>
+                    <md-action-row>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <!--  <span *ngIf="formDatosObra.$dirty" class="text-muted"> <i class="fa fa-hand-o-left text-primary"></i> cambios pendientes</span> -->
+                    </md-action-row>
+
+                </md-expansion-panel>
 
                 <!-- Agregar Manzanas -->
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Agregar Manzanas </h4>
-                    </div>
+                <md-expansion-panel class="mt-3">
+                    <md-expansion-panel-header class="bg-info text-white">
+                        Agregar Manzanas 
+                    </md-expansion-panel-header>
                     <form name="addManzanasForm" (ngSubmit)="obra_selected && obra && addManzanasForm.$valid && addManzana(addManzanasForm)"
                         novalidate>
                         <div class="card-block">
@@ -220,10 +208,10 @@
                             <div class="row">
                                 <div class="col-12 col-sm-12">
                                     <div class="form-group" [ngClass]="{
-                                          'has-error'
-                                          : (addManzanasForm.$submitted || addManzanasForm.nombre_manzana.$touched) && addManzanasForm.nombre_manzana.$error.required }">
+                                          'has-danger'
+                                          : ( nombre_manzana.invalid && (nombre_manzana.dirty || nombre_manzana.touched ))}">
                                         <label class="control-label">Manzana (nombre)</label>
-                                        <input type="text" placeholder="ej. Manzana 1" class="form-control" name="nombre_manzana" [(ngModel)]="nuevaManzana.nombre"
+                                        <input #nombre_manzana="ngModel" type="text" placeholder="ej. Manzana 1" class="form-control" name="nombre_manzana" [(ngModel)]="nuevaManzana.nombre"
                                             maxlength="30" [disabled]="addManzanaOptions.by != 'nombre'" [required]="addManzanaOptions.by === 'nombre'">
                                     </div>
                                 </div>
@@ -271,46 +259,50 @@
                             <div class="row">
                                 <div class="col-6 col-sm-3">
                                     <div class="form-group" [ngClass]="{
-                                            'has-error'
-                                            : (addManzanasForm.$submitted || addManzanasForm.manzana_prefijo.$touched) && (addManzanasForm.manzana_prefijo.$error.required) }">
+                                            'has-danger'
+                                            : (manzana_prefijo.invalid && (manzana_prefijo.dirty || manzana_prefijo.touched ))}">
                                         <label class="control-label">Prefijo</label>
-                                        <input type="text" class="form-control" name="manzana_prefijo" [(ngModel)]="addManzanaOptions.prefijo" required>
+                                        <input #manzana_prefijo="ngModel" type="text" class="form-control" name="manzana_prefijo" [(ngModel)]="addManzanaOptions.prefijo"
+                                            required>
                                     </div>
                                 </div>
                                 <div class="col-3 col-sm-2">
                                     <div class="form-group" [ngClass]="{
-                                            'has-error'
-                                            : (addManzanasForm.$submitted || addManzanasForm.manzana_ini.$touched) && (addManzanasForm.manzana_ini.$error.required || addManzanasForm.manzana_ini.$error.min) }">
+                                            'has-danger'
+                                            : ( manzana_ini.invalid && (manzana_ini.dirty || manzana_ini.touched ))}">
                                         <label class="control-label">Ini</label>
-                                        <input type="number" class="form-control" name="manzana_ini" [(ngModel)]="addManzanaOptions.ini" min="0" [required]="addManzanaOptions.by === 'numero'">
+                                        <input #manzana_ini="ngModel" type="number" class="form-control" name="manzana_ini" [(ngModel)]="addManzanaOptions.ini" min="0"
+                                            [required]="addManzanaOptions.by === 'numero'">
                                     </div>
                                 </div>
                                 <div class="col-3 col-sm-1">
                                     <div class="form-group" [ngClass]="{
-                                            'has-error'
-                                            : (addManzanasForm.$submitted || addManzanasForm.manzana_fin.$touched) && (addManzanasForm.manzana_fin.$error.required || addManzanasForm.manzana_fin.$error.min || addManzanasForm.manzana_fin.$error.max) }">
+                                            'has-danger'
+                                            : (manzana_fin.invalid && (manzana_fin.dirty || manzana_fin.touched ))}">
                                         <label class="control-label">Fin</label>
-                                        <input type="number" class="form-control" name="manzana_fin" [(ngModel)]="addManzanaOptions.fin" min="addManzanaOptions.ini"
+                                        <input type="number" #manzana_fin="ngModel" class="form-control" name="manzana_fin" [(ngModel)]="addManzanaOptions.fin" min="addManzanaOptions.ini"
                                             max="addManzanaOptions.ini+20" [required]="addManzanaOptions.by === 'numero'">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <p class="text-danger" *ngIf="addManzanasForm.manzana_ini.$error.min">El número inicial debe ser mayor o igual a 0.</p>
+                                <!--  <p class="text-danger" *ngIf="addManzanasForm.manzana_ini.$error.min">El número inicial debe ser mayor o igual a 0.</p>
                                 <p class="text-danger" *ngIf="addManzanasForm.manzana_fin.$error.min">El número final debe ser mayor o igual al número inicial.</p>
-                                <p class="text-danger" *ngIf="addManzanasForm.manzana_fin.$error.max">Sólo puede agregar 20 manzanas a la vez.</p>
+                                <p class="text-danger" *ngIf="addManzanasForm.manzana_fin.$error.max">Sólo puede agregar 20 manzanas a la vez.</p> -->
                             </div>
                         </div>
-                        <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">Agregar</button>
-                        </div>
                     </form>
-                </div>
+                    <md-action-row>
+                        <button type="submit" class="btn btn-primary">Agregar</button>
+                    </md-action-row>
+
+                </md-expansion-panel>
+
                 <!-- Agregar Lotes -->
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Agregar Lotes</h4>
-                    </div>
+                <md-expansion-panel class="mt-3">
+                    <md-expansion-panel-header class="bg-info text-white">
+                        Agregar Lotes
+                    </md-expansion-panel-header>
                     <form name="addLotesForm" (ngSubmit)="addLotesForm.$valid && addLoteManzanaSelected(addLotesForm)" novalidate>
                         <div class="card-block">
                             <div class="row">
@@ -331,11 +323,11 @@
                             <div class="row">
                                 <div class="col-12 col-sm-12">
                                     <div class="form-group" [ngClass]="{
-                                          'has-error'
-                                          : (addLotesForm.$submitted || addLotesForm.lote_nombre.$touched) && addLotesForm.lote_nombre.$error.required }">
+                                          'has-danger'
+                                          : (lote_nombre.invalid && ( lote_nombre.dirty || lote_nombre.touched ))}">
                                         <label class="control-label">Lote (nombre)</label>
-                                        <input type="text" placeholder="ej. Lote 1" [(ngModel)]="nuevoLote.nombre" name="lote_nombre" class="form-control" maxlength="30"
-                                            [disabled]="addLoteOptions.by != 'nombre'" [required]="addLoteOptions.by === 'nombre'">
+                                        <input #lote_nombre="ngModel" type="text" placeholder="ej. Lote 1" [(ngModel)]="nuevoLote.nombre" name="lote_nombre" class="form-control"
+                                            maxlength="30" [disabled]="addLoteOptions.by != 'nombre'" [required]="addLoteOptions.by === 'nombre'">
                                     </div>
                                 </div>
                             </div>
@@ -352,54 +344,55 @@
 
                             <div class="row">
                                 <!-- <fieldset id="fieldLotePorNumero" [disabled]="addLoteOptions.by == 'nombre'"> -->
-                                    <div class="col-6 col-sm-2">
+                                <div class="col-6 col-sm-2">
+                                    <div class="form-group" [ngClass]="{
+                                              'has-danger'
+                                              : (lote_prefijo.invalid && ( lote_prefijo.dirty || lote_prefijo.touched ))}">
+                                        <label class="control-label">Prefijo</label>
+                                        <input #lote_prefijo="ngModel" type="text" class="form-control" name="lote_prefijo" [(ngModel)]="addLoteOptions.prefijo"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="col-3 col-sm-2">
+                                    <div class="form-group" [ngClass]="{
+                                              'has-danger'
+                                              : (lote_ini.invalid && ( lote_ini.dirty || lote_ini.touched ))}">
+                                        <label class="control-label">Ini</label>
+                                        <input #lote_ini="ngModel" type="number" class="form-control" name="lote_ini" [(ngModel)]="addLoteOptions.ini" min="0" [required]="addLoteOptions.by === 'numero'">
+                                    </div>
+                                </div>
+                                <div class="col-3 col-sm-2">
+                                    <div class="form-group">
                                         <div class="form-group" [ngClass]="{
-                                              'has-error'
-                                              : (addLotesForm.$submitted || addLotesForm.lote_prefijo.$touched) && (addLotesForm.lote_prefijo.$error.required)}">
-                                            <label class="control-label">Prefijo</label>
-                                            <input type="text" class="form-control" name="lote_prefijo" [(ngModel)]="addLoteOptions.prefijo" required>
+                                                  'has-danger'
+                                                  : (lote_fin.invalid && ( lote_fin.dirty || lote_fin.touched ))}">
+                                            <label class="control-label">Fin</label>
+                                            <input #lote_fin="ngModel" type="number" class="form-control" name="lote_fin" [(ngModel)]="addLoteOptions.fin" min="addLoteOptions.ini"
+                                                max="addLoteOptions.ini+20" [required]="addLoteOptions.by === 'numero'">
                                         </div>
                                     </div>
-                                    <div class="col-3 col-sm-2">
-                                        <div class="form-group" [ngClass]="{
-                                              'has-error'
-                                              : (addLotesForm.$submitted || addLotesForm.lote_ini.$touched) && (addLotesForm.lote_ini.$error.required || addLotesForm.lote_ini.$error.min )}">
-                                            <label class="control-label">Ini</label>
-                                            <input type="number" class="form-control" name="lote_ini" [(ngModel)]="addLoteOptions.ini" min="0" [required]="addLoteOptions.by === 'numero'">
-                                        </div>
-                                    </div>
-                                    <div class="col-3 col-sm-2">
-                                        <div class="form-group">
-                                            <div class="form-group" [ngClass]="{
-                                                  'has-error'
-                                                  : (addLotesForm.$submitted || addLotesForm.lote_fin.$touched) && (addLotesForm.lote_fin.$error.required || addLotesForm.lote_fin.$error.min || addLotesForm.lote_fin.$error.max) }">
-                                                <label class="control-label">Fin</label>
-                                                <input type="number" class="form-control" name="lote_fin" [(ngModel)]="addLoteOptions.fin" min="addLoteOptions.ini" max="addLoteOptions.ini+20"
-                                                    [required]="addLoteOptions.by === 'numero'">
-                                            </div>
-                                        </div>
-                                    </div>
+                                </div>
                                 <!-- </fieldset> -->
                             </div>
                             <div class="form-group">
-                                <p class="text-danger" *ngIf="addLotesForm.lote_ini.$error.min">El número inicial debe ser mayor o igual a 0.</p>
+                                <!--  <p class="text-danger" *ngIf="addLotesForm.lote_ini.$error.min">El número inicial debe ser mayor o igual a 0.</p>
                                 <p class="text-danger" *ngIf="addLotesForm.lote_fin.$error.min">El número final debe ser mayor o igual al número inicial.</p>
-                                <p class="text-danger" *ngIf="addLotesForm.lote_fin.$error.max">Sólo puede agregar 20 lotes a la vez.</p>
+                                <p class="text-danger" *ngIf="addLotesForm.lote_fin.$error.max">Sólo puede agregar 20 lotes a la vez.</p> -->
                             </div>
 
                         </div>
-                        <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">Agregar</button>
-                        </div>
                     </form>
-                </div>
+                    <md-action-row>
+                        <button type="submit" class="btn btn-primary">Agregar</button>
+                    </md-action-row>
+
+                </md-expansion-panel>
 
                 <!-- Operaciones -->
-
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="box-title" id="lblAgregaLote">Operaciones</h4>
-                    </div>
+                <md-expansion-panel class="mt-3">
+                    <md-expansion-panel-header class="bg-info text-white">
+                        Operaciones
+                    </md-expansion-panel-header>
                     <form name="formOperaciones" novalidate>
                         <div class="card-blovk">
                             <label class="control-label">{{num_lotes_selected()}} lote<span *ngIf="num_lotes !== 1">s</span> seleccionado<span *ngIf="num_lotes !== 1">s</span></label>
@@ -408,7 +401,7 @@
                                     <div class="form-group">
                                         <label class="control-label">Prototipo</label>
                                         <div class="input-group">
-                                            <select class="form-control" [(ngModel)]="op.prototipo">
+                                            <select name="prototipo" class="form-control" [(ngModel)]="op.prototipo">
                                               <option value="" >Seleccionar...</option>     
                                               <option [value]="prototipo.id_prototipo" *ngFor="let prototipo of obra.prototipos">{{prototipo.nombre}}</option>                                         
                                           </select>
@@ -424,7 +417,7 @@
                                     <div class="form-group">
                                         <label class="control-label">En venta</label>
                                         <div class="input-group">
-                                            <select class="form-control" [(ngModel)]="op.en_venta">
+                                            <select name="en_venta" class="form-control" [(ngModel)]="op.en_venta">
                                               <option value="">Seleccionar</option>
                                               <option value="1">Si</option>
                                               <option value="0">No</option>
@@ -441,7 +434,7 @@
                                     <div class="form-group">
                                         <label class="control-label">Valor Base</label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" [(ngModel)]="op.valor_base" ui-money-mask min="0">
+                                            <input name="valor_base" type="text" class="form-control" [(ngModel)]="op.valor_base" ui-money-mask min="0">
                                             <div class="input-group-btn">
                                                 <button class="btn btn-primary" (click)="updateValorBase()">Asignar</button>
                                             </div>
@@ -454,7 +447,7 @@
                                     <div class="form-group">
                                         <label class="control-label">Valor Ampliación</label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" [(ngModel)]="op.valor_ampliacion" ui-money-mask min="0">
+                                            <input name="valor_ampliacion" type="text" class="form-control" [(ngModel)]="op.valor_ampliacion" ui-money-mask min="0">
                                             <div class="input-group-btn">
                                                 <button class="btn btn-primary" (click)="updateValorAmpliacion()">Asignar</button>
                                             </div>
@@ -465,7 +458,7 @@
 
                         </div>
                     </form>
-                </div>
+                </md-expansion-panel>
 
             </div>
 

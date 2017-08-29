@@ -19,7 +19,7 @@ import {
   MdExpansionModule,
   MdSlideToggleModule
 } from "@angular/material";
-/*import "hammerjs";*/
+import "hammerjs";
 
 import { AccordionModule } from "primeng/components/accordion/accordion";
 import { DataTableModule } from "primeng/components/datatable/datatable";
@@ -97,7 +97,7 @@ import { AuthGuard } from "app/guards/auth.guard";
     ConfirmarBorradoDialogoComponent,
     EditarUsuarioDialogoComponent,
     EditarClienteDialogoComponent,
-   
+
   ],
   imports: [
     BrowserModule,
@@ -120,7 +120,7 @@ import { AuthGuard } from "app/guards/auth.guard";
 
   ],
 
-  entryComponents:[
+  entryComponents: [
     EditarUsuarioDialogoComponent,
     CambiarPasswordDialogoComponent,
     ConfirmarBorradoDialogoComponent
