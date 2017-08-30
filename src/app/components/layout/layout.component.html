@@ -1,4 +1,4 @@
-<md-toolbar color="primary">
+<md-toolbar color="primary" >
 
   <button md-icon-button (click)="navLeft.toggle()">
             <md-icon>menu</md-icon>
@@ -27,128 +27,130 @@
   <!-- <router-outlet name="toolbar"></router-outlet> -->
 
 </md-toolbar>
+<div class="sidenav-container">
+  <md-sidenav-container class="spacer">
+    <md-sidenav #navLeft class="sidenav-start" mode="over" align="start" opened="false">
 
-<md-sidenav-container>
-  <md-sidenav #navLeft class="sidenav-start" mode="over" align="start" opened="false">
+      <md-nav-list class="mb-5">
+        <!-- *ngIf="auth.hasRole([auth.Rol.Administrador])" -->
+        <h3 class="sidenav-title">Administración</h3>
 
-    <md-nav-list class="mb-5">
-      <!-- *ngIf="auth.hasRole([auth.Rol.Administrador])" -->
-      <h3 class="sidenav-title">Administración</h3>
+        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/login']" routerLinkActive="active">Login</a>
 
-      <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/login']" routerLinkActive="active">Login</a>
+        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/clientes']" routerLinkActive="active">Clientes</a>
 
-      <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/clientes']" routerLinkActive="active">Clientes</a>
+        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/usuarios']" routerLinkActive="active">Usuarios</a>
 
-      <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/usuarios']" routerLinkActive="active">Usuarios</a>
+        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/crear-usuario']" routerLinkActive="active">Crear Usuario</a>
 
-      <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/crear-usuario']" routerLinkActive="active">Crear Usuario</a>
+        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/obras']" routerLinkActive="active">Obras</a>
 
-      <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/obras']" routerLinkActive="active">Obras</a>
+        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/prototipos']" routerLinkActive="active">Prototipos</a>
 
-      <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/prototipos']" routerLinkActive="active">Prototipos</a>
+        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/desarollos']" routerLinkActive="active">Desarrollos</a>
 
-      <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/desarollos']" routerLinkActive="active">Desarrollos</a>
+        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/nuevo-cliente']" routerLinkActive="active">Nuevo cliente</a>
 
-      <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/nuevo-cliente']" routerLinkActive="active">Nuevo cliente</a>
+        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/cliente']" routerLinkActive="active">Cliente</a>
 
-      <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/cliente']" routerLinkActive="active">Cliente</a>
+        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/obras']" routerLinkActive="active">Obras</a>
 
-      <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/obras']" routerLinkActive="active">Obras</a>
+        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/tablero']" routerLinkActive="active">Tablero</a>
 
-      <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/tablero']" routerLinkActive="active">Tablero</a>
-
-      <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/estructura-obra']" routerLinkActive="active">Estructura obra</a>
-
-
-
-    </md-nav-list>
-
-    <md-nav-list class="mb-5">
-      <!-- *ngIf="auth.hasRole([auth.Rol.Ventas])" -->
-      <h3 class="sidenav-title">Ventas</h3>
-
-
-      <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/login']" routerLinkActive="active">Login</a>
-
-      <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/clientes']" routerLinkActive="active">Clientes</a>
-
-      <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/desarollos']" routerLinkActive="active">Desarrollos</a>
-
-      <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/nuevo-cliente']" routerLinkActive="active">Nuevo cliente</a>
-
-      <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/mapas-ventas']" routerLinkActive="active">Mapas Ventas</a>
-
-      <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/cliente']" routerLinkActive="active">Cliente</a>
-
-      <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/obras']" routerLinkActive="active">Obras</a>
-
-      <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/tablero']" routerLinkActive="active">Tablero</a>
-
-    </md-nav-list>
-
-    <md-nav-list class="mb-5">
-      <!-- *ngIf= "auth.hasRole([auth.Rol.Almacen])" -->
-      <h3 class="sidenav-title">Almacén</h3>
-
-
-      <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/login']" routerLinkActive="active">Login</a>
-
-      <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/clientes']" routerLinkActive="active">Clientes</a>
-
-      <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/desarollos']" routerLinkActive="active">Desarrollos</a>
-
-      <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/nuevo-cliente']" routerLinkActive="active">Nuevo cliente</a>
-
-      <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/cliente']" routerLinkActive="active">Cliente</a>
-
-      <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/obras']" routerLinkActive="active">Obras</a>
-
-      <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/tablero']" routerLinkActive="active">Tablero</a>
-
-
-    </md-nav-list>
-
-    <md-nav-list style="margin-bottom:112px"><!-- 64 + 48 -->
-      <!-- *ngIf= "auth.hasRole([auth.Rol.Residente])" -->
-      <h3 class="sidenav-title">Residente</h3>
-      <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/avances']" routerLinkActive="active">Avances</a>
-      <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/mapas-avances']" routerLinkActive="active">Mapas avances</a>
+        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/estructura-obra']" routerLinkActive="active">Estructura obra</a>
 
 
 
+      </md-nav-list>
+
+      <md-nav-list class="mb-5">
+        <!-- *ngIf="auth.hasRole([auth.Rol.Ventas])" -->
+        <h3 class="sidenav-title">Ventas</h3>
+
+
+        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/login']" routerLinkActive="active">Login</a>
+
+        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/clientes']" routerLinkActive="active">Clientes</a>
+
+        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/desarollos']" routerLinkActive="active">Desarrollos</a>
+
+        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/nuevo-cliente']" routerLinkActive="active">Nuevo cliente</a>
+
+        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/mapas-ventas']" routerLinkActive="active">Mapas Ventas</a>
+
+        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/cliente']" routerLinkActive="active">Cliente</a>
+
+        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/obras']" routerLinkActive="active">Obras</a>
+
+        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/tablero']" routerLinkActive="active">Tablero</a>
+
+      </md-nav-list>
+
+      <md-nav-list class="mb-5">
+        <!-- *ngIf= "auth.hasRole([auth.Rol.Almacen])" -->
+        <h3 class="sidenav-title">Almacén</h3>
+
+
+        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/login']" routerLinkActive="active">Login</a>
+
+        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/clientes']" routerLinkActive="active">Clientes</a>
+
+        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/desarollos']" routerLinkActive="active">Desarrollos</a>
+
+        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/nuevo-cliente']" routerLinkActive="active">Nuevo cliente</a>
+
+        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/cliente']" routerLinkActive="active">Cliente</a>
+
+        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/obras']" routerLinkActive="active">Obras</a>
+
+        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/tablero']" routerLinkActive="active">Tablero</a>
+
+
+      </md-nav-list>
+
+      <md-nav-list class="mb-5" >
+        <!-- 64 + 48 style="margin-bottom:112px"-->
+        <!-- *ngIf= "auth.hasRole([auth.Rol.Residente])" -->
+        <h3 class="sidenav-title">Residente</h3>
+        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/avances']" routerLinkActive="active">Avances</a>
+        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/mapas-avances']" routerLinkActive="active">Mapas avances</a>
 
 
 
-    </md-nav-list>
 
 
-  </md-sidenav>
 
-  <md-sidenav #navRight class="sidenav-end" mode="over" align="end" opened="false">
-    <md-tab-group>
-      <md-tab label="Tab 1">
-        <h3>Encabezado</h3>
-        <p>Contenido uno</p>
-      </md-tab>
-      <md-tab>
-        <ng-template md-tab-label>
-          <!-- <md-icon>thumb_down</md-icon> -->Tab 2
-        </ng-template>
-        <h3>Encabezado</h3>
-        <p>Contenido dos</p>
-      </md-tab>
-    </md-tab-group>
-  </md-sidenav>
+      </md-nav-list>
 
-  <div class="my-content">
 
-    <md-toolbar color="accent">
+    </md-sidenav>
+
+    <md-sidenav #navRight class="sidenav-end" mode="over" align="end" opened="false">
+      <md-tab-group>
+        <md-tab label="Tab 1">
+          <h3>Encabezado</h3>
+          <p>Contenido uno</p>
+        </md-tab>
+        <md-tab>
+          <ng-template md-tab-label>
+            <!-- <md-icon>thumb_down</md-icon> -->Tab 2
+          </ng-template>
+          <h3>Encabezado</h3>
+          <p>Contenido dos</p>
+        </md-tab>
+      </md-tab-group>
+    </md-sidenav>
+
+    <div class="my-content">
+
+      <!--  <md-toolbar color="accent">
       <span>Título</span>
-    </md-toolbar>
+    </md-toolbar> -->
 
-    <router-outlet></router-outlet>
+      <router-outlet></router-outlet>
 
 
-  </div>
+    </div>
 
-</md-sidenav-container>
+  </md-sidenav-container>
+</div>

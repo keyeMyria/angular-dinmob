@@ -1,3 +1,17 @@
+:host {
+    
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+.sidenav-container {
+    //height: 100vh;
+    display: flex;
+    flex: 1 1 auto;
+}
+
+
 .spacer{
     flex: 1 1 auto;
 }

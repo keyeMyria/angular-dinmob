@@ -21,10 +21,14 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
+login2(usuario){
+  this.router.navigate(['/tablero']);
+}
+
   login(usuario) {
     
         this.loading = true;
-        
+        this.alert="debug1";
         this.auth.login(usuario)
           .subscribe(res => {
 
@@ -33,7 +37,7 @@ export class LoginComponent implements OnInit {
             if (res.error) {
               this.alert = res.error;
             } else {
-              
+              this.alert="debug";
               
               console.log("login", res);
               localStorage.setItem('token', res.token);
