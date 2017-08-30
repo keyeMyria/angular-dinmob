@@ -12,12 +12,12 @@ export class EditarClienteDialogoComponent implements OnInit {
   cliente:Cliente;
   
     constructor(
-      @Inject(MD_DIALOG_DATA) public data: any,
-      public dialogRef: MdDialogRef<EditarClienteDialogoComponent>
+      /* @Inject(MD_DIALOG_DATA) public data: any,
+      public dialogRef: MdDialogRef<EditarClienteDialogoComponent> */
     ) { }
   
     ngOnInit() {
-      this.cliente= this.data.cliente;
+      /* this.cliente= this.data.cliente; */
     }
   
   }

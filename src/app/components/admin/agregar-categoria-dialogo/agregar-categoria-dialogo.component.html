@@ -1,0 +1,16 @@
+<h1 md-dialog-title>Agregar categoría</h1>
+<div md-dialog-content>
+  <form>
+    <div class="form-group row">
+      <label for="nombre" class="col-sm-4 col-form-label">Categoría</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" id="nombre" name="nombre" [(ngModel)]="categoria.nombre">
+      </div>
+    </div>
+  </form>
+
+</div>
+<div md-dialog-actions>
+  <button md-button [md-dialog-close]="false">CANCELAR</button>
+  <button md-button [md-dialog-close]="true">ACEPTAR</button>
+</div>

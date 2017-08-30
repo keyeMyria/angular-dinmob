@@ -22,9 +22,11 @@ import { CrearUsuarioComponent } from "app/components/admin/crear-usuario/crear-
 import { CambiarPasswordDialogoComponent } from "app/components/admin/cambiar-password-dialogo/cambiar-password-dialogo.component";
 import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component";
 import { EditarUsuarioDialogoComponent } from "app/components/admin/editar-usuario-dialogo/editar-usuario-dialogo.component";
-import { EditarClienteDialogoComponent } from "app/components/ventas/editar-cliente-dialogo/editar-cliente-dialogo.component";
+import { EditarClienteComponent } from "app/components/ventas/editar-cliente/editar-cliente.component";
 import { MapasVentasComponent } from "app/components/ventas/mapas-ventas/mapas-ventas.component";
 import { AuthGuard } from "app/guards/auth.guard";
+import { AgregarCategoriaDialogoComponent } from "app/components/admin/agregar-categoria-dialogo/agregar-categoria-dialogo.component";
+
 
 
 export const ROUTES: Routes = [
@@ -52,7 +54,8 @@ export const ROUTES: Routes = [
             { path: 'cambiar-password-dialogo', component: CambiarPasswordDialogoComponent },
             { path: 'confirmar-borrado-dialogo', component: ConfirmarBorradoDialogoComponent },
             { path: 'editar-usuario-dialogo', component: EditarUsuarioDialogoComponent },
-            { path: 'editar-cliente-dialogo', component: EditarClienteDialogoComponent },
+            { path: 'editar-cliente', component: EditarClienteComponent },
+            { path: 'agregar-categoria-dialogo', component: AgregarCategoriaDialogoComponent },
 
 
 

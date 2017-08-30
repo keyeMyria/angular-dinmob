@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MdDialog, MdSnackBar } from '@angular/material';
-import { EditarClienteDialogoComponent } from "app/components/ventas/editar-cliente-dialogo/editar-cliente-dialogo.component";
+import { EditarClienteComponent } from "app/components/ventas/editar-cliente/editar-cliente.component";
 import { Cliente } from "app/model/cliente";
 import { ClientesService } from "app/services/clientes.service";
 import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component";
+import { ObrasService } from "app/services/obras.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-clientes',
@@ -14,9 +16,15 @@ import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar
 export class ClientesComponent implements OnInit {
   loading: boolean;
   clientes: Cliente[];
+  obras: any = [];
+  obra: any = {
+    datos: {}
+  };
+  obras_selected: any = {};
 
 
-  constructor(private clienteSrv: ClientesService, public dialog: MdDialog, public snackBar: MdSnackBar
+
+  constructor(private router: Router, private obraSrv: ObrasService, private clienteSrv: ClientesService, public dialog: MdDialog, public snackBar: MdSnackBar
   ) { }
 
   ngOnInit() {
@@ -26,10 +34,25 @@ export class ClientesComponent implements OnInit {
         this.clientes = res;
         this.loading = false;
       });
+
+      this.obraSrv.loadFullObra(58)
+      .subscribe(response => {
+        this.obra = response;
+        console.log("obra", this.obra);
+      });
+
+      this.obraSrv.getObrasUsuario(18)
+      .subscribe(response => {
+        this.obras = response;
+      });
     
   }
 
-  editarCliente(cliente: Cliente) {
+  editarCliente(cliente) {
+    this.router.navigate(["/editar-cliente"]);
+  }
+
+ /*  editarCliente(cliente: Cliente) {
     
     
         let copia = Cliente.copiar(cliente);
@@ -59,7 +82,7 @@ export class ClientesComponent implements OnInit {
           }
     
         });
-      }
+      } */
     
     
       delCliente(cliente: Cliente) {

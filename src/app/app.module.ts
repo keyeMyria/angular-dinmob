@@ -70,6 +70,9 @@ import { EditarUsuarioDialogoComponent } from './components/admin/editar-usuario
 import { EditarClienteDialogoComponent } from './components/ventas/editar-cliente-dialogo/editar-cliente-dialogo.component';
 import { MapasService } from "app/services/mapas.service";
 import { AuthGuard } from "app/guards/auth.guard";
+import { EditarClienteComponent } from './components/ventas/editar-cliente/editar-cliente.component';
+import { AgregarCategoriaDialogoComponent } from "app/components/admin/agregar-categoria-dialogo/agregar-categoria-dialogo.component";
+
 
 
 @NgModule({
@@ -97,6 +100,8 @@ import { AuthGuard } from "app/guards/auth.guard";
     ConfirmarBorradoDialogoComponent,
     EditarUsuarioDialogoComponent,
     EditarClienteDialogoComponent,
+    EditarClienteComponent,
+    AgregarCategoriaDialogoComponent,
 
   ],
   imports: [
@@ -120,10 +125,11 @@ import { AuthGuard } from "app/guards/auth.guard";
 
   ],
 
-  entryComponents: [
-    EditarUsuarioDialogoComponent,
+  entryComponents: [    
     CambiarPasswordDialogoComponent,
-    ConfirmarBorradoDialogoComponent
+    ConfirmarBorradoDialogoComponent,
+    AgregarCategoriaDialogoComponent
+    
   ],
 
   providers: [
