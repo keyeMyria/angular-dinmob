@@ -1,40 +1,52 @@
-<div class="row">
-  <div class="col-12">
-    <h1>Desarrollos</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
 
-    <button md-raised-button (click)="collapse=!collapse">Collapse</button>
+      <div class=" my-1 mb-2">
+        <select class="form-control" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)">
+          <option value="">Seleccionar...</option>
+          <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>                                     
+        </select>
+      </div>
 
-    <div [@miAnimacion]="state" (click)="animar()" class="table-responsive" [myCollapse]="collapse">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Manzana</th>
-            <th>Lote</th>
-            <th>Precio</th>
-            <th>Estado</th>
-            <th>F. Estado</th>
-            <th>Alarma</th>
-            <th>Acciones</th>
+      <div class="card">
+        <div class="card-header">
+          Desarrollos      
+        </div>
+        <div>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Manzana</th>
+                  <th>Lote</th>
+                  <th>Precio</th>
+                  <th>Estado</th>
+                  <th>F. Estado</th>
+                  <th>Alarma</th>
+                  <th>Acciones</th>
 
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let lote of lotes">
-            <td>{{lote.manzana}}</td>
-            <td>{{lote.nombre}}</td>
-            <td>{{lote.precio|currency:'USD':true}}</td>
-            <td>{{lote.estado}}</td>
-            <td>1 dic. 2017</td>
-            <td>!</td>
-            <td>
-              <button md-icon-button>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let lote of lotes">
+                  <td>{{lote.manzana}}</td>
+                  <td>{{lote.nombre}}</td>
+                  <td>{{lote.precio|currency:'USD':true}}</td>
+                  <td>{{lote.estado}}</td>
+                  <td>1 dic. 2017</td>
+                  <td>!</td>
+                  <td>
+                    <button md-icon-button>
                 <md-icon>zoom_in</md-icon>
               </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
-
   </div>
 </div>

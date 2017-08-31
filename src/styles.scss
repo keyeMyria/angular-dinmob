@@ -15,6 +15,12 @@ html, body, app-root, md-sidenav-container, .my-content {
     //height: 100%;
 }
 
+//fix bootstrap
+button:focus{
+    outline: none;
+}
+
+
 body {
     font-family:Roboto, sans-serif;
 }

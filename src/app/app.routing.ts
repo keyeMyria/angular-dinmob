@@ -25,7 +25,7 @@ import { EditarUsuarioDialogoComponent } from "app/components/admin/editar-usuar
 import { EditarClienteComponent } from "app/components/ventas/editar-cliente/editar-cliente.component";
 import { MapasVentasComponent } from "app/components/ventas/mapas-ventas/mapas-ventas.component";
 import { AuthGuard } from "app/guards/auth.guard";
-import { AgregarCategoriaDialogoComponent } from "app/components/admin/agregar-categoria-dialogo/agregar-categoria-dialogo.component";
+import { AgregarObraDialogoComponent } from "app/components/admin/agregar-obra-dialogo/agregar-obra-dialogo.component";
 
 
 
@@ -55,7 +55,7 @@ export const ROUTES: Routes = [
             { path: 'confirmar-borrado-dialogo', component: ConfirmarBorradoDialogoComponent },
             { path: 'editar-usuario-dialogo', component: EditarUsuarioDialogoComponent },
             { path: 'editar-cliente', component: EditarClienteComponent },
-            { path: 'agregar-categoria-dialogo', component: AgregarCategoriaDialogoComponent },
+            { path: 'agregar-obra-dialogo', component: AgregarObraDialogoComponent },
 
 
 

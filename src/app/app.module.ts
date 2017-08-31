@@ -4,6 +4,8 @@ import { FormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RoutingModule } from "app/app.routing";
+import { I18n, SpanishDatepickerI18nService } from "app/services/spanish-datepicker-i18n.service";
+import { NgbDatepickerI18n, NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 import { FlexLayoutModule } from "@angular/flex-layout";
 import {
@@ -71,7 +73,9 @@ import { EditarClienteDialogoComponent } from './components/ventas/editar-client
 import { MapasService } from "app/services/mapas.service";
 import { AuthGuard } from "app/guards/auth.guard";
 import { EditarClienteComponent } from './components/ventas/editar-cliente/editar-cliente.component';
-import { AgregarCategoriaDialogoComponent } from "app/components/admin/agregar-categoria-dialogo/agregar-categoria-dialogo.component";
+import { AgregarObraDialogoComponent } from "app/components/admin/agregar-obra-dialogo/agregar-obra-dialogo.component";
+
+
 
 
 
@@ -101,7 +105,7 @@ import { AgregarCategoriaDialogoComponent } from "app/components/admin/agregar-c
     EditarUsuarioDialogoComponent,
     EditarClienteDialogoComponent,
     EditarClienteComponent,
-    AgregarCategoriaDialogoComponent,
+    AgregarObraDialogoComponent,
 
   ],
   imports: [
@@ -111,7 +115,7 @@ import { AgregarCategoriaDialogoComponent } from "app/components/admin/agregar-c
     BrowserAnimationsModule,
     FlexLayoutModule,
     AuthModule,
-    //MaterializeModule,
+    NgbModule.forRoot(),
     AngularMaterialModule,
 
     AccordionModule,
@@ -128,11 +132,13 @@ import { AgregarCategoriaDialogoComponent } from "app/components/admin/agregar-c
   entryComponents: [    
     CambiarPasswordDialogoComponent,
     ConfirmarBorradoDialogoComponent,
-    AgregarCategoriaDialogoComponent
+    AgregarObraDialogoComponent
     
   ],
 
   providers: [
+    I18n,
+    {provide:NgbDatepickerI18n, useClass:SpanishDatepickerI18nService},
     AuthGuard,
     AuthService,
     ObrasService,

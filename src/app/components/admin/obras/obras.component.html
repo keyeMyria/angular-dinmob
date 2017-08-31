@@ -7,7 +7,7 @@
             <div class="align-self-center">Obras</div>
             <div class="spacer"></div>
             <div>
-              <button md-icon-button (click)="agregarCategoria()">
+              <button md-icon-button (click)="agregarObra()">
               <md-icon>add</md-icon>
             </button>
             </div>
@@ -17,14 +17,28 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <th>Nombre</th>
+                <th>Nombre</th>                
                 <th></th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let obra of obras">
-                <td>{{obra.nombre}}</td>
-                <td></td>
+                <td>{{obra.nombre}}</td>                
+                <td class="text-right">
+                    <button md-icon-button [mdMenuTriggerFor]="menu">
+                        <md-icon>more_vert</md-icon>
+                      </button>
+                    <md-menu #menu="mdMenu">
+                      <button md-menu-item (click)="editarCliente(cliente)">
+                          <md-icon>create</md-icon>
+                          <span>Estructura</span>
+                        </button>
+                      <button md-menu-item (click)="delCliente(cliente)">
+                          <md-icon>delete</md-icon>
+                          <span>Eliminar</span>
+                        </button>
+                    </md-menu>
+                  </td>
               </tr>
             </tbody>
           </table>
