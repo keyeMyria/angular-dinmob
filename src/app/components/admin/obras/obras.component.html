@@ -1,4 +1,9 @@
 <div class="container py15px">
+
+  <div *ngIf="loading">
+    <md-spinner class="loading"></md-spinner>
+  </div>
+
   <div class="row">
     <div class="col-12">
       <div class="card">
@@ -17,28 +22,28 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <th>Nombre</th>                
+                <th>Nombre</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let obra of obras">
-                <td>{{obra.nombre}}</td>                
+                <td>{{obra.nombre}}</td>
                 <td class="text-right">
-                    <button md-icon-button [mdMenuTriggerFor]="menu">
+                  <button md-icon-button [mdMenuTriggerFor]="menu">
                         <md-icon>more_vert</md-icon>
                       </button>
-                    <md-menu #menu="mdMenu">
-                      <button md-menu-item (click)="editarCliente(cliente)">
+                  <md-menu #menu="mdMenu">
+                    <button md-menu-item (click)="estructuraObra()">
                           <md-icon>create</md-icon>
                           <span>Estructura</span>
                         </button>
-                      <button md-menu-item (click)="delCliente(cliente)">
+                    <button md-menu-item (click)="delObra(obra)">
                           <md-icon>delete</md-icon>
                           <span>Eliminar</span>
                         </button>
-                    </md-menu>
-                  </td>
+                  </md-menu>
+                </td>
               </tr>
             </tbody>
           </table>

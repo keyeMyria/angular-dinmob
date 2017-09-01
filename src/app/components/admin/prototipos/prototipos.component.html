@@ -1,81 +1,82 @@
-<h1>Single Expansion Panel</h1>
-<md-expansion-panel class="md-expansion-demo-width" #myPanel>
-  <md-expansion-panel-header>
-    <mat-panel-description>This is a panel description.</mat-panel-description>
-    <mat-panel-title>
-         <md-checkbox>Panel Title 1</md-checkbox>
-      </mat-panel-title>
-  </md-expansion-panel-header>
-  This is the content text that makes sense here.
-  <md-action-row>
-    <button md-button (click)="myPanel.expanded = false">CANCEL</button>
-    <button md-button>SAVE</button>
-  </md-action-row>
-</md-expansion-panel>
-<br>
-<h1>Accordion</h1>
-<div>
-  <p>Accordion Options</p>
-  <div>
-    <md-slide-toggle [(ngModel)]="multi">Allow Multi Expansion</md-slide-toggle>
-    <md-slide-toggle [(ngModel)]="hideToggle">Hide Indicators</md-slide-toggle>
-    <md-slide-toggle [(ngModel)]="showPanel3">Show Panel 3</md-slide-toggle>
+<div class="container">
+
+  <div *ngIf="loading">
+    <md-spinner class="loading"></md-spinner>
   </div>
-  <p>Accordion Style</p>
-  <md-radio-group [(ngModel)]="displayMode">
-    <md-radio-button value="default">Default</md-radio-button>
-    <md-radio-button value="flat">Flat</md-radio-button>
-  </md-radio-group>
-  <p>Accordion Panel(s)</p>
-  <div>
-    <md-checkbox [(ngModel)]="panel1.expanded">Panel 1</md-checkbox>
-    <md-checkbox [(ngModel)]="panel2.expanded">Panel 2</md-checkbox>
+
+  <div class="row">
+    <div class="col-12">
+
+
+      <!-- seleccionar obra -->
+
+      <div class=" my-1 mb-2">
+        <select class="form-control" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)">
+          <option value="">Seleccionar...</option>
+          <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>                                     
+        </select>
+      </div>
+
+      <div class="card my-1">
+        <div class="card-header">
+          <div class="d-flex padding-header">
+            <div class="align-self-center">Prototipos</div>
+            <div class="spacer"></div>
+            <div>
+              <button md-icon-button>
+                  <md-icon>add</md-icon>
+                </button>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="table-responsive">
+            <table class="table table-hover table-striped">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Fecha de Inicio</th>
+
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>Prototipo 1</td>
+                  <td>Fecha 1</td>
+                  <td class="text-right">
+                    <button md-icon-button [mdMenuTriggerFor]="menu">
+                            <md-icon>more_vert</md-icon>
+                          </button>
+                    <md-menu #menu="mdMenu">
+                      <button md-menu-item (click)="editarCliente(cliente)">
+                              <md-icon>create</md-icon>
+                              <span>Editar Prototipo</span>
+                            </button>
+                      <button md-menu-item (click)="editarCliente(cliente)">
+                                  <md-icon>file_download</md-icon>
+                                  <span>Descargar archivo</span>
+                                </button>
+                      <button md-menu-item (click)="editarCliente(cliente)">
+                                    <md-icon>create</md-icon>
+                                    <span>Cambiar Nombre</span>
+                                  </button>
+                      <button md-menu-item (click)="delCliente(cliente)">
+                              <md-icon>delete</md-icon>
+                              <span>Eliminar</span>
+                            </button>
+                    </md-menu>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
   </div>
+
 </div>
-<br>
-<md-accordion [displayMode]="displayMode" [multi]="multi" class="md-expansion-demo-width">
-  <md-expansion-panel #panel1 [hideToggle]="hideToggle">
-    <md-expansion-panel-header>Section 1</md-expansion-panel-header>
-    <p>This is the content text that makes sense here.</p>
-  </md-expansion-panel>
-  <md-expansion-panel #panel2 [hideToggle]="hideToggle">
-    <md-expansion-panel-header>Section 2</md-expansion-panel-header>
-    <p>This is the content text that makes sense here.</p>
-  </md-expansion-panel>
-  <md-expansion-panel  [hideToggle]="hideToggle">
-    <md-expansion-panel-header>Section 2</md-expansion-panel-header>
-    <p>This is the content text that makes sense here.</p>
-  </md-expansion-panel>
-  <md-expansion-panel  [hideToggle]="hideToggle">
-    <md-expansion-panel-header>Section 2</md-expansion-panel-header>
-    <p>This is the content text that makes sense here.</p>
-  </md-expansion-panel>
-  <md-expansion-panel  [hideToggle]="hideToggle">
-    <md-expansion-panel-header>Section 2</md-expansion-panel-header>
-    <p>This is the content text that makes sense here.</p>
-  </md-expansion-panel>
-  <md-expansion-panel  [hideToggle]="hideToggle">
-    <md-expansion-panel-header>Section 2</md-expansion-panel-header>
-    <p>This is the content text that makes sense here.</p>
-  </md-expansion-panel>
-  <md-expansion-panel  [hideToggle]="hideToggle">
-    <md-expansion-panel-header>Section 2</md-expansion-panel-header>
-    <p>This is the content text that makes sense here.</p>
-  </md-expansion-panel>
-  <md-expansion-panel  [hideToggle]="hideToggle">
-    <md-expansion-panel-header>Section 2</md-expansion-panel-header>
-    <p>This is the content text that makes sense here.</p>
-  </md-expansion-panel>
-  <md-expansion-panel  [hideToggle]="hideToggle">
-    <md-expansion-panel-header>Section 2</md-expansion-panel-header>
-    <p>This is the content text that makes sense here.</p>
-  </md-expansion-panel>
-  <md-expansion-panel #panel3 *ngIf="showPanel3" [hideToggle]="hideToggle">
-    <md-expansion-panel-header>Section 3</md-expansion-panel-header>
-    <md-checkbox #showButtons>Reveal Buttons Below</md-checkbox>
-    <md-action-row *ngIf="showButtons.checked">
-      <button md-button (click)="panel2.expanded = true">OPEN SECTION 2</button>
-      <button md-button (click)="panel3.expanded = false">CLOSE</button>
-    </md-action-row>
-  </md-expansion-panel>
-</md-accordion>
