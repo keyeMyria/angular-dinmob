@@ -28,7 +28,7 @@ login2(usuario){
   login(usuario) {
     
         this.loading = true;
-        this.alert="debug1";
+        
         this.auth.login(usuario)
           .subscribe(res => {
 
@@ -37,8 +37,7 @@ login2(usuario){
             if (res.error) {
               this.alert = res.error;
             } else {
-              this.alert="debug";
-              
+                            
               console.log("login", res);
               localStorage.setItem('token', res.token);
               localStorage.setItem('usuario', JSON.stringify(res.usuario));

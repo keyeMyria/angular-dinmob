@@ -24,7 +24,12 @@ export class ClientesComponent implements OnInit {
 
 
 
-  constructor(private router: Router, private obraSrv: ObrasService, private clienteSrv: ClientesService, public dialog: MdDialog, public snackBar: MdSnackBar
+  constructor(
+    private router: Router, 
+    private obraSrv: ObrasService, 
+    private clienteSrv: ClientesService, 
+    public dialog: MdDialog, 
+    public snackBar: MdSnackBar
   ) { }
 
   ngOnInit() {
@@ -33,13 +38,7 @@ export class ClientesComponent implements OnInit {
       .subscribe(res => {
         this.clientes = res;
         this.loading = false;
-      });
-
-      this.obraSrv.loadFullObra(58)
-      .subscribe(response => {
-        this.obra = response;
-        console.log("obra", this.obra);
-      });
+      });   
 
       this.obraSrv.getObrasUsuario(18)
       .subscribe(response => {
