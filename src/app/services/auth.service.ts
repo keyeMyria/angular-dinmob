@@ -46,6 +46,7 @@ export class AuthService {
 
     if (strUsuario) {
       let usuario = JSON.parse(strUsuario);
+      console.log("usurio from local storage", usuario);
       return usuario;
     } else {
       return null;
