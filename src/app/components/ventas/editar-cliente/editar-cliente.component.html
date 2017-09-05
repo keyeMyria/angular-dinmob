@@ -675,8 +675,10 @@
                       <thead>
                         <tr>
                           <th>Titular</th>
-                          <th style="width: 90px;">
-                            <button type="button" class="btn btn-primary btn-sm pull-right" (click)="ctrl.pre_uploadDocumentTitular()"><span class="glyphicon glyphicon-plus"></span></button>
+                          <th class="text-right">                            
+                            <button md-icon-button >
+                              <md-icon>add</md-icon>
+                            </button>                            
                           </th>
                         </tr>
                       </thead>
@@ -721,9 +723,11 @@
                       <thead>
                         <tr>
                           <th>Cónyuge</th>
-                          <th style="width: 90px;">
-                            <button type="button" class="btn btn-primary btn-sm pull-right" (click)="ctrl.pre_uploadDocumentConyuge()"><span class="glyphicon glyphicon-plus"></span></button>
-                          </th>
+                          <th class="text-right">                            
+                              <button md-icon-button >
+                                <md-icon>add</md-icon>
+                              </button>                            
+                            </th>
                         </tr>
                       </thead>
                       <tbody>
@@ -823,7 +827,7 @@
                     </table>
                   </div>
 
-                  <div class="text-center">
+                  <div>
                     <!-- *ngIf="ctrl.options.get_rol_usuario() !== 8" -->
                     <button type="button" class="btn btn-primary" (click)="ctrl.pre_addPago()">Nuevo Pago</button>
                   </div>
@@ -970,7 +974,7 @@
           <div class="card-footer">
 
             <div class="row">
-              <div class="col-sm-9 ml-sm-auto">
+              <div class="col-sm-11 ml-sm-auto"> <!-- class="col-sm-9 ml-sm-auto" -->
                 <button type="submit" class="btn btn-primary">Guardar</button>
                 <!-- <span *ngIf="formCliente.$submitted && !formCliente.$valid" class="text-danger">  Complete los campos indicados</span> -->
               </div>
