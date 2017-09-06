@@ -16,13 +16,11 @@ export class CrearUsuarioDialogoComponent implements OnInit {
   usuario: Usuario;
 
   constructor(
-    private usuarioSrv: UsuarioService,
     @Inject(MD_DIALOG_DATA) public data: any,
     public dialogRef: MdDialogRef<CrearUsuarioDialogoComponent>
   ) { }
 
-  ngOnInit() {
-    this.roles = this.data.roles;
+  ngOnInit() {    
     this.usuario = this.data.usuario;
   }
 
