@@ -18,6 +18,8 @@ export class EditarUsuarioDialogoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.usuario= this.data.usuario;
+    this.roles=this.data.roles;
  
   }
   
