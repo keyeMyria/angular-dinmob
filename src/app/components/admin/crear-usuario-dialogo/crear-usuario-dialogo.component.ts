@@ -10,6 +10,7 @@ import { Usuario } from "app/model/usuario";
   styleUrls: ['./crear-usuario-dialogo.component.scss']
 })
 export class CrearUsuarioDialogoComponent implements OnInit {
+  
  
 
   roles: any[];
