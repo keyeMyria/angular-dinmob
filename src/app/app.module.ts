@@ -74,6 +74,8 @@ import { MapasService } from "app/services/mapas.service";
 import { AuthGuard } from "app/guards/auth.guard";
 import { EditarClienteComponent } from './components/ventas/editar-cliente/editar-cliente.component';
 import { AgregarObraDialogoComponent } from "app/components/admin/agregar-obra-dialogo/agregar-obra-dialogo.component";
+import { AgregarDocumentoDialogoComponent } from './components/ventas/agregar-documento-dialogo/agregar-documento-dialogo.component';
+import { CrearUsuarioDialogoComponent } from './components/admin/crear-usuario-dialogo/crear-usuario-dialogo.component';
 
 
 
@@ -106,6 +108,8 @@ import { AgregarObraDialogoComponent } from "app/components/admin/agregar-obra-d
     EditarClienteDialogoComponent,
     EditarClienteComponent,
     AgregarObraDialogoComponent,
+    AgregarDocumentoDialogoComponent,
+    CrearUsuarioDialogoComponent,
 
   ],
   imports: [
@@ -132,7 +136,9 @@ import { AgregarObraDialogoComponent } from "app/components/admin/agregar-obra-d
   entryComponents: [    
     CambiarPasswordDialogoComponent,
     ConfirmarBorradoDialogoComponent,
-    AgregarObraDialogoComponent
+    AgregarObraDialogoComponent,
+    AgregarDocumentoDialogoComponent,
+    CrearUsuarioDialogoComponent
     
   ],
 

@@ -1,65 +1,73 @@
 <div class="container">
-  
-    <div *ngIf="loading">
-      <md-spinner class="loading"></md-spinner>
-    </div>
-  
-    <div class="row">
-      <div class="col-12">
-  
-  
-        <div class="card my-5">
-          <div class="card-header">
-            Usuarios
-          </div>
-          <div>
-            <div class="table-responsive">
-              <table class="table table-hover table-striped">
-                <thead>
-                  <tr>
-                    <th>Id</th>
-                    <th>Nombre</th>
-                    <th>Email</th>
-                    <th>Rol</th>
-                    <th></th>
-                  </tr>
-                </thead>
-  
-                <tbody>
-                  <tr *ngFor="let usuario of usuarios; let i = index">
-                    <td>{{usuario.id_usuario}}</td>
-                    <td>{{usuario.nombre}}</td>
-                    <td>{{usuario.email}}</td>
-                    <td>{{usuario.rol}}</td>
-                    <td>
-                      <button md-icon-button [mdMenuTriggerFor]="menu">
-                        <md-icon>more_vert</md-icon>
-                      </button>
-                      <md-menu #menu="mdMenu">
-                        <button md-menu-item (click)="editarUsuario(usuario)">
-                          <md-icon>create</md-icon>
-                          <span>Editar</span>
-                        </button>
-                        <button md-menu-item (click)="changePassword(usuario)">
-                          <md-icon>lock</md-icon>
-                          <span>Cambiar contraseña</span>
-                        </button>
-                        <button md-menu-item (click)="delUsuario(usuario)">
-                          <md-icon>delete</md-icon>
-                          <span>Eliminar</span>
-                        </button>
-                      </md-menu>
-                    </td>
-                  </tr>
-  
-                </tbody>
-              </table>
+
+  <div *ngIf="loading">
+    <md-spinner class="loading"></md-spinner>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+
+
+      <div class="card my-5">
+        <div class="card-header">
+          <div class="d-flex padding-header">
+            <div class="align-self-center">Usuarios</div>
+            <div class="spacer"></div>
+            <div>
+              <button md-icon-button (click)="agregarUsuario()">
+                  <md-icon>add</md-icon>
+              </button>
             </div>
           </div>
         </div>
-  
-  
+        <div>
+          <div class="table-responsive">
+            <table class="table table-hover table-striped">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Nombre</th>
+                  <th>Email</th>
+                  <th>Rol</th>
+                  <th></th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let usuario of usuarios; let i = index">
+                  <td>{{usuario.id_usuario}}</td>
+                  <td>{{usuario.nombre}}</td>
+                  <td>{{usuario.email}}</td>
+                  <td>{{usuario.rol}}</td>
+                  <td>
+                    <button md-icon-button [mdMenuTriggerFor]="menu">
+                        <md-icon>more_vert</md-icon>
+                      </button>
+                    <md-menu #menu="mdMenu">
+                      <button md-menu-item (click)="editarUsuario(usuario)">
+                          <md-icon>create</md-icon>
+                          <span>Editar</span>
+                        </button>
+                      <button md-menu-item (click)="changePassword(usuario)">
+                          <md-icon>lock</md-icon>
+                          <span>Cambiar contraseña</span>
+                        </button>
+                      <button md-menu-item (click)="delUsuario(usuario)">
+                          <md-icon>delete</md-icon>
+                          <span>Eliminar</span>
+                        </button>
+                    </md-menu>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
+
+
     </div>
-  
   </div>
+
+</div>

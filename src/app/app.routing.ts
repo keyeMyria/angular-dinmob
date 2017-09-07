@@ -26,6 +26,8 @@ import { EditarClienteComponent } from "app/components/ventas/editar-cliente/edi
 import { MapasVentasComponent } from "app/components/ventas/mapas-ventas/mapas-ventas.component";
 import { AuthGuard } from "app/guards/auth.guard";
 import { AgregarObraDialogoComponent } from "app/components/admin/agregar-obra-dialogo/agregar-obra-dialogo.component";
+import { AgregarDocumentoDialogoComponent } from "app/components/ventas/agregar-documento-dialogo/agregar-documento-dialogo.component";
+import { CrearUsuarioDialogoComponent } from "app/components/admin/crear-usuario-dialogo/crear-usuario-dialogo.component";
 
 
 
@@ -56,6 +58,8 @@ export const ROUTES: Routes = [
             { path: 'editar-usuario-dialogo', component: EditarUsuarioDialogoComponent },
             { path: 'editar-cliente', component: EditarClienteComponent },
             { path: 'agregar-obra-dialogo', component: AgregarObraDialogoComponent },
+            { path: 'agregar-documento-dialogo', component: AgregarDocumentoDialogoComponent },
+            { path: 'crear-usuario-dialogo', component: CrearUsuarioDialogoComponent },
 
 
 
