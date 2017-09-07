@@ -6,6 +6,8 @@ import { ClientesService } from "app/services/clientes.service";
 import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component";
 import { ObrasService } from "app/services/obras.service";
 import { Router } from "@angular/router";
+import { AuthService } from "app/services/auth.service";
+import { Usuario } from "app/model/usuario";
 
 @Component({
   selector: 'app-clientes',
@@ -14,6 +16,8 @@ import { Router } from "@angular/router";
 })
 
 export class ClientesComponent implements OnInit {
+
+  usuario:Usuario;
   loading: boolean;
   clientes: Cliente[];
   obras: any = [];
@@ -26,6 +30,7 @@ export class ClientesComponent implements OnInit {
 
   constructor(
     private router: Router, 
+    private auth:AuthService,
     private obraSrv: ObrasService, 
     private clienteSrv: ClientesService, 
     public dialog: MdDialog, 
@@ -33,6 +38,9 @@ export class ClientesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    this.usuario=this.auth.getUsuario();
+
     this.loading = true;
     this.clienteSrv.getClientes()
       .subscribe(res => {
@@ -40,7 +48,7 @@ export class ClientesComponent implements OnInit {
         this.loading = false;
       });   
 
-      this.obraSrv.getObrasUsuario(18)
+      this.obraSrv.getObrasUsuario(this.usuario.id_usuario)
       .subscribe(response => {
         this.obras = response;
       });

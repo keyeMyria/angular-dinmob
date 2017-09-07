@@ -4,21 +4,31 @@ import { Observable } from "rxjs/Observable";
 import { Http, Response } from "@angular/http";
 
 /* export const ROLES = {
-  Administrador: 1,
-  Ventas: 2,
-  Almacen: 3
+ 
 } */
 
 
 @Injectable()
 export class AuthService {
   //url: string = "http://192.168.0.108:8080/barroco/api/index.php/auth/";
+<<<<<<< HEAD
+  url: string = "http://localhost:8080/controlapi/index.php/auth/";
+=======
   url: string = "http://localhost:8080/dinmob/api/index.php/auth/";
+>>>>>>> 74bf5b618b67ac2133a924c25d5f3c528aca5e78
 
   Rol = {
     Administrador: 1,
-    Ventas: 2,
-    Almacen: 3
+    Control:2,
+    Residente:3,
+    Almacenista:4,
+    Contabilidad:5,
+    Ventas:6,
+    AsesorVentas:7,
+    Creditos:8,
+    Recepcion:9,
+    ControlAlmacen:10
+    
   }
 
   redirectUrl:string;
