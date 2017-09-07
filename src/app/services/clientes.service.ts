@@ -9,7 +9,7 @@ import { of } from "rxjs/observable/of";
 @Injectable()
 export class ClientesService {
   //url: string = "http://192.168.0.107:8080/barroco/api/index.php/clientes/";
-  url: string = "http://localhost:8080/controlapi/index.php/ventas_clientes/";
+  url: string = "http://localhost:8080/dinmob/api/index.php/ventas_clientes/";
 
   constructor(private http: Http) { }
 

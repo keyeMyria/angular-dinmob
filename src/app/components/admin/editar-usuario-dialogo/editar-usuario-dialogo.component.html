@@ -19,8 +19,8 @@
     <div class="form-group row">
       <label for="id_rol" class="col-sm-3 col-form-label">Rol</label>
       <div class="col-sm-9">
-        <select class="form-control" id="id_rol" name="id_rol" [(ngModel)]="usuario.id_rol">
-          <option [value]="rol.id_rol" *ngFor="let rol of roles">{{rol.nombre}}</option>                 
+        <select class="form-control" id="id_rol" name="id_rol" [(ngModel)]="usuario.id_tipo_usuario">
+          <option [value]="rol.id_tipo_usuario" *ngFor="let rol of roles">{{rol.tipo}}</option>                 
         </select>
       </div>
     </div>
