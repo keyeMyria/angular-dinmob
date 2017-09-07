@@ -7,7 +7,7 @@ import { AuthHttp } from "angular2-jwt/angular2-jwt";
 @Injectable()
 export class UsuarioService {
   
-  url: string = "http://localhost:8080/barroco/api/index.php/usuarios/";
+  url: string = "http://localhost:8080/dinmob/api/index.php/usuarios/";
 
   constructor(private http: Http, private authHttp:AuthHttp) { }
 

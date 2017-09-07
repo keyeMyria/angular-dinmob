@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ObrasService } from "app/services/obras.service";
+import { Usuario } from "app/model/usuario";
+import { AuthService } from "app/services/auth.service";
 
 @Component({
   selector: 'app-estructura-obra',
@@ -8,6 +10,7 @@ import { ObrasService } from "app/services/obras.service";
 })
 export class EstructuraObraComponent implements OnInit {
 
+  usuario:Usuario;
   obras: any = [];
   obra: any = {
     datos: {}
@@ -39,18 +42,24 @@ export class EstructuraObraComponent implements OnInit {
 
 
 
-  constructor(private obraSrv: ObrasService) { }
+  constructor(
+    private obraSrv: ObrasService,
+    private auth:AuthService
+  ) { }
 
 
 
   ngOnInit() {
+    this.usuario=this.auth.getUsuario();
+
+
     this.obraSrv.loadFullObra(58)
       .subscribe(response => {
         this.obra = response;
         console.log("obra", this.obra);
       });
 
-    this.obraSrv.getObrasUsuario(18)
+    this.obraSrv.getObrasUsuario(this.usuario.id_usuario)
       .subscribe(response => {
         this.obras = response;
       });
