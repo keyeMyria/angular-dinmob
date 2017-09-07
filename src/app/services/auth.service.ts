@@ -13,7 +13,7 @@ import { Http, Response } from "@angular/http";
 @Injectable()
 export class AuthService {
   //url: string = "http://192.168.0.108:8080/barroco/api/index.php/auth/";
-  url: string = "http://localhost:8080/barroco/api/index.php/auth/";
+  url: string = "http://localhost:8080/dinmob/api/index.php/auth/";
 
   Rol = {
     Administrador: 1,

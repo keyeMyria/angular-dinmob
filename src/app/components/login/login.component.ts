@@ -21,45 +21,46 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-login2(usuario){
-  this.router.navigate(['/tablero']);
-}
+  login2(usuario) {
+    this.router.navigate(['/tablero']);
+  }
 
   login(usuario) {
-    
-        this.loading = true;
-        
-        this.auth.login(usuario)
-          .subscribe(res => {
 
-            this.loading = false;
-            
-            if (res.error) {
-              this.alert = res.error;
-            } else {
-                            
-              console.log("login", res);
-              localStorage.setItem('token', res.token);
-              localStorage.setItem('usuario', JSON.stringify(res.usuario));
-              
-              // reset form properties
-              this.usuario = { email: "", password: "" };
-              this.alert = "";
-    
-              //la pagina principal cambia de acuerdo al rol de usuario
-              if (Number(res.usuario.id_rol) === this.auth.Rol.Administrador) {
-                this.router.navigate(['/tablero']);
-              } else if (Number(res.usuario.id_rol) === this.auth.Rol.Ventas) {
-                this.router.navigate(['/tablero']);
-              } else if (Number(res.usuario.id_rol) === this.auth.Rol.Almacen) {
-                this.router.navigate(['/tablero']);
-              } else {
-                //rol no valido
-              }
-    
-            }
-          });
-      }
+    this.loading = true;
+
+    this.auth.login(usuario)
+      .subscribe(res => {
+
+        this.loading = false;
+
+        if (res.error) {
+          this.alert = res.error;
+        } else {
+
+          console.log("login", res);
+          localStorage.setItem('token', res.token);
+          localStorage.setItem('usuario', JSON.stringify(res.usuario));
+
+          // reset form properties
+          this.usuario = { email: "", password: "" };
+          this.alert = "";
+
+          //la pagina principal cambia de acuerdo al rol de usuario
+          switch (res.usuario.id_tipo_usuario) {
+            case this.auth.Rol.Administrador:
+              this.router.navigate(['/tablero']);
+              break;
+
+             
+
+            default:
+              break;
+          }
+
+        }
+      });
+  }
 
 }
 
