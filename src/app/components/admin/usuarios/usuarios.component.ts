@@ -152,7 +152,10 @@ export class UsuariosComponent implements OnInit {
     let usuario = new Usuario();
 
     let dialogRef = this.dialog.open(CrearUsuarioDialogoComponent, {
-      data: {},
+      data: {
+        usuario: usuario,
+        roles: this.roles
+      },
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
