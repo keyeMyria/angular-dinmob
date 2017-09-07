@@ -43,6 +43,14 @@ export class TableroComponent implements OnInit {
     this.router.navigate(["/mapas-ventas"]);
   }
 
+  gotoMapasAvances() {
+    this.router.navigate(["/mapas-avances"]);
+  }
+
+  gotoAvances() {
+    this.router.navigate(["/avances"]);
+  }
+
 
  
 
