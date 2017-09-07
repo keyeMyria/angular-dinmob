@@ -19,7 +19,15 @@
 
       <div class="card my-1">
         <div class="card-header">
-          Lista de clientes
+          <div class="d-flex padding-header">
+            <div class="align-self-center">Lista de clientes</div>
+            <div class="spacer"></div>
+            <div>
+              <button md-icon-button (click)="agregarCliente()">
+                  <md-icon>add</md-icon>
+              </button>
+            </div>
+          </div>
         </div>
         <div>
           <div class="table-responsive">

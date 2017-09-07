@@ -10,7 +10,7 @@ import { Usuario } from "app/model/usuario";
   styleUrls: ['./crear-usuario-dialogo.component.scss']
 })
 export class CrearUsuarioDialogoComponent implements OnInit {
-  @ViewChild('formCreateUsuario') formCreateUsuario: NgForm;
+ 
 
   roles: any[];
   usuario: Usuario;
@@ -21,7 +21,6 @@ export class CrearUsuarioDialogoComponent implements OnInit {
   ) { }
 
   ngOnInit() {    
-    this.usuario = this.data.usuario;
   }
 
 }
