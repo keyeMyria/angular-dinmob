@@ -148,16 +148,34 @@ export class UsuariosComponent implements OnInit {
 
   }
 
-  agregarUsuario() {
+  agregarUsuario(): void {
+    let usuario = new Usuario();
 
-    console.log();
     let dialogRef = this.dialog.open(CrearUsuarioDialogoComponent, {
-      data: {
-      }
+      data: {},
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.selectedOption = result;
-    });
+      if (result === true) {
+
+        console.log("usuario", usuario);
+        this.usuarioSrv.createUsuario(usuario)
+          .subscribe(res => {
+            console.log("response", res);
+            let nuevaUsuario = new Usuario();
+            nuevaUsuario.id_usuario = res;
+            nuevaUsuario.nombre = usuario.nombre;
+            this.usuarios.push(nuevaUsuario);
+
+          });
+        }
+
+        console.log('The dialog was closed');
+      });
+
   }
+
+
+
+
 
 }
