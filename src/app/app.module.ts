@@ -75,6 +75,7 @@ import { AuthGuard } from "app/guards/auth.guard";
 import { EditarClienteComponent } from './components/ventas/editar-cliente/editar-cliente.component';
 import { AgregarObraDialogoComponent } from "app/components/admin/agregar-obra-dialogo/agregar-obra-dialogo.component";
 import { AgregarDocumentoDialogoComponent } from './components/ventas/agregar-documento-dialogo/agregar-documento-dialogo.component';
+import { CrearUsuarioDialogoComponent } from './components/admin/crear-usuario-dialogo/crear-usuario-dialogo.component';
 
 
 
@@ -108,6 +109,7 @@ import { AgregarDocumentoDialogoComponent } from './components/ventas/agregar-do
     EditarClienteComponent,
     AgregarObraDialogoComponent,
     AgregarDocumentoDialogoComponent,
+    CrearUsuarioDialogoComponent,
 
   ],
   imports: [
@@ -135,7 +137,8 @@ import { AgregarDocumentoDialogoComponent } from './components/ventas/agregar-do
     CambiarPasswordDialogoComponent,
     ConfirmarBorradoDialogoComponent,
     AgregarObraDialogoComponent,
-    AgregarDocumentoDialogoComponent
+    AgregarDocumentoDialogoComponent,
+    CrearUsuarioDialogoComponent
     
   ],
 

@@ -1,0 +1,57 @@
+<h1 md-dialog-title>Nuevo Usuario</h1>
+<div md-dialog-content>
+
+    <form>  <!-- #formCreateUsuario="ngForm"  id="formCreateUsuario" (ngSubmit)="createUsuario()" -->
+        
+        
+         
+        <div class="form-group row">
+          <label for="nombre" class="col-sm-3 col-form-label">Nombre</label>
+          <div class="col-sm-9">
+            <input class="form-control" type="text" name="nombre" id="nombre"  [(ngModel)]="usuario.nombre">
+            
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="email" class="col-sm-3 col-form-label">Email</label>
+          <div class="col-sm-9">
+            <input class="form-control" type="text" value="" name="email" id="email" [(ngModel)]="usuario.email">
+            
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label" for="password">Password</label>
+          <div class="col-sm-9">
+            <input type="password" class="form-control" name="password" id="password" placeholder="" [(ngModel)]="usuario.password">                  
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label" for="confirmar">Confirmar</label>
+          <div class="col-sm-9">
+            <input type="password" class="form-control" name="confirmar" id="confirmar" placeholder="">
+          </div>
+        </div>
+        
+         <!--  <div class="form-group row">
+            <label for="id_rol" class="col-sm-3 col-form-label">Rol</label>
+            <div class="col-sm-9">
+              <select class="form-control" id="id_rol" name="id_rol" [(ngModel)]="usuario.id_rol"> 
+                <option [value]="null">Seleccionar</option>
+                <option  [value]="rol.id_rol" *ngFor="let rol of roles" >{{rol.nombre}}</option>  
+              </select>
+            </div>
+          </div> -->
+
+        <!-- <div>usuario: {{usuario|json}}</div> -->
+
+      </form>
+
+
+</div>
+<div md-dialog-actions>
+  <button md-button [md-dialog-close]="false">CERRAR</button>
+  <button md-button [md-dialog-close]="true">ACEPTAR</button>
+</div>
