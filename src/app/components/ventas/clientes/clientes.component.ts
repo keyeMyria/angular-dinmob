@@ -8,6 +8,7 @@ import { ObrasService } from "app/services/obras.service";
 import { Router } from "@angular/router";
 import { AuthService } from "app/services/auth.service";
 import { Usuario } from "app/model/usuario";
+import { ClienteHelperService } from 'app/utils/cliente-helper.service';
 
 @Component({
   selector: 'app-clientes',
@@ -17,6 +18,7 @@ import { Usuario } from "app/model/usuario";
 
 export class ClientesComponent implements OnInit {
 
+ 
   usuario:Usuario;
   loading: boolean;
   clientes: Cliente[];
@@ -31,14 +33,15 @@ export class ClientesComponent implements OnInit {
   constructor(
     private router: Router, 
     private auth:AuthService,
-    private obraSrv: ObrasService, 
+    private obraSrv: ObrasService,
+    private clienteHlp:ClienteHelperService, 
     private clienteSrv: ClientesService, 
     public dialog: MdDialog, 
     public snackBar: MdSnackBar
   ) { }
 
   ngOnInit() {
-
+    
     this.usuario=this.auth.getUsuario();
 
     this.loading = true;

@@ -76,6 +76,7 @@ import { EditarClienteComponent } from './components/ventas/editar-cliente/edita
 import { AgregarObraDialogoComponent } from "app/components/admin/agregar-obra-dialogo/agregar-obra-dialogo.component";
 import { AgregarDocumentoDialogoComponent } from './components/ventas/agregar-documento-dialogo/agregar-documento-dialogo.component';
 import { CrearUsuarioDialogoComponent } from './components/admin/crear-usuario-dialogo/crear-usuario-dialogo.component';
+import { ClienteHelperService } from 'app/utils/cliente-helper.service';
 
 
 
@@ -149,6 +150,7 @@ import { CrearUsuarioDialogoComponent } from './components/admin/crear-usuario-d
     AuthService,
     ObrasService,
     ClientesService,
+    ClienteHelperService,
     UsuarioService,
     MapasService
   ],

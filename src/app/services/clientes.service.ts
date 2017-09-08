@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from "@angular/http";
 import { Observable } from "rxjs/Observable";
 import { of } from "rxjs/observable/of";
+import { Cliente } from 'app/model/cliente';
 
 
 @Injectable()
@@ -14,9 +15,9 @@ export class ClientesService {
   constructor(private http: Http) { }
 
 
-  getClientes() {
+  getClientes(): Observable<Cliente[]> {
     return this.http.get(this.url)
-      .map(this.extractData)
+      .map(this.extractData)  
       .catch(this.handleError);
   }
 

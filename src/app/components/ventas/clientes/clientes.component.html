@@ -36,18 +36,19 @@
                 <tr>
                   <th>Id</th>
                   <th>Nombre</th>
-                  <th>Email</th>
-                  <th>RFC</th>
-                  <th></th>
+                  <th>Manzana</th>
+                  <th>Lote</th>
+                  <th>Estado</th>
                 </tr>
               </thead>
 
               <tbody>
                 <tr *ngFor="let cliente of clientes">
                   <td>{{cliente.id_cliente}}</td>
-                  <td>{{cliente.nombre}}</td>
-                  <td>{{cliente.email}}</td>
-                  <td>{{cliente.rfc}}</td>
+                  <td>{{clienteHlp.getNombre(cliente)}}</td>
+                  <td>manzana 0</td>
+                  <td>lote 0</td>
+                  <td>libre</td>
                   <td>
                     <button md-icon-button [mdMenuTriggerFor]="menu">
                         <md-icon>more_vert</md-icon>
