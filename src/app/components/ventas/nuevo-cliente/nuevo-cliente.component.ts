@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Cliente } from "app/model/cliente";
+import { ClientesService } from "app/services/clientes.service";
 
 @Component({
   selector: 'app-nuevo-cliente',
@@ -14,12 +15,18 @@ export class NuevoClienteComponent implements OnInit {
   hideToggle: boolean = false;
   showPanel3 = true;
 
-  constructor() {
+  constructor(public clienteSrv: ClientesService) {
     this.cliente = new Cliente();
     this.cliente.persona_moral = "0";
-   }
+  }
 
   ngOnInit() {
   }
 
+  createCliente() {
+    this.clienteSrv.createCliente(this.cliente)
+      .subscribe(res => console.log("Cliente Agregado", res));
+      
+
+  }
 }
