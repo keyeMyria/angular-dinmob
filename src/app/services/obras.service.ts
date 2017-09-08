@@ -11,6 +11,14 @@ export class ObrasService {
 
   constructor(private http: Http) { }
 
+  createObra(obra) {
+    return this.http.post(this.url + 'create_obra', {
+      obra: obra
+    })
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
   getObrasUsuarioConMapas(id) {
     return this.http.get(this.url + 'usuario_mapas/' + id);
   }

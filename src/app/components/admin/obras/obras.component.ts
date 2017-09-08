@@ -34,12 +34,10 @@ export class ObrasComponent implements OnInit {
       if (result === true) {
 
         console.log("obra", obra);
-        this.obrasSrv.addObra([], null, obra.nombre, null)
+        this.obrasSrv.createObra(obra)
           .subscribe(res => {
-            console.log("response", res);
-            let nuevaObra = new Obra();
-            nuevaObra.id_obra = res;
-            nuevaObra.nombre = obra.nombre;
+           
+            let nuevaObra =  res;           
             this.obras.push(nuevaObra);
 
 

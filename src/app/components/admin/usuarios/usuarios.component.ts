@@ -164,15 +164,15 @@ export class UsuariosComponent implements OnInit {
         this.usuarioSrv.createUsuario(usuario)
           .subscribe(res => {
             console.log("response", res);
-            let nuevaUsuario = new Usuario();
-            nuevaUsuario.id_usuario = res;
-            nuevaUsuario.nombre = usuario.nombre;
-            this.usuarios.push(nuevaUsuario);
+            let nuevoUsuario = res;//new Usuario();
+           //nuevoUsuario.id_usuario = res;
+           // nuevoUsuario.nombre = usuario.nombre;
+            this.usuarios.push(nuevoUsuario);
 
           });
         }
 
-        console.log('The dialog was closed');
+        
       });
 
   }

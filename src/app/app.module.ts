@@ -77,6 +77,8 @@ import { AgregarObraDialogoComponent } from "app/components/admin/agregar-obra-d
 import { AgregarDocumentoDialogoComponent } from './components/ventas/agregar-documento-dialogo/agregar-documento-dialogo.component';
 import { CrearUsuarioDialogoComponent } from './components/admin/crear-usuario-dialogo/crear-usuario-dialogo.component';
 import { ClienteHelperService } from 'app/utils/cliente-helper.service';
+import { AgregarPrototipoDialogoComponent } from './components/admin/agregar-prototipo-dialogo/agregar-prototipo-dialogo.component';
+import { CambiarNombrePrototipoDialogoComponent } from './components/admin/cambiar-nombre-prototipo-dialogo/cambiar-nombre-prototipo-dialogo.component';
 
 
 
@@ -111,6 +113,8 @@ import { ClienteHelperService } from 'app/utils/cliente-helper.service';
     AgregarObraDialogoComponent,
     AgregarDocumentoDialogoComponent,
     CrearUsuarioDialogoComponent,
+    AgregarPrototipoDialogoComponent,
+    CambiarNombrePrototipoDialogoComponent,
 
   ],
   imports: [
@@ -139,7 +143,9 @@ import { ClienteHelperService } from 'app/utils/cliente-helper.service';
     ConfirmarBorradoDialogoComponent,
     AgregarObraDialogoComponent,
     AgregarDocumentoDialogoComponent,
-    CrearUsuarioDialogoComponent
+    CrearUsuarioDialogoComponent,
+    AgregarPrototipoDialogoComponent,
+    CambiarNombrePrototipoDialogoComponent
     
   ],
 

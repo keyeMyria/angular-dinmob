@@ -28,6 +28,8 @@ import { AuthGuard } from "app/guards/auth.guard";
 import { AgregarObraDialogoComponent } from "app/components/admin/agregar-obra-dialogo/agregar-obra-dialogo.component";
 import { AgregarDocumentoDialogoComponent } from "app/components/ventas/agregar-documento-dialogo/agregar-documento-dialogo.component";
 import { CrearUsuarioDialogoComponent } from "app/components/admin/crear-usuario-dialogo/crear-usuario-dialogo.component";
+import { AgregarPrototipoDialogoComponent } from "app/components/admin/agregar-prototipo-dialogo/agregar-prototipo-dialogo.component";
+import { CambiarNombrePrototipoDialogoComponent } from "app/components/admin/cambiar-nombre-prototipo-dialogo/cambiar-nombre-prototipo-dialogo.component";
 
 
 
@@ -56,10 +58,13 @@ export const ROUTES: Routes = [
             { path: 'cambiar-password-dialogo', component: CambiarPasswordDialogoComponent },
             { path: 'confirmar-borrado-dialogo', component: ConfirmarBorradoDialogoComponent },
             { path: 'editar-usuario-dialogo', component: EditarUsuarioDialogoComponent },
-            { path: 'editar-cliente', component: EditarClienteComponent },
+            { path: 'editar-cliente/:id', component: EditarClienteComponent },
             { path: 'agregar-obra-dialogo', component: AgregarObraDialogoComponent },
             { path: 'agregar-documento-dialogo', component: AgregarDocumentoDialogoComponent },
             { path: 'crear-usuario-dialogo', component: CrearUsuarioDialogoComponent },
+            { path: 'agregar-prototipo-dialogo', component: AgregarPrototipoDialogoComponent },
+            { path: 'cambiar-nombre-prototipo-dialogo', component: CambiarNombrePrototipoDialogoComponent },
+
 
 
 
