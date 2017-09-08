@@ -17,7 +17,13 @@ export class ClientesService {
 
   getClientes(): Observable<Cliente[]> {
     return this.http.get(this.url)
-      .map(this.extractData)  
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  getCliente(id_cliente): Observable<Cliente> {
+    return this.http.get(this.url + 'get_cliente/' + id_cliente)
+      .map(this.extractData)
       .catch(this.handleError);
   }
 
