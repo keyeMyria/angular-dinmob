@@ -16,6 +16,7 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
   compra_selected: any;
   obra_selected: any;
   lotes: any;
+  obras:any;
   map_values: any;
 
   constructor(private mapaSrv: MapasService) { }

@@ -58,7 +58,7 @@ export class ObrasComponent implements OnInit {
         let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
           data: {
             title: "Eliminar Obra",
-            content: `¿Desea eliminar obra: ${obra.nombre}?`
+            content: `¿Desea eliminar la obra: ${obra.nombre}?`
           }
         });
     

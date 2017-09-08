@@ -1,14 +1,39 @@
 <div class="content">
   <div class="map-header">
-    header <button class="btn btn-primary" (click)="getMapa()">Mapa</button>
+    <select class="form-control" name="" id="">
+      <option value="">Seleccionar...</option>
+      <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>
+    </select>
   </div>
 
-  <!--  <div class="map-container">-->
-    <div id="map" class="map"></div>
-  <!--</div>-->
+ 
+  <div id="map" class="map"></div>
 
-  <div class="map-footer">
-    footer
-  </div>
+  <md-toolbar color="primary" class="map-footer">
+
+    <div class="map-toolbar">
+
+      <button md-button (click)="getMapa()">          
+      <md-icon>person</md-icon> MAPA
+    </button>
+
+      <button md-button>          
+        <md-icon>person</md-icon> CLIENTE
+      </button>
+
+      <button md-button>          
+          <md-icon>person</md-icon> LOTE
+        </button>
+
+      <button md-button>          
+            <md-icon>person</md-icon> ESTADO
+          </button>
+
+      <button md-icon-button>          
+                  <md-icon>person</md-icon>
+                </button>
+
+    </div>
+  </md-toolbar>
 
 </div>

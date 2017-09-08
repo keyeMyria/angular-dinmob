@@ -23,12 +23,16 @@
             <thead>
               <tr>
                 <th>Nombre</th>
+                <th>Inicio</th>
+                <th>En Venta</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let obra of obras">
                 <td>{{obra.nombre}}</td>
+                <td>{{obra.fecha_ini}}</td>
+                <td>{{obra.en_venta}}</td>
                 <td class="text-right">
                   <button md-icon-button [mdMenuTriggerFor]="menu">
                         <md-icon>more_vert</md-icon>

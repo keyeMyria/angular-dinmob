@@ -1,21 +1,13 @@
-.content{
+.content {
     display: flex;
     flex-direction: column;
-    //flex-basis: 100%;
-    height: calc(100% - 128px);
+    //64px = toolbar
+    height: calc(100vh - 64px);
 }
 
-//no se utiliza de momento
-.map-container{
-    display: flex;
-    flex-direction: column;
-    background-color: yellow;
-    flex-grow: 1;
-    //height: 100%;
-    //flex-basis: 100%;
-}
 
-.map{
+
+.map {
     display: flex;
     flex-direction: column;
     //background-color: #61076A;
@@ -27,10 +19,13 @@
     //right: 0;
 }
 
-.map-header{
+.map-header {
     background-color: yellow;
 }
 
-.map-footer{
-    background-color: yellow;
+.map-toolbar {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-around;
 }
+
