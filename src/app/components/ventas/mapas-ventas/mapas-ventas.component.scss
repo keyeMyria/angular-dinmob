@@ -19,13 +19,25 @@
     //right: 0;
 }
 
-.map-header {
+/* .map-header {
     background-color: yellow;
 }
-
+ */
 .map-toolbar {
     display: flex;
     flex-grow: 1;
     justify-content: space-around;
 }
+
+.toolbar-slide-toogle {
+    align-self: center;
+    height: unset;    
+
+}
+
+:host /deep/ label.mat-slide-toggle-label {
+    margin-bottom: 0 !important;
+}
+
+
 
