@@ -1,9 +1,11 @@
-export class Usuario {
+export class Usuario {    
+
     
         id_usuario?: number;
         nombre: string;
         email: string;
         id_tipo_usuario: number;
+        id_obra_default?: number;
         tipo_usuario?: string;
     
     

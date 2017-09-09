@@ -41,7 +41,7 @@ export class ClientesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
+        
     this.usuario=this.auth.getUsuario();
 
     this.loading = true;

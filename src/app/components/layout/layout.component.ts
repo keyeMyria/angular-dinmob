@@ -13,13 +13,22 @@ export class LayoutComponent implements OnInit {
   usuario: Usuario;
   username: string;
 
+  obra_default: any;
+
   constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
-    this.usuario = /* new Usuario();  */ this.auth.getUsuario();
-    /* this.usuario.nombre = "Nuevo usuario";
-    this.usuario.id_rol = 1; */
+    this.usuario = this.auth.getUsuario();
     this.username = this.usuario.nombre.split(" ")[0];
+
+
+    if (this.usuario.id_obra_default) {
+      this.obra_default = { obra: this.usuario.id_obra_default };
+    } else {
+      this.obra_default = {};
+    }
+
+
   }
 
   logout() {

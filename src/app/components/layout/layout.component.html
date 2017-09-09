@@ -1,4 +1,4 @@
-<md-toolbar color="primary" >
+<md-toolbar color="primary">
 
   <button md-icon-button (click)="navLeft.toggle()">
             <md-icon>menu</md-icon>
@@ -10,10 +10,10 @@
 
   <span class="spacer"></span>
 
-  <span class="hidden-xs-down">{{username}}</span>
-  <button md-icon-button [mdMenuTriggerFor]="userMenu">          
-            <md-icon>person</md-icon>
-          </button>
+  <button md-button [mdMenuTriggerFor]="userMenu">
+    <span class="d-none d-sm-inline">{{username}}</span>          
+    <md-icon>person</md-icon>
+  </button>
 
   <button md-icon-button (click)="navRight.toggle()">
             <md-icon>more_vert</md-icon>
@@ -37,7 +37,7 @@
 
         <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/login']" routerLinkActive="active">Login</a>
 
-        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/clientes']" routerLinkActive="active">Clientes</a>
+        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/clientes', obra_default]" routerLinkActive="active">Clientes</a>
 
         <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/usuarios']" routerLinkActive="active">Usuarios</a>
 
@@ -45,19 +45,15 @@
 
         <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/obras']" routerLinkActive="active">Obras</a>
 
-        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/prototipos']" routerLinkActive="active">Prototipos</a>
+        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/prototipos', obra_default]" routerLinkActive="active">Prototipos</a>
 
-        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/desarrollos']" routerLinkActive="active">Desarrollos</a>
+        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/desarrollos', obra_default]" routerLinkActive="active">Desarrollos</a>
 
-        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/nuevo-cliente']" routerLinkActive="active">Nuevo cliente</a>
-
-        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/cliente']" routerLinkActive="active">Cliente</a>
-
-        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/obras']" routerLinkActive="active">Obras</a>
+        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/nuevo-cliente']" routerLinkActive="active">Nuevo cliente</a>               
 
         <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/tablero']" routerLinkActive="active">Tablero</a>
 
-        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/estructura-obra']" routerLinkActive="active">Estructura obra</a>
+        <a md-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/estructura-obra', obra_default]" routerLinkActive="active">Estructura obra</a>
 
 
 
@@ -108,7 +104,7 @@
 
       </md-nav-list>
 
-      <md-nav-list class="mb-5" >
+      <md-nav-list class="mb-5">
         <!-- 64 + 48 style="margin-bottom:112px"-->
         <!-- *ngIf= "auth.hasRole([auth.Rol.Residente])" -->
         <h3 class="sidenav-title">Residente</h3>
