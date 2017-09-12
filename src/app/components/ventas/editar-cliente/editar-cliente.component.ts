@@ -15,6 +15,7 @@ export class EditarClienteComponent implements OnInit {
 
   cliente: Cliente = new Cliente();
   selectedOption: string;
+  compra_selected: any = {};
 
   constructor(
     private clienteSrv: ClientesService,

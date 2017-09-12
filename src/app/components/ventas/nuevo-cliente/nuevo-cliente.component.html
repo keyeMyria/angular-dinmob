@@ -1,8 +1,7 @@
 <section class="container py15px">
   <div class="row">
     <div class="col-12 col-sm-10 mx-sm-auto">
-      <form class="form-horizontal" name="formCliente" id="formCliente" (ngSubmit)="createCliente()"
-        novalidate>
+      <form class="form-horizontal" name="formCliente" id="formCliente" (ngSubmit)="createCliente()" novalidate>
 
 
         <div class="card">
@@ -49,11 +48,25 @@
                         <input type="text" class="form-control" name="lugar_nacimiento_persona_fisica" [(ngModel)]="cliente.lugar_nacimiento_persona_fisica">
                       </div>
                     </div>
-                    <div class="form-group row">
+                    <!--  <div class="form-group row">
                       <label class="col-form-label col-sm-3">Fecha de nacimiento</label>
                       <div class="col-sm-9">
                         <input type="text" class="form-control" name="fecha_nacimiento_persona_fisica" [(ngModel)]="cliente.fecha_nacimiento_persona_fisica"
                           date-picker>
+                      </div>
+                    </div> -->
+                    <div class="form-group row">
+                      <label class="col-form-label col-sm-3">Fecha de nacimiento</label>
+                      <div class="col-sm-9">
+                        <div class="input-group">
+                          <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #d="ngbDatepicker" type="text" name="fecha_nacimiento_persona_fisica"
+                            id="fecha_nacimiento_persona_fisica" placement="bottom-right" [(ngModel)]="cliente.fecha_nacimiento_persona_fisica">
+                          <span class="input-group-btn">
+                            <button class="btn btn-secondary" type="button" (click)="d.toggle()">
+                            <i class="fa fa-calendar"></i>
+                            </button>
+                            </span>
+                        </div>
                       </div>
                     </div>
                     <div class="form-group row">
@@ -220,11 +233,25 @@
                         <input type="text" class="form-control" name="nacionalidad_persona_moral" [(ngModel)]="cliente.nacionalidad_persona_moral">
                       </div>
                     </div>
-                    <div class="form-group row">
+                    <!--    <div class="form-group row">
                       <label class="col-form-label col-sm-3">Fecha de constitución</label>
                       <div class="col-sm-9">
                         <input type="text" class="form-control" name="fecha_constitucion_persona_moral" [(ngModel)]="cliente.fecha_constitucion_persona_moral"
                           date-picker>
+                      </div>
+                    </div> -->
+                    <div class="form-group row">
+                      <label class="col-form-label col-sm-3">Fecha de nacimiento</label>
+                      <div class="col-sm-9">
+                        <div class="input-group">
+                          <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #d="ngbDatepicker" type="text" name="fecha_constitucion_persona_moral"
+                            id="fecha_constitucion_persona_moral" placement="bottom-right" [(ngModel)]="cliente.fecha_constitucion_persona_moral">
+                          <span class="input-group-btn">
+                            <button class="btn btn-secondary" type="button" (click)="d.toggle()">
+                            <i class="fa fa-calendar"></i>
+                            </button>
+                            </span>
+                        </div>
                       </div>
                     </div>
                     <div class="form-group row">
@@ -417,11 +444,24 @@
                       <input type="text" class="form-control" name="lugar_nacimiento_conyuge" [(ngModel)]="cliente.lugar_nacimiento_conyuge">
                     </div>
                   </div>
+                  <!--    <div class="form-group row">
+                    <label class="col-form-label col-sm-3">Fecha de nacimiento</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" name="fecha_nacimiento_conyuge" [(ngModel)]="cliente.fecha_nacimiento_conyuge" date-picker>
+                    </div>
+                  </div> -->
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">Fecha de nacimiento</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" name="fecha_nacimiento_conyuge" [(ngModel)]="cliente.fecha_nacimiento_conyuge"
-                        date-picker>
+                      <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #d="ngbDatepicker" type="text" name="fecha_nacimiento_conyuge"
+                          id="fecha_nacimiento_conyuge" placement="bottom-right" [(ngModel)]="cliente.fecha_nacimiento_conyuge">
+                        <span class="input-group-btn">
+                          <button class="btn btn-secondary" type="button" (click)="d.toggle()">
+                          <i class="fa fa-calendar"></i>
+                          </button>
+                          </span>
+                      </div>
                     </div>
                   </div>
                   <div class="form-group row">
@@ -483,8 +523,8 @@
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">RFC</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" name="rfc_conyuge" [(ngModel)]="cliente.rfc_conyuge" ui-mask="****-999999-***"
-                        ui-mask-placeholder ui-mask-placeholder-char="_">
+                      <input type="text" class="form-control" name="rfc_conyuge" [(ngModel)]="cliente.rfc_conyuge" ui-mask="****-999999-***" ui-mask-placeholder
+                        ui-mask-placeholder-char="_">
                     </div>
                   </div>
                   <div class="form-group row">
@@ -572,11 +612,25 @@
                       <input type="text" class="form-control" name="lugar_nacimiento_apoderado" [(ngModel)]="cliente.lugar_nacimiento_apoderado">
                     </div>
                   </div>
-                  <div class="form-group row">
+                  <!-- <div class="form-group row">
                     <label class="col-form-label col-sm-3">Fecha de nacimiento</label>
                     <div class="col-sm-9">
                       <input type="text" class="form-control" name="fecha_nacimiento_apoderado" [(ngModel)]="cliente.fecha_nacimiento_apoderado"
                         date-picker>
+                    </div>
+                  </div> -->
+                  <div class="form-group row">
+                    <label class="col-form-label col-sm-3">Fecha de nacimiento</label>
+                    <div class="col-sm-9">
+                      <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #d="ngbDatepicker" type="text" name="fecha_nacimiento_apoderado"
+                          id="fecha_nacimiento_apoderado" placement="bottom-right" [(ngModel)]="cliente.fecha_nacimiento_apoderado">
+                        <span class="input-group-btn">
+                          <button class="btn btn-secondary" type="button" (click)="d.toggle()">
+                          <i class="fa fa-calendar"></i>
+                          </button>
+                          </span>
+                      </div>
                     </div>
                   </div>
                   <div class="form-group row">
