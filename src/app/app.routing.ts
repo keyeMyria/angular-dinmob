@@ -30,6 +30,8 @@ import { AgregarDocumentoDialogoComponent } from "app/components/ventas/agregar-
 import { CrearUsuarioDialogoComponent } from "app/components/admin/crear-usuario-dialogo/crear-usuario-dialogo.component";
 import { AgregarPrototipoDialogoComponent } from "app/components/admin/agregar-prototipo-dialogo/agregar-prototipo-dialogo.component";
 import { CambiarNombrePrototipoDialogoComponent } from "app/components/admin/cambiar-nombre-prototipo-dialogo/cambiar-nombre-prototipo-dialogo.component";
+import { NuevoPagoDialogoComponent } from 'app/components/ventas/nuevo-pago-dialogo/nuevo-pago-dialogo.component';
+import { NuevaCompraDialogoComponent } from 'app/components/ventas/nueva-compra-dialogo/nueva-compra-dialogo.component';
 
 
 
@@ -64,6 +66,9 @@ export const ROUTES: Routes = [
             { path: 'crear-usuario-dialogo', component: CrearUsuarioDialogoComponent },
             { path: 'agregar-prototipo-dialogo', component: AgregarPrototipoDialogoComponent },
             { path: 'cambiar-nombre-prototipo-dialogo', component: CambiarNombrePrototipoDialogoComponent },
+            { path: 'nuevo-pago-dialogo', component: NuevoPagoDialogoComponent },
+            { path: 'nueva-compra-dialogo', component: NuevaCompraDialogoComponent },
+            { path: 'editar-pago-dialogo', component: NuevaCompraDialogoComponent },
 
 
 

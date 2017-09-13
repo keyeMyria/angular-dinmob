@@ -6,6 +6,8 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RoutingModule } from "app/app.routing";
 import { I18n, SpanishDatepickerI18nService } from "app/services/spanish-datepicker-i18n.service";
 import { NgbDatepickerI18n, NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { TextMaskModule } from "angular2-text-mask";
+
 
 import { FlexLayoutModule } from "@angular/flex-layout";
 import {
@@ -79,6 +81,9 @@ import { CrearUsuarioDialogoComponent } from './components/admin/crear-usuario-d
 import { ClienteHelperService } from 'app/utils/cliente-helper.service';
 import { AgregarPrototipoDialogoComponent } from './components/admin/agregar-prototipo-dialogo/agregar-prototipo-dialogo.component';
 import { CambiarNombrePrototipoDialogoComponent } from './components/admin/cambiar-nombre-prototipo-dialogo/cambiar-nombre-prototipo-dialogo.component';
+import { NuevaCompraDialogoComponent } from './components/ventas/nueva-compra-dialogo/nueva-compra-dialogo.component';
+import { NuevoPagoDialogoComponent } from './components/ventas/nuevo-pago-dialogo/nuevo-pago-dialogo.component';
+import { EditarPagoDialogoComponent } from './components/ventas/editar-pago-dialogo/editar-pago-dialogo.component';
 
 
 
@@ -115,6 +120,9 @@ import { CambiarNombrePrototipoDialogoComponent } from './components/admin/cambi
     CrearUsuarioDialogoComponent,
     AgregarPrototipoDialogoComponent,
     CambiarNombrePrototipoDialogoComponent,
+    NuevaCompraDialogoComponent,
+    NuevoPagoDialogoComponent,
+    EditarPagoDialogoComponent,
 
   ],
   imports: [
@@ -126,6 +134,7 @@ import { CambiarNombrePrototipoDialogoComponent } from './components/admin/cambi
     AuthModule,
     NgbModule.forRoot(),
     AngularMaterialModule,
+    TextMaskModule,
 
     AccordionModule,
     DataTableModule,
@@ -145,7 +154,10 @@ import { CambiarNombrePrototipoDialogoComponent } from './components/admin/cambi
     AgregarDocumentoDialogoComponent,
     CrearUsuarioDialogoComponent,
     AgregarPrototipoDialogoComponent,
-    CambiarNombrePrototipoDialogoComponent
+    CambiarNombrePrototipoDialogoComponent,
+    NuevaCompraDialogoComponent,
+    NuevoPagoDialogoComponent,
+    EditarPagoDialogoComponent
     
   ],
 

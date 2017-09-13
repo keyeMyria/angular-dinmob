@@ -5,6 +5,9 @@ import { AgregarDocumentoDialogoComponent } from "app/components/ventas/agregar-
 import { ActivatedRoute, Router, ParamMap } from "@angular/router";
 import "rxjs/add/operator/switchMap";
 import { ClientesService } from "app/services/clientes.service";
+import { NuevaCompraDialogoComponent } from 'app/components/ventas/nueva-compra-dialogo/nueva-compra-dialogo.component';
+import { NuevoPagoDialogoComponent } from 'app/components/ventas/nuevo-pago-dialogo/nuevo-pago-dialogo.component';
+import { EditarPagoDialogoComponent } from 'app/components/ventas/editar-pago-dialogo/editar-pago-dialogo.component';
 
 @Component({
   selector: 'app-editar-cliente',
@@ -59,6 +62,44 @@ export class EditarClienteComponent implements OnInit {
         });
 
       });
+
+  }
+
+  nuevaCompra() {
+    console.log();
+    let dialogRef = this.dialog.open(NuevaCompraDialogoComponent, {
+      width: '400px',
+      data: {
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.selectedOption = result;
+    });
+  }
+
+  nuevoPago() {
+    console.log();
+    let dialogRef = this.dialog.open(NuevoPagoDialogoComponent, {
+      width: '400px',
+      data: {
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.selectedOption = result;
+    });
+
+  }
+
+  editarPago() {
+    console.log();
+    let dialogRef = this.dialog.open(EditarPagoDialogoComponent, {
+      width: '400px',
+      data: {
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.selectedOption = result;
+    });
 
   }
 

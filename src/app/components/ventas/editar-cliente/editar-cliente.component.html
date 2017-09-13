@@ -635,72 +635,90 @@
                     </table>
                   </div>
 
-                  <div class="text-center margin-bottom" >
-                    <button type="button" class="btn btn-primary" (click)="pre_addCompra()">Nueva Compra</button>
+                  <div class="text-center margin-bottom">
+                    <button type="button" class="btn btn-secondary" (click)="nuevaCompra()">Nueva Compra</button>
                   </div>
 
-                  
-                  <div class="well" >
-                    <div class="form-group">
-                      <label class="control-label col-sm-3">Estado Lote</label>
-                      <div class="col-sm-9">
-                        <div class="input-group">
-                          <select class="form-control" >    <!-- [(ngModel)]='compra_selected.id_estado_venta' -->
+                  <br>
+
+
+
+                  <div class="form-group row">
+                    <label class="col-form-label col-sm-3">Estado Lote</label>
+                    <div class="col-sm-9">
+                      <div class="input-group">
+                        <select class="form-control">    <!-- [(ngModel)]='compra_selected.id_estado_venta' -->
                             <option *ngFor="let estado of estados" [value]="estado.id_estado_lote">{{estado.descripcion}}</option>                                                 
                                         </select>
-                          <div class="input-group-btn">
-                            <button type="button" class="btn btn-primary" (click)="actualizarEstadoLote(compra_selected)">Actualizar</button>
-                          </div>
+                        <div class="input-group-btn">
+                          <button type="button" class="btn btn-secondary" (click)="actualizarEstadoLote(compra_selected)">Actualizar</button>
                         </div>
                       </div>
                     </div>
-                    <div class="form-group">
-                      <label class="control-label col-sm-3">Fecha Estado</label>
+                  </div>
+                  <!--    <div class="form-group row">
+                      <label class="col-form-label col-sm-3">Fecha Estado</label>
                       <div class="col-sm-9">
                         <span class="form-control">{{compra_selected.fecha_cambio_estado}} </span>
                       </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="control-label col-sm-3">Precio de Lista</label>
-                      <div class="col-sm-9">
-                        <span class="form-control">{{compra_selected.valor_base|currency}} </span>
+                    </div> -->
+                  <div class="form-group row">
+                    <label class="col-form-label col-sm-3" for="fecha_nacimiento_persona_fisica">Fecha Estado</label>
+                    <div class="col-sm-9">
+                      <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #d="ngbDatepicker" type="text" name=""
+                          id="fecha_nacimiento_persona_fisica" placement="bottom-right">
+                        <span class="input-group-btn">
+                          <button class="btn btn-secondary" type="button" (click)="d.toggle()">
+                          <i class="fa fa-calendar"></i>
+                          </button>
+                        </span>
                       </div>
                     </div>
                   </div>
+                  <div class="form-group row">
+                    <label class="col-form-label col-sm-3">Precio de Lista</label>
+                    <div class="col-sm-9">
+                      <!-- <span class="form-control">{{compra_selected.valor_base|currency}} </span> -->
+                      <input type="text" class="form-control" name="">
+                    </div>
+                  </div>
+
 
                   <fieldset [disabled]="!compra_selected.id_cliente">
-                    <div class="form-group">
-                      <label class="control-label col-sm-3">Proyecto</label>
+                    <div class="form-group row">
+                      <label class="col-form-label col-sm-3">Proyecto</label>
                       <div class="col-sm-9">
                         <input type="text" class="form-control" name="proyecto" [(ngModel)]="compra_selected.proyecto">
                       </div>
                     </div>
-                    <div class="form-group">
-                      <label class="control-label col-sm-3">Desarrollador</label>
+                    <div class="form-group row">
+                      <label class="col-form-label col-sm-3">Desarrollador</label>
                       <div class="col-sm-9">
                         <input type="text" class="form-control" name="desarrollador" [(ngModel)]="compra_selected.desarrollador">
                       </div>
                     </div>
-                    <div class="form-group">
-                      <label class="control-label col-sm-3">Valor de operación</label>
+                    <div class="form-group row">
+                      <label class="col-form-label col-sm-3">Valor de operación</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="valor_operacion" [(ngModel)]="compra_selected.valor_operacion" ui-money-mask min="0">
+                        <input type="text" class="form-control" name="valor_operacion" [(ngModel)]="compra_selected.valor_operacion" ui-money-mask
+                          min="0">
                       </div>
                     </div>
-                    <div class="form-group">
-                      <label class="control-label col-sm-3">Ubicación</label>
+                    <div class="form-group row">
+                      <label class="col-form-label col-sm-3">Ubicación</label>
                       <div class="col-sm-9">
                         <input type="text" class="form-control" name="ubicacion" [(ngModel)]="compra_selected.ubicacion">
                       </div>
                     </div>
-                    <div class="form-group">
-                      <label class="control-label col-sm-3">Código postal</label>
+                    <div class="form-group row">
+                      <label class="col-form-label col-sm-3">Código postal</label>
                       <div class="col-sm-9">
                         <input type="text" class="form-control" name="cp" [(ngModel)]="compra_selected.cp">
                       </div>
                     </div>
-                    <div class="form-group">
-                      <label class="control-label col-sm-3">Tipo de operación</label>
+                    <div class="form-group row">
+                      <label class="col-form-label col-sm-3">Tipo de operación</label>
                       <div class="col-sm-9">
                         <select class="form-control" name="id_tipo_operacion" [(ngModel)]="compra_selected.id_tipo_operacion">
                                         <option [value]="">Seleccionar...</option>
@@ -708,9 +726,9 @@
                                     </select>
                       </div>
                     </div>
-                    
-                    <div class="form-group" *ngIf="compra_selected.id_tipo_operacion === '1'">
-                      <label class="control-label col-sm-3">Institución Crédito</label>
+
+                    <div class="form-group row" *ngIf="compra_selected.id_tipo_operacion === '1'">
+                      <label class="col-form-label col-sm-3">Institución Crédito</label>
                       <div class="col-sm-9">
                         <select class="form-control" name="id_institucion_credito" [(ngModel)]="compra_selected.id_institucion_credito">
                                         <option [value]="">Seleccionar...</option>
@@ -718,22 +736,22 @@
                                     </select>
                       </div>
                     </div>
-                    
-                    <div class="form-group" *ngIf="compra_selected.id_tipo_operacion === '1' && compra_selected.id_institucion_credito === '1'">
-                      <label class="control-label col-sm-3">Banco</label>
+
+                    <div class="form-group row" *ngIf="compra_selected.id_tipo_operacion === '1' && compra_selected.id_institucion_credito === '1'">
+                      <label class="col-form-label col-sm-3">Banco</label>
                       <div class="col-sm-9">
                         <input type="text" class="form-control" name="banco_credito" [(ngModel)]="compra_selected.banco_credito">
                       </div>
                     </div>
-                    <div class="form-group" *ngIf="compra_selected.id_institucion_credito === '10'">
-                      <label class="control-label col-sm-3">Institución</label>
+                    <div class="form-group row" *ngIf="compra_selected.id_institucion_credito === '10'">
+                      <label class="col-form-label col-sm-3">Institución</label>
                       <div class="col-sm-9">
                         <input type="text" class="form-control" name="otra_credito" [(ngModel)]="compra_selected.otra_credito">
                       </div>
                     </div>
-               
-                    <div class="form-group">
-                      <label class="control-label col-sm-3">Fecha Firma Contrato</label>
+
+                    <div class="form-group row">
+                      <label class="col-form-label col-sm-3">Fecha Firma Contrato</label>
                       <div class="col-sm-9">
                         <div class="input-group">
                           <input type="text" class="form-control" name="fecha_firma_contrato" [(ngModel)]="compra_selected.fecha_firma_contrato" date-picker>
@@ -743,8 +761,8 @@
                         </div>
                       </div>
                     </div>
-                    <div class="form-group">
-                      <label class="control-label col-sm-3">Fecha Entrega Contrato</label>
+                    <div class="form-group row">
+                      <label class="col-form-label col-sm-3">Fecha Entrega Contrato</label>
                       <div class="col-sm-9">
                         <div class="input-group">
                           <input type="text" class="form-control" name="fecha_entrega" [(ngModel)]="compra_selected.fecha_entrega" date-picker>
@@ -754,14 +772,14 @@
                         </div>
                       </div>
                     </div>
-                    <div class="form-group">
-                      <label class="control-label col-sm-3">Asesor Inmobiliario</label>
+                    <div class="form-group row">
+                      <label class="col-form-label col-sm-3">Asesor Inmobiliario</label>
                       <div class="col-sm-9">
                         <input type="text" class="form-control" name="asesor_inmobiliario" [(ngModel)]="compra_selected.asesor_inmobiliario">
                       </div>
                     </div>
-                    <div class="form-group">
-                      <label class="control-label col-sm-3">Asesor</label>
+                    <div class="form-group row">
+                      <label class="col-form-label col-sm-3">Asesor</label>
                       <div class="col-sm-9">
                         <select class="form-control" name="id_asesor" [(ngModel)]="compra_selected.id_asesor">
                                         <option [value]="">Seleccionar...</option>
@@ -769,22 +787,22 @@
                                     </select>
                       </div>
                     </div>
-                    <div class="form-group" *ngIf="compra_selected.id_estado_venta === '5'">
-                      <label class="control-label col-sm-3">Datos de Firma</label>
+                    <div class="form-group row" *ngIf="compra_selected.id_estado_venta === '5'">
+                      <label class="col-form-label col-sm-3">Datos de Firma</label>
                       <div class="col-sm-9">
                         <textarea class="form-control" rows="6" name="notas_escrituracion" [(ngModel)]="compra_selected.notas_escrituracion">
                                     </textarea>
                       </div>
                     </div>
-                    <div class="form-group" *ngIf="compra_selected.activo === '0'">
-                      <label class="control-label col-sm-3">Motivo Cancelación</label>
+                    <div class="form-group row" *ngIf="compra_selected.activo === '0'">
+                      <label class="col-form-label col-sm-3">Motivo Cancelación</label>
                       <div class="col-sm-9">
                         <textarea class="form-control" rows="4" name="notas_cancelacion" [(ngModel)]="compra_selected.notas_cancelacion">
                                     </textarea>
                       </div>
                     </div>
-                    <div class="form-group">
-                      <label class="control-label col-sm-3">Fecha Entrega Física</label>
+                    <div class="form-group row">
+                      <label class="col-form-label col-sm-3">Fecha Entrega Física</label>
                       <div class="col-sm-9">
                         <div class="input-group">
                           <input type="text" class="form-control" name="fecha_entrega_fisica" [(ngModel)]="compra_selected.fecha_entrega_fisica">
@@ -794,19 +812,19 @@
                         </div>
                       </div>
                     </div>
-                    <div class="form-group">
-                      <label class="control-label col-sm-3">Comentarios Entrega Física</label>
+                    <div class="form-group row">
+                      <label class="col-form-label col-sm-3">Comentarios Entrega Física</label>
                       <div class="col-sm-9">
                         <textarea class="form-control" rows="3" name="comentarios_entrega_fisica" [(ngModel)]="compra_selected.comentarios_entrega_fisica">
                                     </textarea>
                       </div>
                     </div>
                   </fieldset>
-                  
 
-                  <div class="form-group" >
+
+                  <div class="row">
                     <div class="col-sm-9 col-sm-offset-3">
-                      <button type="button" class="btn btn-primary" (click)="actualizarCompra(compra_selected)">Actualizar Compra</button>
+                      <button type="button" class="btn btn-secondary" (click)="actualizarCompra(compra_selected)">Actualizar Compra</button>
                     </div>
                   </div>
 
@@ -1098,9 +1116,8 @@
                     </table>
                   </div>
 
-                  <div>
-                    <!--  -->
-                    <button type="button" class="btn btn-primary" (click)="pre_addPago()">Nuevo Pago</button>
+                  <div class="text-center margin-bottom">                    
+                    <button type="button" class="btn btn-secundary" (click)="nuevoPago()">Nuevo Pago</button>
                   </div>
 
                   <hr>
@@ -1158,7 +1175,7 @@
                                     <md-icon>attachment</md-icon>
                                     <span>Ficha</span>
                                 </button>
-                                <button md-menu-item>
+                                <button md-menu-item (click)="editarPago()">
                                     <md-icon>create</md-icon>
                                     <span>Editar</span>
                                 </button>
