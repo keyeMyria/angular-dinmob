@@ -84,6 +84,7 @@ import { CambiarNombrePrototipoDialogoComponent } from './components/admin/cambi
 import { NuevaCompraDialogoComponent } from './components/ventas/nueva-compra-dialogo/nueva-compra-dialogo.component';
 import { NuevoPagoDialogoComponent } from './components/ventas/nuevo-pago-dialogo/nuevo-pago-dialogo.component';
 import { EditarPagoDialogoComponent } from './components/ventas/editar-pago-dialogo/editar-pago-dialogo.component';
+import { NumberToYesNoPipe } from './pipes/number-to-yes-no.pipe';
 
 
 
@@ -123,6 +124,7 @@ import { EditarPagoDialogoComponent } from './components/ventas/editar-pago-dial
     NuevaCompraDialogoComponent,
     NuevoPagoDialogoComponent,
     EditarPagoDialogoComponent,
+    NumberToYesNoPipe,
 
   ],
   imports: [

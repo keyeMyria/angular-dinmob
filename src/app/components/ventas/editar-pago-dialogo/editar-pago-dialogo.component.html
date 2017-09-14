@@ -1,4 +1,4 @@
-<h1 md-dialog-title>Nuevo Pago</h1>
+<h1 md-dialog-title>Editar Pago</h1>
 <div md-dialog-content>
   <form>
 
@@ -13,10 +13,10 @@
       <label for="fecha_entrega">Fecha Programada</label>
       <div>
         <div class="input-group">
-          <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #d="ngbDatepicker" type="text" name="fecha_entrega" id="fecha_entrega"
+          <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #dfechaProgramada="ngbDatepicker" type="text" name="fecha_entrega" id="fecha_entrega"
             placement="bottom-right">
           <span class="input-group-btn">
-            <button class="btn btn-secondary" type="button" (click)="d.toggle()">
+            <button class="btn btn-secondary" type="button" (click)="dfechaProgramada.toggle()">
             <i class="fa fa-calendar"></i>
             </button>
             </span>
@@ -28,10 +28,10 @@
         <label for="fecha_entrega">Fecha Pago</label>
         <div>
           <div class="input-group">
-            <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #d="ngbDatepicker" type="text" name="fecha_entrega" id="fecha_entrega"
+            <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #dfechaPago="ngbDatepicker" type="text" name="fecha_entrega" id="fecha_entrega"
               placement="bottom-right">
             <span class="input-group-btn">
-              <button class="btn btn-secondary" type="button" (click)="d.toggle()">
+              <button class="btn btn-secondary" type="button" (click)="dfechaPago.toggle()">
               <i class="fa fa-calendar"></i>
               </button>
               </span>
