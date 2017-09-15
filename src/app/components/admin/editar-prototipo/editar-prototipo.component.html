@@ -1,22 +1,215 @@
 <div class="container">
-  
     <div class="row">
-  
       <div class="col-12">
-  
         <div class="card my-5">
           <div class="card-header">
-            Editar Prototipo
+            <div class="d-flex padding-header">
+              <div class="align-self-center">Nombre prototipo</div>
+              <div class="spacer"></div>
+              <div>
+                <button md-icon-button [mdMenuTriggerFor]="menu1">
+                    <md-icon>more_vert</md-icon>
+              </button>
+                <md-menu #menu1="mdMenu">
+                  <button md-menu-item (click)="editarNombre()">
+                    <md-icon>create</md-icon>
+                    <span>Editar Nombre</span>
+                  </button>
+                  <button md-menu-item (click)="agregarPartida()">
+                    <md-icon>add</md-icon>
+                    <span>Agregar Partida</span>
+                  </button>
+                </md-menu>
+              </div>
+            </div>
+  
           </div>
           <div class="card-body">
+            <md-accordion [displayMode]="'default'">
+              <md-expansion-panel [hideToggle]="true">
+                <md-expansion-panel-header>
+                  <span>Prototipo</span>
+                  <div class="spacer"></div>
+                  <div class="collapse-header-btns">
+                    <button md-icon-button [mdMenuTriggerFor]="menu2" (click)="$event.stopPropagation()">
+                          <md-icon>more_vert</md-icon>
+                    </button>
+                    <md-menu #menu2="mdMenu">
+                      <button md-menu-item (click)="editarPartida()">
+                        <md-icon>create</md-icon>
+                        <span>Editar</span>
+                      </button>
+                      <button md-menu-item (click)="agregarSubpartida()">
+                       <md-icon>add</md-icon>
+                       <span>Agregar Subpartida</span>
+                      </button>
+                      <button md-menu-item>
+                        <md-icon>delete</md-icon>
+                        <span>Eliminar</span>
+                      </button>
+                    </md-menu>
+                    <span class="badge badge-pill badge-primary">5</span>
+                  </div>
+                </md-expansion-panel-header>
   
-      
+                <md-accordion [displayMode]="'default'">
+                  <md-expansion-panel [hideToggle]="true">
+                    <md-expansion-panel-header>
+                      <span>Nombre 1</span>
+                      <div class="spacer"></div>
+                      <div class="collapse-header-btns">
+                        <button md-icon-button [mdMenuTriggerFor]="menu3" (click)="agregarSubpartida()">
+                          <md-icon>more_vert</md-icon>
+                        </button>
+                        <md-menu #menu3="mdMenu">
+                          <button md-menu-item (click)="editarSubpartida()">
+                            <md-icon>create</md-icon>
+                            <span>Editar</span>
+                          </button>
+                          <button md-menu-item (click)="agregarInsumo()">
+                            <md-icon>add</md-icon>
+                            <span>Agregar Insumo</span>
+                          </button>
+                          <button md-menu-item>
+                            <md-icon>delete</md-icon>
+                            <span>Eliminar</span>
+                          </button>
+                        </md-menu>
+                        <span class="badge badge-pill badge-primary">5</span>
+                      </div>
+                    </md-expansion-panel-header>
+  
+                    <!-- insumos -->
+                    <div class="table-responsive" > <!-- *ngIf="partida.insumos.length" -->
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th class="hidden-xs">Id</th>
+                            <th class="hidden-xs">Código</th>
+                            <th>Insumo</th>
+                            <th>Unidad</th>
+                            <th class="text-right">Cantidad</th>
+                            <th class="text-right">Precio</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr> <!-- *ngFor="insumo in partida.insumos" -->
+                            <td class="hidden-xs"></td>
+                            <td class="hidden-xs"></td>
+                            <td></td>
+                            <td></td>
+                            <td class="text-right"></td>
+                            <td class="text-right"></td>
+                            <th>
+                              <button md-icon-button [mdMenuTriggerFor]="menu4" (click)="agregarSubpartida()">
+                                <md-icon>more_vert</md-icon>
+                              </button>
+                              <md-menu #menu4="mdMenu">
+                                <button md-menu-item (click)="editarInsumo()">
+                                  <md-icon>create</md-icon>
+                                  <span>Editar</span>
+                                </button>
+                                <button md-menu-item>
+                                  <md-icon>delete</md-icon>
+                                  <span>Eliminar</span>
+                                </button>
+                              </md-menu>                            
+                            </th>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </md-expansion-panel>
+                </md-accordion>
+  
+                <md-accordion [displayMode]="'default'">
+                    <md-expansion-panel [hideToggle]="true">
+                      <md-expansion-panel-header>
+                        <span>Nombre 1</span>
+                        <div class="spacer"></div>
+                        <div class="collapse-header-btns">
+                          <button md-icon-button [mdMenuTriggerFor]="menu5" (click)="agregarSubpartida()">
+                                <md-icon>more_vert</md-icon>
+                          </button>
+                          <md-menu #menu5="mdMenu">
+                            <button md-menu-item>
+                                  <md-icon>create</md-icon>
+                                  <span>Editar</span>
+                            </button>
+                            <button md-menu-item>
+                                <md-icon>add</md-icon>
+                                <span>Agregar Insumo</span>
+                          </button>
+                            <button md-menu-item>
+                                  <md-icon>delete</md-icon>
+                                  <span>Eliminar</span>
+                            </button>
+                          </md-menu>
+                          <span class="badge badge-pill badge-primary">5</span>
+                        </div>
+                      </md-expansion-panel-header>
+    
+                      <!-- subpartidas -->
+                      <div class="table-responsive">  <!-- *ngIf="subpartida.insumos.length" -->
+                          <table class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th class="hidden-xs">Id</th>
+                                <th class="hidden-xs">Código</th>
+                                <th>Insumo</th>
+                                <th>Unidad</th>
+                                <th class="text-right">Cantidad</th>
+                                <th class="text-right">Precio</th>
+                                <th></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>  <!-- *ngFor="insumo in subpartida.insumos" -->
+                                <td class="hidden-xs"></td>
+                                <td class="hidden-xs"></td>
+                                <td></td>
+                                <td></td>
+                                <td class="text-right"></td>
+                                <td class="text-right"></td>                             
+                              <th>
+                                <button md-icon-button [mdMenuTriggerFor]="menu6" (click)="agregarSubpartida()">
+                                  <md-icon>more_vert</md-icon>
+                                </button>
+                                <md-menu #menu6="mdMenu">
+                                  <button md-menu-item (click)="ctrl.pre_editInsumo(insumo)">
+                                    <md-icon>create</md-icon>
+                                    <span>Editar</span>
+                                  </button>
+                                  <button md-menu-item>
+                                    <md-icon>delete</md-icon>
+                                    <span>Eliminar</span>
+                                  </button>
+                                </md-menu>                            
+                              </th>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </md-expansion-panel>
+                  </md-accordion>
+  
+  
+  
+  
+  
+              </md-expansion-panel>
+            </md-accordion>
+  
+  
+  
+  
   
           </div>
           <div class="card-footer">
             <div class="col-sm-10 offset-sm-2">
-              <button type="submit" class="btn btn-primary" >Aceptar</button>
-              
+              <button type="submit" class="btn btn-primary">Aceptar</button>
+  
             </div>
           </div>
         </div>

@@ -1,0 +1,66 @@
+<h1 md-dialog-title>Editar Insumo</h1>
+<div md-dialog-content>
+
+  <!-- <div class="modal fade" id="modalEditInsumo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Editar Insumo</h4>
+        </div>
+        <form name="formEditInsumo" id="formEditInsumo" ng-submit="formEditInsumo.$valid && ctrl.editInsumo(formEditInsumo)" novalidate>
+          <div class="modal-body">
+
+            <div class="form-group">
+              <label class="control-label">Nombre</label>
+              <input type="text" class="form-control" ng-model="ctrl.insumo_edited.insumo" readonly>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">Unidad</label>
+              <input type="text" class="form-control" ng-model="ctrl.insumo_edited.unidad" readonly>
+            </div>
+
+            <div class="form-group" ng-class="{
+                                'has-error'
+                                :(formEditInsumo.$submitted || formEditInsumo.cantidad.$touched) && formEditInsumo.cantidad.$error.required }">
+              <label class="control-label">Cantidad</label>
+              <input type="text" name="cantidad" class="form-control" ng-model="ctrl.insumo_edited.cantidad" required>
+              <div ng-show="formEditInsumo.$submitted || formEditInsumo.cantidad.$touched">
+                <span ng-show="formEditInsumo.cantidad.$error.required" class="help-block">La cantidad debe ser mayor a 0</span>
+              </div>
+            </div>
+
+            <div class="form-group" ng-class="{
+                                'has-error'
+                                :(formEditInsumo.$submitted || formEditInsumo.precio.$touched) && formEditInsumo.precio.$error.required }">
+              <label class="control-label">Precio</label>
+              <input type="text" name="precio" class="form-control" ng-model="ctrl.insumo_edited.precio" required>
+              <div ng-show="formEditInsumo.$submitted || formEditInsumo.precio.$touched">
+                <span ng-show="formEditInsumo.precio.$error.required" class="help-block">El precio debe ser mayor a 0</span>
+              </div>
+            </div>
+
+            <div class="checkbox">
+              <label>
+                                <input type="checkbox" ng-model="ctrl.cambiar_precios"> Cambiar precio en todas las partidas
+                            </label>
+            </div>
+            <div>valid: {{formEditInsumo.$valid}}</div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+</div> -->
+<div md-dialog-actions>
+  <button md-button [md-dialog-close]="false">CANCELAR</button>
+  <button md-button [md-dialog-close]="true">CREAR</button>
+</div>

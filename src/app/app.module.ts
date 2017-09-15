@@ -85,6 +85,13 @@ import { NuevaCompraDialogoComponent } from './components/ventas/nueva-compra-di
 import { NuevoPagoDialogoComponent } from './components/ventas/nuevo-pago-dialogo/nuevo-pago-dialogo.component';
 import { EditarPagoDialogoComponent } from './components/ventas/editar-pago-dialogo/editar-pago-dialogo.component';
 import { NumberToYesNoPipe } from './pipes/number-to-yes-no.pipe';
+import { EditarPartidaDialogoComponent } from './components/admin/editar-partida-dialogo/editar-partida-dialogo.component';
+import { EditarSubpartidaDialogoComponent } from './components/admin/editar-subpartida-dialogo/editar-subpartida-dialogo.component';
+import { EditarInsumoDialogoComponent } from './components/admin/editar-insumo-dialogo/editar-insumo-dialogo.component';
+import { EditarNombrePrototipoDialogoComponent } from './components/admin/editar-nombre-prototipo-dialogo/editar-nombre-prototipo-dialogo.component';
+import { AgregarPartidaDialogoComponent } from './components/admin/agregar-partida-dialogo/agregar-partida-dialogo.component';
+import { AgregarSubpartidaDialogoComponent } from './components/admin/agregar-subpartida-dialogo/agregar-subpartida-dialogo.component';
+import { AgregarInsumoDialogoComponent } from './components/admin/agregar-insumo-dialogo/agregar-insumo-dialogo.component';
 
 
 
@@ -125,6 +132,13 @@ import { NumberToYesNoPipe } from './pipes/number-to-yes-no.pipe';
     NuevoPagoDialogoComponent,
     EditarPagoDialogoComponent,
     NumberToYesNoPipe,
+    EditarPartidaDialogoComponent,
+    EditarSubpartidaDialogoComponent,
+    EditarInsumoDialogoComponent,
+    EditarNombrePrototipoDialogoComponent,
+    AgregarPartidaDialogoComponent,
+    AgregarSubpartidaDialogoComponent,
+    AgregarInsumoDialogoComponent,
 
   ],
   imports: [
@@ -159,7 +173,14 @@ import { NumberToYesNoPipe } from './pipes/number-to-yes-no.pipe';
     CambiarNombrePrototipoDialogoComponent,
     NuevaCompraDialogoComponent,
     NuevoPagoDialogoComponent,
-    EditarPagoDialogoComponent
+    EditarPagoDialogoComponent,
+    EditarPartidaDialogoComponent,
+    EditarSubpartidaDialogoComponent,
+    EditarInsumoDialogoComponent,
+    EditarNombrePrototipoDialogoComponent,
+    AgregarPartidaDialogoComponent,
+    AgregarSubpartidaDialogoComponent,
+    AgregarInsumoDialogoComponent,
     
   ],
 

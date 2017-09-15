@@ -1,0 +1,79 @@
+<h1 md-dialog-title>Agregar Insumo</h1>
+<div md-dialog-content>
+
+ <!--  <form name="formAddInsumo" ng-submit="formAddInsumo.$valid && ctrl.addInsumo(formAddInsumo)" novalidate>
+    <div class="box-body">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label class="control-label">Partida</label>
+            <input type="text" class="form-control" readonly value="{{ctrl.partidaPuedeAgregarInsumos()}}" required>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <button type="button" ng-click="ctrl.getInsumosObra(ctrl.prototipo.id_obra)" class="btn btn-block btn-primary">Cargar Insumos</button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-12">
+          <div class="form-group">
+            <label class="control-label">Insumo</label>
+            <select ng-model="ctrl.insumo" ng-options="insumo.codigo +                      ' - ' +                      insumo.insumo for insumo in ctrl.insumos"
+              class="form-control" required>
+                            <option value="">Seleccionar un insumo</option>
+                        </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-6">
+          <div class="form-group">
+            <label class="control-label">Codigo</label>
+            <input type="text" class="form-control" ng-model="ctrl.insumo.codigo" required readonly>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          <div class="form-group">
+            <label class="control-label">Unidad</label>
+            <input type="text" class="form-control" ng-model="ctrl.insumo.unidad" required readonly>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="row">
+
+        <div class="col-xs-12 col-sm-6">
+          <div class="form-group">
+            <div class="form-group">
+              <label class="control-label">Cantidad</label>
+              <input type="number" class="form-control" ng-model="ctrl.nuevoInsumo.cantidad" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6">
+          <div class="form-group">
+            <div class="form-group">
+              <label class="control-label">Precio</label>
+              <input type="text" class="form-control" ng-model="ctrl.insumo.precio" required readonly>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div>{{ctrl.nuevoInsumo|json}}</div>
+    </div>
+    <div class="box-footer">
+      <button type="submit" class="btn btn-primary">Agregar</button>
+    </div>
+  </form> -->
+
+  <div md-dialog-actions>
+    <button md-button [md-dialog-close]="false">CANCELAR</button>
+    <button md-button [md-dialog-close]="true">CREAR</button>
+  </div>
