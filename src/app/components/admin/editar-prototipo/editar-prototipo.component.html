@@ -58,7 +58,7 @@
                       <span>Nombre 1</span>
                       <div class="spacer"></div>
                       <div class="collapse-header-btns">
-                        <button md-icon-button [mdMenuTriggerFor]="menu3" (click)="agregarSubpartida()">
+                        <button md-icon-button [mdMenuTriggerFor]="menu3" (click)="$event.stopPropagation()">
                           <md-icon>more_vert</md-icon>
                         </button>
                         <md-menu #menu3="mdMenu">
@@ -102,7 +102,7 @@
                             <td class="text-right"></td>
                             <td class="text-right"></td>
                             <th>
-                              <button md-icon-button [mdMenuTriggerFor]="menu4" (click)="agregarSubpartida()">
+                              <button md-icon-button [mdMenuTriggerFor]="menu4" (click)="$event.stopPropagation()">
                                 <md-icon>more_vert</md-icon>
                               </button>
                               <md-menu #menu4="mdMenu">
@@ -129,7 +129,7 @@
                         <span>Nombre 1</span>
                         <div class="spacer"></div>
                         <div class="collapse-header-btns">
-                          <button md-icon-button [mdMenuTriggerFor]="menu5" (click)="agregarSubpartida()">
+                          <button md-icon-button [mdMenuTriggerFor]="menu5" (click)="$event.stopPropagation()">
                                 <md-icon>more_vert</md-icon>
                           </button>
                           <md-menu #menu5="mdMenu">
@@ -173,7 +173,7 @@
                                 <td class="text-right"></td>
                                 <td class="text-right"></td>                             
                               <th>
-                                <button md-icon-button [mdMenuTriggerFor]="menu6" (click)="agregarSubpartida()">
+                                <button md-icon-button [mdMenuTriggerFor]="menu6" (click)="$event.stopPropagation()">
                                   <md-icon>more_vert</md-icon>
                                 </button>
                                 <md-menu #menu6="mdMenu">

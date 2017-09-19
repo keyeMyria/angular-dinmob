@@ -136,8 +136,8 @@
                                 <div class="form-group">
                                     <label class="col-form-label">Almacenista</label>
                                     <select name="id_almacenista" class="form-control" [(ngModel)]="obra.datos.id_almacenista">
-                                  <option value="">Elegir almacenista</option>
-                                  <option [value]="a.value" *ngFor="let a of almacenistas ">{{a.text}}</option>                                                 
+                                  <option [value]="">Elegir almacenista</option>
+                                  <option [value]="a.value" *ngFor="let a of almacenistas ">{{insumo.insumo}}</option>                                                 
                               </select>
                                 </div>
                             </div>

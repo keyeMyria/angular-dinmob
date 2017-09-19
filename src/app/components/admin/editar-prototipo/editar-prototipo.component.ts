@@ -27,7 +27,8 @@ export class EditarPrototipoComponent implements OnInit {
     console.log();
     let dialogRef = this.dialog.open(EditarNombrePrototipoDialogoComponent, {
       data: {
-      }
+      },
+      width: '500px',
     });
     dialogRef.afterClosed().subscribe(result => {
       this.selectedOption = result;
@@ -39,7 +40,8 @@ export class EditarPrototipoComponent implements OnInit {
     console.log();
     let dialogRef = this.dialog.open(AgregarPartidaDialogoComponent, {
       data: {
-      }
+      },
+      width: '500px',
     });
     dialogRef.afterClosed().subscribe(result => {
       this.selectedOption = result;
@@ -51,7 +53,10 @@ export class EditarPrototipoComponent implements OnInit {
     console.log();
     let dialogRef = this.dialog.open(EditarPartidaDialogoComponent, {
       data: {
-      }
+
+      },
+      width: '500px',
+     
     });
     dialogRef.afterClosed().subscribe(result => {
       this.selectedOption = result;
@@ -63,7 +68,8 @@ export class EditarPrototipoComponent implements OnInit {
     console.log();
     let dialogRef = this.dialog.open(AgregarSubpartidaDialogoComponent, {
       data: {
-      }
+      },
+      width: '500px',
     });
     dialogRef.afterClosed().subscribe(result => {
       this.selectedOption = result;
@@ -75,7 +81,8 @@ export class EditarPrototipoComponent implements OnInit {
     console.log();
     let dialogRef = this.dialog.open(EditarSubpartidaDialogoComponent, {
       data: {
-      }
+      },
+      width: '500px',
     });
     dialogRef.afterClosed().subscribe(result => {
       this.selectedOption = result;
@@ -87,7 +94,8 @@ export class EditarPrototipoComponent implements OnInit {
     console.log();
     let dialogRef = this.dialog.open(AgregarInsumoDialogoComponent, {
       data: {
-      }
+      },
+      width: '500px',
     });
     dialogRef.afterClosed().subscribe(result => {
       this.selectedOption = result;
@@ -99,7 +107,8 @@ export class EditarPrototipoComponent implements OnInit {
     console.log();
     let dialogRef = this.dialog.open(EditarInsumoDialogoComponent, {
       data: {
-      }
+      },
+      width: '500px',
     });
     dialogRef.afterClosed().subscribe(result => {
       this.selectedOption = result;

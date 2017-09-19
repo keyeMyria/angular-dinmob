@@ -2,52 +2,45 @@
 <div md-dialog-content>
 
 
-  <!-- <div class="modal fade" id="modalAddPartida" tabindex="-1" role="dialog" aria-labelledby="myModaAddPartidalLabel">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModaAddPartidalLabel">Agregar Partida</h4>
-        </div>
-        <form name="formAddPartida" id="formAddPartida" ng-submit="formAddPartida.$valid && ctrl.addPartida(formAddPartida)" novalidate>
-          <div class="modal-body">
 
-            <div class="form-group" ng-class="{
-                                'has-error'
-                                :(formAddPartida.$submitted || formAddPartida.codigo.$touched) && formAddPartida.codigo.$error.required }">
-              <label class="control-label">Código</label>
-              <input type="text" name="codigo" class="form-control" ng-model="ctrl.nuevaPartida.codigo" required>
-              <div ng-show="formAddPartida.$submitted || formAddPartida.codigo.$touched">
-                <span ng-show="formAddPartida.codigo.$error.required" class="help-block">Escriba un código</span>
-              </div>
-            </div>
-
-            <div class="form-group" ng-class="{
-                                'has-error'
-                                :(formAddPartida.$submitted || formAddPartida.nombre.$touched) && formAddPartida.nombre.$error.required }">
-              <label class="control-label">Nombre</label>
-              <input type="text" name="nombre" class="form-control" ng-model="ctrl.nuevaPartida.nombre" required>
-              <div ng-show="formAddPartida.$submitted || formAddPartida.nombre.$touched">
-                <span ng-show="formAddPartida.nombre.$error.required" class="help-block">Escriba un nombre</span>
-              </div>
-            </div>
-            <div>valid: {{formAddPartida.$valid}}</div>
-          </div>
-
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary">Guardar</button>
-          </div>
-        </form>
+  <form>
+    <!-- name="formAddPartida" id="formAddPartida" (ngsubmit)="formAddPartida.$valid && addPartida(formAddPartida)" -->
+    <div class="form-group">
+      <!-- [ngclass]="{
+                  'has-error'
+                  :(formAddPartida.$submitted || formAddPartida.codigo.$touched) && formAddPartida.codigo.$error.required }" -->
+      <label for="codigo" class="control-label">Código</label>
+      <input type="text" name="codigo" class="form-control">
+      <!-- [(ngModel)]="nuevaPartida.codigo" -->
+      <div>
+        <!-- *ngIf="formAddPartida.$submitted || formAddPartida.codigo.$touched" -->
+        <span class="help-block">Escriba un código</span>
+        <!-- *ngIf="formAddPartida.codigo.$error.required" -->
       </div>
-
     </div>
-  </div>
- -->
+
+    <div class="form-group">
+      <!--  [ngclass]="{
+                  'has-error'
+                  :(formAddPartida.$submitted || formAddPartida.nombre.$touched) && formAddPartida.nombre.$error.required }" -->
+      <label class="control-label">Nombre</label>
+      <input type="text" name="nombre" class="form-control">
+      <!-- [(ngModel)]="nuevaPartida.nombre"  -->
+      <div>
+        <!-- *ngIf="formAddPartida.$submitted || formAddPartida.nombre.$touched" -->
+        <span class="help-block">Escriba un nombre</span>
+        <!-- *ngIf="formAddPartida.nombre.$error.required" -->
+      </div>
+    </div>
+    <!-- <div>valid: {{formAddPartida.$valid}}</div> -->
+
+  </form>
+
+
 
 
 </div>
 <div md-dialog-actions>
   <button md-button [md-dialog-close]="false">CANCELAR</button>
-  <button md-button [md-dialog-close]="true">CREAR</button>
-</div> 
+  <button md-button [md-dialog-close]="true">AGREGAR</button>
+</div>
