@@ -6,10 +6,23 @@ import { Observable } from "rxjs/Observable";
 export class PrototiposService {
    url: string = "http://localhost:8080/control/api/index.php/prototipos/";
 
-  constructor() { }
+  constructor(private http: Http) { }
+
+
+  getPrototipos(id_obra) {
+    return this.http.get(this.url + id_obra)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  getPrototipo(id_prototipo) {
+    return this.http.get(this.url + 'get_prototipo/' + id_prototipo)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
 
     private extractData(res: Response) {
-    console.log("response", res);
+    //console.log("response", res);
     let body = res.json();
     console.log("response.json", body);
 

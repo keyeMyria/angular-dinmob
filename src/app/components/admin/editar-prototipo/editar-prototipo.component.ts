@@ -7,6 +7,9 @@ import { AgregarSubpartidaDialogoComponent } from 'app/components/admin/agregar-
 import { EditarSubpartidaDialogoComponent } from 'app/components/admin/editar-subpartida-dialogo/editar-subpartida-dialogo.component';
 import { AgregarInsumoDialogoComponent } from 'app/components/admin/agregar-insumo-dialogo/agregar-insumo-dialogo.component';
 import { EditarInsumoDialogoComponent } from 'app/components/admin/editar-insumo-dialogo/editar-insumo-dialogo.component';
+import { PrototiposService } from "app/services/prototipos.service";
+import { ActivatedRoute, Router, ParamMap } from "@angular/router";
+import { Prototipo } from "app/model/prototipo";
 
 @Component({
   selector: 'app-editar-prototipo',
@@ -16,10 +19,24 @@ import { EditarInsumoDialogoComponent } from 'app/components/admin/editar-insumo
 export class EditarPrototipoComponent implements OnInit {
   selectedOption: string;
 
+  prototipo:Prototipo;
 
-  constructor(public dialog: MdDialog) { }
+
+  constructor(
+    private prototipoSrv:PrototiposService,
+    private route: ActivatedRoute,
+    private router: Router,
+    public dialog: MdDialog
+  ) { }
 
   ngOnInit() {
+
+    this.route.paramMap
+    .switchMap((params: ParamMap) =>
+      this.prototipoSrv.getPrototipo(params.get('id')))
+    .subscribe(res => {
+      this.prototipo = res;
+    });
   }
 
   editarNombre() {
