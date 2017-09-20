@@ -4,16 +4,22 @@ import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class PrototiposService {
-   url: string = "http://localhost:8080/control/api/index.php/prototipos/";
+   url: string = "http://localhost:8080/dinmob/api/index.php/prototipos/";
 
   constructor(private http: Http) { }
 
 
-  getPrototipos(id_obra) {
-    return this.http.get(this.url + id_obra)
+  getPrototipos() {
+    return this.http.get(this.url)
       .map(this.extractData)
       .catch(this.handleError);
   }
+
+  /* getPrototipos(id_obra) {
+    return this.http.get(this.url + id_obra)
+      .map(this.extractData)
+      .catch(this.handleError);
+  } */
 
   getPrototipo(id_prototipo) {
     return this.http.get(this.url + 'get_prototipo/' + id_prototipo)

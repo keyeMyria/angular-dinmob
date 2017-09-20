@@ -10,6 +10,8 @@ import { EditarInsumoDialogoComponent } from 'app/components/admin/editar-insumo
 import { PrototiposService } from "app/services/prototipos.service";
 import { ActivatedRoute, Router, ParamMap } from "@angular/router";
 import { Prototipo } from "app/model/prototipo";
+import { Partida } from "app/model/partida";
+import { Insumo } from "app/model/insumo";
 
 @Component({
   selector: 'app-editar-prototipo',
@@ -19,11 +21,12 @@ import { Prototipo } from "app/model/prototipo";
 export class EditarPrototipoComponent implements OnInit {
   selectedOption: string;
 
-  prototipo:Prototipo;
+  prototipo: any;
+
 
 
   constructor(
-    private prototipoSrv:PrototiposService,
+    private prototipoSrv: PrototiposService,
     private route: ActivatedRoute,
     private router: Router,
     public dialog: MdDialog
@@ -32,19 +35,21 @@ export class EditarPrototipoComponent implements OnInit {
   ngOnInit() {
 
     this.route.paramMap
-    .switchMap((params: ParamMap) =>
-      this.prototipoSrv.getPrototipo(params.get('id')))
-    .subscribe(res => {
-      this.prototipo = res;
-    });
+      .switchMap((params: ParamMap) =>
+        this.prototipoSrv.getPrototipo(params.get('id')))
+      .subscribe(res => {
+        this.prototipo = res;
+      });
+
+
   }
 
-  editarNombre() {
+  editarNombre(prototipo: Prototipo) {
 
-    console.log();
+    let copia = Prototipo.copiar(this.prototipo.info);
+
     let dialogRef = this.dialog.open(EditarNombrePrototipoDialogoComponent, {
-      data: {
-      },
+      data: { prototipo: copia },
       width: '500px',
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -52,11 +57,13 @@ export class EditarPrototipoComponent implements OnInit {
     });
   }
 
-  agregarPartida() {
+  agregarPartida(prototipo: Prototipo) {
 
-    console.log();
+    let copia = Prototipo.copiar(this.prototipo.info);
+
     let dialogRef = this.dialog.open(AgregarPartidaDialogoComponent, {
       data: {
+        prototipo: copia
       },
       width: '500px',
     });
@@ -65,15 +72,14 @@ export class EditarPrototipoComponent implements OnInit {
     });
   }
 
-  editarPartida() {
+  editarPartida(partida) {
 
-    console.log();
+    let copia = Partida.copiar(partida);
+
     let dialogRef = this.dialog.open(EditarPartidaDialogoComponent, {
-      data: {
-
-      },
+      data: { partida: copia },
       width: '500px',
-     
+
     });
     dialogRef.afterClosed().subscribe(result => {
       this.selectedOption = result;
@@ -93,11 +99,13 @@ export class EditarPrototipoComponent implements OnInit {
     });
   }
 
-  editarSubpartida() {
+  editarSubpartida(subpartida) {
 
-    console.log();
+    let copia = Partida.copiar(subpartida);
+    
     let dialogRef = this.dialog.open(EditarSubpartidaDialogoComponent, {
       data: {
+        subpartida:copia
       },
       width: '500px',
     });
@@ -119,11 +127,13 @@ export class EditarPrototipoComponent implements OnInit {
     });
   }
 
-  editarInsumo() {
+  editarInsumo(insumo) {
 
-    console.log();
+    let copia = Insumo.copiar(insumo)
+
     let dialogRef = this.dialog.open(EditarInsumoDialogoComponent, {
       data: {
+        insumo:copia
       },
       width: '500px',
     });

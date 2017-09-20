@@ -57,7 +57,7 @@ export const ROUTES: Routes = [
             { path: 'cliente/:id', component: ClienteComponent },
             { path: 'obras', component: ObrasComponent },
             { path: 'tablero', component: TableroComponent },
-            { path: 'editar-prototipo', component: EditarPrototipoComponent },
+            { path: 'editar-prototipo/:id', component: EditarPrototipoComponent },
             { path: 'estructura-obra', component: EstructuraObraComponent },
             { path: 'prototipos', component: PrototiposComponent },
             { path: 'perfil', component: PerfilComponent },

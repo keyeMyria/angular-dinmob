@@ -4,36 +4,20 @@
 
 
   <form>
-    <!-- name="formAddPartida" id="formAddPartida" (ngsubmit)="formAddPartida.$valid && addPartida(formAddPartida)" -->
     <div class="form-group">
-      <!-- [ngclass]="{
-                  'has-error'
-                  :(formAddPartida.$submitted || formAddPartida.codigo.$touched) && formAddPartida.codigo.$error.required }" -->
       <label for="codigo" class="control-label">Código</label>
       <input type="text" name="codigo" class="form-control">
-      <!-- [(ngModel)]="nuevaPartida.codigo" -->
       <div>
-        <!-- *ngIf="formAddPartida.$submitted || formAddPartida.codigo.$touched" -->
         <span class="help-block">Escriba un código</span>
-        <!-- *ngIf="formAddPartida.codigo.$error.required" -->
       </div>
     </div>
-
     <div class="form-group">
-      <!--  [ngclass]="{
-                  'has-error'
-                  :(formAddPartida.$submitted || formAddPartida.nombre.$touched) && formAddPartida.nombre.$error.required }" -->
       <label class="control-label">Nombre</label>
       <input type="text" name="nombre" class="form-control">
-      <!-- [(ngModel)]="nuevaPartida.nombre"  -->
       <div>
-        <!-- *ngIf="formAddPartida.$submitted || formAddPartida.nombre.$touched" -->
         <span class="help-block">Escriba un nombre</span>
-        <!-- *ngIf="formAddPartida.nombre.$error.required" -->
       </div>
     </div>
-    <!-- <div>valid: {{formAddPartida.$valid}}</div> -->
-
   </form>
 
 

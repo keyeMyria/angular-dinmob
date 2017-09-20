@@ -3,14 +3,10 @@
 
 
   <form name="formEditNombre">
-    <!-- (ngSubmit)="formEditNombre.$valid && editNombrePrototipo(formEditNombre)" novalidate -->
-    <div class="form-group">
-      <!-- [ngClass]="{
-              'has-error'
-              :(formEditNombre.$submitted || formEditNombre.nombre.$touched) && formEditNombre.nombre.$error.required }" -->
+    
+    <div class="form-group">     
       <label for="nombre">Prototipo</label>
-      <input type="text" name="nombre" class="form-control">
-      <!-- [(ngModel)]="prototipo_edited.nombre" -->
+      <input type="text" name="nombre" class="form-control" [(ngModel)]="prototipo.nombre">      
     </div>
   </form>
 

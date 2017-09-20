@@ -1,36 +1,20 @@
 <h1 md-dialog-title>Editar Subpartida</h1>
 <div md-dialog-content>
-
   <form name="formEditSubPartida" id="formEditPartida">
-    <!-- (ngSubmit)="formEditSubPartida.$valid && editPartida(formEditSubPartida)" 
-      novalidate-->
     <div class="form-group">
-      <!--   [ngClass]="{
-          'has-error'
-          :(formEditSubPartida.$submitted || formEditSubPartida.codigo.$touched) && formEditSubPartida.codigo.$error.required }" -->
       <label class="control-label">Código</label>
-      <input type="text" name="codigo" class="form-control">
-      <!-- [(ngModel)]="partida_edited.codigo" required -->
+      <input type="text" name="codigo" class="form-control" [(ngModel)]="partida.codigo">
       <div>
-        <!-- *ngIf="formEditSubPartida.$submitted || formEditSubPartida.codigo.$touched" -->
         <span class="help-block">El código no puede estar vacío</span>
-        <!-- *ngIf="formEditSubPartida.codigo.$error.required"  -->
       </div>
     </div>
     <div class="form-group">
-      <!--  [ngClass]="{
-          'has-error'
-          :(formEditSubPartida.$submitted || formEditSubPartida.nombre.$touched) && formEditSubPartida.nombre.$error.required }" -->
       <label class="control-label">Nombre</label>
-      <input type="text" name="nombre" class="form-control">
-      <!-- [(ngModel)]="partida_edited.nombre" required -->
+      <input type="text" name="nombre" class="form-control" [(ngModel)]="partida.nombre">
       <div>
-        <!--  *ngIf="formEditSubPartida.$submitted || formEditPartida.nombre.$touched" -->
         <span class="help-block">El nombre no puede estar vacío</span>
-        <!-- *ngIf="formEditSubPartida.nombre.$error.required"  -->
       </div>
     </div>
-    <!-- <div>valid: {{formEditSubPartida.$valid}}</div> -->
   </form>
 </div>
 

@@ -41,15 +41,15 @@
               </thead>
 
               <tbody>
-                <tr>
-                  <td>Prototipo 1</td>
-                  <td>Fecha 1</td>
+                <tr *ngFor="let prototipo of prototipos">
+                  <td>{{prototipo.nombre}}</td>
+                  <td>{{prototipo.fecha_creacion}}</td>
                   <td class="text-right">
                     <button md-icon-button [mdMenuTriggerFor]="menu">
                             <md-icon>more_vert</md-icon>
                           </button>
                     <md-menu #menu="mdMenu">
-                      <button md-menu-item (click)="editarPrototipo(cliente)">
+                      <button md-menu-item (click)="editarPrototipo(prototipo)">
                               <md-icon>create</md-icon>
                               <span>Editar Prototipo</span>
                             </button>

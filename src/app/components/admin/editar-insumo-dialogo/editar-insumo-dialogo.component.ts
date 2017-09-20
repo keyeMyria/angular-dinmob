@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
+import { Insumo } from 'app/model/insumo';
+import { MD_DIALOG_DATA, MdDialogRef } from "@angular/material";
+
 
 @Component({
   selector: 'app-editar-insumo-dialogo',
@@ -7,6 +10,7 @@ import createNumberMask from 'text-mask-addons/dist/createNumberMask';
   styleUrls: ['./editar-insumo-dialogo.component.scss']
 })
 export class EditarInsumoDialogoComponent implements OnInit {
+  insumo: Insumo;
 
   currencyMask = createNumberMask({
     allowDecimal: true
@@ -19,9 +23,12 @@ export class EditarInsumoDialogoComponent implements OnInit {
 
 
 
-  constructor() { }
+  constructor(
+    @Inject(MD_DIALOG_DATA) public data: any,
+    public dialogRef: MdDialogRef<EditarInsumoDialogoComponent>) { }
 
   ngOnInit() {
+    this.insumo = this.data.insumo;
   }
 
 }

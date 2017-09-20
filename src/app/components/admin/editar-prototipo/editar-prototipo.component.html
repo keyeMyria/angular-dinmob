@@ -1,218 +1,203 @@
 <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <div class="card my-5">
-          <div class="card-header">
-            <div class="d-flex padding-header">
-              <div class="align-self-center">Nombre prototipo</div>
-              <div class="spacer"></div>
-              <div>
-                <button md-icon-button [mdMenuTriggerFor]="menu1">
+  <div class="row">
+    <div class="col-12">
+      <div class="card my-5">
+        <div class="card-header">
+          <div class="d-flex padding-header">
+            <div class="align-self-center">{{prototipo?.info.nombre}}</div>
+            <div class="spacer"></div>
+            <div>
+              <button md-icon-button [mdMenuTriggerFor]="menu1">
                     <md-icon>more_vert</md-icon>
               </button>
-                <md-menu #menu1="mdMenu">
-                  <button md-menu-item (click)="editarNombre()">
+              <md-menu #menu1="mdMenu">
+                <button md-menu-item (click)="editarNombre()">
                     <md-icon>create</md-icon>
                     <span>Editar Nombre</span>
                   </button>
-                  <button md-menu-item (click)="agregarPartida()">
+                <button md-menu-item (click)="agregarPartida()">
                     <md-icon>add</md-icon>
                     <span>Agregar Partida</span>
                   </button>
-                </md-menu>
-              </div>
+              </md-menu>
             </div>
-  
           </div>
-          <div class="card-body">
-            <md-accordion [displayMode]="'default'">
-              <md-expansion-panel [hideToggle]="true">
-                <md-expansion-panel-header>
-                  <span>Prototipo</span>
-                  <div class="spacer"></div>
-                  <div class="collapse-header-btns">
-                    <button md-icon-button [mdMenuTriggerFor]="menu2" (click)="$event.stopPropagation()">
+
+        </div>
+        <div class="card-body">
+
+
+          <!-- partidas -->
+          <md-accordion [displayMode]="'default'">
+
+            <md-expansion-panel [hideToggle]="true" *ngFor="let partida of prototipo?.partidas">
+              <md-expansion-panel-header>
+                <span class="font-weight-bold">{{partida.codigo}}</span>
+                <span>{{partida.nombre}}</span>
+                <div class="spacer"></div>
+                <div class="collapse-header-btns">
+                  <button md-icon-button [mdMenuTriggerFor]="menu2" (click)="$event.stopPropagation()">
                           <md-icon>more_vert</md-icon>
                     </button>
-                    <md-menu #menu2="mdMenu">
-                      <button md-menu-item (click)="editarPartida()">
+                  <md-menu #menu2="mdMenu">
+                    <button md-menu-item (click)="editarPartida(partida)">
                         <md-icon>create</md-icon>
                         <span>Editar</span>
                       </button>
-                      <button md-menu-item (click)="agregarSubpartida()">
+                    <button md-menu-item (click)="agregarSubpartida()">
                        <md-icon>add</md-icon>
                        <span>Agregar Subpartida</span>
                       </button>
-                      <button md-menu-item>
+                    <button md-menu-item>
                         <md-icon>delete</md-icon>
                         <span>Eliminar</span>
                       </button>
-                    </md-menu>
-                    <span class="badge badge-pill badge-primary">5</span>
-                  </div>
-                </md-expansion-panel-header>
-  
-                <md-accordion [displayMode]="'default'">
-                  <md-expansion-panel [hideToggle]="true">
-                    <md-expansion-panel-header>
-                      <span>Nombre 1</span>
-                      <div class="spacer"></div>
-                      <div class="collapse-header-btns">
-                        <button md-icon-button [mdMenuTriggerFor]="menu3" (click)="$event.stopPropagation()">
+                  </md-menu>
+                  <span class="badge badge-pill badge-primary" *ngIf="partida.subpartidas.length>0">{{partida.subpartidas.length}}</span>
+                  <span class="badge badge-pill badge-primary" *ngIf="partida.insumos.length>0">{{partida.insumos.length}}</span>
+                </div>
+              </md-expansion-panel-header>
+
+
+              <!-- subpartidas -->
+              <md-accordion [displayMode]="'default'" *ngIf="partida.subpartidas.length>0">
+                <md-expansion-panel [hideToggle]="true" *ngFor="let subpartida of partida.subpartidas">
+                  <md-expansion-panel-header>
+                    <span class="font-weight-bold">{{subpartida.codigo}}</span>
+                    <span>{{subpartida.nombre}}</span>
+                    <div class="spacer"></div>
+                    <div class="collapse-header-btns">
+                      <button md-icon-button [mdMenuTriggerFor]="menu3" (click)="$event.stopPropagation()">
                           <md-icon>more_vert</md-icon>
                         </button>
-                        <md-menu #menu3="mdMenu">
-                          <button md-menu-item (click)="editarSubpartida()">
+                      <md-menu #menu3="mdMenu">
+                        <button md-menu-item (click)="editarSubpartida(subpartida)">
                             <md-icon>create</md-icon>
                             <span>Editar</span>
                           </button>
-                          <button md-menu-item (click)="agregarInsumo()">
+                        <button md-menu-item (click)="agregarInsumo()">
                             <md-icon>add</md-icon>
                             <span>Agregar Insumo</span>
                           </button>
-                          <button md-menu-item>
+                        <button md-menu-item>
                             <md-icon>delete</md-icon>
                             <span>Eliminar</span>
                           </button>
-                        </md-menu>
-                        <span class="badge badge-pill badge-primary">5</span>
-                      </div>
-                    </md-expansion-panel-header>
-  
-                    <!-- insumos -->
-                    <div class="table-responsive" > <!-- *ngIf="partida.insumos.length" -->
-                      <table class="table table-striped">
-                        <thead>
-                          <tr>
-                            <th class="hidden-xs">Id</th>
-                            <th class="hidden-xs">Código</th>
-                            <th>Insumo</th>
-                            <th>Unidad</th>
-                            <th class="text-right">Cantidad</th>
-                            <th class="text-right">Precio</th>
-                            <th></th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr> <!-- *ngFor="insumo in partida.insumos" -->
-                            <td class="hidden-xs"></td>
-                            <td class="hidden-xs"></td>
-                            <td></td>
-                            <td></td>
-                            <td class="text-right"></td>
-                            <td class="text-right"></td>
-                            <th>
-                              <button md-icon-button [mdMenuTriggerFor]="menu4" (click)="$event.stopPropagation()">
+                      </md-menu>
+                      <span class="badge badge-pill badge-primary">{{subpartida.insumos.length}}</span>
+                    </div>
+                  </md-expansion-panel-header>
+
+                  <!-- insumos -->
+                  <div class="table-responsive">
+                    <!-- *ngIf="partida.insumos.length" -->
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th class="hidden-xs">Id</th>
+                          <th class="hidden-xs">Código</th>
+                          <th>Insumo</th>
+                          <th>Unidad</th>
+                          <th class="text-right">Cantidad</th>
+                          <th class="text-right">Precio</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let insumo of subpartida.insumos">
+                          <!--  -->
+                          <td class="hidden-xs">{{insumo.id_insumo}}</td>
+                          <td class="hidden-xs">{{insumo.codigo}}</td>
+                          <td>{{insumo.insumo}}</td>
+                          <td>{{insumo.unidad}}</td>
+                          <td class="text-right">{{insumo.cantidad}}</td>
+                          <td class="text-right">{{insumo.precio|currency:symbolDisplay:true}}</td>
+                          <th>
+                            <button md-icon-button [mdMenuTriggerFor]="menu4" (click)="$event.stopPropagation()">
                                 <md-icon>more_vert</md-icon>
                               </button>
-                              <md-menu #menu4="mdMenu">
-                                <button md-menu-item (click)="editarInsumo()">
+                            <md-menu #menu4="mdMenu">
+                              <button md-menu-item (click)="editarInsumo(insumo)">
                                   <md-icon>create</md-icon>
                                   <span>Editar</span>
                                 </button>
-                                <button md-menu-item>
+                              <button md-menu-item>
                                   <md-icon>delete</md-icon>
                                   <span>Eliminar</span>
                                 </button>
-                              </md-menu>                            
-                            </th>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </md-expansion-panel>
-                </md-accordion>
-  
-                <md-accordion [displayMode]="'default'">
-                    <md-expansion-panel [hideToggle]="true">
-                      <md-expansion-panel-header>
-                        <span>Nombre 1</span>
-                        <div class="spacer"></div>
-                        <div class="collapse-header-btns">
-                          <button md-icon-button [mdMenuTriggerFor]="menu5" (click)="$event.stopPropagation()">
-                                <md-icon>more_vert</md-icon>
-                          </button>
-                          <md-menu #menu5="mdMenu">
-                            <button md-menu-item>
-                                  <md-icon>create</md-icon>
-                                  <span>Editar</span>
+                            </md-menu>
+                          </th>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </md-expansion-panel>
+              </md-accordion>
+
+              <!-- insumos -->
+              <div class="table-responsive" *ngIf="partida.insumos.length>0">
+
+
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th class="hidden-xs">Id</th>
+                      <th class="hidden-xs">Código</th>
+                      <th>Insumo</th>
+                      <th>Unidad</th>
+                      <th class="text-right">Cantidad</th>
+                      <th class="text-right">Precio</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let insumo of partida.insumos">
+                      <td class="hidden-xs">{{insumo.id_insumo}}</td>
+                      <td class="hidden-xs">{{insumo.codigo}}</td>
+                      <td>{{insumo.insumo}}</td>
+                      <td>{{insumo.unidad}}</td>
+                      <td class="text-right">{{insumo.cantidad}}</td>
+                      <td class="text-right">{{insumo.precio}}</td>
+                      <th>
+                        <button md-icon-button [mdMenuTriggerFor]="menu4" (click)="$event.stopPropagation()">
+                              <md-icon>more_vert</md-icon>
                             </button>
-                            <button md-menu-item>
-                                <md-icon>add</md-icon>
-                                <span>Agregar Insumo</span>
-                          </button>
-                            <button md-menu-item>
-                                  <md-icon>delete</md-icon>
-                                  <span>Eliminar</span>
-                            </button>
-                          </md-menu>
-                          <span class="badge badge-pill badge-primary">5</span>
-                        </div>
-                      </md-expansion-panel-header>
-    
-                      <!-- subpartidas -->
-                      <div class="table-responsive">  <!-- *ngIf="subpartida.insumos.length" -->
-                          <table class="table table-striped">
-                            <thead>
-                              <tr>
-                                <th class="hidden-xs">Id</th>
-                                <th class="hidden-xs">Código</th>
-                                <th>Insumo</th>
-                                <th>Unidad</th>
-                                <th class="text-right">Cantidad</th>
-                                <th class="text-right">Precio</th>
-                                <th></th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>  <!-- *ngFor="insumo in subpartida.insumos" -->
-                                <td class="hidden-xs"></td>
-                                <td class="hidden-xs"></td>
-                                <td></td>
-                                <td></td>
-                                <td class="text-right"></td>
-                                <td class="text-right"></td>                             
-                              <th>
-                                <button md-icon-button [mdMenuTriggerFor]="menu6" (click)="$event.stopPropagation()">
-                                  <md-icon>more_vert</md-icon>
-                                </button>
-                                <md-menu #menu6="mdMenu">
-                                  <button md-menu-item (click)="ctrl.pre_editInsumo(insumo)">
-                                    <md-icon>create</md-icon>
-                                    <span>Editar</span>
-                                  </button>
-                                  <button md-menu-item>
-                                    <md-icon>delete</md-icon>
-                                    <span>Eliminar</span>
-                                  </button>
-                                </md-menu>                            
-                              </th>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </md-expansion-panel>
-                  </md-accordion>
-  
-  
-  
-  
-  
-              </md-expansion-panel>
-            </md-accordion>
-  
-  
-  
-  
-  
-          </div>
-          <div class="card-footer">
-            <div class="col-sm-10 offset-sm-2">
-              <button type="submit" class="btn btn-primary">Aceptar</button>
-  
-            </div>
+                        <md-menu #menu4="mdMenu">
+                          <button md-menu-item (click)="editarInsumo(insumo)">
+                                <md-icon>create</md-icon>
+                                <span>Editar</span>
+                              </button>
+                          <button md-menu-item>
+                                <md-icon>delete</md-icon>
+                                <span>Eliminar</span>
+                              </button>
+                        </md-menu>
+                      </th>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+
+            </md-expansion-panel>
+
+          </md-accordion>
+
+
+
+
+
+
+
+
+        </div>
+        <div class="card-footer">
+          <div class="col-sm-10 offset-sm-2">
+            <button type="submit" class="btn btn-primary">Aceptar</button>
+
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>

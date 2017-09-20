@@ -92,6 +92,7 @@ import { EditarNombrePrototipoDialogoComponent } from './components/admin/editar
 import { AgregarPartidaDialogoComponent } from './components/admin/agregar-partida-dialogo/agregar-partida-dialogo.component';
 import { AgregarSubpartidaDialogoComponent } from './components/admin/agregar-subpartida-dialogo/agregar-subpartida-dialogo.component';
 import { AgregarInsumoDialogoComponent } from './components/admin/agregar-insumo-dialogo/agregar-insumo-dialogo.component';
+import { PrototiposService } from 'app/services/prototipos.service';
 
 
 
@@ -193,7 +194,8 @@ import { AgregarInsumoDialogoComponent } from './components/admin/agregar-insumo
     ClientesService,
     ClienteHelperService,
     UsuarioService,
-    MapasService
+    MapasService,
+    PrototiposService
   ],
   bootstrap: [AppComponent]
 })
