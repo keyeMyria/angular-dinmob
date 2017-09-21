@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EditarNombrePrototipoDialogoComponent } from 'app/components/admin/editar-nombre-prototipo-dialogo/editar-nombre-prototipo-dialogo.component';
-import { MdDialog } from '@angular/material';
+import { MdDialog, MdSnackBar } from '@angular/material';
 import { AgregarPartidaDialogoComponent } from 'app/components/admin/agregar-partida-dialogo/agregar-partida-dialogo.component';
 import { EditarPartidaDialogoComponent } from 'app/components/admin/editar-partida-dialogo/editar-partida-dialogo.component';
 import { AgregarSubpartidaDialogoComponent } from 'app/components/admin/agregar-subpartida-dialogo/agregar-subpartida-dialogo.component';
@@ -19,6 +19,7 @@ import { Insumo } from "app/model/insumo";
   styleUrls: ['./editar-prototipo.component.scss']
 })
 export class EditarPrototipoComponent implements OnInit {
+  loading: boolean = false;
   selectedOption: string;
 
   prototipo: any;
@@ -29,16 +30,18 @@ export class EditarPrototipoComponent implements OnInit {
     private prototipoSrv: PrototiposService,
     private route: ActivatedRoute,
     private router: Router,
-    public dialog: MdDialog
+    public dialog: MdDialog,
+    public snackBar: MdSnackBar
   ) { }
 
   ngOnInit() {
-
-    this.route.paramMap
+    this.loading = true;
+    this.route.paramMap    
       .switchMap((params: ParamMap) =>
         this.prototipoSrv.getPrototipo(params.get('id')))
       .subscribe(res => {
         this.prototipo = res;
+        this.loading = false;
       });
 
 
@@ -102,10 +105,10 @@ export class EditarPrototipoComponent implements OnInit {
   editarSubpartida(subpartida) {
 
     let copia = Partida.copiar(subpartida);
-    
+
     let dialogRef = this.dialog.open(EditarSubpartidaDialogoComponent, {
       data: {
-        subpartida:copia
+        subpartida: copia
       },
       width: '500px',
     });
@@ -133,7 +136,7 @@ export class EditarPrototipoComponent implements OnInit {
 
     let dialogRef = this.dialog.open(EditarInsumoDialogoComponent, {
       data: {
-        insumo:copia
+        insumo: copia
       },
       width: '500px',
     });
