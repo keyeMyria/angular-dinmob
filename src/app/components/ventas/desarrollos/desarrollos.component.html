@@ -29,7 +29,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let lote of lotes">
+                <tr *ngFor="let lote of obra.lotes">
                   <td>{{lote.manzana}}</td>
                   <td>{{lote.nombre}}</td>
                   <td>{{lote.precio|currency:'USD':true}}</td>
@@ -38,8 +38,8 @@
                   <td>!</td>
                   <td>
                     <button md-icon-button>
-                <md-icon>zoom_in</md-icon>
-              </button>
+                      <md-icon>zoom_in</md-icon>
+                    </button>
                   </td>
                 </tr>
               </tbody>
