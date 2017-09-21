@@ -8,6 +8,7 @@ import {
   keyframes
 } from "@angular/animations";
 import { ObrasService } from "app/services/obras.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-desarrollos',
@@ -24,7 +25,8 @@ export class DesarrollosComponent implements OnInit {
   obra_selected: any = {};
  
   constructor(
-    private obraSrv: ObrasService
+    private obraSrv: ObrasService,
+    private router: Router
   ) { }
 
 
@@ -43,6 +45,10 @@ export class DesarrollosComponent implements OnInit {
     }); 
 
     
+  }
+
+  ventasLote() {
+    this.router.navigate(["/ventas/lote"]);
   }
 
 }

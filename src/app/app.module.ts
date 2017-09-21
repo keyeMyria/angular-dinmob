@@ -93,6 +93,7 @@ import { AgregarPartidaDialogoComponent } from './components/admin/agregar-parti
 import { AgregarSubpartidaDialogoComponent } from './components/admin/agregar-subpartida-dialogo/agregar-subpartida-dialogo.component';
 import { AgregarInsumoDialogoComponent } from './components/admin/agregar-insumo-dialogo/agregar-insumo-dialogo.component';
 import { PrototiposService } from 'app/services/prototipos.service';
+import { VentasLoteComponent } from './components/ventas/ventas-lote/ventas-lote.component';
 
 
 
@@ -140,6 +141,7 @@ import { PrototiposService } from 'app/services/prototipos.service';
     AgregarPartidaDialogoComponent,
     AgregarSubpartidaDialogoComponent,
     AgregarInsumoDialogoComponent,
+    VentasLoteComponent,
 
   ],
   imports: [

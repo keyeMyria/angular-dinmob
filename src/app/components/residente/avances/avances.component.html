@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <md-accordion>
+                <md-expansion-panel>
+                    <md-expansion-panel-header>
+                        <span>Nombre</span>
+                        <div class="spacer"></div>
+                        <div class="collapse-header-btns">
+                            <button md-icon-button [mdMenuTriggerFor]="menu3" (click)="$event.stopPropagation()">
+                                    <md-icon>more_vert</md-icon>
+                                  </button>
+                            <md-menu #menu3="mdMenu">
+                                <button md-menu-item (click)="editarSubpartida(subpartida)">
+                                      <md-icon>create</md-icon>
+                                      <span>Editar</span>
+                                    </button>
+                                <button md-menu-item (click)="agregarInsumo()">
+                                      <md-icon>add</md-icon>
+                                      <span>Agregar Insumo</span>
+                                    </button>
+                                <button md-menu-item>
+                                      <md-icon>delete</md-icon>
+                                      <span>Eliminar</span>
+                                    </button>
+                            </md-menu>
+                            <span class="badge badge-pill badge-primary">{{subpartida.insumos.length}}</span>
+                        </div>
+
+
+
+                    </md-expansion-panel-header>
+                    <md-list>
+                        <md-list-item> </md-list-item>
+                        <md-list-item> </md-list-item>
+                        <md-list-item> </md-list-item>
+                    </md-list>
+                </md-expansion-panel>
+            </md-accordion>
+        </div>
+    </div>
+</div>

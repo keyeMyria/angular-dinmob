@@ -40,6 +40,7 @@ import { EditarNombrePrototipoDialogoComponent } from 'app/components/admin/edit
 import { AgregarPartidaDialogoComponent } from 'app/components/admin/agregar-partida-dialogo/agregar-partida-dialogo.component';
 import { AgregarSubpartidaDialogoComponent } from 'app/components/admin/agregar-subpartida-dialogo/agregar-subpartida-dialogo.component';
 import { AgregarInsumoDialogoComponent } from 'app/components/admin/agregar-insumo-dialogo/agregar-insumo-dialogo.component';
+import { VentasLoteComponent } from 'app/components/ventas/ventas-lote/ventas-lote.component';
 
 
 
@@ -85,6 +86,8 @@ export const ROUTES: Routes = [
             { path: 'agregar-partida-dialogo', component: AgregarPartidaDialogoComponent },
             { path: 'agregar-subpartida-dialogo', component: AgregarSubpartidaDialogoComponent },
             { path: 'agregar-insumo-dialogo', component: AgregarInsumoDialogoComponent },
+            { path: 'ventas/lote', component: VentasLoteComponent },
+            
 
 
 
