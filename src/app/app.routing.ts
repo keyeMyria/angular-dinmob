@@ -41,6 +41,7 @@ import { AgregarPartidaDialogoComponent } from 'app/components/admin/agregar-par
 import { AgregarSubpartidaDialogoComponent } from 'app/components/admin/agregar-subpartida-dialogo/agregar-subpartida-dialogo.component';
 import { AgregarInsumoDialogoComponent } from 'app/components/admin/agregar-insumo-dialogo/agregar-insumo-dialogo.component';
 import { VentasLoteComponent } from 'app/components/ventas/ventas-lote/ventas-lote.component';
+import { ComentarioAvancesDialogoComponent } from 'app/components/residente/comentario-avances-dialogo/comentario-avances-dialogo.component';
 
 
 
@@ -87,6 +88,7 @@ export const ROUTES: Routes = [
             { path: 'agregar-subpartida-dialogo', component: AgregarSubpartidaDialogoComponent },
             { path: 'agregar-insumo-dialogo', component: AgregarInsumoDialogoComponent },
             { path: 'ventas/lote', component: VentasLoteComponent },
+            { path: 'comentario-avances-dialogo', component: ComentarioAvancesDialogoComponent },
             
 
 

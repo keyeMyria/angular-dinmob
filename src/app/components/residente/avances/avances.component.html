@@ -1,41 +1,93 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <button class="btn btn-light" type="submit">Terminar</button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="btn btn-light" type="submit">Liberar</button>
+                        </li>
+                        <li class="nav-item">
+                            <button md-button [mdMenuTriggerFor]="menu">
+                              <md-icon>delete</md-icon>
+                            </button>
+                            <md-menu #menu="mdMenu" xPosition="before" [overlapTrigger]="false">
+                                <button md-menu-item>Avance</button>
+                                <button md-menu-item>Liberación</button>
+                            </md-menu>
+                        </li>
+                        <li class="nav-item">
+                            <button md-icon-button (click)="comentarioAvances()">
+                              <md-icon>chat_bubble</md-icon>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">{{lote?.lote.obra}}</a></li>
+                <li class="breadcrumb-item"><a href="#">{{lote?.lote.manzana}}</a></li>
+                <li class="breadcrumb-item active">{{lote?.lote.nombre}}</li>
+            </ol>
             <md-accordion>
-                <md-expansion-panel>
+
+                <md-expansion-panel *ngFor="let partida of lote?.acordeon" [hideToggle]="true">
                     <md-expansion-panel-header>
-                        <span>Nombre</span>
+                        <span>{{partida.nombre}}</span>
                         <div class="spacer"></div>
                         <div class="collapse-header-btns">
-                            <button md-icon-button [mdMenuTriggerFor]="menu3" (click)="$event.stopPropagation()">
-                                    <md-icon>more_vert</md-icon>
-                                  </button>
-                            <md-menu #menu3="mdMenu">
-                                <button md-menu-item (click)="editarSubpartida(subpartida)">
-                                      <md-icon>create</md-icon>
-                                      <span>Editar</span>
-                                    </button>
-                                <button md-menu-item (click)="agregarInsumo()">
-                                      <md-icon>add</md-icon>
-                                      <span>Agregar Insumo</span>
-                                    </button>
-                                <button md-menu-item>
-                                      <md-icon>delete</md-icon>
-                                      <span>Eliminar</span>
-                                    </button>
-                            </md-menu>
-                            <span class="badge badge-pill badge-primary">{{subpartida.insumos.length}}</span>
+                            <small class="pull-right">{{numSubpartidasFinalizadas(partida)}} <span class="hidden-xs">de  {{partida.subpartidas.length || "1"}}</span>                        
+                            </small>
                         </div>
-
-
-
                     </md-expansion-panel-header>
-                    <md-list>
-                        <md-list-item> </md-list-item>
-                        <md-list-item> </md-list-item>
-                        <md-list-item> </md-list-item>
-                    </md-list>
+                    <div *ngIf="partida.subpartidas.length>0">
+                        <ul class="list-group" *ngFor="let subpartida of partida?.subpartidas">
+                            <li class="list-group-item">
+                                <div class="d-flex">
+                                    <md-checkbox>{{subpartida.nombre}}
+                                        <div style="font-size: 15px;">
+                                            <span class="badge" [ngClass]="{'badge-secondary':!subpartida.fecha_fin, 'badge-primary':subpartida.fecha_fin}"><i class="fa fa-legal"></i>{{partida.fecha_fin|| "No terminada"}}</span>
+                                            <span class="badge" [ngClass]="{'badge-secondary':!subpartida.fecha_liberacion, 'badge-success':subpartida.fecha_liberacion}"><i class="fa fa-usd"></i>{{partida.fecha_liberacion|| "No liberada"}}</span>
+                                        </div>
+                                    </md-checkbox>
+                                    <div class="spacer"></div>
+                                    <div>
+                                        <button md-icon-button>
+                                      <md-icon>camera_alt</md-icon>
+                                  </button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div *ngIf="partida.subpartidas.length===0">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <div class="d-flex">
+                                    <md-checkbox>
+                                        <div style="font-size: 15px;">
+                                            <span class="badge badge-secondary"><i class="fa fa-legal"></i>No terminada</span>
+                                            <span class="badge badge-secondary"><i class="fa fa-usd"></i>No liberada</span>
+                                        </div>
+                                    </md-checkbox>
+                                    <div class="spacer"></div>
+                                    <div>
+                                        <button md-icon-button>
+                                          <md-icon>camera_alt</md-icon>
+                                      </button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </md-expansion-panel>
+
+
+
             </md-accordion>
         </div>
     </div>

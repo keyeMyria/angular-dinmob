@@ -8,7 +8,7 @@ import { I18n, SpanishDatepickerI18nService } from "app/services/spanish-datepic
 import { NgbDatepickerI18n, NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { TextMaskModule } from "angular2-text-mask";
 
-
+import { AuthModule } from "app/modules/auth.module";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import {
   MdMenuModule,
@@ -36,8 +36,15 @@ import { TreeTableModule } from "primeng/components/treetable/treetable";
 //servicios
 import { ClientesService } from "app/services/clientes.service";
 import { ObrasService } from "app/services/obras.service";
+import { LotesService } from 'app/services/lotes.service';
+import { PrototiposService } from 'app/services/prototipos.service';
+import { UsuarioService } from "app/services/usuario.service";
+import { AuthService } from "app/services/auth.service";
 
 //import { MaterializeModule } from "angular2-materialize";
+
+//pipes
+import { NumberToYesNoPipe } from './pipes/number-to-yes-no.pipe';
 
 //app component
 import { AppComponent } from './app.component';
@@ -56,7 +63,7 @@ import { LoginComponent } from './components/login/login.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { TableroComponent } from './components/tablero/tablero.component';
 import { AngularMaterialModule } from "app/modules/angular-material.module";
-import { AuthService } from "app/services/auth.service";
+
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { MapasVentasComponent } from './components/ventas/mapas-ventas/mapas-ventas.component';
 import { AvancesComponent } from './components/residente/avances/avances.component';
@@ -66,8 +73,8 @@ import { PrototiposComponent } from './components/admin/prototipos/prototipos.co
 import { EditarPrototipoComponent } from './components/admin/editar-prototipo/editar-prototipo.component';
 import { UsuariosComponent } from './components/admin/usuarios/usuarios.component';
 import { CrearUsuarioComponent } from './components/admin/crear-usuario/crear-usuario.component';
-import { UsuarioService } from "app/services/usuario.service";
-import { AuthModule } from "app/modules/auth.module";
+
+
 import { CambiarPasswordDialogoComponent } from './components/admin/cambiar-password-dialogo/cambiar-password-dialogo.component';
 import { ConfirmarBorradoDialogoComponent } from './components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
 import { EditarUsuarioDialogoComponent } from './components/admin/editar-usuario-dialogo/editar-usuario-dialogo.component';
@@ -84,7 +91,7 @@ import { CambiarNombrePrototipoDialogoComponent } from './components/admin/cambi
 import { NuevaCompraDialogoComponent } from './components/ventas/nueva-compra-dialogo/nueva-compra-dialogo.component';
 import { NuevoPagoDialogoComponent } from './components/ventas/nuevo-pago-dialogo/nuevo-pago-dialogo.component';
 import { EditarPagoDialogoComponent } from './components/ventas/editar-pago-dialogo/editar-pago-dialogo.component';
-import { NumberToYesNoPipe } from './pipes/number-to-yes-no.pipe';
+
 import { EditarPartidaDialogoComponent } from './components/admin/editar-partida-dialogo/editar-partida-dialogo.component';
 import { EditarSubpartidaDialogoComponent } from './components/admin/editar-subpartida-dialogo/editar-subpartida-dialogo.component';
 import { EditarInsumoDialogoComponent } from './components/admin/editar-insumo-dialogo/editar-insumo-dialogo.component';
@@ -92,8 +99,11 @@ import { EditarNombrePrototipoDialogoComponent } from './components/admin/editar
 import { AgregarPartidaDialogoComponent } from './components/admin/agregar-partida-dialogo/agregar-partida-dialogo.component';
 import { AgregarSubpartidaDialogoComponent } from './components/admin/agregar-subpartida-dialogo/agregar-subpartida-dialogo.component';
 import { AgregarInsumoDialogoComponent } from './components/admin/agregar-insumo-dialogo/agregar-insumo-dialogo.component';
-import { PrototiposService } from 'app/services/prototipos.service';
+
 import { VentasLoteComponent } from './components/ventas/ventas-lote/ventas-lote.component';
+import { ComentarioAvancesDialogoComponent } from './components/residente/comentario-avances-dialogo/comentario-avances-dialogo.component';
+
+
 
 
 
@@ -142,6 +152,8 @@ import { VentasLoteComponent } from './components/ventas/ventas-lote/ventas-lote
     AgregarSubpartidaDialogoComponent,
     AgregarInsumoDialogoComponent,
     VentasLoteComponent,
+    ComentarioAvancesDialogoComponent,
+    
 
   ],
   imports: [
@@ -184,6 +196,7 @@ import { VentasLoteComponent } from './components/ventas/ventas-lote/ventas-lote
     AgregarPartidaDialogoComponent,
     AgregarSubpartidaDialogoComponent,
     AgregarInsumoDialogoComponent,
+    ComentarioAvancesDialogoComponent
     
   ],
 
@@ -197,7 +210,8 @@ import { VentasLoteComponent } from './components/ventas/ventas-lote/ventas-lote
     ClienteHelperService,
     UsuarioService,
     MapasService,
-    PrototiposService
+    PrototiposService,
+    LotesService
   ],
   bootstrap: [AppComponent]
 })
