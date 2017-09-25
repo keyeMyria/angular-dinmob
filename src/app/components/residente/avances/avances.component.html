@@ -1,7 +1,38 @@
 <div class="container">
     <div class="row">
-        <div class="col-12">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="col-4">
+            <md-card>
+                <div class="mb-2">
+                    <select class="form-control" [(ngModel)]="obra_selected" > <!-- (change)="cargarObra(obra_selected)" -->
+                              <option value="">Seleccionar...</option>
+                              <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>                                     
+                    </select>
+                </div>
+                <div class="d-flex">
+                    <!-- <span><i class="fa fa-share"></i></span> -->
+                    <span>{{obra?.obra?.nombre || ""}}</span>
+                    <div class="spacer"></div>
+                    <span class="badge badge-pill badge-warning align-self-center mr-2">{{obra?.manzanas?.length || "0"}}</span>
+                </div>
+            </md-card>
+
+            <md-accordion>
+                <md-expansion-panel *ngFor="let manzana of obra?.manzanas" [hideToggle]="false">
+                    <md-expansion-panel-header>
+                        <span>{{manzana.nombre}}</span>
+                        <div class="spacer"></div>
+                        <span class="badge badge-pill badge-primary align-self-center mr-2">{{manzana.lotes?.length || "0"}}</span>
+
+                    </md-expansion-panel-header>
+                    <ul class="list-group" *ngFor="let lote of manzana.lotes">
+                        <li class="list-group-item">({{lote.prototipos?.length || "0"}}) {{lote.nombre}}</li>
+                    </ul>
+                </md-expansion-panel>
+            </md-accordion>
+
+        </div>
+        <div class="col-8">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light ">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
@@ -28,7 +59,7 @@
                 </div>
             </nav>
 
-            <ol class="breadcrumb">
+            <ol class="breadcrumb colorBread">
                 <li class="breadcrumb-item"><a href="#">{{lote?.lote.obra}}</a></li>
                 <li class="breadcrumb-item"><a href="#">{{lote?.lote.manzana}}</a></li>
                 <li class="breadcrumb-item active">{{lote?.lote.nombre}}</li>
@@ -36,7 +67,7 @@
             <md-accordion>
 
                 <md-expansion-panel *ngFor="let partida of lote?.acordeon" [hideToggle]="true">
-                    <md-expansion-panel-header>
+                    <md-expansion-panel-header [ngClass]="{'bg-info text-white': partidaFinalizada(partida)}">
                         <span>{{partida.nombre}}</span>
                         <div class="spacer"></div>
                         <div class="collapse-header-btns">
@@ -50,8 +81,8 @@
                                 <div class="d-flex">
                                     <md-checkbox>{{subpartida.nombre}}
                                         <div style="font-size: 15px;">
-                                            <span class="badge" [ngClass]="{'badge-secondary':!subpartida.fecha_fin, 'badge-primary':subpartida.fecha_fin}"><i class="fa fa-legal"></i>{{partida.fecha_fin|| "No terminada"}}</span>
-                                            <span class="badge" [ngClass]="{'badge-secondary':!subpartida.fecha_liberacion, 'badge-success':subpartida.fecha_liberacion}"><i class="fa fa-usd"></i>{{partida.fecha_liberacion|| "No liberada"}}</span>
+                                            <span class="badge" [ngClass]="{'badge-secondary':!subpartida.fecha_fin, 'badge-primary':subpartida.fecha_fin}"><i class="fa fa-legal"></i>{{subpartida.fecha_fin|| "No terminada"}}</span>
+                                            <span class="badge" [ngClass]="{'badge-secondary':!subpartida.fecha_liberacion, 'badge-success':subpartida.fecha_liberacion}"><i class="fa fa-usd"></i>{{subpartida.fecha_liberacion|| "No liberada"}}</span>
                                         </div>
                                     </md-checkbox>
                                     <div class="spacer"></div>
@@ -70,8 +101,8 @@
                                 <div class="d-flex">
                                     <md-checkbox>
                                         <div style="font-size: 15px;">
-                                            <span class="badge badge-secondary"><i class="fa fa-legal"></i>No terminada</span>
-                                            <span class="badge badge-secondary"><i class="fa fa-usd"></i>No liberada</span>
+                                            <span class="badge badge-secondary" [ngClass]="{'badge-secondary':!partida.fecha_fin, 'badge-primary':partida.fecha_fin}"><i class="fa fa-legal"></i>{{partida.fecha_fin || "No terminada"}}</span>
+                                            <span class="badge badge-secondary" [ngClass]="{'badge-secundary':!partida.fecha_liberacion, 'badge-success':partida.fecha_liberacion}"><i class="fa fa-usd"></i>{{partida.fecha_liberacion || "No liberada"}}</span>
                                         </div>
                                     </md-checkbox>
                                     <div class="spacer"></div>

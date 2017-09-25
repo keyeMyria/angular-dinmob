@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LotesService } from 'app/services/lotes.service';
 import { ComentarioAvancesDialogoComponent } from 'app/components/residente/comentario-avances-dialogo/comentario-avances-dialogo.component';
 import { MdDialog } from '@angular/material';
+import { ObrasService } from 'app/services/obras.service';
 
 @Component({
   selector: 'app-avances',
@@ -11,19 +12,40 @@ import { MdDialog } from '@angular/material';
 export class AvancesComponent implements OnInit {
 
   lote: any;
+  obra: any;
+  obras_selected: any = {};
+  obras: any = [];
+ 
 
 
 
   constructor(
+    private obraSrv: ObrasService,
     private loteSrv: LotesService,
     public dialog: MdDialog
   ) { }
 
   ngOnInit() {
+    this.obraSrv.loadFullObra(58)
+      .subscribe(response => {
+        this.obra = response;
+        console.log("obra", this.obra);
+      });
+
+    this.obraSrv.getObrasUsuario(18)
+      .subscribe(response => {
+        this.obras = response;
+      });
+
     this.loteSrv.getAvances(153)
       .subscribe(response => {
         this.lote = response;
       });
+    this.obraSrv.getAcordeonManzanas(53)
+      .subscribe(response => {
+        this.obra = response;
+      });
+
   }
 
   comentarioAvances():
@@ -59,5 +81,27 @@ export class AvancesComponent implements OnInit {
     return count;
 
   }
+
+  partidaFinalizada(partida) {
+    //console.log("partidaFinalizada" + partida.id_partida);
+    var finalizada = true;
+
+    //tiene subpartidas
+    if (partida.subpartidas.length) {
+
+      for (var i = 0; i < partida.subpartidas.length; i++) {
+        //si encontramos alguna sin finalizar devolvemos false
+        if (partida.subpartidas[i].fecha_fin === null) {
+          return false;
+        }
+      }
+
+    } else {
+      finalizada = partida.fecha_fin !== null;
+    }
+
+    return finalizada;
+
+  };
 
 }
