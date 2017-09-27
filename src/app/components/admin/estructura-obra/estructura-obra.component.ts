@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ObrasService } from "app/services/obras.service";
 import { Usuario } from "app/model/usuario";
 import { AuthService } from "app/services/auth.service";
+import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 
 @Component({
   selector: 'app-estructura-obra',
@@ -9,6 +10,8 @@ import { AuthService } from "app/services/auth.service";
   styleUrls: ['./estructura-obra.component.scss']
 })
 export class EstructuraObraComponent implements OnInit {
+
+  public maskPreInFi = [/\d/, /\d/, /\d/, /\d/, /\d/]
 
   usuario:Usuario;
   obras: any = [];

@@ -6,7 +6,7 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class LotesService {
-  url: string = "http://localhost:8080/control/api/index.php/lotes/";
+  url: string = "http://localhost:8080/dinmob/api/index.php/lotes/";
 
   constructor(private http: Http) { }
 
@@ -60,7 +60,7 @@ export class LotesService {
       }
 */
   getAvances(id_lote) {
-    return this.http.get(this.url + "lotes/avances/" + id_lote)
+    return this.http.get(this.url + "get_avances/" + id_lote)
       .map(this.extractData)
       .catch(this.handleError);
   }

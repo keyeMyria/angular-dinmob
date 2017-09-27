@@ -1,0 +1,47 @@
+<h1 md-dialog-title>Agregar Subpartida</h1>
+<div md-dialog-content>
+
+
+
+  <form name="formAddSubPartida" id="formAddPartida">
+    <!-- (ngSubmit)="formAddSubPartida.$valid && addSubpartida(formAddSubPartida)"
+            novalidate -->
+
+
+    <div class="form-group">
+      <!-- [ngClass]="{
+                  'has-error'
+                  :(formAddSubPartida.$submitted || formAddSubPartida.codigo.$touched) && formAddSubPartida.codigo.$error.required }" -->
+      <label class="control-label">Código</label>
+      <input type="text" name="codigo" class="form-control">
+      <!-- [(ngModel)]="nuevaSubpartida.codigo" required -->
+      <div>
+        <!-- *ngIf="formAddSubPartida.$submitted || formAddSubPartida.codigo.$touched" -->
+        <span class="help-block">Escriba un código</span>
+        <!-- *ngIf="formAddSubPartida.codigo.$error.required" -->
+      </div>
+    </div>
+
+    <div class="form-group">
+      <!--  [ngClass]="{
+                  'has-error'
+                  :(formAddSubPartida.$submitted || formAddSubPartida.nombre.$touched) && formAddSubPartida.nombre.$error.required }" -->
+      <label class="control-label">Nombre</label>
+      <input type="text" name="nombre" class="form-control">
+      <!-- [(ngModel)]="nuevaSubpartida.nombre" required -->
+      <div>
+        <!-- *ngIf="formAddSubPartida.$submitted || formAddSubPartida.nombre.$touched" -->
+        <span class="help-block">Escriba un nombre</span>
+        <!-- *ngIf="formAddSubPartida.nombre.$error.required" -->
+      </div>
+    </div>
+    <!-- <div>valid: {{formAddSubPartida.$valid}}</div>      -->
+
+
+  </form>
+</div>
+
+<div md-dialog-actions>
+  <button md-button [md-dialog-close]="false">CANCELAR</button>
+  <button md-button [md-dialog-close]="true">AGREGAR</button>
+</div>

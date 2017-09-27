@@ -1,0 +1,69 @@
+<h1 md-dialog-title>Nuevo Pago</h1>
+<div md-dialog-content>
+  <form>
+
+    <div class="form-group">
+      <label for="nombre">Monto</label>
+      <div>
+        <input [textMask]="{mask: numberMask}" class="form-control" type="text" id="nombre" name="nombre">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="fecha_entrega">Fecha Programada</label>
+      <div>
+        <div class="input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #d="ngbDatepicker" type="text" name="fecha_entrega" id="fecha_entrega"
+            placement="bottom-right">
+          <span class="input-group-btn">
+            <button class="btn btn-secondary" type="button" (click)="d.toggle()">
+            <i class="fa fa-calendar"></i>
+            </button>
+            </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="nombre">Tipo</label>
+      <div class="input-group">
+        <select class="form-control" name="" selectval>
+          <option>Seleccionar</option>
+          <option>Apartado</option> 
+          <option>Enganche</option>
+          <option>Parcialidad</option> 
+          <option>Finiquito</option>  
+          <option>Contrato Agua</option> 
+          <option>Devolución</option> 
+          <option>Otros</option> 
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="nombre">Forma</label>
+      <div class="input-group">
+        <select class="form-control" name="" selectval>
+          <option>Seleccionar</option>
+          <option>Efectivo</option> 
+          <option>Transferencia</option>
+          <option>Cheque</option>            
+          </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="">Nota</label>
+      <div>
+        <input class="form-control" type="text" id="nombre" name="">
+      </div>
+    </div>
+
+  </form>
+
+
+</div>
+<div md-dialog-actions>
+  <button md-button [md-dialog-close]="false">CANCELAR</button>
+  <button md-button [md-dialog-close]="true">ACEPTAR</button>
+</div>

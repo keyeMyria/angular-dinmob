@@ -1,0 +1,179 @@
+<div class="container">
+
+  <div *ngIf="loading">
+    <md-spinner class="loading"></md-spinner>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+
+
+      <div class="card my-2">
+        <div>
+          <md-tab-group>
+            <!-- Lote -->
+            <md-tab label="Lote">
+
+              <div class="p15px">
+                <div class="form-group row">
+                  <label class="col-form-label col-sm-3">Obra</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" name="">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-form-label col-sm-3">Manzana</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" name="">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-form-label col-sm-3">Lote</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" name="">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-form-label col-sm-3">Estado Venta</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" name="">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-form-label col-sm-3">Fecha Estado</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" name="">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-form-label col-sm-3">Precio de Lista</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" name="">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-form-label col-sm-3">Valor Ampliación</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" name="">
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-sm-9">
+                  <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                </div>
+              </div>
+
+
+            </md-tab>
+            <!-- Cliente -->
+            <md-tab label="Cliente">
+              <div class="p15px">
+                <div class="table-responsive">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th>Nombre</th>
+                        <th>Activo</th>
+                        <th>Fecha Activación</th>
+                        <th>Fecha Cancelación</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+
+                    </tbody>
+
+                  </table>
+                </div>
+
+              </div>
+
+
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Programación</th>
+                      <th>Pago</th>
+                      <th>Monto</th>
+                      <th>Tipo</th>
+                      <th>Forma</th>
+                      <th>Nota</th>
+                      <th>Validado</th>
+                      <th>Comprobante</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="row">
+                <div class="col-xs-12 col-sm-4">
+                  <div class="description-block border-right">
+                    <h4 class="text-blue">$0.00</h4>
+                    <span>VALOR OPERACIÓN</span>
+                  </div>
+                </div>
+                <div class="col-xs-12 col-sm-4">
+                  <div class="description-block border-right">
+                    <h4 class="text-green">$0.00</h4>
+                    <span>-PAGOS REALIZADOS</span>
+                  </div>
+                </div>
+                <div class="col-xs-12 col-sm-4">
+                  <div class="description-block">
+                    <h4 class="text-red">$0.00</h4>
+                    <span>=SALDO PENDIENTE</span>
+                  </div>
+                </div>
+
+              </div>
+
+
+
+            </md-tab>
+          </md-tab-group>
+
+        </div>
+
+        <div class="card-footer">
+          <!-- <div class="row">
+            <div class="col-sm-11 ml-sm-auto">
+              <button type="submit" class="btn btn-primary">Guardar</button>
+
+            </div>
+          </div> -->
+        </div>
+
+
+
+
+
+
+      </div>
+
+
+    </div>
+  </div>
+
+</div>

@@ -1,17 +1,12 @@
 <section class="container py15px">
   <div class="row">
     <div class="col-12 col-sm-10 mx-sm-auto">
-      <form class="form-horizontal" name="formCliente" id="formCliente" (ngSubmit)="createCliente()"
-        novalidate>
+      <form class="form-horizontal" name="formCliente" id="formCliente" (ngSubmit)="createCliente()" novalidate>
 
 
-        <div class="card">
-
-          <!-- <div class="card-header"></div> -->
-
-          <div class="">
+        <div class="card">        
+          <div >
             <md-tab-group>
-              <!-- <div class="tab-content"> -->
               <!-- Datos Generales -->
               <md-tab label="Cliente">
                 <div class="p15px">
@@ -49,11 +44,25 @@
                         <input type="text" class="form-control" name="lugar_nacimiento_persona_fisica" [(ngModel)]="cliente.lugar_nacimiento_persona_fisica">
                       </div>
                     </div>
-                    <div class="form-group row">
+                    <!--  <div class="form-group row">
                       <label class="col-form-label col-sm-3">Fecha de nacimiento</label>
                       <div class="col-sm-9">
                         <input type="text" class="form-control" name="fecha_nacimiento_persona_fisica" [(ngModel)]="cliente.fecha_nacimiento_persona_fisica"
                           date-picker>
+                      </div>
+                    </div> -->
+                    <div class="form-group row">
+                      <label class="col-form-label col-sm-3">Fecha de nacimiento</label>
+                      <div class="col-sm-9">
+                        <div class="input-group">
+                          <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #d="ngbDatepicker" type="text" name="fecha_nacimiento_persona_fisica"
+                            id="fecha_nacimiento_persona_fisica" placement="bottom-left" [(ngModel)]="cliente.fecha_nacimiento_persona_fisica">
+                          <span class="input-group-btn"> 
+                           <button class="btn btn-secondary" type="button" (click)="d.toggle()">                                               
+                             <i class="fa fa-calendar"></i>  
+                           </button>                          
+                          </span>
+                        </div>
                       </div>
                     </div>
                     <div class="form-group row">
@@ -77,7 +86,7 @@
                     <div class="form-group row">
                       <label class="col-form-label col-sm-3">C.P.</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="cp_persona_fisica" [(ngModel)]="cliente.cp_persona_fisica">
+                        <input [textMask]="{mask: maskCP}" type="text" class="form-control" name="cp_persona_fisica" [(ngModel)]="cliente.cp_persona_fisica">
                       </div>
                     </div>
                     <div class="form-group row">
@@ -89,15 +98,8 @@
                     <div class="form-group row">
                       <label class="col-form-label col-sm-3">Teléfono particular</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="telefono_persona_fisica" [(ngModel)]="cliente.telefono_persona_fisica" ui-mask="(999) 999-9999"
-                          ui-mask-placeholder ui-mask-placeholder-char="_">
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-form-label col-sm-3">Número de celular</label>
-                      <div class="col-sm-9">
-                        <input type="text" class="form-control" name="celular_persona_fisica" [(ngModel)]="cliente.celular_persona_fisica" ui-mask="(999) 999-9999"
-                          ui-mask-placeholder ui-mask-placeholder-char="_">
+                        <input [textMask]="{mask: maskPhone}" type="text" class="form-control" name="telefono_persona_fisica" [(ngModel)]="cliente.telefono_persona_fisica"
+                          ui-mask="(999) 999-9999" ui-mask-placeholder ui-mask-placeholder-char="_">
                       </div>
                     </div>
                     <div class="form-group row">
@@ -121,15 +123,15 @@
                     <div class="form-group row">
                       <label class="col-form-label col-sm-3">RFC</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="rfc_persona_fisica" [(ngModel)]="cliente.rfc_persona_fisica" ui-mask="****-999999-***"
-                          ui-mask-placeholder ui-mask-placeholder-char="_">
+                        <input [textMask]="{mask: maskRFC}" type="text" class="form-control" name="rfc_persona_fisica" [(ngModel)]="cliente.rfc_persona_fisica"
+                          ui-mask="****-999999-***" ui-mask-placeholder ui-mask-placeholder-char="_">
                       </div>
                     </div>
                     <div class="form-group row">
                       <label class="col-form-label col-sm-3">CURP</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="curp_persona_fisica" [(ngModel)]="cliente.curp_persona_fisica" ui-mask="****-999999-A-AA-***-*9"
-                          ui-mask-placeholder ui-mask-placeholder-char="_">
+                        <input [textMask]="{mask: maskCURP}" type="text" class="form-control" name="curp_persona_fisica" [(ngModel)]="cliente.curp_persona_fisica"
+                          ui-mask="****-999999-A-AA-***-*9" ui-mask-placeholder ui-mask-placeholder-char="_">
                       </div>
                     </div>
                     <div class="form-group row">
@@ -179,9 +181,9 @@
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label class="col-form-label col-sm-3">C.P.</label>
+                      <label [textMask]="{mask: maskCP}" class="col-form-label col-sm-3">C.P.</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="df_cp_persona_fisica" [(ngModel)]="cliente.df_cp_persona_fisica">
+                        <input [textMask]="{mask: maskCP}" type="text" class="form-control" name="df_cp_persona_fisica" [(ngModel)]="cliente.df_cp_persona_fisica">
                       </div>
                     </div>
                     <div class="form-group row">
@@ -220,11 +222,26 @@
                         <input type="text" class="form-control" name="nacionalidad_persona_moral" [(ngModel)]="cliente.nacionalidad_persona_moral">
                       </div>
                     </div>
-                    <div class="form-group row">
+                    <!--    <div class="form-group row">
                       <label class="col-form-label col-sm-3">Fecha de constitución</label>
                       <div class="col-sm-9">
                         <input type="text" class="form-control" name="fecha_constitucion_persona_moral" [(ngModel)]="cliente.fecha_constitucion_persona_moral"
                           date-picker>
+                      </div>
+                    </div> -->
+                    <div class="form-group row">
+                      <label class="col-form-label col-sm-3">Fecha Constitución</label>
+                      <div class="col-sm-9">
+                        <div class="input-group">
+                          <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #dfechaConstitucion="ngbDatepicker"
+                            type="text" name="fecha_constitucion_persona_moral" id="fecha_constitucion_persona_moral" placement="bottom-left"
+                            [(ngModel)]="cliente.fecha_constitucion_persona_moral">
+                          <span class="input-group-btn">
+                           <button class="btn btn-secondary" type="button" (click)="dfechaConstitucion.toggle()">                               
+                            <i class="fa fa-calendar"></i> 
+                           </button>
+                          </span>
+                        </div>
                       </div>
                     </div>
                     <div class="form-group row">
@@ -237,7 +254,7 @@
                     <div class="form-group row">
                       <label class="col-form-label col-sm-3">Número de teléfono</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="telefono_persona_moral" [(ngModel)]="cliente.telefono_persona_moral">
+                        <input [textMask]="{mask: maskPhone}" type="text" class="form-control" name="telefono_persona_moral" [(ngModel)]="cliente.telefono_persona_moral">
                       </div>
                     </div>
                     <div class="form-group row">
@@ -249,8 +266,8 @@
                     <div class="form-group row">
                       <label class="col-form-label col-sm-3">RFC</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="rfc_persona_moral" [(ngModel)]="cliente.rfc_persona_moral" ui-mask="***-999999-***"
-                          ui-mask-placeholder ui-mask-placeholder-char="_">
+                        <input [textMask]="{mask: maskRFCM}" type="text" class="form-control" name="rfc_persona_moral" [(ngModel)]="cliente.rfc_persona_moral"
+                          ui-mask="***-999999-***" ui-mask-placeholder ui-mask-placeholder-char="_">
                       </div>
                     </div>
                     <div class="form-group row">
@@ -302,7 +319,7 @@
                     <div class="form-group row">
                       <label class="col-form-label col-sm-3">C.P.</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="df_cp_persona_moral" [(ngModel)]="cliente.df_cp_persona_moral">
+                        <input [textMask]="{mask: maskCP}" type="text" class="form-control" name="df_cp_persona_moral" [(ngModel)]="cliente.df_cp_persona_moral">
                       </div>
                     </div>
                     <div class="form-group row">
@@ -330,6 +347,7 @@
                   </div>
                 </div>
               </md-tab>
+
               <!-- Datos Laborales -->
               <md-tab label="Datos laborales" *ngIf="cliente.persona_moral === '0'">
                 <div class="p15px">
@@ -378,7 +396,7 @@
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">Código postal</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" name="cp_laboral" [(ngModel)]="cliente.cp_laboral">
+                      <input [textMask]="{mask: maskCP}" type="text" class="form-control" name="cp_laboral" [(ngModel)]="cliente.cp_laboral">
                     </div>
                   </div>
                   <div class="form-group row">
@@ -390,12 +408,13 @@
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">Teléfono</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" name="telefono_laboral" [(ngModel)]="cliente.telefono_laboral" ui-mask="(999) 999-9999"
-                        ui-mask-placeholder ui-mask-placeholder-char="_">
+                      <input [textMask]="{mask: maskPhone}" type="text" class="form-control" name="telefono_laboral" [(ngModel)]="cliente.telefono_laboral"
+                        ui-mask="(999) 999-9999" ui-mask-placeholder ui-mask-placeholder-char="_">
                     </div>
                   </div>
                 </div>
               </md-tab>
+
               <!-- conyuge -->
               <md-tab label="Conyuge" *ngIf="cliente.persona_moral === '0' && cliente.regimen_conyugal_persona_fisica === '1'">
                 <div class="p15px">
@@ -417,11 +436,25 @@
                       <input type="text" class="form-control" name="lugar_nacimiento_conyuge" [(ngModel)]="cliente.lugar_nacimiento_conyuge">
                     </div>
                   </div>
+                  <!--    <div class="form-group row">
+                    <label class="col-form-label col-sm-3">Fecha de nacimiento</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" name="fecha_nacimiento_conyuge" [(ngModel)]="cliente.fecha_nacimiento_conyuge" date-picker>
+                    </div>
+                  </div> -->
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">Fecha de nacimiento</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" name="fecha_nacimiento_conyuge" [(ngModel)]="cliente.fecha_nacimiento_conyuge"
-                        date-picker>
+                      <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #dfechaConyuge="ngbDatepicker"
+                          type="text" name="fecha_nacimiento_conyuge" id="fecha_nacimiento_conyuge" placement="bottom-left"
+                          [(ngModel)]="cliente.fecha_nacimiento_conyuge">
+                        <span class="input-group-btn"> 
+                          <button class="btn btn-secondary" type="button" (click)="dfechaConyuge.toggle()">                             
+                           <i class="fa fa-calendar"></i>
+                          </button>                          
+                        </span>
+                      </div>
                     </div>
                   </div>
                   <div class="form-group row">
@@ -445,7 +478,7 @@
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">Código postal</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" name="cp_conyuge" [(ngModel)]="cliente.cp_conyuge">
+                      <input [textMask]="{mask: maskCP}" type="text" class="form-control" name="cp_conyuge" [(ngModel)]="cliente.cp_conyuge">
                     </div>
                   </div>
                   <div class="form-group row">
@@ -457,15 +490,15 @@
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">Teléfono particular</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" name="telefono_conyuge" [(ngModel)]="cliente.telefono_conyuge" ui-mask="(999) 999-9999"
-                        ui-mask-placeholder ui-mask-placeholder-char="_">
+                      <input [textMask]="{mask: maskPhone}" type="text" class="form-control" name="telefono_conyuge" [(ngModel)]="cliente.telefono_conyuge"
+                        ui-mask="(999) 999-9999" ui-mask-placeholder ui-mask-placeholder-char="_">
                     </div>
                   </div>
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">Teléfono celular</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" name="celular_conyuge" [(ngModel)]="cliente.celular_conyuge" ui-mask="(999) 999-9999"
-                        ui-mask-placeholder ui-mask-placeholder-char="_">
+                      <input [textMask]="{mask: maskPhone}" type="text" class="form-control" name="celular_conyuge" [(ngModel)]="cliente.celular_conyuge"
+                        ui-mask="(999) 999-9999" ui-mask-placeholder ui-mask-placeholder-char="_">
                     </div>
                   </div>
                   <div class="form-group row">
@@ -483,15 +516,15 @@
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">RFC</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" name="rfc_conyuge" [(ngModel)]="cliente.rfc_conyuge" ui-mask="****-999999-***"
-                        ui-mask-placeholder ui-mask-placeholder-char="_">
+                      <input [textMask]="{mask: maskRFC}" type="text" class="form-control" name="rfc_conyuge" [(ngModel)]="cliente.rfc_conyuge"
+                        ui-mask="****-999999-***" ui-mask-placeholder ui-mask-placeholder-char="_">
                     </div>
                   </div>
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">CURP</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" name="curp_conyuge" [(ngModel)]="cliente.curp_conyuge" ui-mask="****-999999-A-AA-***-*9"
-                        ui-mask-placeholder ui-mask-placeholder-char="_">
+                      <input [textMask]="{mask: maskCURP}" type="text" class="form-control" name="curp_conyuge" [(ngModel)]="cliente.curp_conyuge"
+                        ui-mask="****-999999-A-AA-***-*9" ui-mask-placeholder ui-mask-placeholder-char="_">
                     </div>
                   </div>
 
@@ -527,7 +560,7 @@
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">C.P.</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" name="df_cp_conyuge" [(ngModel)]="cliente.df_cp_conyuge">
+                      <input [textMask]="{mask: maskCP}" type="text" class="form-control" name="df_cp_conyuge" [(ngModel)]="cliente.df_cp_conyuge">
                     </div>
                   </div>
                   <div class="form-group row">
@@ -551,6 +584,7 @@
 
                 </div>
               </md-tab>
+
               <!-- Apoderado Legal -->
               <md-tab label="Apoderado" *ngIf="cliente.persona_moral === '1'">
                 <div class="p15px">
@@ -572,11 +606,26 @@
                       <input type="text" class="form-control" name="lugar_nacimiento_apoderado" [(ngModel)]="cliente.lugar_nacimiento_apoderado">
                     </div>
                   </div>
-                  <div class="form-group row">
+                  <!-- <div class="form-group row">
                     <label class="col-form-label col-sm-3">Fecha de nacimiento</label>
                     <div class="col-sm-9">
                       <input type="text" class="form-control" name="fecha_nacimiento_apoderado" [(ngModel)]="cliente.fecha_nacimiento_apoderado"
                         date-picker>
+                    </div>
+                  </div> -->
+                  <div class="form-group row">
+                    <label class="col-form-label col-sm-3">Fecha de nacimiento</label>
+                    <div class="col-sm-9">
+                      <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #dfechaApoderado="ngbDatepicker"
+                          type="text" name="fecha_nacimiento_apoderado" id="fecha_nacimiento_apoderado" placement="bottom-left"
+                          [(ngModel)]="cliente.fecha_nacimiento_apoderado">
+                        <span class="input-group-btn"> 
+                         <button class="btn btn-secondary" type="button" (click)="dfechaApoderado.toggle()">                             
+                          <i class="fa fa-calendar"></i> 
+                         </button>                         
+                        </span>
+                      </div>
                     </div>
                   </div>
                   <div class="form-group row">
@@ -600,7 +649,7 @@
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">Código postal</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" name="cp_apoderado" [(ngModel)]="cliente.cp_apoderado">
+                      <input [textMask]="{mask: maskCP}" type="text" class="form-control" name="cp_apoderado" [(ngModel)]="cliente.cp_apoderado">
                     </div>
                   </div>
                   <div class="form-group row">
@@ -612,15 +661,15 @@
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">Teléfono particular</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" name="telefono_apoderado" [(ngModel)]="cliente.telefono_apoderado" ui-mask="(999) 999-9999"
-                        ui-mask-placeholder ui-mask-placeholder-char="_">
+                      <input [textMask]="{mask: maskPhone}" type="text" class="form-control" name="telefono_apoderado" [(ngModel)]="cliente.telefono_apoderado"
+                        ui-mask="(999) 999-9999" ui-mask-placeholder ui-mask-placeholder-char="_">
                     </div>
                   </div>
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">Número de celular</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" name="celular_apoderado" [(ngModel)]="cliente.celular_apoderado" ui-mask="(999) 999-9999"
-                        ui-mask-placeholder ui-mask-placeholder-char="_">
+                      <input [textMask]="{mask: maskPhone}" type="text" class="form-control" name="celular_apoderado" [(ngModel)]="cliente.celular_apoderado"
+                        ui-mask="(999) 999-9999" ui-mask-placeholder ui-mask-placeholder-char="_">
                     </div>
                   </div>
                   <div class="form-group row">
@@ -644,41 +693,33 @@
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">RFC</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" name="rfc_apoderado" [(ngModel)]="cliente.rfc_apoderado" ui-mask="****-999999-***"
-                        ui-mask-placeholder ui-mask-placeholder-char="_">
+                      <input [textMask]="{mask: maskRFC}" type="text" class="form-control" name="rfc_apoderado" [(ngModel)]="cliente.rfc_apoderado"
+                        ui-mask="****-999999-***" ui-mask-placeholder ui-mask-placeholder-char="_">
                     </div>
                   </div>
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">CURP</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" name="curp_apoderado" [(ngModel)]="cliente.curp_apoderado" ui-mask="****-999999-A-AA-***-*9"
-                        ui-mask-placeholder ui-mask-placeholder-char="_">
+                      <input [textMask]="{mask: maskCURP}" type="text" class="form-control" name="curp_apoderado" [(ngModel)]="cliente.curp_apoderado"
+                        ui-mask="****-999999-A-AA-***-*9" ui-mask-placeholder ui-mask-placeholder-char="_">
                     </div>
                   </div>
                 </div>
               </md-tab>
-              <!-- </div> -->
             </md-tab-group>
           </div>
 
-
-
-
-
           <div class="card-footer">
-
             <div class="row">
               <div class="col-sm-9 ml-sm-auto">
                 <button type="submit" class="btn btn-primary">Guardar</button>
                 <!-- <span *ngIf="formCliente.$submitted && !formCliente.$valid" class="text-danger">  Complete los campos indicados</span> -->
               </div>
             </div>
-
-
           </div>
         </div>
-      </form>
 
+      </form>
     </div>
   </div>
 </section>

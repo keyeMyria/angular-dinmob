@@ -1,15 +1,11 @@
 <section class="container py15px">
   <div class="row">
     <div class="col-12 col-sm-10 mx-sm-auto">
-      <form class="form-horizontal" name="formCliente" id="formCliente" 
-        novalidate (ngSubmit)="updateCliente()">
+      <form class="form-horizontal" name="formCliente" id="formCliente" novalidate (ngSubmit)="updateCliente()">
 
 
-        <div class="card">
-
-          <!-- <div class="card-header"></div> -->
-
-          <div class="">
+        <div class="card">       
+          <div>
             <md-tab-group>
               <!-- <div class="tab-content"> -->
               <!-- Datos Generales -->
@@ -51,13 +47,30 @@
                         <input type="text" class="form-control" name="lugar_nacimiento_persona_fisica" [(ngModel)]="cliente.lugar_nacimiento_persona_fisica">
                       </div>
                     </div>
-                    <div class="form-group row">
+                    <!-- <div class="form-group row">
                       <label class="col-form-label col-sm-3">Fecha de nacimiento</label>
                       <div class="col-sm-9">
                         <input type="text" class="form-control" name="fecha_nacimiento_persona_fisica" [(ngModel)]="cliente.fecha_nacimiento_persona_fisica"
                           date-picker>
                       </div>
+                    </div> -->
+
+                    <div class="form-group row">
+                      <label class="col-form-label col-sm-3" for="fecha_nacimiento_persona_fisica">Fecha de nacimiento</label>
+                      <div class="col-sm-9">
+                        <div class="input-group">
+                          <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #dfechaNacimiento="ngbDatepicker"
+                            type="text" name="fecha_nacimiento_persona_fisica" id="fecha_nacimiento_persona_fisica" placement="bottom-left"
+                            [(ngModel)]="cliente.fecha_nacimiento_persona_fisica">
+                          <span class="input-group-btn"> 
+                            <button class="btn btn-secondary" type="button" (click)="dfechaNacimiento.toggle()">                           
+                              <i class="fa fa-calendar"></i> 
+                            </button>                          
+                          </span>
+                        </div>
+                      </div>
                     </div>
+
                     <div class="form-group row">
                       <label class="col-form-label col-sm-3">País de nacimiento</label>
                       <div class="col-sm-9">
@@ -79,7 +92,7 @@
                     <div class="form-group row">
                       <label class="col-form-label col-sm-3">C.P.</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="cp_persona_fisica" [(ngModel)]="cliente.cp_persona_fisica">
+                        <input [textMask]="{mask: maskCP}" type="text" class="form-control" name="cp_persona_fisica" [(ngModel)]="cliente.cp_persona_fisica">
                       </div>
                     </div>
                     <div class="form-group row">
@@ -91,15 +104,15 @@
                     <div class="form-group row">
                       <label class="col-form-label col-sm-3">Teléfono particular</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="telefono_persona_fisica" [(ngModel)]="cliente.telefono_persona_fisica" ui-mask="(999) 999-9999"
-                          ui-mask-placeholder ui-mask-placeholder-char="_">
+                        <input [textMask]="{mask: maskPhone}" type="text" class="form-control" name="telefono_persona_fisica" [(ngModel)]="cliente.telefono_persona_fisica"
+                          ui-mask="(999) 999-9999" ui-mask-placeholder ui-mask-placeholder-char="_">
                       </div>
                     </div>
                     <div class="form-group row">
                       <label class="col-form-label col-sm-3">Número de celular</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="celular_persona_fisica" [(ngModel)]="cliente.celular_persona_fisica" ui-mask="(999) 999-9999"
-                          ui-mask-placeholder ui-mask-placeholder-char="_">
+                        <input [textMask]="{mask: maskPhone}" type="text" class="form-control" name="celular_persona_fisica" [(ngModel)]="cliente.celular_persona_fisica"
+                          ui-mask="(999) 999-9999" ui-mask-placeholder ui-mask-placeholder-char="_">
                       </div>
                     </div>
                     <div class="form-group row">
@@ -123,15 +136,15 @@
                     <div class="form-group row">
                       <label class="col-form-label col-sm-3">RFC</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="rfc_persona_fisica" [(ngModel)]="cliente.rfc_persona_fisica" ui-mask="****-999999-***"
-                          ui-mask-placeholder ui-mask-placeholder-char="_">
+                        <input [textMask]="{mask: maskRFC}" type="text" class="form-control" name="rfc_persona_fisica" [(ngModel)]="cliente.rfc_persona_fisica"
+                          ui-mask="****-999999-***" ui-mask-placeholder ui-mask-placeholder-char="_">
                       </div>
                     </div>
                     <div class="form-group row">
                       <label class="col-form-label col-sm-3">CURP</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="curp_persona_fisica" [(ngModel)]="cliente.curp_persona_fisica" ui-mask="****-999999-A-AA-***-*9"
-                          ui-mask-placeholder ui-mask-placeholder-char="_">
+                        <input [textMask]="{mask: maskCURP}" type="text" class="form-control" name="curp_persona_fisica" [(ngModel)]="cliente.curp_persona_fisica"
+                          ui-mask="****-999999-A-AA-***-*9" ui-mask-placeholder ui-mask-placeholder-char="_">
                       </div>
                     </div>
                     <div class="form-group row">
@@ -183,7 +196,7 @@
                     <div class="form-group row">
                       <label class="col-form-label col-sm-3">C.P.</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="df_cp_persona_fisica" [(ngModel)]="cliente.df_cp_persona_fisica">
+                        <input [textMask]="{mask: maskCP}" type="text" class="form-control" name="df_cp_persona_fisica" [(ngModel)]="cliente.df_cp_persona_fisica">
                       </div>
                     </div>
                     <div class="form-group row">
@@ -223,11 +236,26 @@
                         <input type="text" class="form-control" name="nacionalidad_persona_moral" [(ngModel)]="cliente.nacionalidad_persona_moral">
                       </div>
                     </div>
-                    <div class="form-group row">
+                    <!--   <div class="form-group row">
                       <label class="col-form-label col-sm-3">Fecha de constitución</label>
                       <div class="col-sm-9">
                         <input type="text" class="form-control" name="fecha_constitucion_persona_moral" [(ngModel)]="cliente.fecha_constitucion_persona_moral"
                           date-picker>
+                      </div>
+                    </div> -->
+                    <div class="form-group row">
+                      <label class="col-form-label col-sm-3">Fecha de constitución</label>
+                      <div class="col-sm-9">
+                        <div class="input-group">
+                          <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #dfechaConstitucion="ngbDatepicker"
+                            type="text" name="fecha_constitucion_persona_moral" id="fecha_constitucion_persona_moral" placement="bottom-left"
+                            [(ngModel)]="cliente.fecha_constitucion_persona_moral">
+                          <span class="input-group-btn"> 
+                            <button class="btn btn-secondary" type="button" (click)="dfechaConstitucion.toggle()">                           
+                              <i class="fa fa-calendar"></i> 
+                            </button>                           
+                          </span>
+                        </div>
                       </div>
                     </div>
                     <div class="form-group row">
@@ -240,7 +268,7 @@
                     <div class="form-group row">
                       <label class="col-form-label col-sm-3">Número de teléfono</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="telefono_persona_moral" [(ngModel)]="cliente.telefono_persona_moral">
+                        <input [textMask]="{mask: maskPhone}" type="text" class="form-control" name="telefono_persona_moral" [(ngModel)]="cliente.telefono_persona_moral">
                       </div>
                     </div>
                     <div class="form-group row">
@@ -252,8 +280,8 @@
                     <div class="form-group row">
                       <label class="col-form-label col-sm-3">RFC</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="rfc_persona_moral" [(ngModel)]="cliente.rfc_persona_moral" ui-mask="***-999999-***"
-                          ui-mask-placeholder ui-mask-placeholder-char="_">
+                        <input [textMask]="{mask: maskRFCM}" type="text" class="form-control" name="rfc_persona_moral" [(ngModel)]="cliente.rfc_persona_moral"
+                          ui-mask="***-999999-***" ui-mask-placeholder ui-mask-placeholder-char="_">
                       </div>
                     </div>
                     <div class="form-group row">
@@ -305,7 +333,7 @@
                     <div class="form-group row">
                       <label class="col-form-label col-sm-3">C.P.</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="df_cp_persona_moral" [(ngModel)]="cliente.df_cp_persona_moral">
+                        <input [textMask]="{mask: maskCP}" type="text" class="form-control" name="df_cp_persona_moral" [(ngModel)]="cliente.df_cp_persona_moral">
                       </div>
                     </div>
                     <div class="form-group row">
@@ -382,7 +410,7 @@
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">Código postal</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" name="cp_laboral" [(ngModel)]="cliente.cp_laboral">
+                      <input [textMask]="{mask: maskCP}" type="text" class="form-control" name="cp_laboral" [(ngModel)]="cliente.cp_laboral">
                     </div>
                   </div>
                   <div class="form-group row">
@@ -394,14 +422,14 @@
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">Teléfono</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" name="telefono_laboral" [(ngModel)]="cliente.telefono_laboral" ui-mask="(999) 999-9999"
-                        ui-mask-placeholder ui-mask-placeholder-char="_">
+                      <input [textMask]="{mask: maskPhone}" type="text" class="form-control" name="telefono_laboral" [(ngModel)]="cliente.telefono_laboral"
+                        ui-mask="(999) 999-9999" ui-mask-placeholder ui-mask-placeholder-char="_">
                     </div>
                   </div>
                 </div>
               </md-tab>
 
-              <!-- conyuge -->
+              <!-- Conyuge -->
               <md-tab label="Conyuge" *ngIf="cliente.persona_moral === '0' && cliente.regimen_conyugal_persona_fisica === '1'">
                 <div class="p15px">
                   <div class="form-group row">
@@ -422,11 +450,26 @@
                       <input type="text" class="form-control" name="lugar_nacimiento_conyuge" [(ngModel)]="cliente.lugar_nacimiento_conyuge">
                     </div>
                   </div>
-                  <div class="form-group row">
+                  <!--  <div class="form-group row">
                     <label class="col-form-label col-sm-3">Fecha de nacimiento</label>
                     <div class="col-sm-9">
                       <input type="text" class="form-control" name="fecha_nacimiento_conyuge" [(ngModel)]="cliente.fecha_nacimiento_conyuge"
                         date-picker>
+                    </div>
+                  </div> -->
+                  <div class="form-group row">
+                    <label class="col-form-label col-sm-3" for="fecha_nacimiento_conyuge">Fecha de nacimiento</label>
+                    <div class="col-sm-9">
+                      <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #dfechaConyuge="ngbDatepicker"
+                          type="text" name="fecha_nacimiento_conyuge" id="fecha_nacimiento_conyuge" placement="bottom-left"
+                          [(ngModel)]="cliente.fecha_nacimiento_conyuge">
+                        <span class="input-group-btn">
+                          <button class="btn btn-secondary" type="button" (click)="dfechaConyuge.toggle()">                          
+                            <i class="fa fa-calendar"></i>  
+                          </button>                 
+                        </span>
+                      </div>
                     </div>
                   </div>
                   <div class="form-group row">
@@ -450,7 +493,7 @@
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">Código postal</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" name="cp_conyuge" [(ngModel)]="cliente.cp_conyuge">
+                      <input [textMask]="{mask: maskCP}" type="text" class="form-control" name="cp_conyuge" [(ngModel)]="cliente.cp_conyuge">
                     </div>
                   </div>
                   <div class="form-group row">
@@ -462,15 +505,15 @@
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">Teléfono particular</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" name="telefono_conyuge" [(ngModel)]="cliente.telefono_conyuge" ui-mask="(999) 999-9999"
-                        ui-mask-placeholder ui-mask-placeholder-char="_">
+                      <input [textMask]="{mask: maskPhone}" type="text" class="form-control" name="telefono_conyuge" [(ngModel)]="cliente.telefono_conyuge"
+                        ui-mask="(999) 999-9999" ui-mask-placeholder ui-mask-placeholder-char="_">
                     </div>
                   </div>
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">Teléfono celular</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" name="celular_conyuge" [(ngModel)]="cliente.celular_conyuge" ui-mask="(999) 999-9999"
-                        ui-mask-placeholder ui-mask-placeholder-char="_">
+                      <input [textMask]="{mask: maskPhone}" type="text" class="form-control" name="celular_conyuge" [(ngModel)]="cliente.celular_conyuge"
+                        ui-mask="(999) 999-9999" ui-mask-placeholder ui-mask-placeholder-char="_">
                     </div>
                   </div>
                   <div class="form-group row">
@@ -488,15 +531,15 @@
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">RFC</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" name="rfc_conyuge" [(ngModel)]="cliente.rfc_conyuge" ui-mask="****-999999-***"
-                        ui-mask-placeholder ui-mask-placeholder-char="_">
+                      <input [textMask]="{mask: maskRFC}" type="text" class="form-control" name="rfc_conyuge" [(ngModel)]="cliente.rfc_conyuge"
+                        ui-mask="****-999999-***" ui-mask-placeholder ui-mask-placeholder-char="_">
                     </div>
                   </div>
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">CURP</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" name="curp_conyuge" [(ngModel)]="cliente.curp_conyuge" ui-mask="****-999999-A-AA-***-*9"
-                        ui-mask-placeholder ui-mask-placeholder-char="_">
+                      <input [textMask]="{mask: maskCURP}" type="text" class="form-control" name="curp_conyuge" [(ngModel)]="cliente.curp_conyuge"
+                        ui-mask="****-999999-A-AA-***-*9" ui-mask-placeholder ui-mask-placeholder-char="_">
                     </div>
                   </div>
 
@@ -532,7 +575,7 @@
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">C.P.</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" name="df_cp_conyuge" [(ngModel)]="cliente.df_cp_conyuge">
+                      <input [textMask]="{mask: maskCP}" type="text" class="form-control" name="df_cp_conyuge" [(ngModel)]="cliente.df_cp_conyuge">
                     </div>
                   </div>
                   <div class="form-group row">
@@ -578,11 +621,26 @@
                       <input type="text" class="form-control" name="lugar_nacimiento_apoderado" [(ngModel)]="cliente.lugar_nacimiento_apoderado">
                     </div>
                   </div>
-                  <div class="form-group row">
+                  <!--  <div class="form-group row">
                     <label class="col-form-label col-sm-3">Fecha de nacimiento</label>
                     <div class="col-sm-9">
                       <input type="text" class="form-control" name="fecha_nacimiento_apoderado" [(ngModel)]="cliente.fecha_nacimiento_apoderado"
                         date-picker>
+                    </div>
+                  </div> -->
+                  <div class="form-group row">
+                    <label class="col-form-label col-sm-3" for="fecha_nacimiento_apoderado">Fecha de nacimiento</label>
+                    <div class="col-sm-9">
+                      <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #dfechaApoderado="ngbDatepicker"
+                          type="text" name="fecha_nacimiento_apoderado" id="fecha_nacimiento_apoderado" placement="bottom-right"
+                          [(ngModel)]="cliente.fecha_nacimiento_apoderado">
+                        <span class="input-group-btn">
+                          <button class="btn btn-secondary" type="button" (click)="dfechaApoderado.toggle()">                          
+                            <i class="fa fa-calendar"></i>  
+                          </button>                        
+                        </span>
+                      </div>
                     </div>
                   </div>
                   <div class="form-group row">
@@ -606,7 +664,7 @@
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">Código postal</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" name="cp_apoderado" [(ngModel)]="cliente.cp_apoderado">
+                      <input [textMask]="{mask: maskCP}" type="text" class="form-control" name="cp_apoderado" [(ngModel)]="cliente.cp_apoderado">
                     </div>
                   </div>
                   <div class="form-group row">
@@ -618,15 +676,15 @@
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">Teléfono particular</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" name="telefono_apoderado" [(ngModel)]="cliente.telefono_apoderado" ui-mask="(999) 999-9999"
-                        ui-mask-placeholder ui-mask-placeholder-char="_">
+                      <input [textMask]="{mask: maskPhone}" type="text" class="form-control" name="telefono_apoderado" [(ngModel)]="cliente.telefono_apoderado"
+                        ui-mask="(999) 999-9999" ui-mask-placeholder ui-mask-placeholder-char="_">
                     </div>
                   </div>
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">Número de celular</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" name="celular_apoderado" [(ngModel)]="cliente.celular_apoderado" ui-mask="(999) 999-9999"
-                        ui-mask-placeholder ui-mask-placeholder-char="_">
+                      <input [textMask]="{mask: maskPhone}" type="text" class="form-control" name="celular_apoderado" [(ngModel)]="cliente.celular_apoderado"
+                        ui-mask="(999) 999-9999" ui-mask-placeholder ui-mask-placeholder-char="_">
                     </div>
                   </div>
                   <div class="form-group row">
@@ -650,15 +708,15 @@
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">RFC</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" name="rfc_apoderado" [(ngModel)]="cliente.rfc_apoderado" ui-mask="****-999999-***"
-                        ui-mask-placeholder ui-mask-placeholder-char="_">
+                      <input [textMask]="{mask: maskRFC}" type="text" class="form-control" name="rfc_apoderado" [(ngModel)]="cliente.rfc_apoderado"
+                        ui-mask="****-999999-***" ui-mask-placeholder ui-mask-placeholder-char="_">
                     </div>
                   </div>
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">CURP</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" name="curp_apoderado" [(ngModel)]="cliente.curp_apoderado" ui-mask="****-999999-A-AA-***-*9"
-                        ui-mask-placeholder ui-mask-placeholder-char="_">
+                      <input [textMask]="{mask: maskCURP}" type="text" class="form-control" name="curp_apoderado" [(ngModel)]="cliente.curp_apoderado"
+                        ui-mask="****-999999-A-AA-***-*9" ui-mask-placeholder ui-mask-placeholder-char="_">
                     </div>
                   </div>
                 </div>
@@ -675,23 +733,23 @@
                       <thead>
                         <tr>
                           <th>Titular</th>
-                          <th class="text-right">                            
+                          <th class="text-right">
                             <button md-icon-button (click)="agregarDocumento()">
                               <md-icon>add</md-icon>
-                            </button>                            
+                            </button>
                           </th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          <!-- *ngFor"doc in ctrl.documentos| filter:{conyuge:'0'} as docs_titular" -->
+                          <!-- *ngFor"doc in documentos| filter:{conyuge:'0'} as docs_titular" -->
                           <td>
                             <a target="_blank">doc.nombre</a>
                           </td>
                           <td class="text-right">
                             <div class="btn-group-sm pull-right">
-                              <!-- <button type="button" class="btn btn-default btn-sm" (click)="ctrl.pre_updateDocument(doc)"><span class="glyphicon glyphicon-pencil"></span></button>
-                              <button type="button" class="btn btn-default btn-sm" (click)="ctrl.pre_delDocument(doc)"><span class="glyphicon glyphicon-remove"></span></button> -->
+                              <!-- <button type="button" class="btn btn-default btn-sm" (click)="pre_updateDocument(doc)"><span class="glyphicon glyphicon-pencil"></span></button>
+                              <button type="button" class="btn btn-default btn-sm" (click)="pre_delDocument(doc)"><span class="glyphicon glyphicon-remove"></span></button> -->
                               <button md-icon-button [mdMenuTriggerFor]="menu1">
                                 <md-icon>more_vert</md-icon>
                               </button>
@@ -723,23 +781,23 @@
                       <thead>
                         <tr>
                           <th>Cónyuge</th>
-                          <th class="text-right">                            
-                              <button md-icon-button (click)="agregarDocumento()">
+                          <th class="text-right">
+                            <button md-icon-button (click)="agregarDocumento()">
                                 <md-icon>add</md-icon>
-                              </button>                            
-                            </th>
+                              </button>
+                          </th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                          <!-- *ngFor"doc in ctrl.documentos| filter:{conyuge:'1'} as docs_conyuge" -->
+                          <!-- *ngFor"doc in documentos| filter:{conyuge:'1'} as docs_conyuge" -->
                           <td>
                             <a target="_blank">doc.nombre</a>
                           </td>
                           <td class="text-right">
                             <div class="btn-group-sm pull-right">
-                              <!-- <button type="button" class="btn btn-default btn-sm" (click)="ctrl.pre_updateDocument(doc)"><span class="glyphicon glyphicon-pencil"></span></button>
-                              <button type="button" class="btn btn-default btn-sm" (click)="ctrl.pre_delDocument(doc)"><span class="glyphicon glyphicon-remove"></span></button> -->
+                              <!-- <button type="button" class="btn btn-default btn-sm" (click)="pre_updateDocument(doc)"><span class="glyphicon glyphicon-pencil"></span></button>
+                              <button type="button" class="btn btn-default btn-sm" (click)="pre_delDocument(doc)"><span class="glyphicon glyphicon-remove"></span></button> -->
                               <button md-icon-button [mdMenuTriggerFor]="menu2">
                                   <md-icon>more_vert</md-icon>
                                 </button>
@@ -769,6 +827,251 @@
                 </div>
               </md-tab>
 
+              <!-- <Inmueble> -->
+              <md-tab label="Inmueble">
+                <div class="p15px">
+                  <!-- Compras -->
+                  <div class="table-responsive">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th></th>
+                          <th>Lote</th>
+                          <th>Estado</th>
+                          <th>Activación</th>
+                          <th>Cancelación</th>
+                          <th style="width: 267px;"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let compra of compras" (click)="selectCompra(compra, $event)" style="cursor: pointer;" [ngClass]="{'activo':compra.selected}">
+                          <!--<td><input type="radio" name="lote"></td>-->
+                          <td><span [ngClass]="{'glyphicon glyphicon-check':compra.selected, 'glyphicon glyphicon-unchecked': !compra.selected}"></span></td>
+                          <td>{{compra.obra}} - {{compra.manzana}} - <b>{{compra.lote}}</b></td>
+                          <td>{{compra.activo}}</td>
+                          <td>{{compra.fecha_activo}}</td>
+                          <td>{{compra.fecha_cancelacion}}</td>
+                          <td>
+                            <button type="button" class="btn btn-default btn-sm" (click)="cancelarAsociacion(compra, $event)">{{compra.activo}}</button>
+                            <button type="button" class="btn btn-default btn-sm" (click)="pre_eliminarAsociacion(compra, $event)">Eliminar</button>
+                            <button type="button" class="btn btn-default btn-sm" (click)="reporteAsociacion(compra, $event)">Reporte</button>
+                            <button type="button" title="Ir a lote" class="btn btn-default btn-sm" ui-sref="^.ventas_lote({id_lote:compra.id_lote})"><span class="glyphicon glyphicon-home"></span></button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div class="text-center margin-bottom">
+                    <button type="button" class="btn btn-secondary" (click)="nuevaCompra()">Nueva Compra</button>
+                  </div>
+
+                  <br>
+
+
+
+                  <div class="form-group row">
+                    <label class="col-form-label col-sm-3">Estado Lote</label>
+                    <div class="col-sm-9">
+                      <div class="input-group">
+                        <select class="form-control">    <!-- [(ngModel)]='compra_selected.id_estado_venta' -->
+                                            <option *ngFor="let estado of estados" [value]="estado.id_estado_lote">{{estado.descripcion}}</option>                                                 
+                                                        </select>
+                        <div class="input-group-btn">
+                          <button type="button" class="btn btn-secondary" (click)="actualizarEstadoLote(compra_selected)">Actualizar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--    <div class="form-group row">
+                                      <label class="col-form-label col-sm-3">Fecha Estado</label>
+                                      <div class="col-sm-9">
+                                        <span class="form-control">{{compra_selected.fecha_cambio_estado}} </span>
+                                      </div>
+                                    </div> -->
+                  <div class="form-group row">
+                    <label class="col-form-label col-sm-3" for="fecha_estado">Fecha Estado</label>
+                    <div class="col-sm-9">
+                      <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #dfechaEstado="ngbDatepicker"
+                          type="text" name="fecha_estado" id="fecha_estado" placement="bottom-left">
+                        <span class="input-group-btn">
+                          <button class="btn btn-secondary" type="button" (click)="dfechaEstado.toggle()">                         
+                            <i class="fa fa-calendar"></i>
+                          </button>                          
+                       </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label class="col-form-label col-sm-3">Precio de Lista</label>
+                    <div class="col-sm-9">
+                      <!-- <span class="form-control">{{compra_selected.valor_base|currency}} </span> -->
+                      <input [textMask]="{mask: numbermask}" type="text" class="form-control" name="">
+                    </div>
+                  </div>
+
+
+                  <fieldset>
+                    <!-- [disabled]="!compra_selected.id_cliente" -->
+                    <div class="form-group row">
+                      <label class="col-form-label col-sm-3">Proyecto</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" name="proyecto" [(ngModel)]="compra_selected.proyecto">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-form-label col-sm-3">Desarrollador</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" name="desarrollador" [(ngModel)]="compra_selected.desarrollador">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-form-label col-sm-3">Valor de operación</label>
+                      <div class="col-sm-9">
+                        <input [textMask]="{mask: numbermask}" type="text" class="form-control" name="valor_operacion" [(ngModel)]="compra_selected.valor_operacion">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-form-label col-sm-3">Ubicación</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" name="ubicacion" [(ngModel)]="compra_selected.ubicacion">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-form-label col-sm-3">Código postal</label>
+                      <div class="col-sm-9">
+                        <input [textMask]="{mask: maskCP}" type="text" class="form-control" name="cp" [(ngModel)]="compra_selected.cp">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-form-label col-sm-3">Tipo de operación</label>
+                      <div class="col-sm-9">
+                        <select class="form-control" name="id_tipo_operacion" [(ngModel)]="compra_selected.id_tipo_operacion">
+                                                        <option [value]="">Seleccionar...</option>
+                                                        <option *ngFor="let op of tipos_operacion" [value]="op.id_tipo_operacion">{{op.descripcion}}</option>
+                                                    </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group row" *ngIf="compra_selected.id_tipo_operacion === '1'">
+                      <label class="col-form-label col-sm-3">Institución Crédito</label>
+                      <div class="col-sm-9">
+                        <select class="form-control" name="id_institucion_credito" [(ngModel)]="compra_selected.id_institucion_credito">
+                                                        <option [value]="">Seleccionar...</option>
+                                                        <option *ngFor="let inst of instituciones" [value]="inst.id_istituciones_credito">{{Inst.nombre}}</option>
+                                                    </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group row" *ngIf="compra_selected.id_tipo_operacion === '1' && compra_selected.id_institucion_credito === '1'">
+                      <label class="col-form-label col-sm-3">Banco</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" name="banco_credito" [(ngModel)]="compra_selected.banco_credito">
+                      </div>
+                    </div>
+                    <div class="form-group row" *ngIf="compra_selected.id_institucion_credito === '10'">
+                      <label class="col-form-label col-sm-3">Institución</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" name="otra_credito" [(ngModel)]="compra_selected.otra_credito">
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <label class="col-form-label col-sm-3" for="fecha_firma_contrato">Fecha Firma Contrato</label>
+                      <div class="col-sm-9">
+                        <div class="input-group">
+                          <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #dfechaFirma="ngbDatepicker"
+                            type="text" name="fecha_firma_contrato" id="fecha_firma_contrato" placement="bottom-left">
+                          <span class="input-group-btn"> 
+                            <button class="btn btn-secondary" type="button" (click)="dfechaFirma.toggle()">                           
+                              <i class="fa fa-calendar"></i>   
+                            </button>                         
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <label class="col-form-label col-sm-3" for="fecha_entrega">Fecha Entrega Contrato</label>
+                      <div class="col-sm-9">
+                        <div class="input-group">
+                          <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #dfechaEntrega="ngbDatepicker"
+                            type="text" name="fecha_entrega" id="fecha_entrega" placement="bottom-left">
+                          <span class="input-group-btn"> 
+                            <button class="btn btn-secondary" type="button" (click)="dfechaEntrega.toggle()">                           
+                             <i class="fa fa-calendar"></i> 
+                            </button>                          
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <label class="col-form-label col-sm-3">Asesor Inmobiliario</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" name="asesor_inmobiliario" [(ngModel)]="compra_selected.asesor_inmobiliario">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-form-label col-sm-3">Asesor</label>
+                      <div class="col-sm-9">
+                        <select class="form-control" name="id_asesor" [(ngModel)]="compra_selected.id_asesor">
+                                                        <option [value]="">Seleccionar...</option>
+                                                        <option *ngFor="let a of asesores" [value]="a.value">{{a.text}}</option>
+                                                    </select>
+                      </div>
+                    </div>
+                    <div class="form-group row" *ngIf="compra_selected.id_estado_venta === '5'">
+                      <label class="col-form-label col-sm-3">Datos de Firma</label>
+                      <div class="col-sm-9">
+                        <textarea class="form-control" rows="6" name="notas_escrituracion" [(ngModel)]="compra_selected.notas_escrituracion">
+                                                    </textarea>
+                      </div>
+                    </div>
+                    <div class="form-group row" *ngIf="compra_selected.activo === '0'">
+                      <label class="col-form-label col-sm-3">Motivo Cancelación</label>
+                      <div class="col-sm-9">
+                        <textarea class="form-control" rows="4" name="notas_cancelacion" [(ngModel)]="compra_selected.notas_cancelacion"></textarea>
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <label class="col-form-label col-sm-3" for="fecha_entrega_fisica">Fecha Entrega Física</label>
+                      <div class="col-sm-9">
+                        <div class="input-group">
+                          <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #dfechaFisica="ngbDatepicker"
+                            type="text" name="fecha_entrega_fisica" id="fecha_entrega_fisica" placement="bottom-left">
+                          <span class="input-group-btn"> 
+                            <button class="btn btn-secondary" type="button" (click)="dfechaFisica.toggle()">                           
+                              <i class="fa fa-calendar"></i>  
+                            </button>                          
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <label class="col-form-label col-sm-3">Comentarios Entrega Física</label>
+                      <div class="col-sm-9">
+                        <textarea class="form-control" rows="3" name="comentarios_entrega_fisica" [(ngModel)]="compra_selected.comentarios_entrega_fisica">
+                                                    </textarea>
+                      </div>
+                    </div>
+                  </fieldset>
+
+
+                  <div class="row">
+                    <div class="col-sm-9 col-sm-offset-3">
+                      <button type="button" class="btn btn-secondary" (click)="actualizarCompra(compra_selected)">Actualizar Compra</button>
+                    </div>
+                  </div>
+
+
+                </div>
+              </md-tab>
+
               <!-- <Esquema Pagos> -->
               <md-tab label="Esquema Pagos">
                 <div class="p15px">
@@ -786,7 +1089,7 @@
                       </thead>
                       <tbody>
                         <tr>
-                          <!-- *ngFor"compra in ctrl.compras" (click)="ctrl.selectCompra(compra, $event)" style="cursor: pointer;" [ngClass]="{'activo':compra.selected}" -->
+                          <!-- *ngFor"compra in compras" (click)="selectCompra(compra, $event)" style="cursor: pointer;" [ngClass]="{'activo':compra.selected}" -->
                           <td><span></span></td>
                           <!-- [ngClass]="{'glyphicon glyphicon-check':compra.selected, 'glyphicon glyphicon-unchecked': !compra.selected}" -->
                           <td>
@@ -801,9 +1104,9 @@
                             <!-- {{compra.fecha_cancelacion}} -->
                           </td>
                           <td class="text-right">
-                            <!-- <button *ngIf="ctrl.options.get_rol_usuario() !== 8" type="button" class="btn btn-default btn-sm" (click)="ctrl.cancelarAsociacion(compra, $event)">Cancelar</button>                           
-                            <button *ngIf="ctrl.options.get_rol_usuario() !== 8" type="button" class="btn btn-default btn-sm" (click)="ctrl.pre_eliminarAsociacion(compra, $event)">Eliminar</button>                            
-                            <button type="button" class="btn btn-default btn-sm" (click)="ctrl.reporteAsociacion(compra, $event)">Reporte</button> -->
+                            <!-- <button  type="button" class="btn btn-default btn-sm" (click)="cancelarAsociacion(compra, $event)">Cancelar</button>                           
+                            <button  type="button" class="btn btn-default btn-sm" (click)="pre_eliminarAsociacion(compra, $event)">Eliminar</button>                            
+                            <button type="button" class="btn btn-default btn-sm" (click)="reporteAsociacion(compra, $event)">Reporte</button> -->
                             <button md-icon-button [mdMenuTriggerFor]="menu3">
                                 <md-icon>more_vert</md-icon>
                               </button>
@@ -827,9 +1130,8 @@
                     </table>
                   </div>
 
-                  <div>
-                    <!-- *ngIf="ctrl.options.get_rol_usuario() !== 8" -->
-                    <button type="button" class="btn btn-primary" (click)="ctrl.pre_addPago()">Nuevo Pago</button>
+                  <div class="text-center margin-bottom">
+                    <button type="button" class="btn btn-secundary" (click)="nuevoPago()">Nuevo Pago</button>
                   </div>
 
                   <hr>
@@ -851,7 +1153,7 @@
                       </thead>
                       <tbody>
                         <tr>
-                          <!-- *ngFor"pago in ctrl.compra_selected.pagos" -->
+                          <!-- *ngFor"pago in compra_selected.pagos" -->
                           <td>
                             <!-- {{pago.fecha_programada}} -->
                           </td>
@@ -876,9 +1178,9 @@
                           <!-- *ngIf="pago.file_ficha_deposito"  -->
                           <td class="text-right">
                             <div style="width: 110px;">
-                              <!--  <button type="button" class="btn btn-default btn-sm" (click)="ctrl.pre_uploadFicha(pago)"><i class="glyphicon glyphicon-picture"></i></button>
-                              <button type="button" class="btn btn-default btn-sm" (click)="ctrl.pre_updatePago(pago)"><i class="glyphicon glyphicon-pencil"></i></button>
-                              <button type="button" class="btn btn-default btn-sm" (click)="ctrl.pre_eliminarPago(pago)"><i class="glyphicon glyphicon-remove"></i></button> -->
+                              <!--  <button type="button" class="btn btn-default btn-sm" (click)="pre_uploadFicha(pago)"><i class="glyphicon glyphicon-picture"></i></button>
+                              <button type="button" class="btn btn-default btn-sm" (click)="pre_updatePago(pago)"><i class="glyphicon glyphicon-pencil"></i></button>
+                              <button type="button" class="btn btn-default btn-sm" (click)="pre_eliminarPago(pago)"><i class="glyphicon glyphicon-remove"></i></button> -->
                               <button md-icon-button [mdMenuTriggerFor]="menu4">
                                   <md-icon>more_vert</md-icon>
                                 </button>
@@ -887,7 +1189,7 @@
                                     <md-icon>attachment</md-icon>
                                     <span>Ficha</span>
                                 </button>
-                                <button md-menu-item>
+                                <button md-menu-item (click)="editarPago()">
                                     <md-icon>create</md-icon>
                                     <span>Editar</span>
                                 </button>
@@ -907,7 +1209,7 @@
                     <div class="col-xs-12 col-sm-4">
                       <div class="description-block border-right">
                         <h4 class="text-blue">
-                          <!-- {{(ctrl.compra_selected.valor_operacion|| 0)| currency}} -->
+                          <!-- {{(compra_selected.valor_operacion|| 0)| currency}} -->
                         </h4>
                         <span>VALOR OPERACIÓN</span>
                       </div>
@@ -915,7 +1217,7 @@
                     <div class="col-xs-12 col-sm-4">
                       <div class="description-block border-right">
                         <h4 class="text-green">
-                          <!-- {{(ctrl.totalPagosRealizados(ctrl.compra_selected) || 0) | currency}} -->
+                          <!-- {{(totalPagosRealizados(compra_selected) || 0) | currency}} -->
                         </h4>
                         <span>-PAGOS REALIZADOS</span>
                       </div>
@@ -923,7 +1225,7 @@
                     <div class="col-xs-12 col-sm-4">
                       <div class="description-block">
                         <h4 class="text-red">
-                          <!-- {{(ctrl.saldoPendiente(ctrl.compra_selected) || 0) | currency}} -->
+                          <!-- {{(saldoPendiente(compra_selected) || 0) | currency}} -->
                         </h4>
                         <span>=SALDO PENDIENTE</span>
                       </div>
@@ -936,13 +1238,12 @@
               </md-tab>
 
               <!-- <Alerta> -->
-
               <md-tab label="Alerta">
                 <div class="p15px">
                   <div class="form-group">
                     <div class="checkbox col-sm-12">
                       <label>
-                        <input type="checkbox"> Alerta Activada <!-- [(ngModel)]="ctrl.alerta"  -->
+                        <input type="checkbox"> Alerta Activada <!-- [(ngModel)]="alerta"  -->
                       </label>
                     </div>
                   </div>
@@ -950,41 +1251,31 @@
                     <label class="col-sm-12">Mensaje de Alerta</label>
                     <div class="col-sm-12">
                       <input type="text" class="form-control">
-                      <!-- [(ngModel)]="ctrl.original.mensaje_alerta" -->
+                      <!-- [(ngModel)]="original.mensaje_alerta" -->
                     </div>
                   </div>
                   <div class="form-group">
                     <div class="col-sm-12 text-center">
-                      <button type="button" class="btn btn-primary" (click)="ctrl.updateAlertaCliente()">Guardar</button>
+                      <button type="button" class="btn btn-primary" (click)="updateAlertaCliente()">Guardar</button>
                     </div>
                   </div>
                 </div>
               </md-tab>
-
-
-
-
             </md-tab-group>
           </div>
 
 
-
-
-
           <div class="card-footer">
-
             <div class="row">
-              <div class="col-sm-11 ml-sm-auto"> <!-- class="col-sm-9 ml-sm-auto" -->
+              <div class="col-sm-11 ml-sm-auto">
+                <!-- class="col-sm-9 ml-sm-auto" -->
                 <button type="submit" class="btn btn-primary">Guardar</button>
                 <!-- <span *ngIf="formCliente.$submitted && !formCliente.$valid" class="text-danger">  Complete los campos indicados</span> -->
               </div>
             </div>
-
-
           </div>
         </div>
       </form>
-
     </div>
   </div>
 </section>

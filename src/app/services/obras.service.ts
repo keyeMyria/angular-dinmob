@@ -55,11 +55,21 @@ export class ObrasService {
       .catch(this.handleError);
   }
 
-  getManzanasObra(id_obra) {
+  //ok
+  getAcordeonManzanas(id_obra) {
     return this.http.get(this.url + 'get_manzanas_lotes/' + id_obra)
       .map(this.extractData)
       .catch(this.handleError);
   }
+
+  
+  //ok
+  getLotes(id_obra) {
+    return this.http.get(this.url + 'get_lotes/' + id_obra)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
 
   getObrasUsuario(id) {
     return this.http.get(this.url + 'usuario/' + id)
@@ -74,11 +84,7 @@ export class ObrasService {
       .catch(this.handleError);
   }
 
-/*  getInfoAllObras() {
-    return this.http.post(this.url + "obras/get_info")
-      .map(this.extractData)
-      .catch(this.handleError);
-  }*/
+
 
   getInfoConResidentesAllObras() {
     return this.http.get(this.url + "get_info_con_residentes")
@@ -86,11 +92,7 @@ export class ObrasService {
       .catch(this.handleError);
   }
 
-/*  getPrueba() {
-    return this.http.post(this.url + "obras/get_pagos")
-       .map(this.extractData)
-       .catch(this.handleError);
-   }*/
+
 
   getDatosObra(id_obra) {
     return this.http.get(this.url + 'get_datos/' + id_obra)

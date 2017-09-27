@@ -30,6 +30,19 @@ import { AgregarDocumentoDialogoComponent } from "app/components/ventas/agregar-
 import { CrearUsuarioDialogoComponent } from "app/components/admin/crear-usuario-dialogo/crear-usuario-dialogo.component";
 import { AgregarPrototipoDialogoComponent } from "app/components/admin/agregar-prototipo-dialogo/agregar-prototipo-dialogo.component";
 import { CambiarNombrePrototipoDialogoComponent } from "app/components/admin/cambiar-nombre-prototipo-dialogo/cambiar-nombre-prototipo-dialogo.component";
+import { NuevoPagoDialogoComponent } from 'app/components/ventas/nuevo-pago-dialogo/nuevo-pago-dialogo.component';
+import { NuevaCompraDialogoComponent } from 'app/components/ventas/nueva-compra-dialogo/nueva-compra-dialogo.component';
+import { EditarPagoDialogoComponent } from 'app/components/ventas/editar-pago-dialogo/editar-pago-dialogo.component';
+import { EditarPartidaDialogoComponent } from 'app/components/admin/editar-partida-dialogo/editar-partida-dialogo.component';
+import { EditarSubpartidaDialogoComponent } from 'app/components/admin/editar-subpartida-dialogo/editar-subpartida-dialogo.component';
+import { EditarInsumoDialogoComponent } from 'app/components/admin/editar-insumo-dialogo/editar-insumo-dialogo.component';
+import { EditarNombrePrototipoDialogoComponent } from 'app/components/admin/editar-nombre-prototipo-dialogo/editar-nombre-prototipo-dialogo.component';
+import { AgregarPartidaDialogoComponent } from 'app/components/admin/agregar-partida-dialogo/agregar-partida-dialogo.component';
+import { AgregarSubpartidaDialogoComponent } from 'app/components/admin/agregar-subpartida-dialogo/agregar-subpartida-dialogo.component';
+import { AgregarInsumoDialogoComponent } from 'app/components/admin/agregar-insumo-dialogo/agregar-insumo-dialogo.component';
+import { VentasLoteComponent } from 'app/components/ventas/ventas-lote/ventas-lote.component';
+import { ComentarioAvancesDialogoComponent } from 'app/components/residente/comentario-avances-dialogo/comentario-avances-dialogo.component';
+
 
 
 
@@ -46,7 +59,7 @@ export const ROUTES: Routes = [
             { path: 'cliente/:id', component: ClienteComponent },
             { path: 'obras', component: ObrasComponent },
             { path: 'tablero', component: TableroComponent },
-            { path: 'editar-prototipo', component: EditarPrototipoComponent },
+            { path: 'editar-prototipo/:id', component: EditarPrototipoComponent },
             { path: 'estructura-obra', component: EstructuraObraComponent },
             { path: 'prototipos', component: PrototiposComponent },
             { path: 'perfil', component: PerfilComponent },
@@ -64,6 +77,19 @@ export const ROUTES: Routes = [
             { path: 'crear-usuario-dialogo', component: CrearUsuarioDialogoComponent },
             { path: 'agregar-prototipo-dialogo', component: AgregarPrototipoDialogoComponent },
             { path: 'cambiar-nombre-prototipo-dialogo', component: CambiarNombrePrototipoDialogoComponent },
+            { path: 'nuevo-pago-dialogo', component: NuevoPagoDialogoComponent },
+            { path: 'nueva-compra-dialogo', component: NuevaCompraDialogoComponent },
+            { path: 'editar-pago-dialogo', component: EditarPagoDialogoComponent },
+            { path: 'editar-partida-dialogo', component: EditarPartidaDialogoComponent },
+            { path: 'editar-subpartida-dialogo', component:EditarSubpartidaDialogoComponent },
+            { path: 'editar-insumo-dialogo', component: EditarInsumoDialogoComponent },
+            { path: 'editar-nombre-prototipo-dialogo', component: EditarNombrePrototipoDialogoComponent },
+            { path: 'agregar-partida-dialogo', component: AgregarPartidaDialogoComponent },
+            { path: 'agregar-subpartida-dialogo', component: AgregarSubpartidaDialogoComponent },
+            { path: 'agregar-insumo-dialogo', component: AgregarInsumoDialogoComponent },
+            { path: 'ventas/lote', component: VentasLoteComponent },
+            { path: 'comentario-avances-dialogo', component: ComentarioAvancesDialogoComponent },
+            
 
 
 

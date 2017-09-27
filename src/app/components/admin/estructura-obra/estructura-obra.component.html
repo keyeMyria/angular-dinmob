@@ -96,7 +96,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-12 col-sm-12">
                                 <div class="form-group" [ngClass]="{
                                           'has-danger'
@@ -106,7 +106,22 @@
                                         required>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
+                        <div class="row">
+                            <label class="col-form-label col-12 col-sm-12">Fecha Inicio</label>
+                            <div class="col-12 col-sm-12">
+                              <div class="input-group">
+                                <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #dfechaInicio="ngbDatepicker"
+                                  type="text" name="fecha" id="fecha_ini" placement="bottom-left"
+                                  [(ngModel)]="obra.datos.fecha_ini">
+                                <span class="input-group-btn">
+                                  <button class="btn btn-secondary" type="button" (click)="dfechaInicio.toggle()">                          
+                                    <i class="fa fa-calendar"></i>  
+                                  </button>                 
+                                </span>
+                              </div>
+                            </div>
+                          </div>
 
                         <div class="checkbox">
                             <label>
@@ -121,8 +136,8 @@
                                 <div class="form-group">
                                     <label class="col-form-label">Almacenista</label>
                                     <select name="id_almacenista" class="form-control" [(ngModel)]="obra.datos.id_almacenista">
-                                  <option value="">Elegir almacenista</option>
-                                  <option [value]="a.value" *ngFor="let a of almacenistas ">{{a.text}}</option>                                                 
+                                  <option [value]="">Elegir almacenista</option>
+                                  <option [value]="a.value" *ngFor="let a of almacenistas ">{{insumo.insumo}}</option>                                                 
                               </select>
                                 </div>
                             </div>
@@ -255,21 +270,21 @@
                                             'has-danger'
                                             : (manzana_prefijo.invalid && (manzana_prefijo.dirty || manzana_prefijo.touched ))}">
                                 <label class="col-form-label">Prefijo</label>
-                                <input #manzana_prefijo="ngModel" type="text" class="form-control" name="manzana_prefijo" [(ngModel)]="addManzanaOptions.prefijo"
+                                <input [textMask]="{mask: maskPreInFi}" #manzana_prefijo="ngModel" type="text" class="form-control" name="manzana_prefijo" [(ngModel)]="addManzanaOptions.prefijo"
                                     required>
                             </div>
                             <div class="form-group col-6 col-sm-3" [ngClass]="{
                                             'has-danger'
                                             : ( manzana_ini.invalid && (manzana_ini.dirty || manzana_ini.touched ))}">
                                 <label class="col-form-label">Ini</label>
-                                <input #manzana_ini="ngModel" type="number" class="form-control" name="manzana_ini" [(ngModel)]="addManzanaOptions.ini" min="0"
+                                <input [textMask]="{mask: maskPreInFi}" #manzana_ini="ngModel" type="number" class="form-control" name="manzana_ini" [(ngModel)]="addManzanaOptions.ini" min="0"
                                     [required]="addManzanaOptions.by === 'numero'">
                             </div>
                             <div class="form-group col-6 col-sm-3" [ngClass]="{
                                             'has-danger'
                                             : (manzana_fin.invalid && (manzana_fin.dirty || manzana_fin.touched ))}">
                                 <label class="col-form-label">Fin</label>
-                                <input type="number" #manzana_fin="ngModel" class="form-control" name="manzana_fin" [(ngModel)]="addManzanaOptions.fin" min="addManzanaOptions.ini"
+                                <input [textMask]="{mask: maskPreInFi}" type="number" #manzana_fin="ngModel" class="form-control" name="manzana_fin" [(ngModel)]="addManzanaOptions.fin" min="addManzanaOptions.ini"
                                     max="addManzanaOptions.ini+20" [required]="addManzanaOptions.by === 'numero'">
                             </div>
                         </div>
@@ -336,7 +351,7 @@
                                               'has-danger'
                                               : (lote_prefijo.invalid && ( lote_prefijo.dirty || lote_prefijo.touched ))}">
                                 <label class="col-form-label">Prefijo</label>
-                                <input #lote_prefijo="ngModel" type="text" class="form-control" name="lote_prefijo" [(ngModel)]="addLoteOptions.prefijo"
+                                <input [textMask]="{mask: maskPreInFi}" #lote_prefijo="ngModel" type="text" class="form-control" name="lote_prefijo" [(ngModel)]="addLoteOptions.prefijo"
                                     required>
                             </div>
 
@@ -345,7 +360,7 @@
                                               'has-danger'
                                               : (lote_ini.invalid && ( lote_ini.dirty || lote_ini.touched ))}">
                                 <label class="col-form-label">Ini</label>
-                                <input #lote_ini="ngModel" type="number" class="form-control" name="lote_ini" [(ngModel)]="addLoteOptions.ini" min="0" [required]="addLoteOptions.by === 'numero'">
+                                <input [textMask]="{mask: maskPreInFi}" #lote_ini="ngModel" type="number" class="form-control" name="lote_ini" [(ngModel)]="addLoteOptions.ini" min="0" [required]="addLoteOptions.by === 'numero'">
                             </div>
 
 
@@ -354,7 +369,7 @@
                                                   'has-danger'
                                                   : (lote_fin.invalid && ( lote_fin.dirty || lote_fin.touched ))}">
                                 <label class="col-form-label">Fin</label>
-                                <input #lote_fin="ngModel" type="number" class="form-control" name="lote_fin" [(ngModel)]="addLoteOptions.fin" min="addLoteOptions.ini"
+                                <input [textMask]="{mask: maskPreInFi}" #lote_fin="ngModel" type="number" class="form-control" name="lote_fin" [(ngModel)]="addLoteOptions.fin" min="addLoteOptions.ini"
                                     max="addLoteOptions.ini+20" [required]="addLoteOptions.by === 'numero'">
                             </div>
 
