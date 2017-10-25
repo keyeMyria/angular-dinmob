@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from "app/model/usuario";
 import { UsuarioService } from "app/services/usuario.service";
-import { MdDialog, MdDialogRef, MdSnackBar } from "@angular/material";
+import { MatDialog, MatDialogRef, MatSnackBar } from "@angular/material";
 import { CambiarPasswordDialogoComponent } from "app/components/admin/cambiar-password-dialogo/cambiar-password-dialogo.component";
 import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component";
 import { EditarUsuarioDialogoComponent } from "app/components/admin/editar-usuario-dialogo/editar-usuario-dialogo.component";
@@ -19,7 +19,7 @@ export class UsuariosComponent implements OnInit {
   selectedOption: string;
 
 
-  constructor(public dialog: MdDialog, private usuarioSrv: UsuarioService, public snackBar: MdSnackBar) { }
+  constructor(public dialog: MatDialog, private usuarioSrv: UsuarioService, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.loading = true;

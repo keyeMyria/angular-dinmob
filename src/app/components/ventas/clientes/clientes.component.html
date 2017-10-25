@@ -1,7 +1,7 @@
 <div class="container">
 
   <div *ngIf="loading">
-    <md-spinner class="loading"></md-spinner>
+    <mat-spinner class="loading"></mat-spinner>
   </div>
 
   <div class="row">
@@ -23,8 +23,8 @@
             <div class="align-self-center">Lista de clientes</div>
             <div class="spacer"></div>
             <div>
-              <button md-icon-button (click)="agregarCliente()">
-                  <md-icon>add</md-icon>
+              <button mat-icon-button (click)="agregarCliente()">
+                  <mat-icon>add</mat-icon>
               </button>
             </div>
           </div>
@@ -50,19 +50,19 @@
                   <td>lote 0</td>
                   <td>libre</td>
                   <td>
-                    <button md-icon-button [mdMenuTriggerFor]="menu">
-                        <md-icon>more_vert</md-icon>
+                    <button mat-icon-button [matMenuTriggerFor]="menu">
+                        <mat-icon>more_vert</mat-icon>
                       </button>
-                    <md-menu #menu="mdMenu">
-                      <button md-menu-item (click)="editarCliente(cliente)">
-                          <md-icon>create</md-icon>
+                    <mat-menu #menu="matMenu">
+                      <button mat-menu-item (click)="editarCliente(cliente)">
+                          <mat-icon>create</mat-icon>
                           <span>Editar</span>
                         </button>
-                      <button md-menu-item (click)="delCliente(cliente)">
-                          <md-icon>delete</md-icon>
+                      <button mat-menu-item (click)="delCliente(cliente)">
+                          <mat-icon>delete</mat-icon>
                           <span>Eliminar</span>
                         </button>
-                    </md-menu>
+                    </mat-menu>
                   </td>
                 </tr>
 

@@ -1,7 +1,7 @@
 <div class="container">
 
   <div *ngIf="loading">
-    <md-spinner class="loading"></md-spinner>
+    <mat-spinner class="loading"></mat-spinner>
   </div>
   
   <div class="row">
@@ -12,19 +12,19 @@
             <div class="align-self-center">{{prototipo?.info.nombre}}</div>
             <div class="spacer"></div>
             <div>
-              <button md-icon-button [mdMenuTriggerFor]="menu1">
-                    <md-icon>more_vert</md-icon>
+              <button mat-icon-button [matMenuTriggerFor]="menu1">
+                    <mat-icon>more_vert</mat-icon>
               </button>
-              <md-menu #menu1="mdMenu">
-                <button md-menu-item (click)="editarNombre()">
-                    <md-icon>create</md-icon>
+              <mat-menu #menu1="matMenu">
+                <button mat-menu-item (click)="editarNombre()">
+                    <mat-icon>create</mat-icon>
                     <span>Editar Nombre</span>
                   </button>
-                <button md-menu-item (click)="agregarPartida()">
-                    <md-icon>add</md-icon>
+                <button mat-menu-item (click)="agregarPartida()">
+                    <mat-icon>add</mat-icon>
                     <span>Agregar Partida</span>
                   </button>
-              </md-menu>
+              </mat-menu>
             </div>
           </div>
 
@@ -33,65 +33,65 @@
 
 
           <!-- partidas -->
-          <md-accordion [displayMode]="'default'">
+          <mat-accordion [displayMode]="'default'">
 
-            <md-expansion-panel [hideToggle]="true" *ngFor="let partida of prototipo?.partidas">
-              <md-expansion-panel-header>
+            <mat-expansion-panel [hideToggle]="true" *ngFor="let partida of prototipo?.partidas">
+              <mat-expansion-panel-header>
                 <span class="font-weight-bold">{{partida.codigo}}</span>
                 <span>{{partida.nombre}}</span>
                 <div class="spacer"></div>
                 <div class="collapse-header-btns">
-                  <button md-icon-button [mdMenuTriggerFor]="menu2" (click)="$event.stopPropagation()">
-                          <md-icon>more_vert</md-icon>
+                  <button mat-icon-button [matMenuTriggerFor]="menu2" (click)="$event.stopPropagation()">
+                          <mat-icon>more_vert</mat-icon>
                     </button>
-                  <md-menu #menu2="mdMenu">
-                    <button md-menu-item (click)="editarPartida(partida)">
-                        <md-icon>create</md-icon>
+                  <mat-menu #menu2="matMenu">
+                    <button mat-menu-item (click)="editarPartida(partida)">
+                        <mat-icon>create</mat-icon>
                         <span>Editar</span>
                       </button>
-                    <button md-menu-item (click)="agregarSubpartida()">
-                       <md-icon>add</md-icon>
+                    <button mat-menu-item (click)="agregarSubpartida()">
+                       <mat-icon>add</mat-icon>
                        <span>Agregar Subpartida</span>
                       </button>
-                    <button md-menu-item>
-                        <md-icon>delete</md-icon>
+                    <button mat-menu-item>
+                        <mat-icon>delete</mat-icon>
                         <span>Eliminar</span>
                       </button>
-                  </md-menu>
+                  </mat-menu>
                   <span class="badge badge-pill badge-primary" *ngIf="partida.subpartidas.length>0">{{partida.subpartidas.length}}</span>
                   <span class="badge badge-pill badge-primary" *ngIf="partida.insumos.length>0">{{partida.insumos.length}}</span>
                 </div>
-              </md-expansion-panel-header>
+              </mat-expansion-panel-header>
 
 
               <!-- subpartidas -->
-              <md-accordion [displayMode]="'default'" *ngIf="partida.subpartidas.length>0">
-                <md-expansion-panel [hideToggle]="true" *ngFor="let subpartida of partida.subpartidas">
-                  <md-expansion-panel-header>
+              <mat-accordion [displayMode]="'default'" *ngIf="partida.subpartidas.length>0">
+                <mat-expansion-panel [hideToggle]="true" *ngFor="let subpartida of partida.subpartidas">
+                  <mat-expansion-panel-header>
                     <span class="font-weight-bold">{{subpartida.codigo}}</span>
                     <span>{{subpartida.nombre}}</span>
                     <div class="spacer"></div>
                     <div class="collapse-header-btns">
-                      <button md-icon-button [mdMenuTriggerFor]="menu3" (click)="$event.stopPropagation()">
-                          <md-icon>more_vert</md-icon>
+                      <button mat-icon-button [matMenuTriggerFor]="menu3" (click)="$event.stopPropagation()">
+                          <mat-icon>more_vert</mat-icon>
                         </button>
-                      <md-menu #menu3="mdMenu">
-                        <button md-menu-item (click)="editarSubpartida(subpartida)">
-                            <md-icon>create</md-icon>
+                      <mat-menu #menu3="matMenu">
+                        <button mat-menu-item (click)="editarSubpartida(subpartida)">
+                            <mat-icon>create</mat-icon>
                             <span>Editar</span>
                           </button>
-                        <button md-menu-item (click)="agregarInsumo()">
-                            <md-icon>add</md-icon>
+                        <button mat-menu-item (click)="agregarInsumo()">
+                            <mat-icon>add</mat-icon>
                             <span>Agregar Insumo</span>
                           </button>
-                        <button md-menu-item>
-                            <md-icon>delete</md-icon>
+                        <button mat-menu-item>
+                            <mat-icon>delete</mat-icon>
                             <span>Eliminar</span>
                           </button>
-                      </md-menu>
+                      </mat-menu>
                       <span class="badge badge-pill badge-primary">{{subpartida.insumos.length}}</span>
                     </div>
-                  </md-expansion-panel-header>
+                  </mat-expansion-panel-header>
 
                   <!-- insumos -->
                   <div class="table-responsive">
@@ -118,26 +118,26 @@
                           <td class="text-right">{{insumo.cantidad}}</td>
                           <td class="text-right">{{insumo.precio|currency:symbolDisplay:true}}</td>
                           <th>
-                            <button md-icon-button [mdMenuTriggerFor]="menu4" (click)="$event.stopPropagation()">
-                                <md-icon>more_vert</md-icon>
+                            <button mat-icon-button [matMenuTriggerFor]="menu4" (click)="$event.stopPropagation()">
+                                <mat-icon>more_vert</mat-icon>
                               </button>
-                            <md-menu #menu4="mdMenu">
-                              <button md-menu-item (click)="editarInsumo(insumo)">
-                                  <md-icon>create</md-icon>
+                            <mat-menu #menu4="matMenu">
+                              <button mat-menu-item (click)="editarInsumo(insumo)">
+                                  <mat-icon>create</mat-icon>
                                   <span>Editar</span>
                                 </button>
-                              <button md-menu-item>
-                                  <md-icon>delete</md-icon>
+                              <button mat-menu-item>
+                                  <mat-icon>delete</mat-icon>
                                   <span>Eliminar</span>
                                 </button>
-                            </md-menu>
+                            </mat-menu>
                           </th>
                         </tr>
                       </tbody>
                     </table>
                   </div>
-                </md-expansion-panel>
-              </md-accordion>
+                </mat-expansion-panel>
+              </mat-accordion>
 
               <!-- insumos -->
               <div class="table-responsive" *ngIf="partida.insumos.length>0">
@@ -164,19 +164,19 @@
                       <td class="text-right">{{insumo.cantidad}}</td>
                       <td class="text-right">{{insumo.precio}}</td>
                       <th>
-                        <button md-icon-button [mdMenuTriggerFor]="menu4" (click)="$event.stopPropagation()">
-                              <md-icon>more_vert</md-icon>
+                        <button mat-icon-button [matMenuTriggerFor]="menu4" (click)="$event.stopPropagation()">
+                              <mat-icon>more_vert</mat-icon>
                             </button>
-                        <md-menu #menu4="mdMenu">
-                          <button md-menu-item (click)="editarInsumo(insumo)">
-                                <md-icon>create</md-icon>
+                        <mat-menu #menu4="matMenu">
+                          <button mat-menu-item (click)="editarInsumo(insumo)">
+                                <mat-icon>create</mat-icon>
                                 <span>Editar</span>
                               </button>
-                          <button md-menu-item>
-                                <md-icon>delete</md-icon>
+                          <button mat-menu-item>
+                                <mat-icon>delete</mat-icon>
                                 <span>Eliminar</span>
                               </button>
-                        </md-menu>
+                        </mat-menu>
                       </th>
                     </tr>
                   </tbody>
@@ -184,9 +184,9 @@
               </div>
 
 
-            </md-expansion-panel>
+            </mat-expansion-panel>
 
-          </md-accordion>
+          </mat-accordion>
 
 
 

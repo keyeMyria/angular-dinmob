@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
-import { MdDialogRef, MD_DIALOG_DATA } from "@angular/material";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 import { UsuarioService } from "app/services/usuario.service";
 import { NgForm } from "@angular/forms";
 import { Usuario } from "app/model/usuario";
@@ -18,8 +18,8 @@ export class CrearUsuarioDialogoComponent implements OnInit {
 
   constructor(
     private usuarioSrv: UsuarioService,    
-    @Inject(MD_DIALOG_DATA) public data: any,
-    public dialogRef: MdDialogRef<CrearUsuarioDialogoComponent>
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<CrearUsuarioDialogoComponent>
   ) { }
 
   ngOnInit() {

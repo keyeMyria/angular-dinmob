@@ -11,17 +11,17 @@ import { TextMaskModule } from "angular2-text-mask";
 import { AuthModule } from "app/modules/auth.module";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import {
-  MdMenuModule,
-  MdCheckboxModule,
-  MdRadioModule,
-  MdIconModule,
-  MdToolbarModule,
-  MdSidenavModule,
-  MdButtonModule,
-  MdTabsModule,
-  MdListModule,
-  MdExpansionModule,
-  MdSlideToggleModule
+  MatMenuModule,
+  MatCheckboxModule,
+  MatRadioModule,
+  MatIconModule,
+  MatToolbarModule,
+  MatSidenavModule,
+  MatButtonModule,
+  MatTabsModule,
+  MatListModule,
+  MatExpansionModule,
+  MatSlideToggleModule
 } from "@angular/material";
 import "hammerjs";
 
@@ -102,6 +102,7 @@ import { AgregarInsumoDialogoComponent } from './components/admin/agregar-insumo
 
 import { VentasLoteComponent } from './components/ventas/ventas-lote/ventas-lote.component';
 import { ComentarioAvancesDialogoComponent } from './components/residente/comentario-avances-dialogo/comentario-avances-dialogo.component';
+import { ActaEntregaComponent } from './components/ventas/acta-entrega/acta-entrega.component';
 
 
 
@@ -153,6 +154,7 @@ import { ComentarioAvancesDialogoComponent } from './components/residente/coment
     AgregarInsumoDialogoComponent,
     VentasLoteComponent,
     ComentarioAvancesDialogoComponent,
+    ActaEntregaComponent,
     
 
   ],

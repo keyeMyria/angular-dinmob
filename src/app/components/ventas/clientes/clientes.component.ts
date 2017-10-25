@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MdDialog, MdSnackBar } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { EditarClienteComponent } from "app/components/ventas/editar-cliente/editar-cliente.component";
 import { Cliente } from "app/model/cliente";
 import { ClientesService } from "app/services/clientes.service";
@@ -36,8 +36,8 @@ export class ClientesComponent implements OnInit {
     private obraSrv: ObrasService,
     private clienteHlp:ClienteHelperService, 
     private clienteSrv: ClientesService, 
-    public dialog: MdDialog, 
-    public snackBar: MdSnackBar
+    public dialog: MatDialog, 
+    public snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {

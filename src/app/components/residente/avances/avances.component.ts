@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LotesService } from 'app/services/lotes.service';
 import { ComentarioAvancesDialogoComponent } from 'app/components/residente/comentario-avances-dialogo/comentario-avances-dialogo.component';
-import { MdDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { ObrasService } from 'app/services/obras.service';
 
 @Component({
@@ -22,7 +22,7 @@ export class AvancesComponent implements OnInit {
   constructor(
     private obraSrv: ObrasService,
     private loteSrv: LotesService,
-    public dialog: MdDialog
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {

@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MD_DIALOG_DATA, MdDialogRef } from "@angular/material";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 import { Usuario } from "app/model/usuario";
 
 @Component({
@@ -13,8 +13,8 @@ export class EditarUsuarioDialogoComponent implements OnInit {
   roles:any[];
 
   constructor(
-    @Inject(MD_DIALOG_DATA) public data: any,
-    public dialogRef: MdDialogRef<EditarUsuarioDialogoComponent>
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<EditarUsuarioDialogoComponent>
   ) { }
 
   ngOnInit() {

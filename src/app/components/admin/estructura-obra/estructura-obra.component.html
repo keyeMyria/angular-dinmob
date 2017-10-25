@@ -1,6 +1,6 @@
 <section class="container py15px">
     <div class="row">
-        <div class="col-12 col-md-8">
+        <div class="col-12 col-mat-8">
 
             <!-- Seleccionar Obra -->
             <div class="mb-2">
@@ -14,9 +14,9 @@
 
             <h4>{{obra.datos?.nombre|uppercase}}</h4>
 
-            <md-accordion [displayMode]="'default'">
-                <md-expansion-panel [hideToggle]="true" *ngFor="let manzana of obra.manzanas">
-                    <md-expansion-panel-header>
+            <mat-accordion [displayMode]="'default'">
+                <mat-expansion-panel [hideToggle]="true" *ngFor="let manzana of obra.manzanas">
+                    <mat-expansion-panel-header>
                         <span>{{manzana.nombre}}</span>
                         <div class="spacer"></div>
                         <div class="collapse-header-btns">
@@ -24,7 +24,7 @@
                             <i class="fa fa-times"></i>
                             <span class="badge badge-pill badge-primary">5</span>
                         </div>
-                    </md-expansion-panel-header>
+                    </mat-expansion-panel-header>
 
                     <div id="manzana{{manzana.id_manzana}}">
 
@@ -36,7 +36,7 @@
                                                       'fa fa-check-square-o'
                                                       :manzana.selected, 'fa fa-square-o': !manzana.selected}"></span></th>
                                         <th>Lote</th>
-                                        <th class="hidden-xs hidden-sm hidden-md">Código</th>
+                                        <th class="hidden-xs hidden-sm hidden-mat">Código</th>
                                         <th>Prototipo</th>
                                         <th>Base</th>
                                         <th>Ampliación</th>
@@ -53,7 +53,7 @@
                                                       'fa-check-square-o'
                                                       :lote.selected, 'fa-square-o': !lote.selected}"></i></td>
                                         <td>{{ lote.nombre}}</td>
-                                        <td class="hidden-xs hidden-sm hidden-md">{{lote.code}}</td>
+                                        <td class="hidden-xs hidden-sm hidden-mat">{{lote.code}}</td>
                                         <td>
                                             <span *ngFor="let prototipo of lote.prototipos"><a class="link-del-prototipo" (click)="pre_delPrototipo(lote, prototipo, $event)">{{prototipo.nombre}}</a> <br></span>
                                         </td>
@@ -71,18 +71,18 @@
 
                     </div>
 
-                </md-expansion-panel>
-            </md-accordion>
+                </mat-expansion-panel>
+            </mat-accordion>
 
 
         </div>
 
-        <div class="col-12 col-md-4">
+        <div class="col-12 col-mat-4">
             <!-- Datos Obra -->
-            <md-expansion-panel>
-                <md-expansion-panel-header class="bg-info text-white">
+            <mat-expansion-panel>
+                <mat-expansion-panel-header class="bg-info text-white">
                     Datos Obra
-                </md-expansion-panel-header>
+                </mat-expansion-panel-header>
                 <form name="formDatosObra" id="formDatosObra" (ngSubmit)="obra && !residentesRepetidos() && !controlAlmacenRepetidos() && formDatosObra.$valid && cambiarDatosObra(formDatosObra)"
                     novalidate>
                     <div class="card-block">
@@ -186,18 +186,18 @@
                         <p *ngIf="controlAlmacenRepetidos()" class="text-danger">Tiene algún encargado de almacén repetido</p>
                     </div>
                 </form>
-                <md-action-row>
+                <mat-action-row>
                     <button type="submit" class="btn btn-primary">Guardar</button>
                     <!--  <span *ngIf="formDatosObra.$dirty" class="text-muted"> <i class="fa fa-hand-o-left text-primary"></i> cambios pendientes</span> -->
-                </md-action-row>
+                </mat-action-row>
 
-            </md-expansion-panel>
+            </mat-expansion-panel>
 
             <!-- Agregar Manzanas -->
-            <md-expansion-panel class="mt-3">
-                <md-expansion-panel-header class="bg-info text-white">
+            <mat-expansion-panel class="mt-3">
+                <mat-expansion-panel-header class="bg-info text-white">
                     Agregar Manzanas
-                </md-expansion-panel-header>
+                </mat-expansion-panel-header>
                 <form name="addManzanasForm" (ngSubmit)="obra_selected && obra && addManzanasForm.$valid && addManzana(addManzanasForm)"
                     novalidate>
                     <div class="card-block">
@@ -295,17 +295,17 @@
                         </div>
                     </div>
                 </form>
-                <md-action-row>
+                <mat-action-row>
                     <button type="submit" class="btn btn-primary">Agregar</button>
-                </md-action-row>
+                </mat-action-row>
 
-            </md-expansion-panel>
+            </mat-expansion-panel>
 
             <!-- Agregar Lotes -->
-            <md-expansion-panel class="mt-3">
-                <md-expansion-panel-header class="bg-info text-white">
+            <mat-expansion-panel class="mt-3">
+                <mat-expansion-panel-header class="bg-info text-white">
                     Agregar Lotes
-                </md-expansion-panel-header>
+                </mat-expansion-panel-header>
                 <form name="addLotesForm" (ngSubmit)="addLotesForm.$valid && addLoteManzanaSelected(addLotesForm)" novalidate>
                     <div class="card-block">
                         <div class="row">
@@ -384,17 +384,17 @@
 
                     </div>
                 </form>
-                <md-action-row>
+                <mat-action-row>
                     <button type="submit" class="btn btn-primary">Agregar</button>
-                </md-action-row>
+                </mat-action-row>
 
-            </md-expansion-panel>
+            </mat-expansion-panel>
 
             <!-- Operaciones -->
-            <md-expansion-panel class="mt-3">
-                <md-expansion-panel-header class="bg-info text-white">
+            <mat-expansion-panel class="mt-3">
+                <mat-expansion-panel-header class="bg-info text-white">
                     Operaciones
-                </md-expansion-panel-header>
+                </mat-expansion-panel-header>
                 <form name="formOperaciones" novalidate>
                     <div class="card-blovk">
                         <label class="col-form-label">{{num_lotes_selected()}} lote<span *ngIf="num_lotes !== 1">s</span> seleccionado<span *ngIf="num_lotes !== 1">s</span></label>
@@ -460,7 +460,7 @@
 
                     </div>
                 </form>
-            </md-expansion-panel>
+            </mat-expansion-panel>
 
         </div>
 

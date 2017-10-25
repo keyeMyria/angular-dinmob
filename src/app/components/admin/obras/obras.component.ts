@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ObrasService } from "app/services/obras.service";
-import { MdDialog, MdDialogRef, MD_DIALOG_DATA, MdSnackBar } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { AgregarObraDialogoComponent } from "app/components/admin/agregar-obra-dialogo/agregar-obra-dialogo.component";
 import { Obra } from "app/model/obra";
 import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component";
@@ -15,7 +15,7 @@ export class ObrasComponent implements OnInit {
   loading: boolean;
   obras: any[];
 
-  constructor(private router: Router, private obrasSrv: ObrasService, public dialog: MdDialog, public snackBar: MdSnackBar) { }
+  constructor(private router: Router, private obrasSrv: ObrasService, public dialog: MatDialog, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.obrasSrv.getAllObras()

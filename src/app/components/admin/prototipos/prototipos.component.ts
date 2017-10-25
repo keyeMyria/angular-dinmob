@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ObrasService } from "app/services/obras.service";
 import { AgregarPrototipoDialogoComponent } from "app/components/admin/agregar-prototipo-dialogo/agregar-prototipo-dialogo.component";
-import { MdDialog, MdSnackBar } from "@angular/material";
+import { MatDialog, MatSnackBar } from "@angular/material";
 import { Router } from "@angular/router";
 import { CambiarNombrePrototipoDialogoComponent } from "app/components/admin/cambiar-nombre-prototipo-dialogo/cambiar-nombre-prototipo-dialogo.component";
 import { PrototiposService } from 'app/services/prototipos.service';
@@ -22,7 +22,7 @@ export class PrototiposComponent implements OnInit {
   obras_selected: any = {};
   prototipos:Prototipo[];
 
-  constructor(public snackBar: MdSnackBar, public prototipoSrv: PrototiposService, private obraSrv: ObrasService, public dialog: MdDialog, private router: Router) { }
+  constructor(public snackBar: MatSnackBar, public prototipoSrv: PrototiposService, private obraSrv: ObrasService, public dialog: MatDialog, private router: Router) { }
 
   ngOnInit() {
     this.obraSrv.loadFullObra(58)

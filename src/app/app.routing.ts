@@ -42,6 +42,7 @@ import { AgregarSubpartidaDialogoComponent } from 'app/components/admin/agregar-
 import { AgregarInsumoDialogoComponent } from 'app/components/admin/agregar-insumo-dialogo/agregar-insumo-dialogo.component';
 import { VentasLoteComponent } from 'app/components/ventas/ventas-lote/ventas-lote.component';
 import { ComentarioAvancesDialogoComponent } from 'app/components/residente/comentario-avances-dialogo/comentario-avances-dialogo.component';
+import { ActaEntregaComponent } from 'app/components/ventas/acta-entrega/acta-entrega.component';
 
 
 
@@ -89,6 +90,7 @@ export const ROUTES: Routes = [
             { path: 'agregar-insumo-dialogo', component: AgregarInsumoDialogoComponent },
             { path: 'ventas/lote', component: VentasLoteComponent },
             { path: 'comentario-avances-dialogo', component: ComentarioAvancesDialogoComponent },
+            { path: 'acta-entrega', component: ActaEntregaComponent },
             
 
 

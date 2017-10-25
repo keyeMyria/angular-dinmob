@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MD_DIALOG_DATA, MdDialogRef } from "@angular/material";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 
 @Component({
   selector: 'app-confirmar-borrado-dialogo',
@@ -9,8 +9,8 @@ import { MD_DIALOG_DATA, MdDialogRef } from "@angular/material";
 export class ConfirmarBorradoDialogoComponent implements OnInit {
 
   constructor(
-    @Inject(MD_DIALOG_DATA) public data: any,
-    public dialogRef: MdDialogRef<ConfirmarBorradoDialogoComponent>
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<ConfirmarBorradoDialogoComponent>
   ) { }
 
   ngOnInit() {

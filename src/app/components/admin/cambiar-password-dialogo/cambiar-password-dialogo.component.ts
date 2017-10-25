@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MD_DIALOG_DATA, MdDialogRef } from "@angular/material";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 
 @Component({
   selector: 'app-cambiar-password-dialogo',
@@ -13,8 +13,8 @@ export class CambiarPasswordDialogoComponent implements OnInit {
 
 
   constructor(
-    @Inject(MD_DIALOG_DATA) public data: any,
-    public dialogRef: MdDialogRef<CambiarPasswordDialogoComponent>
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<CambiarPasswordDialogoComponent>
   ) { }
 
   ngOnInit() {

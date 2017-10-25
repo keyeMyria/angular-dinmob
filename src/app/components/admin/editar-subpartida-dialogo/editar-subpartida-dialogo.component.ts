@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Partida } from 'app/model/partida';
-import { MD_DIALOG_DATA, MdDialogRef } from "@angular/material";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 
 @Component({
   selector: 'app-editar-subpartida-dialogo',
@@ -10,8 +10,8 @@ import { MD_DIALOG_DATA, MdDialogRef } from "@angular/material";
 export class EditarSubpartidaDialogoComponent implements OnInit {
 partida:Partida;
 
-  constructor( @Inject(MD_DIALOG_DATA) public data: any,
-  public dialogRef: MdDialogRef<EditarSubpartidaDialogoComponent>) { }
+  constructor( @Inject(MAT_DIALOG_DATA) public data: any,
+  public dialogRef: MatDialogRef<EditarSubpartidaDialogoComponent>) { }
 
   ngOnInit() {
     this.partida=this.data.subpartida;

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Cliente } from "app/model/cliente";
-import { MdDialog, MdSnackBar } from "@angular/material";
+import { MatDialog, MatSnackBar } from "@angular/material";
 import { AgregarDocumentoDialogoComponent } from "app/components/ventas/agregar-documento-dialogo/agregar-documento-dialogo.component";
 import { ActivatedRoute, Router, ParamMap } from "@angular/router";
 import "rxjs/add/operator/switchMap";
@@ -35,8 +35,8 @@ export class EditarClienteComponent implements OnInit {
     private clienteSrv: ClientesService,
     private route: ActivatedRoute,
     private router: Router,
-    public dialog: MdDialog,
-    public snackBar: MdSnackBar
+    public dialog: MatDialog,
+    public snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {

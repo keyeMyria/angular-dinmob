@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
-import { MD_DIALOG_DATA, MdDialogRef } from "@angular/material";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 import { Obra } from "app/model/obra";
 import { NgForm } from "@angular/forms";
 import { ObrasService } from "app/services/obras.service";
@@ -16,8 +16,8 @@ export class AgregarObraDialogoComponent implements OnInit {
 
   constructor(
     private obrasSrv: ObrasService,
-    @Inject(MD_DIALOG_DATA) public data: any,
-    public dialogRef: MdDialogRef<AgregarObraDialogoComponent>
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<AgregarObraDialogoComponent>
   ) { }
 
   ngOnInit() {

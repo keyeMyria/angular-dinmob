@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import { Insumo } from 'app/model/insumo';
-import { MD_DIALOG_DATA, MdDialogRef } from "@angular/material";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 
 
 @Component({
@@ -24,8 +24,8 @@ export class EditarInsumoDialogoComponent implements OnInit {
 
 
   constructor(
-    @Inject(MD_DIALOG_DATA) public data: any,
-    public dialogRef: MdDialogRef<EditarInsumoDialogoComponent>) { }
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<EditarInsumoDialogoComponent>) { }
 
   ngOnInit() {
     this.insumo = this.data.insumo;

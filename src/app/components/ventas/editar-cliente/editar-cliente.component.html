@@ -6,10 +6,10 @@
 
         <div class="card">       
           <div>
-            <md-tab-group>
+            <mat-tab-group>
               <!-- <div class="tab-content"> -->
               <!-- Datos Generales -->
-              <md-tab label="Cliente">
+              <mat-tab label="Cliente">
                 <div class="p15px">
 
                   <!-- Persona Fisica/Moral -->
@@ -360,10 +360,10 @@
 
                   </div>
                 </div>
-              </md-tab>
+              </mat-tab>
 
               <!-- Datos Laborales -->
-              <md-tab label="Datos laborales" *ngIf="cliente.persona_moral === '0'">
+              <mat-tab label="Datos laborales" *ngIf="cliente.persona_moral === '0'">
                 <div class="p15px">
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">Profesión</label>
@@ -427,10 +427,10 @@
                     </div>
                   </div>
                 </div>
-              </md-tab>
+              </mat-tab>
 
               <!-- Conyuge -->
-              <md-tab label="Conyuge" *ngIf="cliente.persona_moral === '0' && cliente.regimen_conyugal_persona_fisica === '1'">
+              <mat-tab label="Conyuge" *ngIf="cliente.persona_moral === '0' && cliente.regimen_conyugal_persona_fisica === '1'">
                 <div class="p15px">
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">Nombre completo</label>
@@ -598,10 +598,10 @@
                   </div>
 
                 </div>
-              </md-tab>
+              </mat-tab>
 
               <!-- Apoderado Legal -->
-              <md-tab label="Apoderado" *ngIf="cliente.persona_moral === '1'">
+              <mat-tab label="Apoderado" *ngIf="cliente.persona_moral === '1'">
                 <div class="p15px">
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">Nombre completo</label>
@@ -720,10 +720,10 @@
                     </div>
                   </div>
                 </div>
-              </md-tab>
+              </mat-tab>
 
               <!-- <Documentos> -->
-              <md-tab label="Documentos">
+              <mat-tab label="Documentos">
                 <div class="p15px">
 
 
@@ -734,8 +734,8 @@
                         <tr>
                           <th>Titular</th>
                           <th class="text-right">
-                            <button md-icon-button (click)="agregarDocumento()">
-                              <md-icon>add</md-icon>
+                            <button mat-icon-button (click)="agregarDocumento()">
+                              <mat-icon>add</mat-icon>
                             </button>
                           </th>
                         </tr>
@@ -750,19 +750,19 @@
                             <div class="btn-group-sm pull-right">
                               <!-- <button type="button" class="btn btn-default btn-sm" (click)="pre_updateDocument(doc)"><span class="glyphicon glyphicon-pencil"></span></button>
                               <button type="button" class="btn btn-default btn-sm" (click)="pre_delDocument(doc)"><span class="glyphicon glyphicon-remove"></span></button> -->
-                              <button md-icon-button [mdMenuTriggerFor]="menu1">
-                                <md-icon>more_vert</md-icon>
+                              <button mat-icon-button [matMenuTriggerFor]="menu1">
+                                <mat-icon>more_vert</mat-icon>
                               </button>
-                              <md-menu #menu1="mdMenu">
-                                <button md-menu-item>
-                                    <md-icon>create</md-icon>
+                              <mat-menu #menu1="matMenu">
+                                <button mat-menu-item>
+                                    <mat-icon>create</mat-icon>
                                     <span>Editar</span>
                                 </button>
-                                <button md-menu-item>
-                                    <md-icon>delete</md-icon>
+                                <button mat-menu-item>
+                                    <mat-icon>delete</mat-icon>
                                     <span>Eliminar</span>
                                 </button>
-                              </md-menu>
+                              </mat-menu>
                             </div>
                           </td>
                         </tr>
@@ -782,8 +782,8 @@
                         <tr>
                           <th>Cónyuge</th>
                           <th class="text-right">
-                            <button md-icon-button (click)="agregarDocumento()">
-                                <md-icon>add</md-icon>
+                            <button mat-icon-button (click)="agregarDocumento()">
+                                <mat-icon>add</mat-icon>
                               </button>
                           </th>
                         </tr>
@@ -798,19 +798,19 @@
                             <div class="btn-group-sm pull-right">
                               <!-- <button type="button" class="btn btn-default btn-sm" (click)="pre_updateDocument(doc)"><span class="glyphicon glyphicon-pencil"></span></button>
                               <button type="button" class="btn btn-default btn-sm" (click)="pre_delDocument(doc)"><span class="glyphicon glyphicon-remove"></span></button> -->
-                              <button md-icon-button [mdMenuTriggerFor]="menu2">
-                                  <md-icon>more_vert</md-icon>
+                              <button mat-icon-button [matMenuTriggerFor]="menu2">
+                                  <mat-icon>more_vert</mat-icon>
                                 </button>
-                              <md-menu #menu2="mdMenu">
-                                <button md-menu-item>
-                                    <md-icon>create</md-icon>
+                              <mat-menu #menu2="matMenu">
+                                <button mat-menu-item>
+                                    <mat-icon>create</mat-icon>
                                     <span>Editar</span>
                                 </button>
-                                <button md-menu-item>
-                                    <md-icon>delete</md-icon>
+                                <button mat-menu-item>
+                                    <mat-icon>delete</mat-icon>
                                     <span>Eliminar</span>
                                 </button>
-                              </md-menu>
+                              </mat-menu>
                             </div>
                           </td>
                         </tr>
@@ -825,10 +825,10 @@
 
 
                 </div>
-              </md-tab>
+              </mat-tab>
 
               <!-- <Inmueble> -->
-              <md-tab label="Inmueble">
+              <mat-tab label="Inmueble">
                 <div class="p15px">
                   <!-- Compras -->
                   <div class="table-responsive">
@@ -1070,10 +1070,10 @@
 
 
                 </div>
-              </md-tab>
+              </mat-tab>
 
               <!-- <Esquema Pagos> -->
-              <md-tab label="Esquema Pagos">
+              <mat-tab label="Esquema Pagos">
                 <div class="p15px">
                   <div class="table-responsive">
                     <table class="table table-striped">
@@ -1107,23 +1107,23 @@
                             <!-- <button  type="button" class="btn btn-default btn-sm" (click)="cancelarAsociacion(compra, $event)">Cancelar</button>                           
                             <button  type="button" class="btn btn-default btn-sm" (click)="pre_eliminarAsociacion(compra, $event)">Eliminar</button>                            
                             <button type="button" class="btn btn-default btn-sm" (click)="reporteAsociacion(compra, $event)">Reporte</button> -->
-                            <button md-icon-button [mdMenuTriggerFor]="menu3">
-                                <md-icon>more_vert</md-icon>
+                            <button mat-icon-button [matMenuTriggerFor]="menu3">
+                                <mat-icon>more_vert</mat-icon>
                               </button>
-                            <md-menu #menu3="mdMenu">
-                              <button md-menu-item>
-                                  <md-icon>cancel</md-icon>
+                            <mat-menu #menu3="matMenu">
+                              <button mat-menu-item>
+                                  <mat-icon>cancel</mat-icon>
                                   <span>Cancelar</span>
                               </button>
-                              <button md-menu-item>
-                                  <md-icon>delete</md-icon>
+                              <button mat-menu-item>
+                                  <mat-icon>delete</mat-icon>
                                   <span>Eliminar</span>
                               </button>
-                              <button md-menu-item>
-                                  <md-icon>report</md-icon>
+                              <button mat-menu-item>
+                                  <mat-icon>report</mat-icon>
                                   <span>Reporte</span>
                               </button>
-                            </md-menu>
+                            </mat-menu>
                           </td>
                         </tr>
                       </tbody>
@@ -1181,23 +1181,23 @@
                               <!--  <button type="button" class="btn btn-default btn-sm" (click)="pre_uploadFicha(pago)"><i class="glyphicon glyphicon-picture"></i></button>
                               <button type="button" class="btn btn-default btn-sm" (click)="pre_updatePago(pago)"><i class="glyphicon glyphicon-pencil"></i></button>
                               <button type="button" class="btn btn-default btn-sm" (click)="pre_eliminarPago(pago)"><i class="glyphicon glyphicon-remove"></i></button> -->
-                              <button md-icon-button [mdMenuTriggerFor]="menu4">
-                                  <md-icon>more_vert</md-icon>
+                              <button mat-icon-button [matMenuTriggerFor]="menu4">
+                                  <mat-icon>more_vert</mat-icon>
                                 </button>
-                              <md-menu #menu4="mdMenu">
-                                <button md-menu-item>
-                                    <md-icon>attachment</md-icon>
+                              <mat-menu #menu4="matMenu">
+                                <button mat-menu-item>
+                                    <mat-icon>attachment</mat-icon>
                                     <span>Ficha</span>
                                 </button>
-                                <button md-menu-item (click)="editarPago()">
-                                    <md-icon>create</md-icon>
+                                <button mat-menu-item (click)="editarPago()">
+                                    <mat-icon>create</mat-icon>
                                     <span>Editar</span>
                                 </button>
-                                <button md-menu-item>
-                                    <md-icon>delete</md-icon>
+                                <button mat-menu-item>
+                                    <mat-icon>delete</mat-icon>
                                     <span>Eliminar</span>
                                 </button>
-                              </md-menu>
+                              </mat-menu>
                             </div>
                           </td>
                         </tr>
@@ -1235,10 +1235,10 @@
 
 
                 </div>
-              </md-tab>
+              </mat-tab>
 
               <!-- <Alerta> -->
-              <md-tab label="Alerta">
+              <mat-tab label="Alerta">
                 <div class="p15px">
                   <div class="form-group">
                     <div class="checkbox col-sm-12">
@@ -1260,8 +1260,8 @@
                     </div>
                   </div>
                 </div>
-              </md-tab>
-            </md-tab-group>
+              </mat-tab>
+            </mat-tab-group>
           </div>
 
 
