@@ -3,7 +3,8 @@
     <div class="col-12">
       <div class="card my-3">
         <div class="card-body">
-          <h4 class="card-title text-center">Acta de entrega de la casa tipo III</h4>
+          <!-- <h4 class="card-title text-center">Acta de entrega de la casa tipo III</h4> -->
+          <h4 class="card-title text-center">{{acta.titulo}}</h4>
 
           <form>
             <div class="form-group">
@@ -18,11 +19,12 @@
             a base de block hueco 12x20x40, techo de loza de entrepiso y azotea de vigueta y bovedilla de poliestileno, patio
             de servicio con jardín interior, cocheras con huellas de concreto de 0.50x0.80 mts:
           </p>
-          
+
           <form>
             <div class="row">
               <div class="col-6 checkbox-group">
-                <mat-checkbox>Sala</mat-checkbox>
+                <mat-checkbox *ngFor="let area of areas">{{area.nombre}}</mat-checkbox>
+                <!--       <mat-checkbox>Sala</mat-checkbox>
                 <mat-checkbox>Baño de visitas</mat-checkbox>
                 <mat-checkbox>Área de alacena</mat-checkbox>
                 <mat-checkbox>Patio de servicio</mat-checkbox>
@@ -31,9 +33,9 @@
                 <mat-checkbox>Cochera descubierta</mat-checkbox>
                 <mat-checkbox>Recámara 4 con vestidor</mat-checkbox>
                 <mat-checkbox>Baño de servicio</mat-checkbox>
-                <mat-checkbox>Comedor</mat-checkbox>
+                <mat-checkbox>Comedor</mat-checkbox> -->
               </div>
-              <div class="col-6 checkbox-group">                
+              <!--        <div class="col-6 checkbox-group">                
                 <mat-checkbox>Cocina integral</mat-checkbox>
                 <mat-checkbox>Bodega pequeña</mat-checkbox>
                 <mat-checkbox>Recámara principal</mat-checkbox>
@@ -43,7 +45,7 @@
                 <mat-checkbox>Estudio</mat-checkbox>
                 <mat-checkbox>Baño en Recámara 4</mat-checkbox>
                 <mat-checkbox>Cuarto de servicio</mat-checkbox>
-              </div>
+              </div> -->
             </div>
           </form>
 
@@ -52,22 +54,23 @@
           <form>
             <div class="row my-3">
               <div class="col-6 checkbox-group">
-                <mat-checkbox>Bomba de presurización</mat-checkbox>
+                <mat-checkbox *ngFor="let equipo of equipamiento">{{equipo.nombre}}</mat-checkbox>
+                <!-- <mat-checkbox>Bomba de presurización</mat-checkbox>
                 <mat-checkbox>Cisterna de 5,000 lts</mat-checkbox>
                 <mat-checkbox>Calentador automático</mat-checkbox>
                 <mat-checkbox>Lavadero en cuarto de servicio</mat-checkbox>
                 <mat-checkbox>Llaves</mat-checkbox>
                 <mat-checkbox>Muebles y accesorios en baños</mat-checkbox>
-                <mat-checkbox>Tanque estacionario de 180 lbs</mat-checkbox>
+                <mat-checkbox>Tanque estacionario de 180 lbs</mat-checkbox> -->
               </div>
-              <div class="col-6 checkbox-group">
+              <!-- <div class="col-6 checkbox-group">
                 <mat-checkbox>Vestidor Recámara principal</mat-checkbox>
                 <mat-checkbox>Closets Recámara No 2</mat-checkbox>
                 <mat-checkbox>Closets Recámara No 3</mat-checkbox>
                 <mat-checkbox>Closets Recámara No 4</mat-checkbox>
                 <mat-checkbox>Campana y Estufa</mat-checkbox>
                 <mat-checkbox>Muebles de blancos</mat-checkbox>
-              </div>
+              </div> -->
             </div>
           </form>
 
@@ -92,9 +95,12 @@
             En caso de vicios ocultos cuenta con un año de garantía.
           </p>
 
-          <div class="text-muted">
+          <!--  <div class="text-muted">
             **Vicios ocultos se consideran grietas, humedades, desprendimiento de recubrimientos, problemas estructurales,
             fallas en instalaciones hidráulicas y eléctricas exclusivamente de las áreas construidas
+          </div> -->
+          <div class="text-muted">
+            {{acta.pie_pagina}}
           </div>
         </div>
       </div>

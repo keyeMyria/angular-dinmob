@@ -40,6 +40,7 @@ import { LotesService } from 'app/services/lotes.service';
 import { PrototiposService } from 'app/services/prototipos.service';
 import { UsuarioService } from "app/services/usuario.service";
 import { AuthService } from "app/services/auth.service";
+import { ActaEntregaService } from 'app/services/acta-entrega.service';
 
 //import { MaterializeModule } from "angular2-materialize";
 
@@ -104,6 +105,11 @@ import { VentasLoteComponent } from './components/ventas/ventas-lote/ventas-lote
 import { ComentarioAvancesDialogoComponent } from './components/residente/comentario-avances-dialogo/comentario-avances-dialogo.component';
 import { ActaEntregaComponent } from './components/ventas/acta-entrega/acta-entrega.component';
 import { CrearActaEntregaComponent } from './components/ventas/crear-acta-entrega/crear-acta-entrega.component';
+import { ActasEntregaComponent } from './components/ventas/actas-entrega/actas-entrega.component';
+import { EditarActaEntregaComponent } from './components/ventas/editar-acta-entrega/editar-acta-entrega.component';
+
+
+
 
 
 
@@ -157,6 +163,9 @@ import { CrearActaEntregaComponent } from './components/ventas/crear-acta-entreg
     ComentarioAvancesDialogoComponent,
     ActaEntregaComponent,
     CrearActaEntregaComponent,
+    ActasEntregaComponent,
+    EditarActaEntregaComponent,
+
     
 
   ],
@@ -215,7 +224,8 @@ import { CrearActaEntregaComponent } from './components/ventas/crear-acta-entreg
     UsuarioService,
     MapasService,
     PrototiposService,
-    LotesService
+    LotesService,
+    ActaEntregaService
   ],
   bootstrap: [AppComponent]
 })
