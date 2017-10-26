@@ -103,6 +103,7 @@ import { AgregarInsumoDialogoComponent } from './components/admin/agregar-insumo
 import { VentasLoteComponent } from './components/ventas/ventas-lote/ventas-lote.component';
 import { ComentarioAvancesDialogoComponent } from './components/residente/comentario-avances-dialogo/comentario-avances-dialogo.component';
 import { ActaEntregaComponent } from './components/ventas/acta-entrega/acta-entrega.component';
+import { CrearActaEntregaComponent } from './components/ventas/crear-acta-entrega/crear-acta-entrega.component';
 
 
 
@@ -155,6 +156,7 @@ import { ActaEntregaComponent } from './components/ventas/acta-entrega/acta-entr
     VentasLoteComponent,
     ComentarioAvancesDialogoComponent,
     ActaEntregaComponent,
+    CrearActaEntregaComponent,
     
 
   ],
