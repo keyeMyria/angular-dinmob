@@ -4,7 +4,7 @@ import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class PrototiposService {
-   url: string = "http://localhost:8080/dinmob/api/index.php/prototipos/";
+  url: string = "http://localhost:8080/dinmob/api/index.php/prototipos/";
 
   constructor(private http: Http) { }
 
@@ -15,11 +15,11 @@ export class PrototiposService {
       .catch(this.handleError);
   }
 
-  /* getPrototipos(id_obra) {
-    return this.http.get(this.url + id_obra)
+  getPrototiposObra(id_obra) {
+    return this.http.get(this.url + "get_prototipos_obra/" + id_obra)
       .map(this.extractData)
       .catch(this.handleError);
-  } */
+  }
 
   getPrototipo(id_prototipo) {
     return this.http.get(this.url + 'get_prototipo/' + id_prototipo)
@@ -27,7 +27,7 @@ export class PrototiposService {
       .catch(this.handleError);
   }
 
-    private extractData(res: Response) {
+  private extractData(res: Response) {
     //console.log("response", res);
     let body = res.json();
     console.log("response.json", body);

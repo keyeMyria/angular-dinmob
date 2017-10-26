@@ -20,9 +20,15 @@ export class PrototiposComponent implements OnInit {
     datos: {}
   };
   obras_selected: any = {};
-  prototipos:Prototipo[];
+  prototipos: Prototipo[];
 
-  constructor(public snackBar: MatSnackBar, public prototipoSrv: PrototiposService, private obraSrv: ObrasService, public dialog: MatDialog, private router: Router) { }
+  constructor(
+    public snackBar: MatSnackBar,
+    public prototipoSrv: PrototiposService,
+    private obraSrv: ObrasService,
+    public dialog: MatDialog,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.obraSrv.loadFullObra(58)
@@ -36,14 +42,25 @@ export class PrototiposComponent implements OnInit {
         this.obras = response;
       });
 
-      this.loading = true;
-      this.prototipoSrv.getPrototipos()
+    this.loading = true;
+    this.prototipoSrv.getPrototipos()
       .subscribe(res => {
         this.prototipos = res;
         this.loading = false;
-        
+
       });
 
+
+  }
+
+  cargarObra(id_obra) {
+
+    if (id_obra) {
+      this.prototipoSrv.getPrototiposObra(id_obra)
+        .subscribe(res => {
+          this.prototipos = res;
+        });
+    }
 
   }
 
@@ -59,7 +76,7 @@ export class PrototiposComponent implements OnInit {
   }
 
   editarPrototipo(prototipo) {
-    this.router.navigate(["/editar-prototipo",prototipo.id_prototipo]);
+    this.router.navigate(["/editar-prototipo", prototipo.id_prototipo]);
   }
 
   cambiarNombre() {

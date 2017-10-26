@@ -17,13 +17,13 @@ import { Router } from '@angular/router';
 
 })
 export class DesarrollosComponent implements OnInit {
- 
+
   obras: any = [];
   obra: any = {
     datos: {}
   };
-  obra_selected: any = {};
- 
+  obra_selected: number;
+
   constructor(
     private obraSrv: ObrasService,
     private router: Router
@@ -34,21 +34,32 @@ export class DesarrollosComponent implements OnInit {
   ngOnInit() {
 
     this.obraSrv.getLotes(58)
-    .subscribe(response => {
-      this.obra = response;
-      console.log("obra", this.obra);
-    });
+      .subscribe(response => {
+        this.obra = response;
+        this.obra_selected = 58;
+      });
 
     this.obraSrv.getObrasUsuario(18)
-    .subscribe(response => {
-      this.obras = response;
-    }); 
+      .subscribe(response => {
+        this.obras = response;
+      });
 
-    
+
   }
 
   ventasLote() {
     this.router.navigate(["/ventas/lote"]);
+  }
+
+  cargarObra(id_obra) {
+
+    if (id_obra) {
+      this.obraSrv.getLotes(id_obra)
+        .subscribe(response => {
+          this.obra = response;
+        });
+    }
+
   }
 
 }

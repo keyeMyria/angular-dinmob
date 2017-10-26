@@ -21,6 +21,12 @@ export class ClientesService {
       .catch(this.handleError);
   }
 
+  getClientesObra(id_obra) {
+    return this.http.get(this.url + "get_clientes_obra/" + id_obra)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
   getCliente(id_cliente): Observable<Cliente> {
     return this.http.get(this.url + 'get_cliente/' + id_cliente)
       .map(this.extractData)

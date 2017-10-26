@@ -18,8 +18,8 @@ import { ClienteHelperService } from 'app/utils/cliente-helper.service';
 
 export class ClientesComponent implements OnInit {
 
- 
-  usuario:Usuario;
+
+  usuario: Usuario;
   loading: boolean;
   clientes: Cliente[];
   obras: any = [];
@@ -31,118 +31,130 @@ export class ClientesComponent implements OnInit {
 
 
   constructor(
-    private router: Router, 
-    private auth:AuthService,
+    private router: Router,
+    private auth: AuthService,
     private obraSrv: ObrasService,
-    private clienteHlp:ClienteHelperService, 
-    private clienteSrv: ClientesService, 
-    public dialog: MatDialog, 
+    private clienteHlp: ClienteHelperService,
+    private clienteSrv: ClientesService,
+    public dialog: MatDialog,
     public snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
-        
-    this.usuario=this.auth.getUsuario();
+
+    this.usuario = this.auth.getUsuario();
 
     this.loading = true;
     this.clienteSrv.getClientes()
       .subscribe(res => {
         this.clientes = res;
         this.loading = false;
-      });   
+      });
 
-      this.obraSrv.getObrasUsuario(this.usuario.id_usuario)
+    this.obraSrv.getObrasUsuario(this.usuario.id_usuario)
       .subscribe(response => {
         this.obras = response;
       });
-    
+
   }
 
   editarCliente(cliente) {
-    this.router.navigate(["/editar-cliente",cliente.id_cliente]);
+    this.router.navigate(["/editar-cliente", cliente.id_cliente]);
   }
 
   agregarCliente(cliente) {
     this.router.navigate(["/nuevo-cliente"]);
   }
 
- /*  editarCliente(cliente: Cliente) {
-    
-    
-        let copia = Cliente.copiar(cliente);
-    
-        let dialogRef = this.dialog.open(EditarClienteDialogoComponent, {
-          data: { cliente: copia }
+
+  cargarObra(id_obra) {
+
+    if (id_obra) {
+      this.clienteSrv.getClientesObra(id_obra)
+        .subscribe(response => {
+          this.clientes = response;
         });
-    
-        dialogRef.afterClosed().subscribe(result => {
-    
-          if (result === true) {
-            this.loading = true;
-    
-            this.clienteSrv.updateCliente(cliente.id_cliente, copia)
-              .subscribe(res => {
-    
-                let i = this.clientes.indexOf(cliente);
-                this.clientes[i] = res;
-                this.loading = false;
-                this.snackBar.open("Cliente Actualizado", "Cerrar", {
-                  duration: 2000
-                });
-    
-              });
-    
-    
-          }
-    
-        });
-      } */
-    
-    
-      delCliente(cliente: Cliente) {
-    
-        let newpassword: string;
-    
-        let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
-          data: {
-            title: "Eliminar cliente",
-            content: `¿Desea eliminar el cliente: ${cliente.nombre}?`
-          }
-        });
-    
-        dialogRef.afterClosed().subscribe(result => {
-    
-          if (result === true) {
-            this.loading = true;
-    
-            this.clienteSrv.delCliente(cliente.id_cliente)
-              .subscribe(res => {
-    
-                if (res.count === 1) {
-                  let i = this.clientes.indexOf(cliente);
-                  this.clientes.splice(i, 1);
-    
-    
-                  this.loading = false;
-                  this.snackBar.open("Cliente Eliminado", "Cerrar", {
-                    duration: 2000
-                  });
-    
-                } else {
-                  this.snackBar.open("Ha ocurrido un error", "Cerrar", {
-                    duration: 2000
-                  });
-                }
-    
-              });
-    
-    
-          }
-    
-        });
-    
+    }
+
+  }
+
+  /*  editarCliente(cliente: Cliente) {
+     
+     
+         let copia = Cliente.copiar(cliente);
+     
+         let dialogRef = this.dialog.open(EditarClienteDialogoComponent, {
+           data: { cliente: copia }
+         });
+     
+         dialogRef.afterClosed().subscribe(result => {
+     
+           if (result === true) {
+             this.loading = true;
+     
+             this.clienteSrv.updateCliente(cliente.id_cliente, copia)
+               .subscribe(res => {
+     
+                 let i = this.clientes.indexOf(cliente);
+                 this.clientes[i] = res;
+                 this.loading = false;
+                 this.snackBar.open("Cliente Actualizado", "Cerrar", {
+                   duration: 2000
+                 });
+     
+               });
+     
+     
+           }
+     
+         });
+       } */
+
+
+  delCliente(cliente: Cliente) {
+
+    let newpassword: string;
+
+    let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
+      data: {
+        title: "Eliminar cliente",
+        content: `¿Desea eliminar el cliente: ${cliente.nombre}?`
       }
-    
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result === true) {
+        this.loading = true;
+
+        this.clienteSrv.delCliente(cliente.id_cliente)
+          .subscribe(res => {
+
+            if (res.count === 1) {
+              let i = this.clientes.indexOf(cliente);
+              this.clientes.splice(i, 1);
+
+
+              this.loading = false;
+              this.snackBar.open("Cliente Eliminado", "Cerrar", {
+                duration: 2000
+              });
+
+            } else {
+              this.snackBar.open("Ha ocurrido un error", "Cerrar", {
+                duration: 2000
+              });
+            }
+
+          });
+
+
+      }
+
+    });
+
+  }
+
 
 }
 
