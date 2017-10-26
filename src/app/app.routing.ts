@@ -43,6 +43,7 @@ import { AgregarInsumoDialogoComponent } from 'app/components/admin/agregar-insu
 import { VentasLoteComponent } from 'app/components/ventas/ventas-lote/ventas-lote.component';
 import { ComentarioAvancesDialogoComponent } from 'app/components/residente/comentario-avances-dialogo/comentario-avances-dialogo.component';
 import { ActaEntregaComponent } from 'app/components/ventas/acta-entrega/acta-entrega.component';
+import { CrearActaEntregaComponent } from 'app/components/ventas/crear-acta-entrega/crear-acta-entrega.component';
 
 
 
@@ -91,6 +92,7 @@ export const ROUTES: Routes = [
             { path: 'ventas/lote', component: VentasLoteComponent },
             { path: 'comentario-avances-dialogo', component: ComentarioAvancesDialogoComponent },
             { path: 'acta-entrega', component: ActaEntregaComponent },
+            { path: 'crear-acta-entrega', component: CrearActaEntregaComponent },
             
 
 
