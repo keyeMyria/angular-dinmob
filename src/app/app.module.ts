@@ -21,11 +21,8 @@ import { LotesService } from 'app/services/lotes.service';
 import { PrototiposService } from 'app/services/prototipos.service';
 import { UsuarioService } from "app/services/usuario.service";
 import { AuthService } from "app/services/auth.service";
-<<<<<<< HEAD
-import { ActaEntregaService } from 'app/services/acta-entrega.service';
-=======
 import { MapasService } from "app/services/mapas.service";
->>>>>>> 7fdde500c2b94abfcaff722ff526e0dfcce78c2f
+import { ActaEntregaService } from 'app/services/acta-entrega.service';
 
 //helpers
 import { ClienteHelperService } from 'app/utils/cliente-helper.service';
@@ -96,6 +93,7 @@ import { ActaEntregaComponent } from './components/ventas/acta-entrega/acta-entr
 import { CrearActaEntregaComponent } from './components/ventas/crear-acta-entrega/crear-acta-entrega.component';
 import { ActasEntregaComponent } from './components/ventas/actas-entrega/actas-entrega.component';
 import { EditarActaEntregaComponent } from './components/ventas/editar-acta-entrega/editar-acta-entrega.component';
+
 
 
 
