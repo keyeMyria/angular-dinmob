@@ -15,7 +15,10 @@ export class LayoutComponent implements OnInit {
 
   obra_default: any;
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(
+    private auth: AuthService, 
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.usuario = this.auth.getUsuario();

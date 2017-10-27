@@ -11,24 +11,35 @@ import { Obra } from "app/model/obra";
   styleUrls: ['./perfil.component.scss']
 })
 export class PerfilComponent implements OnInit {
-  
-  usuario: Usuario;
 
+  usuario: Usuario;
   obras: Obra[];
 
 
   constructor(
     private auth: AuthService,
-    private obraSrv:ObrasService
+    private obraSrv: ObrasService
   ) { }
 
   ngOnInit() {
     this.usuario = this.auth.getUsuario();
 
     this.obraSrv.getObrasUsuario(18)
-    .subscribe(response => {
-      this.obras = response;
-    });
+      .subscribe(response => {
+        this.obras = response;
+      });
+  }
+
+  updateUsuario() {
+    console.log("Not implemented");
+  }
+
+  updatePassword() {
+    console.log("Not implemented");
+  }
+
+  print() {
+    console.log("usuario actual", this.usuario);
   }
 
 }

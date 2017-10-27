@@ -15,19 +15,19 @@ export class AuthService {
 
   Rol = {
     Administrador: 1,
-    Control:2,
-    Residente:3,
-    Almacenista:4,
-    Contabilidad:5,
-    Ventas:6,
-    AsesorVentas:7,
-    Creditos:8,
-    Recepcion:9,
-    ControlAlmacen:10
-    
+    Control: 2,
+    Residente: 3,
+    Almacenista: 4,
+    Contabilidad: 5,
+    Ventas: 6,
+    AsesorVentas: 7,
+    Creditos: 8,
+    Recepcion: 9,
+    ControlAlmacen: 10
+
   }
 
-  redirectUrl:string;
+  redirectUrl: string;
 
   constructor(private http: Http) { }
 
@@ -69,11 +69,11 @@ export class AuthService {
 
   }
 
-/*   getUsername() {
-    let usuario = this.getUsuario();
-    return usuario.email.split('@')[0];
-
-  } */
+  /*   getUsername() {
+      let usuario = this.getUsuario();
+      return usuario.email.split('@')[0];
+  
+    } */
 
   hasRole(roles: any[]) {
     var visible = false;
@@ -98,10 +98,7 @@ export class AuthService {
 
 
   private extractData(res: Response) {
-    //console.log("response", res);
     let body = res.json();
-    console.log("response.json", body);
-
     return body || {};
   }
 

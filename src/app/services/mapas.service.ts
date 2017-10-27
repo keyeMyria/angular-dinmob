@@ -11,7 +11,7 @@ export class MapasService {
   constructor(private http: Http) { }
 
   getMapaObra(path) {
-    return this.http.get('./assets/mapas/'+ path)
+    return this.http.get('./assets/mapas/' + path)
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -35,10 +35,7 @@ export class MapasService {
   }
 
   private extractData(res: Response) {
-    console.log("response", res);
     let body = res.json();
-    console.log("response.json", body);
-
     return body || {};
   }
 

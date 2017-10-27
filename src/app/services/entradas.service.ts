@@ -6,15 +6,12 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class EntradasService {
-   url: string = "http://localhost:8080/controldeobras_api/index.php/";
+  url: string = "http://localhost:8080/controldeobras_api/index.php/";
 
   constructor() { }
 
-    private extractData(res: Response) {
-    console.log("response", res);
+  private extractData(res: Response) {
     let body = res.json();
-    console.log("response.json", body);
-
     return body || {};
   }
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response} from '@angular/http';
+import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { of } from "rxjs/observable/of";
@@ -27,14 +27,14 @@ export class ActaEntregaService {
       .catch(this.handleError);
   }
 
-  getActa(id_acta){
+  getActa(id_acta) {
     return this.http.get(this.url + 'get_acta/' + id_acta)
       .map(this.extractData)
       .catch(this.handleError);
   }
 
-  createActa(acta) {
-    return this.http.post(this.url + 'create_acta', { acta: acta })
+  createActa(acta, areas, equipamiento) {
+    return this.http.post(this.url + 'create_acta', { acta: acta, area: areas, equipamiento: equipamiento })
       .map(this.extractData)
       .catch(this.handleError);
 
@@ -66,10 +66,7 @@ export class ActaEntregaService {
 
 
   private extractData(res: Response) {
-    //console.log("response", res);
     let body = res.json();
-    console.log("response.json", body);
-
     return body || {};
   }
 

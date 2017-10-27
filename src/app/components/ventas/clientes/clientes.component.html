@@ -6,16 +6,17 @@
 
   <div class="row">
     <div class="col-12">
-      
+
 
       <!-- seleccionar obra -->
 
-      <div class=" my-1 mb-2">        
+      <div class=" my-1 mb-2">
         <select class="form-control" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)">
-                      <option value="">Seleccionar...</option>
-                      <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>                                     
-                  </select>
+          <option value="">Seleccionar...</option>
+          <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>
+        </select>
       </div>
+      <button class="btn btn-primary" (click)="print()">Print route</button>
 
       <div class="card my-1">
         <div class="card-header">
@@ -24,7 +25,7 @@
             <div class="spacer"></div>
             <div>
               <button mat-icon-button (click)="agregarCliente()">
-                  <mat-icon>add</mat-icon>
+                <mat-icon>add</mat-icon>
               </button>
             </div>
           </div>
@@ -43,7 +44,7 @@
               </thead>
 
               <tbody>
-                <tr *ngFor="let cliente of clientes">
+                <tr *ngFor="let cliente of clientes$|async">
                   <td>{{cliente.id_cliente}}</td>
                   <td>{{clienteHlp.getNombre(cliente)}}</td>
                   <td>manzana 0</td>
@@ -51,17 +52,17 @@
                   <td>libre</td>
                   <td>
                     <button mat-icon-button [matMenuTriggerFor]="menu">
-                        <mat-icon>more_vert</mat-icon>
-                      </button>
+                      <mat-icon>more_vert</mat-icon>
+                    </button>
                     <mat-menu #menu="matMenu">
                       <button mat-menu-item (click)="editarCliente(cliente)">
-                          <mat-icon>create</mat-icon>
-                          <span>Editar</span>
-                        </button>
+                        <mat-icon>create</mat-icon>
+                        <span>Editar</span>
+                      </button>
                       <button mat-menu-item (click)="delCliente(cliente)">
-                          <mat-icon>delete</mat-icon>
-                          <span>Eliminar</span>
-                        </button>
+                        <mat-icon>delete</mat-icon>
+                        <span>Eliminar</span>
+                      </button>
                     </mat-menu>
                   </td>
                 </tr>

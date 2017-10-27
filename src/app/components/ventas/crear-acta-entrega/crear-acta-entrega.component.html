@@ -6,17 +6,18 @@
               Crear Acta de Entrega
             </div>
         <div class="card-body">          
-          <form>
+          <form  #formCreateActa="ngForm"  id="formCreateActa" (ngSubmit)="createActa()">
+
             <div class="form-group row">
-              <label for="" class="col-lg-2 col-form-label">Titulo</label>
+              <label for="titulo" class="col-lg-2 col-form-label">Titulo</label>
               <div class="col-lg-10">
-                <input class="form-control" id="">
+                <input class="form-control" name="titulo" id="titulo" [(ngModel)]="acta.titulo">
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-lg-2 col-form-label">Texto 1</label>
+              <label for="texto1" class="col-lg-2 col-form-label">Texto 1</label>
               <div class="col-lg-10">
-                <textarea class="form-control" id="" rows="3"></textarea>
+                <textarea class="form-control" name="texto1" id="texto1" rows="3" [(ngModel)]="acta.texto1"></textarea>
               </div>
             </div>
             <div class="form-group row">
@@ -54,23 +55,22 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-lg-2 col-form-label">Texto 2</label>
+              <label for="texto2" class="col-lg-2 col-form-label">Texto 2</label>
               <div class="col-lg-10">
-                <textarea class="form-control" id="" rows="3"></textarea>
+                <textarea class="form-control" name="texto2" id="texto2" rows="3" [(ngModel)]="acta.texto2"></textarea>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-lg-2 col-form-label">Pie de página</label>
+              <label for="pie_pagina" class="col-lg-2 col-form-label">Pie de página</label>
               <div class="col-lg-10">
-                <textarea class="form-control" id="" rows="3"></textarea>
+                <textarea class="form-control" name="pie_pagina" id="pie_pagina" rows="3" [(ngModel)]="acta.pie_pagina"></textarea>
               </div>
             </div>
           </form>
         </div> 
         <div class="card-footer">
             <div class="col-sm-10 offset-sm-2">
-                <button type="submit" class="btn btn-primary">Crear</button>
-                
+                <button type="submit" class="btn btn-primary" [disabled]="!formCreateActa.form.valid" form="formCreateActa">Crear</button>                
               </div>
           </div>       
       </div>

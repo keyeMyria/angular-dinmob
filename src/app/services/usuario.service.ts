@@ -51,11 +51,8 @@ export class UsuarioService {
 
 
 
-  private extractData(res: Response) {
-    //console.log("response", res);
+  private extractData(res: Response) {   
     let body = res.json();
-    console.log("response.json", body);
-
     return body || {};
   }
 

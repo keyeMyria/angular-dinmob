@@ -10,39 +10,28 @@ import { TextMaskModule } from "angular2-text-mask";
 
 import { AuthModule } from "app/modules/auth.module";
 import { FlexLayoutModule } from "@angular/flex-layout";
-import {
-  MatMenuModule,
-  MatCheckboxModule,
-  MatRadioModule,
-  MatIconModule,
-  MatToolbarModule,
-  MatSidenavModule,
-  MatButtonModule,
-  MatTabsModule,
-  MatListModule,
-  MatExpansionModule,
-  MatSlideToggleModule
-} from "@angular/material";
 import "hammerjs";
-
-import { AccordionModule } from "primeng/components/accordion/accordion";
-import { DataTableModule } from "primeng/components/datatable/datatable";
-import { ContextMenuModule } from "primeng/components/contextmenu/contextmenu";
-import { SharedModule } from "primeng/components/common/shared";
-import { MenuModule } from "primeng/components/menu/menu";
-import { TreeTableModule } from "primeng/components/treetable/treetable";
 
 
 //servicios
+import { ConfigService } from 'app/services/config.service';
 import { ClientesService } from "app/services/clientes.service";
 import { ObrasService } from "app/services/obras.service";
 import { LotesService } from 'app/services/lotes.service';
 import { PrototiposService } from 'app/services/prototipos.service';
 import { UsuarioService } from "app/services/usuario.service";
 import { AuthService } from "app/services/auth.service";
+<<<<<<< HEAD
 import { ActaEntregaService } from 'app/services/acta-entrega.service';
+=======
+import { MapasService } from "app/services/mapas.service";
+>>>>>>> 7fdde500c2b94abfcaff722ff526e0dfcce78c2f
 
-//import { MaterializeModule } from "angular2-materialize";
+//helpers
+import { ClienteHelperService } from 'app/utils/cliente-helper.service';
+
+//guards
+import { AuthGuard } from "app/guards/auth.guard";
 
 //pipes
 import { NumberToYesNoPipe } from './pipes/number-to-yes-no.pipe';
@@ -80,13 +69,13 @@ import { CambiarPasswordDialogoComponent } from './components/admin/cambiar-pass
 import { ConfirmarBorradoDialogoComponent } from './components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
 import { EditarUsuarioDialogoComponent } from './components/admin/editar-usuario-dialogo/editar-usuario-dialogo.component';
 import { EditarClienteDialogoComponent } from './components/ventas/editar-cliente-dialogo/editar-cliente-dialogo.component';
-import { MapasService } from "app/services/mapas.service";
-import { AuthGuard } from "app/guards/auth.guard";
+
+
 import { EditarClienteComponent } from './components/ventas/editar-cliente/editar-cliente.component';
 import { AgregarObraDialogoComponent } from "app/components/admin/agregar-obra-dialogo/agregar-obra-dialogo.component";
 import { AgregarDocumentoDialogoComponent } from './components/ventas/agregar-documento-dialogo/agregar-documento-dialogo.component';
 import { CrearUsuarioDialogoComponent } from './components/admin/crear-usuario-dialogo/crear-usuario-dialogo.component';
-import { ClienteHelperService } from 'app/utils/cliente-helper.service';
+
 import { AgregarPrototipoDialogoComponent } from './components/admin/agregar-prototipo-dialogo/agregar-prototipo-dialogo.component';
 import { CambiarNombrePrototipoDialogoComponent } from './components/admin/cambiar-nombre-prototipo-dialogo/cambiar-nombre-prototipo-dialogo.component';
 import { NuevaCompraDialogoComponent } from './components/ventas/nueva-compra-dialogo/nueva-compra-dialogo.component';
@@ -107,6 +96,7 @@ import { ActaEntregaComponent } from './components/ventas/acta-entrega/acta-entr
 import { CrearActaEntregaComponent } from './components/ventas/crear-acta-entrega/crear-acta-entrega.component';
 import { ActasEntregaComponent } from './components/ventas/actas-entrega/actas-entrega.component';
 import { EditarActaEntregaComponent } from './components/ventas/editar-acta-entrega/editar-acta-entrega.component';
+
 
 
 
@@ -179,14 +169,6 @@ import { EditarActaEntregaComponent } from './components/ventas/editar-acta-entr
     NgbModule.forRoot(),
     AngularMaterialModule,
     TextMaskModule,
-
-    AccordionModule,
-    DataTableModule,
-    ContextMenuModule,
-    MenuModule,
-    TreeTableModule,
-    SharedModule,
-
     RoutingModule
 
   ],
@@ -217,6 +199,7 @@ import { EditarActaEntregaComponent } from './components/ventas/editar-acta-entr
     I18n,
     {provide:NgbDatepickerI18n, useClass:SpanishDatepickerI18nService},
     AuthGuard,
+    ConfigService,
     AuthService,
     ObrasService,
     ClientesService,
