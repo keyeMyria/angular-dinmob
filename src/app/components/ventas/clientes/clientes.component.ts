@@ -5,10 +5,12 @@ import { Cliente } from "app/model/cliente";
 import { ClientesService } from "app/services/clientes.service";
 import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component";
 import { ObrasService } from "app/services/obras.service";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute, ParamMap } from "@angular/router";
 import { AuthService } from "app/services/auth.service";
 import { Usuario } from "app/model/usuario";
 import { ClienteHelperService } from 'app/utils/cliente-helper.service';
+import { Observable } from 'rxjs/Observable';
+import { of } from "rxjs/observable/of";
 
 @Component({
   selector: 'app-clientes',
@@ -21,17 +23,18 @@ export class ClientesComponent implements OnInit {
 
   usuario: Usuario;
   loading: boolean;
-  clientes: Cliente[];
+  clientes$: Observable<Cliente[]>;
   obras: any = [];
   obra: any = {
     datos: {}
   };
-  obras_selected: any = {};
+  obra_selected: string = "";
 
 
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private auth: AuthService,
     private obraSrv: ObrasService,
     private clienteHlp: ClienteHelperService,
@@ -41,20 +44,34 @@ export class ClientesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log("paramMap(obra)", this.route.snapshot.paramMap.get("obra"));
 
     this.usuario = this.auth.getUsuario();
 
-    this.loading = true;
-    this.clienteSrv.getClientes()
-      .subscribe(res => {
-        this.clientes = res;
-        this.loading = false;
+    //this.loading = true;
+    this.clientes$ = this.route.paramMap
+      .switchMap((params: ParamMap) => {
+        if (params.has("obra")) {
+          return this.clienteSrv.getClientesObra(params.get("obra"));
+        } else {
+          return of([]);
+        }
+
       });
+
+    /*  this.clienteSrv.getClientes(); */
 
     this.obraSrv.getObrasUsuario(this.usuario.id_usuario)
       .subscribe(response => {
         this.obras = response;
       });
+
+  }
+
+
+  print() {
+    //console.log("paramMap(obra)", this.route.snapshot.paramMap.get("obra"));
+    console.log("observable", this.clientes$);
 
   }
 
@@ -70,10 +87,11 @@ export class ClientesComponent implements OnInit {
   cargarObra(id_obra) {
 
     if (id_obra) {
-      this.clienteSrv.getClientesObra(id_obra)
-        .subscribe(response => {
-          this.clientes = response;
-        });
+      this.router.navigate(["/clientes", { obra: id_obra }]);
+      /*   this.clienteSrv.getClientesObra(id_obra)
+          .subscribe(response => {
+            this.clientes = response;
+          }); */
     }
 
   }
@@ -131,8 +149,8 @@ export class ClientesComponent implements OnInit {
           .subscribe(res => {
 
             if (res.count === 1) {
-              let i = this.clientes.indexOf(cliente);
-              this.clientes.splice(i, 1);
+              // let i = this.clientes.indexOf(cliente);
+              //this.clientes.splice(i, 1);
 
 
               this.loading = false;
