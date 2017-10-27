@@ -6,7 +6,7 @@
           Perfil
         </div>
         <div class="card-body">
-          <form>
+          <form id="formUpdateUsuario" (ngSubmit)="updateUsuario()">
             <div class="form-group row">
               <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
               <div class="col-sm-10">
@@ -29,15 +29,12 @@
                 </select>
               </div>
             </div>
+            <button type="button" class="btn btn-primary" (click)="print()">Print Usuario</button>
 
           </form>
         </div>
         <div class="card-footer">
-          <div class="row">
-            <div class="col-sm-10 ml-sm-auto">
-              <button type="submit" class="btn btn-primary">Actualizar</button>
-            </div>
-          </div>
+          <button type="submit" form="formUpdateUsuario" mat-button color="primary" class="btn-block">Actualizar</button>
         </div>
       </div>
 
@@ -47,7 +44,7 @@
           Cambiar password
         </div>
         <div class="card-body">
-          <form>
+          <form id="formUpdatePassword" (ngSubmit)="updatePassword()">
             <div class="form-group row">
               <label for="password" class="col-sm-2 col-form-label">Nuevo Password</label>
               <div class="col-sm-10">
@@ -65,11 +62,7 @@
           </form>
         </div>
         <div class="card-footer">
-          <div class="row">
-            <div class="col-sm-10 ml-sm-auto">
-              <button type="submit" class="btn btn-primary">Actualizar</button>
-            </div>
-          </div>
+          <button type="submit" form="formUpdatePassword" mat-button color="primary" class="btn-block">Actualizar</button>
         </div>
       </div>
 

@@ -62,7 +62,7 @@ export class ObrasService {
       .catch(this.handleError);
   }
 
-  
+
   //ok
   getLotes(id_obra) {
     return this.http.get(this.url + 'get_lotes/' + id_obra)
@@ -125,10 +125,7 @@ export class ObrasService {
 
 
   private extractData(res: Response) {
-    //console.log("response", res);
     let body = res.json();
-    console.log("response.json", body);
-
     return body || {};
   }
 

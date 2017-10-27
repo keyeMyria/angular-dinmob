@@ -66,10 +66,7 @@ export class ClientesService {
 
 
   private extractData(res: Response) {
-    //console.log("response", res);
     let body = res.json();
-    console.log("response.json", body);
-
     return body || {};
   }
 
