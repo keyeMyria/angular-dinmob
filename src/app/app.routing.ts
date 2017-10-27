@@ -46,6 +46,8 @@ import { ActaEntregaComponent } from 'app/components/ventas/acta-entrega/acta-en
 import { CrearActaEntregaComponent } from 'app/components/ventas/crear-acta-entrega/crear-acta-entrega.component';
 import { EditarActaEntregaComponent } from 'app/components/ventas/editar-acta-entrega/editar-acta-entrega.component';
 import { ActasEntregaComponent } from 'app/components/ventas/actas-entrega/actas-entrega.component';
+import { GenerarActaEntregaComponent } from 'app/components/ventas/generar-acta-entrega/generar-acta-entrega.component';
+
 
 
 
@@ -97,6 +99,8 @@ export const ROUTES: Routes = [
             { path: 'crear-acta-entrega', component: CrearActaEntregaComponent },
             { path: 'actas-entrega', component: ActasEntregaComponent },
             { path: 'editar-acta-entrega/:id', component: EditarActaEntregaComponent },
+            { path: 'generar-acta-entrega', component: GenerarActaEntregaComponent },
+
             
 
 

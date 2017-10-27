@@ -93,6 +93,8 @@ import { ActaEntregaComponent } from './components/ventas/acta-entrega/acta-entr
 import { CrearActaEntregaComponent } from './components/ventas/crear-acta-entrega/crear-acta-entrega.component';
 import { ActasEntregaComponent } from './components/ventas/actas-entrega/actas-entrega.component';
 import { EditarActaEntregaComponent } from './components/ventas/editar-acta-entrega/editar-acta-entrega.component';
+import { GenerarActaEntregaComponent } from './components/ventas/generar-acta-entrega/generar-acta-entrega.component'
+
 
 
 
@@ -153,6 +155,9 @@ import { EditarActaEntregaComponent } from './components/ventas/editar-acta-entr
     CrearActaEntregaComponent,
     ActasEntregaComponent,
     EditarActaEntregaComponent,
+    GenerarActaEntregaComponent,
+
+
 
     
 

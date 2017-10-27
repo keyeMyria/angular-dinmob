@@ -38,11 +38,11 @@ export class CrearActaEntregaComponent implements OnInit {
   delEquipo(equipo) {
     let i = this.equipamiento.indexOf(equipo);
     this.equipamiento.splice(i, 1);
-  }  
-delArea(area) {
+  }
+  delArea(area) {
     let i = this.areas.indexOf(area);
     this.areas.splice(i, 1);
-  }  
+  }
 
   createActa() {
     console.log("createActa");
@@ -50,8 +50,10 @@ delArea(area) {
     this.actaSrv.createActa(this.acta, this.areas, this.equipamiento)
       .subscribe(res => {
         console.log("response", res);
+        this.areas = [];
+        this.equipamiento = [];
 
-        this.acta = new ActaEntrega();        
+        this.acta = new ActaEntrega();
         this.formCreateActa.reset();
       });
   }
