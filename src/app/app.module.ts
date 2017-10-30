@@ -22,6 +22,7 @@ import { PrototiposService } from 'app/services/prototipos.service';
 import { UsuarioService } from "app/services/usuario.service";
 import { AuthService } from "app/services/auth.service";
 import { MapasService } from "app/services/mapas.service";
+import { ActaEntregaService } from 'app/services/acta-entrega.service';
 
 //helpers
 import { ClienteHelperService } from 'app/utils/cliente-helper.service';
@@ -90,6 +91,14 @@ import { VentasLoteComponent } from './components/ventas/ventas-lote/ventas-lote
 import { ComentarioAvancesDialogoComponent } from './components/residente/comentario-avances-dialogo/comentario-avances-dialogo.component';
 import { ActaEntregaComponent } from './components/ventas/acta-entrega/acta-entrega.component';
 import { CrearActaEntregaComponent } from './components/ventas/crear-acta-entrega/crear-acta-entrega.component';
+import { ActasEntregaComponent } from './components/ventas/actas-entrega/actas-entrega.component';
+import { EditarActaEntregaComponent } from './components/ventas/editar-acta-entrega/editar-acta-entrega.component';
+import { GenerarActaEntregaComponent } from './components/ventas/generar-acta-entrega/generar-acta-entrega.component'
+
+
+
+
+
 
 
 
@@ -144,6 +153,12 @@ import { CrearActaEntregaComponent } from './components/ventas/crear-acta-entreg
     ComentarioAvancesDialogoComponent,
     ActaEntregaComponent,
     CrearActaEntregaComponent,
+    ActasEntregaComponent,
+    EditarActaEntregaComponent,
+    GenerarActaEntregaComponent,
+
+
+
     
 
   ],
@@ -195,7 +210,8 @@ import { CrearActaEntregaComponent } from './components/ventas/crear-acta-entreg
     UsuarioService,
     MapasService,
     PrototiposService,
-    LotesService
+    LotesService,
+    ActaEntregaService
   ],
   bootstrap: [AppComponent]
 })

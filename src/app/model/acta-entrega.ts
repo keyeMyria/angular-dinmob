@@ -7,5 +7,6 @@ export class ActaEntrega {
     texto1?: string;
     texto2?: string;
     pie_pagina?: string;
+    fecha_creacion?: string;
 
 }

@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActaEntregaService } from 'app/services/acta-entrega.service';
+import { ActaEntrega } from 'app/model/acta-entrega';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-crear-acta-entrega',
@@ -6,14 +9,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./crear-acta-entrega.component.scss']
 })
 export class CrearActaEntregaComponent implements OnInit {
+  @ViewChild('formCreateActa') formCreateActa: NgForm;
 
   equipamiento: string[] = [];
   areas: string[] = [];
   equipo: string;
   area: string;
+  acta: ActaEntrega = new ActaEntrega();
 
 
-  constructor() { }
+  constructor(
+    private actaSrv: ActaEntregaService
+  ) { }
 
   ngOnInit() {
   }
@@ -31,10 +38,24 @@ export class CrearActaEntregaComponent implements OnInit {
   delEquipo(equipo) {
     let i = this.equipamiento.indexOf(equipo);
     this.equipamiento.splice(i, 1);
-  }  
-delArea(area) {
+  }
+  delArea(area) {
     let i = this.areas.indexOf(area);
     this.areas.splice(i, 1);
-  }  
+  }
+
+  createActa() {
+    console.log("createActa");
+
+    this.actaSrv.createActa(this.acta, this.areas, this.equipamiento)
+      .subscribe(res => {
+        console.log("response", res);
+        this.areas = [];
+        this.equipamiento = [];
+
+        this.acta = new ActaEntrega();
+        this.formCreateActa.reset();
+      });
+  }
 
 }

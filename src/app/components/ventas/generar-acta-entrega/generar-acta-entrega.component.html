@@ -1,0 +1,97 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="card my-3">
+        <div class="card-body">
+          <h4 class="card-title text-center">
+
+            <input type="text" class="form-control" id="" placeholder="Titulo" style="text-align: center">
+
+          </h4>
+
+          <form>
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Recibí de DM Construcciones y Pavimentos, S.A. de C.V. formalmente de la casa habitación ubicada en:</label>
+              <input class="form-control" type="text">
+            </div>
+          </form>
+
+          <p class="card-text">
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Texto"></textarea>
+          </p>
+
+          <div class="input-group">
+            <span class="input-group-addon">Areas</span>
+            <input class="form-control" id="" name="area" [(ngModel)]="area">
+            <button type="button" class="btn btn-primary" (click)="addArea()">Agregar</button>
+          </div>
+          <ul class="list-group my-3">
+            <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let area of areas">
+              {{area}}
+              <button type="button" class="btn btn-outline-dark btn-sm" (click)="delArea(area)">
+                <i class="fa fa-times"></i>
+              </button>
+            </li>
+          </ul>
+
+          <div class="input-group">
+            <span class="input-group-addon">Equipamiento</span>
+            <input class="form-control" id="" name="equipo" [(ngModel)]="equipo">
+            <button type="button" class="btn btn-primary" (click)="addEquipo()">Agregar</button>
+          </div>
+          <ul class="list-group my-3">
+            <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let equipo of equipamiento">
+              {{equipo}}
+              <button type="button" class="btn btn-outline-dark btn-sm" (click)="delEquipo(equipo)">
+                <i class="fa fa-times"></i>
+              </button>
+            </li>
+          </ul>
+
+
+          <p class="card-text">
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Texto"></textarea>
+          </p>
+
+
+          <!-- 
+          <form>
+            <div class="form-group">
+              <label class="col-12">Las llaves incluyen duplicados de acceso, habitaciones y área de servicio:</label>
+              <div class="col-12">
+                <mat-radio-group>
+                  <mat-radio-button value="1">Si</mat-radio-button>
+                  <mat-radio-button value="2">No</mat-radio-button>
+                </mat-radio-group>
+              </div>
+            </div>
+          </form> -->
+
+<!-- 
+          <div class="form-group">
+            <select class="form-control" name="agregar" [(ngModel)]="agregar">
+              <option value="0">Agregar...</option>
+              <option value="0">Pregunta</option>
+              <option value="1">Texto</option>
+            </select>
+          </div>
+
+          <div class="form-group" *ngIf="agregar === '0'">
+            <input type="email" class="form-control" id="" placeholder="¿..?">
+          </div>
+          <div class="form-group" *ngIf="agregar === '1'">
+            <textarea class="form-control" id="" rows="3"></textarea>
+          </div> -->        
+
+
+
+          <div class="text-muted">
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" placeholder="Pie de Página"></textarea>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

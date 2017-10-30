@@ -34,7 +34,7 @@ export class ActaEntregaService {
   }
 
   createActa(acta, areas, equipamiento) {
-    return this.http.post(this.url + 'create_acta', { acta: acta, area: areas, equipamiento: equipamiento })
+    return this.http.post(this.url + 'create_acta', { acta: acta, areas: areas, equipamiento: equipamiento })
       .map(this.extractData)
       .catch(this.handleError);
 

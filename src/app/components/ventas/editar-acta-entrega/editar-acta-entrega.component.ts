@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ActaEntregaService } from 'app/services/acta-entrega.service';
-import { ActivatedRoute, Router, ParamMap } from '@angular/router';
+import { ActaEntrega } from 'app/model/acta-entrega';
 
 @Component({
-  selector: 'app-acta-entrega',
-  templateUrl: './acta-entrega.component.html',
-  styleUrls: ['./acta-entrega.component.scss']
+  selector: 'app-editar-acta-entrega',
+  templateUrl: './editar-acta-entrega.component.html',
+  styleUrls: ['./editar-acta-entrega.component.scss']
 })
-export class ActaEntregaComponent implements OnInit {
+export class EditarActaEntregaComponent implements OnInit {
 
   acta: any = {};
   areas: string[];
@@ -16,7 +17,7 @@ export class ActaEntregaComponent implements OnInit {
   constructor(
     private actaSrv: ActaEntregaService,
     private route: ActivatedRoute,
-    private router: Router,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -28,6 +29,7 @@ export class ActaEntregaComponent implements OnInit {
         this.areas = res.areas;
         this.equipamiento = res.equipamiento;
       });
+
   }
 
 }
