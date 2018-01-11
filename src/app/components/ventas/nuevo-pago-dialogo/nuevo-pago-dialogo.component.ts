@@ -16,4 +16,8 @@ export class NuevoPagoDialogoComponent implements OnInit {
   ngOnInit() {
   }
 
+  onFechaChange() {
+
+  }
+
 }

@@ -13,14 +13,15 @@
       <label for="fecha_entrega">Fecha Programada</label>
       <div>
         <div class="input-group">
-          <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #d="ngbDatepicker" type="text" name="fecha_entrega" id="fecha_entrega"
-            placement="bottom-right">
+          <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_entrega" id="fecha_entrega"
+          [matDatepicker]="dpFechaProgramada" (ngModelChange)="onFechaChange()">
           <span class="input-group-btn">
-            <button class="btn btn-secondary" type="button" (click)="d.toggle()">
-            <i class="fa fa-calendar"></i>
+            <button class="btn btn-secondary" type="button" (click)="dpFechaProgramada.open()">
+              <i class="fa fa-calendar"></i>
             </button>
-            </span>
+          </span>
         </div>
+        <mat-datepicker touchUi="true" #dpFechaProgramada></mat-datepicker>
       </div>
     </div>
 
@@ -29,13 +30,13 @@
       <div class="input-group">
         <select class="form-control" name="" selectval>
           <option>Seleccionar</option>
-          <option>Apartado</option> 
+          <option>Apartado</option>
           <option>Enganche</option>
-          <option>Parcialidad</option> 
-          <option>Finiquito</option>  
-          <option>Contrato Agua</option> 
-          <option>Devolución</option> 
-          <option>Otros</option> 
+          <option>Parcialidad</option>
+          <option>Finiquito</option>
+          <option>Contrato Agua</option>
+          <option>Devolución</option>
+          <option>Otros</option>
         </select>
       </div>
     </div>
@@ -45,10 +46,10 @@
       <div class="input-group">
         <select class="form-control" name="" selectval>
           <option>Seleccionar</option>
-          <option>Efectivo</option> 
+          <option>Efectivo</option>
           <option>Transferencia</option>
-          <option>Cheque</option>            
-          </select>
+          <option>Cheque</option>
+        </select>
       </div>
     </div>
 

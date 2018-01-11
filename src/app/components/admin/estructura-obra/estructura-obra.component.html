@@ -111,15 +111,15 @@
                             <label class="col-form-label col-12 col-sm-12">Fecha Inicio</label>
                             <div class="col-12 col-sm-12">
                               <div class="input-group">
-                                <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #dfechaInicio="ngbDatepicker"
-                                  type="text" name="fecha" id="fecha_ini" placement="bottom-left"
-                                  [(ngModel)]="obra.datos.fecha_ini">
+                                <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha" id="fecha_ini" placement="bottom-left"
+                                  [(ngModel)]="obra.datos.fecha_ini" [matDatepicker]="dpFechaInicio" (ngModelChange)="onFechaChange()">
                                 <span class="input-group-btn">
-                                  <button class="btn btn-secondary" type="button" (click)="dfechaInicio.toggle()">                          
+                                  <button class="btn btn-secondary" type="button" (click)="dpFechaInicio.open()">                          
                                     <i class="fa fa-calendar"></i>  
                                   </button>                 
                                 </span>
                               </div>
+                              <mat-datepicker touchUi="true" #dpFechaInicio></mat-datepicker>
                             </div>
                           </div>
 

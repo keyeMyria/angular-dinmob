@@ -1,37 +1,38 @@
-<mat-toolbar color="primary">
+<div class="app-container" [class.app-is-mobile]="mobileQuery.matches">
 
-  <button mat-icon-button (click)="navLeft.toggle()">
-            <mat-icon>menu</mat-icon>
-          </button>
+  <mat-toolbar color="primary" class="app-toolbar">
 
-  <!--<mat-icon class="icon-20">pets</mat-icon>-->
-
-  <span>Dinmob</span>
-
-  <span class="spacer"></span>
-
-  <button mat-button [matMenuTriggerFor]="userMenu">
-    <span class="d-none d-sm-inline">{{username}}</span>          
-    <mat-icon>person</mat-icon>
-  </button>
-
-  <button mat-icon-button (click)="navRight.toggle()">
-            <mat-icon>more_vert</mat-icon>
-          </button>
-
-  <mat-menu #userMenu="matMenu">
-    <button mat-menu-item routerLink="/perfil"> Perfil </button>
-    <button mat-menu-item (click)="logout()"> Cerrar sesión </button>
-  </mat-menu>
-
-  <!-- <router-outlet name="toolbar"></router-outlet> -->
-
-</mat-toolbar>
+    <button mat-icon-button (click)="navLeft.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
 
 
-<div class="sidenav-container">
-  <mat-sidenav-container class="spacer">
-    <mat-sidenav #navLeft class="sidenav-start" mode="over" align="start" opened="false">
+    <span>Dinmob</span>
+
+    <span class="spacer"></span>
+
+    <button mat-button [matMenuTriggerFor]="userMenu">
+      <span class="d-none d-sm-inline">{{username}}</span>
+      <mat-icon>person</mat-icon>
+    </button>
+
+    <button mat-icon-button (click)="navRight.toggle()">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item routerLink="/perfil"> Perfil </button>
+      <button mat-menu-item (click)="logout()"> Cerrar sesión </button>
+    </mat-menu>
+
+
+  </mat-toolbar>
+
+
+
+  <mat-sidenav-container class="app-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav #navLeft class="app-sidenav-start" mode="over" align="start" opened="false" [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56">
 
       <mat-nav-list class="mb-5">
         <!-- *ngIf="auth.hasRole([auth.Rol.Administrador])" -->
@@ -147,16 +148,13 @@
       </mat-tab-group>
     </mat-sidenav>
 
-    <div class="my-content">
-
-      <!--  <mat-toolbar color="accent">
-      <span>Título</span>
-    </mat-toolbar> -->
+    <mat-sidenav-content>
 
       <router-outlet></router-outlet>
 
-
-    </div>
+    </mat-sidenav-content>
 
   </mat-sidenav-container>
+
+
 </div>

@@ -17,4 +17,8 @@ export class EditarPagoDialogoComponent implements OnInit {
   ngOnInit() {
   }
 
+  onFechaChange() {
+
+  }
+
 }

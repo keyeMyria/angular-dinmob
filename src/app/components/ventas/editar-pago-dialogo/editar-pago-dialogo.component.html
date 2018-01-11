@@ -13,44 +13,46 @@
       <label for="fecha_entrega">Fecha Programada</label>
       <div>
         <div class="input-group">
-          <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #dfechaProgramada="ngbDatepicker" type="text" name="fecha_entrega" id="fecha_entrega"
-            placement="bottom-right">
+          <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_entrega" id="fecha_entrega" [matDatepicker]="dpFechaProgramada"
+            (ngModelChange)="onFechaChange()">
           <span class="input-group-btn">
-            <button class="btn btn-secondary" type="button" (click)="dfechaProgramada.toggle()">
-            <i class="fa fa-calendar"></i>
+            <button class="btn btn-secondary" type="button" (click)="dpFechaProgramada.open()">
+              <i class="fa fa-calendar"></i>
             </button>
-            </span>
+          </span>
         </div>
+        <mat-datepicker touchUi="true" #dpFechaProgramada></mat-datepicker>
       </div>
     </div>
 
     <div class="form-group">
-        <label for="fecha_entrega">Fecha Pago</label>
-        <div>
-          <div class="input-group">
-            <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #dfechaPago="ngbDatepicker" type="text" name="fecha_entrega" id="fecha_entrega"
-              placement="bottom-right">
-            <span class="input-group-btn">
-              <button class="btn btn-secondary" type="button" (click)="dfechaPago.toggle()">
+      <label for="fecha_pago">Fecha Pago</label>
+      <div>
+        <div class="input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_pago" id="fecha_pago" [matDatepicker]="dpFechaPago"
+            (ngModelChange)="onFechaChange()">
+          <span class="input-group-btn">
+            <button class="btn btn-secondary" type="button" (click)="dpFechaPago.open()">
               <i class="fa fa-calendar"></i>
-              </button>
-              </span>
-          </div>
+            </button>
+          </span>
         </div>
+        <mat-datepicker touchUi="true" #dpFechaPago></mat-datepicker>
       </div>
+    </div>
 
     <div class="form-group">
       <label for="nombre">Tipo</label>
       <div class="input-group">
         <select class="form-control" name="" selectval>
           <option>Seleccionar</option>
-          <option>Apartado</option> 
+          <option>Apartado</option>
           <option>Enganche</option>
-          <option>Parcialidad</option> 
-          <option>Finiquito</option>  
-          <option>Contrato Agua</option> 
-          <option>Devolución</option> 
-          <option>Otros</option> 
+          <option>Parcialidad</option>
+          <option>Finiquito</option>
+          <option>Contrato Agua</option>
+          <option>Devolución</option>
+          <option>Otros</option>
         </select>
       </div>
     </div>
@@ -60,10 +62,10 @@
       <div class="input-group">
         <select class="form-control" name="" selectval>
           <option>Seleccionar</option>
-          <option>Efectivo</option> 
+          <option>Efectivo</option>
           <option>Transferencia</option>
-          <option>Cheque</option>            
-          </select>
+          <option>Cheque</option>
+        </select>
       </div>
     </div>
 

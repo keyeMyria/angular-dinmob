@@ -4,8 +4,8 @@
       <form class="form-horizontal" name="formCliente" id="formCliente" (ngSubmit)="createCliente()" novalidate>
 
 
-        <div class="card">        
-          <div >
+        <div class="card">
+          <div>
             <mat-tab-group>
               <!-- Datos Generales -->
               <mat-tab label="Cliente">
@@ -15,9 +15,9 @@
                     <label class="col-form-label col-sm-3">Actividad Económica</label>
                     <div class="col-sm-9">
                       <select class="form-control" name="persona_moral" [(ngModel)]="cliente.persona_moral">
-                                            <option value="0">Persona Física</option>
-                                            <option value="1">Persona Moral</option>
-                                        </select>
+                        <option value="0">Persona Física</option>
+                        <option value="1">Persona Moral</option>
+                      </select>
                     </div>
                   </div>
                   <!-- Persona Fisica -->
@@ -55,14 +55,15 @@
                       <label class="col-form-label col-sm-3">Fecha de nacimiento</label>
                       <div class="col-sm-9">
                         <div class="input-group">
-                          <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #d="ngbDatepicker" type="text" name="fecha_nacimiento_persona_fisica"
-                            id="fecha_nacimiento_persona_fisica" placement="bottom-left" [(ngModel)]="cliente.fecha_nacimiento_persona_fisica">
-                          <span class="input-group-btn"> 
-                           <button class="btn btn-secondary" type="button" (click)="d.toggle()">                                               
-                             <i class="fa fa-calendar"></i>  
-                           </button>                          
+                          <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_nacimiento_persona_fisica" id="fecha_nacimiento_persona_fisica"
+                            [matDatepicker]="dpFechaNacimientoPF" (ngModelChange)="onFechaChange()" [(ngModel)]="cliente.fecha_nacimiento_persona_fisica">
+                          <span class="input-group-btn">
+                            <button class="btn btn-secondary" type="button" (click)="dpFechaNacimientoPF.open()">
+                              <i class="fa fa-calendar"></i>
+                            </button>
                           </span>
                         </div>
+                        <mat-datepicker touchUi="true" #dpFechaNacimientoPF></mat-datepicker>
                       </div>
                     </div>
                     <div class="form-group row">
@@ -135,19 +136,19 @@
                       <label class="col-form-label col-sm-3">Estado civil</label>
                       <div class="col-sm-9">
                         <select class="form-control" name="estado_civil_persona_fisica" [(ngModel)]="cliente.estado_civil_persona_fisica">
-                                                <option value="0">Soltero</option>
-                                                <option value="1">Casado</option>
-                                            </select>
+                          <option value="0">Soltero</option>
+                          <option value="1">Casado</option>
+                        </select>
 
                       </div>
                     </div>
                     <div class="form-group row" *ngIf="cliente.estado_civil_persona_fisica === '1'">
                       <label class="col-form-label col-sm-3">Régimen</label>
                       <div class="col-sm-9">
-                        <select class="form-control" name="regimen_conyugal_persona_fisica" [(ngModel)]="cliente.regimen_conyugal_persona_fisica">                                               
-                                                <option value="0">Separación de Bienes</option>
-                                                <option value="1">Sociedad Conyugal</option>
-                                            </select>
+                        <select class="form-control" name="regimen_conyugal_persona_fisica" [(ngModel)]="cliente.regimen_conyugal_persona_fisica">
+                          <option value="0">Separación de Bienes</option>
+                          <option value="1">Sociedad Conyugal</option>
+                        </select>
                       </div>
                     </div>
                     <!-- Domicilio Fiscal persona fisica -->
@@ -230,15 +231,15 @@
                       <label class="col-form-label col-sm-3">Fecha Constitución</label>
                       <div class="col-sm-9">
                         <div class="input-group">
-                          <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #dfechaConstitucion="ngbDatepicker"
-                            type="text" name="fecha_constitucion_persona_moral" id="fecha_constitucion_persona_moral" placement="bottom-left"
-                            [(ngModel)]="cliente.fecha_constitucion_persona_moral">
+                          <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_constitucion_persona_moral" id="fecha_constitucion_persona_moral"
+                            [(ngModel)]="cliente.fecha_constitucion_persona_moral" [matDatepicker]="dpFechaConstitucion" (ngModelChange)="onFechaChange()">
                           <span class="input-group-btn">
-                           <button class="btn btn-secondary" type="button" (click)="dfechaConstitucion.toggle()">                               
-                            <i class="fa fa-calendar"></i> 
-                           </button>
+                            <button class="btn btn-secondary" type="button" (click)="dpFechaConstitucion.open()">
+                              <i class="fa fa-calendar"></i>
+                            </button>
                           </span>
                         </div>
+                        <mat-datepicker touchUi="true" #dpFechaConstitucion></mat-datepicker>
                       </div>
                     </div>
                     <div class="form-group row">
@@ -443,15 +444,16 @@
                     <label class="col-form-label col-sm-3">Fecha de nacimiento</label>
                     <div class="col-sm-9">
                       <div class="input-group">
-                        <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #dfechaConyuge="ngbDatepicker"
+                        <input class="form-control" placeholder="yyyy-mm-dd" [matDatepicker]="dpFechaNacimientoConyugue" (ngModelChange)="onFechaChange()"
                           type="text" name="fecha_nacimiento_conyuge" id="fecha_nacimiento_conyuge" placement="bottom-left"
                           [(ngModel)]="cliente.fecha_nacimiento_conyuge">
-                        <span class="input-group-btn"> 
-                          <button class="btn btn-secondary" type="button" (click)="dfechaConyuge.toggle()">                             
-                           <i class="fa fa-calendar"></i>
-                          </button>                          
+                        <span class="input-group-btn">
+                          <button class="btn btn-secondary" type="button" (click)="dpFechaNacimientoConyugue.open()">
+                            <i class="fa fa-calendar"></i>
+                          </button>
                         </span>
                       </div>
+                      <mat-datepicker touchUi="true" #dpFechaNacimientoConyugue></mat-datepicker>
                     </div>
                   </div>
                   <div class="form-group row">
@@ -603,26 +605,20 @@
                       <input type="text" class="form-control" name="lugar_nacimiento_apoderado" [(ngModel)]="cliente.lugar_nacimiento_apoderado">
                     </div>
                   </div>
-                  <!-- <div class="form-group row">
-                    <label class="col-form-label col-sm-3">Fecha de nacimiento</label>
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" name="fecha_nacimiento_apoderado" [(ngModel)]="cliente.fecha_nacimiento_apoderado"
-                        date-picker>
-                    </div>
-                  </div> -->
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">Fecha de nacimiento</label>
                     <div class="col-sm-9">
                       <div class="input-group">
-                        <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #dfechaApoderado="ngbDatepicker"
-                          type="text" name="fecha_nacimiento_apoderado" id="fecha_nacimiento_apoderado" placement="bottom-left"
-                          [(ngModel)]="cliente.fecha_nacimiento_apoderado">
-                        <span class="input-group-btn"> 
-                         <button class="btn btn-secondary" type="button" (click)="dfechaApoderado.toggle()">                             
-                          <i class="fa fa-calendar"></i> 
-                         </button>                         
+                        <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_nacimiento_apoderado" id="fecha_nacimiento_apoderado"
+                          placement="bottom-left" [(ngModel)]="cliente.fecha_nacimiento_apoderado" [matDatepicker]="dpFechaNacimientoApoderado"
+                          (ngModelChange)="onFechaChange()">
+                        <span class="input-group-btn">
+                          <button class="btn btn-secondary" type="button" (click)="dpFechaNacimientoApoderado.open()">
+                            <i class="fa fa-calendar"></i>
+                          </button>
                         </span>
                       </div>
+                      <mat-datepicker touchUi="true" #dpFechaNacimientoApoderado></mat-datepicker>
                     </div>
                   </div>
                   <div class="form-group row">
@@ -728,7 +724,9 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
         <h4 class="modal-title" id="myModalLabel">El cliente se ha creado con éxito.</h4>
       </div>
       <div class="modal-body">

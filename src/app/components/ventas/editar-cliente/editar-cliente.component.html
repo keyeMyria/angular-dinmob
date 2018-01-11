@@ -4,7 +4,7 @@
       <form class="form-horizontal" name="formCliente" id="formCliente" novalidate (ngSubmit)="updateCliente()">
 
 
-        <div class="card">       
+        <div class="card">
           <div>
             <mat-tab-group>
               <!-- <div class="tab-content"> -->
@@ -17,9 +17,9 @@
                     <label class="col-form-label col-sm-3">Actividad Económica</label>
                     <div class="col-sm-9">
                       <select class="form-control" name="persona_moral" [(ngModel)]="cliente.persona_moral">
-                                              <option value="0">Persona Física</option>
-                                              <option value="1">Persona Moral</option>
-                                          </select>
+                        <option value="0">Persona Física</option>
+                        <option value="1">Persona Moral</option>
+                      </select>
                     </div>
                   </div>
 
@@ -59,15 +59,15 @@
                       <label class="col-form-label col-sm-3" for="fecha_nacimiento_persona_fisica">Fecha de nacimiento</label>
                       <div class="col-sm-9">
                         <div class="input-group">
-                          <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #dfechaNacimiento="ngbDatepicker"
-                            type="text" name="fecha_nacimiento_persona_fisica" id="fecha_nacimiento_persona_fisica" placement="bottom-left"
-                            [(ngModel)]="cliente.fecha_nacimiento_persona_fisica">
-                          <span class="input-group-btn"> 
-                            <button class="btn btn-secondary" type="button" (click)="dfechaNacimiento.toggle()">                           
-                              <i class="fa fa-calendar"></i> 
-                            </button>                          
+                          <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_nacimiento_persona_fisica" id="fecha_nacimiento_persona_fisica"
+                            [(ngModel)]="cliente.fecha_nacimiento_persona_fisica" [matDatepicker]="dpFechaNacimientoPF" (ngModelChange)="onFechaChange()">
+                          <span class="input-group-btn">
+                            <button class="btn btn-secondary" type="button" (click)="dpFechaNacimientoPF.open()">
+                              <i class="fa fa-calendar"></i>
+                            </button>
                           </span>
                         </div>
+                        <mat-datepicker touchUi="true" #dpFechaNacimientoPF></mat-datepicker>
                       </div>
                     </div>
 
@@ -151,19 +151,19 @@
                       <label class="col-form-label col-sm-3">Estado civil</label>
                       <div class="col-sm-9">
                         <select class="form-control" name="estado_civil_persona_fisica" [(ngModel)]="cliente.estado_civil_persona_fisica">
-                                                  <option value="0">Soltero</option>
-                                                  <option value="1">Casado</option>
-                                              </select>
+                          <option value="0">Soltero</option>
+                          <option value="1">Casado</option>
+                        </select>
 
                       </div>
                     </div>
                     <div class="form-group row" *ngIf="cliente.estado_civil_persona_fisica === '1'">
                       <label class="col-form-label col-sm-3">Régimen</label>
                       <div class="col-sm-9">
-                        <select class="form-control" name="regimen_conyugal_persona_fisica" [(ngModel)]="cliente.regimen_conyugal_persona_fisica">                                               
-                                                  <option value="0">Separación de Bienes</option>
-                                                  <option value="1">Sociedad Conyugal</option>
-                                              </select>
+                        <select class="form-control" name="regimen_conyugal_persona_fisica" [(ngModel)]="cliente.regimen_conyugal_persona_fisica">
+                          <option value="0">Separación de Bienes</option>
+                          <option value="1">Sociedad Conyugal</option>
+                        </select>
                       </div>
                     </div>
                     <!-- Domicilio Fiscal persona fisica -->
@@ -247,15 +247,15 @@
                       <label class="col-form-label col-sm-3">Fecha de constitución</label>
                       <div class="col-sm-9">
                         <div class="input-group">
-                          <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #dfechaConstitucion="ngbDatepicker"
-                            type="text" name="fecha_constitucion_persona_moral" id="fecha_constitucion_persona_moral" placement="bottom-left"
-                            [(ngModel)]="cliente.fecha_constitucion_persona_moral">
-                          <span class="input-group-btn"> 
-                            <button class="btn btn-secondary" type="button" (click)="dfechaConstitucion.toggle()">                           
-                              <i class="fa fa-calendar"></i> 
-                            </button>                           
+                          <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_constitucion_persona_moral" id="fecha_constitucion_persona_moral"
+                            [(ngModel)]="cliente.fecha_constitucion_persona_moral" [matDatepicker]="dpFechaConstitucion" (ngModelChange)="onFechaChange()">
+                          <span class="input-group-btn">
+                            <button class="btn btn-secondary" type="button" (click)="dpFechaConstitucion.open()">
+                              <i class="fa fa-calendar"></i>
+                            </button>
                           </span>
                         </div>
+                        <mat-datepicker touchUi="true" #dpFechaConstitucion></mat-datepicker>
                       </div>
                     </div>
                     <div class="form-group row">
@@ -461,15 +461,15 @@
                     <label class="col-form-label col-sm-3" for="fecha_nacimiento_conyuge">Fecha de nacimiento</label>
                     <div class="col-sm-9">
                       <div class="input-group">
-                        <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #dfechaConyuge="ngbDatepicker"
-                          type="text" name="fecha_nacimiento_conyuge" id="fecha_nacimiento_conyuge" placement="bottom-left"
-                          [(ngModel)]="cliente.fecha_nacimiento_conyuge">
+                        <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_nacimiento_conyuge" id="fecha_nacimiento_conyuge"
+                          [(ngModel)]="cliente.fecha_nacimiento_conyuge" [matDatepicker]="dpFechaNacimientoConyugue" (ngModelChange)="onFechaChange()">
                         <span class="input-group-btn">
-                          <button class="btn btn-secondary" type="button" (click)="dfechaConyuge.toggle()">                          
-                            <i class="fa fa-calendar"></i>  
-                          </button>                 
+                          <button class="btn btn-secondary" type="button" (click)="dpFechaNacimientoConyugue.open()">
+                            <i class="fa fa-calendar"></i>
+                          </button>
                         </span>
                       </div>
+                      <mat-datepicker touchUi="true" #dpFechaNacimientoConyugue></mat-datepicker>
                     </div>
                   </div>
                   <div class="form-group row">
@@ -632,15 +632,15 @@
                     <label class="col-form-label col-sm-3" for="fecha_nacimiento_apoderado">Fecha de nacimiento</label>
                     <div class="col-sm-9">
                       <div class="input-group">
-                        <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #dfechaApoderado="ngbDatepicker"
-                          type="text" name="fecha_nacimiento_apoderado" id="fecha_nacimiento_apoderado" placement="bottom-right"
-                          [(ngModel)]="cliente.fecha_nacimiento_apoderado">
+                        <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_nacimiento_apoderado" id="fecha_nacimiento_apoderado"
+                          [(ngModel)]="cliente.fecha_nacimiento_apoderado" [matDatepicker]="dpFechaNacimientoApoderado" (ngModelChange)="onFechaChange()">
                         <span class="input-group-btn">
-                          <button class="btn btn-secondary" type="button" (click)="dfechaApoderado.toggle()">                          
-                            <i class="fa fa-calendar"></i>  
-                          </button>                        
+                          <button class="btn btn-secondary" type="button" (click)="dpFechaNacimientoApoderado.open()">
+                            <i class="fa fa-calendar"></i>
+                          </button>
                         </span>
                       </div>
+                      <mat-datepicker touchUi="true" #dpFechaNacimientoApoderado></mat-datepicker>
                     </div>
                   </div>
                   <div class="form-group row">
@@ -755,12 +755,12 @@
                               </button>
                               <mat-menu #menu1="matMenu">
                                 <button mat-menu-item>
-                                    <mat-icon>create</mat-icon>
-                                    <span>Editar</span>
+                                  <mat-icon>create</mat-icon>
+                                  <span>Editar</span>
                                 </button>
                                 <button mat-menu-item>
-                                    <mat-icon>delete</mat-icon>
-                                    <span>Eliminar</span>
+                                  <mat-icon>delete</mat-icon>
+                                  <span>Eliminar</span>
                                 </button>
                               </mat-menu>
                             </div>
@@ -783,8 +783,8 @@
                           <th>Cónyuge</th>
                           <th class="text-right">
                             <button mat-icon-button (click)="agregarDocumento()">
-                                <mat-icon>add</mat-icon>
-                              </button>
+                              <mat-icon>add</mat-icon>
+                            </button>
                           </th>
                         </tr>
                       </thead>
@@ -799,16 +799,16 @@
                               <!-- <button type="button" class="btn btn-default btn-sm" (click)="pre_updateDocument(doc)"><span class="glyphicon glyphicon-pencil"></span></button>
                               <button type="button" class="btn btn-default btn-sm" (click)="pre_delDocument(doc)"><span class="glyphicon glyphicon-remove"></span></button> -->
                               <button mat-icon-button [matMenuTriggerFor]="menu2">
-                                  <mat-icon>more_vert</mat-icon>
-                                </button>
+                                <mat-icon>more_vert</mat-icon>
+                              </button>
                               <mat-menu #menu2="matMenu">
                                 <button mat-menu-item>
-                                    <mat-icon>create</mat-icon>
-                                    <span>Editar</span>
+                                  <mat-icon>create</mat-icon>
+                                  <span>Editar</span>
                                 </button>
                                 <button mat-menu-item>
-                                    <mat-icon>delete</mat-icon>
-                                    <span>Eliminar</span>
+                                  <mat-icon>delete</mat-icon>
+                                  <span>Eliminar</span>
                                 </button>
                               </mat-menu>
                             </div>
@@ -846,8 +846,12 @@
                       <tbody>
                         <tr *ngFor="let compra of compras" (click)="selectCompra(compra, $event)" style="cursor: pointer;" [ngClass]="{'activo':compra.selected}">
                           <!--<td><input type="radio" name="lote"></td>-->
-                          <td><span [ngClass]="{'glyphicon glyphicon-check':compra.selected, 'glyphicon glyphicon-unchecked': !compra.selected}"></span></td>
-                          <td>{{compra.obra}} - {{compra.manzana}} - <b>{{compra.lote}}</b></td>
+                          <td>
+                            <span [ngClass]="{'glyphicon glyphicon-check':compra.selected, 'glyphicon glyphicon-unchecked': !compra.selected}"></span>
+                          </td>
+                          <td>{{compra.obra}} - {{compra.manzana}} -
+                            <b>{{compra.lote}}</b>
+                          </td>
                           <td>{{compra.activo}}</td>
                           <td>{{compra.fecha_activo}}</td>
                           <td>{{compra.fecha_cancelacion}}</td>
@@ -855,7 +859,9 @@
                             <button type="button" class="btn btn-default btn-sm" (click)="cancelarAsociacion(compra, $event)">{{compra.activo}}</button>
                             <button type="button" class="btn btn-default btn-sm" (click)="pre_eliminarAsociacion(compra, $event)">Eliminar</button>
                             <button type="button" class="btn btn-default btn-sm" (click)="reporteAsociacion(compra, $event)">Reporte</button>
-                            <button type="button" title="Ir a lote" class="btn btn-default btn-sm" ui-sref="^.ventas_lote({id_lote:compra.id_lote})"><span class="glyphicon glyphicon-home"></span></button>
+                            <button type="button" title="Ir a lote" class="btn btn-default btn-sm" ui-sref="^.ventas_lote({id_lote:compra.id_lote})">
+                              <span class="glyphicon glyphicon-home"></span>
+                            </button>
                           </td>
                         </tr>
                       </tbody>
@@ -874,9 +880,10 @@
                     <label class="col-form-label col-sm-3">Estado Lote</label>
                     <div class="col-sm-9">
                       <div class="input-group">
-                        <select class="form-control">    <!-- [(ngModel)]='compra_selected.id_estado_venta' -->
-                                            <option *ngFor="let estado of estados" [value]="estado.id_estado_lote">{{estado.descripcion}}</option>                                                 
-                                                        </select>
+                        <select class="form-control">
+                          <!-- [(ngModel)]='compra_selected.id_estado_venta' -->
+                          <option *ngFor="let estado of estados" [value]="estado.id_estado_lote">{{estado.descripcion}}</option>
+                        </select>
                         <div class="input-group-btn">
                           <button type="button" class="btn btn-secondary" (click)="actualizarEstadoLote(compra_selected)">Actualizar</button>
                         </div>
@@ -893,14 +900,15 @@
                     <label class="col-form-label col-sm-3" for="fecha_estado">Fecha Estado</label>
                     <div class="col-sm-9">
                       <div class="input-group">
-                        <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #dfechaEstado="ngbDatepicker"
-                          type="text" name="fecha_estado" id="fecha_estado" placement="bottom-left">
+                        <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_estado" id="fecha_estado" [matDatepicker]="dpFechaEstado"
+                          (ngModelChange)="onFechaChange()">
                         <span class="input-group-btn">
-                          <button class="btn btn-secondary" type="button" (click)="dfechaEstado.toggle()">                         
+                          <button class="btn btn-secondary" type="button" (click)="dpFechaEstado.open()">
                             <i class="fa fa-calendar"></i>
-                          </button>                          
-                       </span>
+                          </button>
+                        </span>
                       </div>
+                      <mat-datepicker touchUi="true" #dpFechaEstado></mat-datepicker>
                     </div>
                   </div>
 
@@ -949,9 +957,9 @@
                       <label class="col-form-label col-sm-3">Tipo de operación</label>
                       <div class="col-sm-9">
                         <select class="form-control" name="id_tipo_operacion" [(ngModel)]="compra_selected.id_tipo_operacion">
-                                                        <option [value]="">Seleccionar...</option>
-                                                        <option *ngFor="let op of tipos_operacion" [value]="op.id_tipo_operacion">{{op.descripcion}}</option>
-                                                    </select>
+                          <option [value]="">Seleccionar...</option>
+                          <option *ngFor="let op of tipos_operacion" [value]="op.id_tipo_operacion">{{op.descripcion}}</option>
+                        </select>
                       </div>
                     </div>
 
@@ -959,9 +967,9 @@
                       <label class="col-form-label col-sm-3">Institución Crédito</label>
                       <div class="col-sm-9">
                         <select class="form-control" name="id_institucion_credito" [(ngModel)]="compra_selected.id_institucion_credito">
-                                                        <option [value]="">Seleccionar...</option>
-                                                        <option *ngFor="let inst of instituciones" [value]="inst.id_istituciones_credito">{{Inst.nombre}}</option>
-                                                    </select>
+                          <option [value]="">Seleccionar...</option>
+                          <option *ngFor="let inst of instituciones" [value]="inst.id_istituciones_credito">{{Inst.nombre}}</option>
+                        </select>
                       </div>
                     </div>
 
@@ -982,14 +990,15 @@
                       <label class="col-form-label col-sm-3" for="fecha_firma_contrato">Fecha Firma Contrato</label>
                       <div class="col-sm-9">
                         <div class="input-group">
-                          <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #dfechaFirma="ngbDatepicker"
-                            type="text" name="fecha_firma_contrato" id="fecha_firma_contrato" placement="bottom-left">
-                          <span class="input-group-btn"> 
-                            <button class="btn btn-secondary" type="button" (click)="dfechaFirma.toggle()">                           
-                              <i class="fa fa-calendar"></i>   
-                            </button>                         
+                          <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_firma_contrato" id="fecha_firma_contrato" [matDatepicker]="dpFechaFirmaContrato"
+                            (ngModelChange)="onFechaChange()">
+                          <span class="input-group-btn">
+                            <button class="btn btn-secondary" type="button" (click)="dpFechaFirmaContrato.open()">
+                              <i class="fa fa-calendar"></i>
+                            </button>
                           </span>
                         </div>
+                        <mat-datepicker touchUi="true" #dpFechaFirmaContrato></mat-datepicker>
                       </div>
                     </div>
 
@@ -997,14 +1006,15 @@
                       <label class="col-form-label col-sm-3" for="fecha_entrega">Fecha Entrega Contrato</label>
                       <div class="col-sm-9">
                         <div class="input-group">
-                          <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #dfechaEntrega="ngbDatepicker"
-                            type="text" name="fecha_entrega" id="fecha_entrega" placement="bottom-left">
-                          <span class="input-group-btn"> 
-                            <button class="btn btn-secondary" type="button" (click)="dfechaEntrega.toggle()">                           
-                             <i class="fa fa-calendar"></i> 
-                            </button>                          
+                          <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_entrega" id="fecha_entrega" [matDatepicker]="dpFechaEntrega"
+                            (ngModelChange)="onFechaChange()">
+                          <span class="input-group-btn">
+                            <button class="btn btn-secondary" type="button" (click)="dpFechaEntrega.open()">
+                              <i class="fa fa-calendar"></i>
+                            </button>
                           </span>
                         </div>
+                        <mat-datepicker touchUi="true" #dpFechaEntrega></mat-datepicker>
                       </div>
                     </div>
 
@@ -1018,9 +1028,9 @@
                       <label class="col-form-label col-sm-3">Asesor</label>
                       <div class="col-sm-9">
                         <select class="form-control" name="id_asesor" [(ngModel)]="compra_selected.id_asesor">
-                                                        <option [value]="">Seleccionar...</option>
-                                                        <option *ngFor="let a of asesores" [value]="a.value">{{a.text}}</option>
-                                                    </select>
+                          <option [value]="">Seleccionar...</option>
+                          <option *ngFor="let a of asesores" [value]="a.value">{{a.text}}</option>
+                        </select>
                       </div>
                     </div>
                     <div class="form-group row" *ngIf="compra_selected.id_estado_venta === '5'">
@@ -1041,14 +1051,15 @@
                       <label class="col-form-label col-sm-3" for="fecha_entrega_fisica">Fecha Entrega Física</label>
                       <div class="col-sm-9">
                         <div class="input-group">
-                          <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #dfechaFisica="ngbDatepicker"
-                            type="text" name="fecha_entrega_fisica" id="fecha_entrega_fisica" placement="bottom-left">
-                          <span class="input-group-btn"> 
-                            <button class="btn btn-secondary" type="button" (click)="dfechaFisica.toggle()">                           
-                              <i class="fa fa-calendar"></i>  
-                            </button>                          
+                          <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_entrega_fisica" id="fecha_entrega_fisica" [matDatepicker]="dpFechaEntregaFisica"
+                            (ngModelChange)="onFechaChange()">
+                          <span class="input-group-btn">
+                            <button class="btn btn-secondary" type="button" (click)="dpFechaEntregaFisica.open()">
+                              <i class="fa fa-calendar"></i>
+                            </button>
                           </span>
                         </div>
+                        <mat-datepicker touchUi="true" #dpFechaEntregaFisica></mat-datepicker>
                       </div>
                     </div>
 
@@ -1090,10 +1101,13 @@
                       <tbody>
                         <tr>
                           <!-- *ngFor"compra in compras" (click)="selectCompra(compra, $event)" style="cursor: pointer;" [ngClass]="{'activo':compra.selected}" -->
-                          <td><span></span></td>
+                          <td>
+                            <span></span>
+                          </td>
                           <!-- [ngClass]="{'glyphicon glyphicon-check':compra.selected, 'glyphicon glyphicon-unchecked': !compra.selected}" -->
                           <td>
-                            <!-- {{compra.obra}} - {{compra.manzana}} - <b>{{compra.lote}} --></td>
+                            <!-- {{compra.obra}} - {{compra.manzana}} - <b>{{compra.lote}} -->
+                          </td>
                           <td>
                             <!-- {{compra.activo|compraActiva}} -->
                           </td>
@@ -1108,20 +1122,20 @@
                             <button  type="button" class="btn btn-default btn-sm" (click)="pre_eliminarAsociacion(compra, $event)">Eliminar</button>                            
                             <button type="button" class="btn btn-default btn-sm" (click)="reporteAsociacion(compra, $event)">Reporte</button> -->
                             <button mat-icon-button [matMenuTriggerFor]="menu3">
-                                <mat-icon>more_vert</mat-icon>
-                              </button>
+                              <mat-icon>more_vert</mat-icon>
+                            </button>
                             <mat-menu #menu3="matMenu">
                               <button mat-menu-item>
-                                  <mat-icon>cancel</mat-icon>
-                                  <span>Cancelar</span>
+                                <mat-icon>cancel</mat-icon>
+                                <span>Cancelar</span>
                               </button>
                               <button mat-menu-item>
-                                  <mat-icon>delete</mat-icon>
-                                  <span>Eliminar</span>
+                                <mat-icon>delete</mat-icon>
+                                <span>Eliminar</span>
                               </button>
                               <button mat-menu-item>
-                                  <mat-icon>report</mat-icon>
-                                  <span>Reporte</span>
+                                <mat-icon>report</mat-icon>
+                                <span>Reporte</span>
                               </button>
                             </mat-menu>
                           </td>
@@ -1147,7 +1161,9 @@
                           <th>Forma</th>
                           <th>Nota</th>
                           <th>Validado</th>
-                          <th><span class="glyphicon glyphicon-picture"></span></th>
+                          <th>
+                            <span class="glyphicon glyphicon-picture"></span>
+                          </th>
                           <th style="width:126px;"></th>
                         </tr>
                       </thead>
@@ -1172,9 +1188,15 @@
                           <td>
                             <!-- {{pago.nota}} -->
                           </td>
-                          <td><span class="label"><!-- {{pago.validado|validado}} --></span></td>
+                          <td>
+                            <span class="label">
+                              <!-- {{pago.validado|validado}} -->
+                            </span>
+                          </td>
                           <!-- [ngClass]="{'label-danger': pago.validado == '0', 'label-success':pago.validado == '1'}" -->
-                          <td><a target="_blank"></a></td>
+                          <td>
+                            <a target="_blank"></a>
+                          </td>
                           <!-- *ngIf="pago.file_ficha_deposito"  -->
                           <td class="text-right">
                             <div style="width: 110px;">
@@ -1182,20 +1204,20 @@
                               <button type="button" class="btn btn-default btn-sm" (click)="pre_updatePago(pago)"><i class="glyphicon glyphicon-pencil"></i></button>
                               <button type="button" class="btn btn-default btn-sm" (click)="pre_eliminarPago(pago)"><i class="glyphicon glyphicon-remove"></i></button> -->
                               <button mat-icon-button [matMenuTriggerFor]="menu4">
-                                  <mat-icon>more_vert</mat-icon>
-                                </button>
+                                <mat-icon>more_vert</mat-icon>
+                              </button>
                               <mat-menu #menu4="matMenu">
                                 <button mat-menu-item>
-                                    <mat-icon>attachment</mat-icon>
-                                    <span>Ficha</span>
+                                  <mat-icon>attachment</mat-icon>
+                                  <span>Ficha</span>
                                 </button>
                                 <button mat-menu-item (click)="editarPago()">
-                                    <mat-icon>create</mat-icon>
-                                    <span>Editar</span>
+                                  <mat-icon>create</mat-icon>
+                                  <span>Editar</span>
                                 </button>
                                 <button mat-menu-item>
-                                    <mat-icon>delete</mat-icon>
-                                    <span>Eliminar</span>
+                                  <mat-icon>delete</mat-icon>
+                                  <span>Eliminar</span>
                                 </button>
                               </mat-menu>
                             </div>
@@ -1243,7 +1265,8 @@
                   <div class="form-group">
                     <div class="checkbox col-sm-12">
                       <label>
-                        <input type="checkbox"> Alerta Activada <!-- [(ngModel)]="alerta"  -->
+                        <input type="checkbox"> Alerta Activada
+                        <!-- [(ngModel)]="alerta"  -->
                       </label>
                     </div>
                   </div>

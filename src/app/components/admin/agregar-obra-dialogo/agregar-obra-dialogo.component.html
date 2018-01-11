@@ -5,42 +5,45 @@
       <label for="nombre">Nombre</label>
       <div>
         <input class="form-control" type="text" id="nombre" name="nombre" [(ngModel)]="obra.nombre">
-        
+
       </div>
     </div>
 
     <div class="form-group">
-      <label for="fecha_entrega">Fecha Inicio</label>
-      <div >
+      <label for="fecha_ini">Fecha Inicio</label>
+      <div>
         <div class="input-group">
-          <input class="form-control" placeholder="yyyy-mm-dd" ngbDatepicker #d="ngbDatepicker" type="text" name="fecha_entrega" id="fecha_entrega" placement="bottom-right"
-          [(ngModel)]="obra.fecha_ini">
+          <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_ini" id="fecha_ini" [(ngModel)]="obra.fecha_ini"
+            [matDatepicker]="dpFechaInicio" (ngModelChange)="onFechaChange()">
           <span class="input-group-btn">
-            <button class="btn btn-secondary" type="button" (click)="d.toggle()">
-            <i class="fa fa-calendar"></i>
+            <button class="btn btn-secondary" type="button" (click)="dpFechaInicio.open()">
+              <i class="fa fa-calendar"></i>
             </button>
-            </span>
+          </span>
         </div>
+        <mat-datepicker touchUi="true" #dpFechaInicio></mat-datepicker>
       </div>
     </div>
     <div class="form-group">
       <label for="nombre">Residente</label>
       <div class="input-group">
         <select class="form-control" name="" selectval>
-                <option>Elegir residente</option>
-                <option>1</option> 
-            </select>
+          <option>Elegir residente</option>
+          <option>1</option>
+        </select>
         <span class="input-group-btn">
-              <button class="btn btn-secondary"><i class="fa fa-plus" aria-hidden="true"></i></button>
-            </span>
+          <button class="btn btn-secondary">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+          </button>
+        </span>
       </div>
     </div>
     <div class="form-group">
       <label for="nombre">Almacenista</label>
       <div class="input-group">
         <select class="form-control" name="" selectval>
-                  <option>Elegir residente</option>
-                  <option>1</option> 
+          <option>Elegir residente</option>
+          <option>1</option>
         </select>
       </div>
     </div>
@@ -50,10 +53,12 @@
       <div class="input-group">
         <select class="form-control" name="" selectval>
           <option>Elegir</option>
-          <option>1</option> 
+          <option>1</option>
         </select>
         <span class="input-group-btn">
-          <button class="btn btn-secondary"><i class="fa fa-plus" aria-hidden="true"></i></button>
+          <button class="btn btn-secondary">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+          </button>
         </span>
       </div>
     </div>
@@ -62,7 +67,7 @@
 
 
 
-</form>
+  </form>
 
 
 </div>

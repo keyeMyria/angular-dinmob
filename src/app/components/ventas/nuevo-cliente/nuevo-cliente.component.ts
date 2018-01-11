@@ -38,4 +38,8 @@ export class NuevoClienteComponent implements OnInit {
       
 
   }
+
+  onFechaChange(){
+    
+  }
 }

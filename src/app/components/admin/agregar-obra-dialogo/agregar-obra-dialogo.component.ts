@@ -24,5 +24,11 @@ export class AgregarObraDialogoComponent implements OnInit {
     this.obra=this.data.obra;
   }
 
+  onFechaChange(){
+   /*  console.log("fecha change",this.fecha_publicacion.format());
+    this.anuncio.fecha_publicacion = this.fecha_publicacion.format(); */
+
+  }
+
 
 }

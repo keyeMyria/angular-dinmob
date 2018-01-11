@@ -19,7 +19,10 @@ import {
   MatDialogModule,
   MatProgressSpinnerModule,
   MatSnackBarModule,
-  MatGridListModule
+  MatGridListModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  //NativeDateAdapter,
 } from "@angular/material";
 
 @NgModule({
@@ -42,7 +45,9 @@ import {
     MatDialogModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
-    MatGridListModule
+    MatGridListModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   exports: [
     MatMenuModule,
@@ -63,7 +68,9 @@ import {
     MatDialogModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
-    MatGridListModule
+    MatGridListModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ]
 })
 export class AngularMaterialModule { }

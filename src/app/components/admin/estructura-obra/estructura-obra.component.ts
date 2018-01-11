@@ -97,5 +97,9 @@ export class EstructuraObraComponent implements OnInit {
     return 0;
   }
 
+  onFechaChange() {
+    
+  }
+
 
 }

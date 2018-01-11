@@ -5,11 +5,9 @@ import { HttpModule } from "@angular/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RoutingModule } from "app/app.routing";
 import { I18n, SpanishDatepickerI18nService } from "app/services/spanish-datepicker-i18n.service";
-import { NgbDatepickerI18n, NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { TextMaskModule } from "angular2-text-mask";
-
 import { AuthModule } from "app/modules/auth.module";
-import { FlexLayoutModule } from "@angular/flex-layout";
+
 import "hammerjs";
 
 
@@ -167,9 +165,7 @@ import { GenerarActaEntregaComponent } from './components/ventas/generar-acta-en
     HttpModule,
     FormsModule,
     BrowserAnimationsModule,
-    FlexLayoutModule,
-    AuthModule,
-    NgbModule.forRoot(),
+    AuthModule, 
     AngularMaterialModule,
     TextMaskModule,
     RoutingModule
@@ -200,7 +196,6 @@ import { GenerarActaEntregaComponent } from './components/ventas/generar-acta-en
 
   providers: [
     I18n,
-    {provide:NgbDatepickerI18n, useClass:SpanishDatepickerI18nService},
     AuthGuard,
     ConfigService,
     AuthService,

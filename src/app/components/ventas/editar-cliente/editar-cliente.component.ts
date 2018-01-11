@@ -114,4 +114,7 @@ export class EditarClienteComponent implements OnInit {
 
   }
 
+  onFechaChange() {
+
+  }
 }

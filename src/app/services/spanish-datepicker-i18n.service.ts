@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { NgbDatepickerI18n } from "@ng-bootstrap/ng-bootstrap";
+//import { NgbDatepickerI18n } from "@ng-bootstrap/ng-bootstrap";
 
 
 const I18N_VALUES = {
@@ -25,21 +25,23 @@ export class I18n {
 
 
 @Injectable()
-export class SpanishDatepickerI18nService extends NgbDatepickerI18n {
+export class SpanishDatepickerI18nService {
+
+  //extends NgbDatepickerI18n
 
   constructor(private i18n: I18n) {
-    super();
+
   }
 
-  getWeekdayShortName(weekday: number): string {
-    return I18N_VALUES[this.i18n.language].weekdays[weekday - 1];
-  }
-  getMonthShortName(month: number): string {
-    return I18N_VALUES[this.i18n.language].months[month - 1];
-  }
-  getMonthFullName(month: number): string {
-    return this.getMonthShortName(month);
-  }
+  /*   getWeekdayShortName(weekday: number): string {
+      return I18N_VALUES[this.i18n.language].weekdays[weekday - 1];
+    }
+    getMonthShortName(month: number): string {
+      return I18N_VALUES[this.i18n.language].months[month - 1];
+    }
+    getMonthFullName(month: number): string {
+      return this.getMonthShortName(month);
+    } */
 
 
 
