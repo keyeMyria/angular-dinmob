@@ -3,6 +3,9 @@ import { ObrasService } from "app/services/obras.service";
 import { Usuario } from "app/model/usuario";
 import { AuthService } from "app/services/auth.service";
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
+import { EditarManzanaDialogoComponent } from 'app/components/admin/editar-manzana-dialogo/editar-manzana-dialogo.component';
+import { MatDialog } from '@angular/material';
+import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
 
 @Component({
   selector: 'app-estructura-obra',
@@ -11,9 +14,11 @@ import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 })
 export class EstructuraObraComponent implements OnInit {
 
-  public maskPreInFi = [/\d/, /\d/, /\d/, /\d/, /\d/]
+  public maskDosDigitos = [/[1-9]/, /\d/];
+  guide: boolean = false;
 
-  usuario:Usuario;
+  selectedOption: string;
+  usuario: Usuario;
   obras: any = [];
   obra: any = {
     datos: {}
@@ -32,28 +37,30 @@ export class EstructuraObraComponent implements OnInit {
   };
 
   nuevoLote: any = {
-    nombre:""
+    nombre: ""
   };
 
   op: any = {
-    prototipo:""
+    prototipo: ""
   };
 
-  manzanaSelected: any ={
-    nombre:""
+  manzanaSelected: any = {
+    nombre: ""
   };
+
 
 
 
   constructor(
     private obraSrv: ObrasService,
-    private auth:AuthService
+    private auth: AuthService,
+    public dialog: MatDialog
   ) { }
 
 
 
   ngOnInit() {
-    this.usuario=this.auth.getUsuario();
+    this.usuario = this.auth.getUsuario();
 
 
     this.obraSrv.loadFullObra(58)
@@ -98,8 +105,40 @@ export class EstructuraObraComponent implements OnInit {
   }
 
   onFechaChange() {
-    
+
   }
+
+  editarManzana() {
+    let dialogRef = this.dialog.open(EditarManzanaDialogoComponent, {
+      data: {},
+      width: '500px',
+
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.selectedOption = result;
+    });
+  }
+
+  DelManzana() {
+
+    let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
+      data: {
+        title: "Eliminar Manzana",
+        content: `¿Desea eliminar la Manzana?`
+      },
+      width: "500px"
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+    });
+
+  }
+
+  createManzanas() {
+    console.log("Opciones", this.addManzanaOptions);
+  }
+
 
 
 }

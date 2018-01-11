@@ -5,9 +5,9 @@
             <!-- Seleccionar Obra -->
             <div class="mb-2">
                 <select class="form-control" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)">
-                        <option value="">Seleccionar...</option>
-                        <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>                                     
-                    </select>
+                    <option value="">Seleccionar...</option>
+                    <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>
+                </select>
             </div>
 
             <!-- Manzanas y Lotes -->
@@ -20,9 +20,20 @@
                         <span>{{manzana.nombre}}</span>
                         <div class="spacer"></div>
                         <div class="collapse-header-btns">
-                            <i class="fa fa-pencil"></i>
-                            <i class="fa fa-times"></i>
                             <span class="badge badge-pill badge-primary">5</span>
+                            <button mat-icon-button [matMenuTriggerFor]="menu2" (click)="$event.stopPropagation()">
+                                <mat-icon>more_vert</mat-icon>
+                            </button>
+                            <mat-menu #menu2="matMenu">
+                                <button mat-menu-item (click)="editarManzana()">
+                                    <mat-icon>create</mat-icon>
+                                    <span>Editar</span>
+                                </button>
+                                <button mat-menu-item (click)="DelManzana()">
+                                    <mat-icon>delete</mat-icon>
+                                    <span>Eliminar</span>
+                                </button>
+                            </mat-menu>
                         </div>
                     </mat-expansion-panel-header>
 
@@ -32,9 +43,11 @@
                             <table id="idTablaManzana{{manzana.id_manzana}}" class="table table-sm table-striped">
                                 <thead>
                                     <tr>
-                                        <th (click)="selectAllLotes(manzana)" style="cursor: pointer; width:30px;"><span [ngClass]="{
+                                        <th (click)="selectAllLotes(manzana)" style="cursor: pointer; width:30px;">
+                                            <span [ngClass]="{
                                                       'fa fa-check-square-o'
-                                                      :manzana.selected, 'fa fa-square-o': !manzana.selected}"></span></th>
+                                                      :manzana.selected, 'fa fa-square-o': !manzana.selected}"></span>
+                                        </th>
                                         <th>Lote</th>
                                         <th class="hidden-xs hidden-sm hidden-mat">Código</th>
                                         <th>Prototipo</th>
@@ -49,20 +62,29 @@
                                     <tr *ngFor="let lote of manzana.lotes" (click)="toggleSelectionLote(manzana, lote)" style="cursor: pointer;" [ngClass]="{
                                                   'bg-primary text-white'
                                                   :lote.selected}">
-                                        <td><i class="fa" [ngClass]="{
+                                        <td>
+                                            <i class="fa" [ngClass]="{
                                                       'fa-check-square-o'
-                                                      :lote.selected, 'fa-square-o': !lote.selected}"></i></td>
+                                                      :lote.selected, 'fa-square-o': !lote.selected}"></i>
+                                        </td>
                                         <td>{{ lote.nombre}}</td>
                                         <td class="hidden-xs hidden-sm hidden-mat">{{lote.code}}</td>
                                         <td>
-                                            <span *ngFor="let prototipo of lote.prototipos"><a class="link-del-prototipo" (click)="pre_delPrototipo(lote, prototipo, $event)">{{prototipo.nombre}}</a> <br></span>
+                                            <span *ngFor="let prototipo of lote.prototipos">
+                                                <a class="link-del-prototipo" (click)="pre_delPrototipo(lote, prototipo, $event)">{{prototipo.nombre}}</a>
+                                                <br>
+                                            </span>
                                         </td>
-                                        <td>{{lote.valor_base|currency:'USD':true}}</td>
-                                        <td>{{lote.valor_ampliacion|currency :'USD':true}}</td>
+                                        <td>{{lote.valor_base|currency}}</td>
+                                        <td>{{lote.valor_ampliacion|currency}}</td>
                                         <td>{{lote.en_venta}}</td>
                                         <td>
-                                            <button class="btn btn-outline-dark btn-sm" (click)="pre_editLote(manzana, lote, $event)"><i class="fa fa-pencil"></i></button>
-                                            <button class="btn btn-outline-dark btn-sm" (click)="pre_delLote(manzana, lote, $event)"><i class="fa fa-times"></i></button>
+                                            <button class="btn btn-outline-dark btn-sm" (click)="pre_editLote(manzana, lote, $event)">
+                                                <i class="fa fa-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-outline-dark btn-sm" (click)="pre_delLote(manzana, lote, $event)">
+                                                <i class="fa fa-times"></i>
+                                            </button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -110,24 +132,23 @@
                         <div class="row">
                             <label class="col-form-label col-12 col-sm-12">Fecha Inicio</label>
                             <div class="col-12 col-sm-12">
-                              <div class="input-group">
-                                <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha" id="fecha_ini" placement="bottom-left"
-                                  [(ngModel)]="obra.datos.fecha_ini" [matDatepicker]="dpFechaInicio" (ngModelChange)="onFechaChange()">
-                                <span class="input-group-btn">
-                                  <button class="btn btn-secondary" type="button" (click)="dpFechaInicio.open()">                          
-                                    <i class="fa fa-calendar"></i>  
-                                  </button>                 
-                                </span>
-                              </div>
-                              <mat-datepicker touchUi="true" #dpFechaInicio></mat-datepicker>
+                                <div class="input-group">
+                                    <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha" id="fecha_ini" placement="bottom-left" [(ngModel)]="obra.datos.fecha_ini"
+                                        [matDatepicker]="dpFechaInicio" (ngModelChange)="onFechaChange()">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-secondary" type="button" (click)="dpFechaInicio.open()">
+                                            <i class="fa fa-calendar"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                                <mat-datepicker touchUi="true" #dpFechaInicio></mat-datepicker>
                             </div>
-                          </div>
+                        </div>
 
                         <div class="checkbox">
                             <label>
-                          <input type="checkbox" name="en_venta" ng-true-value="'1'" ng-false-value="'0'" [(ngModel)]="obra.datos.en_venta">
-                          En Venta
-                      </label>
+                                <input type="checkbox" name="en_venta" ng-true-value="'1'" ng-false-value="'0'" [(ngModel)]="obra.datos.en_venta"> En Venta
+                            </label>
                         </div>
                         <p class="help-block">Esta propiedad indica la visibilidad en el módulo de Ventas</p>
 
@@ -136,14 +157,15 @@
                                 <div class="form-group">
                                     <label class="col-form-label">Almacenista</label>
                                     <select name="id_almacenista" class="form-control" [(ngModel)]="obra.datos.id_almacenista">
-                                  <option [value]="">Elegir almacenista</option>
-                                  <option [value]="a.value" *ngFor="let a of almacenistas ">{{insumo.insumo}}</option>                                                 
-                              </select>
+                                        <option [value]="">Elegir almacenista</option>
+                                        <option [value]="a.value" *ngFor="let a of almacenistas ">{{insumo.insumo}}</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-default" (click)="addResidente($event)"><i class="fa fa-plus" aria-hidden="true"></i> Residentes</button>
+                            <button class="btn btn-default" (click)="addResidente($event)">
+                                <i class="fa fa-plus" aria-hidden="true"></i> Residentes</button>
                         </div>
 
                         <div class="row" *ngFor="let residente of obra.residentes">
@@ -151,12 +173,14 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                         <select class="form-control" name="res_{{$index}}" [(ngModel)]="residente.id_residente" selectval>
-                                      <option value="0">Elegir residente</option>
-                                              <option *ngFor="let res of residentes" [value]="res.value">{{res.text}}</option> 
-                                          </select>
+                                            <option value="0">Elegir residente</option>
+                                            <option *ngFor="let res of residentes" [value]="res.value">{{res.text}}</option>
+                                        </select>
                                         <span class="input-group-btn">
-                                              <button class="btn btn-default" (click)="delResidente($event, residente)"><i class="fa fa-minus" aria-hidden="true"></i></button>
-                                            </span>
+                                            <button class="btn btn-default" (click)="delResidente($event, residente)">
+                                                <i class="fa fa-minus" aria-hidden="true"></i>
+                                            </button>
+                                        </span>
                                     </div>
                                     <p *ngIf="(residente.id_residente === '0' || !residente.id_residente)" class="text-danger">Selecciona un residente para poder guardar los cambios</p>
                                 </div>
@@ -164,7 +188,8 @@
                         </div>
                         <p *ngIf="residentesRepetidos()" class="text-danger">Tiene algún residente repetido</p>
                         <div class="form-group">
-                            <button class="btn btn-default" (click)="addControlAlmacen($event)"><i class="fa fa-plus" aria-hidden="true"></i> Control Almacén</button>
+                            <button class="btn btn-default" (click)="addControlAlmacen($event)">
+                                <i class="fa fa-plus" aria-hidden="true"></i> Control Almacén</button>
                         </div>
 
                         <div class="row" *ngFor="let encargado of obra.control_almacen">
@@ -172,12 +197,14 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                         <select class="form-control" name="alm_{{$index}}" [(ngModel)]="encargado.id_usuario" selectval>
-                                              <option value="0">Elegir encargado</option>
-                                              <option *ngFor="let alm of control_almacen" value="{{alm.value}}">{{alm.text}}</option>
-                                          </select>
+                                            <option value="0">Elegir encargado</option>
+                                            <option *ngFor="let alm of control_almacen" value="{{alm.value}}">{{alm.text}}</option>
+                                        </select>
                                         <span class="input-group-btn">
-                                              <button class="btn btn-default" (click)="delControlAlmacen($event, encargado)"><i class="fa fa-minus" aria-hidden="true"></i></button>
-                                            </span>
+                                            <button class="btn btn-default" (click)="delControlAlmacen($event, encargado)">
+                                                <i class="fa fa-minus" aria-hidden="true"></i>
+                                            </button>
+                                        </span>
                                     </div>
                                     <p *ngIf="(encargado.id_usuario === '0' || !encargado.id_usuario)" class="text-danger">Selecciona un encargado para poder guardar los cambios</p>
                                 </div>
@@ -208,9 +235,8 @@
                             <div class="col-12 col-sm-12">
                                 <div class="radio">
                                     <label>
-                                          <input type="radio" name="tipo" [(ngModel)]="addManzanaOptions.by" value="nombre">                                        
-                                          Por nombre
-                                      </label>
+                                        <input type="radio" name="tipo" [(ngModel)]="addManzanaOptions.by" value="nombre"> Por nombre
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -229,9 +255,8 @@
                             <div class="col-12 col-sm-12">
                                 <div class="radio">
                                     <label>
-                                          <input type="radio"  name="tipo" [(ngModel)]="addManzanaOptions.by" value="numero">
-                                          Por número
-                                      </label>
+                                        <input type="radio" name="tipo" [(ngModel)]="addManzanaOptions.by" value="numero"> Por número
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -270,22 +295,23 @@
                                             'has-danger'
                                             : (manzana_prefijo.invalid && (manzana_prefijo.dirty || manzana_prefijo.touched ))}">
                                 <label class="col-form-label">Prefijo</label>
-                                <input [textMask]="{mask: maskPreInFi}" #manzana_prefijo="ngModel" type="text" class="form-control" name="manzana_prefijo" [(ngModel)]="addManzanaOptions.prefijo"
+                                <input #manzana_prefijo="ngModel" type="text" class="form-control" name="manzana_prefijo" [(ngModel)]="addManzanaOptions.prefijo"
                                     required>
                             </div>
                             <div class="form-group col-6 col-sm-3" [ngClass]="{
                                             'has-danger'
                                             : ( manzana_ini.invalid && (manzana_ini.dirty || manzana_ini.touched ))}">
                                 <label class="col-form-label">Ini</label>
-                                <input [textMask]="{mask: maskPreInFi}" #manzana_ini="ngModel" type="number" class="form-control" name="manzana_ini" [(ngModel)]="addManzanaOptions.ini" min="0"
-                                    [required]="addManzanaOptions.by === 'numero'">
+                                <input [textMask]="{mask: maskDosDigitos, guide:guide}" guide="false" #manzana_ini="ngModel" type="text" class="form-control" name="manzana_ini"
+                                    [(ngModel)]="addManzanaOptions.ini" min="0" [required]="addManzanaOptions.by === 'numero'">
                             </div>
                             <div class="form-group col-6 col-sm-3" [ngClass]="{
                                             'has-danger'
                                             : (manzana_fin.invalid && (manzana_fin.dirty || manzana_fin.touched ))}">
                                 <label class="col-form-label">Fin</label>
-                                <input [textMask]="{mask: maskPreInFi}" type="number" #manzana_fin="ngModel" class="form-control" name="manzana_fin" [(ngModel)]="addManzanaOptions.fin" min="addManzanaOptions.ini"
-                                    max="addManzanaOptions.ini+20" [required]="addManzanaOptions.by === 'numero'">
+                                <input [textMask]="{mask: maskDosDigitos, guide: guide}" type="text" #manzana_fin="ngModel" class="form-control" name="manzana_fin"
+                                    [(ngModel)]="addManzanaOptions.fin" min="addManzanaOptions.ini" max="addManzanaOptions.ini+20"
+                                    [required]="addManzanaOptions.by === 'numero'">
                             </div>
                         </div>
                         <div class="form-group">
@@ -296,7 +322,7 @@
                     </div>
                 </form>
                 <mat-action-row>
-                    <button type="submit" class="btn btn-primary">Agregar</button>
+                    <button type="submit" class="btn btn-primary" (click)="createManzanas()">Agregar</button>
                 </mat-action-row>
 
             </mat-expansion-panel>
@@ -316,9 +342,8 @@
                             <div class="col-12 col-sm-12">
                                 <div class="radio">
                                     <label>
-                                          <input type="radio" name="tipoLote" [(ngModel)]="addLoteOptions.by" value="nombre">
-                                          Por nombre
-                                      </label>
+                                        <input type="radio" name="tipoLote" [(ngModel)]="addLoteOptions.by" value="nombre"> Por nombre
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -338,9 +363,8 @@
                             <div class="col-12 col-sm-12">
                                 <div class="radio">
                                     <label>
-                                          <input type="radio" name="tipoLote" [(ngModel)]="addLoteOptions.by" value="numero">
-                                          Por número
-                                      </label>
+                                        <input type="radio" name="tipoLote" [(ngModel)]="addLoteOptions.by" value="numero"> Por número
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -351,7 +375,7 @@
                                               'has-danger'
                                               : (lote_prefijo.invalid && ( lote_prefijo.dirty || lote_prefijo.touched ))}">
                                 <label class="col-form-label">Prefijo</label>
-                                <input [textMask]="{mask: maskPreInFi}" #lote_prefijo="ngModel" type="text" class="form-control" name="lote_prefijo" [(ngModel)]="addLoteOptions.prefijo"
+                                <input #lote_prefijo="ngModel" type="text" class="form-control" name="lote_prefijo" [(ngModel)]="addLoteOptions.prefijo"
                                     required>
                             </div>
 
@@ -360,7 +384,8 @@
                                               'has-danger'
                                               : (lote_ini.invalid && ( lote_ini.dirty || lote_ini.touched ))}">
                                 <label class="col-form-label">Ini</label>
-                                <input [textMask]="{mask: maskPreInFi}" #lote_ini="ngModel" type="number" class="form-control" name="lote_ini" [(ngModel)]="addLoteOptions.ini" min="0" [required]="addLoteOptions.by === 'numero'">
+                                <input [textMask]="{mask: maskDosDigitos, guide:guide}" #lote_ini="ngModel" type="text" class="form-control" name="lote_ini" [(ngModel)]="addLoteOptions.ini"
+                                    min="0" [required]="addLoteOptions.by === 'numero'">
                             </div>
 
 
@@ -369,8 +394,8 @@
                                                   'has-danger'
                                                   : (lote_fin.invalid && ( lote_fin.dirty || lote_fin.touched ))}">
                                 <label class="col-form-label">Fin</label>
-                                <input [textMask]="{mask: maskPreInFi}" #lote_fin="ngModel" type="number" class="form-control" name="lote_fin" [(ngModel)]="addLoteOptions.fin" min="addLoteOptions.ini"
-                                    max="addLoteOptions.ini+20" [required]="addLoteOptions.by === 'numero'">
+                                <input [textMask]="{mask: maskDosDigitos, guide:guide}" #lote_fin="ngModel" type="text" class="form-control" name="lote_fin" [(ngModel)]="addLoteOptions.fin"
+                                    min="addLoteOptions.ini" max="addLoteOptions.ini+20" [required]="addLoteOptions.by === 'numero'">
                             </div>
 
 
@@ -397,16 +422,19 @@
                 </mat-expansion-panel-header>
                 <form name="formOperaciones" novalidate>
                     <div class="card-blovk">
-                        <label class="col-form-label">{{num_lotes_selected()}} lote<span *ngIf="num_lotes !== 1">s</span> seleccionado<span *ngIf="num_lotes !== 1">s</span></label>
+                        <label class="col-form-label">{{num_lotes_selected()}} lote
+                            <span *ngIf="num_lotes !== 1">s</span> seleccionado
+                            <span *ngIf="num_lotes !== 1">s</span>
+                        </label>
                         <div class="row">
                             <div class="col-12 col-sm-12">
                                 <div class="form-group">
                                     <label class="col-form-label">Prototipo</label>
                                     <div class="input-group">
                                         <select name="prototipo" class="form-control" [(ngModel)]="op.prototipo">
-                                              <option value="" >Seleccionar...</option>     
-                                              <option [value]="prototipo.id_prototipo" *ngFor="let prototipo of obra.prototipos">{{prototipo.nombre}}</option>                                         
-                                          </select>
+                                            <option value="">Seleccionar...</option>
+                                            <option [value]="prototipo.id_prototipo" *ngFor="let prototipo of obra.prototipos">{{prototipo.nombre}}</option>
+                                        </select>
                                         <div class="input-group-btn">
                                             <button class="btn btn-primary" (click)="updatePrototipo()">Asignar</button>
                                         </div>
@@ -420,10 +448,10 @@
                                     <label class="col-form-label">En venta</label>
                                     <div class="input-group">
                                         <select name="en_venta" class="form-control" [(ngModel)]="op.en_venta">
-                                              <option value="">Seleccionar</option>
-                                              <option value="1">Si</option>
-                                              <option value="0">No</option>
-                                          </select>
+                                            <option value="">Seleccionar</option>
+                                            <option value="1">Si</option>
+                                            <option value="0">No</option>
+                                        </select>
                                         <div class="input-group-btn">
                                             <button class="btn btn-primary" (click)="updateEnVenta()">Asignar</button>
                                         </div>
