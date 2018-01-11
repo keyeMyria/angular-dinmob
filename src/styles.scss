@@ -35,7 +35,7 @@ body {
 
 /* Absolute Center Spinner */
 .loading {
-    position: fixed;
+    position: fixed !important;
     z-index: 999;
     //height: 2em;
     //width: 2em;
@@ -51,7 +51,7 @@ body {
   .loading:before {
     content: '';
     display: block;
-    position: fixed;
+    position: fixed !important;
     top: 0;
     left: 0;
     width: 100%;
