@@ -3,7 +3,7 @@
   <div *ngIf="loading">
     <mat-spinner class="loading"></mat-spinner>
   </div>
-  
+
   <div class="row">
     <div class="col-12">
       <div class="card my-5">
@@ -13,17 +13,17 @@
             <div class="spacer"></div>
             <div>
               <button mat-icon-button [matMenuTriggerFor]="menu1">
-                    <mat-icon>more_vert</mat-icon>
+                <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu1="matMenu">
                 <button mat-menu-item (click)="editarNombre()">
-                    <mat-icon>create</mat-icon>
-                    <span>Editar Nombre</span>
-                  </button>
+                  <mat-icon>create</mat-icon>
+                  <span>Editar Nombre</span>
+                </button>
                 <button mat-menu-item (click)="agregarPartida()">
-                    <mat-icon>add</mat-icon>
-                    <span>Agregar Partida</span>
-                  </button>
+                  <mat-icon>add</mat-icon>
+                  <span>Agregar Partida</span>
+                </button>
               </mat-menu>
             </div>
           </div>
@@ -36,30 +36,30 @@
           <mat-accordion [displayMode]="'default'">
 
             <mat-expansion-panel [hideToggle]="true" *ngFor="let partida of prototipo?.partidas">
-              <mat-expansion-panel-header>
-                <span class="font-weight-bold">{{partida.codigo}}</span>
-                <span>{{partida.nombre}}</span>
+              <mat-expansion-panel-header class="align-items-center">
+                <span class="font-weight-bold align-self-center mr-1">{{partida.codigo}}</span>
+                <span class="align-self-center">{{partida.nombre}}</span>
                 <div class="spacer"></div>
                 <div class="collapse-header-btns">
-                  <button mat-icon-button [matMenuTriggerFor]="menu2" (click)="$event.stopPropagation()">
-                          <mat-icon>more_vert</mat-icon>
-                    </button>
-                  <mat-menu #menu2="matMenu">
-                    <button mat-menu-item (click)="editarPartida(partida)">
-                        <mat-icon>create</mat-icon>
-                        <span>Editar</span>
-                      </button>
-                    <button mat-menu-item (click)="agregarSubpartida()">
-                       <mat-icon>add</mat-icon>
-                       <span>Agregar Subpartida</span>
-                      </button>
-                    <button mat-menu-item>
-                        <mat-icon>delete</mat-icon>
-                        <span>Eliminar</span>
-                      </button>
-                  </mat-menu>
                   <span class="badge badge-pill badge-primary" *ngIf="partida.subpartidas.length>0">{{partida.subpartidas.length}}</span>
                   <span class="badge badge-pill badge-primary" *ngIf="partida.insumos.length>0">{{partida.insumos.length}}</span>
+                  <button mat-icon-button [matMenuTriggerFor]="menu2" (click)="$event.stopPropagation()">
+                    <mat-icon>more_vert</mat-icon>
+                  </button>
+                  <mat-menu #menu2="matMenu">
+                    <button mat-menu-item (click)="editarPartida(partida)">
+                      <mat-icon>create</mat-icon>
+                      <span>Editar</span>
+                    </button>
+                    <button mat-menu-item (click)="agregarSubpartida()">
+                      <mat-icon>add</mat-icon>
+                      <span>Agregar Subpartida</span>
+                    </button>
+                    <button mat-menu-item>
+                      <mat-icon>delete</mat-icon>
+                      <span>Eliminar</span>
+                    </button>
+                  </mat-menu>
                 </div>
               </mat-expansion-panel-header>
 
@@ -68,28 +68,28 @@
               <mat-accordion [displayMode]="'default'" *ngIf="partida.subpartidas.length>0">
                 <mat-expansion-panel [hideToggle]="true" *ngFor="let subpartida of partida.subpartidas">
                   <mat-expansion-panel-header>
-                    <span class="font-weight-bold">{{subpartida.codigo}}</span>
-                    <span>{{subpartida.nombre}}</span>
+                    <span class="font-weight-bold align-self-center mr-1">{{subpartida.codigo}}</span>
+                    <span class="align-self-center">{{subpartida.nombre}}</span>
                     <div class="spacer"></div>
                     <div class="collapse-header-btns">
+                      <span class="badge badge-pill badge-primary">{{subpartida.insumos.length}}</span>
                       <button mat-icon-button [matMenuTriggerFor]="menu3" (click)="$event.stopPropagation()">
-                          <mat-icon>more_vert</mat-icon>
-                        </button>
+                        <mat-icon>more_vert</mat-icon>
+                      </button>
                       <mat-menu #menu3="matMenu">
                         <button mat-menu-item (click)="editarSubpartida(subpartida)">
-                            <mat-icon>create</mat-icon>
-                            <span>Editar</span>
-                          </button>
+                          <mat-icon>create</mat-icon>
+                          <span>Editar</span>
+                        </button>
                         <button mat-menu-item (click)="agregarInsumo()">
-                            <mat-icon>add</mat-icon>
-                            <span>Agregar Insumo</span>
-                          </button>
+                          <mat-icon>add</mat-icon>
+                          <span>Agregar Insumo</span>
+                        </button>
                         <button mat-menu-item>
-                            <mat-icon>delete</mat-icon>
-                            <span>Eliminar</span>
-                          </button>
+                          <mat-icon>delete</mat-icon>
+                          <span>Eliminar</span>
+                        </button>
                       </mat-menu>
-                      <span class="badge badge-pill badge-primary">{{subpartida.insumos.length}}</span>
                     </div>
                   </mat-expansion-panel-header>
 
@@ -116,20 +116,20 @@
                           <td>{{insumo.insumo}}</td>
                           <td>{{insumo.unidad}}</td>
                           <td class="text-right">{{insumo.cantidad}}</td>
-                          <td class="text-right">{{insumo.precio|currency:symbolDisplay:true}}</td>
+                          <td class="text-right">{{insumo.precio|currency}}</td>
                           <th>
                             <button mat-icon-button [matMenuTriggerFor]="menu4" (click)="$event.stopPropagation()">
-                                <mat-icon>more_vert</mat-icon>
-                              </button>
+                              <mat-icon>more_vert</mat-icon>
+                            </button>
                             <mat-menu #menu4="matMenu">
                               <button mat-menu-item (click)="editarInsumo(insumo)">
-                                  <mat-icon>create</mat-icon>
-                                  <span>Editar</span>
-                                </button>
+                                <mat-icon>create</mat-icon>
+                                <span>Editar</span>
+                              </button>
                               <button mat-menu-item>
-                                  <mat-icon>delete</mat-icon>
-                                  <span>Eliminar</span>
-                                </button>
+                                <mat-icon>delete</mat-icon>
+                                <span>Eliminar</span>
+                              </button>
                             </mat-menu>
                           </th>
                         </tr>
@@ -165,17 +165,17 @@
                       <td class="text-right">{{insumo.precio}}</td>
                       <th>
                         <button mat-icon-button [matMenuTriggerFor]="menu4" (click)="$event.stopPropagation()">
-                              <mat-icon>more_vert</mat-icon>
-                            </button>
+                          <mat-icon>more_vert</mat-icon>
+                        </button>
                         <mat-menu #menu4="matMenu">
                           <button mat-menu-item (click)="editarInsumo(insumo)">
-                                <mat-icon>create</mat-icon>
-                                <span>Editar</span>
-                              </button>
+                            <mat-icon>create</mat-icon>
+                            <span>Editar</span>
+                          </button>
                           <button mat-menu-item>
-                                <mat-icon>delete</mat-icon>
-                                <span>Eliminar</span>
-                              </button>
+                            <mat-icon>delete</mat-icon>
+                            <span>Eliminar</span>
+                          </button>
                         </mat-menu>
                       </th>
                     </tr>
