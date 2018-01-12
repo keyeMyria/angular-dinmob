@@ -87,11 +87,10 @@ export class ClientesComponent implements OnInit {
   cargarObra(id_obra) {
 
     if (id_obra) {
-      this.router.navigate(["/clientes", { obra: id_obra }]);
-      /*   this.clienteSrv.getClientesObra(id_obra)
-          .subscribe(response => {
-            this.clientes = response;
-          }); */
+      this.router.navigate([".", { obra: id_obra }]);
+    } else {
+      this.router.navigate([".", {}]);
+
     }
 
   }

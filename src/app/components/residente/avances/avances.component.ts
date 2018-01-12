@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { LotesService } from 'app/services/lotes.service';
 import { ComentarioAvancesDialogoComponent } from 'app/components/residente/comentario-avances-dialogo/comentario-avances-dialogo.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatDrawer } from '@angular/material';
 import { ObrasService } from 'app/services/obras.service';
+
 
 @Component({
   selector: 'app-avances',
@@ -10,12 +11,13 @@ import { ObrasService } from 'app/services/obras.service';
   styleUrls: ['./avances.component.scss']
 })
 export class AvancesComponent implements OnInit {
+  @ViewChild(MatDrawer) drawer: MatDrawer;
 
   lote: any;
   obra: any;
   obras_selected: any = {};
   obras: any = [];
- 
+
 
 
 
@@ -102,6 +104,13 @@ export class AvancesComponent implements OnInit {
 
     return finalizada;
 
-  };
+  }
+
+  getAvancesLote(lote) {
+    console.log("getAvancesLote", lote);
+    this.drawer.toggle();
+
+
+  }
 
 }

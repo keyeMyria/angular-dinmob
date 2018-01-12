@@ -6,6 +6,10 @@ import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import { EditarManzanaDialogoComponent } from 'app/components/admin/editar-manzana-dialogo/editar-manzana-dialogo.component';
 import { MatDialog } from '@angular/material';
 import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import "rxjs/add/observable/of";
+import { Observable } from 'rxjs/Observable';
+
 
 @Component({
   selector: 'app-estructura-obra',
@@ -52,6 +56,8 @@ export class EstructuraObraComponent implements OnInit {
 
 
   constructor(
+    private router: Router,
+    private route: ActivatedRoute,
     private obraSrv: ObrasService,
     private auth: AuthService,
     public dialog: MatDialog
@@ -63,16 +69,36 @@ export class EstructuraObraComponent implements OnInit {
     this.usuario = this.auth.getUsuario();
 
 
-    this.obraSrv.loadFullObra(58)
-      .subscribe(response => {
-        this.obra = response;
-        console.log("obra", this.obra);
+    this.route.paramMap
+      .switchMap((params: ParamMap) => {
+        if (params.has("obra")) {
+          return this.obraSrv.loadFullObra(params.get("obra"));
+        } else {
+          return Observable.of({ datos: {} });
+        }
+      }).subscribe(obra => {
+        console.log("obra", obra);
+        this.obra = obra
       });
+
 
     this.obraSrv.getObrasUsuario(this.usuario.id_usuario)
       .subscribe(response => {
         this.obras = response;
       });
+  }
+
+  cargarObra(id_obra) {
+    console.log("cargarobra");
+
+    if (id_obra) {
+      //si se eligio una obra del select entonces enviamos el id
+      this.router.navigate([".", { obra: id_obra }]);
+
+    } else {
+      // eliminamos el parametro de navegacion
+      this.router.navigate([".", {}]);
+    }
   }
 
   toggleSelectionLote(manzana, lote) {

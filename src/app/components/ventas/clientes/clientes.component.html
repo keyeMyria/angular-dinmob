@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mt-2 mb-5">
 
   <div *ngIf="loading">
     <mat-spinner class="loading"></mat-spinner>
@@ -10,18 +10,18 @@
 
       <!-- seleccionar obra -->
 
-      <div class=" my-1 mb-2">
+      <div class="mb-2">
         <select class="form-control" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)">
           <option value="">Seleccionar...</option>
           <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>
         </select>
       </div>
-      <button class="btn btn-primary" (click)="print()">Print route</button>
+      
 
-      <div class="card my-1">
+      <div class="card">
         <div class="card-header">
           <div class="d-flex padding-header">
-            <div class="align-self-center">Lista de clientes</div>
+            <div class="align-self-center">Clientes</div>
             <div class="spacer"></div>
             <div>
               <button mat-icon-button (click)="agregarCliente()">
