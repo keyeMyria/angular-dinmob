@@ -5,13 +5,13 @@
       <div class="mb-2">
         <select class="form-control" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)">
           <option value="">Seleccionar...</option>
-          <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>                                     
+          <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>
         </select>
       </div>
 
       <div class="card">
         <div class="card-header">
-          Lotes      
+          Lotes
         </div>
         <div>
           <div class="table-responsive">
@@ -35,9 +35,14 @@
                   <td>{{lote.valor_base|currency}}</td>
                   <td>{{lote.estado_venta}}</td>
                   <td>{{lote.fecha_cambio_estado}}</td>
-                  <td>!</td>
                   <td>
-                    <button mat-icon-button (click)="ventasLote()">
+                    <span *ngIf="(lote.id_cliente && lote.id_estado_venta === '1')" matTooltip="El lote tiene cliente pero está en estado libre"
+                      class="fa fa-exclamation-triangle text-danger"></span>
+                    <span *ngIf="(!lote.id_cliente && lote.id_estado_venta !== '1')" matTooltip="El lote no tiene cliente asociado" 
+                    class="fa fa-exclamation-triangle text-warning"></span>
+                  </td>
+                  <td>
+                    <button mat-icon-button (click)="ventasLote(lote)">
                       <mat-icon>zoom_in</mat-icon>
                     </button>
                   </td>

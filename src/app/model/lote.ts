@@ -1,4 +1,6 @@
 export class Lote {
   id_lote?:number;
-  nombre?:string;  
+  nombre?:string; 
+  obra?:string;
+
 }

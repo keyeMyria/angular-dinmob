@@ -22,6 +22,7 @@ import {
   MatGridListModule,
   MatDatepickerModule,
   MatNativeDateModule,
+  MatTooltipModule,
   //NativeDateAdapter,
 } from "@angular/material";
 
@@ -48,6 +49,7 @@ import {
     MatGridListModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatTooltipModule,
   ],
   exports: [
     MatMenuModule,
@@ -71,6 +73,7 @@ import {
     MatGridListModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatTooltipModule,
   ]
 })
 export class AngularMaterialModule { }

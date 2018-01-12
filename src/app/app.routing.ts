@@ -56,7 +56,7 @@ export const ROUTES: Routes = [
     {
         path: '',
         component: LayoutComponent,
-        canActivate:[AuthGuard],
+        canActivate: [AuthGuard],
         children: [
             { path: '', redirectTo: 'tablero', pathMatch: 'full' },
             { path: 'clientes', component: ClientesComponent },
@@ -87,13 +87,13 @@ export const ROUTES: Routes = [
             { path: 'nueva-compra-dialogo', component: NuevaCompraDialogoComponent },
             { path: 'editar-pago-dialogo', component: EditarPagoDialogoComponent },
             { path: 'editar-partida-dialogo', component: EditarPartidaDialogoComponent },
-            { path: 'editar-subpartida-dialogo', component:EditarSubpartidaDialogoComponent },
+            { path: 'editar-subpartida-dialogo', component: EditarSubpartidaDialogoComponent },
             { path: 'editar-insumo-dialogo', component: EditarInsumoDialogoComponent },
             { path: 'editar-nombre-prototipo-dialogo', component: EditarNombrePrototipoDialogoComponent },
             { path: 'agregar-partida-dialogo', component: AgregarPartidaDialogoComponent },
             { path: 'agregar-subpartida-dialogo', component: AgregarSubpartidaDialogoComponent },
             { path: 'agregar-insumo-dialogo', component: AgregarInsumoDialogoComponent },
-            { path: 'ventas/lote', component: VentasLoteComponent },
+            { path: 'ventas/lote/:id', component: VentasLoteComponent },
             { path: 'comentario-avances-dialogo', component: ComentarioAvancesDialogoComponent },
             { path: 'acta-entrega/:id', component: ActaEntregaComponent },
             { path: 'crear-acta-entrega', component: CrearActaEntregaComponent },
@@ -101,7 +101,7 @@ export const ROUTES: Routes = [
             { path: 'editar-acta-entrega/:id', component: EditarActaEntregaComponent },
             { path: 'generar-acta-entrega', component: GenerarActaEntregaComponent },
 
-            
+
 
 
 

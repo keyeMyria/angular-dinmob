@@ -55,15 +55,15 @@ export class DesarrollosComponent implements OnInit {
 
 
 
-      this.obraSrv.getObrasUsuario(this.usuario.id_usuario)
+    this.obraSrv.getObrasUsuario(this.usuario.id_usuario)
       .subscribe(response => {
         this.obras = response;
       });
 
   }
 
-  ventasLote() {
-    this.router.navigate(["/ventas/lote"]);
+  ventasLote(lote) {
+    this.router.navigate(["/ventas/lote", lote.id_lote]);
   }
 
   cargarObra(id_obra) {
