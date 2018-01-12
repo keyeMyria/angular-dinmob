@@ -46,10 +46,10 @@
               <tbody>
                 <tr *ngFor="let cliente of clientes$|async">
                   <td>{{cliente.id_cliente}}</td>
-                  <td>{{clienteHlp.getNombre(cliente)}}</td>
-                  <td>manzana 0</td>
-                  <td>lote 0</td>
-                  <td>libre</td>
+                  <td>{{cliente.nombre}}</td>
+                  <td>{{cliente.manzana}}</td>
+                  <td>{{cliente.lote}}</td>
+                  <td>{{cliente.estado_lote}}</td>
                   <td>
                     <button mat-icon-button [matMenuTriggerFor]="menu">
                       <mat-icon>more_vert</mat-icon>

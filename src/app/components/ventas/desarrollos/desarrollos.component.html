@@ -32,7 +32,7 @@
                 <tr *ngFor="let lote of obra.lotes">
                   <td>{{lote.nombre_manzana}}</td>
                   <td>{{lote.nombre}}</td>
-                  <td>{{lote.valor_base|currency:'USD':true}}</td>
+                  <td>{{lote.valor_base|currency}}</td>
                   <td>{{lote.estado_venta}}</td>
                   <td>{{lote.fecha_cambio_estado}}</td>
                   <td>!</td>

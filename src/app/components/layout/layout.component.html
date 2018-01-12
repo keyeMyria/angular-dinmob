@@ -119,7 +119,7 @@
         <!-- 64 + 48 style="margin-bottom:112px"-->
         <!-- *ngIf= "auth.hasRole([auth.Rol.Residente])" -->
         <h3 class="sidenav-title">Residente</h3>
-        <a mat-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/avances']" routerLinkActive="active">Avances</a>
+        <a mat-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/avances',obra_default]" routerLinkActive="active">Avances</a>
         <a mat-list-item href="" (click)="navLeft.toggle()" [routerLink]="['/mapas-avances']" routerLinkActive="active">Mapas avances</a>
 
 
@@ -132,11 +132,11 @@
 
     </mat-sidenav>
 
-   <!--  <mat-sidenav #navRight class="sidenav-end" mode="over" align="end" opened="false">
+    <mat-sidenav #navRight class="sidenav-end" mode="over" align="end" opened="false">
       <mat-tab-group>
         <mat-tab label="Tab 1">
           <h3>Encabezado</h3>
-          <p>Contenido uno</p>
+          <p>Aquí puedo poner la configuración, por ejemplo</p>
         </mat-tab>
         <mat-tab>
           <ng-template mat-tab-label>
@@ -146,7 +146,7 @@
           <p>Contenido dos</p>
         </mat-tab>
       </mat-tab-group>
-    </mat-sidenav> -->
+    </mat-sidenav>
 
     <mat-sidenav-content>
 

@@ -3,6 +3,10 @@ import { LotesService } from 'app/services/lotes.service';
 import { ComentarioAvancesDialogoComponent } from 'app/components/residente/comentario-avances-dialogo/comentario-avances-dialogo.component';
 import { MatDialog, MatDrawer } from '@angular/material';
 import { ObrasService } from 'app/services/obras.service';
+import { Usuario } from 'app/model/usuario';
+import { AuthService } from 'app/services/auth.service';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 
 
 @Component({
@@ -17,35 +21,46 @@ export class AvancesComponent implements OnInit {
   obra: any;
   obras_selected: any = {};
   obras: any = [];
-
+  usuario: Usuario;
 
 
 
   constructor(
+    private router: Router,
+    private route: ActivatedRoute,
     private obraSrv: ObrasService,
     private loteSrv: LotesService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private auth: AuthService,
   ) { }
 
   ngOnInit() {
-    this.obraSrv.loadFullObra(58)
-      .subscribe(response => {
-        this.obra = response;
-        console.log("obra", this.obra);
+
+    this.usuario = this.auth.getUsuario();
+
+
+    /*     this.obraSrv.loadFullObra(58)
+          .subscribe(response => {
+            this.obra = response;
+            console.log("obra", this.obra);
+          }); */
+
+    this.route.paramMap
+      .switchMap((params: ParamMap) => {
+        if (params.has("obra")) {
+          return this.obraSrv.getAcordeonManzanas(params.get("obra"));
+        } else {
+          return Observable.of({ datos: {} });
+        }
+      }).subscribe(obra => {
+        console.log("obra", obra);
+        this.obra = obra
       });
 
-    this.obraSrv.getObrasUsuario(18)
+
+    this.obraSrv.getObrasUsuario(this.usuario.id_usuario)
       .subscribe(response => {
         this.obras = response;
-      });
-
-    this.loteSrv.getAvances(153)
-      .subscribe(response => {
-        this.lote = response;
-      });
-    this.obraSrv.getAcordeonManzanas(53)
-      .subscribe(response => {
-        this.obra = response;
       });
 
   }
@@ -109,6 +124,10 @@ export class AvancesComponent implements OnInit {
   getAvancesLote(lote) {
     console.log("getAvancesLote", lote);
     this.drawer.toggle();
+    this.loteSrv.getAvances(lote.id_lote)
+      .subscribe(response => {
+        this.lote = response;
+      });
 
 
   }
