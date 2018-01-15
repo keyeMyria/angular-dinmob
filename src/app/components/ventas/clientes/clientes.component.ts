@@ -8,7 +8,6 @@ import { ObrasService } from "app/services/obras.service";
 import { Router, ActivatedRoute, ParamMap } from "@angular/router";
 import { AuthService } from "app/services/auth.service";
 import { Usuario } from "app/model/usuario";
-import { ClienteHelperService } from 'app/utils/cliente-helper.service';
 import { Observable } from 'rxjs/Observable';
 import { of } from "rxjs/observable/of";
 
@@ -23,11 +22,9 @@ export class ClientesComponent implements OnInit {
 
   usuario: Usuario;
   loading: boolean;
-  clientes$: Observable<Cliente[]>;
+  //clientes$: Observable<Cliente[]>;
+  clientes: Cliente[] = [];
   obras: any = [];
-  obra: any = {
-    datos: {}
-  };
   obra_selected: string = "";
 
 
@@ -37,33 +34,34 @@ export class ClientesComponent implements OnInit {
     private route: ActivatedRoute,
     private auth: AuthService,
     private obraSrv: ObrasService,
-    private clienteHlp: ClienteHelperService,
     private clienteSrv: ClientesService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
-    console.log("paramMap(obra)", this.route.snapshot.paramMap.get("obra"));
 
     this.usuario = this.auth.getUsuario();
 
     //this.loading = true;
-    this.clientes$ = this.route.paramMap
+    this.route.paramMap
       .switchMap((params: ParamMap) => {
         if (params.has("obra")) {
+          this.obra_selected = params.get("obra");
           return this.clienteSrv.getClientesObra(params.get("obra"));
         } else {
           return of([]);
         }
 
+      }).subscribe(clientes => {
+        this.clientes = clientes;
       });
 
-    /*  this.clienteSrv.getClientes(); */
+   
 
     this.obraSrv.getObrasUsuario(this.usuario.id_usuario)
-      .subscribe(response => {
-        this.obras = response;
+      .subscribe(obras => {
+        this.obras = obras;
       });
 
   }
@@ -71,7 +69,7 @@ export class ClientesComponent implements OnInit {
 
   print() {
     //console.log("paramMap(obra)", this.route.snapshot.paramMap.get("obra"));
-    console.log("observable", this.clientes$);
+    console.log("observable", this.clientes);
 
   }
 

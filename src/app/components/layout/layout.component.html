@@ -7,7 +7,8 @@
     </button>
 
 
-    <span>Dinmob</span>
+    <!-- <span>Dinmob</span> -->
+    <button mat-button [routerLink]="[ '/tablero']">DinMob</button>
 
     <span class="spacer"></span>
 
@@ -116,7 +117,7 @@
       </mat-nav-list>
 
       <mat-nav-list class="mb-5">
-        
+
         <!-- *ngIf= "auth.hasRole([auth.Rol.Residente])" -->
         <h3 class="sidenav-title">Residente</h3>
         <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/avances',obra_default]" routerLinkActive="active">Avances</a>

@@ -19,7 +19,7 @@ export class AvancesComponent implements OnInit {
 
   lote: any;
   obra: any;
-  obras_selected: any = {};
+  obra_selected: string = "";
   obras: any = [];
   usuario: Usuario;
 
@@ -39,15 +39,10 @@ export class AvancesComponent implements OnInit {
     this.usuario = this.auth.getUsuario();
 
 
-    /*     this.obraSrv.loadFullObra(58)
-          .subscribe(response => {
-            this.obra = response;
-            console.log("obra", this.obra);
-          }); */
-
     this.route.paramMap
       .switchMap((params: ParamMap) => {
         if (params.has("obra")) {
+          this.obra_selected = params.get("obra");
           return this.obraSrv.getAcordeonManzanas(params.get("obra"));
         } else {
           return Observable.of({ datos: {} });
@@ -62,6 +57,16 @@ export class AvancesComponent implements OnInit {
       .subscribe(response => {
         this.obras = response;
       });
+
+  }
+
+  cargarObra(id_obra: string) {
+
+    if (id_obra) {
+      this.router.navigate([".", { obra: id_obra }]);
+    } else {
+      this.router.navigate([".", {}]);
+    }
 
   }
 

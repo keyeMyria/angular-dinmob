@@ -9,7 +9,8 @@ import {
 } from "@angular/animations";
 import { ObrasService } from "app/services/obras.service";
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+//import { Observable } from 'rxjs/Observable';
+import { of } from "rxjs/observable/of";
 import { AuthService } from 'app/services/auth.service';
 import { Usuario } from 'app/model/usuario';
 
@@ -25,7 +26,7 @@ export class DesarrollosComponent implements OnInit {
 
   obras: any = [];
   obra: any = {};
-  obra_selected: number;
+  obra_selected: string = "";
 
   constructor(
     private obraSrv: ObrasService,
@@ -42,10 +43,10 @@ export class DesarrollosComponent implements OnInit {
     this.route.paramMap
       .switchMap((params: ParamMap) => {
         if (params.has("obra")) {
-          this.obra_selected = +params.get("obra");
+          this.obra_selected = params.get("obra");
           return this.obraSrv.getLotes(params.get("obra"));
         } else {
-          return Observable.of({});
+          return of({});
         }
       }).subscribe(obra => {
         console.log("obra", obra);

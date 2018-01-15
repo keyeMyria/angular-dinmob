@@ -3,21 +3,20 @@
 </button>
 
 <mat-drawer-container class="drawer-container">
-    <mat-drawer #drawer mode="over" opened="false" style="width:250px">
+    <mat-drawer #drawer mode="over" opened="true" style="width:250px">
         <mat-card>
             <div class="mb-2">
-                <select class="form-control" [(ngModel)]="obra_selected">
-                    <!-- (change)="cargarObra(obra_selected)" -->
+                <select class="form-control" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)">
                     <option value="">Seleccionar...</option>
                     <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>
                 </select>
             </div>
-            <div class="d-flex">
-                <!-- <span><i class="fa fa-share"></i></span> -->
+         <!--    <div class="d-flex">
+                <span><i class="fa fa-share"></i></span>
                 <span>{{obra?.obra?.nombre || ""}}</span>
                 <div class="spacer"></div>
                 <span class="badge badge-pill badge-warning align-self-center mr-2">{{obra?.manzanas?.length || "0"}}</span>
-            </div>
+            </div> -->
         </mat-card>
         <div class="mb-3">
             <mat-accordion>
@@ -126,8 +125,8 @@
                                 </div>
                             </mat-expansion-panel-header>
                             <div *ngIf="partida.subpartidas.length>0">
-                                <ul class="list-group" *ngFor="let subpartida of partida?.subpartidas">
-                                    <li class="list-group-item">
+                                <ul class="list-group">
+                                    <li class="list-group-item" *ngFor="let subpartida of partida?.subpartidas">
                                         <div class="d-flex">
                                             <mat-checkbox>{{subpartida.nombre}}
                                                 <div style="font-size: 15px;">
