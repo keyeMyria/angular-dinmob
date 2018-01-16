@@ -1,12 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  trigger,
-  state,
-  style,
-  transition,
-  animate,
-  keyframes
-} from "@angular/animations";
+
 import { ObrasService } from "app/services/obras.service";
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 //import { Observable } from 'rxjs/Observable';

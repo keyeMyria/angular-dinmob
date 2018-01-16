@@ -9,8 +9,8 @@
 
 
       <div class="card">
-        <div class="card-header">
-          <div class="d-flex padding-header">
+        <div class="card-header padding-card-header">
+          <div class="d-flex">
             <div class="align-self-center">Usuarios</div>
             <div class="spacer"></div>
             <div>
@@ -22,7 +22,7 @@
         </div>
         <div>
           <div class="table-responsive">
-            <table class="table table-hover table-striped">
+            <table class="table table-hover table-striped table-align-middle">
               <thead>
                 <tr>
                   <th>Id</th>
@@ -39,7 +39,7 @@
                   <td>{{usuario.nombre}}</td>
                   <td>{{usuario.email}}</td>
                   <td>{{usuario.tipo_usuario}}</td>
-                  <td>
+                  <td class="text-right">
                     <button mat-icon-button [matMenuTriggerFor]="menu">
                         <mat-icon>more_vert</mat-icon>
                       </button>
