@@ -9,6 +9,7 @@ import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import "rxjs/add/observable/of";
 import { Observable } from 'rxjs/Observable';
+import { NgForm } from '@angular/forms';
 
 
 @Component({
@@ -29,15 +30,24 @@ export class EstructuraObraComponent implements OnInit {
   };
   obra_selected: string = "";
   residente: any = {};
-  addManzanaOptions: any = {
-    by: ""
+
+  addManzanas: any = {
+    tipo: "numero",
+    nombre:"",
+    ini: "",
+    fin: "",
+    prefijo: ""
   };
   nuevaManzana: any = {
     nombre: ""
   };
 
   addLoteOptions: any = {
-    by: ""
+    tipo: "numero",
+    nombre:"",
+    ini: "",
+    fin: "",
+    prefijo: ""
   };
 
   nuevoLote: any = {
@@ -162,8 +172,8 @@ export class EstructuraObraComponent implements OnInit {
 
   }
 
-  createManzanas() {
-    console.log("Opciones", this.addManzanaOptions);
+  createManzanas(form: NgForm) {
+    console.log("Opciones", form.value);
   }
 
 
