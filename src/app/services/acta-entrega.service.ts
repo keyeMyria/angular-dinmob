@@ -4,15 +4,19 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { of } from "rxjs/observable/of";
 import { Observable } from 'rxjs/Observable';
+import { ConfigService } from 'app/services/config.service';
 
 @Injectable()
 export class ActaEntregaService {
 
-  url: string = "http://localhost:8080/dinmob/api/index.php/actas_entrega/";
+  url: string;
 
   constructor(
-    private http: Http
-  ) { }
+    private http: Http,
+    private config: ConfigService
+  ) { 
+    this.url = this.config.api_url + "actas_entrega/";
+  }
 
 
   getActas() {

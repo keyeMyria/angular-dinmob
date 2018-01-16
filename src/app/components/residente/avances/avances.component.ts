@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { LotesService } from 'app/services/lotes.service';
 import { ComentarioAvancesDialogoComponent } from 'app/components/residente/comentario-avances-dialogo/comentario-avances-dialogo.component';
 import { MatDialog, MatDrawer } from '@angular/material';
@@ -7,6 +7,7 @@ import { Usuario } from 'app/model/usuario';
 import { AuthService } from 'app/services/auth.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import { MediaMatcher } from '@angular/cdk/layout';
 
 
 @Component({
@@ -17,6 +18,10 @@ import { Observable } from 'rxjs/Observable';
 export class AvancesComponent implements OnInit {
   @ViewChild(MatDrawer) drawer: MatDrawer;
 
+  mobileQuery: MediaQueryList;
+  private _mobileQueryListener: () => void;
+
+
   lote: any;
   obra: any;
   obra_selected: string = "";
@@ -26,13 +31,21 @@ export class AvancesComponent implements OnInit {
 
 
   constructor(
+    private changeDetectorRef: ChangeDetectorRef,
+    private media: MediaMatcher,
     private router: Router,
     private route: ActivatedRoute,
     private obraSrv: ObrasService,
     private loteSrv: LotesService,
     public dialog: MatDialog,
     private auth: AuthService,
-  ) { }
+  ) {
+
+    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
+
+  }
 
   ngOnInit() {
 
@@ -128,12 +141,21 @@ export class AvancesComponent implements OnInit {
 
   getAvancesLote(lote) {
     console.log("getAvancesLote", lote);
-    this.drawer.toggle();
+
     this.loteSrv.getAvances(lote.id_lote)
       .subscribe(response => {
         this.lote = response;
       });
 
+    if (this.mobileQuery.matches) {
+      this.drawer.close();
+    }
+
+
+  }
+
+  ngOnDestroy(): void {
+    this.mobileQuery.removeListener(this._mobileQueryListener)
 
   }
 

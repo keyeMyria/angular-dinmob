@@ -5,14 +5,20 @@ import { Http, Response } from "@angular/http";
 import { Observable } from "rxjs/Observable";
 import { of } from "rxjs/observable/of";
 import { Cliente } from 'app/model/cliente';
+import { ConfigService } from 'app/services/config.service';
 
 
 @Injectable()
 export class ClientesService {
-  //url: string = "http://192.168.0.107:8080/barroco/api/index.php/clientes/";
-  url: string = "http://localhost:8080/dinmob/api/index.php/ventas_clientes/";
 
-  constructor(private http: Http) { }
+  url: string;
+
+  constructor(
+    private http: Http,
+    private config: ConfigService
+  ) {
+    this.url = this.config.api_url + "ventas_clientes/";
+  }
 
 
   getClientes(): Observable<Cliente[]> {

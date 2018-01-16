@@ -48,7 +48,7 @@ export class LayoutComponent implements OnInit {
     //event.preventDefault();
     //event.stopPropagation();
     this.sidenav.toggle();
-    return false;
+    //return false;
   }
 
   logout() {

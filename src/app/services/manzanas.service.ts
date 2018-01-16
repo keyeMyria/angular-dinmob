@@ -3,12 +3,17 @@ import { Http, Response } from "@angular/http";
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import { ConfigService } from 'app/services/config.service';
 
 @Injectable()
 export class ManzanasService {
-  url: string = "http://localhost:8080/controldeobras_api/index.php/";
+  url: string;
 
-  constructor() { }
+  constructor(
+    private config: ConfigService
+  ) {
+    this.url = this.config.api_url + "manzanas/";
+  }
 
   private extractData(res: Response) {
     let body = res.json();

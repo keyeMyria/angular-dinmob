@@ -1,12 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from "@angular/http";
 import { Observable } from "rxjs/Observable";
+import { ConfigService } from 'app/services/config.service';
 
 @Injectable()
 export class PrototiposService {
-  url: string = "http://localhost:8080/dinmob/api/index.php/prototipos/";
+  url: string;
 
-  constructor(private http: Http) { }
+  constructor(
+    private http: Http,
+    private config: ConfigService
+  ) {
+    this.url = this.config.api_url + "prototipos/";
+  }
 
 
   getPrototipos() {

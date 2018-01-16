@@ -93,6 +93,7 @@ import { ActasEntregaComponent } from './components/ventas/actas-entrega/actas-e
 import { EditarActaEntregaComponent } from './components/ventas/editar-acta-entrega/editar-acta-entrega.component';
 import { GenerarActaEntregaComponent } from './components/ventas/generar-acta-entrega/generar-acta-entrega.component';
 import { EditarManzanaDialogoComponent } from './components/admin/editar-manzana-dialogo/editar-manzana-dialogo.component'
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -164,6 +165,7 @@ import { EditarManzanaDialogoComponent } from './components/admin/editar-manzana
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     HttpModule,
     FormsModule,
     BrowserAnimationsModule,

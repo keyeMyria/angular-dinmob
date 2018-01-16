@@ -3,13 +3,19 @@ import { Http, Response } from "@angular/http";
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import { ConfigService } from 'app/services/config.service';
 
 @Injectable()
 export class ObrasService {
 
-  url: string = "http://localhost:8080/dinmob/api/index.php/obras/";
+  url: string;
 
-  constructor(private http: Http) { }
+  constructor(
+    private http: Http,
+    private config: ConfigService
+  ) {
+    this.url = this.config.api_url + "obras/";
+  }
 
   createObra(obra) {
     return this.http.post(this.url + 'create_obra', {

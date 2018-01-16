@@ -3,13 +3,20 @@ import { Http, Response } from "@angular/http";
 import { Observable } from "rxjs/Observable";
 import { Usuario } from "app/model/usuario";
 import { AuthHttp } from "angular2-jwt/angular2-jwt";
+import { ConfigService } from 'app/services/config.service';
 
 @Injectable()
 export class UsuarioService {
-  
-  url: string = "http://localhost:8080/dinmob/api/index.php/usuarios/";
 
-  constructor(private http: Http, private authHttp:AuthHttp) { }
+  url: string;
+
+  constructor(
+    private http: Http,
+    private authHttp: AuthHttp,
+    private config: ConfigService
+  ) {
+    this.url = this.config.api_url + "usuarios/";
+  }
 
   getUsuarios(): Observable<Usuario[]> {
     return this.http.get(this.url)
@@ -51,7 +58,7 @@ export class UsuarioService {
 
 
 
-  private extractData(res: Response) {   
+  private extractData(res: Response) {
     let body = res.json();
     return body || {};
   }
