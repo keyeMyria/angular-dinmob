@@ -21,8 +21,6 @@
 
             <!-- Manzanas y Lotes -->
 
-            <!--  <h4>{{obra.datos?.nombre|uppercase}}</h4> -->
-
             <mat-accordion [displayMode]="'default'">
                 <mat-expansion-panel [hideToggle]="true" *ngFor="let manzana of obra.manzanas">
                     <mat-expansion-panel-header>
@@ -240,49 +238,42 @@
                 <mat-expansion-panel-header class="bg-info text-white">
                     Agregar Manzanas
                 </mat-expansion-panel-header>
-                <form name="addManzanasForm" (ngSubmit)="obra_selected && obra && addManzanasForm.$valid && addManzana(addManzanasForm)"
-                    novalidate>
+                <form name="addManzanasForm" id="formManzanas" #formManzanas="ngForm" (ngSubmit)="createManzanas(formManzanas)" novalidate>
                     <div class="card-block">
                         <div class="row">
                             <label class="col-form-label col-12">{{obra.datos.nombre}}</label>
                         </div>
                         <div class="row">
                             <div class="col-12 col-sm-12">
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="tipo" [(ngModel)]="addManzanaOptions.by" value="nombre"> Por nombre
-                                    </label>
-                                </div>
+                                <mat-radio-group name="tipo" [(ngModel)]="addManzanas.tipo">
+                                    <mat-radio-button name="tipo" value="nombre">Por nombre</mat-radio-button>
+                                </mat-radio-group>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12 col-sm-12">
-                                <div class="form-group" [ngClass]="{
-                                          'has-danger'
-                                          : ( nombre_manzana.invalid && (nombre_manzana.dirty || nombre_manzana.touched ))}">
+                                <div class="form-group" [ngClass]="{'has-danger': ( nombre_manzana.invalid && (nombre_manzana.dirty || nombre_manzana.touched ))}">
                                     <label class="col-form-label">Manzana (nombre)</label>
-                                    <input #nombre_manzana="ngModel" type="text" placeholder="ej. Manzana 1" class="form-control" name="nombre_manzana" [(ngModel)]="nuevaManzana.nombre"
-                                        maxlength="30" [disabled]="addManzanaOptions.by != 'nombre'" [required]="addManzanaOptions.by === 'nombre'">
+                                    <input #nombre_manzana="ngModel" type="text" placeholder="ej. Manzana 1" class="form-control" name="nombre" [(ngModel)]="addManzanas.nombre"
+                                        maxlength="30" [disabled]="addManzanas.tipo != 'nombre'" [required]="addManzanas.tipo === 'nombre'">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12 col-sm-12">
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="tipo" [(ngModel)]="addManzanaOptions.by" value="numero"> Por número
-                                    </label>
-                                </div>
+                                <mat-radio-group name="tipo" [(ngModel)]="addManzanas.tipo">
+                                    <mat-radio-button name="tipo" value="numero">Por número</mat-radio-button>
+                                </mat-radio-group>
                             </div>
                         </div>
                         <!--  <div class="row">
-                                <fieldset [disabled]="addManzanaOptions.by == 'nombre'">
+                                <fieldset [disabled]="addManzanas.tipo == 'nombre'">
                                     <div class="col-12 col-sm-6">
                                         <div class="form-group" [ngClass]="{
                                               'has-error'
                                               : (addManzanasForm.$submitted || addManzanasForm.manzana_prefijo.$touched) && (addManzanasForm.manzana_prefijo.$error.required) }">
                                             <label class="col-form-label">Prefijo</label>
-                                            <input type="text" class="form-control" name="manzana_prefijo" [(ngModel)]="addManzanaOptions.prefijo" required>
+                                            <input type="text" class="form-control" name="manzana_prefijo" [(ngModel)]="addManzanas.prefijo" required>
                                         </div>
                                     </div>
                                     <div class="col-12 col-sm-3">
@@ -290,7 +281,7 @@
                                               'has-error'
                                               : (addManzanasForm.$submitted || addManzanasForm.manzana_ini.$touched) && (addManzanasForm.manzana_ini.$error.required || addManzanasForm.manzana_ini.$error.min) }">
                                             <label class="col-form-label">Ini</label>
-                                            <input type="number" class="form-control" name="manzana_ini" [(ngModel)]="addManzanaOptions.ini" min="0" [required]="addManzanaOptions.by === 'numero'">
+                                            <input type="number" class="form-control" name="manzana_ini" [(ngModel)]="addManzanas.ini" min="0" [required]="addManzanas.tipo === 'numero'">
                                         </div>
                                     </div>
                                     <div class="col-12 col-sm-3">
@@ -298,37 +289,34 @@
                                               'has-error'
                                               : (addManzanasForm.$submitted || addManzanasForm.manzana_fin.$touched) && (addManzanasForm.manzana_fin.$error.required || addManzanasForm.manzana_fin.$error.min || addManzanasForm.manzana_fin.$error.max) }">
                                             <label class="col-form-label">Fin</label>
-                                            <input type="number" class="form-control" name="manzana_fin" [(ngModel)]="addManzanaOptions.fin" min="addManzanaOptions.ini"
-                                                max="addManzanaOptions.ini+20" [required]="addManzanaOptions.by === 'numero'">
+                                            <input type="number" class="form-control" name="manzana_fin" [(ngModel)]="addManzanas.fin" min="addManzanas.ini"
+                                                max="addManzanas.ini+20" [required]="addManzanas.tipo === 'numero'">
                                         </div>
                                     </div>
                                 </fieldset>
                             </div> -->
+                        <fieldset [disabled]="addManzanas.tipo == 'nombre'">
+                            <div class="form-row">
 
-                        <div class="form-row">
-                            <div class="form-group col-12 col-sm-6" [ngClass]="{
-                                            'has-danger'
-                                            : (manzana_prefijo.invalid && (manzana_prefijo.dirty || manzana_prefijo.touched ))}">
-                                <label class="col-form-label">Prefijo</label>
-                                <input #manzana_prefijo="ngModel" type="text" class="form-control" name="manzana_prefijo" [(ngModel)]="addManzanaOptions.prefijo"
-                                    required>
+                                <div class="form-group col-12 col-sm-6" [ngClass]="{'has-danger':(manzana_prefijo.invalid && (manzana_prefijo.dirty || manzana_prefijo.touched ))}">
+                                    <label class="col-form-label">Prefijo</label>
+                                    <input #manzana_prefijo="ngModel" type="text" class="form-control" name="manzana_prefijo" [(ngModel)]="addManzanas.prefijo"
+                                        required>
+                                </div>
+                                <div class="form-group col-6 col-sm-3" [ngClass]="{'has-danger':( manzana_ini.invalid && (manzana_ini.dirty || manzana_ini.touched ))}">
+                                    <label class="col-form-label">Ini</label>
+                                    <input [textMask]="{mask: maskDosDigitos, guide:guide}" guide="false" #manzana_ini="ngModel" type="text" class="form-control"
+                                        name="manzana_ini" [(ngModel)]="addManzanas.ini" min="0" [required]="addManzanas.tipo === 'numero'">
+                                </div>
+                                <div class="form-group col-6 col-sm-3" [ngClass]="{'has-danger':(manzana_fin.invalid && (manzana_fin.dirty || manzana_fin.touched ))}">
+                                    <label class="col-form-label">Fin</label>
+                                    <input [textMask]="{mask: maskDosDigitos, guide: guide}" type="text" #manzana_fin="ngModel" class="form-control" name="manzana_fin"
+                                        [(ngModel)]="addManzanas.fin" min="addManzanas.ini" max="addManzanas.ini+20" [required]="addManzanas.tipo === 'numero'">
+                                </div>
+
                             </div>
-                            <div class="form-group col-6 col-sm-3" [ngClass]="{
-                                            'has-danger'
-                                            : ( manzana_ini.invalid && (manzana_ini.dirty || manzana_ini.touched ))}">
-                                <label class="col-form-label">Ini</label>
-                                <input [textMask]="{mask: maskDosDigitos, guide:guide}" guide="false" #manzana_ini="ngModel" type="text" class="form-control"
-                                    name="manzana_ini" [(ngModel)]="addManzanaOptions.ini" min="0" [required]="addManzanaOptions.by === 'numero'">
-                            </div>
-                            <div class="form-group col-6 col-sm-3" [ngClass]="{
-                                            'has-danger'
-                                            : (manzana_fin.invalid && (manzana_fin.dirty || manzana_fin.touched ))}">
-                                <label class="col-form-label">Fin</label>
-                                <input [textMask]="{mask: maskDosDigitos, guide: guide}" type="text" #manzana_fin="ngModel" class="form-control" name="manzana_fin"
-                                    [(ngModel)]="addManzanaOptions.fin" min="addManzanaOptions.ini" max="addManzanaOptions.ini+20"
-                                    [required]="addManzanaOptions.by === 'numero'">
-                            </div>
-                        </div>
+                        </fieldset>
+                        <pre>{{addManzanas|json}}</pre>
                         <div class="form-group">
                             <!--  <p class="text-danger" *ngIf="addManzanasForm.manzana_ini.$error.min">El número inicial debe ser mayor o igual a 0.</p>
                                 <p class="text-danger" *ngIf="addManzanasForm.manzana_fin.$error.min">El número final debe ser mayor o igual al número inicial.</p>
@@ -337,7 +325,7 @@
                     </div>
                 </form>
                 <mat-action-row>
-                    <button type="submit" class="btn btn-primary" (click)="createManzanas()">Agregar</button>
+                    <button type="submit" form="formManzanas" class="btn btn-primary" [disabled]="formManzanas.invalid">Agregar</button>
                 </mat-action-row>
 
             </mat-expansion-panel>
@@ -357,7 +345,7 @@
                             <div class="col-12 col-sm-12">
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="tipoLote" [(ngModel)]="addLoteOptions.by" value="nombre"> Por nombre
+                                        <input type="radio" name="tipoLote" [(ngModel)]="addLoteOptions.tipo" value="nombre"> Por nombre
                                     </label>
                                 </div>
                             </div>
@@ -370,7 +358,7 @@
                                           : (lote_nombre.invalid && ( lote_nombre.dirty || lote_nombre.touched ))}">
                                     <label class="col-form-label">Lote (nombre)</label>
                                     <input #lote_nombre="ngModel" type="text" placeholder="ej. Lote 1" [(ngModel)]="nuevoLote.nombre" name="lote_nombre" class="form-control"
-                                        maxlength="30" [disabled]="addLoteOptions.by != 'nombre'" [required]="addLoteOptions.by === 'nombre'">
+                                        maxlength="30" [disabled]="addLoteOptions.tipo != 'nombre'" [required]="addLoteOptions.tipo === 'nombre'">
                                 </div>
                             </div>
                         </div>
@@ -378,14 +366,14 @@
                             <div class="col-12 col-sm-12">
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="tipoLote" [(ngModel)]="addLoteOptions.by" value="numero"> Por número
+                                        <input type="radio" name="tipoLote" [(ngModel)]="addLoteOptions.tipo" value="numero"> Por número
                                     </label>
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-row">
-                            <!-- <fieldset id="fieldLotePorNumero" [disabled]="addLoteOptions.by == 'nombre'"> -->
+                            <!-- <fieldset id="fieldLotePorNumero" [disabled]="addLoteOptions.tipo == 'nombre'"> -->
                             <div class="form-group col-12 col-sm-6" [ngClass]="{
                                               'has-danger'
                                               : (lote_prefijo.invalid && ( lote_prefijo.dirty || lote_prefijo.touched ))}">
@@ -400,7 +388,7 @@
                                               : (lote_ini.invalid && ( lote_ini.dirty || lote_ini.touched ))}">
                                 <label class="col-form-label">Ini</label>
                                 <input [textMask]="{mask: maskDosDigitos, guide:guide}" #lote_ini="ngModel" type="text" class="form-control" name="lote_ini"
-                                    [(ngModel)]="addLoteOptions.ini" min="0" [required]="addLoteOptions.by === 'numero'">
+                                    [(ngModel)]="addLoteOptions.ini" min="0" [required]="addLoteOptions.tipo === 'numero'">
                             </div>
 
 
@@ -410,7 +398,7 @@
                                                   : (lote_fin.invalid && ( lote_fin.dirty || lote_fin.touched ))}">
                                 <label class="col-form-label">Fin</label>
                                 <input [textMask]="{mask: maskDosDigitos, guide:guide}" #lote_fin="ngModel" type="text" class="form-control" name="lote_fin"
-                                    [(ngModel)]="addLoteOptions.fin" min="addLoteOptions.ini" max="addLoteOptions.ini+20" [required]="addLoteOptions.by === 'numero'">
+                                    [(ngModel)]="addLoteOptions.fin" min="addLoteOptions.ini" max="addLoteOptions.ini+20" [required]="addLoteOptions.tipo === 'numero'">
                             </div>
 
 
