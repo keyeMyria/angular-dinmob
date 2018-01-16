@@ -9,14 +9,22 @@
 
 
       <!-- seleccionar obra -->
-
+      <!-- 
       <div class="mb-2">
         <select class="form-control" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)">
           <option value="">Seleccionar...</option>
           <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>
         </select>
+      </div> -->
+
+      <div>
+        <mat-form-field class="w-100">
+          <mat-select placeholder="Obra" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)">
+            <mat-option *ngFor="let obra of obras" [value]="obra.id_obra">{{ obra.nombre }}</mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
-      
+
 
       <div class="card">
         <div class="card-header padding-card-header">

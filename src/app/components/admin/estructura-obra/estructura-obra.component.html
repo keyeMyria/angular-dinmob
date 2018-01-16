@@ -3,7 +3,7 @@
         <div class="col-12 col-md-8">
 
             <!-- Seleccionar Obra -->
-    <!--         <div class="mb-2">
+            <!--         <div class="mb-2">
                 <select class="form-control" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)">
                     <option value="">Seleccionar...</option>
                     <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>
@@ -13,7 +13,7 @@
 
             <div>
                 <mat-form-field class="w-100">
-                    <mat-select placeholder="Obra" #selObra (change)="cargarObra(selObra.value)">
+                    <mat-select placeholder="Obra" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)">
                         <mat-option *ngFor="let obra of obras" [value]="obra.id_obra">{{ obra.nombre }}</mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -21,7 +21,7 @@
 
             <!-- Manzanas y Lotes -->
 
-           <!--  <h4>{{obra.datos?.nombre|uppercase}}</h4> -->
+            <!--  <h4>{{obra.datos?.nombre|uppercase}}</h4> -->
 
             <mat-accordion [displayMode]="'default'">
                 <mat-expansion-panel [hideToggle]="true" *ngFor="let manzana of obra.manzanas">

@@ -27,7 +27,7 @@ export class EstructuraObraComponent implements OnInit {
   obra: any = {
     datos: {}
   };
-  obras_selected: any = {};
+  obra_selected: string = "";
   residente: any = {};
   addManzanaOptions: any = {
     by: ""
@@ -72,6 +72,7 @@ export class EstructuraObraComponent implements OnInit {
     this.route.paramMap
       .switchMap((params: ParamMap) => {
         if (params.has("obra")) {
+          this.obra_selected = params.get("obra");
           return this.obraSrv.loadFullObra(params.get("obra"));
         } else {
           return Observable.of({ datos: {} });
