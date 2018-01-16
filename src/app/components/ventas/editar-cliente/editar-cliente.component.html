@@ -1263,12 +1263,15 @@
               <mat-tab label="Alerta">
                 <div class="p15px">
                   <div class="form-group">
-                    <div class="checkbox col-sm-12">
+                    <!--           <div class="checkbox col-sm-12">
                       <label>
                         <input type="checkbox"> Alerta Activada
-                        <!-- [(ngModel)]="alerta"  -->
+                        [(ngModel)]="alerta"
                       </label>
-                    </div>
+                    </div> -->
+                    <mat-slide-toggle>
+                      Alerta Activada
+                    </mat-slide-toggle>
                   </div>
                   <div class="form-group">
                     <label class="col-sm-12">Mensaje de Alerta</label>

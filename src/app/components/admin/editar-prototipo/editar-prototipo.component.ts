@@ -12,6 +12,7 @@ import { ActivatedRoute, Router, ParamMap } from "@angular/router";
 import { Prototipo } from "app/model/prototipo";
 import { Partida } from "app/model/partida";
 import { Insumo } from "app/model/insumo";
+import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
 
 @Component({
   selector: 'app-editar-prototipo',
@@ -36,7 +37,7 @@ export class EditarPrototipoComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-    this.route.paramMap    
+    this.route.paramMap
       .switchMap((params: ParamMap) =>
         this.prototipoSrv.getPrototipo(params.get('id')))
       .subscribe(res => {
@@ -143,6 +144,54 @@ export class EditarPrototipoComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.selectedOption = result;
     });
+  }
+
+  delPartida(partida) {
+
+
+    let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
+      data: {
+        title: "Eliminar Partida",
+        content: `¿Desea eliminar la partida: ${partida.nombre}?`
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+      }
+
+    });
+
+  }
+
+  delSubpartida(subpartida) {
+
+
+    let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
+      data: {
+        title: "Eliminar Subpartida",
+        content: `¿Desea eliminar la Subpartida: ${subpartida.nombre}?`
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+      }
+    });
+  }
+
+  delInsumo(insumo) {
+    let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
+      data: {
+        title: "Eliminar Insumo",
+        content: `¿Desea eliminar el Insumo: ${insumo.insumo}?`
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+      }
+    });
+
   }
 
 

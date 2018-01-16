@@ -154,11 +154,17 @@
                             </div>
                         </div>
 
-                        <div class="checkbox">
+                        <!--       <div class="checkbox">
                             <label>
                                 <input type="checkbox" name="en_venta" ng-true-value="'1'" ng-false-value="'0'" [(ngModel)]="obra.datos.en_venta"> En Venta
                             </label>
-                        </div>
+                        </div> -->
+
+                        <mat-slide-toggle>
+                            En Venta
+                        </mat-slide-toggle>
+
+
                         <p class="help-block">Esta propiedad indica la visibilidad en el módulo de Ventas</p>
 
                         <div class="row">
