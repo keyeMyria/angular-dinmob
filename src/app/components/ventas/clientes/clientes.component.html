@@ -58,7 +58,9 @@
                   <td>{{cliente.nombre}}</td>
                   <td>{{cliente.manzana}}</td>
                   <td>{{cliente.lote}}</td>
-                  <td>{{cliente.estado_lote}}</td>
+                  <td>
+                    <span class="badge badge-{{cliente.estado_lote|lowercase}}">{{cliente.estado_lote}}</span>
+                  </td>
                   <td class="text-right">
                     <button mat-icon-button [matMenuTriggerFor]="menu">
                       <mat-icon>more_vert</mat-icon>
