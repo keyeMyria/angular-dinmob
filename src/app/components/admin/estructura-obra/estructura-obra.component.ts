@@ -88,18 +88,45 @@ export class EstructuraObraComponent implements OnInit {
       prefijo: ""
     });
 
+    // { value: "", disabled: true }
     this.formLote = this.fb.group({
       tipo: "numero",
-      nombre: [{ value: "", disabled: true }],
-      ini: "",
-      fin: "",
-      prefijo: ""
+      nombre: ["", [Validators.required, Validators.maxLength(30)]],
+      ini: ["", Validators.required],
+      fin: ["", Validators.required],
+      prefijo: ["", [Validators.required, Validators.maxLength(30)]]
     });
 
+    this.formLote.controls["tipo"].valueChanges
+      .subscribe((value) => {
+        console.log("valueChanges", value);
+
+        if (value == "nombre") {
+
+          this.formLote.controls["ini"].disable();
+          this.formLote.controls["fin"].disable();
+          this.formLote.controls["prefijo"].disable();
+
+          this.formLote.controls["nombre"].enable();
 
 
+
+
+        } else {/* numero*/
+          this.formLote.controls["ini"].enable();
+          this.formLote.controls["fin"].enable();
+          this.formLote.controls["prefijo"].enable();
+
+          this.formLote.controls["nombre"].disable();
+        }
+
+      });
 
   }
+
+
+
+
 
   debug(model) {
     console.log(model);

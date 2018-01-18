@@ -358,7 +358,10 @@
                     <!-- [ngClass]="{'has-danger':(lote_nombre.invalid && ( lote_nombre.dirty || lote_nombre.touched ))}" -->
                     <div class="form-group">
                         <label>Lote (nombre)</label>
-                        <input type="text" placeholder="ej. Lote 1" class="form-control" formControlName="nombre">
+                        <input type="text" placeholder="ej. Lote 1" class="form-control" formControlName="nombre" [ngClass]="{'is-invalid': formLote.get('nombre').invalid}">
+                        <div class="invalid-feedback" *ngIf="formLote.get('nombre').invalid">
+                            Escriba un nombre con máximo 30 caracteres
+                        </div>
                     </div>
 
 
@@ -369,30 +372,40 @@
                     </div>
 
 
-                    <fieldset [disabled]="formLote.get('tipo').value=='nombre'">
-                        <div class="form-row">
-                            <!-- [ngClass]="{'has-danger':(lote_prefijo.invalid && ( lote_prefijo.dirty || lote_prefijo.touched ))}" -->
-                            <div class="form-group col-12 col-sm-6">
-                                <label class="col-form-label">Prefijo</label>
-                                <input type="text" class="form-control" formControlName="prefijo">
-                            </div>
-
-                            <!-- [ngClass]="{'has-danger':(lote_ini.invalid && ( lote_ini.dirty || lote_ini.touched ))}" -->
-                            <div class="form-group col-6 col-sm-3">
-                                <label class="col-form-label">Ini</label>
-                                <input [textMask]="{mask: maskDosDigitos, guide:guide}" type="text" class="form-control" formControlName="ini">
-                            </div>
-
-
-                            <!-- [ngClass]="{'has-danger':(lote_fin.invalid && ( lote_fin.dirty || lote_fin.touched ))}" -->
-                            <div class="form-group col-6 col-sm-3">
-                                <label class="col-form-label">Fin</label>
-                                <input [textMask]="{mask: maskDosDigitos, guide:guide}" type="text" class="form-control" formControlName="fin">
-                            </div>
-
-
+                    <!-- <fieldset [disabled]="formLote.get('tipo').value=='nombre'"> -->
+                    <div class="form-row">
+                        <!-- [ngClass]="{'has-danger':(lote_prefijo.invalid && ( lote_prefijo.dirty || lote_prefijo.touched ))}" -->
+                        <div class="form-group col-12 col-sm-6">
+                            <label class="col-form-label">Prefijo</label>
+                            <input type="text" class="form-control" formControlName="prefijo" [ngClass]="{'is-invalid': formLote.get('prefijo').invalid}">
+                            <div class="invalid-feedback" *ngIf="formLote.get('prefijo').errors">Escriba un prefijo con máximo 30 caracteres.</div>
                         </div>
-                    </fieldset>
+
+                        <!-- [ngClass]="{'has-danger':(lote_ini.invalid && ( lote_ini.dirty || lote_ini.touched ))}" -->
+                        <div class="form-group col-6 col-sm-3">
+                            <label class="col-form-label">Ini</label>
+                            <input [textMask]="{mask: maskDosDigitos, guide:guide}" type="text" class="form-control" formControlName="ini" [ngClass]="{'is-invalid': formLote.get('ini').invalid}">
+                            <div class="invalid-feedback" *ngIf="formLote.get('ini').errors">El número inicial debe ser mayor o igual a 0.</div>
+                        </div>
+
+
+                        <!-- [ngClass]="{'has-danger':(lote_fin.invalid && ( lote_fin.dirty || lote_fin.touched ))}" -->
+                        <div class="form-group col-6 col-sm-3">
+                            <label class="col-form-label">Fin</label>
+                            <input [textMask]="{mask: maskDosDigitos, guide:guide}" type="text" class="form-control" formControlName="fin" [ngClass]="{'is-invalid': formLote.get('fin').invalid}">
+                            <div class="invalid-feedback" *ngIf="formLote.get('fin').errors">El número final debe ser mayor o igual al número inicial.</div>
+                            <div class="invalid-feedback" *ngIf="formLote.get('fin')errors">Sólo puede agregar 20 lotes a la vez.</div>
+                        </div>
+
+
+
+
+
+
+
+
+                    </div>
+                    <!-- </fieldset> -->
 
                     <div class="form-group">
                         <!--  <p class="text-danger" *ngIf="addLotesForm.lote_ini.$error.min">El número inicial debe ser mayor o igual a 0.</p>
