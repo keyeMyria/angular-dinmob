@@ -10,6 +10,8 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import "rxjs/add/observable/of";
 import { Observable } from 'rxjs/Observable';
 import { NgForm, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { AgregarManzanaDialogoComponent } from 'app/components/admin/agregar-manzana-dialogo/agregar-manzana-dialogo.component';
+import { AgregarLoteDialogoComponent } from 'app/components/admin/agregar-lote-dialogo/agregar-lote-dialogo.component';
 
 
 
@@ -233,6 +235,35 @@ export class EstructuraObraComponent implements OnInit {
   createManzanas(form: NgForm) {
     console.log("Opciones", form.value);
   }
+
+  addManzana() {
+    let dialogRef = this.dialog.open(AgregarManzanaDialogoComponent, {
+      data: {
+
+      },
+      width: "500px"
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+    });
+
+  }
+
+  addLote() {
+    let dialogRef = this.dialog.open(AgregarLoteDialogoComponent, {
+      data: {
+
+      },
+      width: "500px"
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+    });
+
+  }
+
 
 
 

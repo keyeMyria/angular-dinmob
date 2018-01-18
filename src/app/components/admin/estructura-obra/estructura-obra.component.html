@@ -26,7 +26,7 @@
                 <div class="card-header padding-card-header">
                     <div class="d-flex align-items-center justify-content-between">
                         <span>Manzanas</span>
-                        <button mat-icon-button>
+                        <button mat-icon-button (click)="addManzana()">
                             <mat-icon>add</mat-icon>
                         </button>
                     </div>
@@ -37,7 +37,7 @@
                     <div class="alert alert-primary text-center m-3" role="alert">
                         <strong>Agregue alguna manzana para continuar...</strong>
                         <hr>
-                        <button type="button" class="btn btn-primary">Agregar</button>
+                        <button type="button" class="btn btn-primary" (click)="addManzana()">Agregar</button>
                     </div>
                 </div>
 
@@ -57,6 +57,10 @@
                                     <button mat-menu-item (click)="editarManzana()">
                                         <mat-icon>create</mat-icon>
                                         <span>Editar</span>
+                                    </button>
+                                    <button mat-menu-item (click)="addLote()">
+                                        <mat-icon>add_box</mat-icon>
+                                        <span>Agregar Lote</span>
                                     </button>
                                     <button mat-menu-item (click)="DelManzana()">
                                         <mat-icon>delete</mat-icon>
