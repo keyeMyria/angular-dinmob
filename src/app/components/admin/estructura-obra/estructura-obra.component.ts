@@ -9,7 +9,8 @@ import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import "rxjs/add/observable/of";
 import { Observable } from 'rxjs/Observable';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+
 
 
 @Component({
@@ -33,7 +34,7 @@ export class EstructuraObraComponent implements OnInit {
 
   addManzanas: any = {
     tipo: "numero",
-    nombre:"",
+    nombre: "",
     ini: "",
     fin: "",
     prefijo: ""
@@ -44,7 +45,7 @@ export class EstructuraObraComponent implements OnInit {
 
   addLoteOptions: any = {
     tipo: "numero",
-    nombre:"",
+    nombre: "",
     ini: "",
     fin: "",
     prefijo: ""
@@ -54,15 +55,20 @@ export class EstructuraObraComponent implements OnInit {
     nombre: ""
   };
 
-  op: any = {
-    prototipo: ""
-  };
+
 
   manzanaSelected: any = {
     nombre: ""
   };
 
 
+  opPrototipo = new FormControl("", Validators.required)
+  opEnVenta = new FormControl("", Validators.required)
+  opValorBase = new FormControl("", Validators.required)
+  opValorAmpliacion = new FormControl("", Validators.required)
+
+  formManzana: FormGroup;
+  formLote: FormGroup;
 
 
   constructor(
@@ -70,10 +76,35 @@ export class EstructuraObraComponent implements OnInit {
     private route: ActivatedRoute,
     private obraSrv: ObrasService,
     private auth: AuthService,
-    public dialog: MatDialog
-  ) { }
+    public dialog: MatDialog,
+    private fb: FormBuilder
+  ) {
+
+    this.formManzana = this.fb.group({
+      tipo: "numero",
+      nombre: "",
+      ini: "",
+      fin: "",
+      prefijo: ""
+    });
+
+    this.formLote = this.fb.group({
+      tipo: "numero",
+      nombre: [{ value: "", disabled: true }],
+      ini: "",
+      fin: "",
+      prefijo: ""
+    });
 
 
+
+
+  }
+
+  debug(model) {
+    console.log(model);
+
+  }
 
   ngOnInit() {
     this.usuario = this.auth.getUsuario();

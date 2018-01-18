@@ -21,92 +21,115 @@
 
             <!-- Manzanas y Lotes -->
 
-            <mat-accordion [displayMode]="'default'">
-                <mat-expansion-panel [hideToggle]="true" *ngFor="let manzana of obra.manzanas">
-                    <mat-expansion-panel-header>
-                        <span class="align-self-center">{{manzana.nombre}}</span>
-                        <div class="spacer"></div>
-                        <div class="collapse-header-btns">
-                            <span class="badge badge-pill badge-primary">5</span>
-                            <button mat-icon-button [matMenuTriggerFor]="menu2" (click)="$event.stopPropagation()">
-                                <mat-icon>more_vert</mat-icon>
-                            </button>
-                            <mat-menu #menu2="matMenu">
-                                <button mat-menu-item (click)="editarManzana()">
-                                    <mat-icon>create</mat-icon>
-                                    <span>Editar</span>
-                                </button>
-                                <button mat-menu-item (click)="DelManzana()">
-                                    <mat-icon>delete</mat-icon>
-                                    <span>Eliminar</span>
-                                </button>
-                            </mat-menu>
-                        </div>
-                    </mat-expansion-panel-header>
+            <div class="card">
 
-                    <div id="manzana{{manzana.id_manzana}}">
+                <div class="card-header padding-card-header">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <span>Manzanas</span>
+                        <button mat-icon-button>
+                            <mat-icon>add</mat-icon>
+                        </button>
+                    </div>
+                </div>
 
-                        <div class="table-responsive">
-                            <table id="idTablaManzana{{manzana.id_manzana}}" class="table table-sm table-striped">
-                                <thead>
-                                    <tr>
-                                        <th (click)="selectAllLotes(manzana)" style="cursor: pointer; width:30px;">
-                                            <span [ngClass]="{
+                <!-- alerta cuando la obra aun no tiene manzanas -->
+                <div *ngIf="obra.manzanas && obra.manzanas.length==0">
+                    <div class="alert alert-primary text-center m-3" role="alert">
+                        <strong>Agregue alguna manzana para continuar...</strong>
+                        <hr>
+                        <button type="button" class="btn btn-primary">Agregar</button>
+                    </div>
+                </div>
+
+
+                <!-- acordeon de manzanas -->
+                <mat-accordion [displayMode]="'default'">
+                    <mat-expansion-panel [hideToggle]="true" *ngFor="let manzana of obra.manzanas">
+                        <mat-expansion-panel-header>
+                            <span class="align-self-center">{{manzana.nombre}}</span>
+                            <div class="spacer"></div>
+                            <div class="collapse-header-btns">
+                                <span class="badge badge-pill badge-primary">5</span>
+                                <button mat-icon-button [matMenuTriggerFor]="menu2" (click)="$event.stopPropagation()">
+                                    <mat-icon>more_vert</mat-icon>
+                                </button>
+                                <mat-menu #menu2="matMenu">
+                                    <button mat-menu-item (click)="editarManzana()">
+                                        <mat-icon>create</mat-icon>
+                                        <span>Editar</span>
+                                    </button>
+                                    <button mat-menu-item (click)="DelManzana()">
+                                        <mat-icon>delete</mat-icon>
+                                        <span>Eliminar</span>
+                                    </button>
+                                </mat-menu>
+                            </div>
+                        </mat-expansion-panel-header>
+
+                        <div id="manzana{{manzana.id_manzana}}">
+
+                            <div class="table-responsive">
+                                <table id="idTablaManzana{{manzana.id_manzana}}" class="table table-sm table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th (click)="selectAllLotes(manzana)" style="cursor: pointer; width:30px;">
+                                                <span [ngClass]="{
                                                       'fa fa-check-square-o'
                                                       :manzana.selected, 'fa fa-square-o': !manzana.selected}"></span>
-                                        </th>
-                                        <th>Lote</th>
-                                        <th class="hidden-xs hidden-sm hidden-mat">Código</th>
-                                        <th>Prototipo</th>
-                                        <th>Base</th>
-                                        <th>Ampliación</th>
-                                        <th>En Venta</th>
-                                        <th></th>
+                                            </th>
+                                            <th>Lote</th>
+                                            <th class="hidden-xs hidden-sm hidden-mat">Código</th>
+                                            <th>Prototipo</th>
+                                            <th>Base</th>
+                                            <th>Ampliación</th>
+                                            <th>En Venta</th>
+                                            <th></th>
 
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let lote of manzana.lotes" (click)="toggleSelectionLote(manzana, lote)" style="cursor: pointer;" [ngClass]="{
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let lote of manzana.lotes" (click)="toggleSelectionLote(manzana, lote)" style="cursor: pointer;" [ngClass]="{
                                                   'bg-primary text-white'
                                                   :lote.selected}">
-                                        <td>
-                                            <i class="fa" [ngClass]="{
+                                            <td>
+                                                <i class="fa" [ngClass]="{
                                                       'fa-check-square-o'
                                                       :lote.selected, 'fa-square-o': !lote.selected}"></i>
-                                        </td>
-                                        <td>{{ lote.nombre}}</td>
-                                        <td class="hidden-xs hidden-sm hidden-mat">{{lote.code}}</td>
-                                        <td>
-                                            <span *ngFor="let prototipo of lote.prototipos">
-                                                <a class="link-del-prototipo" (click)="pre_delPrototipo(lote, prototipo, $event)">{{prototipo.nombre}}</a>
-                                                <br>
-                                            </span>
-                                        </td>
-                                        <td>{{lote.valor_base|currency}}</td>
-                                        <td>{{lote.valor_ampliacion|currency}}</td>
-                                        <td>{{lote.en_venta}}</td>
-                                        <td>
-                                            <button class="btn btn-outline-dark btn-sm" (click)="pre_editLote(manzana, lote, $event)">
-                                                <i class="fa fa-pencil"></i>
-                                            </button>
-                                            <button class="btn btn-outline-dark btn-sm" (click)="pre_delLote(manzana, lote, $event)">
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                                            </td>
+                                            <td>{{ lote.nombre}}</td>
+                                            <td class="hidden-xs hidden-sm hidden-mat">{{lote.code}}</td>
+                                            <td>
+                                                <span *ngFor="let prototipo of lote.prototipos">
+                                                    <a class="link-del-prototipo" (click)="pre_delPrototipo(lote, prototipo, $event)">{{prototipo.nombre}}</a>
+                                                    <br>
+                                                </span>
+                                            </td>
+                                            <td>{{lote.valor_base|currency}}</td>
+                                            <td>{{lote.valor_ampliacion|currency}}</td>
+                                            <td>{{lote.en_venta}}</td>
+                                            <td>
+                                                <button class="btn btn-outline-dark btn-sm" (click)="pre_editLote(manzana, lote, $event)">
+                                                    <i class="fa fa-pencil"></i>
+                                                </button>
+                                                <button class="btn btn-outline-dark btn-sm" (click)="pre_delLote(manzana, lote, $event)">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
                         </div>
 
-                    </div>
-
-                </mat-expansion-panel>
-            </mat-accordion>
-
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
 
         </div>
 
-        <div class="col-12 col-md-4">
+        <div class="col-12 col-md-4 mt-2">
+
             <!-- Datos Obra -->
             <mat-expansion-panel>
                 <mat-expansion-panel-header class="bg-info text-white">
@@ -238,93 +261,80 @@
                 <mat-expansion-panel-header class="bg-info text-white">
                     Agregar Manzanas
                 </mat-expansion-panel-header>
+
                 <form name="addManzanasForm" id="formManzanas" #formManzanas="ngForm" (ngSubmit)="createManzanas(formManzanas)" novalidate>
-                    <div class="card-block">
-                        <div class="row">
-                            <label class="col-form-label col-12">{{obra.datos.nombre}}</label>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 col-sm-12">
-                                <mat-radio-group name="tipo" [(ngModel)]="addManzanas.tipo">
-                                    <mat-radio-button name="tipo" value="nombre">Por nombre</mat-radio-button>
-                                </mat-radio-group>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 col-sm-12">
-                                <div class="form-group" [ngClass]="{'has-danger': ( nombre_manzana.invalid && (nombre_manzana.dirty || nombre_manzana.touched ))}">
-                                    <label class="col-form-label">Manzana (nombre)</label>
-                                    <input #nombre_manzana="ngModel" type="text" placeholder="ej. Manzana 1" class="form-control" name="nombre" [(ngModel)]="addManzanas.nombre"
-                                        maxlength="30" [disabled]="addManzanas.tipo != 'nombre'" [required]="addManzanas.tipo === 'nombre'">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 col-sm-12">
-                                <mat-radio-group name="tipo" [(ngModel)]="addManzanas.tipo">
-                                    <mat-radio-button name="tipo" value="numero">Por número</mat-radio-button>
-                                </mat-radio-group>
-                            </div>
-                        </div>
-                        <!--  <div class="row">
-                                <fieldset [disabled]="addManzanas.tipo == 'nombre'">
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group" [ngClass]="{
-                                              'has-error'
-                                              : (addManzanasForm.$submitted || addManzanasForm.manzana_prefijo.$touched) && (addManzanasForm.manzana_prefijo.$error.required) }">
-                                            <label class="col-form-label">Prefijo</label>
-                                            <input type="text" class="form-control" name="manzana_prefijo" [(ngModel)]="addManzanas.prefijo" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-sm-3">
-                                        <div class="form-group" [ngClass]="{
-                                              'has-error'
-                                              : (addManzanasForm.$submitted || addManzanasForm.manzana_ini.$touched) && (addManzanasForm.manzana_ini.$error.required || addManzanasForm.manzana_ini.$error.min) }">
-                                            <label class="col-form-label">Ini</label>
-                                            <input type="number" class="form-control" name="manzana_ini" [(ngModel)]="addManzanas.ini" min="0" [required]="addManzanas.tipo === 'numero'">
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-sm-3">
-                                        <div class="form-group" [ngClass]="{
-                                              'has-error'
-                                              : (addManzanasForm.$submitted || addManzanasForm.manzana_fin.$touched) && (addManzanasForm.manzana_fin.$error.required || addManzanasForm.manzana_fin.$error.min || addManzanasForm.manzana_fin.$error.max) }">
-                                            <label class="col-form-label">Fin</label>
-                                            <input type="number" class="form-control" name="manzana_fin" [(ngModel)]="addManzanas.fin" min="addManzanas.ini"
-                                                max="addManzanas.ini+20" [required]="addManzanas.tipo === 'numero'">
-                                        </div>
-                                    </div>
-                                </fieldset>
-                            </div> -->
-                        <fieldset [disabled]="addManzanas.tipo == 'nombre'">
-                            <div class="form-row">
 
-                                <div class="form-group col-12 col-sm-6" [ngClass]="{'has-danger':(manzana_prefijo.invalid && (manzana_prefijo.dirty || manzana_prefijo.touched ))}">
-                                    <label class="col-form-label">Prefijo</label>
-                                    <input #manzana_prefijo="ngModel" type="text" class="form-control" name="manzana_prefijo" [(ngModel)]="addManzanas.prefijo"
-                                        required>
-                                </div>
-                                <div class="form-group col-6 col-sm-3" [ngClass]="{'has-danger':( manzana_ini.invalid && (manzana_ini.dirty || manzana_ini.touched ))}">
-                                    <label class="col-form-label">Ini</label>
-                                    <input [textMask]="{mask: maskDosDigitos, guide:guide}" guide="false" #manzana_ini="ngModel" type="text" class="form-control"
-                                        name="manzana_ini" [(ngModel)]="addManzanas.ini" min="0" [required]="addManzanas.tipo === 'numero'">
-                                </div>
-                                <div class="form-group col-6 col-sm-3" [ngClass]="{'has-danger':(manzana_fin.invalid && (manzana_fin.dirty || manzana_fin.touched ))}">
-                                    <label class="col-form-label">Fin</label>
-                                    <input [textMask]="{mask: maskDosDigitos, guide: guide}" type="text" #manzana_fin="ngModel" class="form-control" name="manzana_fin"
-                                        [(ngModel)]="addManzanas.fin" min="addManzanas.ini" max="addManzanas.ini+20" [required]="addManzanas.tipo === 'numero'">
-                                </div>
 
-                            </div>
-                        </fieldset>
-                        <pre>{{addManzanas|json}}</pre>
-                        <div class="form-group">
-                            <!--  <p class="text-danger" *ngIf="addManzanasForm.manzana_ini.$error.min">El número inicial debe ser mayor o igual a 0.</p>
+
+                    <div class="form-group mt-3">
+                        <mat-radio-group name="tipo" [(ngModel)]="addManzanas.tipo">
+                            <mat-radio-button value="nombre">Por nombre</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-form-label">Manzana (nombre)</label>
+                        <input #nombre_manzana="ngModel" type="text" placeholder="ej. Manzana 1" class="form-control" [ngClass]="{'is-invalid': ( nombre_manzana.invalid && (nombre_manzana.dirty || nombre_manzana.touched ))}"
+                            name="nombre" [(ngModel)]="addManzanas.nombre" maxlength="30" [disabled]="addManzanas.tipo != 'nombre'"
+                            required>
+                        <!--  
+                        [required]="addManzanas.tipo === 'nombre'"  
+                        <div class="invalid-feedback">
+                            Máximo 30 caracteres
+                        </div> -->
+                        <div class="invalid-feedback">
+                            Escriba un nombre
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <mat-radio-group name="tipo" [(ngModel)]="addManzanas.tipo">
+                            <mat-radio-button value="numero">Por número</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="form-group col-12 col-sm-6">
+                            <label class="col-form-label">Prefijo</label>
+                            <input #manzana_prefijo="ngModel" type="text" class="form-control" [ngClass]="{'is-invalid':(manzana_prefijo.invalid && (manzana_prefijo.dirty || manzana_prefijo.touched ))}"
+                                name="manzana_prefijo" [(ngModel)]="addManzanas.prefijo" [disabled]="addManzanas.tipo == 'nombre'"
+                                required>
+                        </div>
+                        <div class="form-group col-6 col-sm-3">
+                            <label class="col-form-label">Ini</label>
+                            <input [textMask]="{mask: maskDosDigitos, guide:guide}" guide="false" #manzana_ini="ngModel" type="text" class="form-control"
+                                [ngClass]="{'is-invalid':( manzana_ini.invalid && (manzana_ini.dirty || manzana_ini.touched ))}"
+                                name="manzana_ini" [(ngModel)]="addManzanas.ini" min="0" [disabled]="addManzanas.tipo == 'nombre'"
+                                required>
+                        </div>
+                        <div class="form-group col-6 col-sm-3">
+                            <label class="col-form-label">Fin</label>
+                            <!-- [min]="addManzanas.ini" [max]="addManzanas.ini + 20" -->
+                            <input [textMask]="{mask: maskDosDigitos, guide: guide}" type="text" #manzana_fin="ngModel" class="form-control" [ngClass]="{'is-invalid':(manzana_fin.invalid && (manzana_fin.dirty || manzana_fin.touched ))}"
+                                name="manzana_fin" [min]="addManzanas.ini" max="addManzanas.ini + 20" [(ngModel)]="addManzanas.fin"
+                                [disabled]="addManzanas.tipo == 'nombre'" required>
+                        </div>
+
+                        <div class="invalid-feedback" *ngIf="manzana_ini.errors">El número inicial debe ser mayor o igual a 0.</div>
+                        <div class="invalid-feedback" *ngIf="manzana_fin.errors">El número final debe ser mayor o igual al número inicial.</div>
+                        <div class="invalid-feedback" *ngIf="manzana_fin.errors">Sólo puede agregar 20 manzanas a la vez.</div>
+
+                    </div>
+
+
+                    <pre>{{addManzanas|json}}</pre>
+                    <div class="form-group">
+                        <!--  <p class="text-danger" *ngIf="addManzanasForm.manzana_ini.$error.min">El número inicial debe ser mayor o igual a 0.</p>
                                 <p class="text-danger" *ngIf="addManzanasForm.manzana_fin.$error.min">El número final debe ser mayor o igual al número inicial.</p>
                                 <p class="text-danger" *ngIf="addManzanasForm.manzana_fin.$error.max">Sólo puede agregar 20 manzanas a la vez.</p> -->
-                        </div>
                     </div>
                 </form>
                 <mat-action-row>
+                    <button type="button" class="btn btn-dark" (click)="debug(formManzanas)">debug</button>
                     <button type="submit" form="formManzanas" class="btn btn-primary" [disabled]="formManzanas.invalid">Agregar</button>
                 </mat-action-row>
 
@@ -335,83 +345,65 @@
                 <mat-expansion-panel-header class="bg-info text-white">
                     Agregar Lotes
                 </mat-expansion-panel-header>
-                <form name="addLotesForm" (ngSubmit)="addLotesForm.$valid && addLoteManzanaSelected(addLotesForm)" novalidate>
-                    <div class="card-block">
-                        <div class="row">
-                            <label class="col-form-label col-12">{{manzanaSelected.nombre}}</label>
-                        </div>
 
-                        <div class="row">
-                            <div class="col-12 col-sm-12">
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="tipoLote" [(ngModel)]="addLoteOptions.tipo" value="nombre"> Por nombre
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
+                <form [formGroup]="formLote" (ngSubmit)="addLoteManzanaSelected(addLotesForm)" novalidate>
 
-                        <div class="row">
-                            <div class="col-12 col-sm-12">
-                                <div class="form-group" [ngClass]="{
-                                          'has-danger'
-                                          : (lote_nombre.invalid && ( lote_nombre.dirty || lote_nombre.touched ))}">
-                                    <label class="col-form-label">Lote (nombre)</label>
-                                    <input #lote_nombre="ngModel" type="text" placeholder="ej. Lote 1" [(ngModel)]="nuevoLote.nombre" name="lote_nombre" class="form-control"
-                                        maxlength="30" [disabled]="addLoteOptions.tipo != 'nombre'" [required]="addLoteOptions.tipo === 'nombre'">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 col-sm-12">
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="tipoLote" [(ngModel)]="addLoteOptions.tipo" value="numero"> Por número
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
 
+                    <div class="form-group mt-3">
+                        <mat-radio-group name="hola" formControlName="tipo">
+                            <mat-radio-button value="nombre">Por nombre</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+
+                    <!-- [ngClass]="{'has-danger':(lote_nombre.invalid && ( lote_nombre.dirty || lote_nombre.touched ))}" -->
+                    <div class="form-group">
+                        <label>Lote (nombre)</label>
+                        <input type="text" placeholder="ej. Lote 1" class="form-control" formControlName="nombre">
+                    </div>
+
+
+                    <div class="form-group">
+                        <mat-radio-group name="hola" formControlName="tipo">
+                            <mat-radio-button value="numero">Por número</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+
+
+                    <fieldset [disabled]="formLote.get('tipo').value=='nombre'">
                         <div class="form-row">
-                            <!-- <fieldset id="fieldLotePorNumero" [disabled]="addLoteOptions.tipo == 'nombre'"> -->
-                            <div class="form-group col-12 col-sm-6" [ngClass]="{
-                                              'has-danger'
-                                              : (lote_prefijo.invalid && ( lote_prefijo.dirty || lote_prefijo.touched ))}">
+                            <!-- [ngClass]="{'has-danger':(lote_prefijo.invalid && ( lote_prefijo.dirty || lote_prefijo.touched ))}" -->
+                            <div class="form-group col-12 col-sm-6">
                                 <label class="col-form-label">Prefijo</label>
-                                <input #lote_prefijo="ngModel" type="text" class="form-control" name="lote_prefijo" [(ngModel)]="addLoteOptions.prefijo"
-                                    required>
+                                <input type="text" class="form-control" formControlName="prefijo">
                             </div>
 
-
-                            <div class="form-group col-6 col-sm-3" [ngClass]="{
-                                              'has-danger'
-                                              : (lote_ini.invalid && ( lote_ini.dirty || lote_ini.touched ))}">
+                            <!-- [ngClass]="{'has-danger':(lote_ini.invalid && ( lote_ini.dirty || lote_ini.touched ))}" -->
+                            <div class="form-group col-6 col-sm-3">
                                 <label class="col-form-label">Ini</label>
-                                <input [textMask]="{mask: maskDosDigitos, guide:guide}" #lote_ini="ngModel" type="text" class="form-control" name="lote_ini"
-                                    [(ngModel)]="addLoteOptions.ini" min="0" [required]="addLoteOptions.tipo === 'numero'">
+                                <input [textMask]="{mask: maskDosDigitos, guide:guide}" type="text" class="form-control" formControlName="ini">
                             </div>
 
 
-
-                            <div class="form-group col-6 col-sm-3" [ngClass]="{
-                                                  'has-danger'
-                                                  : (lote_fin.invalid && ( lote_fin.dirty || lote_fin.touched ))}">
+                            <!-- [ngClass]="{'has-danger':(lote_fin.invalid && ( lote_fin.dirty || lote_fin.touched ))}" -->
+                            <div class="form-group col-6 col-sm-3">
                                 <label class="col-form-label">Fin</label>
-                                <input [textMask]="{mask: maskDosDigitos, guide:guide}" #lote_fin="ngModel" type="text" class="form-control" name="lote_fin"
-                                    [(ngModel)]="addLoteOptions.fin" min="addLoteOptions.ini" max="addLoteOptions.ini+20" [required]="addLoteOptions.tipo === 'numero'">
+                                <input [textMask]="{mask: maskDosDigitos, guide:guide}" type="text" class="form-control" formControlName="fin">
                             </div>
 
 
-                            <!-- </fieldset> -->
                         </div>
-                        <div class="form-group">
-                            <!--  <p class="text-danger" *ngIf="addLotesForm.lote_ini.$error.min">El número inicial debe ser mayor o igual a 0.</p>
+                    </fieldset>
+
+                    <div class="form-group">
+                        <!--  <p class="text-danger" *ngIf="addLotesForm.lote_ini.$error.min">El número inicial debe ser mayor o igual a 0.</p>
                                 <p class="text-danger" *ngIf="addLotesForm.lote_fin.$error.min">El número final debe ser mayor o igual al número inicial.</p>
                                 <p class="text-danger" *ngIf="addLotesForm.lote_fin.$error.max">Sólo puede agregar 20 lotes a la vez.</p> -->
-                        </div>
-
                     </div>
+
+
                 </form>
+                <pre>{{formLote.value|json}}</pre>
+                <pre>{{formLote.status|json}}</pre>
                 <mat-action-row>
                     <button type="submit" class="btn btn-primary">Agregar</button>
                 </mat-action-row>
@@ -423,74 +415,70 @@
                 <mat-expansion-panel-header class="bg-info text-white">
                     Operaciones
                 </mat-expansion-panel-header>
-                <form name="formOperaciones" novalidate>
-                    <div class="card-blovk">
-                        <label class="col-form-label">{{num_lotes_selected()}} lote
-                            <span *ngIf="num_lotes !== 1">s</span> seleccionado
-                            <span *ngIf="num_lotes !== 1">s</span>
-                        </label>
-                        <div class="row">
-                            <div class="col-12 col-sm-12">
-                                <div class="form-group">
-                                    <label class="col-form-label">Prototipo</label>
-                                    <div class="input-group">
-                                        <select name="prototipo" class="form-control" [(ngModel)]="op.prototipo">
-                                            <option value="">Seleccionar...</option>
-                                            <option [value]="prototipo.id_prototipo" *ngFor="let prototipo of obra.prototipos">{{prototipo.nombre}}</option>
-                                        </select>
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-primary" (click)="updatePrototipo()">Asignar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 col-sm-12">
-                                <div class="form-group">
-                                    <label class="col-form-label">En venta</label>
-                                    <div class="input-group">
-                                        <select name="en_venta" class="form-control" [(ngModel)]="op.en_venta">
-                                            <option value="">Seleccionar</option>
-                                            <option value="1">Si</option>
-                                            <option value="0">No</option>
-                                        </select>
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-primary" (click)="updateEnVenta()">Asignar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 col-sm-12">
-                                <div class="form-group">
-                                    <label class="col-form-label">Valor Base</label>
-                                    <div class="input-group">
-                                        <input name="valor_base" type="text" class="form-control" [(ngModel)]="op.valor_base" ui-money-mask min="0">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-primary" (click)="updateValorBase()">Asignar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 col-sm-12">
-                                <div class="form-group">
-                                    <label class="col-form-label">Valor Ampliación</label>
-                                    <div class="input-group">
-                                        <input name="valor_ampliacion" type="text" class="form-control" [(ngModel)]="op.valor_ampliacion" ui-money-mask min="0">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-primary" (click)="updateValorAmpliacion()">Asignar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
+                <div class="">
+
+                    <label class="col-form-label">{{num_lotes_selected()}} lote
+                        <span *ngIf="num_lotes !== 1">s</span> seleccionado
+                        <span *ngIf="num_lotes !== 1">s</span>
+                    </label>
+
+                    <!-- asignar prototipo -->
+                    <div class="form-group">
+                        <label>Prototipo</label>
+                        <div class="input-group">
+                            <select name="prototipo" class="form-control" [formControl]="opPrototipo">
+                                <option value="">Seleccionar...</option>
+                                <option [value]="prototipo.id_prototipo" *ngFor="let prototipo of obra.prototipos">{{prototipo.nombre}}</option>
+                            </select>
+                            <div class="input-group-btn">
+                                <button class="btn btn-primary" (click)="updatePrototipo()" [disabled]="opPrototipo.errors">Asignar</button>
+                            </div>
+                        </div>
                     </div>
-                </form>
+
+                    <!--  asignar estado venta   -->
+                    <div class="form-group">
+                        <label>En venta</label>
+                        <div class="input-group">
+                            <select name="en_venta" class="form-control" [formControl]="opEnVenta">
+                                <option value="">Seleccionar</option>
+                                <option value="1">Si</option>
+                                <option value="0">No</option>
+                            </select>
+                            <div class="input-group-btn">
+                                <button class="btn btn-primary" (click)="updateEnVenta()" [disabled]="opEnVenta.errors">Asignar</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- asignar valor base -->
+                    <div class="form-group">
+                        <label>Valor Base</label>
+                        <div class="input-group">
+                            <input name="valor_base" type="text" class="form-control" [formControl]="opValorBase">
+                            <div class="input-group-btn">
+                                <button class="btn btn-primary" (click)="updateValorBase()" [disabled]="opValorBase.errors">Asignar</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- asignar valor ampliacion -->
+                    <div class="form-group">
+                        <label>Valor Ampliación</label>
+                        <div class="input-group">
+                            <input name="valor_ampliacion" type="text" class="form-control" [formControl]="opValorAmpliacion">
+                            <div class="input-group-btn">
+                                <button class="btn btn-primary" (click)="updateValorAmpliacion()" [disabled]="opValorAmpliacion.errors">Asignar</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
             </mat-expansion-panel>
 
         </div>
