@@ -847,7 +847,7 @@
                         <tr *ngFor="let compra of compras" (click)="selectCompra(compra, $event)" style="cursor: pointer;" [ngClass]="{'activo':compra.selected}">
                           <!--<td><input type="radio" name="lote"></td>-->
                           <td>
-                            <span [ngClass]="{'glyphicon glyphicon-check':compra.selected, 'glyphicon glyphicon-unchecked': !compra.selected}"></span>
+                            <span [ngClass]="{'fa fa-check':compra.selected, 'fa fa-unchecked': !compra.selected}"></span>
                           </td>
                           <td>{{compra.obra}} - {{compra.manzana}} -
                             <b>{{compra.lote}}</b>
@@ -860,7 +860,7 @@
                             <button type="button" class="btn btn-default btn-sm" (click)="pre_eliminarAsociacion(compra, $event)">Eliminar</button>
                             <button type="button" class="btn btn-default btn-sm" (click)="reporteAsociacion(compra, $event)">Reporte</button>
                             <button type="button" title="Ir a lote" class="btn btn-default btn-sm" ui-sref="^.ventas_lote({id_lote:compra.id_lote})">
-                              <span class="glyphicon glyphicon-home"></span>
+                              <span class="fa fa-home"></span>
                             </button>
                           </td>
                         </tr>
@@ -1099,28 +1099,29 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <!-- *ngFor"compra in compras" (click)="selectCompra(compra, $event)" style="cursor: pointer;" [ngClass]="{'activo':compra.selected}" -->
+                        <tr *ngFor="let compra of compras" (click)="selectCompra(compra, $event)" style="cursor: pointer;" [ngClass]="{'activo':compra.selected}">
+
                           <td>
-                            <span></span>
+                            <span [ngClass]="{'fa fa-check':compra.selected, 'fa fa-unchecked': !compra.selected}"></span>
                           </td>
-                          <!-- [ngClass]="{'glyphicon glyphicon-check':compra.selected, 'glyphicon glyphicon-unchecked': !compra.selected}" -->
+
                           <td>
-                            <!-- {{compra.obra}} - {{compra.manzana}} - <b>{{compra.lote}} -->
-                          </td>
-                          <td>
-                            <!-- {{compra.activo|compraActiva}} -->
+                            {{compra.obra}} - {{compra.manzana}} -
+                            <b>{{compra.lote}}</b>
                           </td>
                           <td>
-                            <!-- {{compra.fecha_activo}} -->
+                            {{compra.activo}}
                           </td>
                           <td>
-                            <!-- {{compra.fecha_cancelacion}} -->
+                            {{compra.fecha_activo}}
+                          </td>
+                          <td>
+                            {{compra.fecha_cancelacion}}
                           </td>
                           <td class="text-right">
-                            <!-- <button  type="button" class="btn btn-default btn-sm" (click)="cancelarAsociacion(compra, $event)">Cancelar</button>                           
-                            <button  type="button" class="btn btn-default btn-sm" (click)="pre_eliminarAsociacion(compra, $event)">Eliminar</button>                            
-                            <button type="button" class="btn btn-default btn-sm" (click)="reporteAsociacion(compra, $event)">Reporte</button> -->
+                            <button type="button" class="btn btn-default btn-sm" (click)="cancelarAsociacion(compra, $event)">Cancelar</button>
+                            <button type="button" class="btn btn-default btn-sm" (click)="pre_eliminarAsociacion(compra, $event)">Eliminar</button>
+                            <button type="button" class="btn btn-default btn-sm" (click)="reporteAsociacion(compra, $event)">Reporte</button>
                             <button mat-icon-button [matMenuTriggerFor]="menu3">
                               <mat-icon>more_vert</mat-icon>
                             </button>
@@ -1162,35 +1163,35 @@
                           <th>Nota</th>
                           <th>Validado</th>
                           <th>
-                            <span class="glyphicon glyphicon-picture"></span>
+                            <span class="fa fa-picture"></span>
                           </th>
                           <th style="width:126px;"></th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <!-- *ngFor"pago in compra_selected.pagos" -->
+                        <tr *ngFor="let pago of compra_selected.pagos">
+
                           <td>
-                            <!-- {{pago.fecha_programada}} -->
+                            {{pago.fecha_programada}}
                           </td>
                           <td>
-                            <!-- {{pago.fecha_pago}} -->
+                            {{pago.fecha_pago}}
                           </td>
                           <td>
-                            <!-- {{pago.monto|currency}} -->
+                            {{pago.monto|currency}}
                           </td>
                           <td>
-                            <!-- {{pago.tipo_pago}} -->
+                            {{pago.tipo_pago}}
                           </td>
                           <td>
-                            <!-- {{pago.forma_pago}} -->
+                            {{pago.forma_pago}}
                           </td>
                           <td>
-                            <!-- {{pago.nota}} -->
+                            {{pago.nota}}
                           </td>
                           <td>
                             <span class="label">
-                              <!-- {{pago.validado|validado}} -->
+                              {{pago.validado}}
                             </span>
                           </td>
                           <!-- [ngClass]="{'label-danger': pago.validado == '0', 'label-success':pago.validado == '1'}" -->
@@ -1231,7 +1232,7 @@
                     <div class="col-xs-12 col-sm-4">
                       <div class="description-block border-right">
                         <h4 class="text-blue">
-                          <!-- {{(compra_selected.valor_operacion|| 0)| currency}} -->
+                          {{(compra_selected.valor_operacion|| 0)| currency}}
                         </h4>
                         <span>VALOR OPERACIÓN</span>
                       </div>
