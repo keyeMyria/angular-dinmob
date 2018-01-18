@@ -5,7 +5,44 @@
 
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "~font-awesome/css/font-awesome.css";
+@import "variables";
 
+
+.badge-apartado {
+    color:white;
+    background-color: $apartado; 
+  
+  }
+  
+  .badge-libre {
+    color:white;
+    background-color: $libre; 
+  
+  }
+  
+  .badge-bloqueado {
+    color:white;
+    background-color: $bloqueado; 
+  
+  }
+  
+  .badge-contrato {
+    color:white;
+    background-color: $contrato; 
+  
+  }
+  
+  .badge-escriturado {
+    color:white;
+    background-color: $escriturado; 
+  
+  }
+  
+  .badge-cancelado {
+    color:white;
+    background-color: $cancelado; 
+  
+  }
 
 
 html, body, app-root, md-sidenav-container, .my-content {

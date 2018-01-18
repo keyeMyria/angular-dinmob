@@ -94,6 +94,8 @@ import { EditarActaEntregaComponent } from './components/ventas/editar-acta-entr
 import { GenerarActaEntregaComponent } from './components/ventas/generar-acta-entrega/generar-acta-entrega.component';
 import { EditarManzanaDialogoComponent } from './components/admin/editar-manzana-dialogo/editar-manzana-dialogo.component'
 import { HttpClientModule } from '@angular/common/http';
+import { AgregarManzanaDialogoComponent } from './components/admin/agregar-manzana-dialogo/agregar-manzana-dialogo.component';
+import { AgregarLoteDialogoComponent } from './components/admin/agregar-lote-dialogo/agregar-lote-dialogo.component';
 
 
 
@@ -157,6 +159,8 @@ import { HttpClientModule } from '@angular/common/http';
     EditarActaEntregaComponent,
     GenerarActaEntregaComponent,
     EditarManzanaDialogoComponent,
+    AgregarManzanaDialogoComponent,
+    AgregarLoteDialogoComponent,
 
 
 
@@ -195,7 +199,10 @@ import { HttpClientModule } from '@angular/common/http';
     AgregarSubpartidaDialogoComponent,
     AgregarInsumoDialogoComponent,
     ComentarioAvancesDialogoComponent,
-    EditarManzanaDialogoComponent
+    EditarManzanaDialogoComponent,
+    AgregarManzanaDialogoComponent,
+    AgregarLoteDialogoComponent
+
     
   ],
 
