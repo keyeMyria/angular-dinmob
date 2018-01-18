@@ -28,6 +28,8 @@ export class EditarClienteComponent implements OnInit {
   public maskRFCM = [/[A-Z0-9]/i, /[A-Z0-9]/i, /[A-Z0-9]/i, '-', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /[A-Z0-9]/i, /[A-Z0-9]/i, /[A-Z0-9]/i,]
 
   cliente: Cliente = new Cliente();
+  compras: any[] = [];
+
   selectedOption: string;
   compra_selected: any = {};
 
@@ -42,14 +44,27 @@ export class EditarClienteComponent implements OnInit {
   ngOnInit() {
     /* this.cliente = new Cliente();
     this.cliente.persona_moral = "0"; */
-    this.route.paramMap
-      .switchMap((params: ParamMap) =>
-        this.clienteSrv.getCliente(params.get('id')))
+
+    let id = this.route.snapshot.paramMap.get('id');
+
+
+    this.clienteSrv.getCliente(id)
       .subscribe(res => {
         this.cliente = res;
       });
 
+    this.clienteSrv.getCompras(id)
+      .subscribe(compras => {
+        this.compras = compras;
+      });
 
+
+
+
+  }
+
+  selectCompra(compra, event) {
+    this.compra_selected = compra;
   }
 
   agregarDocumento() {
