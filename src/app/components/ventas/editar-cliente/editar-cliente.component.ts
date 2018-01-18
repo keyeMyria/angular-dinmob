@@ -64,7 +64,12 @@ export class EditarClienteComponent implements OnInit {
   }
 
   selectCompra(compra, event) {
-    this.compra_selected = compra;
+
+    if (event.checked) {
+      this.compra_selected = compra;
+    } else {
+      this.compra_selected = {};
+    };
   }
 
   agregarDocumento() {

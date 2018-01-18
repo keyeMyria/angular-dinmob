@@ -844,10 +844,10 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr *ngFor="let compra of compras" (click)="selectCompra(compra, $event)" style="cursor: pointer;" [ngClass]="{'activo':compra.selected}">
+                        <tr *ngFor="let compra of compras" style="cursor: pointer;" [ngClass]="{'activo':compra.selected}">
                           <!--<td><input type="radio" name="lote"></td>-->
                           <td>
-                            <span [ngClass]="{'fa fa-check':compra.selected, 'fa fa-unchecked': !compra.selected}"></span>
+                            <mat-checkbox (change)="selectCompra(compra, $event)"></mat-checkbox>
                           </td>
                           <td>{{compra.obra}} - {{compra.manzana}} -
                             <b>{{compra.lote}}</b>
@@ -855,13 +855,36 @@
                           <td>{{compra.activo}}</td>
                           <td>{{compra.fecha_activo}}</td>
                           <td>{{compra.fecha_cancelacion}}</td>
-                          <td>
-                            <button type="button" class="btn btn-default btn-sm" (click)="cancelarAsociacion(compra, $event)">{{compra.activo}}</button>
-                            <button type="button" class="btn btn-default btn-sm" (click)="pre_eliminarAsociacion(compra, $event)">Eliminar</button>
-                            <button type="button" class="btn btn-default btn-sm" (click)="reporteAsociacion(compra, $event)">Reporte</button>
+                          <td class="text-right">
+                           <!--  <button type="button" class="btn btn-default btn-sm" (click)="cancelarAsociacion(compra, $event)">{{compra.activo}}</button>
+                            <button type="button" class="btn btn-default btn-sm">Eliminar</button>
+                            <button type="button" class="btn btn-default btn-sm">Reporte</button>
                             <button type="button" title="Ir a lote" class="btn btn-default btn-sm" ui-sref="^.ventas_lote({id_lote:compra.id_lote})">
                               <span class="fa fa-home"></span>
+                            </button> -->
+                            <button mat-icon-button [matMenuTriggerFor]="menu3">
+                              <mat-icon>more_vert</mat-icon>
                             </button>
+                            <mat-menu #menu3="matMenu">
+                              <button mat-menu-item>
+                                <mat-icon>cancel</mat-icon>
+                                <span>Cancelar</span>
+                              </button>
+                              <button mat-menu-item (click)="pre_eliminarAsociacion(compra, $event)">
+                                <mat-icon>delete</mat-icon>
+                                <span>Eliminar</span>
+                              </button>
+                              <button mat-menu-item (click)="reporteAsociacion(compra, $event)">
+                                <mat-icon>report</mat-icon>
+                                <span>Reporte</span>
+                              </button>
+                              <button mat-menu-item>
+                                <mat-icon>assignment_late</mat-icon>
+                                <span>Ir a Lote</span>
+                              </button>
+
+                            </mat-menu>
+
                           </td>
                         </tr>
                       </tbody>
@@ -1099,10 +1122,10 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr *ngFor="let compra of compras" (click)="selectCompra(compra, $event)" style="cursor: pointer;" [ngClass]="{'activo':compra.selected}">
+                        <tr *ngFor="let compra of compras" style="cursor: pointer;" [ngClass]="{'activo':compra.selected}">
 
                           <td>
-                            <span [ngClass]="{'fa fa-check':compra.selected, 'fa fa-unchecked': !compra.selected}"></span>
+                            <mat-checkbox (change)="selectCompra(compra, $event)"></mat-checkbox>
                           </td>
 
                           <td>
@@ -1119,22 +1142,19 @@
                             {{compra.fecha_cancelacion}}
                           </td>
                           <td class="text-right">
-                            <button type="button" class="btn btn-default btn-sm" (click)="cancelarAsociacion(compra, $event)">Cancelar</button>
-                            <button type="button" class="btn btn-default btn-sm" (click)="pre_eliminarAsociacion(compra, $event)">Eliminar</button>
-                            <button type="button" class="btn btn-default btn-sm" (click)="reporteAsociacion(compra, $event)">Reporte</button>
                             <button mat-icon-button [matMenuTriggerFor]="menu3">
                               <mat-icon>more_vert</mat-icon>
                             </button>
                             <mat-menu #menu3="matMenu">
-                              <button mat-menu-item>
+                              <button mat-menu-item (click)="cancelarAsociacion(compra, $event)">
                                 <mat-icon>cancel</mat-icon>
                                 <span>Cancelar</span>
                               </button>
-                              <button mat-menu-item>
+                              <button mat-menu-item (click)="pre_eliminarAsociacion(compra, $event)">
                                 <mat-icon>delete</mat-icon>
                                 <span>Eliminar</span>
                               </button>
-                              <button mat-menu-item>
+                              <button mat-menu-item (click)="reporteAsociacion(compra, $event)">
                                 <mat-icon>report</mat-icon>
                                 <span>Reporte</span>
                               </button>
