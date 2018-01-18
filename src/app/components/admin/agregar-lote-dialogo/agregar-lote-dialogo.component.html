@@ -1,0 +1,66 @@
+<h1 mat-dialog-title>Agregar Lote</h1>
+<div mat-dialog-content>
+
+
+  <form name="addLotesForm" (ngSubmit)="addLotesForm.$valid && addLoteManzanaSelected(addLotesForm)" novalidate>
+
+    <div class="card-block">
+
+      <div class="row">
+        <div class="col-12 col-sm-12">
+          <div class="radio">
+            <label>
+              <input type="radio" name="tipoLote" [(ngModel)]="addLoteOptions.tipo" value="nombre"> Por nombre
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-sm-12">
+          <div class="form-group" [ngClass]="{'has-danger' : (lote_nombre.invalid && ( lote_nombre.dirty || lote_nombre.touched ))}">
+            <label class="col-form-label">Lote (nombre)</label>
+            <input #lote_nombre="ngModel" type="text" placeholder="ej. Lote 1" [(ngModel)]="nuevoLote.nombre" name="lote_nombre" class="form-control"
+              maxlength="30" [disabled]="addLoteOptions.tipo != 'nombre'" [required]="addLoteOptions.tipo === 'nombre'">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-sm-12">
+          <div class="radio">
+            <label>
+              <input type="radio" name="tipoLote" [(ngModel)]="addLoteOptions.tipo" value="numero"> Por número
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-12 col-sm-6" [ngClass]="{'has-danger' : (lote_prefijo.invalid && ( lote_prefijo.dirty || lote_prefijo.touched ))}">
+          <label class="col-form-label">Prefijo</label>
+          <input #lote_prefijo="ngModel" type="text" class="form-control" name="lote_prefijo" [(ngModel)]="addLoteOptions.prefijo"
+            required>
+        </div>
+        <div class="form-group col-6 col-sm-3" [ngClass]="{'has-danger' : (lote_ini.invalid && ( lote_ini.dirty || lote_ini.touched ))}">
+          <label class="col-form-label">Ini</label>
+          <input [textMask]="{mask: maskDosDigitos, guide:guide}" #lote_ini="ngModel" type="text" class="form-control" name="lote_ini"
+            [(ngModel)]="addLoteOptions.ini" min="0" [required]="addLoteOptions.tipo === 'numero'">
+        </div>
+        <div class="form-group col-6 col-sm-3" [ngClass]="{'has-danger' : (lote_fin.invalid && ( lote_fin.dirty || lote_fin.touched ))}">
+          <label class="col-form-label">Fin</label>
+          <input [textMask]="{mask: maskDosDigitos, guide:guide}" #lote_fin="ngModel" type="text" class="form-control" name="lote_fin"
+            [(ngModel)]="addLoteOptions.fin" min="addLoteOptions.ini" max="addLoteOptions.ini+20" [required]="addLoteOptions.tipo === 'numero'">
+        </div>
+      </div>
+
+
+    </div>
+  </form>
+
+
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="false">CANCELAR</button>
+  <button mat-button [mat-dialog-close]="true" color="warn">ACEPTAR</button>
+</div>
