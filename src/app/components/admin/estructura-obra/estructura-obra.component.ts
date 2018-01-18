@@ -95,9 +95,11 @@ export class EstructuraObraComponent implements OnInit {
       tipo: "numero",
       nombre: ["", [Validators.required, Validators.maxLength(30)]],
       ini: ["", Validators.required],
-      fin: ["", Validators.required],
+      fin: "",
       prefijo: ["", [Validators.required, Validators.maxLength(30)]]
     });
+
+    this.formLote.get("fin").setValidators([Validators.required, this.checkLoteFin.bind(this.formLote)]);
 
     this.formLote.controls["tipo"].valueChanges
       .subscribe((value) => {
@@ -112,8 +114,6 @@ export class EstructuraObraComponent implements OnInit {
           this.formLote.controls["nombre"].enable();
 
 
-
-
         } else {/* numero*/
           this.formLote.controls["ini"].enable();
           this.formLote.controls["fin"].enable();
@@ -124,6 +124,21 @@ export class EstructuraObraComponent implements OnInit {
 
       });
 
+  }
+
+  checkLoteFin(control: FormControl): { [key: string]: boolean } {
+
+    let form: any = this;
+    console.log(form);
+
+    // control.value < form.get("ini").value
+    if (control.value < form.get("ini").value) {
+      return { menorqueini: true };
+    } else if (control.value - form.get("ini").value > 20) {
+      return { masde20: true };
+    } else {
+      return null;
+    }
   }
 
 
