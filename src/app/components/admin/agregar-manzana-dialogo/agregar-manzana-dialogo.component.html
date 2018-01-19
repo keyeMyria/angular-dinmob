@@ -1,60 +1,71 @@
-<h1 mat-dialog-title>Agregar Manzana</h1>
+<h1 mat-dialog-title>Agregar Manzanas</h1>
 <div mat-dialog-content>
 
+  <h6>{{data.manzana.nombre}}</h6>
 
-  <form>
-    <div class="card-block">
-      <div class="row">
-        <div class="col-12 col-sm-12">
-          <mat-radio-group name="tipo" [(ngModel)]="addManzanas.tipo">
-            <mat-radio-button name="tipo" value="nombre">Por nombre</mat-radio-button>
-          </mat-radio-group>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12 col-sm-12">
-          <div class="form-group" [ngClass]="{'has-danger': ( nombre_manzana.invalid && (nombre_manzana.dirty || nombre_manzana.touched ))}">
-            <label class="col-form-label">Manzana (nombre)</label>
-            <input #nombre_manzana="ngModel" type="text" placeholder="ej. Manzana 1" class="form-control" name="nombre" [(ngModel)]="addManzanas.nombre"
-              maxlength="30" [disabled]="addManzanas.tipo != 'nombre'" [required]="addManzanas.tipo === 'nombre'">
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12 col-sm-12">
-          <mat-radio-group name="tipo" [(ngModel)]="addManzanas.tipo">
-            <mat-radio-button name="tipo" value="numero">Por número</mat-radio-button>
-          </mat-radio-group>
-        </div>
-      </div>
+  <form [formGroup]="formManzana" id="id_formManzana" (ngSubmit)="createManzanas()">
 
-      <fieldset [disabled]="addManzanas.tipo == 'nombre'">
-        <div class="form-row">
 
-          <div class="form-group col-12 col-sm-6" [ngClass]="{'has-danger':(manzana_prefijo.invalid && (manzana_prefijo.dirty || manzana_prefijo.touched ))}">
-            <label class="col-form-label">Prefijo</label>
-            <input #manzana_prefijo="ngModel" type="text" class="form-control" name="manzana_prefijo" [(ngModel)]="addManzanas.prefijo"
-              required>
-          </div>
-          <div class="form-group col-6 col-sm-3" [ngClass]="{'has-danger':( manzana_ini.invalid && (manzana_ini.dirty || manzana_ini.touched ))}">
-            <label class="col-form-label">Ini</label>
-            <input [textMask]="{mask: maskDosDigitos, guide:guide}" guide="false" #manzana_ini="ngModel" type="text" class="form-control"
-              name="manzana_ini" [(ngModel)]="addManzanas.ini" min="0" [required]="addManzanas.tipo === 'numero'">
-          </div>
-          <div class="form-group col-6 col-sm-3" [ngClass]="{'has-danger':(manzana_fin.invalid && (manzana_fin.dirty || manzana_fin.touched ))}">
-            <label class="col-form-label">Fin</label>
-            <input [textMask]="{mask: maskDosDigitos, guide: guide}" type="text" #manzana_fin="ngModel" class="form-control" name="manzana_fin"
-              [(ngModel)]="addManzanas.fin" min="addManzanas.ini" max="addManzanas.ini+20" [required]="addManzanas.tipo === 'numero'">
-          </div>
-
-        </div>
-      </fieldset>
+    <div class="form-group mt-3">
+      <mat-radio-group name="hola" formControlName="tipo">
+        <mat-radio-button value="nombre">Por nombre</mat-radio-button>
+      </mat-radio-group>
     </div>
+
+
+    <div class="form-group">
+      <label>Lote (nombre)</label>
+      <input type="text" placeholder="ej. Lote 1" class="form-control" formControlName="nombre" 
+      [ngClass]="{'is-invalid': formManzana.get('nombre').invalid && formManzana.get('nombre').touched }">
+      <div class="invalid-feedback" *ngIf="formManzana.get('nombre').invalid">
+        Escriba un nombre con máximo 30 caracteres
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <mat-radio-group name="hola" formControlName="tipo">
+        <mat-radio-button value="numero">Por número</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+
+    <div class="form-row">
+      <div class="form-group col-12 col-sm-6">
+        <label class="col-form-label">Prefijo</label>
+        <input type="text" class="form-control" formControlName="prefijo" 
+        [ngClass]="{'is-invalid': formManzana.get('prefijo').invalid && formManzana.get('prefijo').touched}">
+      </div>
+
+      <div class="form-group col-6 col-sm-3">
+        <label class="col-form-label">Ini</label>
+        <input type="number" class="form-control" formControlName="ini" 
+        [ngClass]="{'is-invalid': formManzana.get('ini').invalid && formManzana.get('ini').touched}">
+      </div>
+
+      <div class="form-group col-6 col-sm-3">
+        <label class="col-form-label">Fin</label>
+        <input type="number" class="form-control" formControlName="fin" 
+        [ngClass]="{'is-invalid': formManzana.get('fin').invalid && formManzana.get('fin').touched}">
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <div class="form-text text-danger" *ngIf="formManzana.get('prefijo').errors && formManzana.get('prefijo').invalid && formManzana.get('prefijo').touched ">Escriba un prefijo con máximo 30 caracteres.</div>
+      <div class="form-text text-danger" *ngIf="formManzana.get('ini').errors && formManzana.get('ini').invalid && formManzana.get('ini').touched">El número inicial debe ser mayor o igual a 0.</div>
+      <div class="form-text text-danger" *ngIf="formManzana.get('fin').errors?.menorqueini && formManzana.get('fin').invalid && formManzana.get('fin').dirty">El número final debe ser mayor o igual al número inicial.</div>
+      <div class="form-text text-danger" *ngIf="formManzana.get('fin').errors?.masde20 && formManzana.get('fin').invalid && formManzana.get('fin').dirty">Sólo puede agregar 20 lotes a la vez.</div>
+    </div>
+
+
   </form>
+  <!-- <pre>{{formManzana.value|json}}</pre>
+<pre>{{formManzana.status|json}}</pre> -->
 
 
 </div>
 <div mat-dialog-actions>
   <button mat-button [mat-dialog-close]="false">CANCELAR</button>
-  <button mat-button [mat-dialog-close]="true" color="warn">ACEPTAR</button>
+  <button type="submit" mat-button form="id_formManzana" color="primary" [disabled]="formManzana.invalid">AGREGAR</button>
 </div>
