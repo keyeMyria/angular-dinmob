@@ -3,8 +3,8 @@
 </button>
 
 <mat-drawer-container class="drawer-container">
-    <mat-drawer #drawer [mode]="mobileQuery.matches ? 'over':'side'" [opened]="!mobileQuery.matches" style="width:250px">
-        <mat-card>
+    <mat-drawer class="estructura" #drawer [mode]="mobileQuery.matches ? 'over':'side'" [opened]="!mobileQuery.matches" style="width:250px">
+        <mat-card class="estructura">
             <div class="mb-2">
                 <select class="form-control" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)">
                     <option value="">Seleccionar...</option>
@@ -20,7 +20,7 @@
         </mat-card>
         <div class="mb-3">
             <mat-accordion>
-                <mat-expansion-panel *ngFor="let manzana of obra?.manzanas" [hideToggle]="false">
+                <mat-expansion-panel class="manzanas" *ngFor="let manzana of obra?.manzanas" [hideToggle]="false">
                     <mat-expansion-panel-header>
                         <span>{{manzana.nombre}}</span>
                         <div class="spacer"></div>
