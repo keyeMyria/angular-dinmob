@@ -49,20 +49,20 @@
                             <span class="align-self-center">{{manzana.nombre}}</span>
                             <div class="spacer"></div>
                             <div class="collapse-header-btns">
-                                <span class="badge badge-pill badge-primary">5</span>
+                                <span class="badge badge-pill badge-primary">{{manzana.lotes.length}}</span>
                                 <button mat-icon-button [matMenuTriggerFor]="menu2" (click)="$event.stopPropagation()">
                                     <mat-icon>more_vert</mat-icon>
                                 </button>
                                 <mat-menu #menu2="matMenu">
-                                    <button mat-menu-item (click)="editarManzana()">
+                                    <button mat-menu-item (click)="editarManzana(manzana)">
                                         <mat-icon>create</mat-icon>
                                         <span>Editar</span>
                                     </button>
-                                    <button mat-menu-item (click)="addLote()">
+                                    <button mat-menu-item (click)="addLotes(manzana)">
                                         <mat-icon>add_box</mat-icon>
-                                        <span>Agregar Lote</span>
+                                        <span>Agregar lotes</span>
                                     </button>
-                                    <button mat-menu-item (click)="DelManzana()">
+                                    <button mat-menu-item (click)="delManzana(manzana)">
                                         <mat-icon>delete</mat-icon>
                                         <span>Eliminar</span>
                                     </button>
@@ -291,6 +291,8 @@
                         </div>
                     </div>
 
+                
+
 
 
                     <div class="form-group">
@@ -344,82 +346,7 @@
 
             </mat-expansion-panel>
 
-            <!-- Agregar Lotes -->
-            <mat-expansion-panel class="mt-2">
-                <mat-expansion-panel-header class="bg-info text-white">
-                    Agregar Lotes
-                </mat-expansion-panel-header>
-
-                <form [formGroup]="formLote" (ngSubmit)="addLoteManzanaSelected(addLotesForm)" novalidate>
-
-
-                    <div class="form-group mt-3">
-                        <mat-radio-group name="hola" formControlName="tipo">
-                            <mat-radio-button value="nombre">Por nombre</mat-radio-button>
-                        </mat-radio-group>
-                    </div>
-
-                    <!-- [ngClass]="{'has-danger':(lote_nombre.invalid && ( lote_nombre.dirty || lote_nombre.touched ))}" -->
-                    <div class="form-group">
-                        <label>Lote (nombre)</label>
-                        <input type="text" placeholder="ej. Lote 1" class="form-control" formControlName="nombre" [ngClass]="{'is-invalid': formLote.get('nombre').invalid}">
-                        <div class="invalid-feedback" *ngIf="formLote.get('nombre').invalid">
-                            Escriba un nombre con máximo 30 caracteres
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <mat-radio-group name="hola" formControlName="tipo">
-                            <mat-radio-button value="numero">Por número</mat-radio-button>
-                        </mat-radio-group>
-                    </div>
-
-
-
-                    <div class="form-row">
-                        <!-- [ngClass]="{'has-danger':(lote_prefijo.invalid && ( lote_prefijo.dirty || lote_prefijo.touched ))}" -->
-                        <div class="form-group col-12 col-sm-6">
-                            <label class="col-form-label">Prefijo</label>
-                            <input type="text" class="form-control" formControlName="prefijo" [ngClass]="{'is-invalid': formLote.get('prefijo').invalid}">
-
-                        </div>
-
-                        <!-- [ngClass]="{'has-danger':(lote_ini.invalid && ( lote_ini.dirty || lote_ini.touched ))}" -->
-                        <div class="form-group col-6 col-sm-3">
-                            <label class="col-form-label">Ini</label>
-                            <input type="number" class="form-control" formControlName="ini" [ngClass]="{'is-invalid': formLote.get('ini').invalid}">
-
-                        </div>
-
-
-                        <!-- [ngClass]="{'has-danger':(lote_fin.invalid && ( lote_fin.dirty || lote_fin.touched ))}" -->
-                        <div class="form-group col-6 col-sm-3">
-                            <label class="col-form-label">Fin</label>
-                            <input type="number" class="form-control" formControlName="fin" [ngClass]="{'is-invalid': formLote.get('fin').invalid}">
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="form-group">
-                        <div class="form-text text-danger" *ngIf="formLote.get('prefijo').errors">Escriba un prefijo con máximo 30 caracteres.</div>
-                        <div class="form-text text-danger" *ngIf="formLote.get('ini').errors">El número inicial debe ser mayor o igual a 0.</div>
-                        <div class="form-text text-danger" *ngIf="formLote.get('fin').errors?.menorqueini">El número final debe ser mayor o igual al número inicial.</div>
-                        <div class="form-text text-danger" *ngIf="formLote.get('fin').errors?.masde20">Sólo puede agregar 20 lotes a la vez.</div>
-                    </div>
-
-
-                </form>
-                <pre>{{formLote.value|json}}</pre>
-                <pre>{{formLote.status|json}}</pre>
-                <mat-action-row>
-                    <button type="submit" class="btn btn-primary">Agregar</button>
-                </mat-action-row>
-
-            </mat-expansion-panel>
-
+  
             <!-- Operaciones -->
             <mat-expansion-panel class="mt-2">
                 <mat-expansion-panel-header class="bg-info text-white">

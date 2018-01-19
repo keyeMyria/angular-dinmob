@@ -12,6 +12,8 @@ import { Observable } from 'rxjs/Observable';
 import { NgForm, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { AgregarManzanaDialogoComponent } from 'app/components/admin/agregar-manzana-dialogo/agregar-manzana-dialogo.component';
 import { AgregarLoteDialogoComponent } from 'app/components/admin/agregar-lote-dialogo/agregar-lote-dialogo.component';
+import { LotesService } from 'app/services/lotes.service';
+import { ManzanasService } from 'app/services/manzanas.service';
 
 
 
@@ -79,7 +81,9 @@ export class EstructuraObraComponent implements OnInit {
     private obraSrv: ObrasService,
     private auth: AuthService,
     public dialog: MatDialog,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private loteSrv: LotesService,
+    private manzanaSrv: ManzanasService
   ) {
 
     this.formManzana = this.fb.group({
@@ -90,58 +94,8 @@ export class EstructuraObraComponent implements OnInit {
       prefijo: ""
     });
 
-    // { value: "", disabled: true }
-    this.formLote = this.fb.group({
-      tipo: "numero",
-      nombre: ["", [Validators.required, Validators.maxLength(30)]],
-      ini: ["", Validators.required],
-      fin: "",
-      prefijo: ["", [Validators.required, Validators.maxLength(30)]]
-    });
-
-    this.formLote.get("fin").setValidators([Validators.required, this.checkLoteFin.bind(this.formLote)]);
-
-    this.formLote.controls["tipo"].valueChanges
-      .subscribe((value) => {
-        console.log("valueChanges", value);
-
-        if (value == "nombre") {
-
-          this.formLote.controls["ini"].disable();
-          this.formLote.controls["fin"].disable();
-          this.formLote.controls["prefijo"].disable();
-
-          this.formLote.controls["nombre"].enable();
-
-
-        } else {/* numero*/
-          this.formLote.controls["ini"].enable();
-          this.formLote.controls["fin"].enable();
-          this.formLote.controls["prefijo"].enable();
-
-          this.formLote.controls["nombre"].disable();
-        }
-
-      });
 
   }
-
-  checkLoteFin(control: FormControl): { [key: string]: boolean } {
-
-    let form: any = this;
-    console.log(form);
-
-    // control.value < form.get("ini").value
-    if (control.value < form.get("ini").value) {
-      return { menorqueini: true };
-    } else if (control.value - form.get("ini").value > 20) {
-      return { masde20: true };
-    } else {
-      return null;
-    }
-  }
-
-
 
 
 
@@ -187,6 +141,8 @@ export class EstructuraObraComponent implements OnInit {
     }
   }
 
+
+
   toggleSelectionLote(manzana, lote) {
     lote.selected = !lote.selected;
 
@@ -216,9 +172,7 @@ export class EstructuraObraComponent implements OnInit {
     return 0;
   }
 
-  onFechaChange() {
 
-  }
 
   editarManzana() {
     let dialogRef = this.dialog.open(EditarManzanaDialogoComponent, {
@@ -231,25 +185,14 @@ export class EstructuraObraComponent implements OnInit {
     });
   }
 
-  DelManzana() {
 
-    let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
-      data: {
-        title: "Eliminar Manzana",
-        content: `¿Desea eliminar la Manzana?`
-      },
-      width: "500px"
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-
-    });
-
-  }
 
   createManzanas(form: NgForm) {
     console.log("Opciones", form.value);
   }
+
+
+
 
   addManzana() {
     let dialogRef = this.dialog.open(AgregarManzanaDialogoComponent, {
@@ -265,15 +208,17 @@ export class EstructuraObraComponent implements OnInit {
 
   }
 
-  addLote() {
+  addLotes(manzana) {
     let dialogRef = this.dialog.open(AgregarLoteDialogoComponent, {
       data: {
-
+        manzana:manzana
       },
       width: "500px"
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      console.log("dialogo cerrado");
+      
 
     });
 
