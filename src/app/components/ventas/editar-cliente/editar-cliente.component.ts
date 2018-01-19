@@ -9,6 +9,7 @@ import { NuevaCompraDialogoComponent } from 'app/components/ventas/nueva-compra-
 import { NuevoPagoDialogoComponent } from 'app/components/ventas/nuevo-pago-dialogo/nuevo-pago-dialogo.component';
 import { EditarPagoDialogoComponent } from 'app/components/ventas/editar-pago-dialogo/editar-pago-dialogo.component';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
+import { Pago } from 'app/model/pago';
 
 @Component({
   selector: 'app-editar-cliente',
@@ -29,9 +30,9 @@ export class EditarClienteComponent implements OnInit {
 
   cliente: Cliente = new Cliente();
   compras: any[] = [];
-
   selectedOption: string;
   compra_selected: any = {};
+  pago: Pago;
 
   constructor(
     private clienteSrv: ClientesService,
@@ -71,6 +72,7 @@ export class EditarClienteComponent implements OnInit {
       this.compra_selected = {};
     };
   }
+
 
   agregarDocumento() {
 
@@ -112,8 +114,7 @@ export class EditarClienteComponent implements OnInit {
     console.log();
     let dialogRef = this.dialog.open(NuevoPagoDialogoComponent, {
       width: '400px',
-      data: {
-      }
+      data: {},
     });
     dialogRef.afterClosed().subscribe(result => {
       this.selectedOption = result;
@@ -121,18 +122,23 @@ export class EditarClienteComponent implements OnInit {
 
   }
 
-  editarPago() {
-    console.log();
+  editarPago(pago) {
+
+    let copia = Pago.copiar(pago);
+    //copia.fecha_pago = "01/19/2018"
+    console.log("Copia", copia);
+    console.log("Pago", pago);
     let dialogRef = this.dialog.open(EditarPagoDialogoComponent, {
       width: '400px',
-      data: {
-      }
+      data: { pago: copia },
     });
     dialogRef.afterClosed().subscribe(result => {
       this.selectedOption = result;
     });
 
   }
+
+
 
   onFechaChange() {
 
