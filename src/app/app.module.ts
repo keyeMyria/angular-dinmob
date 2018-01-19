@@ -96,6 +96,7 @@ import { EditarManzanaDialogoComponent } from './components/admin/editar-manzana
 import { HttpClientModule } from '@angular/common/http';
 import { AgregarManzanaDialogoComponent } from './components/admin/agregar-manzana-dialogo/agregar-manzana-dialogo.component';
 import { AgregarLoteDialogoComponent } from './components/admin/agregar-lote-dialogo/agregar-lote-dialogo.component';
+import { FotoPartidaDialogoComponent } from './components/residente/foto-partida-dialogo/foto-partida-dialogo.component';
 
 
 
@@ -161,6 +162,7 @@ import { AgregarLoteDialogoComponent } from './components/admin/agregar-lote-dia
     EditarManzanaDialogoComponent,
     AgregarManzanaDialogoComponent,
     AgregarLoteDialogoComponent,
+    FotoPartidaDialogoComponent,
 
 
 
@@ -202,7 +204,8 @@ import { AgregarLoteDialogoComponent } from './components/admin/agregar-lote-dia
     ComentarioAvancesDialogoComponent,
     EditarManzanaDialogoComponent,
     AgregarManzanaDialogoComponent,
-    AgregarLoteDialogoComponent
+    AgregarLoteDialogoComponent,
+    FotoPartidaDialogoComponent
 
     
   ],

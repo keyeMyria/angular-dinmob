@@ -8,6 +8,7 @@ import { AuthService } from 'app/services/auth.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { MediaMatcher } from '@angular/cdk/layout';
+import { FotoPartidaDialogoComponent } from 'app/components/residente/foto-partida-dialogo/foto-partida-dialogo.component';
 
 
 @Component({
@@ -152,6 +153,17 @@ export class AvancesComponent implements OnInit {
     }
 
 
+  }
+
+  addFoto() {
+    let dialogRef = this.dialog.open(FotoPartidaDialogoComponent, {
+      width: '500px',
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
   ngOnDestroy(): void {
