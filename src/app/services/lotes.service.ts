@@ -108,13 +108,13 @@ export class LotesService {
   }
 
   addLoteByNombre(nombre, id_manzana) {
-    return this.http.post(this.url + 'add_by_nombre', { nombre_lote: nombre, id_manzana: id_manzana })
+    return this.http.post(this.url + 'add_by_nombre', { nombre: nombre, id_manzana: id_manzana })
       .map(this.extractData)
       .catch(this.handleError);
   }
 
   addLoteByNumero(prefijo, ini, fin, id_manzana) {
-    return this.http.post(this.url + 'add_by_numero', { prefijo: prefijo, lote_ini: ini, lote_fin: fin, id_manzana: id_manzana })
+    return this.http.post(this.url + 'add_by_numero', { prefijo: prefijo, ini: ini, fin: fin, id_manzana: id_manzana })
       .map(this.extractData)
       .catch(this.handleError);
   }

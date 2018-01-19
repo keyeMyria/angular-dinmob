@@ -21,6 +21,7 @@ import { UsuarioService } from "app/services/usuario.service";
 import { AuthService } from "app/services/auth.service";
 import { MapasService } from "app/services/mapas.service";
 import { ActaEntregaService } from 'app/services/acta-entrega.service';
+import { ManzanasService } from 'app/services/manzanas.service';
 
 //helpers
 import { ClienteHelperService } from 'app/utils/cliente-helper.service';
@@ -97,6 +98,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AgregarManzanaDialogoComponent } from './components/admin/agregar-manzana-dialogo/agregar-manzana-dialogo.component';
 import { AgregarLoteDialogoComponent } from './components/admin/agregar-lote-dialogo/agregar-lote-dialogo.component';
 import { FotoPartidaDialogoComponent } from './components/residente/foto-partida-dialogo/foto-partida-dialogo.component';
+
 
 
 
@@ -222,6 +224,7 @@ import { FotoPartidaDialogoComponent } from './components/residente/foto-partida
     MapasService,
     PrototiposService,
     LotesService,
+    ManzanasService,
     ActaEntregaService
   ],
   bootstrap: [AppComponent]
