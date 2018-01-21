@@ -101,6 +101,15 @@ import { FotoPartidaDialogoComponent } from './components/residente/foto-partida
 
 
 
+//resolvers
+import { ObrasUsuarioResolverService } from 'app/resolvers/obras-usuario-resolver.service';
+import { UsuariosAlmacenistasResolverService } from 'app/resolvers/usuarios-almacenistas-resolver.service';
+import { UsuariosContolAlmacenResolverService } from 'app/resolvers/usuarios-contol-almacen-resolver.service';
+import { UsuariosResidentesResolverService } from 'app/resolvers/usuarios-residentes-resolver.service';
+import { UsuariosAsesoresResolverService } from 'app/resolvers/usuarios-asesores-resolver.service';
+
+
+
 
 
 
@@ -225,7 +234,13 @@ import { FotoPartidaDialogoComponent } from './components/residente/foto-partida
     PrototiposService,
     LotesService,
     ManzanasService,
-    ActaEntregaService
+    ActaEntregaService,
+
+    ObrasUsuarioResolverService,
+    UsuariosAlmacenistasResolverService,
+    UsuariosAsesoresResolverService,
+    UsuariosContolAlmacenResolverService,
+    UsuariosResidentesResolverService
   ],
   bootstrap: [AppComponent]
 })

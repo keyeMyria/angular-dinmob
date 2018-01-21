@@ -49,6 +49,13 @@ import { ActasEntregaComponent } from 'app/components/ventas/actas-entrega/actas
 import { GenerarActaEntregaComponent } from 'app/components/ventas/generar-acta-entrega/generar-acta-entrega.component';
 
 
+//resolvers
+import { ObrasUsuarioResolverService } from 'app/resolvers/obras-usuario-resolver.service';
+import { UsuariosResidentesResolverService } from 'app/resolvers/usuarios-residentes-resolver.service';
+import { UsuariosAlmacenistasResolverService } from 'app/resolvers/usuarios-almacenistas-resolver.service';
+import { UsuariosContolAlmacenResolverService } from 'app/resolvers/usuarios-contol-almacen-resolver.service';
+
+
 
 
 
@@ -66,7 +73,15 @@ export const ROUTES: Routes = [
             { path: 'obras', component: ObrasComponent },
             { path: 'tablero', component: TableroComponent },
             { path: 'editar-prototipo/:id', component: EditarPrototipoComponent },
-            { path: 'estructura-obra', component: EstructuraObraComponent },
+            {
+                path: 'estructura-obra', component: EstructuraObraComponent,
+                resolve: {
+                    obras: ObrasUsuarioResolverService,
+                    residentes:UsuariosResidentesResolverService,
+                    almacenistas:UsuariosAlmacenistasResolverService,
+                    control_almacen:UsuariosContolAlmacenResolverService
+                }
+            },
             { path: 'prototipos', component: PrototiposComponent },
             { path: 'perfil', component: PerfilComponent },
             { path: 'avances', component: AvancesComponent },

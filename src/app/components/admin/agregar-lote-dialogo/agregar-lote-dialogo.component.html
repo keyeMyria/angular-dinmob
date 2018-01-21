@@ -7,7 +7,7 @@
 
 
     <div class="form-group mt-3">
-      <mat-radio-group name="hola" formControlName="tipo">
+      <mat-radio-group name="tipo" formControlName="tipo">
         <mat-radio-button value="nombre">Por nombre</mat-radio-button>
       </mat-radio-group>
     </div>
@@ -23,7 +23,7 @@
 
 
     <div class="form-group">
-      <mat-radio-group name="hola" formControlName="tipo">
+      <mat-radio-group name="tipo" formControlName="tipo">
         <mat-radio-button value="numero">Por número</mat-radio-button>
       </mat-radio-group>
     </div>
@@ -51,7 +51,7 @@
       <div class="form-text text-danger" *ngIf="formLote.get('prefijo').errors && formLote.get('prefijo').invalid && formLote.get('prefijo').touched ">Escriba un prefijo con máximo 30 caracteres.</div>
       <div class="form-text text-danger" *ngIf="formLote.get('ini').errors && formLote.get('ini').invalid && formLote.get('ini').touched">El número inicial debe ser mayor o igual a 0.</div>
       <div class="form-text text-danger" *ngIf="formLote.get('fin').errors?.menorqueini && formLote.get('fin').invalid && formLote.get('fin').dirty">El número final debe ser mayor o igual al número inicial.</div>
-      <div class="form-text text-danger" *ngIf="formLote.get('fin').errors?.masde20 && formLote.get('fin').invalid && formLote.get('fin').dirty">Sólo puede agregar 20 lotes a la vez.</div>
+      <div class="form-text text-danger" *ngIf="formLote.get('fin').errors?.masde20 && formLote.get('fin').invalid && formLote.get('fin').dirty">Sólo pueden agregar 20 lotes a la vez.</div>
     </div>
 
 

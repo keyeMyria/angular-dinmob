@@ -1,20 +1,20 @@
 <h1 mat-dialog-title>Agregar Manzanas</h1>
 <div mat-dialog-content>
 
-  <h6>{{data.manzana.nombre}}</h6>
+  <h6>{{data.obra.nombre}}</h6>
 
   <form [formGroup]="formManzana" id="id_formManzana" (ngSubmit)="createManzanas()">
 
 
     <div class="form-group mt-3">
-      <mat-radio-group name="hola" formControlName="tipo">
+      <mat-radio-group name="tipo" formControlName="tipo">
         <mat-radio-button value="nombre">Por nombre</mat-radio-button>
       </mat-radio-group>
     </div>
 
 
     <div class="form-group">
-      <label>Lote (nombre)</label>
+      <label>Manzana (nombre)</label>
       <input type="text" placeholder="ej. Lote 1" class="form-control" formControlName="nombre" 
       [ngClass]="{'is-invalid': formManzana.get('nombre').invalid && formManzana.get('nombre').touched }">
       <div class="invalid-feedback" *ngIf="formManzana.get('nombre').invalid">
@@ -24,7 +24,7 @@
 
 
     <div class="form-group">
-      <mat-radio-group name="hola" formControlName="tipo">
+      <mat-radio-group name="tipo" formControlName="tipo">
         <mat-radio-button value="numero">Por número</mat-radio-button>
       </mat-radio-group>
     </div>
@@ -55,7 +55,7 @@
       <div class="form-text text-danger" *ngIf="formManzana.get('prefijo').errors && formManzana.get('prefijo').invalid && formManzana.get('prefijo').touched ">Escriba un prefijo con máximo 30 caracteres.</div>
       <div class="form-text text-danger" *ngIf="formManzana.get('ini').errors && formManzana.get('ini').invalid && formManzana.get('ini').touched">El número inicial debe ser mayor o igual a 0.</div>
       <div class="form-text text-danger" *ngIf="formManzana.get('fin').errors?.menorqueini && formManzana.get('fin').invalid && formManzana.get('fin').dirty">El número final debe ser mayor o igual al número inicial.</div>
-      <div class="form-text text-danger" *ngIf="formManzana.get('fin').errors?.masde20 && formManzana.get('fin').invalid && formManzana.get('fin').dirty">Sólo puede agregar 20 lotes a la vez.</div>
+      <div class="form-text text-danger" *ngIf="formManzana.get('fin').errors?.masde20 && formManzana.get('fin').invalid && formManzana.get('fin').dirty">Sólo pueden agregar 20 manzanas a la vez.</div>
     </div>
 
 

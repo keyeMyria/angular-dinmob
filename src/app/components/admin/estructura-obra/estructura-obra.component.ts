@@ -27,49 +27,26 @@ export class EstructuraObraComponent implements OnInit {
   public maskDosDigitos = [/[1-9]/, /\d/];
   guide: boolean = false;
 
-  selectedOption: string;
-  usuario: Usuario;
+
   obras: any = [];
+  residentes: any[] = [];
+  almacenistas: any[] = [];
+  control_almacen: any[] = [];
+
+
+
   obra: any = {
     datos: {}
   };
+
   obra_selected: string = "";
-  residente: any = {};
-
-  addManzanas: any = {
-    tipo: "numero",
-    nombre: "",
-    ini: "",
-    fin: "",
-    prefijo: ""
-  };
-  nuevaManzana: any = {
-    nombre: ""
-  };
-
-  addLoteOptions: any = {
-    tipo: "numero",
-    nombre: "",
-    ini: "",
-    fin: "",
-    prefijo: ""
-  };
-
-  nuevoLote: any = {
-    nombre: ""
-  };
 
 
 
-  manzanaSelected: any = {
-    nombre: ""
-  };
-
-
-  opPrototipo = new FormControl("", Validators.required)
-  opEnVenta = new FormControl("", Validators.required)
-  opValorBase = new FormControl("", Validators.required)
-  opValorAmpliacion = new FormControl("", Validators.required)
+  opPrototipo = new FormControl("", Validators.required);
+  opEnVenta = new FormControl("", Validators.required);
+  opValorBase = new FormControl("", Validators.required);
+  opValorAmpliacion = new FormControl("", Validators.required);
 
   formManzana: FormGroup;
   formLote: FormGroup;
@@ -79,21 +56,12 @@ export class EstructuraObraComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private obraSrv: ObrasService,
-    private auth: AuthService,
     public dialog: MatDialog,
     private fb: FormBuilder,
     private loteSrv: LotesService,
     private manzanaSrv: ManzanasService
   ) {
-
-    this.formManzana = this.fb.group({
-      tipo: "numero",
-      nombre: "",
-      ini: "",
-      fin: "",
-      prefijo: ""
-    });
-
+    // console.log("-------------constructor-----");
 
   }
 
@@ -105,7 +73,17 @@ export class EstructuraObraComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.usuario = this.auth.getUsuario();
+    /*  this.usuario = this.auth.getUsuario(); */
+
+    this.route.data
+      .subscribe((data: { obras: any[], residentes: any[], almacenistas: any[], control_almacen: any[] }) => {
+        console.log("resusltado resolve ", data);
+
+        this.obras = data.obras;
+        this.residentes = data.residentes;
+        this.almacenistas = data.almacenistas;
+        this.control_almacen = data.control_almacen;
+      });
 
 
     this.route.paramMap
@@ -121,11 +99,6 @@ export class EstructuraObraComponent implements OnInit {
         this.obra = obra
       });
 
-
-    this.obraSrv.getObrasUsuario(this.usuario.id_usuario)
-      .subscribe(response => {
-        this.obras = response;
-      });
   }
 
   cargarObra(id_obra) {
@@ -187,17 +160,14 @@ export class EstructuraObraComponent implements OnInit {
 
 
 
-  createManzanas(form: NgForm) {
-    console.log("Opciones", form.value);
+  onFechaChange(){
+
   }
 
-
-
-
-  addManzana() {
+  addManzanas() {
     let dialogRef = this.dialog.open(AgregarManzanaDialogoComponent, {
       data: {
-
+        obra: this.obra.datos
       },
       width: "500px"
     });
@@ -211,17 +181,47 @@ export class EstructuraObraComponent implements OnInit {
   addLotes(manzana) {
     let dialogRef = this.dialog.open(AgregarLoteDialogoComponent, {
       data: {
-        manzana:manzana
+        manzana: manzana
       },
       width: "500px"
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log("dialogo cerrado");
-      
+
 
     });
 
+  }
+
+  addResidente(usuario){
+    console.log("addResidente");
+    
+  }
+
+  addControlAlmacen(usuario){
+    console.log("addControl");
+    
+  }
+
+  addAlmacenista(usuario){
+    console.log("addAlmacenista");
+    
+  }
+
+  delResidente(usuario){
+    console.log("delResidente");
+    
+  }
+
+  delControlAlmacen(usuario){
+    console.log("delControl");
+    
+  }
+
+  delAlmacenista(usuario){
+    console.log("delAlmacenista");
+    
   }
 
 

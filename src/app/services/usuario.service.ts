@@ -30,6 +30,27 @@ export class UsuarioService {
       .catch(this.handleError);
   }
 
+  getUsuariosResidentes(){
+    return this.http.get(this.url + 'residentes')
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+  getUsuariosAlmacenistas(){
+    return this.http.get(this.url + 'almacenistas')
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+  getUsuariosControlAlmacen(){
+    return this.http.get(this.url + 'control_almacen')
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+  getUsuariosAsesores(){
+    return this.http.get(this.url + 'asesores')
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+
 
 
   createUsuario(usuario) {

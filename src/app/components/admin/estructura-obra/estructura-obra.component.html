@@ -26,7 +26,7 @@
                 <div class="card-header padding-card-header">
                     <div class="d-flex align-items-center justify-content-between">
                         <span>Manzanas</span>
-                        <button mat-icon-button (click)="addManzana()">
+                        <button mat-icon-button (click)="addManzanas()">
                             <mat-icon>add</mat-icon>
                         </button>
                     </div>
@@ -37,15 +37,15 @@
                     <div class="alert alert-primary text-center m-3" role="alert">
                         <strong>Agregue alguna manzana para continuar...</strong>
                         <hr>
-                        <button type="button" class="btn btn-primary" (click)="addManzana()">Agregar</button>
+                        <button type="button" class="btn btn-primary" (click)="addManzanas()">Agregar</button>
                     </div>
                 </div>
 
 
                 <!-- acordeon de manzanas -->
                 <mat-accordion [displayMode]="'default'">
-                    <mat-expansion-panel [hideToggle]="true" *ngFor="let manzana of obra.manzanas">
-                        <mat-expansion-panel-header>
+                    <mat-expansion-panel [hideToggle]="false" *ngFor="let manzana of obra.manzanas" #panel>
+                        <mat-expansion-panel-header [ngClass]="{'bg-primary text-white':panel.expanded}">
                             <span class="align-self-center">{{manzana.nombre}}</span>
                             <div class="spacer"></div>
                             <div class="collapse-header-btns">
@@ -73,7 +73,7 @@
                         <div id="manzana{{manzana.id_manzana}}">
 
                             <div class="table-responsive">
-                                <table id="idTablaManzana{{manzana.id_manzana}}" class="table table-sm table-striped">
+                                <table id="idTablaManzana{{manzana.id_manzana}}" class="table table-sm table-align-middle table-striped">
                                     <thead>
                                         <tr>
                                             <th (click)="selectAllLotes(manzana)" style="cursor: pointer; width:30px;">
@@ -82,12 +82,12 @@
                                                       :manzana.selected, 'fa fa-square-o': !manzana.selected}"></span>
                                             </th>
                                             <th>Lote</th>
-                                            <th class="hidden-xs hidden-sm hidden-mat">Código</th>
+                                            <th class="hidden-xs hidden-sm hidden-md">Código</th>
                                             <th>Prototipo</th>
                                             <th>Base</th>
                                             <th>Ampliación</th>
                                             <th>En Venta</th>
-                                            <th></th>
+                                            <th> </th>
 
                                         </tr>
                                     </thead>
@@ -101,7 +101,7 @@
                                                       :lote.selected, 'fa-square-o': !lote.selected}"></i>
                                             </td>
                                             <td>{{ lote.nombre}}</td>
-                                            <td class="hidden-xs hidden-sm hidden-mat">{{lote.code}}</td>
+                                            <td class="hidden-xs hidden-sm hidden-md">{{lote.code}}</td>
                                             <td>
                                                 <span *ngFor="let prototipo of lote.prototipos">
                                                     <a class="link-del-prototipo" (click)="pre_delPrototipo(lote, prototipo, $event)">{{prototipo.nombre}}</a>
@@ -111,13 +111,16 @@
                                             <td>{{lote.valor_base|currency}}</td>
                                             <td>{{lote.valor_ampliacion|currency}}</td>
                                             <td>{{lote.en_venta}}</td>
-                                            <td>
+                                            <td class="text-right">
+                                                <!--   <button mat-button >
+                                                            <i class="fa fa-pencil"></i>
+                                                    </button> -->
                                                 <button class="btn btn-outline-dark btn-sm" (click)="pre_editLote(manzana, lote, $event)">
                                                     <i class="fa fa-pencil"></i>
                                                 </button>
-                                                <button class="btn btn-outline-dark btn-sm" (click)="pre_delLote(manzana, lote, $event)">
+                                                <!--   <button class="btn btn-outline-dark btn-sm" (click)="pre_delLote(manzana, lote, $event)">
                                                     <i class="fa fa-times"></i>
-                                                </button>
+                                                </button> -->
                                             </td>
                                         </tr>
                                     </tbody>
@@ -139,20 +142,15 @@
                 <mat-expansion-panel-header class="bg-info text-white">
                     Datos Obra
                 </mat-expansion-panel-header>
-                <form name="formDatosObra" id="formDatosObra" (ngSubmit)="obra && !residentesRepetidos() && !controlAlmacenRepetidos() && formDatosObra.$valid && cambiarDatosObra(formDatosObra)"
-                    novalidate>
-                    <div class="card-block">
-                        <div class="row">
-                            <div class="col-12 col-sm-12">
-                                <div class="form-group" [ngClass]="{
-                                          'has-danger'
+                <form name="formDatosObra" id="formDatosObra" (ngSubmit)="obra && !residentesRepetidos() && !controlAlmacenRepetidos() && formDatosObra.$valid && cambiarDatosObra(formDatosObra)">
+
+                    <div class="form-group" [ngClass]="{
+                                          'is-invalid'
                                           :( nombre.invalid && (nombre.dirty || nombre.touched ))}">
-                                    <label class="col-form-label">Nombre</label>
-                                    <input #nombre="ngModel" type="text" class="form-control" name="nombre" [(ngModel)]="obra.datos.nombre" required>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- <div class="row">
+                        <label class="col-form-label">Nombre</label>
+                        <input #nombre="ngModel" type="text" class="form-control" name="nombre" [(ngModel)]="obra.datos.nombre" required>
+                    </div>
+                    <!-- <div class="row">
                             <div class="col-12 col-sm-12">
                                 <div class="form-group" [ngClass]="{
                                           'has-danger'
@@ -163,96 +161,99 @@
                                 </div>
                             </div>
                         </div> -->
-                        <div class="row">
-                            <label class="col-form-label col-12 col-sm-12">Fecha Inicio</label>
-                            <div class="col-12 col-sm-12">
-                                <div class="input-group">
-                                    <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha" id="fecha_ini" placement="bottom-left" [(ngModel)]="obra.datos.fecha_ini"
-                                        [matDatepicker]="dpFechaInicio" (ngModelChange)="onFechaChange()">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-secondary" type="button" (click)="dpFechaInicio.open()">
-                                            <i class="fa fa-calendar"></i>
-                                        </button>
-                                    </span>
-                                </div>
-                                <mat-datepicker touchUi="true" #dpFechaInicio></mat-datepicker>
-                            </div>
+                    <div class="form-group">
+                        <label class="col-form-label">Fecha Inicio</label>
+                        <div class="input-group">
+                            <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha" id="fecha_ini" placement="bottom-left" [(ngModel)]="obra.datos.fecha_ini"
+                                [matDatepicker]="dpFechaInicio" (ngModelChange)="onFechaChange()">
+                            <span class="input-group-btn">
+                                <button class="btn btn-secondary" type="button" (click)="dpFechaInicio.open()">
+                                    <i class="fa fa-calendar"></i>
+                                </button>
+                            </span>
                         </div>
+                        <mat-datepicker touchUi="true" #dpFechaInicio></mat-datepicker>
+                    </div>
 
-                        <!--       <div class="checkbox">
+                    <!--       <div class="checkbox">
                             <label>
                                 <input type="checkbox" name="en_venta" ng-true-value="'1'" ng-false-value="'0'" [(ngModel)]="obra.datos.en_venta"> En Venta
                             </label>
                         </div> -->
 
-                        <mat-slide-toggle>
+                    <div class="form-group">
+
+                        <mat-slide-toggle name="en_venta" [(ngModel)]="!!obra.datos.en_venta">
                             En Venta
                         </mat-slide-toggle>
+                        <small class="form-text text-muted">Esta propiedad indica la visibilidad en el módulo de Ventas</small>
 
-
-                        <p class="help-block">Esta propiedad indica la visibilidad en el módulo de Ventas</p>
-
-                        <div class="row">
-                            <div class="col-12 col-sm-12">
-                                <div class="form-group">
-                                    <label class="col-form-label">Almacenista</label>
-                                    <select name="id_almacenista" class="form-control" [(ngModel)]="obra.datos.id_almacenista">
-                                        <option [value]="">Elegir almacenista</option>
-                                        <option [value]="a.value" *ngFor="let a of almacenistas ">{{insumo.insumo}}</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <button class="btn btn-default" (click)="addResidente($event)">
-                                <i class="fa fa-plus" aria-hidden="true"></i> Residentes</button>
-                        </div>
-
-                        <div class="row" *ngFor="let residente of obra.residentes">
-                            <div class="col-12 col-sm-12">
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <select class="form-control" name="res_{{$index}}" [(ngModel)]="residente.id_residente" selectval>
-                                            <option value="0">Elegir residente</option>
-                                            <option *ngFor="let res of residentes" [value]="res.value">{{res.text}}</option>
-                                        </select>
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-default" (click)="delResidente($event, residente)">
-                                                <i class="fa fa-minus" aria-hidden="true"></i>
-                                            </button>
-                                        </span>
-                                    </div>
-                                    <p *ngIf="(residente.id_residente === '0' || !residente.id_residente)" class="text-danger">Selecciona un residente para poder guardar los cambios</p>
-                                </div>
-                            </div>
-                        </div>
-                        <p *ngIf="residentesRepetidos()" class="text-danger">Tiene algún residente repetido</p>
-                        <div class="form-group">
-                            <button class="btn btn-default" (click)="addControlAlmacen($event)">
-                                <i class="fa fa-plus" aria-hidden="true"></i> Control Almacén</button>
-                        </div>
-
-                        <div class="row" *ngFor="let encargado of obra.control_almacen">
-                            <div class="col-12 col-sm-12">
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <select class="form-control" name="alm_{{$index}}" [(ngModel)]="encargado.id_usuario" selectval>
-                                            <option value="0">Elegir encargado</option>
-                                            <option *ngFor="let alm of control_almacen" value="{{alm.value}}">{{alm.text}}</option>
-                                        </select>
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-default" (click)="delControlAlmacen($event, encargado)">
-                                                <i class="fa fa-minus" aria-hidden="true"></i>
-                                            </button>
-                                        </span>
-                                    </div>
-                                    <p *ngIf="(encargado.id_usuario === '0' || !encargado.id_usuario)" class="text-danger">Selecciona un encargado para poder guardar los cambios</p>
-                                </div>
-                            </div>
-                        </div>
-                        <p *ngIf="controlAlmacenRepetidos()" class="text-danger">Tiene algún encargado de almacén repetido</p>
                     </div>
+
+
+                    <div class="form-group">
+                        <button class="btn btn-secondary btn-block">
+                            <i class="fa fa-plus" aria-hidden="true"></i> Almacenista</button>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-12 col-sm-12">
+                            <div class="form-group">
+                                <label class="col-form-label">Almacenista</label>
+                                <select name="id_almacenista" class="form-control" [(ngModel)]="obra.datos.id_almacenista">
+                                    <option [value]="">Elegir almacenista</option>
+                                    <option [value]="a.id_usuario" *ngFor="let a of almacenistas ">{{a.nombre}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-secondary btn-block" (click)="addResidente()">
+                            <i class="fa fa-plus" aria-hidden="true"></i> Residentes</button>
+                    </div>
+
+                    <div class="form-group" *ngFor="let residente of obra.residentes; let i= index">
+                        <div class="input-group">
+                            <select class="form-control" name="res_{{i}}" [(ngModel)]="residente.id_usuario">
+                                <option value="">Elegir residente</option>
+                                <option *ngFor="let res of residentes" [value]="res.id_usuario">{{res.nombre}}</option>
+                            </select>
+                            <span class="input-group-btn">
+                                <button class="btn btn-secondary" (click)="delResidente(residente)">
+                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <!-- <p *ngIf="(residente.id_residente === '0' || !residente.id_residente)" class="text-danger">Selecciona un residente para poder guardar los cambios</p> -->
+                    </div>
+
+                    <!-- <div *ngIf="residentesRepetidos()" class="form-text text-danger">Tiene algún residente repetido</div> -->
+
+                    <div class="form-group">
+                        <button class="btn btn-secondary btn-block" (click)="addControlAlmacen()">
+                            <i class="fa fa-plus" aria-hidden="true"></i> Control Almacén</button>
+                    </div>
+
+                    <div class="form-group" *ngFor="let encargado of obra.control_almacen;let i=index">
+                        <div class="input-group">
+                            <select class="form-control" name="alm_{{i}}" [(ngModel)]="encargado.id_usuario">
+                                <option value="">Elegir encargado</option>
+                                <option *ngFor="let alm of control_almacen" [value]="alm.id_usuario">{{alm.nombre}}</option>
+                            </select>
+                            <span class="input-group-btn">
+                                <button class="btn btn-secondary" (click)="delControlAlmacen(encargado)">
+                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <!-- <p *ngIf="(encargado.id_usuario === '0' || !encargado.id_usuario)" class="text-danger">Selecciona un encargado para poder guardar los cambios</p> -->
+                    </div>
+
+                    <!-- <div *ngIf="controlAlmacenRepetidos()" class="form-text text-danger">Tiene algún encargado de almacén repetido</div> -->
                 </form>
+
                 <mat-action-row>
                     <button type="submit" class="btn btn-primary">Guardar</button>
                     <!--  <span *ngIf="formDatosObra.$dirty" class="text-muted"> <i class="fa fa-hand-o-left text-primary"></i> cambios pendientes</span> -->
@@ -260,93 +261,7 @@
 
             </mat-expansion-panel>
 
-            <!-- Agregar Manzanas -->
-            <mat-expansion-panel class="mt-2">
-                <mat-expansion-panel-header class="bg-info text-white">
-                    Agregar Manzanas
-                </mat-expansion-panel-header>
 
-                <form name="addManzanasForm" id="formManzanas" #formManzanas="ngForm" (ngSubmit)="createManzanas(formManzanas)" novalidate>
-
-
-
-                    <div class="form-group mt-3">
-                        <mat-radio-group name="tipo" [(ngModel)]="addManzanas.tipo">
-                            <mat-radio-button value="nombre">Por nombre</mat-radio-button>
-                        </mat-radio-group>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-form-label">Manzana (nombre)</label>
-                        <input #nombre_manzana="ngModel" type="text" placeholder="ej. Manzana 1" class="form-control" [ngClass]="{'is-invalid': ( nombre_manzana.invalid && (nombre_manzana.dirty || nombre_manzana.touched ))}"
-                            name="nombre" [(ngModel)]="addManzanas.nombre" maxlength="30" [disabled]="addManzanas.tipo != 'nombre'"
-                            required>
-                        <!--  
-                        [required]="addManzanas.tipo === 'nombre'"  
-                        <div class="invalid-feedback">
-                            Máximo 30 caracteres
-                        </div> -->
-                        <div class="invalid-feedback">
-                            Escriba un nombre
-                        </div>
-                    </div>
-
-                
-
-
-
-                    <div class="form-group">
-                        <mat-radio-group name="tipo" [(ngModel)]="addManzanas.tipo">
-                            <mat-radio-button value="numero">Por número</mat-radio-button>
-                        </mat-radio-group>
-                    </div>
-
-
-                    <div class="form-row">
-
-                        <div class="form-group col-12 col-sm-6">
-                            <label class="col-form-label">Prefijo</label>
-                            <input #manzana_prefijo="ngModel" type="text" class="form-control" [ngClass]="{'is-invalid':(manzana_prefijo.invalid && (manzana_prefijo.dirty || manzana_prefijo.touched ))}"
-                                name="manzana_prefijo" [(ngModel)]="addManzanas.prefijo" [disabled]="addManzanas.tipo == 'nombre'"
-                                required>
-                        </div>
-                        <div class="form-group col-6 col-sm-3">
-                            <label class="col-form-label">Ini</label>
-                            <input [textMask]="{mask: maskDosDigitos, guide:guide}" guide="false" #manzana_ini="ngModel" type="text" class="form-control"
-                                [ngClass]="{'is-invalid':( manzana_ini.invalid && (manzana_ini.dirty || manzana_ini.touched ))}"
-                                name="manzana_ini" [(ngModel)]="addManzanas.ini" min="0" [disabled]="addManzanas.tipo == 'nombre'"
-                                required>
-                        </div>
-                        <div class="form-group col-6 col-sm-3">
-                            <label class="col-form-label">Fin</label>
-                            <!-- [min]="addManzanas.ini" [max]="addManzanas.ini + 20" -->
-                            <input [textMask]="{mask: maskDosDigitos, guide: guide}" type="text" #manzana_fin="ngModel" class="form-control" [ngClass]="{'is-invalid':(manzana_fin.invalid && (manzana_fin.dirty || manzana_fin.touched ))}"
-                                name="manzana_fin" [min]="addManzanas.ini" max="addManzanas.ini + 20" [(ngModel)]="addManzanas.fin"
-                                [disabled]="addManzanas.tipo == 'nombre'" required>
-                        </div>
-
-                        <div class="invalid-feedback" *ngIf="manzana_ini.errors">El número inicial debe ser mayor o igual a 0.</div>
-                        <div class="invalid-feedback" *ngIf="manzana_fin.errors">El número final debe ser mayor o igual al número inicial.</div>
-                        <div class="invalid-feedback" *ngIf="manzana_fin.errors">Sólo puede agregar 20 manzanas a la vez.</div>
-
-                    </div>
-
-
-                    <pre>{{addManzanas|json}}</pre>
-                    <div class="form-group">
-                        <!--  <p class="text-danger" *ngIf="addManzanasForm.manzana_ini.$error.min">El número inicial debe ser mayor o igual a 0.</p>
-                                <p class="text-danger" *ngIf="addManzanasForm.manzana_fin.$error.min">El número final debe ser mayor o igual al número inicial.</p>
-                                <p class="text-danger" *ngIf="addManzanasForm.manzana_fin.$error.max">Sólo puede agregar 20 manzanas a la vez.</p> -->
-                    </div>
-                </form>
-                <mat-action-row>
-                    <button type="button" class="btn btn-dark" (click)="debug(formManzanas)">debug</button>
-                    <button type="submit" form="formManzanas" class="btn btn-primary" [disabled]="formManzanas.invalid">Agregar</button>
-                </mat-action-row>
-
-            </mat-expansion-panel>
-
-  
             <!-- Operaciones -->
             <mat-expansion-panel class="mt-2">
                 <mat-expansion-panel-header class="bg-info text-white">
