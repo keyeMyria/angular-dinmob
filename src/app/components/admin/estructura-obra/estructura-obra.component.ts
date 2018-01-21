@@ -29,9 +29,7 @@ export class EstructuraObraComponent implements OnInit {
 
 
   obras: any = [];
-  residentes: any[] = [];
-  almacenistas: any[] = [];
-  control_almacen: any[] = [];
+
 
 
 
@@ -76,13 +74,11 @@ export class EstructuraObraComponent implements OnInit {
     /*  this.usuario = this.auth.getUsuario(); */
 
     this.route.data
-      .subscribe((data: { obras: any[], residentes: any[], almacenistas: any[], control_almacen: any[] }) => {
+      .subscribe((data: { obras: any[] }) => {
         console.log("resusltado resolve ", data);
 
         this.obras = data.obras;
-        this.residentes = data.residentes;
-        this.almacenistas = data.almacenistas;
-        this.control_almacen = data.control_almacen;
+
       });
 
 
@@ -154,13 +150,13 @@ export class EstructuraObraComponent implements OnInit {
 
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.selectedOption = result;
+
     });
   }
 
 
 
-  onFechaChange(){
+  onFechaChange() {
 
   }
 
@@ -194,34 +190,34 @@ export class EstructuraObraComponent implements OnInit {
 
   }
 
-  addResidente(usuario){
+  addResidente(usuario) {
     console.log("addResidente");
-    
+
   }
 
-  addControlAlmacen(usuario){
+  addControlAlmacen(usuario) {
     console.log("addControl");
-    
+
   }
 
-  addAlmacenista(usuario){
+  addAlmacenista(usuario) {
     console.log("addAlmacenista");
-    
+
   }
 
-  delResidente(usuario){
+  delResidente(usuario) {
     console.log("delResidente");
-    
+
   }
 
-  delControlAlmacen(usuario){
+  delControlAlmacen(usuario) {
     console.log("delControl");
-    
+
   }
 
-  delAlmacenista(usuario){
+  delAlmacenista(usuario) {
     console.log("delAlmacenista");
-    
+
   }
 
 

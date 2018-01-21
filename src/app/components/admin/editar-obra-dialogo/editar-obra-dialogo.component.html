@@ -1,0 +1,121 @@
+<h1 mat-dialog-title>Editar Obra</h1>
+<div mat-dialog-content>
+
+    <form name="formDatosObra" id="formDatosObra" (ngSubmit)="obra && !residentesRepetidos() && !controlAlmacenRepetidos() && formDatosObra.$valid && cambiarDatosObra(formDatosObra)">
+
+        <div class="form-group" [ngClass]="{
+                              'is-invalid'
+                              :( nombre.invalid && (nombre.dirty || nombre.touched ))}">
+            <label class="col-form-label">Nombre</label>
+            <input #nombre="ngModel" type="text" class="form-control" name="nombre" [(ngModel)]="obra.datos.nombre" required>
+        </div>
+        <!-- <div class="row">
+                <div class="col-12 col-sm-12">
+                    <div class="form-group" [ngClass]="{
+                              'has-danger'
+                              :( fecha.invalid && (fecha.dirty || fecha.touched ))}">
+                        <label class="col-form-label">Fecha Inicio</label>
+                        <input #fecha="ngModel" type="text" class="form-control" id="fecha_ini" name="fecha" [(ngModel)]="obra.datos.fecha_ini" date-picker
+                            required>
+                    </div>
+                </div>
+            </div> -->
+        <div class="form-group">
+            <label class="col-form-label">Fecha Inicio</label>
+            <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha" id="fecha_ini" placement="bottom-left" [(ngModel)]="obra.datos.fecha_ini"
+                    [matDatepicker]="dpFechaInicio" (ngModelChange)="onFechaChange()">
+                <span class="input-group-btn">
+                    <button class="btn btn-secondary" type="button" (click)="dpFechaInicio.open()">
+                        <i class="fa fa-calendar"></i>
+                    </button>
+                </span>
+            </div>
+            <mat-datepicker touchUi="true" #dpFechaInicio></mat-datepicker>
+        </div>
+
+        <!--       <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="en_venta" ng-true-value="'1'" ng-false-value="'0'" [(ngModel)]="obra.datos.en_venta"> En Venta
+                </label>
+            </div> -->
+
+        <div class="form-group">
+
+            <mat-slide-toggle name="en_venta" [(ngModel)]="!!obra.datos.en_venta">
+                En Venta
+            </mat-slide-toggle>
+            <small class="form-text text-muted">Esta propiedad indica la visibilidad en el módulo de Ventas</small>
+
+        </div>
+
+
+        <div class="form-group">
+            <button class="btn btn-secondary btn-block">
+                <i class="fa fa-plus" aria-hidden="true"></i> Almacenista</button>
+        </div>
+
+
+        <div class="row">
+            <div class="col-12 col-sm-12">
+                <div class="form-group">
+                    <label class="col-form-label">Almacenista</label>
+                    <select name="id_almacenista" class="form-control" [(ngModel)]="obra.datos.id_almacenista">
+                        <option [value]="">Elegir almacenista</option>
+                        <option [value]="a.id_usuario" *ngFor="let a of almacenistas ">{{a.nombre}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-secondary btn-block" (click)="addResidente()">
+                <i class="fa fa-plus" aria-hidden="true"></i> Residentes</button>
+        </div>
+
+        <div class="form-group" *ngFor="let residente of obra.residentes; let i= index">
+            <div class="input-group">
+                <select class="form-control" name="res_{{i}}" [(ngModel)]="residente.id_usuario">
+                    <option value="">Elegir residente</option>
+                    <option *ngFor="let res of residentes" [value]="res.id_usuario">{{res.nombre}}</option>
+                </select>
+                <span class="input-group-btn">
+                    <button class="btn btn-secondary" (click)="delResidente(residente)">
+                        <i class="fa fa-minus" aria-hidden="true"></i>
+                    </button>
+                </span>
+            </div>
+            <!-- <p *ngIf="(residente.id_residente === '0' || !residente.id_residente)" class="text-danger">Selecciona un residente para poder guardar los cambios</p> -->
+        </div>
+
+        <!-- <div *ngIf="residentesRepetidos()" class="form-text text-danger">Tiene algún residente repetido</div> -->
+
+        <div class="form-group">
+            <button class="btn btn-secondary btn-block" (click)="addControlAlmacen()">
+                <i class="fa fa-plus" aria-hidden="true"></i> Control Almacén</button>
+        </div>
+
+        <div class="form-group" *ngFor="let encargado of obra.control_almacen;let i=index">
+            <div class="input-group">
+                <select class="form-control" name="alm_{{i}}" [(ngModel)]="encargado.id_usuario">
+                    <option value="">Elegir encargado</option>
+                    <option *ngFor="let alm of control_almacen" [value]="alm.id_usuario">{{alm.nombre}}</option>
+                </select>
+                <span class="input-group-btn">
+                    <button class="btn btn-secondary" (click)="delControlAlmacen(encargado)">
+                        <i class="fa fa-minus" aria-hidden="true"></i>
+                    </button>
+                </span>
+            </div>
+            <!-- <p *ngIf="(encargado.id_usuario === '0' || !encargado.id_usuario)" class="text-danger">Selecciona un encargado para poder guardar los cambios</p> -->
+        </div>
+
+        <!-- <div *ngIf="controlAlmacenRepetidos()" class="form-text text-danger">Tiene algún encargado de almacén repetido</div> -->
+    </form>
+    
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="false">CANCELAR</button>
+  <button mat-button [mat-dialog-close]="true">EDITAR</button>
+</div>

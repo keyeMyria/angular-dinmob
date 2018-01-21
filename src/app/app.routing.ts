@@ -70,16 +70,21 @@ export const ROUTES: Routes = [
             { path: 'desarrollos', component: DesarrollosComponent },
             { path: 'nuevo-cliente', component: NuevoClienteComponent },
             { path: 'cliente/:id', component: ClienteComponent },
-            { path: 'obras', component: ObrasComponent },
+            {
+                path: 'obras', component: ObrasComponent,
+                resolve: {
+                    //obras: ObrasUsuarioResolverService,
+                    residentes: UsuariosResidentesResolverService,
+                    almacenistas: UsuariosAlmacenistasResolverService,
+                    control_almacen: UsuariosContolAlmacenResolverService
+                }
+            },
             { path: 'tablero', component: TableroComponent },
             { path: 'editar-prototipo/:id', component: EditarPrototipoComponent },
             {
                 path: 'estructura-obra', component: EstructuraObraComponent,
                 resolve: {
-                    obras: ObrasUsuarioResolverService,
-                    residentes:UsuariosResidentesResolverService,
-                    almacenistas:UsuariosAlmacenistasResolverService,
-                    control_almacen:UsuariosContolAlmacenResolverService
+                    obras: ObrasUsuarioResolverService                 
                 }
             },
             { path: 'prototipos', component: PrototiposComponent },

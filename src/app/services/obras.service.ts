@@ -77,15 +77,16 @@ export class ObrasService {
   }
 
 
+  //ok
   getObrasUsuario(id) {
     return this.http.get(this.url + 'usuario/' + id)
       .map(this.extractData)
       .catch(this.handleError);
   }
 
-
-  getAllObras() {
-    return this.http.get(this.url + "all")
+//ok
+  getObrasConUsuarios() {
+    return this.http.get(this.url + "get_obras_con_usuarios")
       .map(this.extractData)
       .catch(this.handleError);
   }

@@ -44,8 +44,12 @@
                       <mat-icon>more_vert</mat-icon>
                     </button>
                     <mat-menu #menu="matMenu">
-                      <button mat-menu-item (click)="gotoEstructuraObra(obra)">
+                      <button mat-menu-item (click)="openDialogEditarObra(obra)">
                         <mat-icon>create</mat-icon>
+                        <span>Editar</span>
+                      </button>
+                      <button mat-menu-item (click)="gotoEstructuraObra(obra)">
+                        <mat-icon>business</mat-icon>
                         <span>Estructura</span>
                       </button>
                       <button mat-menu-item (click)="delObra(obra)">

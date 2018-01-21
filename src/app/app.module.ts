@@ -107,6 +107,7 @@ import { UsuariosAlmacenistasResolverService } from 'app/resolvers/usuarios-alma
 import { UsuariosContolAlmacenResolverService } from 'app/resolvers/usuarios-contol-almacen-resolver.service';
 import { UsuariosResidentesResolverService } from 'app/resolvers/usuarios-residentes-resolver.service';
 import { UsuariosAsesoresResolverService } from 'app/resolvers/usuarios-asesores-resolver.service';
+import { EditarObraDialogoComponent } from './components/admin/editar-obra-dialogo/editar-obra-dialogo.component';
 
 
 
@@ -174,6 +175,7 @@ import { UsuariosAsesoresResolverService } from 'app/resolvers/usuarios-asesores
     AgregarManzanaDialogoComponent,
     AgregarLoteDialogoComponent,
     FotoPartidaDialogoComponent,
+    EditarObraDialogoComponent,
 
 
 
@@ -216,7 +218,9 @@ import { UsuariosAsesoresResolverService } from 'app/resolvers/usuarios-asesores
     EditarManzanaDialogoComponent,
     AgregarManzanaDialogoComponent,
     AgregarLoteDialogoComponent,
-    FotoPartidaDialogoComponent
+    FotoPartidaDialogoComponent,
+    EditarObraDialogoComponent,
+    
 
     
   ],
