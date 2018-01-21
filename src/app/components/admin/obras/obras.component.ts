@@ -4,7 +4,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/
 import { AgregarObraDialogoComponent } from "app/components/admin/agregar-obra-dialogo/agregar-obra-dialogo.component";
 import { Obra } from "app/model/obra";
 import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component";
-import { Router,ActivatedRoute } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { EditarObraDialogoComponent } from 'app/components/admin/editar-obra-dialogo/editar-obra-dialogo.component';
 
 
@@ -21,23 +21,23 @@ export class ObrasComponent implements OnInit {
   control_almacen: any[] = [];
 
   constructor(
-    private router: Router, 
-    private route:ActivatedRoute,
-    private obrasSrv: ObrasService, 
-    public dialog: MatDialog, 
+    private router: Router,
+    private route: ActivatedRoute,
+    private obrasSrv: ObrasService,
+    public dialog: MatDialog,
     public snackBar: MatSnackBar) { }
 
   ngOnInit() {
 
     this.route.data
-    .subscribe((data: { obras: any[], residentes: any[], almacenistas: any[], control_almacen: any[] }) => {
-      console.log("resusltado resolve ", data);
+      .subscribe((data: { obras: any[], residentes: any[], almacenistas: any[], control_almacen: any[] }) => {
+        console.log("resusltado resolve ", data);
 
-      //this.obras = data.obras;
-      this.residentes = data.residentes;
-      this.almacenistas = data.almacenistas;
-      this.control_almacen = data.control_almacen;
-    });
+        //this.obras = data.obras;
+        this.residentes = data.residentes;
+        this.almacenistas = data.almacenistas;
+        this.control_almacen = data.control_almacen;
+      });
 
 
     this.obrasSrv.getObrasConUsuarios()
@@ -123,9 +123,12 @@ export class ObrasComponent implements OnInit {
 
     let dialogRef = this.dialog.open(EditarObraDialogoComponent, {
       data: {
-        obra: obra
+        obra: obra,
+        residentes: this.residentes,
+        control_almacen: this.control_almacen,
+        almacenistas: this.almacenistas
       },
-      width:"500px"
+      width: "500px"
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -133,26 +136,26 @@ export class ObrasComponent implements OnInit {
       if (result === true) {
         this.loading = true;
 
-    /*     this.obrasSrv.delObra(obra.id_obra)
-          .subscribe(res => {
-
-            if (res.count === 1) {
-
-              let i = this.obras.indexOf(obra);
-              this.obras.splice(i, 1);
-
-              this.loading = false;
-              this.snackBar.open("Obra Eliminada", "Cerrar", {
-                duration: 2000
-              });
-
-            } else {
-              this.snackBar.open("Ha ocurrido un error", "Cerrar", {
-                duration: 2000
-              });
-            }
-
-          }); */
+        /*     this.obrasSrv.delObra(obra.id_obra)
+              .subscribe(res => {
+    
+                if (res.count === 1) {
+    
+                  let i = this.obras.indexOf(obra);
+                  this.obras.splice(i, 1);
+    
+                  this.loading = false;
+                  this.snackBar.open("Obra Eliminada", "Cerrar", {
+                    duration: 2000
+                  });
+    
+                } else {
+                  this.snackBar.open("Ha ocurrido un error", "Cerrar", {
+                    duration: 2000
+                  });
+                }
+    
+              }); */
 
 
       }
