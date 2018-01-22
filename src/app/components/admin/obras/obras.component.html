@@ -37,7 +37,7 @@
               <tbody>
                 <tr *ngFor="let obra of obras">
                   <td>{{obra.nombre}}</td>
-                  <td>{{obra.fecha_ini}}</td>
+                  <td>{{obra.fecha_ini| date:'mediumDate':'':'es'}}</td>
                   <td>{{obra.en_venta | numberToYesNo}}</td>
                   <td class="text-right">
                     <button mat-icon-button [matMenuTriggerFor]="menu">

@@ -112,11 +112,9 @@ import { EditarObraDialogoComponent } from './components/admin/editar-obra-dialo
 
 
 
-
-
-
-
-
+import localeEs from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localeEs, 'es');
 
 
 

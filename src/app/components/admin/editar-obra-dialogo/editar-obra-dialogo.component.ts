@@ -2,6 +2,10 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
 
+import * as _moment from 'moment';
+import {default as _rollupMoment} from 'moment';
+const moment = _rollupMoment || _moment;
+
 @Component({
   selector: 'app-editar-obra-dialogo',
   templateUrl: './editar-obra-dialogo.component.html',
@@ -20,7 +24,7 @@ export class EditarObraDialogoComponent implements OnInit {
     this.form = this.fb.group({
 
       nombre: [data.obra.nombre, Validators.required],
-      fecha_ini: [data.obra.fecha_ini, Validators.required],
+      fecha_ini: [moment(data.obra.fecha_ini, "YYYY-MM-DD"), Validators.required],
       en_venta: data.obra.en_venta == "0" ? false : true,
       residentes: this.fb.array([], this.checkUsuariosRepetidos),
       control_almacen: this.fb.array([], this.checkUsuariosRepetidos),
@@ -83,6 +87,10 @@ export class EditarObraDialogoComponent implements OnInit {
 
   delControlAlmacen(index: number) {
     (<FormArray>this.form.controls["control_almacen"]).removeAt(index);
+  }
+
+  onFechaChange(){
+
   }
 
   debug() {

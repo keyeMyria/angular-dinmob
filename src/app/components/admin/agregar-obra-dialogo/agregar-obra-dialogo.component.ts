@@ -4,6 +4,11 @@ import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@ang
 
 import { ObrasService } from "app/services/obras.service";
 
+
+import * as _moment from 'moment';
+import {default as _rollupMoment} from 'moment';
+const moment = _rollupMoment || _moment;
+
 @Component({
   selector: 'app-agregar-obra-dialogo',
   templateUrl: './agregar-obra-dialogo.component.html',
@@ -23,7 +28,7 @@ export class AgregarObraDialogoComponent implements OnInit {
     this.form = this.fb.group({
 
       nombre: ["", Validators.required],
-      fecha_ini: ["", Validators.required],
+      fecha_ini: [moment(), Validators.required],
       en_venta: false,
       residentes: this.fb.array([], this.checkUsuariosRepetidos),
       control_almacen: this.fb.array([], this.checkUsuariosRepetidos),
