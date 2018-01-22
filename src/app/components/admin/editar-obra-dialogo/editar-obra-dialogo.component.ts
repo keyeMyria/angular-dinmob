@@ -1,10 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
+import { ObrasService } from 'app/services/obras.service';
 
-import * as _moment from 'moment';
-import {default as _rollupMoment} from 'moment';
-const moment = _rollupMoment || _moment;
+import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-editar-obra-dialogo',
@@ -19,6 +19,7 @@ export class EditarObraDialogoComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<EditarObraDialogoComponent>,
     private fb: FormBuilder,
+    private obraSrv: ObrasService
   ) {
 
     this.form = this.fb.group({
@@ -89,8 +90,20 @@ export class EditarObraDialogoComponent implements OnInit {
     (<FormArray>this.form.controls["control_almacen"]).removeAt(index);
   }
 
-  onFechaChange(){
+  guardar() {
+    console.log("guardar");
+    this.dialogRef.close(true);
 
+    this.obraSrv.updateObra(this.data.obra.id_obra, this.form.value)
+      .subscribe(
+      obra => {
+
+        let i = this.data.obras.indexOf(this.data.obra);
+        this.data.obras[i] = obra;
+
+      }, (error) => {
+        this.dialogRef.close({ error: "Ha ocurrido un error. Vuelva a intentarlo más tarde." });
+      });
   }
 
   debug() {

@@ -5,9 +5,8 @@ import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@ang
 import { ObrasService } from "app/services/obras.service";
 
 
-import * as _moment from 'moment';
-import {default as _rollupMoment} from 'moment';
-const moment = _rollupMoment || _moment;
+import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-agregar-obra-dialogo',
@@ -80,11 +79,6 @@ export class AgregarObraDialogoComponent implements OnInit {
     (<FormArray>this.form.controls["control_almacen"]).removeAt(index);
   }
 
-  onFechaChange() {
-    /*  console.log("fecha change",this.fecha_publicacion.format());
-     this.anuncio.fecha_publicacion = this.fecha_publicacion.format(); */
-
-  }
 
   debug() {
     console.log("formgroup", this.form);
@@ -108,7 +102,7 @@ export class AgregarObraDialogoComponent implements OnInit {
 
       },
       (error) => {
-        this.dialogRef.close({ error: "Error de conexión" });
+        this.dialogRef.close({ error: "Ha ocurrido un error. Vuelva a intentarlo más tarde." });
       }
       );
   }

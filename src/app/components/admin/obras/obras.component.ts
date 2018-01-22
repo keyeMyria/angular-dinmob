@@ -59,12 +59,21 @@ export class ObrasComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+
+
       if (result === true) {
 
-      } else {
-        //cancel or error
-      }
+        this.snackBar.open("Obra Actualizada", "Cerrar", {
+          duration: 2000
+        });
 
+      } else if (result.error) {
+
+        this.snackBar.open(result.error, "Cerrar", {
+          duration: 2000
+        });
+
+      }
 
       console.log('The dialog was closed');
     });
@@ -123,6 +132,7 @@ export class ObrasComponent implements OnInit {
     let dialogRef = this.dialog.open(EditarObraDialogoComponent, {
       data: {
         obra: obra,
+        obras: this.obras,
         residentes: this.residentes,
         control_almacen: this.control_almacen,
         almacenistas: this.almacenistas
@@ -133,32 +143,22 @@ export class ObrasComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
 
       if (result === true) {
-        this.loading = true;
 
-        /*     this.obrasSrv.delObra(obra.id_obra)
-              .subscribe(res => {
-    
-                if (res.count === 1) {
-    
-                  let i = this.obras.indexOf(obra);
-                  this.obras.splice(i, 1);
-    
-                  this.loading = false;
-                  this.snackBar.open("Obra Eliminada", "Cerrar", {
-                    duration: 2000
-                  });
-    
-                } else {
-                  this.snackBar.open("Ha ocurrido un error", "Cerrar", {
-                    duration: 2000
-                  });
-                }
-    
-              }); */
+        this.snackBar.open("Obra Actualizada", "Cerrar", {
+          duration: 2000
+        });
 
+      } else if (result.error) {
+
+        this.snackBar.open(result.error, "Cerrar", {
+          duration: 2000
+        });
 
       }
 
+
     });
   }
+
+
 }

@@ -17,6 +17,7 @@ export class ObrasService {
     this.url = this.config.api_url + "obras/";
   }
 
+  //ok
   createObra(obra) {
     return this.http.post(this.url + 'create_obra', {
       obra: obra
@@ -25,41 +26,16 @@ export class ObrasService {
       .catch(this.handleError);
   }
 
-  getObrasUsuarioConMapas(id) {
-    return this.http.get(this.url + 'usuario_mapas/' + id);
-  }
-
-
-  //comprobar
-  loadFullObra(id_obra) {
-    return this.http.get(this.url + 'load/' + id_obra)
+  //ok
+  updateObra(id_obra, obra) {
+    return this.http.post(this.url + 'update_obra/' + id_obra, {
+      obra: obra
+    })
       .map(this.extractData)
       .catch(this.handleError);
   }
 
-  cambiarDatosObra(id_obra, nombre_obra, fecha_ini, en_venta, id_almacenista, residentes) {
-    return this.http.post(this.url + "cambiar_datos", { id_obra: id_obra, nombre_obra: nombre_obra, fecha_ini: fecha_ini, en_venta: en_venta, id_almacenista: id_almacenista, residentes: residentes })
-      .map(this.extractData)
-      .catch(this.handleError);
-  }
 
-  loadFullObraReporte(id_obra) {
-    return this.http.get(this.url + 'load_with_dates/' + id_obra)
-      .map(this.extractData)
-      .catch(this.handleError);
-  }
-
-  obraEnVenta(id_obra, valor) {
-    return this.http.post(this.url + 'cambiar_estado_venta/' + id_obra, { valor: valor })
-      .map(this.extractData)
-      .catch(this.handleError);
-  }
-
-  getInfoMapa(id_obra) {
-    return this.http.post(this.url + 'estado_lotes/', { id_obra: id_obra })
-      .map(this.extractData)
-      .catch(this.handleError);
-  }
 
   //ok
   getAcordeonManzanas(id_obra) {
@@ -84,7 +60,7 @@ export class ObrasService {
       .catch(this.handleError);
   }
 
-//ok
+  //ok
   getObrasConUsuarios() {
     return this.http.get(this.url + "get_obras_con_usuarios")
       .map(this.extractData)
@@ -93,36 +69,6 @@ export class ObrasService {
 
 
 
-  getInfoConResidentesAllObras() {
-    return this.http.get(this.url + "get_info_con_residentes")
-      .map(this.extractData)
-      .catch(this.handleError);
-  }
-
-
-
-  getDatosObra(id_obra) {
-    return this.http.get(this.url + 'get_datos/' + id_obra)
-      .map(this.extractData)
-      .catch(this.handleError);
-  }
-
-  getNombreObra(id_obra) {
-    return this.http.get(this.url + 'get_obra/' + id_obra)
-      .map(this.extractData)
-      .catch(this.handleError);
-  }
-
-  addObra(residentes, id_almacenista, nombre, fecha_ini) {
-    return this.http.post(this.url + 'add_obra', {
-      residentes: residentes,
-      id_almacenista: id_almacenista,
-      nombre: nombre,
-      fecha_ini: fecha_ini
-    })
-      .map(this.extractData)
-      .catch(this.handleError);
-  }
 
   delObra(id_obra) {
     return this.http.post(this.url + "delete", { id_obra: id_obra })

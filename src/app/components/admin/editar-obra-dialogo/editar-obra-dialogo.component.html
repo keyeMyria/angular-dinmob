@@ -1,7 +1,7 @@
 <h1 mat-dialog-title>Editar Obra</h1>
 <div mat-dialog-content>
 
-  <form [formGroup]="form" id="id_form" (ngSubmit)=" actualizar()">
+  <form [formGroup]="form" id="id_form" (ngSubmit)=" guardar()" class="pb-4">
 
     <div class="form-group">
       <label class="col-form-label">Nombre</label>
@@ -17,7 +17,7 @@
 
       <div class="input-group">
         <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="fecha_ini" placement="bottom-left" [matDatepicker]="dpFechaInicio"
-          (ngModelChange)="onFechaChange()" formControlName="fecha_ini" [ngClass]="{'is-invalid':form.get('fecha_ini').invalid && form.get('fecha_ini').touched }">
+          formControlName="fecha_ini" [ngClass]="{'is-invalid':form.get('fecha_ini').invalid && form.get('fecha_ini').touched }">
         <span class="input-group-btn">
           <button class="btn btn-secondary" type="button" (click)="dpFechaInicio.open()">
             <i class="fa fa-calendar"></i>
@@ -117,7 +117,7 @@
 </div>
 
 <div mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="false">CANCELAR</button>
-  <button mat-button [disabled]="form.invalid">GUARDAR</button>
-  <button mat-button (click)="debug()">debug</button>
+  <button type="button" mat-button [mat-dialog-close]="false">CANCELAR</button>
+  <button type="submit" form="id_form" mat-button [disabled]="form.invalid">GUARDAR</button>
+  <button type="button" mat-button (click)="debug()">debug</button>
 </div>
