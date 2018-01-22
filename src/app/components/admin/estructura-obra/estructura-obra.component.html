@@ -70,64 +70,61 @@
                             </div>
                         </mat-expansion-panel-header>
 
-                        <div id="manzana{{manzana.id_manzana}}">
 
-                            <div class="table-responsive">
-                                <table id="idTablaManzana{{manzana.id_manzana}}" class="table table-sm table-align-middle table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th (click)="selectAllLotes(manzana)" style="cursor: pointer; width:30px;">
-                                                <span [ngClass]="{
-                                                      'fa fa-check-square-o'
-                                                      :manzana.selected, 'fa fa-square-o': !manzana.selected}"></span>
-                                            </th>
-                                            <th>Lote</th>
-                                            <th class="hidden-xs hidden-sm hidden-md">Código</th>
-                                            <th>Prototipo</th>
-                                            <th>Base</th>
-                                            <th>Ampliación</th>
-                                            <th>En Venta</th>
-                                            <th> </th>
+                        <div class="table-responsive">
+                            <table class="table table-sm table-align-middle table-striped">
+                                <thead>
+                                    <tr>
+                                        <th (click)="selectAllLotes(manzana)" style="cursor: pointer; width:30px;">
+                                            <span [ngClass]="{'fa fa-check-square-o':manzana.selected, 'fa fa-square-o': !manzana.selected}"></span>
+                                        </th>
+                                        <th>Lote</th>
+                                        <th class="hidden-xs hidden-sm hidden-md">Código</th>
+                                        <th>Prototipo</th>
+                                        <th>Base</th>
+                                        <th>Ampliación</th>
+                                        <th>En Venta</th>
+                                        <th> </th>
 
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr *ngFor="let lote of manzana.lotes" (click)="toggleSelectionLote(manzana, lote)" style="cursor: pointer;" [ngClass]="{
-                                                  'bg-primary text-white'
-                                                  :lote.selected}">
-                                            <td>
-                                                <i class="fa" [ngClass]="{
-                                                      'fa-check-square-o'
-                                                      :lote.selected, 'fa-square-o': !lote.selected}"></i>
-                                            </td>
-                                            <td>{{ lote.nombre}}</td>
-                                            <td class="hidden-xs hidden-sm hidden-md">{{lote.code}}</td>
-                                            <td>
-                                                <span *ngFor="let prototipo of lote.prototipos">
-                                                    <a class="link-del-prototipo" (click)="pre_delPrototipo(lote, prototipo, $event)">{{prototipo.nombre}}</a>
-                                                    <br>
-                                                </span>
-                                            </td>
-                                            <td>{{lote.valor_base|currency}}</td>
-                                            <td>{{lote.valor_ampliacion|currency}}</td>
-                                            <td>{{lote.en_venta}}</td>
-                                            <td class="text-right">
-                                                <!--   <button mat-button >
-                                                            <i class="fa fa-pencil"></i>
-                                                    </button> -->
-                                                <button class="btn btn-outline-dark btn-sm" (click)="editarLote()">
-                                                    <i class="fa fa-pencil"></i>
-                                                </button>
-                                                <button class="btn btn-outline-dark btn-sm" (click)="delLote(lote)">
-                                                    <i class="fa fa-times"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let lote of manzana.lotes" (click)="toggleSelectionLote(manzana, lote)" class="pointer" [ngClass]="{'bg-primary text-white':lote.selected}">
+                                        <td>
+                                            <i class="fa" [ngClass]="{'fa-check-square-o':lote.selected, 'fa-square-o': !lote.selected}"></i>
+                                        </td>
+                                        <td>{{ lote.nombre}}</td>
+                                        <td class="hidden-xs hidden-sm hidden-md">{{lote.code}}</td>
+                                        <td>
+                                            <span *ngFor="let prototipo of lote.prototipos">
+                                                <a class="link-del-prototipo" (click)="pre_delPrototipo(lote, prototipo, $event)">{{prototipo.nombre}}</a>
+                                                <br>
+                                            </span>
+                                        </td>
+                                        <td>{{lote.valor_base|currency}}</td>
+                                        <td>{{lote.valor_ampliacion|currency}}</td>
+                                        <td>{{lote.en_venta| numberToYesNo}}</td>
+                                        <td class="text-right">
 
+                                            <button mat-button class="no-min" (click)="editarLote()">
+                                                <i class="fa fa-pencil"></i>
+                                            </button>
+                                            <button mat-raised-button class="no-min"  (click)="delLote(lote)">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+
+                                            <!--     <button class="btn btn-outline-dark btn-sm" (click)="editarLote()">
+                                                <i class="fa fa-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-outline-dark btn-sm" (click)="delLote(lote)">
+                                                <i class="fa fa-times"></i>
+                                            </button> -->
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
+
 
                     </mat-expansion-panel>
                 </mat-accordion>

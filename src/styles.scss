@@ -113,3 +113,19 @@ table.table-align-middle  td {
 .visible.invalid-feedback {
     display: block !important;
 }
+
+.pointer {
+    cursor: pointer;
+}
+
+.no-min {
+    &.mat-button {
+        min-width: unset !important;
+    }
+    &.mat-raised-button {
+        min-width: unset !important;
+        padding: 0 12px !important;
+    }
+   
+}
+
