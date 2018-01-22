@@ -67,4 +67,9 @@ export class VentasLoteComponent implements OnInit {
     return saldo;
   }
 
+
+  onFechaChange() {
+
+  }
+
 }

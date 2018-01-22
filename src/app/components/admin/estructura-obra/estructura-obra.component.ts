@@ -14,6 +14,7 @@ import { AgregarManzanaDialogoComponent } from 'app/components/admin/agregar-man
 import { AgregarLoteDialogoComponent } from 'app/components/admin/agregar-lote-dialogo/agregar-lote-dialogo.component';
 import { LotesService } from 'app/services/lotes.service';
 import { ManzanasService } from 'app/services/manzanas.service';
+import { EditarLoteDialogoComponent } from 'app/components/admin/editar-lote-dialogo/editar-lote-dialogo.component';
 
 
 
@@ -154,6 +155,17 @@ export class EstructuraObraComponent implements OnInit {
     });
   }
 
+  editarLote() {
+    let dialogRef = this.dialog.open(EditarLoteDialogoComponent, {
+      data: {},
+      width: '500px',
+
+    });
+    dialogRef.afterClosed().subscribe(result => {
+
+    });
+  }
+
 
 
   onFechaChange() {
@@ -185,6 +197,37 @@ export class EstructuraObraComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log("dialogo cerrado");
 
+
+    });
+
+  }
+
+  delLote(lote) {
+    let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
+      data: {
+        title: "Eliminar Lote",
+        content: `¿Desea eliminar ${lote.nombre}?`
+      },
+      width: "500px"
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+    });
+
+  }
+
+
+  delManzana(manzana) {
+    let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
+      data: {
+        title: "Eliminar Manzana",
+        content: `¿Desea eliminar ${manzana.nombre}?`
+      },
+      width: "500px"
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
 
     });
 

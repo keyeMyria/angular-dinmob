@@ -10,6 +10,8 @@ import { AuthService } from "app/services/auth.service";
 import { Usuario } from "app/model/usuario";
 import { Observable } from 'rxjs/Observable';
 import { of } from "rxjs/observable/of";
+import { VerCelulaFiscalDialogoComponent } from 'app/components/ventas/ver-celula-fiscal-dialogo/ver-celula-fiscal-dialogo.component';
+import { VerDatosFirmaDialogoComponent } from 'app/components/ventas/ver-datos-firma-dialogo/ver-datos-firma-dialogo.component';
 
 @Component({
   selector: 'app-clientes',
@@ -26,6 +28,8 @@ export class ClientesComponent implements OnInit {
   clientes: Cliente[] = [];
   obras: any = [];
   obra_selected: string = "";
+
+
 
 
 
@@ -57,7 +61,7 @@ export class ClientesComponent implements OnInit {
         this.clientes = clientes;
       });
 
-   
+
 
     this.obraSrv.getObrasUsuario(this.usuario.id_usuario)
       .subscribe(obras => {
@@ -90,6 +94,35 @@ export class ClientesComponent implements OnInit {
       this.router.navigate([".", {}]);
 
     }
+
+  }
+
+  verCelulaFiscal(cliente: Cliente) {
+    console.log("cliente", cliente);
+
+    let dialogRef = this.dialog.open(VerCelulaFiscalDialogoComponent, {
+      data: {
+        cliente: cliente,
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+    });
+
+  }
+
+  verDatosFirma() {
+
+    let dialogRef = this.dialog.open(VerDatosFirmaDialogoComponent, {
+      data: {
+
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+    });
 
   }
 

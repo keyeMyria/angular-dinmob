@@ -70,10 +70,18 @@
                         <mat-icon>create</mat-icon>
                         <span>Editar</span>
                       </button>
-                      <button mat-menu-item (click)="delCliente(cliente)">
+                      <button mat-menu-item (click)="verCelulaFiscal(cliente)">
+                        <mat-icon>chrome_reader_mode</mat-icon>
+                        <span>Celula Fiscal</span>
+                      </button>
+                      <button mat-menu-item (click)="verDatosFirma(id_cliente)">
+                        <mat-icon>description</mat-icon>
+                        <span>Datos Firma</span>
+                      </button>
+               <!--        <button mat-menu-item (click)="delCliente(cliente)">
                         <mat-icon>delete</mat-icon>
                         <span>Eliminar</span>
-                      </button>
+                      </button> -->
                     </mat-menu>
                   </td>
                 </tr>

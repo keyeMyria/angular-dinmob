@@ -40,9 +40,18 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label for="fecha_cambio_estado" class="col-form-label col-sm-3">Fecha Estado</label>
+                  <label class="col-form-label col-sm-3" for="fecha_cambio_estado">Fecha Estado</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" [(ngModel)]="lote.lote.fecha_cambio_estado" name="fecha_cambio_estado">
+                    <div class="input-group">
+                      <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_cambio_estado" id="fecha_cambio_estado" [(ngModel)]="lote.lote.fecha_cambio_estado"
+                        [matDatepicker]="dpFechaEstado" (ngModelChange)="onFechaChange()">
+                      <span class="input-group-btn">
+                        <button class="btn btn-secondary" type="button" (click)="dpFechaEstado.open()">
+                          <i class="fa fa-calendar"></i>
+                        </button>
+                      </span>
+                    </div>
+                    <mat-datepicker touchUi="true" #dpFechaEstado></mat-datepicker>
                   </div>
                 </div>
                 <div class="form-group row">
