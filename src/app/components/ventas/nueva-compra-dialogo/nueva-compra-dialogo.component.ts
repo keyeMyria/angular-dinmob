@@ -18,7 +18,7 @@ export class NuevaCompraDialogoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.obraSrv.loadFullObra(58)
+/*     this.obraSrv.loadFullObra(58)
     .subscribe(response => {
       this.obra = response;
       console.log("obra", this.obra);
@@ -27,7 +27,9 @@ export class NuevaCompraDialogoComponent implements OnInit {
   this.obraSrv.getObrasUsuario(18)
     .subscribe(response => {
       this.obras = response;
-    });
+    }); */
+
+
   }
 
 }

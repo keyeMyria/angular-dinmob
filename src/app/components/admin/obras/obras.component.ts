@@ -31,12 +31,13 @@ export class ObrasComponent implements OnInit {
 
     this.route.data
       .subscribe((data: { obras: any[], residentes: any[], almacenistas: any[], control_almacen: any[] }) => {
-        console.log("resusltado resolve ", data);
 
-        //this.obras = data.obras;
+        //console.log("resusltado resolve ", data);
+
         this.residentes = data.residentes;
         this.almacenistas = data.almacenistas;
         this.control_almacen = data.control_almacen;
+
       });
 
 
@@ -44,28 +45,35 @@ export class ObrasComponent implements OnInit {
       .subscribe(response => this.obras = response);
   }
 
-  agregarObra(): void {
+  openDialogCreateObra(): void {
     let obra = new Obra();
 
     let dialogRef = this.dialog.open(AgregarObraDialogoComponent, {
-      data: { obra: obra },
+      data: {
+        obras: this.obras,
+        residentes: this.residentes,
+        control_almacen: this.control_almacen,
+        almacenistas: this.almacenistas
+      },
       width: '500px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
+
+
       if (result === true) {
 
-        console.log("obra", obra);
-        this.obrasSrv.createObra(obra)
-          .subscribe(res => {
+        this.snackBar.open("Obra Actualizada", "Cerrar", {
+          duration: 2000
+        });
 
-            let nuevaObra = res;
-            this.obras.push(nuevaObra);
+      } else if (result.error) {
 
+        this.snackBar.open(result.error, "Cerrar", {
+          duration: 2000
+        });
 
-          });
       }
-
 
       console.log('The dialog was closed');
     });
@@ -124,6 +132,7 @@ export class ObrasComponent implements OnInit {
     let dialogRef = this.dialog.open(EditarObraDialogoComponent, {
       data: {
         obra: obra,
+        obras: this.obras,
         residentes: this.residentes,
         control_almacen: this.control_almacen,
         almacenistas: this.almacenistas
@@ -134,32 +143,22 @@ export class ObrasComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
 
       if (result === true) {
-        this.loading = true;
 
-        /*     this.obrasSrv.delObra(obra.id_obra)
-              .subscribe(res => {
-    
-                if (res.count === 1) {
-    
-                  let i = this.obras.indexOf(obra);
-                  this.obras.splice(i, 1);
-    
-                  this.loading = false;
-                  this.snackBar.open("Obra Eliminada", "Cerrar", {
-                    duration: 2000
-                  });
-    
-                } else {
-                  this.snackBar.open("Ha ocurrido un error", "Cerrar", {
-                    duration: 2000
-                  });
-                }
-    
-              }); */
+        this.snackBar.open("Obra Actualizada", "Cerrar", {
+          duration: 2000
+        });
 
+      } else if (result.error) {
+
+        this.snackBar.open(result.error, "Cerrar", {
+          duration: 2000
+        });
 
       }
 
+
     });
   }
+
+
 }

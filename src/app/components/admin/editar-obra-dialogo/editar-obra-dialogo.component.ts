@@ -1,7 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { FormArray } from '@angular/forms/src/model';
+import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
+import { ObrasService } from 'app/services/obras.service';
+
+import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-editar-obra-dialogo',
@@ -16,12 +19,13 @@ export class EditarObraDialogoComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<EditarObraDialogoComponent>,
     private fb: FormBuilder,
+    private obraSrv: ObrasService
   ) {
 
     this.form = this.fb.group({
 
       nombre: [data.obra.nombre, Validators.required],
-      fecha_ini: [data.obra.fecha_ini, Validators.required],
+      fecha_ini: [moment(data.obra.fecha_ini, "YYYY-MM-DD"), Validators.required],
       en_venta: data.obra.en_venta == "0" ? false : true,
       residentes: this.fb.array([], this.checkUsuariosRepetidos),
       control_almacen: this.fb.array([], this.checkUsuariosRepetidos),
@@ -48,7 +52,7 @@ export class EditarObraDialogoComponent implements OnInit {
 
   checkUsuariosRepetidos(control: FormArray): { [key: string]: boolean } {
 
-    console.log("chekrepetidos", control);
+    //console.log("chekrepetidos", control);
 
     let tiene_repetidos = (new Set(control.value)).size !== control.value.length;
 
@@ -86,12 +90,26 @@ export class EditarObraDialogoComponent implements OnInit {
     (<FormArray>this.form.controls["control_almacen"]).removeAt(index);
   }
 
+  guardar() {
+    console.log("guardar");
+    this.dialogRef.close(true);
+
+    this.obraSrv.updateObra(this.data.obra.id_obra, this.form.value)
+      .subscribe(
+      obra => {
+
+        let i = this.data.obras.indexOf(this.data.obra);
+        this.data.obras[i] = obra;
+
+      }, (error) => {
+        this.dialogRef.close({ error: "Ha ocurrido un error. Vuelva a intentarlo más tarde." });
+      });
+  }
+
   debug() {
     console.log("formgroup", this.form);
     console.log("value", this.form.value);
     console.log("status", this.form.status);
-
-
   }
 
 }
