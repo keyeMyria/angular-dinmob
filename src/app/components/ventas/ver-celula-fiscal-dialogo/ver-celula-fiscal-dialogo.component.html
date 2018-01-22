@@ -1,11 +1,14 @@
 <h1 mat-dialog-title>Célula Fiscal</h1>
 <div mat-dialog-content>
 
-  <div class="row">
+  <div class="row" *ngIf="cliente.persona_moral==='0'">
     <strong>Nombre:</strong>
-    <div class="pl-1" *ngIf="">
+    <div class="pl-1">
       {{cliente.nombre}}
     </div>
+  </div>
+  <div class="row" *ngIf="cliente.persona_moral==='1'">
+    <strong>Nombre:</strong>
     <div class="pl-1">
       {{cliente.nombre}}
     </div>
@@ -28,31 +31,41 @@
       {{cliente.num_exterior}}
     </div>
   </div>
-  <div class="row">
+  <div class="row" *ngIf="cliente.num_interior">
     <strong>Núm. Interior:</strong>
-    <div class="ml-1" *ngIf="cliente.num_interior">
+    <div class="ml-1">
       {{cliente.num_interior}}
     </div>
   </div>
   <div class="row">
     <strong>Colonia:</strong>
-
+    <div class="ml-1">
+      {{cliente.colonia}}
+    </div>
   </div>
   <div class="row">
     <strong>CP:</strong>
-
+    <div class="ml-1">
+      {{cliente.cp}}
+    </div>
   </div>
   <div class="row">
     <strong>Localidad:</strong>
-
+    <div class="ml-1">
+      {{cliente.localidad}}
+    </div>
   </div>
   <div class="row">
     <strong>Municipio:</strong>
-
+    <div class="ml-1">
+      {{cliente.municipio}}
+    </div>
   </div>
   <div class="row">
     <strong>Estado:</strong>
-
+    <div class="ml-1">
+      {{cliente.estado}}
+    </div>
   </div>
 
 

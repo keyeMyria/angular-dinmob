@@ -112,11 +112,11 @@ export class ClientesComponent implements OnInit {
 
   }
 
-  verDatosFirma() {
-
+  verDatosFirma(cliente) {
+    console.log("cliente", cliente);
     let dialogRef = this.dialog.open(VerDatosFirmaDialogoComponent, {
       data: {
-
+        cliente: cliente
       }
     });
 

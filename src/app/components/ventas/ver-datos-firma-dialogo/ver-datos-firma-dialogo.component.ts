@@ -8,12 +8,15 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 })
 export class VerDatosFirmaDialogoComponent implements OnInit {
 
+  cliente: any;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<VerDatosFirmaDialogoComponent>
   ) { }
 
   ngOnInit() {
+    this.cliente = this.data.cliente;
   }
 
 }
