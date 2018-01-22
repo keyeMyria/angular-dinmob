@@ -1,7 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { FormArray } from '@angular/forms/src/model';
+import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-editar-obra-dialogo',
@@ -48,7 +47,7 @@ export class EditarObraDialogoComponent implements OnInit {
 
   checkUsuariosRepetidos(control: FormArray): { [key: string]: boolean } {
 
-    console.log("chekrepetidos", control);
+    //console.log("chekrepetidos", control);
 
     let tiene_repetidos = (new Set(control.value)).size !== control.value.length;
 
@@ -90,8 +89,6 @@ export class EditarObraDialogoComponent implements OnInit {
     console.log("formgroup", this.form);
     console.log("value", this.form.value);
     console.log("status", this.form.status);
-
-
   }
 
 }

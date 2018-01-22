@@ -1,77 +1,123 @@
 <h1 mat-dialog-title>Crear Obra</h1>
 <div mat-dialog-content>
-  <form #formCreateObra="ngForm" id="formCreateObra" (ngSubmit)="createObra()">
-    <div class="form-group">
-      <label for="nombre">Nombre</label>
-      <div>
-        <input class="form-control" type="text" id="nombre" name="nombre" [(ngModel)]="obra.nombre">
 
+  <form [formGroup]="form" id="id_form" (ngSubmit)="crear()" class="pb-5">
+
+    <div class="form-group">
+      <label class="col-form-label">Nombre</label>
+      <input type="text" class="form-control" formControlName="nombre" [ngClass]="{'is-invalid':form.get('nombre').invalid && form.get('nombre').touched }">
+      <div class="invalid-feedback">
+        Escriba un nombre
       </div>
     </div>
 
     <div class="form-group">
-      <label for="fecha_ini">Fecha Inicio</label>
-      <div>
+
+      <label class="col-form-label">Fecha Inicio</label>
+
+      <div class="input-group">
+        <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="fecha_ini" placement="bottom-left" [matDatepicker]="dpFechaInicio"
+          (ngModelChange)="onFechaChange()" formControlName="fecha_ini" [ngClass]="{'is-invalid':form.get('fecha_ini').invalid && form.get('fecha_ini').touched }">
+        <span class="input-group-btn">
+          <button class="btn btn-secondary" type="button" (click)="dpFechaInicio.open()">
+            <i class="fa fa-calendar"></i>
+          </button>
+        </span>
+
+      </div>
+
+      <div *ngIf="form.get('fecha_ini').invalid && form.get('fecha_ini').touched " class="visible invalid-feedback">
+        Seleccione una fecha
+      </div>
+
+      <mat-datepicker touchUi="true" #dpFechaInicio></mat-datepicker>
+
+    </div>
+
+    <div class="form-group">
+
+      <mat-slide-toggle formControlName="en_venta">
+        En Venta
+      </mat-slide-toggle>
+      <small class="form-text text-muted">Esta propiedad indica la visibilidad en el módulo de Ventas</small>
+
+    </div>
+
+    <div class="form-group">
+      <button type="button" class="btn btn-secondary btn-block" (click)="addResidente()">
+        <i class="fa fa-plus" aria-hidden="true"></i> Residente</button>
+    </div>
+
+    <div formArrayName="residentes">
+      <div class="form-group" *ngFor="let residente of form.controls['residentes'].controls; let i= index">
         <div class="input-group">
-          <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_ini" id="fecha_ini" [(ngModel)]="obra.fecha_ini"
-            [matDatepicker]="dpFechaInicio" (ngModelChange)="onFechaChange()">
+          <select class="form-control" [formControlName]="i" [ngClass]="{'is-invalid':form.get('residentes').controls[i].invalid}">
+            <option value="">Elegir usuario...</option>
+            <option *ngFor="let res of data.residentes" [value]="res.id_usuario">{{res.nombre}}</option>
+          </select>
           <span class="input-group-btn">
-            <button class="btn btn-secondary" type="button" (click)="dpFechaInicio.open()">
-              <i class="fa fa-calendar"></i>
+            <button class="btn btn-secondary" (click)="delResidente(i)">
+              <i class="fa fa-minus" aria-hidden="true"></i>
             </button>
           </span>
         </div>
-        <mat-datepicker touchUi="true" #dpFechaInicio></mat-datepicker>
       </div>
     </div>
-    <div class="form-group">
-      <label for="nombre">Residente</label>
-      <div class="input-group">
-        <select class="form-control" name="" selectval>
-          <option>Elegir residente</option>
-          <option>1</option>
-        </select>
-        <span class="input-group-btn">
-          <button class="btn btn-secondary">
-            <i class="fa fa-plus" aria-hidden="true"></i>
-          </button>
-        </span>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="nombre">Almacenista</label>
-      <div class="input-group">
-        <select class="form-control" name="" selectval>
-          <option>Elegir residente</option>
-          <option>1</option>
-        </select>
-      </div>
+    <div class="form-group" *ngIf="form.get('residentes').errors?.repetidos">
+      <div class="form-text text-danger">Tiene algún residente repetido</div>
     </div>
 
     <div class="form-group">
-      <label for="nombre">Control Almacen</label>
-      <div class="input-group">
-        <select class="form-control" name="" selectval>
-          <option>Elegir</option>
-          <option>1</option>
-        </select>
-        <span class="input-group-btn">
-          <button class="btn btn-secondary">
-            <i class="fa fa-plus" aria-hidden="true"></i>
-          </button>
-        </span>
-      </div>
+      <button type="button" class="btn btn-secondary btn-block" (click)="addAlmacenista()">
+        <i class="fa fa-plus" aria-hidden="true"></i> Almacenista</button>
     </div>
 
+    <div formArrayName="almacenistas">
+      <div class="form-group" *ngFor="let almacenista of form.controls['almacenistas'].controls; let i= index">
+        <div class="input-group">
+          <select class="form-control" [formControlName]="i" [ngClass]="{'is-invalid':form.get('almacenistas').controls[i].invalid}">
+            <option value="">Elegir usuario...</option>
+            <option *ngFor="let alm of data.almacenistas" [value]="alm.id_usuario">{{alm.nombre}}</option>
+          </select>
+          <span class="input-group-btn">
+            <button class="btn btn-secondary" (click)="delAlmacenista(i)">
+              <i class="fa fa-minus" aria-hidden="true"></i>
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="form-group" *ngIf="form.get('almacenistas').errors?.repetidos">
+      <div class="form-text text-danger">Tiene algún almacenista repetido</div>
+    </div>
 
+    <div class="form-group">
+      <button type="button" class="btn btn-secondary btn-block" (click)="addControlAlmacen()">
+        <i class="fa fa-plus" aria-hidden="true"></i> Control Almacén</button>
+    </div>
 
-
+    <div formArrayName="control_almacen">
+      <div class="form-group" *ngFor="let encargado of form.controls['control_almacen'].controls;let i=index">
+        <div class="input-group">
+          <select class="form-control" [formControlName]="i" [ngClass]="{'is-invalid':form.get('control_almacen').controls[i].invalid}" >
+            <option value="">Elegir usuario...</option>
+            <option *ngFor="let alm of data.control_almacen" [value]="alm.id_usuario">{{alm.nombre}}</option>
+          </select>
+          <span class="input-group-btn">
+            <button class="btn btn-secondary" (click)="delControlAlmacen(i)">
+              <i class="fa fa-minus" aria-hidden="true"></i>
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
 
   </form>
 
-
 </div>
+
 <div mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="false">CANCELAR</button>
-  <button mat-button [mat-dialog-close]="true">CREAR</button>
+  <button type="button" mat-button [mat-dialog-close]="false">CANCELAR</button>
+  <button mat-button [disabled]="form.invalid" type="submit" form="id_form">CREAR</button>
+  <button type="button" mat-button (click)="debug()">debug</button>
 </div>

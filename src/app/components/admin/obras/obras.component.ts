@@ -31,12 +31,13 @@ export class ObrasComponent implements OnInit {
 
     this.route.data
       .subscribe((data: { obras: any[], residentes: any[], almacenistas: any[], control_almacen: any[] }) => {
-        console.log("resusltado resolve ", data);
 
-        //this.obras = data.obras;
+        //console.log("resusltado resolve ", data);
+
         this.residentes = data.residentes;
         this.almacenistas = data.almacenistas;
         this.control_almacen = data.control_almacen;
+
       });
 
 
@@ -44,26 +45,24 @@ export class ObrasComponent implements OnInit {
       .subscribe(response => this.obras = response);
   }
 
-  agregarObra(): void {
+  openDialogCreateObra(): void {
     let obra = new Obra();
 
     let dialogRef = this.dialog.open(AgregarObraDialogoComponent, {
-      data: { obra: obra },
+      data: {
+        obras: this.obras,
+        residentes: this.residentes,
+        control_almacen: this.control_almacen,
+        almacenistas: this.almacenistas
+      },
       width: '500px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
 
-        console.log("obra", obra);
-        this.obrasSrv.createObra(obra)
-          .subscribe(res => {
-
-            let nuevaObra = res;
-            this.obras.push(nuevaObra);
-
-
-          });
+      } else {
+        //cancel or error
       }
 
 

@@ -52,22 +52,15 @@ html, body, app-root, md-sidenav-container, .my-content {
 }
 
 //fix bootstrap
-button:focus{
+/* button:focus{
     outline: none;
-}
+} */
 
 
 body {
     font-family:Roboto, sans-serif;
 }
 
-.py15px {
-    padding-top: 15px;
-    padding-bottom: 15px;
-}
-.p15px {
-    padding:15px;
-}
 
 
 /* Absolute Center Spinner */
@@ -114,4 +107,9 @@ table.table-align-middle  td {
 .avances .mat-expansion-panel-body {
     padding-right: 5px !important;
     padding-left: 5px !important;
+}
+
+
+.visible.invalid-feedback {
+    display: block !important;
 }
