@@ -1,0 +1,62 @@
+<h1 mat-dialog-title>Célula Fiscal</h1>
+<div mat-dialog-content>
+
+  <div class="row">
+    <strong>Nombre:</strong>
+    <div class="pl-1" *ngIf="">
+      {{cliente.nombre}}
+    </div>
+    <div class="pl-1">
+      {{cliente.nombre}}
+    </div>
+  </div>
+  <div class="row">
+    <strong>RFC:</strong>
+    <div class="pl-1">
+      {{cliente.rfc}}
+    </div>
+  </div>
+  <div class="row">
+    <strong>Calle:</strong>
+    <div class="pl-1">
+      {{cliente.calle}}
+    </div>
+  </div>
+  <div class="row">
+    <strong>Núm. Exterior:</strong>
+    <div class="pl-1">
+      {{cliente.num_exterior}}
+    </div>
+  </div>
+  <div class="row">
+    <strong>Núm. Interior:</strong>
+    <div class="ml-1" *ngIf="cliente.num_interior">
+      {{cliente.num_interior}}
+    </div>
+  </div>
+  <div class="row">
+    <strong>Colonia:</strong>
+
+  </div>
+  <div class="row">
+    <strong>CP:</strong>
+
+  </div>
+  <div class="row">
+    <strong>Localidad:</strong>
+
+  </div>
+  <div class="row">
+    <strong>Municipio:</strong>
+
+  </div>
+  <div class="row">
+    <strong>Estado:</strong>
+
+  </div>
+
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="true">Cerrar</button>
+</div>

@@ -10,6 +10,7 @@ import { NuevoPagoDialogoComponent } from 'app/components/ventas/nuevo-pago-dial
 import { EditarPagoDialogoComponent } from 'app/components/ventas/editar-pago-dialogo/editar-pago-dialogo.component';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import { Pago } from 'app/model/pago';
+import { EditarDocumentoDialogoComponent } from 'app/components/ventas/editar-documento-dialogo/editar-documento-dialogo.component';
 
 @Component({
   selector: 'app-editar-cliente',
@@ -136,6 +137,19 @@ export class EditarClienteComponent implements OnInit {
       this.selectedOption = result;
     });
 
+  }
+
+  editarDocumento(){
+    
+    let dialogRef = this.dialog.open(EditarDocumentoDialogoComponent, {
+      data: {
+
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+    });
   }
 
 

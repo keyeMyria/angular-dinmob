@@ -108,6 +108,10 @@ import { UsuariosContolAlmacenResolverService } from 'app/resolvers/usuarios-con
 import { UsuariosResidentesResolverService } from 'app/resolvers/usuarios-residentes-resolver.service';
 import { UsuariosAsesoresResolverService } from 'app/resolvers/usuarios-asesores-resolver.service';
 import { EditarObraDialogoComponent } from './components/admin/editar-obra-dialogo/editar-obra-dialogo.component';
+import { VerCelulaFiscalDialogoComponent } from './components/ventas/ver-celula-fiscal-dialogo/ver-celula-fiscal-dialogo.component';
+import { VerDatosFirmaDialogoComponent } from './components/ventas/ver-datos-firma-dialogo/ver-datos-firma-dialogo.component';
+import { EditarDocumentoDialogoComponent } from './components/ventas/editar-documento-dialogo/editar-documento-dialogo.component';
+import { EditarLoteDialogoComponent } from './components/admin/editar-lote-dialogo/editar-lote-dialogo.component';
 
 
 
@@ -176,6 +180,11 @@ import { EditarObraDialogoComponent } from './components/admin/editar-obra-dialo
     AgregarLoteDialogoComponent,
     FotoPartidaDialogoComponent,
     EditarObraDialogoComponent,
+    VerCelulaFiscalDialogoComponent,
+    VerDatosFirmaDialogoComponent,
+    EditarDocumentoDialogoComponent,
+    EditarLoteDialogoComponent,
+ 
 
 
 
@@ -220,6 +229,10 @@ import { EditarObraDialogoComponent } from './components/admin/editar-obra-dialo
     AgregarLoteDialogoComponent,
     FotoPartidaDialogoComponent,
     EditarObraDialogoComponent,
+    VerCelulaFiscalDialogoComponent,
+    VerDatosFirmaDialogoComponent,
+    EditarDocumentoDialogoComponent,
+    EditarLoteDialogoComponent
     
 
     
