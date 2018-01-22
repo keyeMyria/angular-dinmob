@@ -39,8 +39,19 @@
     </mat-drawer>
 
     <mat-drawer-content>
-        <!-- 100vh = alto del dispositivo -56 de la toolbar cuando está en modo mobile -3rem= mb-5 -->
-        <div class="container mb-5" style=" min-height: calc(100vh - 56px - 3rem);">
+
+        <mat-toolbar>
+            
+            <button mat-button>Terminar</button>
+            <button mat-button>Liberar</button>
+            <button mat-icon-button>
+                <mat-icon>delete</mat-icon>
+            </button>
+        </mat-toolbar>
+        <!-- 100vh = alto del dispositivo -56 de la main-toolbar, -56 de la toolbar cuando está en modo mobile -3rem= mb-5 -->
+        <div class="container-fluid mb-5" style=" min-height: calc(100vh - 56px - 56px - 3rem);">
+
+
 
 
             <div class="row">
@@ -77,6 +88,7 @@
                 </div> -->
 
                 <div class="col">
+
                     <nav class="navbar navbar-expand-lg navbar-light bg-light ">
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav mr-auto">
@@ -105,13 +117,13 @@
                     </nav>
 
                     <ol class="breadcrumb colorBread">
-                        <li class="breadcrumb-item">
-                            <a href="#">{{lote?.lote.obra}}</a>
+                        <li class="breadcrumb-item text-primary">
+                            {{lote?.lote.obra}}
                         </li>
-                        <li class="breadcrumb-item">
-                            <a href="#">{{lote?.lote.manzana}}</a>
+                        <li class="breadcrumb-item text-primary">
+                            {{lote?.lote.manzana}}
                         </li>
-                        <li class="breadcrumb-item active">{{lote?.lote.nombre}}</li>
+                        <li class="breadcrumb-item text-primary">{{lote?.lote.nombre}}</li>
                     </ol>
                     <div class="avances">
                         <mat-accordion>

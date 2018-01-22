@@ -86,7 +86,7 @@ export class EstructuraObraComponent implements OnInit {
       .switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
-          return this.obraSrv.loadFullObra(params.get("obra"));
+          return this.obraSrv.getAcordeonManzanas(params.get("obra"));
         } else {
           return Observable.of({ datos: {} });
         }
