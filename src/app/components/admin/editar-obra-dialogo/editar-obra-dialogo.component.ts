@@ -23,8 +23,9 @@ export class EditarObraDialogoComponent implements OnInit {
       nombre: [data.obra.nombre, Validators.required],
       fecha_ini: [data.obra.fecha_ini, Validators.required],
       en_venta: data.obra.en_venta == "0" ? false : true,
-      residentes: this.fb.array([], this.checkResidentesRepetidos),
-      control_almacen: this.fb.array([]),
+      residentes: this.fb.array([], this.checkUsuariosRepetidos),
+      control_almacen: this.fb.array([], this.checkUsuariosRepetidos),
+      almacenistas: this.fb.array([], this.checkUsuariosRepetidos),
     });
 
     this.data.obra.residentes.forEach(usuario => {
@@ -35,16 +36,18 @@ export class EditarObraDialogoComponent implements OnInit {
       (<FormArray>this.form.controls["control_almacen"]).push(new FormControl(usuario.id_usuario, Validators.required));
     });
 
+    this.data.obra.almacenistas.forEach(usuario => {
+      (<FormArray>this.form.controls["almacenistas"]).push(new FormControl(usuario.id_usuario, Validators.required));
+    });
+
 
   }
 
   ngOnInit() {
   }
 
-  checkResidentesRepetidos(control: FormArray): { [key: string]: boolean } {
+  checkUsuariosRepetidos(control: FormArray): { [key: string]: boolean } {
 
-
-    //console.log(form);
     console.log("chekrepetidos", control);
 
     let tiene_repetidos = (new Set(control.value)).size !== control.value.length;
@@ -55,8 +58,8 @@ export class EditarObraDialogoComponent implements OnInit {
       return null;
     }
 
-
   }
+
 
   addResidente() {
     (<FormArray>this.form.controls["residentes"]).push(new FormControl("", Validators.required));
@@ -64,6 +67,15 @@ export class EditarObraDialogoComponent implements OnInit {
 
   delResidente(index: number) {
     (<FormArray>this.form.controls["residentes"]).removeAt(index);
+  }
+
+
+  addAlmacenista() {
+    (<FormArray>this.form.controls["almacenistas"]).push(new FormControl("", Validators.required));
+  }
+
+  delAlmacenista(index: number) {
+    (<FormArray>this.form.controls["almacenistas"]).removeAt(index);
   }
 
   addControlAlmacen() {

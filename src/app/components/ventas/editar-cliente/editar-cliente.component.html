@@ -741,10 +741,10 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
+                        <tr *ngFor="let doc of documentos_cliente">
                           <!-- *ngFor"doc in documentos| filter:{conyuge:'0'} as docs_titular" -->
                           <td>
-                            <a target="_blank">doc.nombre</a>
+                            <a target="_blank">{{doc.nombre}}</a>
                           </td>
                           <td class="text-right">
                             <div class="btn-group-sm pull-right">
@@ -766,9 +766,8 @@
                             </div>
                           </td>
                         </tr>
-                        <tr>
-                          <!-- *ngIf="docs_titular.length === 0" -->
-                          <td colspan="2" style="text-align: center;">Ningún documento encontrado</td>
+                        <tr *ngIf="documentos_cliente.length === 0">
+                          <td colspan="2" class="text-center">Ningún documento encontrado</td>
                         </tr>
                       </tbody>
                     </table>
@@ -789,10 +788,10 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
+                        <tr *ngFor="let doc of documentos_conyuge">
                           <!-- *ngFor"doc in documentos| filter:{conyuge:'1'} as docs_conyuge" -->
                           <td>
-                            <a target="_blank">doc.nombre</a>
+                            <a target="_blank">{{doc.nombre}}</a>
                           </td>
                           <td class="text-right">
                             <div class="btn-group-sm pull-right">
@@ -814,9 +813,8 @@
                             </div>
                           </td>
                         </tr>
-                        <tr>
-                          <!-- *ngIf="docs_conyuge.length === 0" -->
-                          <td colspan="2" style="text-align: center;">Ningún documento encontrado</td>
+                        <tr *ngIf="documentos_conyuge.length === 0">
+                          <td colspan="2" class="text-center">Ningún documento encontrado</td>
                         </tr>
                       </tbody>
                     </table>
@@ -856,7 +854,7 @@
                           <td>{{compra.fecha_activo}}</td>
                           <td>{{compra.fecha_cancelacion}}</td>
                           <td class="text-right">
-                           <!--  <button type="button" class="btn btn-default btn-sm" (click)="cancelarAsociacion(compra, $event)">{{compra.activo}}</button>
+                            <!--  <button type="button" class="btn btn-default btn-sm" (click)="cancelarAsociacion(compra, $event)">{{compra.activo}}</button>
                             <button type="button" class="btn btn-default btn-sm">Eliminar</button>
                             <button type="button" class="btn btn-default btn-sm">Reporte</button>
                             <button type="button" title="Ir a lote" class="btn btn-default btn-sm" ui-sref="^.ventas_lote({id_lote:compra.id_lote})">
@@ -1258,7 +1256,7 @@
                         <span>VALOR OPERACIÓN</span>
                       </div>
                     </div>
-                    
+
                     <div class="col-12 col-sm-4">
                       <div class="text-center border-right">
                         <h4 class="text-success">
@@ -1268,7 +1266,7 @@
                         <span>-PAGOS REALIZADOS</span>
                       </div>
                     </div>
-                    
+
                     <div class="col-12 col-sm-4">
                       <div class="text-center">
                         <h4 class="text-danger">

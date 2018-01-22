@@ -30,6 +30,11 @@ export class EditarClienteComponent implements OnInit {
 
   cliente: Cliente = new Cliente();
   compras: any[] = [];
+  documentos_cliente: any[] = [];
+  documentos_conyuge: any[] = [];
+
+
+
   selectedOption: string;
   compra_selected: any = {};
   pago: Pago;
@@ -49,18 +54,13 @@ export class EditarClienteComponent implements OnInit {
     let id = this.route.snapshot.paramMap.get('id');
 
 
-    this.clienteSrv.getCliente(id)
-      .subscribe(res => {
-        this.cliente = res;
+    this.clienteSrv.getClienteConComprasYDocumentos(id)
+      .subscribe(response => {
+        this.cliente = response.cliente;
+        this.compras = response.compras;
+        this.documentos_cliente = response.documentos_cliente;
+        this.documentos_conyuge = response.documentos_conyuge;
       });
-
-    this.clienteSrv.getCompras(id)
-      .subscribe(compras => {
-        this.compras = compras;
-      });
-
-
-
 
   }
 

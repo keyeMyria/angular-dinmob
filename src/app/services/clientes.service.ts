@@ -39,6 +39,12 @@ export class ClientesService {
       .catch(this.handleError);
   }
 
+  getClienteConComprasYDocumentos(id_cliente) {
+    return this.http.get(this.url + 'get_cliente_documentos_compras/' + id_cliente)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
   getCompras(id_cliente) {
     return this.http.get(this.url + 'get_compras/' + id_cliente)
       .map(this.extractData)

@@ -30,13 +30,9 @@
         Seleccione una fecha
       </div>
 
-
-
-
       <mat-datepicker touchUi="true" #dpFechaInicio></mat-datepicker>
 
     </div>
-
 
     <div class="form-group">
 
@@ -47,21 +43,29 @@
 
     </div>
 
-
     <div class="form-group">
-      <button type="button" class="btn btn-secondary btn-block">
+      <button type="button" class="btn btn-secondary btn-block" (click)="addAlmacenista()">
         <i class="fa fa-plus" aria-hidden="true"></i> Almacenista</button>
     </div>
 
-
-
-    <div class="form-group">
-      <select name="id_almacenista" class="form-control">
-        <option [value]="">Elegir usuario...</option>
-        <option [value]="a.id_usuario" *ngFor="let a of data.almacenistas ">{{a.nombre}}</option>
-      </select>
+    <div formArrayName="almacenistas">
+      <div class="form-group" *ngFor="let almacenista of form.controls['almacenistas'].controls; let i= index">
+        <div class="input-group">
+          <select class="form-control" [formControlName]="i">
+            <option value="">Elegir usuario...</option>
+            <option *ngFor="let alm of data.almacenistas" [value]="alm.id_usuario">{{alm.nombre}}</option>
+          </select>
+          <span class="input-group-btn">
+            <button class="btn btn-secondary" (click)="delAlmacenista(i)">
+              <i class="fa fa-minus" aria-hidden="true"></i>
+            </button>
+          </span>
+        </div>
+      </div>
     </div>
-
+    <div class="form-group" *ngIf="form.get('almacenistas').errors?.repetidos">
+      <div class="form-text text-danger">Tiene algún almacenista repetido</div>
+    </div>
 
     <div class="form-group">
       <button type="button" class="btn btn-secondary btn-block" (click)="addResidente()">
@@ -81,7 +85,6 @@
             </button>
           </span>
         </div>
-        <!-- <p *ngIf="(residente.id_residente === '0' || !residente.id_residente)" class="text-danger">Selecciona un residente para poder guardar los cambios</p> -->
       </div>
     </div>
     <div class="form-group" *ngIf="form.get('residentes').errors?.repetidos">
@@ -106,11 +109,9 @@
             </button>
           </span>
         </div>
-        <!-- <p *ngIf="(encargado.id_usuario === '0' || !encargado.id_usuario)" class="text-danger">Selecciona un encargado para poder guardar los cambios</p> -->
       </div>
     </div>
 
-    <!-- <div *ngIf="controlAlmacenRepetidos()" class="form-text text-danger">Tiene algún encargado de almacén repetido</div> -->
   </form>
 
 </div>
