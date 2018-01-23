@@ -112,35 +112,22 @@ export class UsuariosComponent implements OnInit {
   }
 
 
-  editarUsuario(usuario: Usuario) {
+  editarUsuario(usuario) {
 
-    let copia = Usuario.copiar(usuario);
 
     let dialogRef = this.dialog.open(EditarUsuarioDialogoComponent, {
       data: {
-        usuario: copia,
-        roles: this.roles
+        usuario: usuario,
+        usuarios: this.usuarios
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
 
       if (result === true) {
-        this.loading = true;
-
-        this.usuarioSrv.updateUsuario(usuario.id_usuario, copia)
-          .subscribe(res => {
-
-            let i = this.usuarios.indexOf(usuario);
-            this.usuarios[i] = res;
-            this.loading = false;
-            this.snackBar.open("Usuario Actualizado", "Cerrar", {
-              duration: 2000
-            });
-
-          });
-
-
+        this.snackBar.open("Usuario Actualizado", "Cerrar", {
+          duration: 2000
+        });
       }
 
     });
@@ -165,15 +152,15 @@ export class UsuariosComponent implements OnInit {
           .subscribe(res => {
             console.log("response", res);
             let nuevoUsuario = res;//new Usuario();
-           //nuevoUsuario.id_usuario = res;
-           // nuevoUsuario.nombre = usuario.nombre;
+            //nuevoUsuario.id_usuario = res;
+            // nuevoUsuario.nombre = usuario.nombre;
             this.usuarios.push(nuevoUsuario);
 
           });
-        }
+      }
 
-        
-      });
+
+    });
 
   }
 

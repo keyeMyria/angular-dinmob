@@ -1,6 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
-import { Usuario } from "app/model/usuario";
+import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
+import { UsuarioService } from 'app/services/usuario.service';
+
 
 @Component({
   selector: 'app-editar-usuario-dialogo',
@@ -8,20 +10,43 @@ import { Usuario } from "app/model/usuario";
   styleUrls: ['./editar-usuario-dialogo.component.scss']
 })
 export class EditarUsuarioDialogoComponent implements OnInit {
+  form: FormGroup;
+  loading: boolean = false;
 
-  usuario:Usuario;
-  roles:any[];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef: MatDialogRef<EditarUsuarioDialogoComponent>
-  ) { }
+    public dialogRef: MatDialogRef<EditarUsuarioDialogoComponent>,
+    private fb: FormBuilder,
+    private usuarioSrv: UsuarioService
+
+  ) {
+
+    this.form = this.fb.group({
+      nombre: [data.usuario.nombre, Validators.required],
+      email: [data.usuario.email, Validators.required]
+    });
+
+  }
 
   ngOnInit() {
-    this.usuario= this.data.usuario;
-    this.roles=this.data.roles;
- 
+
+
   }
-  
+
+  guardar() {
+    console.log("pago", this.form.value);
+    this.usuarioSrv.updateUsuario(this.data.usuario.id_usuario, this.form.value)
+      .subscribe(usuario => {
+
+        let i = this.data.usuarios.indexOf(this.data.usuario);
+        this.data.usuarios[i] = usuario;
+        this.loading = false;
+        this.dialogRef.close(true);
+
+
+      });
+  }
+
 
 }
