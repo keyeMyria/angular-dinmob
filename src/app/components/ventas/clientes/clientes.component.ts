@@ -7,11 +7,10 @@ import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar
 import { ObrasService } from "app/services/obras.service";
 import { Router, ActivatedRoute, ParamMap } from "@angular/router";
 import { AuthService } from "app/services/auth.service";
-import { Usuario } from "app/model/usuario";
 import { Observable } from 'rxjs/Observable';
 import { of } from "rxjs/observable/of";
-import { VerCelulaFiscalDialogoComponent } from 'app/components/ventas/ver-celula-fiscal-dialogo/ver-celula-fiscal-dialogo.component';
 import { VerDatosFirmaDialogoComponent } from 'app/components/ventas/ver-datos-firma-dialogo/ver-datos-firma-dialogo.component';
+import { VerCedulaFiscalDialogoComponent } from 'app/components/ventas/ver-cedula-fiscal-dialogo/ver-cedula-fiscal-dialogo.component';
 
 @Component({
   selector: 'app-clientes',
@@ -22,7 +21,7 @@ import { VerDatosFirmaDialogoComponent } from 'app/components/ventas/ver-datos-f
 export class ClientesComponent implements OnInit {
 
 
-  usuario: Usuario;
+
   loading: boolean;
   //clientes$: Observable<Cliente[]>;
   clientes: Cliente[] = [];
@@ -45,7 +44,11 @@ export class ClientesComponent implements OnInit {
 
   ngOnInit() {
 
-    this.usuario = this.auth.getUsuario();
+    this.route.data
+      .subscribe((data: { obras: any[] }) => {
+        //console.log("resusltado resolve ", data);
+        this.obras = data.obras;
+      });
 
     //this.loading = true;
     this.route.paramMap
@@ -63,10 +66,7 @@ export class ClientesComponent implements OnInit {
 
 
 
-    this.obraSrv.getObrasUsuario(this.usuario.id_usuario)
-      .subscribe(obras => {
-        this.obras = obras;
-      });
+
 
   }
 
@@ -100,10 +100,11 @@ export class ClientesComponent implements OnInit {
   verCelulaFiscal(cliente: Cliente) {
     console.log("cliente", cliente);
 
-    let dialogRef = this.dialog.open(VerCelulaFiscalDialogoComponent, {
+    let dialogRef = this.dialog.open(VerCedulaFiscalDialogoComponent, {
       data: {
         cliente: cliente,
-      }
+      },
+      width: '500px'
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -117,7 +118,8 @@ export class ClientesComponent implements OnInit {
     let dialogRef = this.dialog.open(VerDatosFirmaDialogoComponent, {
       data: {
         cliente: cliente
-      }
+      },
+      width: '500px'
     });
 
     dialogRef.afterClosed().subscribe(result => {

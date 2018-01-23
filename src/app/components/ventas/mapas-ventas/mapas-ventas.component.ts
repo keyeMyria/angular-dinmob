@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MapasService } from "app/services/mapas.service";
 import 'jvectormap';
+import { ActivatedRoute } from '@angular/router';
 declare var jQuery: any;
 declare var $: any;
 
@@ -16,12 +17,20 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
   compra_selected: any;
   obra_selected: any;
   lotes: any;
-  obras:any;
+  obras: any[] = [];
   map_values: any;
 
-  constructor(private mapaSrv: MapasService) { }
+  constructor(
+    private mapaSrv: MapasService,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
+    this.route.data
+      .subscribe((data: { obras: any[] }) => {
+        //console.log("resusltado resolve ", data);
+        this.obras = data.obras;
+      });
   }
 
   ngOnDestroy() {

@@ -73,7 +73,6 @@ import { AgregarDocumentoDialogoComponent } from './components/ventas/agregar-do
 import { CrearUsuarioDialogoComponent } from './components/admin/crear-usuario-dialogo/crear-usuario-dialogo.component';
 
 import { AgregarPrototipoDialogoComponent } from './components/admin/agregar-prototipo-dialogo/agregar-prototipo-dialogo.component';
-import { CambiarNombrePrototipoDialogoComponent } from './components/admin/cambiar-nombre-prototipo-dialogo/cambiar-nombre-prototipo-dialogo.component';
 import { NuevaCompraDialogoComponent } from './components/ventas/nueva-compra-dialogo/nueva-compra-dialogo.component';
 import { NuevoPagoDialogoComponent } from './components/ventas/nuevo-pago-dialogo/nuevo-pago-dialogo.component';
 import { EditarPagoDialogoComponent } from './components/ventas/editar-pago-dialogo/editar-pago-dialogo.component';
@@ -108,7 +107,6 @@ import { UsuariosContolAlmacenResolverService } from 'app/resolvers/usuarios-con
 import { UsuariosResidentesResolverService } from 'app/resolvers/usuarios-residentes-resolver.service';
 import { UsuariosAsesoresResolverService } from 'app/resolvers/usuarios-asesores-resolver.service';
 import { EditarObraDialogoComponent } from './components/admin/editar-obra-dialogo/editar-obra-dialogo.component';
-import { VerCelulaFiscalDialogoComponent } from './components/ventas/ver-celula-fiscal-dialogo/ver-celula-fiscal-dialogo.component';
 import { VerDatosFirmaDialogoComponent } from './components/ventas/ver-datos-firma-dialogo/ver-datos-firma-dialogo.component';
 import { EditarDocumentoDialogoComponent } from './components/ventas/editar-documento-dialogo/editar-documento-dialogo.component';
 import { EditarLoteDialogoComponent } from './components/admin/editar-lote-dialogo/editar-lote-dialogo.component';
@@ -118,6 +116,7 @@ import { EditarLoteDialogoComponent } from './components/admin/editar-lote-dialo
 
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
+import { VerCedulaFiscalDialogoComponent } from './components/ventas/ver-cedula-fiscal-dialogo/ver-cedula-fiscal-dialogo.component';
 registerLocaleData(localeEs, 'es');
 
 
@@ -154,7 +153,6 @@ registerLocaleData(localeEs, 'es');
     AgregarDocumentoDialogoComponent,
     CrearUsuarioDialogoComponent,
     AgregarPrototipoDialogoComponent,
-    CambiarNombrePrototipoDialogoComponent,
     NuevaCompraDialogoComponent,
     NuevoPagoDialogoComponent,
     EditarPagoDialogoComponent,
@@ -177,11 +175,11 @@ registerLocaleData(localeEs, 'es');
     AgregarManzanaDialogoComponent,
     AgregarLoteDialogoComponent,
     FotoPartidaDialogoComponent,
-    EditarObraDialogoComponent,
-    VerCelulaFiscalDialogoComponent,
+    EditarObraDialogoComponent,    
     VerDatosFirmaDialogoComponent,
     EditarDocumentoDialogoComponent,
     EditarLoteDialogoComponent,
+    VerCedulaFiscalDialogoComponent,
  
 
 
@@ -210,7 +208,6 @@ registerLocaleData(localeEs, 'es');
     AgregarDocumentoDialogoComponent,
     CrearUsuarioDialogoComponent,
     AgregarPrototipoDialogoComponent,
-    CambiarNombrePrototipoDialogoComponent,
     NuevaCompraDialogoComponent,
     NuevoPagoDialogoComponent,
     EditarPagoDialogoComponent,
@@ -226,11 +223,12 @@ registerLocaleData(localeEs, 'es');
     AgregarManzanaDialogoComponent,
     AgregarLoteDialogoComponent,
     FotoPartidaDialogoComponent,
-    EditarObraDialogoComponent,
-    VerCelulaFiscalDialogoComponent,
+    EditarObraDialogoComponent,  
     VerDatosFirmaDialogoComponent,
     EditarDocumentoDialogoComponent,
-    EditarLoteDialogoComponent
+    EditarLoteDialogoComponent,
+    EditarUsuarioDialogoComponent,
+    VerCedulaFiscalDialogoComponent
     
 
     

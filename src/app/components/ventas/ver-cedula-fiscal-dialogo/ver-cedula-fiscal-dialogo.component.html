@@ -1,18 +1,13 @@
 <h1 mat-dialog-title>Célula Fiscal</h1>
 <div mat-dialog-content>
 
-  <div class="row" *ngIf="cliente.persona_moral==='0'">
-    <strong>Nombre:</strong>
+  <div class="row">
+    <strong>{{cliente.persona_moral=='0'?'Nombre:': 'Razón Social:'}}</strong>
     <div class="pl-1">
       {{cliente.nombre}}
     </div>
   </div>
-  <div class="row" *ngIf="cliente.persona_moral==='1'">
-    <strong>Nombre:</strong>
-    <div class="pl-1">
-      {{cliente.nombre}}
-    </div>
-  </div>
+
   <div class="row">
     <strong>RFC:</strong>
     <div class="pl-1">
@@ -71,5 +66,5 @@
 
 </div>
 <div mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="true">Cerrar</button>
+  <button mat-button class="btn-block" [mat-dialog-close]="true">Cerrar</button>
 </div>

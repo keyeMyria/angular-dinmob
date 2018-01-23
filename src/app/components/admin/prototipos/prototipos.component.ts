@@ -3,14 +3,16 @@ import { ObrasService } from "app/services/obras.service";
 import { AgregarPrototipoDialogoComponent } from "app/components/admin/agregar-prototipo-dialogo/agregar-prototipo-dialogo.component";
 import { MatDialog, MatSnackBar } from "@angular/material";
 import { Router, ActivatedRoute, ParamMap } from "@angular/router";
-import { CambiarNombrePrototipoDialogoComponent } from "app/components/admin/cambiar-nombre-prototipo-dialogo/cambiar-nombre-prototipo-dialogo.component";
+
 import { PrototiposService } from 'app/services/prototipos.service';
 import { Prototipo } from "app/model/prototipo";
 import { AuthService } from 'app/services/auth.service';
-import { Usuario } from 'app/model/usuario';
+import { EditarNombrePrototipoDialogoComponent } from 'app/components/admin/editar-nombre-prototipo-dialogo/editar-nombre-prototipo-dialogo.component';
+
 
 //import 'rxjs/add/observable/of';
 import { of } from 'rxjs/observable/of';
+
 
 
 @Component({
@@ -20,7 +22,6 @@ import { of } from 'rxjs/observable/of';
 })
 export class PrototiposComponent implements OnInit {
   loading: boolean;
-  usuario: Usuario;
   obras: any = [];
   obra: any = {
     datos: {}
@@ -39,16 +40,14 @@ export class PrototiposComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loading = true;
-    this.usuario = this.auth.getUsuario();
 
-    this.obraSrv.getObrasUsuario(this.usuario.id_usuario)
-      .subscribe(obras => {
-        this.obras = obras;
+    this.route.data
+      .subscribe((data: { obras: any[] }) => {
+        //console.log("resusltado resolve ", data);
+        this.obras = data.obras;
       });
 
-
-
+    this.loading = true;
 
     this.route.paramMap
       .switchMap((params: ParamMap) => {
@@ -91,9 +90,12 @@ export class PrototiposComponent implements OnInit {
     this.router.navigate(["/editar-prototipo", prototipo.id_prototipo]);
   }
 
-  cambiarNombre() {
-    let dialogRef = this.dialog.open(CambiarNombrePrototipoDialogoComponent, {
-      data: {},
+  cambiarNombre(prototipo) {
+    console.log("prototipo", prototipo);
+    let dialogRef = this.dialog.open(EditarNombrePrototipoDialogoComponent, {
+      data: {
+        prototipo: prototipo,
+      },
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {

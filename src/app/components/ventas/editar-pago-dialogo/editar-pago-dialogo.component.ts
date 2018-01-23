@@ -1,7 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Pago } from 'app/model/pago';
+import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-editar-pago-dialogo',
@@ -9,9 +10,9 @@ import { Pago } from 'app/model/pago';
   styleUrls: ['./editar-pago-dialogo.component.scss']
 })
 export class EditarPagoDialogoComponent implements OnInit {
+  form: FormGroup;
 
-  pago:Pago;
-  
+
   numberMask = createNumberMask({
     allowDecimal: true
   });
@@ -19,15 +20,31 @@ export class EditarPagoDialogoComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef: MatDialogRef<EditarPagoDialogoComponent>
-  ) { }
+    public dialogRef: MatDialogRef<EditarPagoDialogoComponent>,
+    private fb: FormBuilder,
+  ) {
+
+
+    this.form = this.fb.group({
+
+      monto: [data.pago.monto, Validators.required],
+      fecha_programada: [moment(data.pago.fecha_programada, "YYYY-MM-DD"), Validators.required],
+      fecha_pago: moment(data.pago.fecha_pago, "YYYY-MM-DD"),
+      tipo_pago: data.pago.tipo_pago,
+      forma_pago: data.pago.forma_pago,
+      nota: data.pago.nota
+
+    });
+  }
 
   ngOnInit() {
-    this.pago=this.data.pago;
-  }
-
-  onFechaChange() {
 
   }
+
+  guardar(){
+    console.log("pago", this.form.value);
+  }
+
+
 
 }

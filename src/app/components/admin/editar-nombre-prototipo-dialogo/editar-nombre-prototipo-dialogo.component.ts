@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Prototipo } from 'app/model/prototipo';
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-editar-nombre-prototipo-dialogo',
@@ -8,16 +8,23 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
   styleUrls: ['./editar-nombre-prototipo-dialogo.component.scss']
 })
 export class EditarNombrePrototipoDialogoComponent implements OnInit {
-
-  prototipo:Prototipo;
+  nombre: FormControl;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<EditarNombrePrototipoDialogoComponent>
-  ) { }
+  ) {
+    this.nombre = new FormControl(this.data.prototipo.nombre, Validators.required);
+  }
 
   ngOnInit() {
-    this.prototipo=this.data.prototipo;
+
   }
+  
+  guardar() {
+    console.log("guardar", this.nombre.value);
+
+  }
+
 
 }

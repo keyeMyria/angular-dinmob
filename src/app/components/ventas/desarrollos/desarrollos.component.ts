@@ -5,7 +5,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 //import { Observable } from 'rxjs/Observable';
 import { of } from "rxjs/observable/of";
 import { AuthService } from 'app/services/auth.service';
-import { Usuario } from 'app/model/usuario';
+
 
 @Component({
   selector: 'app-desarrollos',
@@ -14,8 +14,6 @@ import { Usuario } from 'app/model/usuario';
 
 })
 export class DesarrollosComponent implements OnInit {
-
-  usuario: Usuario;
 
   obras: any = [];
   obra: any = {};
@@ -31,7 +29,12 @@ export class DesarrollosComponent implements OnInit {
 
 
   ngOnInit() {
-    this.usuario = this.auth.getUsuario();
+
+    this.route.data
+      .subscribe((data: { obras: any[] }) => {
+        //console.log("resusltado resolve ", data);
+        this.obras = data.obras;
+      });
 
     this.route.paramMap
       .switchMap((params: ParamMap) => {
@@ -46,13 +49,6 @@ export class DesarrollosComponent implements OnInit {
         this.obra = obra
       });
 
-
-
-
-    this.obraSrv.getObrasUsuario(this.usuario.id_usuario)
-      .subscribe(response => {
-        this.obras = response;
-      });
 
   }
 

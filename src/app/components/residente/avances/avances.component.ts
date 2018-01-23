@@ -3,7 +3,6 @@ import { LotesService } from 'app/services/lotes.service';
 import { ComentarioAvancesDialogoComponent } from 'app/components/residente/comentario-avances-dialogo/comentario-avances-dialogo.component';
 import { MatDialog, MatDrawer } from '@angular/material';
 import { ObrasService } from 'app/services/obras.service';
-import { Usuario } from 'app/model/usuario';
 import { AuthService } from 'app/services/auth.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
@@ -27,7 +26,6 @@ export class AvancesComponent implements OnInit {
   obra: any;
   obra_selected: string = "";
   obras: any = [];
-  usuario: Usuario;
 
 
 
@@ -50,7 +48,11 @@ export class AvancesComponent implements OnInit {
 
   ngOnInit() {
 
-    this.usuario = this.auth.getUsuario();
+    this.route.data
+      .subscribe((data: { obras: any[] }) => {
+        //console.log("resusltado resolve ", data);
+        this.obras = data.obras;
+      });
 
 
     this.route.paramMap
@@ -66,11 +68,6 @@ export class AvancesComponent implements OnInit {
         this.obra = obra
       });
 
-
-    this.obraSrv.getObrasUsuario(this.usuario.id_usuario)
-      .subscribe(response => {
-        this.obras = response;
-      });
 
   }
 

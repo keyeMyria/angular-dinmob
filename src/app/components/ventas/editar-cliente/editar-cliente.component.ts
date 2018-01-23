@@ -67,7 +67,9 @@ export class EditarClienteComponent implements OnInit {
 
   selectCompra(compra, event) {
 
-    if (event.checked) {
+
+    compra.selected = !compra.selected;
+    if (compra.selected) {
       this.compra_selected = compra;
     } else {
       this.compra_selected = {};
@@ -125,13 +127,13 @@ export class EditarClienteComponent implements OnInit {
 
   editarPago(pago) {
 
-    let copia = Pago.copiar(pago);
-    //copia.fecha_pago = "01/19/2018"
-    console.log("Copia", copia);
-    console.log("Pago", pago);
+    /*     let copia = Pago.copiar(pago);
+        //copia.fecha_pago = "01/19/2018"
+        console.log("Copia", copia);
+        console.log("Pago", pago); */
     let dialogRef = this.dialog.open(EditarPagoDialogoComponent, {
       width: '400px',
-      data: { pago: copia },
+      data: { pago: pago },
     });
     dialogRef.afterClosed().subscribe(result => {
       this.selectedOption = result;
@@ -139,11 +141,11 @@ export class EditarClienteComponent implements OnInit {
 
   }
 
-  editarDocumento(){
-    
+  editarDocumento(doc) {
+
     let dialogRef = this.dialog.open(EditarDocumentoDialogoComponent, {
       data: {
-
+        doc: doc
       }
     });
 

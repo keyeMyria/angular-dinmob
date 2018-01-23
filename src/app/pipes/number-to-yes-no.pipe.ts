@@ -10,9 +10,16 @@ export class NumberToYesNoPipe implements PipeTransform {
       
       if (tipo === 'AC') {
         if (value === '1') {
-          return 'Aceptar';
+          return 'Activo';
         }
-        return 'Cancelar';
+        return 'Cancelado';
+      }
+
+      if (tipo === 'VAL') {
+        if (value === '1') {
+          return 'Validado';
+        }
+        return 'No Validado';
       }
 
       if (tipo === 'SN') {
