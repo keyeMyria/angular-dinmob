@@ -1,60 +1,64 @@
 <h1 mat-dialog-title>Editar Lote</h1>
 <div mat-dialog-content>
 
-  <div>
-    <form>
-      <div class="form-group">
-        <label for="lote">Lote</label>
-        <input type="text" class="form-control" id="lote">
-      </div>
-      <div class="form-group">
-        <label for="codigo">Código</label>
-        <input type="text" class="form-control" id="codigo">
-      </div>
-      <div class="form-group">
-        <label for="valor_base">Valor Base</label>
-        <input type="text" class="form-control" id="valor_base">
-      </div>
-      <div class="form-group">
-        <label for="valor_ampliacion">Valor Ampliación</label>
-        <input type="text" class="form-control" id="valor_ampliacion">
-      </div>
-      <div class="form-group">
-        <mat-slide-toggle>En Venta</mat-slide-toggle>
-      </div>
 
 
-      <div class="form-group">
-        <button type="button" class="btn btn-secondary btn-block" (click)="addPrototipo()">
-          <i class="fa fa-plus" aria-hidden="true"></i> Prototipo</button>
-      </div>
+  <form id="id_form" [formGroup]="form" (ngSubmit)="guardar()" class="pb-4">
 
-      <div formArrayName="prototipos">
-        <div class="form-group" *ngFor="let prototipo of form.controls['prototipos'].controls; let i= index">
-          <div class="input-group">
-            <select class="form-control" [formControlName]="i">
-              <option value="">Elegir prototipo...</option>
-              <option *ngFor="let p of prototipos" [value]="p.id_prototipo">{{p.nombre}}</option>
-            </select>
-            <span class="input-group-btn">
-              <button class="btn btn-secondary" (click)="delPrototipo(i)">
-                <i class="fa fa-minus" aria-hidden="true"></i>
-              </button>
-            </span>
-          </div>
+    <div class="form-group">
+      <label for="lote">Lote</label>
+      <input type="text" class="form-control" id="lote" formControlName="nombre">
+    </div>
+
+    <div class="form-group">
+      <label for="codigo">Código</label>
+      <input type="text" class="form-control" id="codigo" formControlName="code">
+    </div>
+
+    <div class="form-group">
+      <label for="valor_base">Valor Base</label>
+      <input type="text" class="form-control" id="valor_base" formControlName="valor_base">
+    </div>
+
+    <div class="form-group">
+      <label for="valor_ampliacion">Valor Ampliación</label>
+      <input type="text" class="form-control" id="valor_ampliacion" formControlName="valor_ampliacion">
+    </div>
+
+    <div class="form-group">
+      <mat-slide-toggle formControlName="en_venta">En Venta</mat-slide-toggle>
+    </div>
+
+    <div class="form-group">
+      <button type="button" class="btn btn-secondary btn-block" (click)="addPrototipo()">
+        <i class="fa fa-plus" aria-hidden="true"></i> Prototipo</button>
+    </div>
+
+    <div formArrayName="prototipos">
+      <div class="form-group" *ngFor="let prototipo of form.controls['prototipos'].controls; let i= index">
+        <div class="input-group">
+          <select class="form-control" [formControlName]="i">
+            <option value="">Elegir prototipo...</option>
+            <option *ngFor="let p of prototipos" [value]="p.id_prototipo">{{p.nombre}}</option>
+          </select>
+          <span class="input-group-btn">
+            <button class="btn btn-secondary" (click)="delPrototipo(i)">
+              <i class="fa fa-minus" aria-hidden="true"></i>
+            </button>
+          </span>
         </div>
       </div>
-      <div class="form-group" *ngIf="form.get('prototipos').errors?.repetidos">
-        <div class="form-text text-danger">Tiene algún prototipo repetido</div>
-      </div>
+    </div>
+    <div class="form-group" *ngIf="form.get('prototipos').errors?.repetidos">
+      <div class="form-text text-danger">Tiene algún prototipo repetido</div>
+    </div>
 
+  </form>
 
-
-    </form>
-  </div>
 
 </div>
 <div mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="false">CANCELAR</button>
-  <button mat-button [mat-dialog-close]="true" color="primary">GUARDAR</button>
+  <button type="button" mat-button [mat-dialog-close]="false">CANCELAR</button>
+  <button type="submit" form="id_form" mat-button [disabled]="form.invalid" color="primary">GUARDAR</button>
+  <button type="button" mat-button (click)="debug()">debug</button>
 </div>

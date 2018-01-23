@@ -77,7 +77,7 @@ export class AgregarLoteDialogoComponent implements OnInit {
 
   createLotes() {
 
-    console.log("createLotes");
+    //console.log("createLotes");
     this.dialogRef.close();
 
     if (this.formLote.value.tipo == "nombre") {

@@ -31,24 +31,16 @@ export class EstructuraObraComponent implements OnInit {
 
   obras: any = [];
 
-
-
-
   obra: any = {
     datos: {}
   };
 
   obra_selected: string = "";
 
-
-
   opPrototipo = new FormControl("", Validators.required);
   opEnVenta = new FormControl("", Validators.required);
   opValorBase = new FormControl("", Validators.required);
   opValorAmpliacion = new FormControl("", Validators.required);
-
-  formManzana: FormGroup;
-  formLote: FormGroup;
 
 
   constructor(
@@ -130,13 +122,6 @@ export class EstructuraObraComponent implements OnInit {
 
   }
 
-  residentesRepetidos() {
-    return true;
-  }
-
-  controlAlmacenRepetidos() {
-    return true;
-  }
 
   num_lotes_selected() {
     return 0;
@@ -155,9 +140,13 @@ export class EstructuraObraComponent implements OnInit {
     });
   }
 
-  editarLote() {
+  editarLote(manzana, lote) {
     let dialogRef = this.dialog.open(EditarLoteDialogoComponent, {
-      data: {},
+      data: {
+        lotes:manzana.lotes,
+        lote:lote
+
+      },
       width: '500px',
 
     });
@@ -166,11 +155,6 @@ export class EstructuraObraComponent implements OnInit {
     });
   }
 
-
-
-  onFechaChange() {
-
-  }
 
   addManzanas() {
     let dialogRef = this.dialog.open(AgregarManzanaDialogoComponent, {
@@ -233,37 +217,6 @@ export class EstructuraObraComponent implements OnInit {
 
   }
 
-  addResidente(usuario) {
-    console.log("addResidente");
-
-  }
-
-  addControlAlmacen(usuario) {
-    console.log("addControl");
-
-  }
-
-  addAlmacenista(usuario) {
-    console.log("addAlmacenista");
-
-  }
-
-  delResidente(usuario) {
-    console.log("delResidente");
-
-  }
-
-  delControlAlmacen(usuario) {
-    console.log("delControl");
-
-  }
-
-  delAlmacenista(usuario) {
-    console.log("delAlmacenista");
-
-  }
-
-
-
+  
 
 }

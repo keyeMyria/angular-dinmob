@@ -121,6 +121,7 @@ table.table-align-middle  td {
 .no-min {
     &.mat-button {
         min-width: unset !important;
+        padding: 0 12px !important;
     }
     &.mat-raised-button {
         min-width: unset !important;
