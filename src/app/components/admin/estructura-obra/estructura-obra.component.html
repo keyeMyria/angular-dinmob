@@ -92,7 +92,7 @@
                                 <tbody>
                                     <tr *ngFor="let lote of manzana.lotes" (click)="toggleSelectionLote(manzana, lote)" class="pointer" [ngClass]="{'bg-primary text-white':lote.selected}">
                                         <td>
-                                           <!--  <i class="fa" [ngClass]="{'fa-check-square-o':lote.selected, 'fa-square-o': !lote.selected}"></i> -->
+                                            <!--  <i class="fa" [ngClass]="{'fa-check-square-o':lote.selected, 'fa-square-o': !lote.selected}"></i> -->
                                             <mat-icon style="font-size: 20px">{{ lote.selected?'check_box':'check_box_outline_blank'}}</mat-icon>
                                         </td>
                                         <td>{{ lote.nombre}}</td>
@@ -145,7 +145,7 @@
 
                 <div class="">
 
-            <!--         <label class="col-form-label">{{num_lotes_selected()}} lote
+                    <!--         <label class="col-form-label">{{num_lotes_selected()}} lote
                         <span *ngIf="num_lotes !== 1">s</span> seleccionado
                         <span *ngIf="num_lotes !== 1">s</span>
                     </label> -->
@@ -210,207 +210,32 @@
 
         </div>
 
+        <!-- test -->
+
+        <button class="btn btn-primary" (click)="debugSelection()">selection</button>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
+                        </mat-checkbox>
+                    </th>
+                    <th>id</th>
+                    <th>valor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of items" class="pointer" (click)="selection.toggle(item)" [ngClass]="{'bg-primary':selection.isSelected(item)}">
+                    <td>
+                        <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(item) : null" [checked]="selection.isSelected(item)">
+                        </mat-checkbox>
+                    </td>
+                    <td>{{item.id}}</td>
+                    <td>{{item.valor}}</td>
+                </tr>
+            </tbody>
+
+        </table>
+
     </div>
 </section>
-
-
-
-<!-- Modal Editar Lote-->
-
-<!-- <div class="modal fade" id="modalEditLote" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-      <div class="modal-content">
-          <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="myModalLabel">Editar Lote</h4>
-          </div>
-          <div class="modal-body">
-              <form name="formEditLote" id="formEditLote" (ngSubmit)="formEditLote.$valid && editLote(formEditLote)" novalidate>
-                  <div class="form-group" [ngClass]="{
-                          'has-error'
-                          :(formEditLote.$submitted || formEditLote.nombre.$touched) && formEditLote.nombre.$error.required }">
-                      <label class="col-form-label">Lote</label>
-                      <input type="text" name="nombre" class="form-control" [(ngModel)]="lote_edited.nombre" required>
-                  </div>
-                  <div class="form-group" [ngClass]="{
-                          'has-error'
-                          :(formEditLote.$submitted || formEditLote.code.$touched) && formEditLote.code.$error.required }">
-                      <label class="col-form-label">Código</label>
-                      <input type="text" name="code" class="form-control" [(ngModel)]="lote_edited.code" required>
-                  </div>
-                  <div class="form-group" [ngClass]="{
-                          'has-error'
-                          :(formEditLote.$submitted || formEditLote.valor_ampliacion.$touched) && formEditLote.valor_ampliacion.$error.required }">
-                      <label class="col-form-label">Valor Ampliación</label>
-                      <input type="text" name="valor_ampliacion" class="form-control" [(ngModel)]="lote_edited.valor_ampliacion" ui-money-mask
-                             min="0">
-                  </div>
-                  <div class="form-group" [ngClass]="{
-                          'has-error'
-                          :(formEditLote.$submitted || formEditLote.valor_base.$touched) && formEditLote.valor_base.$error.required }">
-                      <label class="col-form-label">Valor Base</label>
-                      <input type="text" name="valor_base" class="form-control" [(ngModel)]="lote_edited.valor_base" ui-money-mask min="0">
-                  </div>
-                  <div class="checkbox">
-                      <label>
-                          <input type="checkbox" name="en_venta" ng-true-value="'1'" ng-false-value="'0'" [(ngModel)]="lote_edited.en_venta">
-                          En Venta
-                      </label>
-                  </div>
-            
-              </form>
-              <div class="form-group">
-                  <label class="col-form-label">Prototipo</label>
-                  <div class="input-group">
-                      <select class="form-control" [(ngModel)]="op.prototipo">                        
-                          <option value="">Seleccionar...</option> 
-                          <option [value]="prototipo.id_prototipo" *ngFor="let prototipo of obra.prototipos">{{prototipo.nombre}}</option>                                            
-                      </select>
-                      <div class="input-group-btn">
-                          <button class="btn btn-primary" (click)=" op.prototipo && addPrototipo(lote_actual, op.prototipo)">Asignar</button>
-                      </div>
-                  </div>
-              </div>
-              <div class="form-group">
-                  <label class="col-form-label">Prototipos Asignados</label>                  
-                  <ul class="list-group">
-                      <li class="list-group-item" *ngIf="(lote_actual.prototipos) && (lote_actual.prototipos.length > 0)">Ningún prototipo asignado</li>
-                      <li *ngFor="let prototipo of lote_actual.prototipos" class="list-group-item">
-                          {{prototipo.nombre}}
-                          <a href="" (click)="pre_delPrototipo(lote_actual, prototipo, $event)" class="pull-right">Eliminar</a>
-                      </li>
-                  </ul>
-              </div>
-          </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-              <button type="submit" class="btn btn-primary" form="formEditLote">Guardar</button>
-          </div>
-      </div>
-  </div>
-</div>
- -->
-<!-- Modal Editar Manzana-->
-<!-- <div class="modal fade" id="modalEditManzana" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-      <div class="modal-content">
-          <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="myModalLabel">Editar Manzana</h4>
-          </div>
-          <form name="formEditManzana" id="formEditManzana" (ngSubmit)="formEditManzana.$valid && editManzana(formEditManzana)"
-                novalidate>
-              <div class="modal-body">
-                  <div class="form-group" [ngClass]="{
-                          'has-error'
-                          :(formEditManzana.$submitted || formEditManzana.nombre.$touched) && formEditManzana.nombre.$error.required }">
-                      <label class="col-form-label">Manzana</label>
-                      <input type="text" name="nombre" class="form-control" [(ngModel)]="manzana_edited.nombre" required>
-                      <div *ngIf="formEditManzana.$submitted || formEditManzana.nombre.$touched">
-                          <span *ngIf="formEditManzana.nombre.$error.required" class="help-block">El nombre no puede estar vacío</span>
-                      </div>
-                  </div>                  
-              </div>
-
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                  <button type="submit" class="btn btn-primary">Guardar</button>
-              </div>
-          </form>
-      </div>
-
-  </div>
-</div> -->
-
-<!-- Modal Alert-->
-<!-- <div class="modal fade" id="modalAlert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-      <div class="modal-content">
-          <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="myModalLabel">{{alert.header}}</h4>
-          </div>
-          <div class="modal-body">
-              <div class="form-group">
-                  <div class="" ng-bind-html="alert.message"></div>
-              </div>
-          </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-default" style="width: 80px" data-dismiss="modal">Ok</button>
-          </div>
-      </div>
-
-  </div>
-</div> -->
-
-<!-- Modal Confirmacion Eliminar Lote-->
-<!-- <div class="modal fade" id="modalDelLote" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-      <div class="modal-content">
-          <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="myModalLabel">Eliminar Lote</h4>
-          </div>
-          <div class="modal-body">
-              <div class="form-group">
-                  <div class="" role="alert">
-                      ¿Desea eliminar <strong>{{manzana_deleted.nombre}} - {{lote_deleted.nombre}}</strong>?
-                  </div>
-              </div>
-          </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-              <button type="button" class="btn btn-danger" (click)="delLote()">Eliminar</button>
-          </div>
-      </div>
-
-  </div>
-</div>
- -->
-<!-- Modal Confirmacion Eliminar Lote Prototipo-->
-<!-- <div class="modal fade" id="modalDelLotePrototipo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-      <div class="modal-content">
-          <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="myModalLabel">Eliminar Prototipo</h4>
-          </div>
-          <div class="modal-body">
-              <div class="form-group">
-                  <div class="" role="alert">
-                      ¿Desea eliminar <strong>{{prototipo_deleted.nombre}} </strong> de<strong> {{lote_deleted.nombre}}</strong>?
-                  </div>
-              </div>
-          </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-              <button type="button" class="btn btn-danger" (click)="delPrototipo()">Eliminar</button>
-          </div>
-      </div>
-
-  </div>
-</div> -->
-
-<!-- Modal Confirmacion Eliminar Manzana-->
-<!-- <div class="modal fade" id="modalDelManzana" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-      <div class="modal-content">
-          <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="myModalLabel">Eliminar Manzana</h4>
-          </div>
-          <div class="modal-body">
-              <div class="form-group">
-                  <div class="" role="alert">
-                      ¿Desea eliminar <strong>{{manzana_deleted.nombre}}</strong>?
-                  </div>
-              </div>
-          </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-              <button type="button" class="btn btn-danger" (click)="delManzana()">Eliminar</button>
-          </div>
-      </div>
-
-  </div>
-</div> -->
