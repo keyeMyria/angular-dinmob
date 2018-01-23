@@ -751,7 +751,7 @@
                 <button mat-button class="no-min" (click)="editarDocumento(doc)">
                   <i class="fa fa-pencil"></i>
                 </button>
-                <button mat-button class="no-min" (click)="delLote(manzana,lote, $event)">
+                <button mat-button class="no-min" (click)="delDocumento(doc)">
                   <i class="fa fa-times"></i>
                 </button>
               </td>
@@ -848,7 +848,7 @@
                     <mat-icon>cancel</mat-icon>
                     <span>Cancelar</span>
                   </button>
-                  <button mat-menu-item (click)="pre_eliminarAsociacion(compra, $event)">
+                  <button mat-menu-item (click)="delLote(compra)">
                     <mat-icon>delete</mat-icon>
                     <span>Eliminar</span>
                   </button>
@@ -856,7 +856,7 @@
                     <mat-icon>report</mat-icon>
                     <span>Reporte</span>
                   </button>
-                  <button mat-menu-item>
+                  <button mat-menu-item (click)="irLote(compra)" >
                     <mat-icon>assignment_late</mat-icon>
                     <span>Ir a Lote</span>
                   </button>
@@ -1129,7 +1129,7 @@
                     <mat-icon>cancel</mat-icon>
                     <span>Cancelar</span>
                   </button>
-                  <button mat-menu-item (click)="pre_eliminarAsociacion(compra, $event)">
+                  <button mat-menu-item (click)="delPagos(compra)">
                     <mat-icon>delete</mat-icon>
                     <span>Eliminar</span>
                   </button>
@@ -1215,7 +1215,7 @@
                       <mat-icon>create</mat-icon>
                       <span>Editar</span>
                     </button>
-                    <button mat-menu-item>
+                    <button mat-menu-item (click)="delPago(pago)" >
                       <mat-icon>delete</mat-icon>
                       <span>Eliminar</span>
                     </button>

@@ -11,6 +11,7 @@ import { EditarPagoDialogoComponent } from 'app/components/ventas/editar-pago-di
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import { Pago } from 'app/model/pago';
 import { EditarDocumentoDialogoComponent } from 'app/components/ventas/editar-documento-dialogo/editar-documento-dialogo.component';
+import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
 
 @Component({
   selector: 'app-editar-cliente',
@@ -152,6 +153,78 @@ export class EditarClienteComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
 
     });
+  }
+
+  delDocumento(doc) {
+
+    let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
+      data: {
+        title: "Eliminar Documento",
+        content: `¿Desea eliminar el documento: ${doc.nombre}?`
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+
+
+    });
+
+  }
+
+  delLote(compra) {
+
+    let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
+      data: {
+        title: "Eliminar Lote",
+        content: `¿Desea eliminar el ${compra.lote}?`
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+
+
+    });
+
+  }
+
+  delPagos(compra) {
+
+    let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
+      data: {
+        title: "Eliminar Pago",
+        content: `¿Desea eliminar el pagos del ${compra.lote}?`
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+
+
+    });
+
+  }
+
+  delPago(pago) {
+
+    let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
+      data: {
+        title: "Eliminar Pago",
+        content: `¿Desea eliminar el pago del ${pago.fecha_pago}?`
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+
+
+    });
+
+  }
+
+  irLote(compra) {
+    this.router.navigate(["/ventas/lote", compra.id_lote]);
   }
 
 
