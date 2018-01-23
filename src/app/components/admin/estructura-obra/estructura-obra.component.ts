@@ -17,6 +17,7 @@ import { ManzanasService } from 'app/services/manzanas.service';
 import { EditarLoteDialogoComponent } from 'app/components/admin/editar-lote-dialogo/editar-lote-dialogo.component';
 
 
+import {SelectionModel} from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-estructura-obra',
@@ -46,7 +47,8 @@ export class EstructuraObraComponent implements OnInit {
   opValorAmpliacion = new FormControl("", Validators.required);
 
 
-
+  items: any[] = [];
+  selection = new SelectionModel<any>(true, []);
 
   constructor(
     private router: Router,
@@ -59,6 +61,11 @@ export class EstructuraObraComponent implements OnInit {
     public snackBar: MatSnackBar
   ) {
     // console.log("-------------constructor-----");
+
+
+    for (let i = 0; i < 10; i++) {
+      this.items.push({ id: i, valor: "valor " + i });
+    }
 
   }
 
@@ -244,7 +251,7 @@ export class EstructuraObraComponent implements OnInit {
     //console.log("lotes", lotes);
 
     console.log("lotes_selected", this.lotes_selected);
-    
+
 
 
     /*    this.loteSrv.bulkUpdate(lotes,this.opValorBase)
@@ -272,6 +279,26 @@ export class EstructuraObraComponent implements OnInit {
 
     return lotes;
   }
+
+
+    /** Whether the number of selected elements matches the total number of rows. */
+    isAllSelected() {
+      const numSelected = this.selection.selected.length;
+      const numRows = this.items.length;
+      return numSelected === numRows;
+    }
+  
+    /** Selects all rows if they are not all selected; otherwise clear selection. */
+    masterToggle() {
+      this.isAllSelected() ?
+          this.selection.clear() :
+          this.items.forEach(row => this.selection.select(row));
+    }
+
+    debugSelection(){
+      console.log(this.selection.selected);
+      
+    }
 
 
 
