@@ -1,16 +1,17 @@
-<section class="container py15px">
+<!-- <section class="container-fluid">
   <div class="row">
     <div class="col-12 col-sm-10 mx-sm-auto">
       <form class="form-horizontal" name="formCliente" id="formCliente" novalidate (ngSubmit)="updateCliente()">
 
 
         <div class="card">
-          <div>
+          <div> -->
+
             <mat-tab-group>
               <!-- <div class="tab-content"> -->
               <!-- Datos Generales -->
               <mat-tab label="Cliente">
-                <div class="p-3">
+                <div class="container py-3">
 
                   <!-- Persona Fisica/Moral -->
                   <div class="form-group row">
@@ -364,7 +365,7 @@
 
               <!-- Datos Laborales -->
               <mat-tab label="Datos laborales" *ngIf="cliente.persona_moral === '0'">
-                <div class="p15px">
+                <div class="container py-3">
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">Profesión</label>
                     <div class="col-sm-9">
@@ -431,7 +432,7 @@
 
               <!-- Conyuge -->
               <mat-tab label="Conyuge" *ngIf="cliente.persona_moral === '0' && cliente.regimen_conyugal_persona_fisica === '1'">
-                <div class="p15px">
+                <div class="container py-3">
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">Nombre completo</label>
                     <div class="col-sm-9">
@@ -602,7 +603,7 @@
 
               <!-- Apoderado Legal -->
               <mat-tab label="Apoderado" *ngIf="cliente.persona_moral === '1'">
-                <div class="p15px">
+                <div class="container py-3">
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">Nombre completo</label>
                     <div class="col-sm-9">
@@ -724,7 +725,7 @@
 
               <!-- <Documentos> -->
               <mat-tab label="Documentos">
-                <div class="p15px">
+                <div class="container py-3">
 
 
 
@@ -827,7 +828,7 @@
 
               <!-- <Inmueble> -->
               <mat-tab label="Inmueble">
-                <div class="p15px">
+                <div class="container py-3">
                   <!-- Compras -->
                   <div class="table-responsive">
                     <table class="table table-striped">
@@ -1106,7 +1107,7 @@
 
               <!-- <Esquema Pagos> -->
               <mat-tab label="Esquema Pagos">
-                <div class="p15px">
+                <div class="container py-3">
                   <div class="table-responsive">
                     <table class="table table-striped">
                       <thead>
@@ -1285,7 +1286,7 @@
 
               <!-- <Alerta> -->
               <mat-tab label="Alerta">
-                <div class="p15px">
+                <div class="container py-3">
                   <div class="form-group">
                     <!--           <div class="checkbox col-sm-12">
                       <label>
@@ -1312,20 +1313,23 @@
                 </div>
               </mat-tab>
             </mat-tab-group>
-          </div>
+
+<!--           </div>
 
 
           <div class="card-footer">
             <div class="row">
               <div class="col-sm-11 ml-sm-auto">
-                <!-- class="col-sm-9 ml-sm-auto" -->
+            
                 <button type="submit" class="btn btn-primary">Guardar</button>
-                <!-- <span *ngIf="formCliente.$submitted && !formCliente.$valid" class="text-danger">  Complete los campos indicados</span> -->
+             
               </div>
             </div>
           </div>
+
         </div>
+
       </form>
     </div>
   </div>
-</section>
+</section> -->
