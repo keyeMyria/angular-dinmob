@@ -95,10 +95,15 @@ body {
 }
 
 
-table.table-align-middle  td {
-    vertical-align: middle;
-}
+table.table-align-middle  {
+    td {
+        vertical-align: middle;
+    }
 
+    th {
+        vertical-align: middle;
+    }
+}
 .padding-card-header {
     padding: 0.25rem 1.25rem;
 }

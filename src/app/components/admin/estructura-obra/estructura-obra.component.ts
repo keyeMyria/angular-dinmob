@@ -4,7 +4,7 @@ import { Usuario } from "app/model/usuario";
 import { AuthService } from "app/services/auth.service";
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import { EditarManzanaDialogoComponent } from 'app/components/admin/editar-manzana-dialogo/editar-manzana-dialogo.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import "rxjs/add/observable/of";
@@ -37,10 +37,15 @@ export class EstructuraObraComponent implements OnInit {
 
   obra_selected: string = "";
 
+  lotes_selected: any = {};
+
+
   opPrototipo = new FormControl("", Validators.required);
   opEnVenta = new FormControl("", Validators.required);
   opValorBase = new FormControl("", Validators.required);
   opValorAmpliacion = new FormControl("", Validators.required);
+
+
 
 
   constructor(
@@ -50,7 +55,8 @@ export class EstructuraObraComponent implements OnInit {
     public dialog: MatDialog,
     private fb: FormBuilder,
     private loteSrv: LotesService,
-    private manzanaSrv: ManzanasService
+    private manzanaSrv: ManzanasService,
+    public snackBar: MatSnackBar
   ) {
     // console.log("-------------constructor-----");
 
@@ -64,14 +70,11 @@ export class EstructuraObraComponent implements OnInit {
   }
 
   ngOnInit() {
-    /*  this.usuario = this.auth.getUsuario(); */
 
     this.route.data
       .subscribe((data: { obras: any[] }) => {
-        console.log("resusltado resolve ", data);
-
+        //console.log("resusltado resolve ", data);
         this.obras = data.obras;
-
       });
 
 
@@ -84,7 +87,7 @@ export class EstructuraObraComponent implements OnInit {
           return Observable.of({ datos: {} });
         }
       }).subscribe(obra => {
-        console.log("obra", obra);
+        //console.log("obra", obra);
         this.obra = obra
       });
 
@@ -108,6 +111,8 @@ export class EstructuraObraComponent implements OnInit {
   toggleSelectionLote(manzana, lote) {
     lote.selected = !lote.selected;
 
+    this.lotes_selected[lote.id_lote] = lote.selected;
+
     /*   var allSelected = _.find(manzana.lotes, function (lote) {
         return !_.has(lote, 'selected') || lote.selected === false;
       });
@@ -123,11 +128,6 @@ export class EstructuraObraComponent implements OnInit {
   }
 
 
-  num_lotes_selected() {
-    return 0;
-  }
-
-
 
   editarManzana() {
     let dialogRef = this.dialog.open(EditarManzanaDialogoComponent, {
@@ -140,17 +140,34 @@ export class EstructuraObraComponent implements OnInit {
     });
   }
 
-  editarLote(manzana, lote) {
+  editarLote(manzana, lote, event) {
+    event.stopPropagation();
+
+
     let dialogRef = this.dialog.open(EditarLoteDialogoComponent, {
       data: {
-        lotes:manzana.lotes,
-        lote:lote
+        lotes: manzana.lotes,
+        lote: lote
 
       },
       width: '500px',
 
     });
     dialogRef.afterClosed().subscribe(result => {
+
+      if (result === true) {
+
+        this.snackBar.open("Lote Actualizado", "Cerrar", {
+          duration: 2000
+        });
+
+      } else if (result.error) {
+
+        this.snackBar.open(result.error, "Cerrar", {
+          duration: 2000
+        });
+
+      }
 
     });
   }
@@ -186,11 +203,14 @@ export class EstructuraObraComponent implements OnInit {
 
   }
 
-  delLote(lote) {
+  delLote(manzana, lote, event) {
+
+    event.stopPropagation();
+
     let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
       data: {
         title: "Eliminar Lote",
-        content: `¿Desea eliminar ${lote.nombre}?`
+        content: `¿Desea eliminar: ${lote.nombre}?`
       },
       width: "500px"
     });
@@ -206,7 +226,7 @@ export class EstructuraObraComponent implements OnInit {
     let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
       data: {
         title: "Eliminar Manzana",
-        content: `¿Desea eliminar ${manzana.nombre}?`
+        content: `¿Desea eliminar: ${manzana.nombre}?`
       },
       width: "500px"
     });
@@ -217,6 +237,42 @@ export class EstructuraObraComponent implements OnInit {
 
   }
 
-  
+  updateValorBase() {
+
+    //let lotes = this.getLotesSelected();
+
+    //console.log("lotes", lotes);
+
+    console.log("lotes_selected", this.lotes_selected);
+    
+
+
+    /*    this.loteSrv.bulkUpdate(lotes,this.opValorBase)
+       .subscribe(res=>{
+         console.log("respuesta", res);
+         
+       }); */
+
+
+  }
+
+  private getLotesSelected() {
+
+    let lotes = [];
+
+    this.obra.manzanas.forEach(manzana => {
+
+      manzana.lotes.forEach(lote => {
+        if (lote.selected) {
+          lotes.push(lote.id_lote);
+        }
+      });
+
+    });
+
+    return lotes;
+  }
+
+
 
 }

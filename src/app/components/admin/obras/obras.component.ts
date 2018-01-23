@@ -75,7 +75,7 @@ export class ObrasComponent implements OnInit {
 
       }
 
-      console.log('The dialog was closed');
+      //console.log('The dialog was closed');
     });
   }
 

@@ -76,11 +76,12 @@
                                 <thead>
                                     <tr>
                                         <th (click)="selectAllLotes(manzana)" style="cursor: pointer; width:30px;">
-                                            <span [ngClass]="{'fa fa-check-square-o':manzana.selected, 'fa fa-square-o': !manzana.selected}"></span>
+                                            <!-- <i [ngClass]="{'fa fa-check-square-o':manzana.selected, 'fa fa-square-o': !manzana.selected}"></i> -->
+                                            <mat-icon style="font-size: 20px">{{ manzana.selected?'check_box':'check_box_outline_blank'}}</mat-icon>
                                         </th>
                                         <th>Lote</th>
                                         <th class="hidden-xs hidden-sm hidden-md">Código</th>
-                                        <th>Prototipo</th>
+                                        <th>Prototipos</th>
                                         <th>Base</th>
                                         <th>Ampliación</th>
                                         <th>En Venta</th>
@@ -91,7 +92,8 @@
                                 <tbody>
                                     <tr *ngFor="let lote of manzana.lotes" (click)="toggleSelectionLote(manzana, lote)" class="pointer" [ngClass]="{'bg-primary text-white':lote.selected}">
                                         <td>
-                                            <i class="fa" [ngClass]="{'fa-check-square-o':lote.selected, 'fa-square-o': !lote.selected}"></i>
+                                           <!--  <i class="fa" [ngClass]="{'fa-check-square-o':lote.selected, 'fa-square-o': !lote.selected}"></i> -->
+                                            <mat-icon style="font-size: 20px">{{ lote.selected?'check_box':'check_box_outline_blank'}}</mat-icon>
                                         </td>
                                         <td>{{ lote.nombre}}</td>
                                         <td class="hidden-xs hidden-sm hidden-md">{{lote.code}}</td>
@@ -106,10 +108,10 @@
                                         <td>{{lote.en_venta| numberToYesNo}}</td>
                                         <td class="text-right">
 
-                                            <button mat-button class="no-min" (click)="editarLote(manzana,lote)">
+                                            <button mat-button class="no-min" (click)="editarLote(manzana,lote, $event)">
                                                 <i class="fa fa-pencil"></i>
                                             </button>
-                                            <button mat-button class="no-min" (click)="delLote(manzana,lote)">
+                                            <button mat-button class="no-min" (click)="delLote(manzana,lote, $event)">
                                                 <i class="fa fa-times"></i>
                                             </button>
 
@@ -143,10 +145,10 @@
 
                 <div class="">
 
-                    <label class="col-form-label">{{num_lotes_selected()}} lote
+            <!--         <label class="col-form-label">{{num_lotes_selected()}} lote
                         <span *ngIf="num_lotes !== 1">s</span> seleccionado
                         <span *ngIf="num_lotes !== 1">s</span>
-                    </label>
+                    </label> -->
 
                     <!-- asignar prototipo -->
                     <div class="form-group">
