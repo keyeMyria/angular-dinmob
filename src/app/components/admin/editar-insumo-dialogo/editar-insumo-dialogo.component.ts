@@ -1,8 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
-import { Insumo } from 'app/model/insumo';
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
-
+import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-editar-insumo-dialogo',
@@ -10,7 +9,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
   styleUrls: ['./editar-insumo-dialogo.component.scss']
 })
 export class EditarInsumoDialogoComponent implements OnInit {
-  insumo: Insumo;
+  form: FormGroup;
 
   currencyMask = createNumberMask({
     allowDecimal: true
@@ -25,10 +24,24 @@ export class EditarInsumoDialogoComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef: MatDialogRef<EditarInsumoDialogoComponent>) { }
+    public dialogRef: MatDialogRef<EditarInsumoDialogoComponent>,
+    private fb: FormBuilder, ) {
+    this.form = this.fb.group({
+      insumo: [data.insumo.insumo],
+      unidad: [data.insumo.unidad],
+      cantidad: [data.insumo.cantidad, Validators.required],
+      precio: [data.insumo.precio, Validators.required]
+
+
+    });
+
+  }
 
   ngOnInit() {
-    this.insumo = this.data.insumo;
+  }
+
+  guardar() {
+    console.log("ok", this.form.value)
   }
 
 }

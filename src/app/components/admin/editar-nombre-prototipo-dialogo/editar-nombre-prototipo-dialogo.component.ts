@@ -14,7 +14,7 @@ export class EditarNombrePrototipoDialogoComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<EditarNombrePrototipoDialogoComponent>
   ) {
-    this.nombre = new FormControl(this.data.prototipo.nombre, Validators.required);
+    this.nombre = new FormControl(this.data.prototipo.info.nombre, Validators.required);
   }
 
   ngOnInit() {

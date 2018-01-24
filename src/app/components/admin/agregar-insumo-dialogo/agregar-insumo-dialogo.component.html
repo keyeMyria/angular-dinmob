@@ -2,16 +2,16 @@
 <div mat-dialog-content>
 
 
-  <form>
+  <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
     <!-- name="formAddInsumo" id="formAddInsumo" (ngSubmit)="add_insumo_repeated && formAddInsumo.$valid && ctrl.addInsumoPartida(formAddInsumo)"
       novalidate
      -->
 
     <div class="form-group">
       <label class="control-label">Nombre</label>
-      <select class="form-control" (change)="changeInsumo(ctrl.add_insumo_selected)" name="add_insumo_selected" [(ngModel)]="add_insumo_selected">  
+      <select class="form-control" (change)="changeInsumo(ctrl.add_insumo_selected)" name="add_insumo_selected" formControlName="add_insumo_selected">  
                                 <option [value]="">Seleccionar...</option>
-                                <option [value]="insumo.codigo" *ngFor="let insumo of insumos ">{{a.text}}</option>   
+                                <option [value]="insumo.codigo" *ngFor="let insumo of data.insumos">{{a.text}}</option>   
                             </select>
       <div>
         <!-- *ngIf="add_insumo_repeated" -->
@@ -21,8 +21,8 @@
 
 
     <div class="form-group">
-      <label class="control-label">Unidad</label>
-      <input type="text" class="form-control" name="unidad">
+      <label for="unidad" class="control-label">Unidad</label>
+      <input type="text" class="form-control" name="unidad" id="unidad" formControlName="unidad">
       <!-- [(ngModel)]="add_insumo_selected.unidad" -->
     </div>
 
@@ -30,8 +30,8 @@
       <!--   [ngClass]="{
             'has-error'
             :(formAddInsumo.$submitted || formAddInsumo.precio.$touched) && formAddInsumo.precio.$error.required }" -->
-      <label class="control-label">Precio</label>
-      <input  [textMask]="{mask: currencyMask}" type="text" name="precio" class="form-control" name="precio" ui-money-mask min="0" required>
+      <label for="precio" class="control-label">Precio</label>
+      <input  [textMask]="{mask: currencyMask}" type="text" class="form-control" id="precio" name="precio" ui-money-mask min="0" formControlName="precio">
       <!-- [(ngModel)]="add_insumo.precio" -->
       <div>
         <!-- *ngIf="formAddInsumo.$submitted || formAddInsumo.precio.$touched" -->
@@ -44,8 +44,8 @@
       <!-- [ngClass]="{
             'has-error'
             :(formAddInsumo.$submitted || formAddInsumo.cantidad.$touched) && formAddInsumo.cantidad.$error.required }" -->
-      <label class="control-label">Cantidad</label>
-      <input [textMask]="{mask: numberMask}" type="text" name="cantidad" class="form-control" ui-number-mask="6" name="cantidad" required>
+      <label for="cantidad" class="control-label">Cantidad</label>
+      <input [textMask]="{mask: numberMask}" type="text" name="cantidad" id="cantidad" class="form-control" ui-number-mask="6" formControlName="cantidad">
       <!-- [(ngModel)]="ctrl.add_insumo.cantidad" -->
       <div>
         <!-- *ngIf="formAddInsumo.$submitted || formAddInsumo.cantidad.$touched -->
@@ -60,6 +60,6 @@
 
 
 <div mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="false">CANCELAR</button>
-  <button mat-button [mat-dialog-close]="true">AGREGAR</button>
+  <button mat-button type="button"[mat-dialog-close]="false">CERRAR</button>
+  <button mat-button type="submit" form="id_form" [disabled]="form.invalid" color="primary">GUARDAR</button>
 </div>

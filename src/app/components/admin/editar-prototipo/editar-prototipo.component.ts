@@ -22,8 +22,10 @@ import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar
 export class EditarPrototipoComponent implements OnInit {
   loading: boolean = false;
   selectedOption: string;
-
   prototipo: any;
+  subpartida: any;
+  insumo: any;
+  insumos: any[];
 
 
 
@@ -48,68 +50,81 @@ export class EditarPrototipoComponent implements OnInit {
 
   }
 
-  editarNombre(prototipo: Prototipo) {
+  editarNombre(prototipo) {
 
-    let copia = Prototipo.copiar(this.prototipo.info);
 
     let dialogRef = this.dialog.open(EditarNombrePrototipoDialogoComponent, {
-      data: { prototipo: copia },
-      width: '500px',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.selectedOption = result;
-    });
-  }
-
-  agregarPartida(prototipo: Prototipo) {
-
-    let copia = Prototipo.copiar(this.prototipo.info);
-
-    let dialogRef = this.dialog.open(AgregarPartidaDialogoComponent, {
       data: {
-        prototipo: copia
+        prototipo: prototipo
       },
       width: '500px',
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.selectedOption = result;
+
+    });
+  }
+
+  agregarPartida() {
+
+    let dialogRef = this.dialog.open(AgregarPartidaDialogoComponent, {
+      data: {
+        prototipo: this.prototipo
+      },
+      width: '500px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        if (result === true) {
+          this.snackBar.open("Partida Agregada", "Cerrar", {
+            duration: 2000
+          });
+        }
+      }
     });
   }
 
   editarPartida(partida) {
 
-    let copia = Partida.copiar(partida);
-
     let dialogRef = this.dialog.open(EditarPartidaDialogoComponent, {
-      data: { partida: copia },
+      data: {
+        partida: partida
+      },
       width: '500px',
 
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.selectedOption = result;
+      if (result === true) {
+        this.snackBar.open("Partida Actualizada", "Cerrar", {
+          duration: 2000
+        });
+      }
     });
   }
 
   agregarSubpartida() {
 
-    console.log();
     let dialogRef = this.dialog.open(AgregarSubpartidaDialogoComponent, {
       data: {
+        subpartida: this.subpartida
       },
       width: '500px',
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.selectedOption = result;
+      if (result === true) {
+        if (result === true) {
+          this.snackBar.open("Subpartida Agregada", "Cerrar", {
+            duration: 2000
+          });
+        }
+      }
     });
   }
 
   editarSubpartida(subpartida) {
 
-    let copia = Partida.copiar(subpartida);
-
     let dialogRef = this.dialog.open(EditarSubpartidaDialogoComponent, {
       data: {
-        subpartida: copia
+        subpartida: subpartida
       },
       width: '500px',
     });
@@ -120,29 +135,36 @@ export class EditarPrototipoComponent implements OnInit {
 
   agregarInsumo() {
 
-    console.log();
     let dialogRef = this.dialog.open(AgregarInsumoDialogoComponent, {
       data: {
+        insumos: this.insumos,
+        insumo: this.insumo
       },
       width: '500px',
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.selectedOption = result;
+      if (result === true) {
+        if (result === true) {
+          this.snackBar.open("Insumo Agregado", "Cerrar", {
+            duration: 2000
+          });
+        }
+      }
+
     });
   }
 
   editarInsumo(insumo) {
 
-    let copia = Insumo.copiar(insumo)
 
     let dialogRef = this.dialog.open(EditarInsumoDialogoComponent, {
       data: {
-        insumo: copia
+        insumo: insumo
       },
       width: '500px',
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.selectedOption = result;
+
     });
   }
 

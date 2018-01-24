@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container pt-2 pb-3">
 
   <div *ngIf="loading">
     <mat-spinner class="loading"></mat-spinner>
@@ -6,7 +6,7 @@
 
   <div class="row">
     <div class="col-12">
-      <div class="card my-5">
+      <div class="card">
         <div class="card-header">
           <div class="d-flex padding-header">
             <div class="align-self-center">{{prototipo?.info.nombre}}</div>
@@ -16,7 +16,7 @@
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu1="matMenu">
-                <button mat-menu-item (click)="editarNombre()">
+                <button mat-menu-item (click)="editarNombre(prototipo)">
                   <mat-icon>create</mat-icon>
                   <span>Editar Nombre</span>
                 </button>
@@ -195,12 +195,6 @@
 
 
 
-        </div>
-        <div class="card-footer">
-          <div class="col-sm-10 offset-sm-2">
-            <button type="submit" class="btn btn-primary">Aceptar</button>
-
-          </div>
         </div>
       </div>
     </div>

@@ -1,18 +1,17 @@
-<h1 mat-dialog-title>Editar Nombre</h1>
+<h1 mat-dialog-title>Actualizar Nombre</h1>
 <div mat-dialog-content>
 
 
 
 
   <div class="form-group">
-    <label for="prototipo">Prototipo</label>
-    <input type="text" name="prototipo" id="prototipo" class="form-control" [formControl]="nombre">
+    <input type="text" class="form-control" [formControl]="nombre">
   </div>
 
 
 
 </div>
 <div mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="false">CANCELAR</button>
-  <button mat-button type="button" [disabled]="nombre.invalid" (click)="guardar()">EDITAR</button>
+  <button type="button" mat-button [mat-dialog-close]="false">CANCELAR</button>
+  <button type="button" mat-button [disabled]="nombre.invalid" (click)="guardar()" >GUARDAR</button>
 </div>

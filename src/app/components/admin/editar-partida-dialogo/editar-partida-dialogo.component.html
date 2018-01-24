@@ -3,12 +3,12 @@
 
 
 
-  <form>
+  <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
    
 
     <div class="form-group">     
       <label class="control-label">Código</label>
-      <input type="text" name="codigo" class="form-control" [(ngModel)]="partida.codigo">     
+      <input type="text" name="codigo" class="form-control" formControlName="codigo">     
       <div>       
         <span class="help-block">El código no puede estar vacío</span>      
       </div>
@@ -16,7 +16,7 @@
 
     <div class="form-group">     
       <label class="control-label">Nombre</label>
-      <input type="text" name="nombre" class="form-control" [(ngModel)]="partida.nombre">     
+      <input type="text" name="nombre" class="form-control" formControlName="nombre">     
       <div>       
         <span class="help-block">El nombre no puede estar vacío</span>       
       </div>
@@ -28,6 +28,6 @@
 </div>
 
 <div mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="false">CANCELAR</button>
-  <button mat-button [mat-dialog-close]="true">EDITAR</button>
+  <button mat-button type="button" [mat-dialog-close]="false">CANCELAR</button>
+  <button mat-button type="submit" form="id_form" [disabled]="form.invalid" color="primary">EDITAR</button>
 </div>
