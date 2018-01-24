@@ -1,70 +1,58 @@
 <h1 mat-dialog-title>Cédula Fiscal</h1>
 <div mat-dialog-content>
 
-  <div class="row">
-    <strong>{{cliente.persona_moral=='0'?'Nombre:': 'Razón Social:'}}</strong>
-    <div class="pl-1">
-      {{cliente.nombre}}
-    </div>
+  <div class="form-group">
+    <div>
+      <strong class="pr-1">{{cliente.persona_moral=='0'?'Nombre:': 'Razón Social:'}}</strong>{{cliente.nombre}}</div>
   </div>
 
-  <div class="row">
-    <strong>RFC:</strong>
-    <div class="pl-1">
-      {{cliente.rfc}}
-    </div>
+  <div class="form-group">
+    <div>
+      <strong class="pr-1">RFC:</strong>{{cliente.rfc}}</div>
   </div>
-  <div class="row">
-    <strong>Calle:</strong>
-    <div class="pl-1">
-      {{cliente.calle}}
-    </div>
+
+  <div class="form-group">
+    <div>
+      <strong class="pr-1">Calle:</strong>{{cliente.calle}}</div>
   </div>
-  <div class="row">
-    <strong>Núm. Exterior:</strong>
-    <div class="pl-1">
-      {{cliente.num_exterior}}
-    </div>
+
+  <div class="form-group">
+    <div>
+      <strong class="pr-1">Núm. Exterior:</strong>{{cliente.num_exterior}}</div>
   </div>
-  <div class="row" *ngIf="cliente.num_interior">
-    <strong>Núm. Interior:</strong>
-    <div class="ml-1">
-      {{cliente.num_interior}}
-    </div>
+
+  <div class="form-group">
+    <div>
+      <strong class="pr-1">Núm. Interior:</strong>{{cliente.num_interior}}</div>
   </div>
-  <div class="row">
-    <strong>Colonia:</strong>
-    <div class="ml-1">
-      {{cliente.colonia}}
-    </div>
+
+  <div class="form-group">
+    <div>
+      <strong class="pr-1">Colonia:</strong>{{cliente.colonia}}</div>
   </div>
-  <div class="row">
-    <strong>CP:</strong>
-    <div class="ml-1">
-      {{cliente.cp}}
-    </div>
+
+  <div class="form-group">
+    <div>
+      <strong class="pr-1">CP:</strong>{{cliente.cp}}</div>
   </div>
-  <div class="row">
-    <strong>Localidad:</strong>
-    <div class="ml-1">
-      {{cliente.localidad}}
-    </div>
+
+  <div class="form-group">
+    <div>
+      <strong class="pr-1">Localidad:</strong>{{cliente.localidad}}</div>
   </div>
-  <div class="row">
-    <strong>Municipio:</strong>
-    <div class="ml-1">
-      {{cliente.municipio}}
-    </div>
+
+  <div class="form-group">
+    <div>
+      <strong class="pr-1">Municipio:</strong>{{cliente.municipio}}</div>
   </div>
-  <div class="row">
-    <strong>Estado:</strong>
-    <div class="ml-1">
-      {{cliente.estado}}
-    </div>
+
+  <div class="form-group">
+    <div>
+      <strong class="pr-1">Estado:</strong>{{cliente.estado}}</div>
   </div>
 
 
 </div>
 <div mat-dialog-actions>
-  <button mat-button class="btn-block" [mat-dialog-close]="true">Cerrar</button>
+  <button mat-button class="btn-block" [mat-dialog-close]="true">CERRAR</button>
 </div>
