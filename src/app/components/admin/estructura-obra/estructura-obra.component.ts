@@ -17,7 +17,8 @@ import { ManzanasService } from 'app/services/manzanas.service';
 import { EditarLoteDialogoComponent } from 'app/components/admin/editar-lote-dialogo/editar-lote-dialogo.component';
 
 
-import {SelectionModel} from '@angular/cdk/collections';
+import { SelectionModel } from '@angular/cdk/collections';
+import { log } from 'util';
 
 @Component({
   selector: 'app-estructura-obra',
@@ -28,6 +29,9 @@ export class EstructuraObraComponent implements OnInit {
 
   public maskDosDigitos = [/[1-9]/, /\d/];
   guide: boolean = false;
+
+  lotesMapping:
+  {[k: string]: string} = {'=0': 'Ningún lote seleccionado.', '=1': 'Un lote seleccionado.', 'other': '# lotes seleccionados.'};
 
 
   obras: any = [];
@@ -47,8 +51,11 @@ export class EstructuraObraComponent implements OnInit {
   opValorAmpliacion = new FormControl("", Validators.required);
 
 
+
+  manzana_selected: number = null;
   items: any[] = [];
-  selection = new SelectionModel<any>(true, []);
+  //selection = new SelectionModel<any>(true, []);
+  selection: SelectionModel<any>[];
 
   constructor(
     private router: Router,
@@ -70,12 +77,7 @@ export class EstructuraObraComponent implements OnInit {
   }
 
 
-
-  debug(model) {
-    console.log(model);
-
-  }
-
+  
   ngOnInit() {
 
     this.route.data
@@ -95,7 +97,15 @@ export class EstructuraObraComponent implements OnInit {
         }
       }).subscribe(obra => {
         //console.log("obra", obra);
-        this.obra = obra
+        this.obra = obra;
+
+        this.manzana_selected=null;
+        this.selection = [];
+        for (let i = 0; i < this.obra.manzanas.length; i++) {
+          this.selection.push(new SelectionModel<any>(true, []));
+        }
+
+
       });
 
   }
@@ -115,25 +125,26 @@ export class EstructuraObraComponent implements OnInit {
 
 
 
-  toggleSelectionLote(manzana, lote) {
-    lote.selected = !lote.selected;
-
-    this.lotes_selected[lote.id_lote] = lote.selected;
-
-    /*   var allSelected = _.find(manzana.lotes, function (lote) {
-        return !_.has(lote, 'selected') || lote.selected === false;
-      });
-  
-      if (_.isUndefined(allSelected)) {
-        manzana.selected = true;
-      } else {
-        manzana.selected = false;
-      } */
 
 
+  selectManzana(index) {
+
+    //console.log("opened", index);
+    //seleccionamos la manzana expandida
+    this.manzana_selected = index;
 
   }
 
+  onClosedManzana(index) {
+
+    //console.log("closed", index);
+
+    //si cerramos la manzana expandida entonces no queda ninguna abierta
+    if (this.manzana_selected === index) {
+      this.manzana_selected = null;
+    }
+
+  }
 
 
   editarManzana() {
@@ -263,42 +274,30 @@ export class EstructuraObraComponent implements OnInit {
 
   }
 
-  private getLotesSelected() {
 
-    let lotes = [];
 
-    this.obra.manzanas.forEach(manzana => {
-
-      manzana.lotes.forEach(lote => {
-        if (lote.selected) {
-          lotes.push(lote.id_lote);
-        }
-      });
-
-    });
-
-    return lotes;
+  /** Whether the number of selected elements matches the total number of rows. */
+  isAllSelected(i) {
+    const numSelected = this.selection[i].selected.length;
+    const numRows = this.obra.manzanas[i].lotes.length;
+    return numSelected === numRows;
   }
 
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle(i) {
+    this.isAllSelected(i) ?
+      this.selection[i].clear() :
+      this.obra.manzanas[i].lotes.forEach(lote => this.selection[i].select(lote));
+  }
 
-    /** Whether the number of selected elements matches the total number of rows. */
-    isAllSelected() {
-      const numSelected = this.selection.selected.length;
-      const numRows = this.items.length;
-      return numSelected === numRows;
-    }
-  
-    /** Selects all rows if they are not all selected; otherwise clear selection. */
-    masterToggle() {
-      this.isAllSelected() ?
-          this.selection.clear() :
-          this.items.forEach(row => this.selection.select(row));
-    }
+  debugSelection() {
+    //console.log(this.selection.selected);
+    console.log("manzana selected", this.manzana_selected);
+    this.manzana_selected === null ? console.log("ninguna manzana seleccionada") : console.log(this.selection[this.manzana_selected].selected);
 
-    debugSelection(){
-      console.log(this.selection.selected);
-      
-    }
+
+
+  }
 
 
 
