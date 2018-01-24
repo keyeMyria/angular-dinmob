@@ -45,8 +45,8 @@ export class AuthService {
   login(usuario) {
     return this.http.post(this.url + 'login', { usuario: usuario })
       .pipe(
-        tap(response => console.log("response", response)),
-        catchError(this.handleError("login",{}))
+      tap(response => console.log("response", response)),
+      catchError(this.handleError("login", {}))
       )
   }
 
@@ -70,6 +70,10 @@ export class AuthService {
     } else {
       return null;
     }
+  }
+
+  setInLocalStorage(key: string, value: string) {
+    localStorage.setItem(key, value);
   }
 
   getRolUsuario() {
@@ -123,7 +127,7 @@ export class AuthService {
 
       // Let the app keep running by returning an empty result.
       //return of(result as T);
-      
+
       return Observable.throw(error);
     };
   }

@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   login(usuario) {
 
     this.loading = true;
-    
+
     this.auth.login(usuario)
       .subscribe(
       (res: any) => {
@@ -42,8 +42,11 @@ export class LoginComponent implements OnInit {
 
 
         //console.log("login", res);
-        localStorage.setItem('token', res.token);
-        localStorage.setItem('usuario', JSON.stringify(res.usuario));
+
+        this.auth.setInLocalStorage('token', res.token);
+        this.auth.setInLocalStorage('usuario', JSON.stringify(res.usuario));
+        /* localStorage.setItem('token', res.token);
+        localStorage.setItem('usuario', JSON.stringify(res.usuario)); */
 
         // reset form properties
         this.usuario = { email: "", password: "" };
@@ -105,7 +108,7 @@ export class LoginComponent implements OnInit {
         } else {
 
           //this.alert = "Error en la conexión";
-          this.alert=error;
+          this.alert = error;
         }
 
       }

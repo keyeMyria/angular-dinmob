@@ -6,25 +6,25 @@
           Perfil
         </div>
         <div class="card-body">
-          <form id="formUpdateUsuario" (ngSubmit)="updateUsuario()">
+          <form id="formUpdateUsuario" (ngSubmit)="updateUsuario()" [formGroup]="formDatos">
             <div class="form-group row">
               <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
               <div class="col-sm-10">
-                <input class="form-control" type="text" id="nombre" name="nombre" [(ngModel)]="copia.nombre">
+                <input class="form-control" type="text" id="nombre" name="nombre" formControlName="nombre">
               </div>
             </div>
 
             <div class="form-group row">
               <label for="email" class="col-sm-2 col-form-label">Email</label>
               <div class="col-sm-10">
-                <input class="form-control" type="text" id="email" name="email" [(ngModel)]="copia.email">
+                <input class="form-control" type="text" id="email" name="email" formControlName="email">
               </div>
             </div>
 
             <div class="form-group row">
               <label for="rol" class="col-sm-2 col-form-label">Obra default</label>
               <div class="col-sm-10">
-                <select class="form-control" id="id_obra_default" name="id_obra_default" [(ngModel)]="copia.id_obra_default">
+                <select class="form-control" id="id_obra_default" name="id_obra_default" formControlName="id_obra_default">
                   <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>
                 </select>
               </div>
@@ -34,7 +34,7 @@
           </form>
         </div>
         <div class="card-footer">
-          <button type="submit" form="formUpdateUsuario" mat-button color="primary" class="btn-block">Actualizar</button>
+          <button type="submit" form="formUpdateUsuario" mat-button color="primary" class="btn-block" [disabled]="formDatos.invalid">Actualizar</button>
         </div>
       </div>
 
@@ -44,11 +44,11 @@
           Cambiar password
         </div>
         <div class="card-body">
-          <form id="formUpdatePassword" (ngSubmit)="updatePassword()">
+          <form id="formUpdatePassword" (ngSubmit)="updatePassword()" [formGroup]="formPassword">
             <div class="form-group row">
               <label for="password" class="col-sm-2 col-form-label">Nuevo Password</label>
               <div class="col-sm-10">
-                <input class="form-control" type="password" id="password" name="password">
+                <input class="form-control" type="password" id="password" name="password" formControlName="password">
               </div>
             </div>
 
@@ -62,7 +62,7 @@
           </form>
         </div>
         <div class="card-footer">
-          <button type="submit" form="formUpdatePassword" mat-button color="primary" class="btn-block">Actualizar</button>
+          <button type="submit" form="formUpdatePassword" mat-button color="primary" class="btn-block" [disabled]="formPassword.invalid">Actualizar</button>
         </div>
       </div>
 

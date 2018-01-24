@@ -84,7 +84,12 @@ export const ROUTES: Routes = [
                     obras: ObrasUsuarioResolverService
                 }
             },
-            { path: 'perfil', component: PerfilComponent },
+            { 
+                path: 'perfil', component: PerfilComponent,
+                resolve: {
+                    obras: ObrasUsuarioResolverService
+                }
+             },
             {
                 path: 'avances', component: AvancesComponent,
                 resolve: {
