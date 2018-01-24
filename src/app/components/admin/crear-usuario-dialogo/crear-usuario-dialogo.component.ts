@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 import { UsuarioService } from "app/services/usuario.service";
-import { NgForm } from "@angular/forms";
-import { Usuario } from "app/model/usuario";
+import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
+
 
 @Component({
   selector: 'app-crear-usuario-dialogo',
@@ -10,21 +10,43 @@ import { Usuario } from "app/model/usuario";
   styleUrls: ['./crear-usuario-dialogo.component.scss']
 })
 export class CrearUsuarioDialogoComponent implements OnInit {
-  @ViewChild('formCreateUsuario') formCreateUsuario: NgForm;
- 
+  form: FormGroup;
 
-  roles: any[];
-  usuario: Usuario;
+
 
   constructor(
-    private usuarioSrv: UsuarioService,    
+    private usuarioSrv: UsuarioService,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef: MatDialogRef<CrearUsuarioDialogoComponent>
-  ) { }
+    public dialogRef: MatDialogRef<CrearUsuarioDialogoComponent>,
+    private fb: FormBuilder,
+  ) {
+    this.form = this.fb.group({
+      nombre: ["", Validators.required],
+      email: ["", Validators.required],
+      password: ["", Validators.required],
+      id_tipo_usuario: ["", Validators.required]
+
+    });
+
+  }
 
   ngOnInit() {
-    this.roles=this.data.roles;
-    this.usuario=this.data.usuario;    
+
   }
+
+  guardar() {
+
+    console.log("usuario", this.form.value);
+    this.usuarioSrv.createUsuario(this.form.value)
+      .subscribe(usuario => {
+
+        this.data.usuarios.push(usuario);
+        this.dialogRef.close(true);
+
+
+      });
+  }
+
+
 
 }

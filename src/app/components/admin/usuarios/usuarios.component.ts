@@ -34,31 +34,31 @@ export class UsuariosComponent implements OnInit {
       });
   }
 
-  changePassword(usuario: Usuario) {
-
-    let newpassword: string;
+  changePassword(usuario) {
 
     let dialogRef = this.dialog.open(CambiarPasswordDialogoComponent, {
       data: {
-        usuario: usuario,
-        password: newpassword
+        usuario: usuario      
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
 
       if (result === true) {
-        this.loading = true;
-
-        this.usuarioSrv.updatePassword(usuario.id_usuario, newpassword)
-          .subscribe(res => {
-
-            this.loading = false;
-            this.snackBar.open("Usuario Actualizado", "Cerrar", {
-              duration: 2000
-            });
-
-          });
+        this.snackBar.open("Usuario Actualizado", "Cerrar", {
+          duration: 2000
+        });
+        /*         this.loading = true;
+        
+                this.usuarioSrv.updatePassword(usuario.id_usuario, newpassword)
+                  .subscribe(res => {
+        
+                    this.loading = false;
+                    this.snackBar.open("Usuario Actualizado", "Cerrar", {
+                      duration: 2000
+                    });
+        
+                  }); */
 
 
       }
@@ -114,7 +114,6 @@ export class UsuariosComponent implements OnInit {
 
   editarUsuario(usuario) {
 
-
     let dialogRef = this.dialog.open(EditarUsuarioDialogoComponent, {
       data: {
         usuario: usuario,
@@ -136,27 +135,21 @@ export class UsuariosComponent implements OnInit {
   }
 
   agregarUsuario(): void {
-    let usuario = new Usuario();
+
 
     let dialogRef = this.dialog.open(CrearUsuarioDialogoComponent, {
       data: {
-        usuario: usuario,
-        roles: this.roles
+        roles: this.roles,
+        usuarios: this.usuarios
       },
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
-
-        console.log("usuario", usuario);
-        this.usuarioSrv.createUsuario(usuario)
-          .subscribe(res => {
-            console.log("response", res);
-            let nuevoUsuario = res;//new Usuario();
-            //nuevoUsuario.id_usuario = res;
-            // nuevoUsuario.nombre = usuario.nombre;
-            this.usuarios.push(nuevoUsuario);
-
+        if (result === true) {
+          this.snackBar.open("Usuario Agregado", "Cerrar", {
+            duration: 2000
           });
+        }
       }
 
 

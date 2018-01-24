@@ -3,7 +3,7 @@
 
 
 
-  <form name="formAddSubPartida" id="formAddPartida">
+  <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
     <!-- (ngSubmit)="formAddSubPartida.$valid && addSubpartida(formAddSubPartida)"
             novalidate -->
 
@@ -12,8 +12,8 @@
       <!-- [ngClass]="{
                   'has-error'
                   :(formAddSubPartida.$submitted || formAddSubPartida.codigo.$touched) && formAddSubPartida.codigo.$error.required }" -->
-      <label class="control-label">Código</label>
-      <input type="text" name="codigo" class="form-control">
+      <label for="codigo" class="control-label">Código</label>
+      <input type="text" name="codigo" class="form-control" formControlName="codigo">
       <!-- [(ngModel)]="nuevaSubpartida.codigo" required -->
       <div>
         <!-- *ngIf="formAddSubPartida.$submitted || formAddSubPartida.codigo.$touched" -->
@@ -26,8 +26,8 @@
       <!--  [ngClass]="{
                   'has-error'
                   :(formAddSubPartida.$submitted || formAddSubPartida.nombre.$touched) && formAddSubPartida.nombre.$error.required }" -->
-      <label class="control-label">Nombre</label>
-      <input type="text" name="nombre" class="form-control">
+      <label for="nombre" class="control-label">Nombre</label>
+      <input type="text" name="nombre" class="form-control" formControlName="nombre">
       <!-- [(ngModel)]="nuevaSubpartida.nombre" required -->
       <div>
         <!-- *ngIf="formAddSubPartida.$submitted || formAddSubPartida.nombre.$touched" -->
@@ -42,6 +42,6 @@
 </div>
 
 <div mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="false">CANCELAR</button>
-  <button mat-button [mat-dialog-close]="true">AGREGAR</button>
+  <button mat-button type="button" [mat-dialog-close]="false">CERRAR</button>
+  <button mat-button type="submit" form="id_form" [disabled]="form.invalid" color="primary">GUARDAR</button>
 </div>

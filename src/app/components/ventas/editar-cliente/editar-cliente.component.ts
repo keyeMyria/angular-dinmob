@@ -147,7 +147,8 @@ export class EditarClienteComponent implements OnInit {
     let dialogRef = this.dialog.open(EditarDocumentoDialogoComponent, {
       data: {
         doc: doc
-      }
+      },
+      width: '500px',
     });
 
     dialogRef.afterClosed().subscribe(result => {

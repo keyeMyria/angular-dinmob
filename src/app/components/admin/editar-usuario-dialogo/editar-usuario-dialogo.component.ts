@@ -35,7 +35,7 @@ export class EditarUsuarioDialogoComponent implements OnInit {
   }
 
   guardar() {
-    console.log("pago", this.form.value);
+    console.log("usuario", this.form.value);
     this.usuarioSrv.updateUsuario(this.data.usuario.id_usuario, this.form.value)
       .subscribe(usuario => {
 

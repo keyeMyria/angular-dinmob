@@ -1,14 +1,14 @@
 <h1 mat-dialog-title>Nuevo Usuario</h1>
 <div mat-dialog-content>
 
-    <form #formCreateUsuario="ngForm"  id="formCreateUsuario" (ngSubmit)="createUsuario()">  <!--  -->
+    <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">  <!--  -->
         
         
          
         <div class="form-group row">
           <label for="nombre" class="col-sm-3 col-form-label">Nombre</label>
           <div class="col-sm-9">
-            <input class="form-control" type="text" name="nombre" id="nombre"  [(ngModel)]="usuario.nombre">
+            <input class="form-control" type="text" name="nombre" id="nombre" formControlName="nombre">
             
           </div>
         </div>
@@ -16,7 +16,7 @@
         <div class="form-group row">
           <label for="email" class="col-sm-3 col-form-label">Email</label>
           <div class="col-sm-9">
-            <input class="form-control" type="text" value="" name="email" id="email" [(ngModel)]="usuario.email">
+            <input class="form-control" type="text" value="" name="email" id="email" formControlName="email">
             
           </div>
         </div>
@@ -24,7 +24,7 @@
         <div class="form-group row">
           <label class="col-sm-3 col-form-label" for="password">Password</label>
           <div class="col-sm-9">
-            <input type="password" class="form-control" name="password" id="password" placeholder="" [(ngModel)]="usuario.password">                  
+            <input type="password" class="form-control" name="password" id="password" placeholder="" formControlName="password">                  
           </div>
         </div>
 
@@ -38,9 +38,9 @@
           <div class="form-group row">
             <label for="id_tipo_usuario" class="col-sm-3 col-form-label">Rol</label>
             <div class="col-sm-9">
-              <select class="form-control" id="id_tipo_usuario" name="id_tipo_usuario" [(ngModel)]="usuario.id_tipo_usuario"> 
-                <option [value]="null">Seleccionar</option>
-                <option  [value]="rol.id_tipo_usuario" *ngFor="let rol of roles" >{{rol.tipo}}</option>  
+              <select class="form-control" id="id_tipo_usuario" name="id_tipo_usuario" formControlName="id_tipo_usuario"> 
+                <option value="">Seleccionar</option>
+                <option  [value]="rol.id_tipo_usuario" *ngFor="let rol of data.roles" >{{rol.tipo}}</option>  
               </select>
             </div>
           </div> 
@@ -52,6 +52,6 @@
 
 </div>
 <div mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="false">CERRAR</button>
-  <button mat-button [mat-dialog-close]="true">ACEPTAR</button>
+  <button mat-button type="button"[mat-dialog-close]="false">CERRAR</button>
+  <button mat-button type="submit" form="id_form" [disabled]="form.invalid" color="primary">GUARDAR</button>
 </div>
