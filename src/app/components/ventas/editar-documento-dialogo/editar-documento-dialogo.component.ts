@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
 
 
 @Component({
@@ -9,20 +9,23 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
   styleUrls: ['./editar-documento-dialogo.component.scss']
 })
 export class EditarDocumentoDialogoComponent implements OnInit {
-  nombre: FormControl;
+  form: FormGroup;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef: MatDialogRef<EditarDocumentoDialogoComponent>
-  ) {
-    this.nombre = new FormControl(this.data.doc.nombre, Validators.required);
+    public dialogRef: MatDialogRef<EditarDocumentoDialogoComponent>,
+    private fb: FormBuilder,
+  ) {  
+    this.form = this.fb.group({
+      nombre: [data.doc.nombre, Validators.required]      
+    });
   }
 
   ngOnInit() {
   }
 
   guardar() {
-    console.log("guardar", this.nombre.value);
+    console.log("guardar", this.form.value);
     
   }
 

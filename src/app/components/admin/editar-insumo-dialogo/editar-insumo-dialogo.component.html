@@ -13,16 +13,19 @@
     </div>
     <div class="form-group">
       <label class="control-label">Cantidad</label>
-      <input [textMask]="{mask: numberMask}" type="text" name="cantidad" class="form-control" required formControlName="cantidad">
+      <input [textMask]="{mask: numberMask}" type="text" name="cantidad" class="form-control" required formControlName="cantidad"
+        [ngClass]="{'is-invalid': form.get('cantidad').invalid  && (form.get('cantidad').dirty || form.get('cantidad').touched )}">
+      <div class="invalid-feedback">La cantidad debe ser mayor a 0</div>
       <div>
-        <span class="help-block">La cantidad debe ser mayor a 0</span>
       </div>
     </div>
     <div class="form-group">
       <label class="control-label">Precio</label>
-      <input [textMask]="{mask: currencyMask}" type="text" name="precio" class="form-control" name="precio" required formControlName="precio">
+      <input [textMask]="{mask: currencyMask}" type="text" name="precio" class="form-control" name="precio" required formControlName="precio"
+        [ngClass]="{'is-invalid': form.get('precio').invalid  && (form.get('precio').dirty || form.get('precio').touched )}">
+      <div class="invalid-feedback">El precio debe ser mayor a 0</div>
       <div>
-        <span class="help-block">El precio debe ser mayor a 0</span>
+
       </div>
     </div>
 

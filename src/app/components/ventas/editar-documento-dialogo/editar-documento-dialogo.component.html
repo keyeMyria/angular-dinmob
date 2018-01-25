@@ -2,12 +2,14 @@
 <div mat-dialog-content>
 
 
-
+  <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
     <div class="form-group mt-1">
-
-      <input class="form-control" type="text" [formControl]="nombre">
-
+      <label for="nombre" class="col-sm-3 col-form-label">Nombre</label>
+      <input class="form-control" type="text" name="nombre" id="nombre" formControlName="nombre" 
+      [ngClass]="{'is-invalid': form.get('nombre').invalid  && (form.get('nombre').dirty || form.get('nombre').touched )}">
+      <div class="invalid-feedback">Proporcione un nombre</div>
     </div>
+  </form>
 
 
 
@@ -15,6 +17,6 @@
 </div>
 
 <div mat-dialog-actions>
-  <button type="button" mat-button [mat-dialog-close]="false">CANCELAR</button>
-  <button type="button" mat-button [disabled]="nombre.invalid" (click)="guardar()" >GUARDAR</button>
+  <button mat-button type="button" [mat-dialog-close]="false">CERRAR</button>
+  <button mat-button type="submit" form="id_form" [disabled]="form.invalid" color="primary">GUARDAR</button>
 </div>
