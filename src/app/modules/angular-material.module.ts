@@ -26,6 +26,7 @@ import {
   MAT_DATE_LOCALE,
   DateAdapter,
   MAT_DATE_FORMATS,
+  MatSortModule,
 
   //NativeDateAdapter,
 } from "@angular/material";
@@ -68,6 +69,7 @@ export const MY_FORMATS = {
     MatDatepickerModule,
     MatNativeDateModule,
     MatTooltipModule,
+    MatSortModule
 
   ],
   exports: [
@@ -93,6 +95,7 @@ export const MY_FORMATS = {
     MatDatepickerModule,
     MatNativeDateModule,
     MatTooltipModule,
+    MatSortModule
 
   ],
 

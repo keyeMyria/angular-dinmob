@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from "app/model/usuario";
 import { UsuarioService } from "app/services/usuario.service";
-import { MatDialog, MatDialogRef, MatSnackBar } from "@angular/material";
+import { MatDialog, MatDialogRef, MatSnackBar, Sort } from "@angular/material";
 import { CambiarPasswordDialogoComponent } from "app/components/admin/cambiar-password-dialogo/cambiar-password-dialogo.component";
 import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component";
 import { EditarUsuarioDialogoComponent } from "app/components/admin/editar-usuario-dialogo/editar-usuario-dialogo.component";
 import { CrearUsuarioDialogoComponent } from "app/components/admin/crear-usuario-dialogo/crear-usuario-dialogo.component";
+import { log } from 'util';
 
 @Component({
   selector: 'app-usuarios',
@@ -15,6 +16,7 @@ import { CrearUsuarioDialogoComponent } from "app/components/admin/crear-usuario
 export class UsuariosComponent implements OnInit {
   loading: boolean;
   usuarios: Usuario[];
+  usuariosOrdenados: Usuario[];
   roles: any[];
   selectedOption: string;
 
@@ -30,6 +32,7 @@ export class UsuariosComponent implements OnInit {
     this.usuarioSrv.getUsuarios()
       .subscribe(res => {
         this.usuarios = res;
+        this.usuariosOrdenados= this.usuarios.slice();
         this.loading = false;
       });
   }
@@ -122,7 +125,8 @@ export class UsuariosComponent implements OnInit {
       if (result === true) {
 
         this.snackBar.open("Usuario Actualizado", "Cerrar", {
-          duration: 2000
+          duration: 2000,
+          //panelClass:['bg-danger', 'text-white']
         });
 
       } else if (result.error) {
@@ -171,8 +175,31 @@ export class UsuariosComponent implements OnInit {
 
   }
 
+  ordenarDatos(sort: Sort) {
+    console.log("ordenarDatos", sort);
 
+    const data = this.usuarios.slice();
+    if (!sort.active || sort.direction == '') {
+      this.usuariosOrdenados = data;
+      return;
+    }
 
+    this.usuariosOrdenados = data.sort((a, b) => {
+      let isAsc = sort.direction == 'asc';
+      switch (sort.active) {
+        case 'id': return compare(+a.id_usuario, +b.id_usuario, isAsc);
+        case 'nombre': return compare(a.nombre, b.nombre, isAsc);
+        case 'email': return compare(a.email, b.email, isAsc);
+        case 'rol': return compare(a.tipo_usuario, b.tipo_usuario, isAsc);      
+        default: return 0;
+      }
+    });
 
+  }
 
 }
+
+function compare(a, b, isAsc) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+}
+

@@ -22,19 +22,19 @@
         </div>
         <div>
           <div class="table-responsive">
-            <table class="table table-hover table-striped table-align-middle">
+            <table matSort (matSortChange)="ordenarDatos($event)" class="table table-hover table-striped table-align-middle">
               <thead>
                 <tr>
-                  <th>Id</th>
-                  <th>Nombre</th>
-                  <th>Email</th>
-                  <th>Rol</th>
+                  <th mat-sort-header="id">Id</th>
+                  <th mat-sort-header="nombre">Nombre</th>
+                  <th mat-sort-header="email">Email</th>
+                  <th mat-sort-header="rol">Rol</th>
                   <th></th>
                 </tr>
               </thead>
 
               <tbody>
-                <tr *ngFor="let usuario of usuarios; let i = index">
+                <tr *ngFor="let usuario of usuariosOrdenados; let i = index">
                   <td>{{usuario.id_usuario}}</td>
                   <td>{{usuario.nombre}}</td>
                   <td>{{usuario.email}}</td>
