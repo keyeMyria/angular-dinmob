@@ -66,6 +66,10 @@ export class TableroComponent implements OnInit {
     this.router.navigate(["/mapas-ventas", this.obra_default]);
   }
 
+  gotoEstadisticas() {
+    this.router.navigate(["/estadisticas-ventas", this.obra_default]);
+  }
+
   gotoMapasAvances() {
     this.router.navigate(["/mapas-avances", this.obra_default]);
   }
