@@ -35,6 +35,8 @@ import { ObrasUsuarioResolverService } from 'app/resolvers/obras-usuario-resolve
 import { UsuariosResidentesResolverService } from 'app/resolvers/usuarios-residentes-resolver.service';
 import { UsuariosAlmacenistasResolverService } from 'app/resolvers/usuarios-almacenistas-resolver.service';
 import { UsuariosContolAlmacenResolverService } from 'app/resolvers/usuarios-contol-almacen-resolver.service';
+import { AlertaClientesComponent } from 'app/components/ventas/alerta-clientes/alerta-clientes.component';
+import { ClienteSinLoteComponent } from 'app/components/ventas/cliente-sin-lote/cliente-sin-lote.component';
 
 
 
@@ -84,12 +86,12 @@ export const ROUTES: Routes = [
                     obras: ObrasUsuarioResolverService
                 }
             },
-            { 
+            {
                 path: 'perfil', component: PerfilComponent,
                 resolve: {
                     obras: ObrasUsuarioResolverService
                 }
-             },
+            },
             {
                 path: 'avances', component: AvancesComponent,
                 resolve: {
@@ -104,14 +106,26 @@ export const ROUTES: Routes = [
                 }
             },
             { path: 'usuarios', component: UsuariosComponent },
-            { path: 'crear-usuario', component: CrearUsuarioComponent },            
-            { path: 'editar-cliente/:id', component: EditarClienteComponent },                 
+            { path: 'crear-usuario', component: CrearUsuarioComponent },
+            { path: 'editar-cliente/:id', component: EditarClienteComponent },
             { path: 'acta-entrega/:id', component: ActaEntregaComponent },
             { path: 'crear-acta-entrega', component: CrearActaEntregaComponent },
             { path: 'actas-entrega', component: ActasEntregaComponent },
             { path: 'editar-acta-entrega/:id', component: EditarActaEntregaComponent },
             { path: 'generar-acta-entrega', component: GenerarActaEntregaComponent },
             { path: 'ventas/lote/:id', component: VentasLoteComponent },
+            {
+                path: 'alerta-clientes', component: AlertaClientesComponent,
+                resolve: {
+                    obras: ObrasUsuarioResolverService
+                }
+            },
+            {
+                path: 'clientes-sin-lote', component: ClienteSinLoteComponent,
+                resolve: {
+                    obras: ObrasUsuarioResolverService
+                }
+            },
 
 
 
