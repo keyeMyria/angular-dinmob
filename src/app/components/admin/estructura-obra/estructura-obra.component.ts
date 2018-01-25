@@ -31,7 +31,7 @@ export class EstructuraObraComponent implements OnInit {
   guide: boolean = false;
 
   lotesMapping:
-  {[k: string]: string} = {'=0': 'Ningún lote seleccionado.', '=1': 'Un lote seleccionado.', 'other': '# lotes seleccionados.'};
+    { [k: string]: string } = { '=0': 'Ningún lote seleccionado', '=1': 'Un lote seleccionado', 'other': '# lotes seleccionados' };
 
 
   obras: any = [];
@@ -77,7 +77,7 @@ export class EstructuraObraComponent implements OnInit {
   }
 
 
-  
+
   ngOnInit() {
 
     this.route.data
@@ -99,7 +99,7 @@ export class EstructuraObraComponent implements OnInit {
         //console.log("obra", obra);
         this.obra = obra;
 
-        this.manzana_selected=null;
+        this.manzana_selected = null;
         this.selection = [];
         for (let i = 0; i < this.obra.manzanas.length; i++) {
           this.selection.push(new SelectionModel<any>(true, []));
@@ -257,22 +257,158 @@ export class EstructuraObraComponent implements OnInit {
 
   updateValorBase() {
 
-    //let lotes = this.getLotesSelected();
+    let id_lotes = [];
 
-    //console.log("lotes", lotes);
+    this.selection[this.manzana_selected].selected.forEach(lote => {
+      id_lotes.push(lote.id_lote);
+    });
 
-    console.log("lotes_selected", this.lotes_selected);
+
+    this.loteSrv.bulkUpdate(id_lotes, { valor_base: this.opValorBase.value })
+      .subscribe(res => {
+        console.log("respuesta", res);
 
 
+        if (res.count) {
+          //todo ok
 
-    /*    this.loteSrv.bulkUpdate(lotes,this.opValorBase)
-       .subscribe(res=>{
-         console.log("respuesta", res);
-         
-       }); */
+          //actualizamos la vista
+          this.selection[this.manzana_selected].selected.forEach(lote => {
+            lote.valor_base = this.opValorBase.value;
+          });
+
+          //eliminamos la seleccion
+          this.selection[this.manzana_selected].clear();
+
+          this.snackBar.open("Actualización completada", "Cerrar", {
+            duration: 2000
+          });
+
+        } else {
+          //error
+
+          this.snackBar.open("Su solicitud no se ha podido completar.", "Cerrar", {
+            duration: 3000
+          });
+
+        }
+
+
+      },
+      (error) => {
+
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde.", "Cerrar", {
+          duration: 3000
+        });
+
+      });
 
 
   }
+
+  updateValorAmpliacion() {
+
+    let id_lotes = [];
+
+    this.selection[this.manzana_selected].selected.forEach(lote => {
+      id_lotes.push(lote.id_lote);
+    });
+
+
+    this.loteSrv.bulkUpdate(id_lotes, { valor_ampliacion: this.opValorAmpliacion.value })
+      .subscribe(res => {
+        console.log("respuesta", res);
+
+
+        if (res.count) {
+          //todo ok
+
+          //actualizamos la vista
+          this.selection[this.manzana_selected].selected.forEach(lote => {
+            lote.valor_ampliacion = this.opValorAmpliacion.value;
+          });
+
+          //eliminamos la seleccion
+          this.selection[this.manzana_selected].clear();
+
+
+          this.snackBar.open("Actualización completada", "Cerrar", {
+            duration: 2000
+          });
+
+        } else {
+          //error o count==0
+
+          this.snackBar.open("Su solicitud no se ha podido completar.", "Cerrar", {
+            duration: 3000
+          });
+
+        }
+
+
+      },
+      (error) => {
+
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde.", "Cerrar", {
+          duration: 3000
+        });
+
+      });
+
+
+  }
+
+  updateEnVenta() {
+
+    let id_lotes = [];
+
+    this.selection[this.manzana_selected].selected.forEach(lote => {
+      id_lotes.push(lote.id_lote);
+    });
+
+
+    this.loteSrv.bulkUpdate(id_lotes, { en_venta: this.opEnVenta.value })
+      .subscribe(res => {
+        console.log("respuesta", res);
+
+        if (res.count) {
+          //todo ok
+
+          //actualizamos la vista
+          this.selection[this.manzana_selected].selected.forEach(lote => {
+            lote.en_venta = this.opEnVenta.value;
+          });
+
+          //eliminamos la seleccion
+          this.selection[this.manzana_selected].clear();
+
+          this.snackBar.open("Actualización completada", "Cerrar", {
+            duration: 2000
+          });
+
+        } else {
+          //error
+
+          this.snackBar.open("Su solicitud no se ha podido completar.", "Cerrar", {
+            duration: 3000
+          });
+
+        }
+
+
+      },
+      (error) => {
+
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde.", "Cerrar", {
+          duration: 3000
+        });
+
+      });
+
+
+  }
+
+
 
 
 
