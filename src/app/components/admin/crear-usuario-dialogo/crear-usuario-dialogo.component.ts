@@ -20,15 +20,38 @@ export class CrearUsuarioDialogoComponent implements OnInit {
     public dialogRef: MatDialogRef<CrearUsuarioDialogoComponent>,
     private fb: FormBuilder,
   ) {
+
     this.form = this.fb.group({
       nombre: ["", Validators.required],
       email: ["", Validators.required],
       password: ["", Validators.required],
+      confirmar: ["", Validators.required],
       id_tipo_usuario: ["", Validators.required]
-
-    });
+    }, { validator: this.checkIfMatchingPasswords("password", "confirmar") });
 
   }
+
+
+  checkIfMatchingPasswords(passwordKey: string, passwordConfirmationKey: string) {
+
+    return (group: FormGroup) => {
+
+      let passwordInput = group.controls[passwordKey];
+      let passwordConfirmationInput = group.controls[passwordConfirmationKey];
+
+      if (passwordInput.value !== passwordConfirmationInput.value) {
+
+        //le asignamos el error al input confirmar
+        return passwordConfirmationInput.setErrors({ notEqual: true });
+
+      } else {
+
+        return passwordConfirmationInput.setErrors(null);
+
+      }
+    }
+  }
+
 
   ngOnInit() {
 
@@ -36,15 +59,23 @@ export class CrearUsuarioDialogoComponent implements OnInit {
 
   guardar() {
 
-    console.log("usuario", this.form.value);
+    //console.log("usuario", this.form.value);
     this.usuarioSrv.createUsuario(this.form.value)
       .subscribe(usuario => {
 
         this.data.usuarios.push(usuario);
         this.dialogRef.close(true);
 
-
+      },
+      (error) => {
+        this.dialogRef.close({ error: "Ha ocurrido un error. Vuelva a intentarlo más tarde." });
       });
+  }
+
+  debug() {
+    console.log("formgroup", this.form);
+    console.log("value", this.form.value);
+    console.log("status", this.form.status);
   }
 
 

@@ -38,28 +38,24 @@ export class UsuariosComponent implements OnInit {
 
     let dialogRef = this.dialog.open(CambiarPasswordDialogoComponent, {
       data: {
-        usuario: usuario      
-      }
+        usuario: usuario
+      },
+      width: "450px"
     });
 
     dialogRef.afterClosed().subscribe(result => {
 
       if (result === true) {
+
         this.snackBar.open("Usuario Actualizado", "Cerrar", {
           duration: 2000
         });
-        /*         this.loading = true;
-        
-                this.usuarioSrv.updatePassword(usuario.id_usuario, newpassword)
-                  .subscribe(res => {
-        
-                    this.loading = false;
-                    this.snackBar.open("Usuario Actualizado", "Cerrar", {
-                      duration: 2000
-                    });
-        
-                  }); */
 
+      } else if (result.error) {
+
+        this.snackBar.open(result.error, "Cerrar", {
+          duration: 3000
+        });
 
       }
 
@@ -98,7 +94,7 @@ export class UsuariosComponent implements OnInit {
 
             } else {
               this.snackBar.open("Ha ocurrido un error", "Cerrar", {
-                duration: 2000
+                duration: 3000
               });
             }
 
@@ -111,23 +107,32 @@ export class UsuariosComponent implements OnInit {
 
   }
 
-
   editarUsuario(usuario) {
 
     let dialogRef = this.dialog.open(EditarUsuarioDialogoComponent, {
       data: {
         usuario: usuario,
         usuarios: this.usuarios
-      }
+      },
+      width: "450px"
     });
 
     dialogRef.afterClosed().subscribe(result => {
 
       if (result === true) {
+
         this.snackBar.open("Usuario Actualizado", "Cerrar", {
           duration: 2000
         });
+
+      } else if (result.error) {
+
+        this.snackBar.open(result.error, "Cerrar", {
+          duration: 3000
+        });
+
       }
+
 
     });
 
@@ -142,14 +147,23 @@ export class UsuariosComponent implements OnInit {
         roles: this.roles,
         usuarios: this.usuarios
       },
+      width: "450px"
     });
+
     dialogRef.afterClosed().subscribe(result => {
+
       if (result === true) {
-        if (result === true) {
-          this.snackBar.open("Usuario Agregado", "Cerrar", {
-            duration: 2000
-          });
-        }
+
+        this.snackBar.open("Usuario Agregado", "Cerrar", {
+          duration: 2000
+        });
+
+      } else if (result.error) {
+
+        this.snackBar.open(result.error, "Cerrar", {
+          duration: 3000
+        });
+
       }
 
 

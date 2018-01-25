@@ -4,7 +4,9 @@
     <div class="form-group row">
       <label for="nombre" class="col-sm-3 col-form-label">Nombre</label>
       <div class="col-sm-9">
-        <input class="form-control" type="text" id="nombre" name="nombre" formControlName="nombre">
+        <input class="form-control" type="text" id="nombre" name="nombre" formControlName="nombre" 
+        [ngClass]="{'is-invalid': form.get('nombre').invalid  && (form.get('nombre').dirty || form.get('nombre').touched) }">
+        <div class="invalid-feedback">Proporcione un nombre</div>
       </div>
     </div>
 
@@ -12,7 +14,9 @@
       <label for="email" class="col-sm-3 col-form-label">Email</label>
       <div class="col-sm-9">
 
-        <input class="form-control" type="text" id="email" name="email" formControlName="email">
+        <input class="form-control" type="text" id="email" name="email" formControlName="email" 
+        [ngClass]="{'is-invalid': form.get('email').invalid  && (form.get('email').dirty || form.get('email').touched) }">
+        <div class="invalid-feedback">Proporcione un email</div>
       </div>
     </div>
     <!--  <div>data {{data|json}}</div> -->

@@ -35,7 +35,7 @@ export class EditarUsuarioDialogoComponent implements OnInit {
   }
 
   guardar() {
-    console.log("usuario", this.form.value);
+    //console.log("usuario", this.form.value);
     this.usuarioSrv.updateUsuario(this.data.usuario.id_usuario, this.form.value)
       .subscribe(usuario => {
 
@@ -44,7 +44,9 @@ export class EditarUsuarioDialogoComponent implements OnInit {
         this.loading = false;
         this.dialogRef.close(true);
 
-
+      },
+      (error) => {
+        this.dialogRef.close({ error: "Ha ocurrido un error. Vuelva a intentarlo más tarde." });
       });
   }
 

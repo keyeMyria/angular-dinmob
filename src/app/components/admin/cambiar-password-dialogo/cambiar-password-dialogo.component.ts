@@ -20,9 +20,31 @@ export class CambiarPasswordDialogoComponent implements OnInit {
     private usuarioSrv: UsuarioService
   ) {
     this.form = this.fb.group({
-      password: ["", Validators.required]
 
-    });
+      password: ["", Validators.required],
+      confirmar: ["", Validators.required]
+
+    }, { validator: this.checkIfMatchingPasswords("password", "confirmar") });
+  }
+
+  checkIfMatchingPasswords(passwordKey: string, passwordConfirmationKey: string) {
+
+    return (group: FormGroup) => {
+
+      let passwordInput = group.controls[passwordKey];
+      let passwordConfirmationInput = group.controls[passwordConfirmationKey];
+
+      if (passwordInput.value !== passwordConfirmationInput.value) {
+
+        //le asignamos el error al input confirmar
+        return passwordConfirmationInput.setErrors({ notEqual: true });
+
+      } else {
+
+        return passwordConfirmationInput.setErrors(null);
+
+      }
+    }
   }
 
   ngOnInit() {
@@ -33,9 +55,18 @@ export class CambiarPasswordDialogoComponent implements OnInit {
   guardar() {
 
     console.log("usuario", this.form.value);
-    this.usuarioSrv.updatePassword(this.data.usuario.id_usuario, this.form.value)
-      .subscribe(usuario => {        
-        this.dialogRef.close(true);
+    this.usuarioSrv.updatePassword(this.data.usuario.id_usuario, this.form.get('password').value)
+      .subscribe(res => {
+
+        if (res.count === 1) {
+          this.dialogRef.close(true);
+        } else {
+          this.dialogRef.close({ error: "Ha ocurrido un error. Vuelva a intentarlo más tarde." });
+        }
+
+      },
+      (error) => {
+        this.dialogRef.close({ error: "Ha ocurrido un error de conexión. Vuelva a intentarlo más tarde." });
       });
   }
 
