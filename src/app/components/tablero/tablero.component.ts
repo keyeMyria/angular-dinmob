@@ -53,6 +53,15 @@ export class TableroComponent implements OnInit {
     this.router.navigate(["/estructura-obra", this.obra_default]);
   }
 
+  gotoAlertaClientes() {
+    this.router.navigate(["alerta-clientes", this.obra_default]);
+  }
+
+  gotoClienteSinLote() {
+    this.router.navigate(["/clientes-sin-lote", this.obra_default]);
+  }
+
+
   gotoMapas() {
     this.router.navigate(["/mapas-ventas", this.obra_default]);
   }
