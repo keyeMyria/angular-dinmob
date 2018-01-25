@@ -821,14 +821,14 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let compra of compras" class="pointer" (click)="selectCompra(compra, $event)" [ngClass]="{'bg-primary text-white':compra.selected}">
+            <tr *ngFor="let compra of compras" class="pointer" (click)="selectCompra(compra, $event)" [ngClass]="{'table-primary':compra.selected}">
               <!--<td><input type="radio" name="lote"></td>-->
               <td>
                 <mat-icon>{{ compra.selected?'check_box':'check_box_outline_blank'}}</mat-icon>
                 <!-- <mat-checkbox (change)="selectCompra(compra, $event)"></mat-checkbox> -->
               </td>
-              <td>{{compra.obra}} - {{compra.manzana}} -
-                <b>{{compra.lote}}</b>
+              <td>{{compra.obra + " / " + compra.manzana + " / "}}
+                <strong>{{compra.lote}}</strong>
               </td>
               <td>{{compra.activo|numberToYesNo:'AC'}}</td>
               <td>{{compra.fecha_activo| date:'mediumDate':'':'es'}}</td>
@@ -840,7 +840,7 @@
                             <button type="button" title="Ir a lote" class="btn btn-default btn-sm" ui-sref="^.ventas_lote({id_lote:compra.id_lote})">
                               <span class="fa fa-home"></span>
                             </button> -->
-                <button mat-icon-button [matMenuTriggerFor]="menu3">
+                <button mat-icon-button [matMenuTriggerFor]="menu3" (click)="$event.stopPropagation()">
                   <mat-icon>more_vert</mat-icon>
                 </button>
                 <mat-menu #menu3="matMenu">
@@ -856,7 +856,7 @@
                     <mat-icon>report</mat-icon>
                     <span>Reporte</span>
                   </button>
-                  <button mat-menu-item (click)="irLote(compra)" >
+                  <button mat-menu-item (click)="irLote(compra)">
                     <mat-icon>assignment_late</mat-icon>
                     <span>Ir a Lote</span>
                   </button>
@@ -1100,28 +1100,21 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let compra of compras" class="pointer" (click)="selectCompra(compra, $event)" [ngClass]="{'bg-primary text-white':compra.selected}">
+            <tr *ngFor="let compra of compras" class="pointer" (click)="selectCompra(compra, $event)" [ngClass]="{'table-primary':compra.selected}">
 
               <td>
                 <mat-icon>{{ compra.selected?'check_box':'check_box_outline_blank'}}</mat-icon>
                 <!-- <mat-checkbox (change)="selectCompra(compra, $event)"></mat-checkbox> -->
               </td>
 
-              <td>
-                {{compra.obra}} - {{compra.manzana}} -
-                <b>{{compra.lote}}</b>
+              <td>{{compra.obra + " / " + compra.manzana + " / "}}
+                <strong>{{compra.lote}}</strong>
               </td>
-              <td>
-                {{compra.activo|numberToYesNo:'AC'}}
-              </td>
-              <td>
-                {{compra.fecha_activo| date:'mediumDate':'':'es'}}
-              </td>
-              <td>
-                {{compra.fecha_cancelacion| date:'mediumDate':'':'es'}}
-              </td>
+              <td>{{compra.activo|numberToYesNo:'AC'}}</td>
+              <td>{{compra.fecha_activo| date:'mediumDate':'':'es'}}</td>
+              <td>{{compra.fecha_cancelacion| date:'mediumDate':'':'es'}}</td>
               <td class="text-right">
-                <button mat-icon-button [matMenuTriggerFor]="menu3">
+                <button mat-icon-button [matMenuTriggerFor]="menu3" (click)="$event.stopPropagation()">
                   <mat-icon>more_vert</mat-icon>
                 </button>
                 <mat-menu #menu3="matMenu">
@@ -1215,7 +1208,7 @@
                       <mat-icon>create</mat-icon>
                       <span>Editar</span>
                     </button>
-                    <button mat-menu-item (click)="delPago(pago)" >
+                    <button mat-menu-item (click)="delPago(pago)">
                       <mat-icon>delete</mat-icon>
                       <span>Eliminar</span>
                     </button>
