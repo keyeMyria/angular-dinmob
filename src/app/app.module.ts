@@ -108,6 +108,9 @@ import { UsuariosContolAlmacenResolverService } from 'app/resolvers/usuarios-con
 import { UsuariosResidentesResolverService } from 'app/resolvers/usuarios-residentes-resolver.service';
 import { UsuariosAsesoresResolverService } from 'app/resolvers/usuarios-asesores-resolver.service';
 import { EstadosVentaLoteResolverService } from 'app/resolvers/estados-venta-lote-resolver.service';
+import { MapasUsuarioResolverService } from 'app/resolvers/mapas-usuario-resolver.service';
+
+
 
 //components
 import { EditarObraDialogoComponent } from './components/admin/editar-obra-dialogo/editar-obra-dialogo.component';
@@ -270,7 +273,8 @@ import { EstadisticasVentasComponent } from './components/ventas/estadisticas-ve
     UsuariosAsesoresResolverService,
     UsuariosContolAlmacenResolverService,
     UsuariosResidentesResolverService,
-    EstadosVentaLoteResolverService
+    EstadosVentaLoteResolverService,
+    MapasUsuarioResolverService
   ],
   bootstrap: [AppComponent]
 })

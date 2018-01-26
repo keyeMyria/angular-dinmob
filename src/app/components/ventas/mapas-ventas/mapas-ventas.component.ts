@@ -28,7 +28,7 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.route.data
       .subscribe((data: { obras: any[] }) => {
-        //console.log("resusltado resolve ", data);
+        console.log("resusltado resolve ", data);
         this.obras = data.obras;
       });
   }
