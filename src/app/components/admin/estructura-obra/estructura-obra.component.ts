@@ -8,6 +8,7 @@ import { MatDialog, MatSnackBar } from '@angular/material';
 import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import "rxjs/add/observable/of";
+import "rxjs/add/observable/forkJoin";
 import { Observable } from 'rxjs/Observable';
 import { NgForm, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { AgregarManzanaDialogoComponent } from 'app/components/admin/agregar-manzana-dialogo/agregar-manzana-dialogo.component';
@@ -19,6 +20,7 @@ import { EditarLoteDialogoComponent } from 'app/components/admin/editar-lote-dia
 
 import { SelectionModel } from '@angular/cdk/collections';
 import { log } from 'util';
+import { PrototiposService } from 'app/services/prototipos.service';
 
 @Component({
   selector: 'app-estructura-obra',
@@ -27,7 +29,7 @@ import { log } from 'util';
 })
 export class EstructuraObraComponent implements OnInit {
 
-  public maskDosDigitos = [/[1-9]/, /\d/];
+  maskDosDigitos = [/[1-9]/, /\d/];
   guide: boolean = false;
 
   lotesMapping:
@@ -35,6 +37,7 @@ export class EstructuraObraComponent implements OnInit {
 
 
   obras: any = [];
+  prototipos: any = [];
 
   obra: any = {
     datos: {}
@@ -53,31 +56,25 @@ export class EstructuraObraComponent implements OnInit {
 
 
   manzana_selected: number = null;
-  items: any[] = [];
-  //selection = new SelectionModel<any>(true, []);
   selection: SelectionModel<any>[];
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private obraSrv: ObrasService,
-    public dialog: MatDialog,
+    private prototipoSrv: PrototiposService,
+    private dialog: MatDialog,
     private fb: FormBuilder,
     private loteSrv: LotesService,
     private manzanaSrv: ManzanasService,
-    public snackBar: MatSnackBar
+    private snackBar: MatSnackBar
   ) {
     // console.log("-------------constructor-----");
-
-
-    for (let i = 0; i < 10; i++) {
-      this.items.push({ id: i, valor: "valor " + i });
-    }
 
   }
 
 
-
+  /* obtenemos las obras del usurio del resolve y consultamos la obra requerida como routeParam */
   ngOnInit() {
 
     this.route.data
@@ -91,14 +88,21 @@ export class EstructuraObraComponent implements OnInit {
       .switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
-          return this.obraSrv.getAcordeonManzanas(params.get("obra"));
-        } else {
-          return Observable.of({ datos: {} });
-        }
-      }).subscribe(obra => {
-        //console.log("obra", obra);
-        this.obra = obra;
 
+          //unimos la consulta de las manzanas y los prototipos
+          return Observable.forkJoin(
+            this.obraSrv.getAcordeonManzanas(params.get("obra")),
+            this.prototipoSrv.getPrototiposObra(params.get("obra"))
+          );
+        } else {
+          return Observable.of([{ datos: {} }, []]);
+        }
+      }).subscribe(res => {
+        //console.log("res", res);
+        this.obra = res[0];
+        this.prototipos = res[1];
+
+        //inicializamos la seleccion de lotes
         this.manzana_selected = null;
         this.selection = [];
         for (let i = 0; i < this.obra.manzanas.length; i++) {
@@ -110,8 +114,9 @@ export class EstructuraObraComponent implements OnInit {
 
   }
 
+  /* actualizamos la ruta con el parametro obra  */
   cargarObra(id_obra) {
-    console.log("cargarobra");
+    //console.log("cargarobra");
 
     if (id_obra) {
       //si se eligio una obra del select entonces enviamos el id
@@ -125,8 +130,7 @@ export class EstructuraObraComponent implements OnInit {
 
 
 
-
-
+  /* asignamos la obra seleccionada como resultado del evento expansion-panel opened */
   selectManzana(index) {
 
     //console.log("opened", index);
@@ -135,6 +139,7 @@ export class EstructuraObraComponent implements OnInit {
 
   }
 
+  /* callback del evento expansion-panel closed, ninguna manzana seleccionada si cerramos todos los paneles */
   onClosedManzana(index) {
 
     //console.log("closed", index);
@@ -158,6 +163,8 @@ export class EstructuraObraComponent implements OnInit {
     });
   }
 
+    
+   /* abrimos un dialogo para editar las propiedades del lote */
   editarLote(manzana, lote, event) {
     event.stopPropagation();
 
@@ -165,7 +172,8 @@ export class EstructuraObraComponent implements OnInit {
     let dialogRef = this.dialog.open(EditarLoteDialogoComponent, {
       data: {
         lotes: manzana.lotes,
-        lote: lote
+        lote: lote,
+        prototipos: this.prototipos
 
       },
       width: '500px',
@@ -255,6 +263,7 @@ export class EstructuraObraComponent implements OnInit {
 
   }
 
+  /* actualizamos la propiedad valor_base a los lotes seleccionados */
   updateValorBase() {
 
     let id_lotes = [];
@@ -306,6 +315,7 @@ export class EstructuraObraComponent implements OnInit {
 
   }
 
+  /* actualizamos la propiedad valor_ampliacion a los lotes seleccionados */
   updateValorAmpliacion() {
 
     let id_lotes = [];
@@ -358,6 +368,7 @@ export class EstructuraObraComponent implements OnInit {
 
   }
 
+  /* actualizamos la propiedad en_venta a los lotes seleccionados */
   updateEnVenta() {
 
     let id_lotes = [];
@@ -408,9 +419,54 @@ export class EstructuraObraComponent implements OnInit {
 
   }
 
+  /* agregamos el prototipo a los lotes seleccionados */
+  addLotePrototipo() {
+
+    let id_lotes = [];
+
+    this.selection[this.manzana_selected].selected.forEach(lote => {
+      id_lotes.push(lote.id_lote);
+    });
 
 
+    let prototipo = {
+      id_prototipo: this.opPrototipo.value.id_prototipo,
+      nombre: this.opPrototipo.value.nombre
+    };
 
+    //console.log(prototipo);
+
+    this.loteSrv.bulkAddLotePrototipo(id_lotes, prototipo.id_prototipo)
+      .subscribe(res => {
+        console.log("respuesta", res);
+
+
+        //todo ok
+
+        //actualizamos la vista
+        this.selection[this.manzana_selected].selected.forEach(lote => {
+          lote.prototipos = res.lotes[lote.id_lote].prototipos;
+        });
+
+        //eliminamos la seleccion
+        this.selection[this.manzana_selected].clear();
+
+        this.snackBar.open("Actualización completada", "Cerrar", {
+          duration: 2000
+        });
+
+
+      },
+      (error) => {
+
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde.", "Cerrar", {
+          duration: 3000
+        });
+
+      });
+
+
+  }
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected(i) {
@@ -426,6 +482,7 @@ export class EstructuraObraComponent implements OnInit {
       this.obra.manzanas[i].lotes.forEach(lote => this.selection[i].select(lote));
   }
 
+  //para consultar los lotes seleccionados
   debugSelection() {
     //console.log(this.selection.selected);
     console.log("manzana selected", this.manzana_selected);

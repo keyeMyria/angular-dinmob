@@ -138,7 +138,8 @@
 
             <!-- Operaciones -->
             <mat-expansion-panel class="mt-2" expanded="true">
-                <mat-expansion-panel-header class="bg-info text-white">
+                <!-- class="bg-info text-white" -->
+                <mat-expansion-panel-header class="bg-primary text-white" >
                     Operaciones
                 </mat-expansion-panel-header>
 
@@ -151,21 +152,21 @@
 
                     <!-- asignar prototipo -->
                     <div class="form-group">
-                        <label>Prototipo</label>
+                        <label class="form-label">Prototipo</label>
                         <div class="input-group">
                             <select name="prototipo" class="form-control" [formControl]="opPrototipo">
                                 <option value="">Seleccionar...</option>
-                                <option [value]="prototipo.id_prototipo" *ngFor="let prototipo of obra.prototipos">{{prototipo.nombre}}</option>
+                                <option [ngValue]="prototipo" *ngFor="let prototipo of prototipos">{{prototipo.nombre}}</option>
                             </select>
                             <div class="input-group-btn">
-                                <button class="btn btn-primary" (click)="updatePrototipo()" [disabled]=" manzana_selected==null || !selection[manzana_selected].selected.length  || opPrototipo.errors">Asignar</button>
+                                <button class="btn btn-primary" (click)="addLotePrototipo()" [disabled]=" manzana_selected==null || !selection[manzana_selected].selected.length  || opPrototipo.errors">Asignar</button>
                             </div>
                         </div>
                     </div>
 
                     <!--  asignar estado venta   -->
                     <div class="form-group">
-                        <label>En venta</label>
+                        <label class="form-label">En venta</label>
                         <div class="input-group">
                             <select name="en_venta" class="form-control" [formControl]="opEnVenta">
                                 <option value="">Seleccionar</option>
@@ -181,7 +182,7 @@
 
                     <!-- asignar valor base -->
                     <div class="form-group">
-                        <label>Valor Base</label>
+                        <label class="form-label">Valor Base</label>
                         <div class="input-group">
                             <input name="valor_base" type="text" class="form-control" [formControl]="opValorBase">
                             <div class="input-group-btn">
@@ -193,7 +194,7 @@
 
                     <!-- asignar valor ampliacion -->
                     <div class="form-group">
-                        <label>Valor Ampliación</label>
+                        <label class="form-label">Valor Ampliación</label>
                         <div class="input-group">
                             <input name="valor_ampliacion" type="text" class="form-control" [formControl]="opValorAmpliacion">
                             <div class="input-group-btn">
@@ -202,44 +203,13 @@
                         </div>
                     </div>
 
-                    <button type="button" class="btn btn-primary" (click)="debugSelection()">seleccionados</button>
-
-
-
+                    <button type="button" class="btn btn-primary" (click)="debugSelection()">ver seleccionados</button>
 
                 </div>
 
             </mat-expansion-panel>
 
         </div>
-
-        <!-- test -->
-
-        <!--         <button class="btn btn-primary" (click)="debugSelection()">selection</button>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        <mat-checkbox color="primary" (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
-                            [indeterminate]="selection.hasValue() && !isAllSelected()">
-                        </mat-checkbox>
-                    </th>
-                    <th>id</th>
-                    <th>valor</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let item of items" class="pointer" (click)="selection.toggle(item)" [ngClass]="{'table-primary':selection.isSelected(item)}">
-                    <td>
-                        <mat-checkbox color="accent" (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(item) : null" [checked]="selection.isSelected(item)">
-                        </mat-checkbox>
-                    </td>
-                    <td>{{item.id}}</td>
-                    <td>{{item.valor}}</td>
-                </tr>
-            </tbody>
-
-        </table> -->
 
     </div>
 </section>

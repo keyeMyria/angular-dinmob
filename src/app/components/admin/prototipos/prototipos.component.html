@@ -51,7 +51,7 @@
               <tbody>
                 <tr *ngFor="let prototipo of prototipos">
                   <td>{{prototipo.nombre}}</td>
-                  <td>{{prototipo.fecha_creacion}}</td>
+                  <td>{{prototipo.fecha_creacion| date:'mediumDate':'':'es'}}</td>
                   <td class="text-right">
                     <button mat-icon-button [matMenuTriggerFor]="menu">
                       <mat-icon>more_vert</mat-icon>

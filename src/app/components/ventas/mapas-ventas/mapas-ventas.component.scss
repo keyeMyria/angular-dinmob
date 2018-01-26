@@ -1,22 +1,35 @@
 .content {
+    /*********funciona cuando  pantalla > 600px **********/
+    height: 100%;
+    position: relative;
+    /**************************************************/
+
+
     display: flex;
     flex-direction: column;
-    //64px = toolbar
-    height: calc(100vh - 64px);
+
+    /********** aplicar cuando pantalla < 600 px *****/
+    //height toolbar = pantalla < 600px? 56px: 64px
+    //height: calc(100vh - 64px);
+    /***************************/
+}
+
+@media only screen and (max-width: 600px) {
+
+    .content{
+        height: calc(100vh - 56px);
+    }
+
 }
 
 
-
 .map {
+   
     display: flex;
-    flex-direction: column;
-    //background-color: #61076A;
+    //flex-direction: column;
     flex-grow: 1;
-    //position: absolute;
-    //top: 64px;
-    //bottom: 0;
-    //left: 0;
-    //right: 0;
+    background-color: yellow;
+  
 }
 
 /* .map-header {

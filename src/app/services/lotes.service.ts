@@ -37,17 +37,17 @@ export class LotesService {
       .catch(this.handleError);
   }
 
-    bulkUpdate(ids, props) {
-      return this.http.post(this.url + 'bulk_update', { ids: ids, props: props })
-        .map(this.extractData)
-        .catch(this.handleError);
-    }
+  bulkUpdate(ids, props) {
+    return this.http.post(this.url + 'bulk_update', { ids: ids, props: props })
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
 
-  /*   bulkAddLotePrototipo(ids_lotes, id_prototipo) {
-      return this.http.post(this.url + 'bulk_add_lote_prototipo', { ids: ids_lotes, id_prototipo: id_prototipo })
-        .map(this.extractData)
-        .catch(this.handleError);
-    } */
+  bulkAddLotePrototipo(ids_lotes, id_prototipo) {
+    return this.http.post(this.url + 'bulk_add_lote_prototipo', { ids: ids_lotes, id_prototipo: id_prototipo })
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
 
   /*   addLotePrototipo(id_lote, id_prototipo) {
       return this.http.post(this.url + 'add_lote_prototipo', { id_lote: id_lote, id_prototipo: id_prototipo })

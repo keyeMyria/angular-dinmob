@@ -84,9 +84,9 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
                 values: [],//this.map_values,
                 scale: {
                   'Libre': '#00a65a', //green
-                  'Apartado': '#f39c12', //amarillo     '#ff851b', //orange
+                  'Apartado': '#f39c12', //amarillo     
                   'Bloqueado': '#d81b60', //maroon 
-                  'Contrato': '#00c0ef', //aqua         #0073b7',//blue
+                  'Contrato': '#00c0ef', //aqua        
                   'Escriturado': '#605ca8' //purple
 
                 },

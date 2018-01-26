@@ -123,6 +123,10 @@ table.table-align-middle  {
     cursor: pointer;
 }
 
+.col-form-label, .form-label {
+    font-weight: 500;
+}
+
 .no-min {
     &.mat-button {
         min-width: unset !important;

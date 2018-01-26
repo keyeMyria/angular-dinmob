@@ -6,22 +6,23 @@
   <form id="id_form" [formGroup]="form" (ngSubmit)="guardar()" class="pb-4">
 
     <div class="form-group">
-      <label for="lote">Lote</label>
-      <input type="text" class="form-control" id="lote" formControlName="nombre">
+      <label class="form-label" for="lote">Lote</label>
+      <input type="text" class="form-control" id="lote" formControlName="nombre"  
+      [ngClass]="{'is-invalid': form.controls['nombre'].invalid && (form.controls['nombre'].dirty || form.controls['nombre'].touched) }">
     </div>
 
     <div class="form-group">
-      <label for="codigo">Código</label>
+      <label class="form-label" for="codigo">Código</label>
       <input type="text" class="form-control" id="codigo" formControlName="code">
     </div>
 
     <div class="form-group">
-      <label for="valor_base">Valor Base</label>
+      <label class="form-label" for="valor_base">Valor Base</label>
       <input type="text" class="form-control" id="valor_base" formControlName="valor_base">
     </div>
 
     <div class="form-group">
-      <label for="valor_ampliacion">Valor Ampliación</label>
+      <label class="form-label" for="valor_ampliacion">Valor Ampliación</label>
       <input type="text" class="form-control" id="valor_ampliacion" formControlName="valor_ampliacion">
     </div>
 
@@ -37,9 +38,9 @@
     <div formArrayName="prototipos">
       <div class="form-group" *ngFor="let prototipo of form.controls['prototipos'].controls; let i= index">
         <div class="input-group">
-          <select class="form-control" [formControlName]="i">
+          <select class="form-control" [formControlName]="i" [ngClass]="{'is-invalid': form.controls['prototipos'].controls[i].invalid }">
             <option value="">Elegir prototipo...</option>
-            <option *ngFor="let p of prototipos" [value]="p.id_prototipo">{{p.nombre}}</option>
+            <option *ngFor="let p of data.prototipos" [value]="p.id_prototipo">{{p.nombre}}</option>
           </select>
           <span class="input-group-btn">
             <button class="btn btn-secondary" (click)="delPrototipo(i)">

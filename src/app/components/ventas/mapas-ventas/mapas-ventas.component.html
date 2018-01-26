@@ -1,22 +1,43 @@
-<div class="content">
-  <div class="map-header">
+
+<button mat-fab style="position:fixed; bottom:64px; right:20px; z-index:100" >
+    <mat-icon aria-label="fab-button">home</mat-icon>
+</button>
+
+<div class="content container-fluid pb-2">
+  <!-- <div class="map-header container pt-2"> -->
     <!--     <select class="form-control" name="" id="">
       <option value="">Seleccionar...</option>
       <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>
     </select> -->
 
-    <mat-form-field class="w-100">
-      <mat-select placeholder="Obra" #selObra (change)="cargarObra(selObra.value)">
+    <mat-form-field class="w-100 pt-2">
+      <mat-select placeholder="Obra" #selObra (change)="getMapa()">
         <mat-option *ngFor="let obra of obras" [value]="obra.id_obra">{{ obra.nombre }}</mat-option>
       </mat-select>
     </mat-form-field>
 
-  </div>
+  <!-- </div> -->
+
+  <!-- id="map" -->
+  <div class="map" id="map"></div>
 
 
-  <div id="map" class="map"></div>
+  <!--   <div class="map">
 
-  <mat-toolbar color="primary" class="map-footer">
+    <div id="map" class="col-12 col-md-9" style="background-color: green">
+
+    </div>
+
+
+    <div class="d-none d-md-block col-md-3" style="background-color: red">
+
+    </div>
+
+  </div> -->
+
+
+
+  <!-- <mat-toolbar color="primary" class="map-footer">
 
     <div class="map-toolbar">
 
@@ -43,6 +64,6 @@
       <mat-slide-toggle class="toolbar-slide-toogle">LEYENDA</mat-slide-toggle>
 
     </div>
-  </mat-toolbar>
+  </mat-toolbar> -->
 
 </div>
