@@ -45,6 +45,15 @@ export class ObrasService {
   }
 
 
+
+  //ok
+  getLotesEnVentaLibres(id_obra) {
+    return this.http.get(this.url + 'get_manzanas_lotes_en_venta_libres/' + id_obra)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+
   //ok
   getLotes(id_obra) {
     return this.http.get(this.url + 'get_lotes/' + id_obra)

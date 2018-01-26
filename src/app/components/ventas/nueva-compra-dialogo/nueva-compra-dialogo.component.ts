@@ -9,8 +9,9 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
   styleUrls: ['./nueva-compra-dialogo.component.scss']
 })
 export class NuevaCompraDialogoComponent implements OnInit {
+  loading: boolean = false;
   obras: any = [];
-  lotes: any = [];
+  manzanas: any = [];
   obra: any = {
     datos: {}
   };
@@ -21,27 +22,40 @@ export class NuevaCompraDialogoComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<NuevaCompraDialogoComponent>,
     private fb: FormBuilder,
+    private obraSrv: ObrasService
   ) {
     this.form = this.fb.group({
-      obra_selected: ["", Validators.required],
+      obra: ["", Validators.required],
       lote: ["", Validators.required]
     });
   }
 
   ngOnInit() {
-    /*     this.obraSrv.loadFullObra(58)
-        .subscribe(response => {
-          this.obra = response;
-          console.log("obra", this.obra);
+  }
+
+  cargarObra(id_obra) {
+
+    console.log("cargar obra", id_obra);
+
+    if (id_obra) {
+      this.loading = true;
+      this.obraSrv.getLotesEnVentaLibres(id_obra)
+        .subscribe(obra => {
+          console.log("getLotes", obra.manzanas);
+          this.manzanas = obra.manzanas;
+          this.loading = false;
+        }, (error) => {
+          this.loading = false;
         });
-    
-      this.obraSrv.getObrasUsuario(18)
-        .subscribe(response => {
-          this.obras = response;
-        }); */
+
+    } else {
+      this.manzanas = [];
+    }
+
 
 
   }
+
 
   guardar() {
 
