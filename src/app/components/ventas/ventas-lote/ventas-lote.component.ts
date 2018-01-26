@@ -12,6 +12,7 @@ export class VentasLoteComponent implements OnInit {
 
   lote: any = { lote: {}, obra: {}, clientes: [] };
   cliente_selected: any = { pagos: [] };
+  estados: any[] = [];
 
   constructor(
     private router: Router,
@@ -20,6 +21,13 @@ export class VentasLoteComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+
+    this.route.data
+      .subscribe((data: { estados: any[] }) => {
+        //console.log("resusltado resolve ", data);
+        this.estados = data.estados;
+      });
 
     let id = this.route.snapshot.paramMap.get('id');
 

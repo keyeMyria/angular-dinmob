@@ -22,6 +22,7 @@ import { AuthService } from "app/services/auth.service";
 import { MapasService } from "app/services/mapas.service";
 import { ActaEntregaService } from 'app/services/acta-entrega.service';
 import { ManzanasService } from 'app/services/manzanas.service';
+import { LoteEstadoVentaService } from 'app/services/lote-estado-venta.service';
 
 //helpers
 import { ClienteHelperService } from 'app/utils/cliente-helper.service';
@@ -106,6 +107,9 @@ import { UsuariosAlmacenistasResolverService } from 'app/resolvers/usuarios-alma
 import { UsuariosContolAlmacenResolverService } from 'app/resolvers/usuarios-contol-almacen-resolver.service';
 import { UsuariosResidentesResolverService } from 'app/resolvers/usuarios-residentes-resolver.service';
 import { UsuariosAsesoresResolverService } from 'app/resolvers/usuarios-asesores-resolver.service';
+import { EstadosVentaLoteResolverService } from 'app/resolvers/estados-venta-lote-resolver.service';
+
+//components
 import { EditarObraDialogoComponent } from './components/admin/editar-obra-dialogo/editar-obra-dialogo.component';
 import { VerDatosFirmaDialogoComponent } from './components/ventas/ver-datos-firma-dialogo/ver-datos-firma-dialogo.component';
 import { EditarDocumentoDialogoComponent } from './components/ventas/editar-documento-dialogo/editar-documento-dialogo.component';
@@ -116,11 +120,16 @@ import { EditarLoteDialogoComponent } from './components/admin/editar-lote-dialo
 
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
+registerLocaleData(localeEs, 'es');
+
+//components
 import { VerCedulaFiscalDialogoComponent } from './components/ventas/ver-cedula-fiscal-dialogo/ver-cedula-fiscal-dialogo.component';
 import { AlertaClientesComponent } from './components/ventas/alerta-clientes/alerta-clientes.component';
 import { ClienteSinLoteComponent } from './components/ventas/cliente-sin-lote/cliente-sin-lote.component';
 import { EstadisticasVentasComponent } from './components/ventas/estadisticas-ventas/estadisticas-ventas.component';
-registerLocaleData(localeEs, 'es');
+
+
+
 
 
 
@@ -254,12 +263,14 @@ registerLocaleData(localeEs, 'es');
     LotesService,
     ManzanasService,
     ActaEntregaService,
+    LoteEstadoVentaService,
 
     ObrasUsuarioResolverService,
     UsuariosAlmacenistasResolverService,
     UsuariosAsesoresResolverService,
     UsuariosContolAlmacenResolverService,
-    UsuariosResidentesResolverService
+    UsuariosResidentesResolverService,
+    EstadosVentaLoteResolverService
   ],
   bootstrap: [AppComponent]
 })

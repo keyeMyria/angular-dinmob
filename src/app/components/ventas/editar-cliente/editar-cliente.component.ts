@@ -22,7 +22,9 @@ import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@ang
 export class EditarClienteComponent implements OnInit {
 
   numbermask = createNumberMask({
-    allowDecimal: true
+    allowDecimal: true,
+    prefix: '',
+    decimalLimit: 2
   });
 
   public maskRFC = [/[A-Z0-9]/i, /[A-Z0-9]/i, /[A-Z0-9]/i, /[A-Z0-9]/i, '-', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /[A-Z0-9]/i, /[A-Z0-9]/i, /[A-Z0-9]/i,]
