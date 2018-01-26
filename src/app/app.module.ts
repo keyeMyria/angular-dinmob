@@ -257,7 +257,7 @@ import { EstadisticasVentasComponent } from './components/ventas/estadisticas-ve
   ],
 
   providers: [
-    I18n,
+ 
     AuthGuard,
     ConfigService,
     AuthService,
