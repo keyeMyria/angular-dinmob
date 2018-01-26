@@ -39,6 +39,7 @@ import { AlertaClientesComponent } from 'app/components/ventas/alerta-clientes/a
 import { ClienteSinLoteComponent } from 'app/components/ventas/cliente-sin-lote/cliente-sin-lote.component';
 import { EstadisticasVentasComponent } from 'app/components/ventas/estadisticas-ventas/estadisticas-ventas.component';
 import { EstadosVentaLoteResolverService } from 'app/resolvers/estados-venta-lote-resolver.service';
+import { MapasUsuarioResolverService } from 'app/resolvers/mapas-usuario-resolver.service';
 
 
 
@@ -104,7 +105,7 @@ export const ROUTES: Routes = [
             {
                 path: 'mapas-ventas', component: MapasVentasComponent,
                 resolve: {
-                    obras: ObrasUsuarioResolverService
+                    obras: MapasUsuarioResolverService
                 }
             },
             { path: 'usuarios', component: UsuariosComponent },

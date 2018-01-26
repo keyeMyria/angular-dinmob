@@ -61,6 +61,13 @@ export class ObrasService {
   }
 
   //ok
+  getMapasUsuario(id) {
+    return this.http.get(this.url + 'usuario_mapas/' + id)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  //ok
   getObrasConUsuarios() {
     return this.http.get(this.url + "get_obras_con_usuarios")
       .map(this.extractData)
