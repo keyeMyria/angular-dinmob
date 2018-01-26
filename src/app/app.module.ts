@@ -203,20 +203,12 @@ import { ClientesLoteDialogoComponent } from './components/ventas/clientes-lote-
     AlertaClientesComponent,
     ClienteSinLoteComponent,
     EstadisticasVentasComponent,
-<<<<<<< HEAD
-
-
-
-
-
-=======
     ClientesLoteDialogoComponent,
 
 
 
 
 
->>>>>>> 07eabe8db1d705360952e4398166d53f1fc49e9f
 
   ],
   imports: [

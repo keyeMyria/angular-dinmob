@@ -56,7 +56,7 @@ export class EditarClienteComponent implements OnInit {
   ) {
 
     this.form = this.fb.group({
-      mensaje_alerta: ["", Validators.required],     
+      mensaje_alerta: ["", Validators.required],
     });
 
   }
@@ -66,10 +66,10 @@ export class EditarClienteComponent implements OnInit {
     this.cliente.persona_moral = "0"; */
 
     this.route.data
-    .subscribe((data: { obras: any[] }) => {
-      //console.log("resusltado resolve ", data);
-      this.obras = data.obras;
-    });
+      .subscribe((data: { obras: any[], formas_pago: any[], instituciones_credito: any[], tipos_operacion: any[], tipos_pago: any[] }) => {
+        console.log("resultado resolve ", data);
+        this.obras = data.obras;
+      });
 
 
     let id = this.route.snapshot.paramMap.get('id');
@@ -86,7 +86,7 @@ export class EditarClienteComponent implements OnInit {
   }
 
   guardar() {
-    console.log("mensaje alerta", this.form.value)   
+    console.log("mensaje alerta", this.form.value)
   }
 
   selectCompra(compra, event) {
@@ -130,7 +130,7 @@ export class EditarClienteComponent implements OnInit {
     let dialogRef = this.dialog.open(NuevaCompraDialogoComponent, {
       width: '400px',
       data: {
-        obras:this.obras
+        obras: this.obras
       }
     });
     dialogRef.afterClosed().subscribe(result => {

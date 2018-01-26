@@ -40,6 +40,11 @@ import { ClienteSinLoteComponent } from 'app/components/ventas/cliente-sin-lote/
 import { EstadisticasVentasComponent } from 'app/components/ventas/estadisticas-ventas/estadisticas-ventas.component';
 import { EstadosVentaLoteResolverService } from 'app/resolvers/estados-venta-lote-resolver.service';
 import { MapasUsuarioResolverService } from 'app/resolvers/mapas-usuario-resolver.service';
+import { FormasPagoResolverService } from 'app/resolvers/formas-pago-resolver.service';
+import { InstitucionesCreditoResolverService } from 'app/resolvers/instituciones-credito-resolver.service';
+import { TipoOperacionService } from 'app/services/tipo-operacion.service';
+import { TiposOperacionResolverService } from 'app/resolvers/tipos-operacion-resolver.service';
+import { TiposPagoResolverService } from 'app/resolvers/tipos-pago-resolver.service';
 
 
 
@@ -113,7 +118,11 @@ export const ROUTES: Routes = [
             {
                 path: 'editar-cliente/:id', component: EditarClienteComponent,
                 resolve: {
-                    obras: ObrasUsuarioResolverService
+                    obras: ObrasUsuarioResolverService,
+                    formas_pago: FormasPagoResolverService,
+                    instituciones_credito: InstitucionesCreditoResolverService,
+                    tipos_operacion: TiposOperacionResolverService,
+                    tipos_pago: TiposPagoResolverService
                 }
             },
             { path: 'acta-entrega/:id', component: ActaEntregaComponent },
