@@ -38,6 +38,7 @@ import { UsuariosContolAlmacenResolverService } from 'app/resolvers/usuarios-con
 import { AlertaClientesComponent } from 'app/components/ventas/alerta-clientes/alerta-clientes.component';
 import { ClienteSinLoteComponent } from 'app/components/ventas/cliente-sin-lote/cliente-sin-lote.component';
 import { EstadisticasVentasComponent } from 'app/components/ventas/estadisticas-ventas/estadisticas-ventas.component';
+import { EstadosVentaLoteResolverService } from 'app/resolvers/estados-venta-lote-resolver.service';
 
 
 
@@ -119,7 +120,12 @@ export const ROUTES: Routes = [
             { path: 'actas-entrega', component: ActasEntregaComponent },
             { path: 'editar-acta-entrega/:id', component: EditarActaEntregaComponent },
             { path: 'generar-acta-entrega', component: GenerarActaEntregaComponent },
-            { path: 'ventas/lote/:id', component: VentasLoteComponent },
+            {
+                path: 'ventas/lote/:id', component: VentasLoteComponent,
+                resolve: {
+                    estados: EstadosVentaLoteResolverService
+                }
+            },
             {
                 path: 'alerta-clientes', component: AlertaClientesComponent,
                 resolve: {
