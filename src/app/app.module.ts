@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RoutingModule } from "app/app.routing";
-import { I18n, SpanishDatepickerI18nService } from "app/services/spanish-datepicker-i18n.service";
 import { TextMaskModule } from "angular2-text-mask";
 import { AuthModule } from "app/modules/auth.module";
 
