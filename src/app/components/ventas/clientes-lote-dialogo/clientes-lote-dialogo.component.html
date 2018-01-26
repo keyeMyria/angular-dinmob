@@ -10,8 +10,7 @@
           <th>Nombre</th>
           <th>Activo</th>
           <th>Fecha Activación</th>
-          <th>Fecha Cancelación</th>
-          <th></th>
+          <th>Fecha Cancelación</th>          
         </tr>
       </thead>
       <tbody>
@@ -25,12 +24,7 @@
           </td>
           <td>{{cliente.activo|numberToYesNo:'AC'}}</td>
           <td>{{cliente.fecha_activo| date:'mediumDate':'':'es'}}</td>
-          <td>{{cliente.fecha_cancelacion| date:'mediumDate':'':'es'}}</td>
-          <td>
-            <button mat-button class="no-min" (click)="gotoCliente(cliente)">
-              <i class="fa fa-pencil"></i>
-            </button>
-          </td>
+          <td>{{cliente.fecha_cancelacion| date:'mediumDate':'':'es'}}</td>       
         </tr>
 
       </tbody>
