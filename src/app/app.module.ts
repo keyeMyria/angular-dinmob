@@ -23,6 +23,11 @@ import { MapasService } from "app/services/mapas.service";
 import { ActaEntregaService } from 'app/services/acta-entrega.service';
 import { ManzanasService } from 'app/services/manzanas.service';
 import { LoteEstadoVentaService } from 'app/services/lote-estado-venta.service';
+import { FormaPagoService } from 'app/services/forma-pago.service';
+import { InstitucionCreditoService } from 'app/services/institucion-credito.service';
+import { TipoOperacionService } from 'app/services/tipo-operacion.service';
+import { TipoPagoService } from 'app/services/tipo-pago.service';
+
 
 //helpers
 import { ClienteHelperService } from 'app/utils/cliente-helper.service';
@@ -190,7 +195,7 @@ import { EstadisticasVentasComponent } from './components/ventas/estadisticas-ve
     AgregarManzanaDialogoComponent,
     AgregarLoteDialogoComponent,
     FotoPartidaDialogoComponent,
-    EditarObraDialogoComponent,    
+    EditarObraDialogoComponent,
     VerDatosFirmaDialogoComponent,
     EditarDocumentoDialogoComponent,
     EditarLoteDialogoComponent,
@@ -198,11 +203,11 @@ import { EstadisticasVentasComponent } from './components/ventas/estadisticas-ve
     AlertaClientesComponent,
     ClienteSinLoteComponent,
     EstadisticasVentasComponent,
- 
 
 
 
-    
+
+
 
   ],
   imports: [
@@ -212,14 +217,14 @@ import { EstadisticasVentasComponent } from './components/ventas/estadisticas-ve
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    AuthModule, 
+    AuthModule,
     AngularMaterialModule,
     TextMaskModule,
     RoutingModule
 
   ],
 
-  entryComponents: [    
+  entryComponents: [
     CambiarPasswordDialogoComponent,
     ConfirmarBorradoDialogoComponent,
     AgregarObraDialogoComponent,
@@ -241,15 +246,15 @@ import { EstadisticasVentasComponent } from './components/ventas/estadisticas-ve
     AgregarManzanaDialogoComponent,
     AgregarLoteDialogoComponent,
     FotoPartidaDialogoComponent,
-    EditarObraDialogoComponent,  
+    EditarObraDialogoComponent,
     VerDatosFirmaDialogoComponent,
     EditarDocumentoDialogoComponent,
     EditarLoteDialogoComponent,
     EditarUsuarioDialogoComponent,
     VerCedulaFiscalDialogoComponent
-    
 
-    
+
+
   ],
 
   providers: [
@@ -267,6 +272,10 @@ import { EstadisticasVentasComponent } from './components/ventas/estadisticas-ve
     ManzanasService,
     ActaEntregaService,
     LoteEstadoVentaService,
+    FormaPagoService,
+    InstitucionCreditoService,
+    TipoOperacionService,
+    TipoPagoService,
 
     ObrasUsuarioResolverService,
     UsuariosAlmacenistasResolverService,
