@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MapasService } from "app/services/mapas.service";
 import 'jvectormap';
 import { ActivatedRoute } from '@angular/router';
+import { ClientesLoteDialogoComponent } from 'app/components/ventas/clientes-lote-dialogo/clientes-lote-dialogo.component';
+import { MatDialog, MatSnackBar } from '@angular/material';
 declare var jQuery: any;
 declare var $: any;
 
@@ -22,7 +24,9 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
 
   constructor(
     private mapaSrv: MapasService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public dialog: MatDialog,
+    public snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -31,6 +35,23 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
         console.log("resusltado resolve ", data);
         this.obras = data.obras;
       });
+  }
+
+  gotoLote() {
+
+    let dialogRef = this.dialog.open(ClientesLoteDialogoComponent, {
+      data: {  
+      },
+      width: "800px"
+    });
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result === true) { 
+
+      } else if (result.error) {     
+
+      }
+    });
   }
 
   ngOnDestroy() {

@@ -191,7 +191,7 @@ import { ClientesLoteDialogoComponent } from './components/ventas/clientes-lote-
     AgregarManzanaDialogoComponent,
     AgregarLoteDialogoComponent,
     FotoPartidaDialogoComponent,
-    EditarObraDialogoComponent,    
+    EditarObraDialogoComponent,
     VerDatosFirmaDialogoComponent,
     EditarDocumentoDialogoComponent,
     EditarLoteDialogoComponent,
@@ -200,11 +200,11 @@ import { ClientesLoteDialogoComponent } from './components/ventas/clientes-lote-
     ClienteSinLoteComponent,
     EstadisticasVentasComponent,
     ClientesLoteDialogoComponent,
- 
 
 
 
-    
+
+
 
   ],
   imports: [
@@ -214,14 +214,14 @@ import { ClientesLoteDialogoComponent } from './components/ventas/clientes-lote-
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    AuthModule, 
+    AuthModule,
     AngularMaterialModule,
     TextMaskModule,
     RoutingModule
 
   ],
 
-  entryComponents: [    
+  entryComponents: [
     CambiarPasswordDialogoComponent,
     ConfirmarBorradoDialogoComponent,
     AgregarObraDialogoComponent,
@@ -243,15 +243,16 @@ import { ClientesLoteDialogoComponent } from './components/ventas/clientes-lote-
     AgregarManzanaDialogoComponent,
     AgregarLoteDialogoComponent,
     FotoPartidaDialogoComponent,
-    EditarObraDialogoComponent,  
+    EditarObraDialogoComponent,
     VerDatosFirmaDialogoComponent,
     EditarDocumentoDialogoComponent,
     EditarLoteDialogoComponent,
     EditarUsuarioDialogoComponent,
-    VerCedulaFiscalDialogoComponent
-    
+    VerCedulaFiscalDialogoComponent,
+    ClientesLoteDialogoComponent
 
-    
+
+
   ],
 
   providers: [
