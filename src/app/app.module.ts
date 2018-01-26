@@ -127,6 +127,7 @@ import { VerCedulaFiscalDialogoComponent } from './components/ventas/ver-cedula-
 import { AlertaClientesComponent } from './components/ventas/alerta-clientes/alerta-clientes.component';
 import { ClienteSinLoteComponent } from './components/ventas/cliente-sin-lote/cliente-sin-lote.component';
 import { EstadisticasVentasComponent } from './components/ventas/estadisticas-ventas/estadisticas-ventas.component';
+import { ClientesLoteDialogoComponent } from './components/ventas/clientes-lote-dialogo/clientes-lote-dialogo.component';
 
 
 
@@ -195,6 +196,7 @@ import { EstadisticasVentasComponent } from './components/ventas/estadisticas-ve
     AlertaClientesComponent,
     ClienteSinLoteComponent,
     EstadisticasVentasComponent,
+    ClientesLoteDialogoComponent,
  
 
 

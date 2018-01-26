@@ -75,6 +75,10 @@ export class VentasLoteComponent implements OnInit {
     return saldo;
   }
 
+  gotoCliente(cliente) {
+    this.router.navigate(["/editar-cliente", cliente.id_cliente]);
+  }
+
 
   onFechaChange() {
 

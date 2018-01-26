@@ -100,11 +100,11 @@
                 <span *ngIf="cliente.persona_moral === '0'">{{cliente.nombre_persona_fisica}}</span>
                 <span *ngIf="cliente.persona_moral === '1'">{{cliente.razon_social_persona_moral}}</span>
               </td>
-              <td>{{cliente.activa}}</td>
-              <td>{{cliente.fecha_activo}}</td>
-              <td>{{cliente.fecha_cancelacion}}</td>
+              <td>{{cliente.activo|numberToYesNo:'AC'}}</td>
+              <td>{{cliente.fecha_activo| date:'mediumDate':'':'es'}}</td>
+              <td>{{cliente.fecha_cancelacion| date:'mediumDate':'':'es'}}</td>
               <td>
-                <button class="btn btn-outline-secondary btn-sm" (click)="gotoCliente(cliente)">
+                <button mat-button class="no-min" (click)="gotoCliente(cliente)">
                   <i class="fa fa-pencil"></i>
                 </button>
               </td>
@@ -131,17 +131,24 @@
           </thead>
           <tbody>
             <tr *ngFor="let pago of cliente_selected.pagos">
-              <td>{{pago.fecha_programada}}</td>
-              <td>{{pago.fecha_pago}}</td>
+              <td>{{pago.fecha_programada| date:'mediumDate':'':'es'}}</td>
+              <td>{{pago.fecha_pago| date:'mediumDate':'':'es'}}</td>
               <td>{{pago.monto|currency}}</td>
               <td>{{pago.tipo_pago}}</td>
               <td>{{pago.forma_pago}}</td>
               <td>{{pago.nota}}</td>
-              <td>{{pago.validado}}</td>
+              <td>
+                <span class="badge" [ngClass]="pago.validado=='1'?'badge-success':'badge-secondary'">
+                  {{pago.validado|numberToYesNo:'VAL'}}
+                </span>
+              </td>
               <td>
                 <a class="btn btn-outline-secondary btn-sm" [href]="'/controlapi/public/comprobantes/'+pago.file_ficha_deposito">
                   <i class="fa fa-money"></i>
                 </a>
+                <!--                 <button mat-button class="no-min">
+                  <i class="fa fa-money"></i>
+                </button> -->
               </td>
             </tr>
           </tbody>
@@ -151,19 +158,19 @@
       <div class="row">
         <div class="col-xs-12 col-sm-4">
           <div class="description-block border-right">
-            <h4 class="text-blue">{{(cliente_selected.valor_operacion|| 0)| currency}}</h4>
+            <h4 class="text-primary">{{(cliente_selected.valor_operacion|| 0)| currency}}</h4>
             <span>VALOR OPERACIÓN</span>
           </div>
         </div>
         <div class="col-xs-12 col-sm-4">
           <div class="description-block border-right">
-            <h4 class="text-green">{{(totalPagosRealizados(cliente_selected) || 0) | currency}}</h4>
+            <h4 class="text-success">{{(totalPagosRealizados(cliente_selected) || 0) | currency}}</h4>
             <span>-PAGOS REALIZADOS</span>
           </div>
         </div>
         <div class="col-xs-12 col-sm-4">
           <div class="description-block">
-            <h4 class="text-red">{{(saldoPendiente(cliente_selected) || 0) | currency}}</h4>
+            <h4 class="text-danger">{{(saldoPendiente(cliente_selected) || 0) | currency}}</h4>
             <span>=SALDO PENDIENTE</span>
           </div>
         </div>
@@ -172,7 +179,7 @@
 
     </div>
 
-  
+
   </mat-tab>
 
 </mat-tab-group>
