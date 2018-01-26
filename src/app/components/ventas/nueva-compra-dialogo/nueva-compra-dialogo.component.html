@@ -1,27 +1,23 @@
 <h1 mat-dialog-title>Nueva Compra</h1>
 <div mat-dialog-content>
 
-  <form>
+  <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
     <div class="form-group">
-      <label for="obra_selected">Seleccionar Obra</label>
-      <div class="input-group">
-        <select class="form-control" name="obra_selected" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)">
-            <option value="">Seleccionar...</option>
-            <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>                                     
-          </select>
-      </div>
+      <label class="control-label" for="obra_selected">Seleccionar Obra</label>
+      <select class="form-control" name="obra_selected" (change)="cargarObra(obra_selected)" formControlName="obra_selected" [ngClass]="{'is-invalid': form.get('obra_selected').invalid  && (form.get('obra_selected').dirty || form.get('obra_selected').touched )}">
+        <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>
+      </select>
+      <div class="invalid-feedback">Seleccione una obra</div>
     </div>
 
     <div class="form-group">
-        <label for="nombre">Lote</label>
-        <div class="input-group">
-          <select class="form-control" name="" selectval>
-                    <option>Elegir Lote</option>
-                    <option>1</option> 
-                    <option>2</option> 
-          </select>
-        </div>
-      </div>
+      <label class="control-label" for="lote">Lote</label>
+      <select class="form-control" name="lote" (change)="cargarLote(lote)" formControlName="lote" 
+      [ngClass]="{'is-invalid': form.get('lote').invalid  && (form.get('lote').dirty || form.get('lote').touched )}">
+        <option>1</option>
+      </select>
+      <div class="invalid-feedback">Seleccione un lote</div>
+    </div>
 
 
 
@@ -30,6 +26,6 @@
 
 </div>
 <div mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="false">CERRAR</button>
-  <button mat-button [mat-dialog-close]="true">ACEPTAR</button>
+  <button mat-button type="button" [mat-dialog-close]="false">CERRAR</button>
+  <button mat-button type="submit" form="id_form" [disabled]="form.invalid" color="primary">GUARDAR</button>
 </div>

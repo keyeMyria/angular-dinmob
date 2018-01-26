@@ -12,6 +12,7 @@ import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import { Pago } from 'app/model/pago';
 import { EditarDocumentoDialogoComponent } from 'app/components/ventas/editar-documento-dialogo/editar-documento-dialogo.component';
 import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
+import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-editar-cliente',
@@ -34,6 +35,7 @@ export class EditarClienteComponent implements OnInit {
   compras: any[] = [];
   documentos_cliente: any[] = [];
   documentos_conyuge: any[] = [];
+  form: FormGroup;
 
 
 
@@ -46,8 +48,13 @@ export class EditarClienteComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public dialog: MatDialog,
-    public snackBar: MatSnackBar
-  ) { }
+    public snackBar: MatSnackBar,
+    private fb: FormBuilder,
+  ) {
+    this.form = this.fb.group({
+      mensaje_alerta: ["", Validators.required],     
+    });
+  }
 
   ngOnInit() {
     /* this.cliente = new Cliente();
@@ -64,6 +71,10 @@ export class EditarClienteComponent implements OnInit {
         this.documentos_conyuge = response.documentos_conyuge;
       });
 
+  }
+
+  guardar() {
+    console.log("mensaje alerta", this.form.value)   
   }
 
   selectCompra(compra, event) {

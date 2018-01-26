@@ -30,9 +30,10 @@ export class EditarPagoDialogoComponent implements OnInit {
       monto: [data.pago.monto, Validators.required],
       fecha_programada: [moment(data.pago.fecha_programada, "YYYY-MM-DD"), Validators.required],
       fecha_pago: moment(data.pago.fecha_pago, "YYYY-MM-DD"),
-      tipo_pago: data.pago.tipo_pago,
-      forma_pago: data.pago.forma_pago,
-      nota: data.pago.nota
+      tipo: ["", Validators.required],
+      forma: ["", Validators.required],
+      nota: [""],
+
 
     });
   }
@@ -41,7 +42,7 @@ export class EditarPagoDialogoComponent implements OnInit {
 
   }
 
-  guardar(){
+  guardar() {
     console.log("pago", this.form.value);
   }
 

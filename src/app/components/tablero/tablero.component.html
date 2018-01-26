@@ -50,10 +50,34 @@
     </div>
 
     <div class="col-12 col-md-6 col-lg-4 p-2">
+      <mat-card class="d-flex align-items-center card-pointer" (click)="gotoAlertaClientes()">
+        <mat-card-title class="mb-0">Alerta Clientes</mat-card-title>
+        <span class="spacer"></span>
+        <i class="material-icons icono-tablero">notifications</i>
+      </mat-card>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-4 p-2">
+      <mat-card class="d-flex align-items-center card-pointer" (click)="gotoClienteSinLote()">
+        <mat-card-title class="mb-0">Clientes Sin Lote</mat-card-title>
+        <span class="spacer"></span>
+        <i class="material-icons icono-tablero">person_outline</i>
+      </mat-card>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-4 p-2">
       <mat-card class="d-flex align-items-center card-pointer" (click)="gotoMapas()">
         <mat-card-title class="mb-0">Mapas Ventas</mat-card-title>
         <span class="spacer"></span>
         <i class="material-icons icono-tablero">map</i>
+      </mat-card>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-4 p-2">
+      <mat-card class="d-flex align-items-center card-pointer" (click)="gotoEstadisticas()">
+        <mat-card-title class="mb-0">Estadisticas Ventas</mat-card-title>
+        <span class="spacer"></span>
+        <i class="material-icons icono-tablero">assessment</i>
       </mat-card>
     </div>
 

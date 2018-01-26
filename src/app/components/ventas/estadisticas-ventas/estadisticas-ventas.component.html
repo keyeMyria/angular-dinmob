@@ -1,0 +1,64 @@
+<div class="container mt-3 mb-5">
+  <div>
+    <mat-form-field class="w-100">
+      <mat-select placeholder="Obra" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)">
+        <mat-option *ngFor="let obra of obras" [value]="obra.id_obra">{{ obra.nombre }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="row">
+
+    <div class="col-12 col-md-6 col-lg-2 p-2">
+      <mat-card class="d-flex align-items-center card-pointer">
+        <i class="material-icons icono-tablero">contacts</i>
+        <span class="spacer"></span>
+        <mat-card-title class="mb-0">Clientes</mat-card-title>
+      </mat-card>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-2 p-2">
+      <mat-card class="d-flex align-items-center card-pointer">
+        <i class="material-icons icono-tablero">group_add</i>
+        <span class="spacer"></span>
+        <mat-card-title class="mb-0">Usuarios</mat-card-title>
+      </mat-card>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-2 p-2">
+      <mat-card class="d-flex align-items-center card-pointer">
+        <mat-card-title class="mb-0">Obras</mat-card-title>
+        <span class="spacer"></span>
+        <i class="material-icons icono-tablero">list</i>
+      </mat-card>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-2 p-2">
+      <mat-card class="d-flex align-items-center card-pointer">
+        <mat-card-title class="mb-0">Prototipos</mat-card-title>
+        <span class="spacer"></span>
+        <i class="material-icons icono-tablero">donut_large</i>
+      </mat-card>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-2 p-2">
+      <mat-card class="d-flex align-items-center card-pointer">
+        <mat-card-title class="mb-0">Prototipos</mat-card-title>
+        <span class="spacer"></span>
+        <i class="material-icons icono-tablero">donut_large</i>
+      </mat-card>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-2 p-2">
+      <mat-card class="d-flex align-items-center card-pointer">
+        <mat-card-title class="mb-0">Prototipos</mat-card-title>
+        <span class="spacer"></span>
+        <i class="material-icons icono-tablero">donut_large</i>
+      </mat-card>
+    </div>
+
+
+  </div>
+
+
+</div>

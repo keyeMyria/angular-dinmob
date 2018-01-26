@@ -117,6 +117,9 @@ import { EditarLoteDialogoComponent } from './components/admin/editar-lote-dialo
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 import { VerCedulaFiscalDialogoComponent } from './components/ventas/ver-cedula-fiscal-dialogo/ver-cedula-fiscal-dialogo.component';
+import { AlertaClientesComponent } from './components/ventas/alerta-clientes/alerta-clientes.component';
+import { ClienteSinLoteComponent } from './components/ventas/cliente-sin-lote/cliente-sin-lote.component';
+import { EstadisticasVentasComponent } from './components/ventas/estadisticas-ventas/estadisticas-ventas.component';
 registerLocaleData(localeEs, 'es');
 
 
@@ -180,6 +183,9 @@ registerLocaleData(localeEs, 'es');
     EditarDocumentoDialogoComponent,
     EditarLoteDialogoComponent,
     VerCedulaFiscalDialogoComponent,
+    AlertaClientesComponent,
+    ClienteSinLoteComponent,
+    EstadisticasVentasComponent,
  
 
 

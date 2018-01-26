@@ -3,56 +3,32 @@
 
 
   <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
-    <!-- name="formAddInsumo" id="formAddInsumo" (ngSubmit)="add_insumo_repeated && formAddInsumo.$valid && ctrl.addInsumoPartida(formAddInsumo)"
-      novalidate
-     -->
+
 
     <div class="form-group">
-      <label class="control-label">Nombre</label>
-      <select class="form-control" (change)="changeInsumo(ctrl.add_insumo_selected)" name="add_insumo_selected" formControlName="add_insumo_selected">  
-                                <option [value]="">Seleccionar...</option>
-                                <option [value]="insumo.codigo" *ngFor="let insumo of data.insumos">{{a.text}}</option>   
-                            </select>
-      <div>
-        <!-- *ngIf="add_insumo_repeated" -->
-        <span class="text-danger">El insumo ya está incluido en la partida. Seleccione otro insumo.</span>
-      </div>
+      <label for="add_insumo_selected" class="control-label">Nombre</label>
+      <select class="form-control" (change)="changeInsumo(ctrl.add_insumo_selected)" id="add_insumo_selected" name="add_insumo_selected"
+        formControlName="add_insumo_selected" [ngClass]="{'is-invalid': form.get('add_insumo_selected').invalid  && (form.get('add_insumo_selected').dirty || form.get('add_insumo_selected').touched )}">
+        <option [value]="insumo.codigo" *ngFor="let insumo of data.insumos">{{a.text}}</option>
+      </select>
+      <div class="invalid-feedback">Seleccione un insumo.</div>
     </div>
-
-
     <div class="form-group">
       <label for="unidad" class="control-label">Unidad</label>
-      <input type="text" class="form-control" name="unidad" id="unidad" formControlName="unidad">
-      <!-- [(ngModel)]="add_insumo_selected.unidad" -->
+      <input type="text" class="form-control" name="unidad" id="unidad" formControlName="unidad" [ngClass]="{'is-invalid': form.get('unidad').invalid  && (form.get('unidad').dirty || form.get('unidad').touched )}">
+      <div class="invalid-feedback">Inserte Unidad</div>
     </div>
-
     <div class="form-group">
-      <!--   [ngClass]="{
-            'has-error'
-            :(formAddInsumo.$submitted || formAddInsumo.precio.$touched) && formAddInsumo.precio.$error.required }" -->
       <label for="precio" class="control-label">Precio</label>
-      <input  [textMask]="{mask: currencyMask}" type="text" class="form-control" id="precio" name="precio" ui-money-mask min="0" formControlName="precio">
-      <!-- [(ngModel)]="add_insumo.precio" -->
-      <div>
-        <!-- *ngIf="formAddInsumo.$submitted || formAddInsumo.precio.$touched" -->
-        <span class="help-block">El precio debe ser mayor a 0</span>
-        <!-- *ngIf="formAddInsumo.precio.$error.required" -->
-      </div>
+      <input [textMask]="{mask: currencyMask}" type="text" class="form-control" id="precio" name="precio" ui-money-mask min="0"
+        formControlName="precio" [ngClass]="{'is-invalid': form.get('precio').invalid  && (form.get('precio').dirty || form.get('precio').touched )}">
+      <div class="invalid-feedback">El precio debe ser mayor a 0</div>
     </div>
-
     <div class="form-group">
-      <!-- [ngClass]="{
-            'has-error'
-            :(formAddInsumo.$submitted || formAddInsumo.cantidad.$touched) && formAddInsumo.cantidad.$error.required }" -->
       <label for="cantidad" class="control-label">Cantidad</label>
-      <input [textMask]="{mask: numberMask}" type="text" name="cantidad" id="cantidad" class="form-control" ui-number-mask="6" formControlName="cantidad">
-      <!-- [(ngModel)]="ctrl.add_insumo.cantidad" -->
-      <div>
-        <!-- *ngIf="formAddInsumo.$submitted || formAddInsumo.cantidad.$touched -->
-        <span class="help-block">La cantidad debe ser mayor a 0</span>
-        <!-- *ngIf="formAddInsumo.cantidad.$error.required" -->
-      </div>
-
+      <input [textMask]="{mask: numberMask}" type="text" name="cantidad" id="cantidad" class="form-control" ui-number-mask="6"
+        formControlName="cantidad" [ngClass]="{'is-invalid': form.get('cantidad').invalid  && (form.get('cantidad').dirty || form.get('cantidad').touched )}">
+      <div class="invalid-feedback">La cantidad debe ser mayor a 0</div>
     </div>
   </form>
 </div>
@@ -60,6 +36,6 @@
 
 
 <div mat-dialog-actions>
-  <button mat-button type="button"[mat-dialog-close]="false">CERRAR</button>
+  <button mat-button type="button" [mat-dialog-close]="false">CERRAR</button>
   <button mat-button type="submit" form="id_form" [disabled]="form.invalid" color="primary">GUARDAR</button>
 </div>

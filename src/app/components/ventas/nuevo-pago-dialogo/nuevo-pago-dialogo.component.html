@@ -1,63 +1,60 @@
 <h1 mat-dialog-title>Nuevo Pago</h1>
 <div mat-dialog-content>
-  <form>
+  <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
 
     <div class="form-group">
-      <label for="nombre">Monto</label>
-      <div>
-        <input [textMask]="{mask: numberMask}" class="form-control" type="text" id="nombre" name="nombre">
-      </div>
+      <label for="monto" class="control-label">Monto</label>
+      <input [textMask]="{mask: numberMask}" class="form-control" type="text" id="monto" name="monto" formControlName="monto"
+        [ngClass]="{'is-invalid': form.get('monto').invalid  && (form.get('monto').dirty || form.get('monto').touched )}">
+      <div class="invalid-feedback">Inserte una cantidad</div>
     </div>
 
     <div class="form-group">
-      <label for="fecha_entrega">Fecha Programada</label>
-      <div>
-        <div class="input-group">
-          <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_entrega" id="fecha_entrega"
-          [matDatepicker]="dpFechaProgramada" (ngModelChange)="onFechaChange()">
-          <span class="input-group-btn">
-            <button class="btn btn-secondary" type="button" (click)="dpFechaProgramada.open()">
-              <i class="fa fa-calendar"></i>
-            </button>
-          </span>
-        </div>
-        <mat-datepicker touchUi="true" #dpFechaProgramada></mat-datepicker>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="nombre">Tipo</label>
+      <label for="fecha_entrega" class="col-form-label">Fecha Programada</label>
       <div class="input-group">
-        <select class="form-control" name="" selectval>
-          <option>Seleccionar</option>
-          <option>Apartado</option>
-          <option>Enganche</option>
-          <option>Parcialidad</option>
-          <option>Finiquito</option>
-          <option>Contrato Agua</option>
-          <option>Devolución</option>
-          <option>Otros</option>
-        </select>
+        <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_entrega" id="fecha_entrega" placement="bottom-left"
+          [matDatepicker]="dpFechaEntrega" formControlName="fecha_entrega" [ngClass]="{'is-invalid':form.get('fecha_entrega').invalid && form.get('fecha_entrega').touched }">
+        <span class="input-group-btn">
+          <button class="btn btn-secondary" type="button" (click)="dpFechaEntrega.open()">
+            <i class="fa fa-calendar"></i>
+          </button>
+        </span>
       </div>
+      <div *ngIf="form.get('fecha_entrega').invalid && form.get('fecha_entrega').touched " class="visible invalid-feedback">
+        Seleccione una fecha
+      </div>
+      <mat-datepicker touchUi="true" #dpFechaEntrega></mat-datepicker>
     </div>
 
     <div class="form-group">
-      <label for="nombre">Forma</label>
-      <div class="input-group">
-        <select class="form-control" name="" selectval>
-          <option>Seleccionar</option>
-          <option>Efectivo</option>
-          <option>Transferencia</option>
-          <option>Cheque</option>
-        </select>
-      </div>
+      <label for="tipo" class="control-label">Tipo</label>
+      <select class="form-control" (change)="changeInsumo(ctrl.tipo)" id="tipo" name="tipo" formControlName="tipo" [ngClass]="{'is-invalid': form.get('tipo').invalid  && (form.get('tipo').dirty || form.get('tipo').touched )}">
+        <option>Seleccionar</option>
+        <option>Apartado</option>
+        <option>Enganche</option>
+        <option>Parcialidad</option>
+        <option>Finiquito</option>
+        <option>Contrato Agua</option>
+        <option>Devolución</option>
+        <option>Otros</option>
+      </select>
+      <div class="invalid-feedback">Seleccione un tipo de pago.</div>
     </div>
 
     <div class="form-group">
-      <label for="">Nota</label>
-      <div>
-        <input class="form-control" type="text" id="nombre" name="">
-      </div>
+      <label for="forma" class="control-label">Forma</label>
+      <select class="form-control" (change)="changeInsumo(ctrl.tipo)" id="forma" name="forma" formControlName="forma" [ngClass]="{'is-invalid': form.get('forma').invalid  && (form.get('forma').dirty || form.get('forma').touched )}">
+        <option>Seleccionar</option>
+        <option>Efectivo</option>
+        <option>Transferencia</option>
+        <option>Cheque</option>
+      </select>
+      <div class="invalid-feedback">Defina la forma de pago.</div>
+    </div>
+
+    <div class="form-group">
+      <label for="nota" class="control-label">Nota</label>
+      <input class="form-control" type="text" id="nota" name="nota" formControlName="nota">
     </div>
 
   </form>
@@ -65,6 +62,6 @@
 
 </div>
 <div mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="false">CANCELAR</button>
-  <button mat-button [mat-dialog-close]="true">ACEPTAR</button>
+    <button mat-button type="button" [mat-dialog-close]="false">CERRAR</button>
+    <button mat-button type="submit" form="id_form" [disabled]="form.invalid" color="primary">GUARDAR</button>
 </div>

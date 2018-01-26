@@ -1260,29 +1260,28 @@
   <!-- <Alerta> -->
   <mat-tab label="Alerta">
     <div class="container py-3">
-      <div class="form-group">
-        <!--           <div class="checkbox col-sm-12">
-                      <label>
-                        <input type="checkbox"> Alerta Activada
-                        [(ngModel)]="alerta"
-                      </label>
-                    </div> -->
-        <mat-slide-toggle>
-          Alerta Activada
-        </mat-slide-toggle>
-      </div>
-      <div class="form-group">
-        <label class="col-sm-12">Mensaje de Alerta</label>
-        <div class="col-sm-12">
-          <input type="text" class="form-control">
-          <!-- [(ngModel)]="original.mensaje_alerta" -->
+      <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
+
+        <div class="form-group">
+          <mat-slide-toggle>
+            Alerta Activada
+          </mat-slide-toggle>
         </div>
-      </div>
+
+        <div class="form-group">
+          <label for="mensaje_alerta" class="col-form-label">Mensaje de Alerta</label>
+          <input class="form-control" type="text" name="mensaje_alerta" id="mensaje_alerta" formControlName="mensaje_alerta" 
+          [ngClass]="{'is-invalid': form.get('mensaje_alerta').invalid  && (form.get('mensaje_alerta').dirty || form.get('mensaje_alerta').touched )}">
+          <div class="invalid-feedback">Escriba mensaje de alerta</div>
+        </div>
+      </form>
+
       <div class="form-group">
         <div class="col-sm-12 text-center">
-          <button type="button" class="btn btn-primary" (click)="updateAlertaCliente()">Guardar</button>
+          <button class="btn btn-secondary" type="submit" form="id_form" [disabled]="form.invalid" color="primary">Guardar</button>
         </div>
       </div>
+
     </div>
   </mat-tab>
 </mat-tab-group>

@@ -2,76 +2,76 @@
 <div mat-dialog-content>
 
   <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
-    <div class=" form-group ">
-      <label for="monto">Monto</label>
-      <div>
-        <input [textMask]="{mask: numberMask}" class="form-control" type="text" id="nombre" name="monto" formControlName="monto">
-      </div>
+
+    <div class="form-group">
+      <label for="monto" class="control-label">Monto</label>
+      <input [textMask]="{mask: numberMask}" class="form-control" type="text" id="monto" name="monto" formControlName="monto" [ngClass]="{'is-invalid': form.get('monto').invalid  && (form.get('monto').dirty || form.get('monto').touched )}">
+      <div class="invalid-feedback">Inserte una cantidad</div>
     </div>
 
     <div class="form-group">
-      <label for="fecha_programada">Fecha Programada</label>
-      <div>
-        <div class="input-group">
-          <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_programada" id="fecha_programada" [matDatepicker]="dpFechaProgramada" formControlName="fecha_programada">
-          <span class="input-group-btn">
-            <button class="btn btn-secondary" type="button" (click)="dpFechaProgramada.open()">
-              <i class="fa fa-calendar"></i>
-            </button>
-          </span>
-        </div>
-        <mat-datepicker touchUi="true" #dpFechaProgramada></mat-datepicker>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="fecha_pago ">Fecha Pago</label>
-      <div>
-        <div class="input-group">
-          <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_pago" id="fecha_pago" [matDatepicker]="dpFechaPago" formControlName="fecha_pago">
-          <span class="input-group-btn">
-            <button class="btn btn-secondary" type="button" (click)="dpFechaPago.open()">
-              <i class="fa fa-calendar"></i>
-            </button>
-          </span>
-        </div>
-        <mat-datepicker touchUi="true" #dpFechaPago></mat-datepicker>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="tipo_pago">Tipo</label>
+      <label for="fecha_programada" class="col-form-label">Fecha Programada</label>
       <div class="input-group">
-        <select class="form-control" name="tipo_pago" formControlName="tipo_pago">
-          <option>Seleccionar</option>
-          <option>Apartado</option>
-          <option>Enganche</option>
-          <option>Parcialidad</option>
-          <option>Finiquito</option>
-          <option>Contrato Agua</option>
-          <option>Devolución</option>
-          <option>Otros</option>
-        </select>
+        <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_programada" id="fecha_programada" placement="bottom-left"
+          [matDatepicker]="dpFechaProgramada" formControlName="fecha_programada" [ngClass]="{'is-invalid':form.get('fecha_programada').invalid && form.get('fecha_programada').touched }">
+        <span class="input-group-btn">
+          <button class="btn btn-secondary" type="button" (click)="dpFechaProgramada.open()">
+            <i class="fa fa-calendar"></i>
+          </button>
+        </span>
       </div>
+      <div *ngIf="form.get('fecha_programada').invalid && form.get('fecha_programada').touched " class="visible invalid-feedback">
+        Seleccione una fecha
+      </div>
+      <mat-datepicker touchUi="true" #dpFechaProgramada></mat-datepicker>
     </div>
 
     <div class="form-group">
-      <label for="forma_pago">Forma</label>
+      <label for="fecha_pago" class="col-form-label">Fecha Pago</label>
       <div class="input-group">
-        <select class="form-control" name="forma_pago" formControlName="forma_pago">
-          <option>Seleccionar</option>
-          <option>Efectivo</option>
-          <option>Transferencia</option>
-          <option>Cheque</option>
-        </select>
+        <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_pago" id="fecha_pago" placement="bottom-left"
+          [matDatepicker]="dpFechaPago" formControlName="fecha_pago" [ngClass]="{'is-invalid':form.get('fecha_pago').invalid && form.get('fecha_pago').touched }">
+        <span class="input-group-btn">
+          <button class="btn btn-secondary" type="button" (click)="dpFechaPago.open()">
+            <i class="fa fa-calendar"></i>
+          </button>
+        </span>
       </div>
+      <div *ngIf="form.get('fecha_pago').invalid && form.get('fecha_pago').touched " class="visible invalid-feedback">
+        Seleccione una fecha
+      </div>
+      <mat-datepicker touchUi="true" #dpFechaPago></mat-datepicker>
     </div>
 
     <div class="form-group">
-      <label for="nota">Nota</label>
-      <div>
-        <input class="form-control" type="text" id="nombre" name="nota" formControlName="nota">
-      </div>
+      <label for="tipo" class="control-label">Tipo</label>
+      <select class="form-control" (change)="changeInsumo(ctrl.tipo)" id="tipo" name="tipo" formControlName="tipo" [ngClass]="{'is-invalid': form.get('tipo').invalid  && (form.get('tipo').dirty || form.get('tipo').touched )}">
+        <option>Seleccionar</option>
+        <option>Apartado</option>
+        <option>Enganche</option>
+        <option>Parcialidad</option>
+        <option>Finiquito</option>
+        <option>Contrato Agua</option>
+        <option>Devolución</option>
+        <option>Otros</option>
+      </select>
+      <div class="invalid-feedback">Seleccione un tipo de pago.</div>
+    </div>
+
+    <div class="form-group">
+      <label for="forma" class="control-label">Forma</label>
+      <select class="form-control" (change)="changeInsumo(ctrl.tipo)" id="forma" name="forma" formControlName="forma" [ngClass]="{'is-invalid': form.get('forma').invalid  && (form.get('forma').dirty || form.get('forma').touched )}">
+        <option>Seleccionar</option>
+        <option>Efectivo</option>
+        <option>Transferencia</option>
+        <option>Cheque</option>
+      </select>
+      <div class="invalid-feedback">Defina la forma de pago.</div>
+    </div>
+
+    <div class="form-group">
+      <label for="nota" class="control-label">Nota</label>
+      <input class="form-control" type="text" id="nota" name="nota" formControlName="nota">
     </div>
 
   </form>
