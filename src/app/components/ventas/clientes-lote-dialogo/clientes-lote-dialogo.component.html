@@ -1,0 +1,85 @@
+<h1 mat-dialog-title>Cliente Lote</h1>
+<div mat-dialog-content>
+
+
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Nombre</th>
+          <th>Activo</th>
+          <th>Fecha Activación</th>
+          <th>Fecha Cancelación</th>          
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cliente of lote.clientes">
+          <td>
+            <mat-checkbox (change)="seleccionarCliente($event,cliente)"></mat-checkbox>
+          </td>
+          <td>
+            <span *ngIf="cliente.persona_moral === '0'">{{cliente.nombre_persona_fisica}}</span>
+            <span *ngIf="cliente.persona_moral === '1'">{{cliente.razon_social_persona_moral}}</span>
+          </td>
+          <td>{{cliente.activo|numberToYesNo:'AC'}}</td>
+          <td>{{cliente.fecha_activo| date:'mediumDate':'':'es'}}</td>
+          <td>{{cliente.fecha_cancelacion| date:'mediumDate':'':'es'}}</td>       
+        </tr>
+
+      </tbody>
+
+    </table>
+  </div>
+
+
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Pago</th>
+          <th>Monto</th>
+          <th>Tipo</th>
+          <th>Forma</th>
+          <th>Nota</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pago of cliente_selected.pagos">
+          <td>{{pago.fecha_pago| date:'mediumDate':'':'es'}}</td>
+          <td>{{pago.monto|currency}}</td>
+          <td>{{pago.tipo_pago}}</td>
+          <td>{{pago.forma_pago}}</td>
+          <td>{{pago.nota}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-4">
+      <div class="description-block border-right">
+        <h4 class="text-primary">{{(cliente_selected.valor_operacion|| 0)| currency}}</h4>
+        <span>VALOR OPERACIÓN</span>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+      <div class="description-block border-right">
+        <h4 class="text-success">{{(totalPagosRealizados(cliente_selected) || 0) | currency}}</h4>
+        <span>-PAGOS REALIZADOS</span>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+      <div class="description-block">
+        <h4 class="text-danger">{{(saldoPendiente(cliente_selected) || 0) | currency}}</h4>
+        <span>=SALDO PENDIENTE</span>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button class="btn-block" [mat-dialog-close]="true">CERRAR</button>
+</div>
