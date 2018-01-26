@@ -2,9 +2,10 @@
 <div mat-dialog-content>
 
   <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
+
     <div class="form-group">
-      <label class="form-label" for="obra_selected">Seleccionar Obra</label>
-      <select class="form-control" name="obra_selected" (change)="cargarObra(obra_selected)" formControlName="obra_selected" [ngClass]="{'is-invalid': form.get('obra_selected').invalid  && (form.get('obra_selected').dirty || form.get('obra_selected').touched )}">
+      <label class="form-label" for="obra">Obra</label>
+      <select class="form-control" name="obra" #obra (change)="cargarObra(obra.value)" formControlName="obra" [ngClass]="{'is-invalid': form.get('obra').invalid  && (form.get('obra').dirty || form.get('obra').touched )}">
         <option value="">Seleccionar...</option>
         <option [value]="obra.id_obra" *ngFor="let obra of data.obras">{{obra.nombre}}</option>
       </select>
@@ -12,11 +13,15 @@
     </div>
 
     <div class="form-group">
-      <label class="form-label" for="lote">Lote</label>
-      <select class="form-control" name="lote" (change)="cargarLote(lote)" formControlName="lote" [ngClass]="{'is-invalid': form.get('lote').invalid  && (form.get('lote').dirty || form.get('lote').touched )}">
+      <label class="form-label" for="lote">Lote <i *ngIf="loading" class="fa fa-spinner fa-spin fa-fw"></i></label>
+      <select class="form-control" name="lote" formControlName="lote" [ngClass]="{'is-invalid': form.get('lote').invalid  && (form.get('lote').dirty || form.get('lote').touched )}">
         <option value="">Seleccionar...</option>
-        <option [value]="lote" *ngFor="let lote of lotes">{{lote.manzana + " " + lote.nombre}}</option>
+        <ng-container *ngFor="let manzana of manzanas">
+          <option [value]="lote.id_lote" *ngFor="let lote of manzana.lotes">{{manzana.nombre + " / " + lote.nombre}}</option>
+        </ng-container>
+
       </select>
+      <small class="fomr-text text-muted">Sólo se muestran los lotes en estado LIBRE</small>
       <div class="invalid-feedback">Seleccione un lote</div>
     </div>
 
