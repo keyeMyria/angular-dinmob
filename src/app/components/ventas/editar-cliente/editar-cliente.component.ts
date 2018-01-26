@@ -33,6 +33,7 @@ export class EditarClienteComponent implements OnInit {
 
   cliente: Cliente = new Cliente();
   compras: any[] = [];
+  obras: any[] = [];
   documentos_cliente: any[] = [];
   documentos_conyuge: any[] = [];
   form: FormGroup;
@@ -51,14 +52,23 @@ export class EditarClienteComponent implements OnInit {
     public snackBar: MatSnackBar,
     private fb: FormBuilder,
   ) {
+
     this.form = this.fb.group({
       mensaje_alerta: ["", Validators.required],     
     });
+
   }
 
   ngOnInit() {
     /* this.cliente = new Cliente();
     this.cliente.persona_moral = "0"; */
+
+    this.route.data
+    .subscribe((data: { obras: any[] }) => {
+      //console.log("resusltado resolve ", data);
+      this.obras = data.obras;
+    });
+
 
     let id = this.route.snapshot.paramMap.get('id');
 
@@ -118,6 +128,7 @@ export class EditarClienteComponent implements OnInit {
     let dialogRef = this.dialog.open(NuevaCompraDialogoComponent, {
       width: '400px',
       data: {
+        obras:this.obras
       }
     });
     dialogRef.afterClosed().subscribe(result => {

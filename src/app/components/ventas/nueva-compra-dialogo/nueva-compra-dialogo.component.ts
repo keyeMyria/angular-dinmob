@@ -10,6 +10,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 })
 export class NuevaCompraDialogoComponent implements OnInit {
   obras: any = [];
+  lotes: any = [];
   obra: any = {
     datos: {}
   };

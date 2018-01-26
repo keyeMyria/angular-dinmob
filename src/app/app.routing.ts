@@ -108,7 +108,12 @@ export const ROUTES: Routes = [
             },
             { path: 'usuarios', component: UsuariosComponent },
             { path: 'crear-usuario', component: CrearUsuarioComponent },
-            { path: 'editar-cliente/:id', component: EditarClienteComponent },
+            {
+                path: 'editar-cliente/:id', component: EditarClienteComponent,
+                resolve: {
+                    obras: ObrasUsuarioResolverService
+                }
+            },
             { path: 'acta-entrega/:id', component: ActaEntregaComponent },
             { path: 'crear-acta-entrega', component: CrearActaEntregaComponent },
             { path: 'actas-entrega', component: ActasEntregaComponent },
