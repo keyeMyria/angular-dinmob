@@ -9,7 +9,7 @@
             <mat-tab-group>
               <!-- Datos Generales -->
               <mat-tab label="Cliente">
-                <div class="p15px">
+                <div class="container py-3">
                   <!-- Persona Fisica/Moral -->
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">Actividad Económica</label>
@@ -348,7 +348,7 @@
 
               <!-- Datos Laborales -->
               <mat-tab label="Datos laborales" *ngIf="cliente.persona_moral === '0'">
-                <div class="p15px">
+                <div class="container py-3">
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">Profesión</label>
                     <div class="col-sm-9">
@@ -415,7 +415,7 @@
 
               <!-- conyuge -->
               <mat-tab label="Conyuge" *ngIf="cliente.persona_moral === '0' && cliente.regimen_conyugal_persona_fisica === '1'">
-                <div class="p15px">
+                <div class="container py-3">
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">Nombre completo</label>
                     <div class="col-sm-9">
@@ -586,7 +586,7 @@
 
               <!-- Apoderado Legal -->
               <mat-tab label="Apoderado" *ngIf="cliente.persona_moral === '1'">
-                <div class="p15px">
+                <div class="container py-3">
                   <div class="form-group row">
                     <label class="col-form-label col-sm-3">Nombre completo</label>
                     <div class="col-sm-9">

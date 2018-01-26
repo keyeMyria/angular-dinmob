@@ -5,14 +5,14 @@
 
   <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
     <div class="form-group">
-      <label class="control-label">Código</label>
+      <label for="codigo"class="control-label">Código</label>
       <input type="text" name="codigo" class="form-control" formControlName="codigo" 
       [ngClass]="{'is-invalid': form.get('codigo').invalid  && (form.get('codigo').dirty || form.get('codigo').touched )}">
       <div class="invalid-feedback">El código no puede estar vacío</div>
     </div>
 
     <div class="form-group">
-      <label class="control-label">Nombre</label>
+      <label for="nombre" class="control-label">Nombre</label>
       <input type="text" name="nombre" class="form-control" formControlName="nombre"
       [ngClass]="{'is-invalid': form.get('nombre').invalid  && (form.get('nombre').dirty || form.get('nombre').touched )}">
       <div class="invalid-feedback">El nombre no puede estar vacío</div>

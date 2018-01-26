@@ -18,7 +18,7 @@ export class EditarNombrePrototipoDialogoComponent implements OnInit {
     private fb: FormBuilder
   ) {
     this.form = this.fb.group({
-      nombre: [data.prototipo.info.nombre, Validators.required]
+      nombre: [data.prototipo.nombre, Validators.required]
     });
 
 

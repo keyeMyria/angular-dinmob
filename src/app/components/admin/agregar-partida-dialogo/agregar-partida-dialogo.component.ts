@@ -9,7 +9,7 @@ import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@ang
   styleUrls: ['./agregar-partida-dialogo.component.scss']
 })
 export class AgregarPartidaDialogoComponent implements OnInit {
-  form: FormGroup;;
+  form: FormGroup;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,

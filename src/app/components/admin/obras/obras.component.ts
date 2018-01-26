@@ -87,7 +87,8 @@ export class ObrasComponent implements OnInit {
       data: {
         title: "Eliminar Obra",
         content: `¿Desea eliminar la obra: ${obra.nombre}?`
-      }
+      },
+      width: "500px"
     });
 
     dialogRef.afterClosed().subscribe(result => {

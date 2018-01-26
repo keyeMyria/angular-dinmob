@@ -78,6 +78,7 @@ export class PrototiposComponent implements OnInit {
   agregarPrototipo() {
     let dialogRef = this.dialog.open(AgregarPrototipoDialogoComponent, {
       data: {},
+      width: '500px'
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
@@ -96,6 +97,7 @@ export class PrototiposComponent implements OnInit {
       data: {
         prototipo: prototipo,
       },
+      width: "500px"
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {

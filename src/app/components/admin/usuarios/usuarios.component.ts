@@ -43,7 +43,7 @@ export class UsuariosComponent implements OnInit {
       data: {
         usuario: usuario
       },
-      width: "450px"
+      width: "500px"
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -74,7 +74,8 @@ export class UsuariosComponent implements OnInit {
       data: {
         title: "Eliminar usuario",
         content: `¿Desea eliminar el usuario: ${usuario.nombre}?`
-      }
+      },
+      width: "500px"
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -117,7 +118,7 @@ export class UsuariosComponent implements OnInit {
         usuario: usuario,
         usuarios: this.usuarios
       },
-      width: "450px"
+      width: "500px"
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -151,7 +152,7 @@ export class UsuariosComponent implements OnInit {
         roles: this.roles,
         usuarios: this.usuarios
       },
-      width: "450px"
+      width: "500px"
     });
 
     dialogRef.afterClosed().subscribe(result => {

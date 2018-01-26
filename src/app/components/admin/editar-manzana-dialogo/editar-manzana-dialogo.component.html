@@ -3,23 +3,18 @@
 
 
 
-  <form>
-
-
+  <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
     <div class="form-group">
-      <label class="control-label">Nombre</label>
-      <input type="text" name="nombre" class="form-control">
-      <div>
-        <span class="help-block">El nombre no puede estar vacío</span>
-      </div>
+      <label for="nombre" class="control-label">Nombre</label>
+      <input type="text" id="nombre" name="nombre" class="form-control" formControlName="nombre" 
+      [ngClass]="{'is-invalid': form.get('nombre').invalid  && (form.get('nombre').dirty || form.get('nombre').touched )}">
+      <span class="invalid-feedback">El nombre no puede estar vacío</span>
     </div>
-
-
-
   </form>
+
 </div>
 
 <div mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="false">CANCELAR</button>
-  <button mat-button [mat-dialog-close]="true">EDITAR</button>
+    <button mat-button type="button" [mat-dialog-close]="false">CANCELAR</button>
+    <button mat-button type="submit" form="id_form" [disabled]="form.invalid" color="primary">EDITAR</button>
 </div>

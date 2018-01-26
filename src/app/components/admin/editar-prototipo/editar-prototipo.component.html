@@ -67,9 +67,9 @@
               <!-- subpartidas -->
               <mat-accordion [displayMode]="'default'" *ngIf="partida.subpartidas.length>0">
 
-                <mat-expansion-panel [hideToggle]="true" *ngFor="let subpartida of partida.subpartidas"  #sub>
-                
-                  <mat-expansion-panel-header  [ngClass]="{'bg-secondary text-white':sub.expanded}">
+                <mat-expansion-panel [hideToggle]="true" *ngFor="let subpartida of partida.subpartidas" #sub>
+
+                  <mat-expansion-panel-header [ngClass]="{'bg-secondary text-white':sub.expanded}">
                     <span class="font-weight-bold align-self-center mr-1">{{subpartida.codigo}}</span>
                     <span class="align-self-center">{{subpartida.nombre}}</span>
                     <div class="spacer"></div>
@@ -120,7 +120,7 @@
                           <td class="text-right">{{insumo.cantidad}}</td>
                           <td class="text-right">{{insumo.precio|currency}}</td>
                           <th>
-                            <button mat-icon-button [matMenuTriggerFor]="menu4" (click)="$event.stopPropagation()">
+                            <!--               <button mat-icon-button [matMenuTriggerFor]="menu4" (click)="$event.stopPropagation()">
                               <mat-icon>more_vert</mat-icon>
                             </button>
                             <mat-menu #menu4="matMenu">
@@ -132,7 +132,13 @@
                                 <mat-icon>delete</mat-icon>
                                 <span>Eliminar</span>
                               </button>
-                            </mat-menu>
+                            </mat-menu> -->
+                            <button mat-button class="no-min" (click)="editarInsumo(insumo)">
+                              <i class="fa fa-pencil"></i>
+                            </button>
+                            <button mat-button class="no-min" (click)="delInsumo(insumo)">
+                              <i class="fa fa-times"></i>
+                            </button>
                           </th>
                         </tr>
                       </tbody>

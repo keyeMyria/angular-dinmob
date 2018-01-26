@@ -152,9 +152,11 @@ export class EstructuraObraComponent implements OnInit {
   }
 
 
-  editarManzana() {
+  editarManzana(manzana) {
     let dialogRef = this.dialog.open(EditarManzanaDialogoComponent, {
-      data: {},
+      data: {
+        manzana: manzana
+      },
       width: '500px',
 
     });
@@ -163,8 +165,8 @@ export class EstructuraObraComponent implements OnInit {
     });
   }
 
-    
-   /* abrimos un dialogo para editar las propiedades del lote */
+
+  /* abrimos un dialogo para editar las propiedades del lote */
   editarLote(manzana, lote, event) {
     event.stopPropagation();
 
