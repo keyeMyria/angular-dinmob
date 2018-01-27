@@ -27,6 +27,7 @@ export class ObrasComponent implements OnInit {
     public dialog: MatDialog,
     public snackBar: MatSnackBar) { }
 
+
   ngOnInit() {
 
     this.route.data

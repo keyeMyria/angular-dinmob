@@ -837,7 +837,7 @@
         <table class="table table-striped table-hover table-align-middle table-striped mb-4">
           <thead>
             <tr>
-              <th></th>
+              <th style="width:56px"></th>
               <th>Lote</th>
               <th>Estado</th>
               <th>Activación</th>
@@ -850,10 +850,10 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let compra of compras" class="pointer" (click)="selectCompra(compra, $event)" [ngClass]="{'table-primary':compra.selected}">
-              <td>
-                <mat-icon>{{ compra.selected?'check_box':'check_box_outline_blank'}}</mat-icon>
-                <!-- <mat-checkbox (change)="selectCompra(compra, $event)"></mat-checkbox> -->
+            <tr *ngFor="let compra of compras" class="pointer" (click)="selectCompra(compra)" [ngClass]="{'table-primary':selection.isSelected(compra)}">
+              <td style="overflow: visible">
+                <!-- <mat-icon>{{ compra.selected?'check_box':'check_box_outline_blank'}}</mat-icon> -->
+                <mat-checkbox class="pl-2" (click)="$event.stopPropagation()" (change)="$event ? selectCompra(compra) : null" [checked]="selection.isSelected(compra)"></mat-checkbox>
               </td>
               <td>{{compra.obra + " / " + compra.manzana + " / "}}
                 <strong>{{compra.lote}}</strong>
@@ -896,6 +896,8 @@
           </tbody>
         </table>
       </div>
+
+      <button class="btn btn-outline-dark" (click)="showSelection()">show selection</button>
 
       <!-- <div class="text-center margin-bottom">
         <button type="button" class="btn btn-secondary" (click)="nuevaCompra()">Nueva Compra</button>
@@ -1129,11 +1131,13 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let compra of compras" class="pointer" (click)="selectCompra(compra, $event)" [ngClass]="{'table-primary':compra.selected}">
+            <tr *ngFor="let compra of compras" class="pointer" (click)="selectCompra(compra)" [ngClass]="{'table-primary':selection.isSelected(compra)}">
 
               <td>
-                <mat-icon>{{ compra.selected?'check_box':'check_box_outline_blank'}}</mat-icon>
-                <!-- <mat-checkbox (change)="selectCompra(compra, $event)"></mat-checkbox> -->
+                <mat-checkbox class="pl-2" 
+                (click)="$event.stopPropagation()" 
+                (change)="$event ? selectCompra(compra) : null" 
+                [checked]="selection.isSelected(compra)"></mat-checkbox>
               </td>
 
               <td>{{compra.obra + " / " + compra.manzana + " / "}}

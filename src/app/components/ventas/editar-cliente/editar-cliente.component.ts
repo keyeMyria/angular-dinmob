@@ -13,6 +13,7 @@ import { Pago } from 'app/model/pago';
 import { EditarDocumentoDialogoComponent } from 'app/components/ventas/editar-documento-dialogo/editar-documento-dialogo.component';
 import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
 import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
+import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-editar-cliente',
@@ -33,24 +34,32 @@ export class EditarClienteComponent implements OnInit {
   public maskPhone = ['(', /\d/, /\d/, /\d/, ')', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
   public maskRFCM = [/[A-Z0-9]/i, /[A-Z0-9]/i, /[A-Z0-9]/i, '-', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /[A-Z0-9]/i, /[A-Z0-9]/i, /[A-Z0-9]/i,]
 
+  //las propiedades del cliente
   cliente: Cliente = new Cliente();
-  compras: any[] = [];
-  obras: any[] = [];
+  compras: any[] = []; 
   documentos_cliente: any[] = [];
   documentos_conyuge: any[] = [];
-  form: FormGroup;
 
+
+  //catalogos para los selects
+  //mediante resolvers
+  obras: any[] = [];
   formas_pago: any[] = [];
   instituciones_credito: any[] = [];
   tipos_operacion: any[] = [];
   tipos_pago: any[] = [];
   estados: any[] = [];
 
+  //selector de compras
+  selection= new SelectionModel<any>(false);
+
 
 
   selectedOption: string;
   compra_selected: any = {};
   pago: Pago;
+
+  form: FormGroup;
 
   constructor(
     private clienteSrv: ClientesService,
@@ -100,7 +109,7 @@ export class EditarClienteComponent implements OnInit {
     console.log("mensaje alerta", this.form.value)
   }
 
-  selectCompra(compra, event) {
+  selectCompra_old(compra, event) {
 
 
     compra.selected = !compra.selected;
@@ -109,6 +118,26 @@ export class EditarClienteComponent implements OnInit {
     } else {
       this.compra_selected = {};
     };
+  }
+
+  
+  selectCompra(compra) {
+
+    this.selection.toggle(compra);
+    if (this.selection.selected.length>0) {
+      this.compra_selected= this.selection.selected[0];
+      
+    } else {
+      this.compra_selected={};
+    }
+
+  }
+
+  
+
+  showSelection(){
+    console.log(this.selection.selected);
+    
   }
 
 
