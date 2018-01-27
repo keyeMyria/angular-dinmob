@@ -1,11 +1,4 @@
-<!-- <section class="container-fluid">
-  <div class="row">
-    <div class="col-12 col-sm-10 mx-sm-auto">
-      <form class="form-horizontal" name="formCliente" id="formCliente" novalidate (ngSubmit)="updateCliente()">
 
-
-        <div class="card">
-          <div> -->
 
 <mat-tab-group>
   <!-- <div class="tab-content"> -->
@@ -969,7 +962,7 @@
           <div class="col-sm-9">
             <select class="form-control" name="id_institucion_credito" [(ngModel)]="compra_selected.id_institucion_credito">
               <option [value]="">Seleccionar...</option>
-              <option *ngFor="let inst of instituciones" [value]="inst.id_istituciones_credito">{{Inst.nombre}}</option>
+              <option *ngFor="let inst of instituciones_credito" [value]="inst.id_istitucion_credito">{{inst.nombre}}</option>
             </select>
           </div>
         </div>
@@ -1286,22 +1279,3 @@
   </mat-tab>
 </mat-tab-group>
 
-<!--           </div>
-
-
-          <div class="card-footer">
-            <div class="row">
-              <div class="col-sm-11 ml-sm-auto">
-            
-                <button type="submit" class="btn btn-primary">Guardar</button>
-             
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-      </form>
-    </div>
-  </div>
-</section> -->

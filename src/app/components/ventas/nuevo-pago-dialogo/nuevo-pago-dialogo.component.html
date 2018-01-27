@@ -30,24 +30,18 @@
       <label for="tipo" class="form-label">Tipo</label>
       <select class="form-control" (change)="changeInsumo(ctrl.tipo)" id="tipo" name="tipo" formControlName="tipo" [ngClass]="{'is-invalid': form.get('tipo').invalid  && (form.get('tipo').dirty || form.get('tipo').touched )}">
         <option value="">Seleccionar...</option>
-        <option>Apartado</option>
-        <option>Enganche</option>
-        <option>Parcialidad</option>
-        <option>Finiquito</option>
-        <option>Contrato Agua</option>
-        <option>Devolución</option>
-        <option>Otros</option>
+        <option [value]="tipo.id_tipo_pago" *ngFor="let tipo of data.tipos">{{tipo.descripcion}}</option>
+   
       </select>
-      <div class="invalid-feedback">Seleccione un tipo de pago</div>
+      <div class="invalid-feedback">Seleccione el tipo de pago</div>
     </div>
 
     <div class="form-group">
       <label for="forma" class="form-label">Forma</label>
       <select class="form-control" (change)="changeInsumo(ctrl.tipo)" id="forma" name="forma" formControlName="forma" [ngClass]="{'is-invalid': form.get('forma').invalid  && (form.get('forma').dirty || form.get('forma').touched )}">
         <option value="">Seleccionar...</option>
-        <option>Efectivo</option>
-        <option>Transferencia</option>
-        <option>Cheque</option>
+        <option [value]="forma.id_forma_pago" *ngFor="let forma of data.formas">{{forma.descripcion}}</option>
+      
       </select>
       <div class="invalid-feedback">Seleccione la forma de pago</div>
     </div>

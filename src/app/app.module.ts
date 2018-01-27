@@ -113,6 +113,10 @@ import { UsuariosResidentesResolverService } from 'app/resolvers/usuarios-reside
 import { UsuariosAsesoresResolverService } from 'app/resolvers/usuarios-asesores-resolver.service';
 import { EstadosVentaLoteResolverService } from 'app/resolvers/estados-venta-lote-resolver.service';
 import { MapasUsuarioResolverService } from 'app/resolvers/mapas-usuario-resolver.service';
+import { FormasPagoResolverService } from 'app/resolvers/formas-pago-resolver.service';
+import { InstitucionesCreditoResolverService } from 'app/resolvers/instituciones-credito-resolver.service';
+import { TiposPagoResolverService } from 'app/resolvers/tipos-pago-resolver.service';
+import { TiposOperacionResolverService } from 'app/resolvers/tipos-operacion-resolver.service';
 
 
 
@@ -135,6 +139,7 @@ import { AlertaClientesComponent } from './components/ventas/alerta-clientes/ale
 import { ClienteSinLoteComponent } from './components/ventas/cliente-sin-lote/cliente-sin-lote.component';
 import { EstadisticasVentasComponent } from './components/ventas/estadisticas-ventas/estadisticas-ventas.component';
 import { ClientesLoteDialogoComponent } from './components/ventas/clientes-lote-dialogo/clientes-lote-dialogo.component';
+
 
 
 
@@ -285,7 +290,11 @@ import { ClientesLoteDialogoComponent } from './components/ventas/clientes-lote-
     UsuariosContolAlmacenResolverService,
     UsuariosResidentesResolverService,
     EstadosVentaLoteResolverService,
-    MapasUsuarioResolverService
+    MapasUsuarioResolverService,
+    FormasPagoResolverService,
+    InstitucionesCreditoResolverService,
+    TiposPagoResolverService,
+    TiposOperacionResolverService
   ],
   bootstrap: [AppComponent]
 })

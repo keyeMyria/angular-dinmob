@@ -122,7 +122,8 @@ export const ROUTES: Routes = [
                     formas_pago: FormasPagoResolverService,
                     instituciones_credito: InstitucionesCreditoResolverService,
                     tipos_operacion: TiposOperacionResolverService,
-                    tipos_pago: TiposPagoResolverService
+                    tipos_pago: TiposPagoResolverService,
+                    estados: EstadosVentaLoteResolverService
                 }
             },
             { path: 'acta-entrega/:id', component: ActaEntregaComponent },

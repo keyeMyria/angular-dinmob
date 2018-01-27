@@ -15,7 +15,7 @@ export class TipoPagoService {
     private http: HttpClient,
     private config: ConfigService
   ) { 
-    this.url = this.config.api_url + "ventas_estados_lote/";
+    this.url = this.config.api_url + "ventas_tipos_pago/";
   }
 
   getTipos() {

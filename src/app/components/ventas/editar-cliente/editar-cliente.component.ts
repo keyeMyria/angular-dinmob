@@ -40,6 +40,12 @@ export class EditarClienteComponent implements OnInit {
   documentos_conyuge: any[] = [];
   form: FormGroup;
 
+  formas_pago: any[] = [];
+  instituciones_credito: any[] = [];
+  tipos_operacion: any[] = [];
+  tipos_pago: any[] = [];
+  estados: any[] = [];
+
 
 
   selectedOption: string;
@@ -66,9 +72,14 @@ export class EditarClienteComponent implements OnInit {
     this.cliente.persona_moral = "0"; */
 
     this.route.data
-      .subscribe((data: { obras: any[], formas_pago: any[], instituciones_credito: any[], tipos_operacion: any[], tipos_pago: any[] }) => {
+      .subscribe((data: { obras: any[], formas_pago: any[], instituciones_credito: any[], tipos_operacion: any[], tipos_pago: any[], estados: any[] }) => {
         console.log("resultado resolve ", data);
         this.obras = data.obras;
+        this.formas_pago = data.formas_pago;
+        this.instituciones_credito = data.instituciones_credito;
+        this.tipos_operacion = data.tipos_operacion;
+        this.tipos_pago = data.tipos_pago;
+        this.estados = data.estados;
       });
 
 
@@ -142,7 +153,10 @@ export class EditarClienteComponent implements OnInit {
     console.log();
     let dialogRef = this.dialog.open(NuevoPagoDialogoComponent, {
       width: '400px',
-      data: {},
+      data: {
+        tipos: this.tipos_pago,
+        formas: this.formas_pago
+      },
     });
     dialogRef.afterClosed().subscribe(result => {
       this.selectedOption = result;
@@ -152,13 +166,13 @@ export class EditarClienteComponent implements OnInit {
 
   editarPago(pago) {
 
-    /*     let copia = Pago.copiar(pago);
-        //copia.fecha_pago = "01/19/2018"
-        console.log("Copia", copia);
-        console.log("Pago", pago); */
     let dialogRef = this.dialog.open(EditarPagoDialogoComponent, {
       width: '400px',
-      data: { pago: pago },
+      data: {
+        pago: pago,
+        tipos: this.tipos_pago,
+        formas: this.formas_pago
+      },
     });
     dialogRef.afterClosed().subscribe(result => {
       this.selectedOption = result;

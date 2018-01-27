@@ -15,7 +15,7 @@ export class InstitucionCreditoService {
     private http: HttpClient,
     private config: ConfigService
   ) {
-    this.url = this.config.api_url + "ventas_institucion_credito/";
+    this.url = this.config.api_url + "ventas_instituciones_credito/";
   }
 
   getInstituciones() {
