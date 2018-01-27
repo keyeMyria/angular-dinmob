@@ -20,10 +20,7 @@ export class FormaPagoService {
 
   getFormas() {
     return this.http.get(this.url)
-      .pipe(
-      tap(response => console.log("response", response)),
-      catchError(this.handleError("getFormas"))
-      );
+      .pipe(catchError(this.handleError("getFormas")));
 
   }
 

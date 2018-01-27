@@ -73,7 +73,7 @@ export class EditarClienteComponent implements OnInit {
 
     this.route.data
       .subscribe((data: { obras: any[], formas_pago: any[], instituciones_credito: any[], tipos_operacion: any[], tipos_pago: any[], estados: any[] }) => {
-        console.log("resultado resolve ", data);
+        //console.log("resultado resolve ", data);
         this.obras = data.obras;
         this.formas_pago = data.formas_pago;
         this.instituciones_credito = data.instituciones_credito;

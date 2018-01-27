@@ -43,7 +43,7 @@ export class PrototiposComponent implements OnInit {
 
     this.route.data
       .subscribe((data: { obras: any[] }) => {
-        //console.log("resusltado resolve ", data);
+        //console.log("resultado resolve ", data);
         this.obras = data.obras;
       });
 
@@ -58,7 +58,7 @@ export class PrototiposComponent implements OnInit {
           return of([]);
         }
       }).subscribe(prototipos => {
-        console.log("prototipos", prototipos);
+        //console.log("prototipos", prototipos);
         this.prototipos = prototipos;
         this.loading = false;
 

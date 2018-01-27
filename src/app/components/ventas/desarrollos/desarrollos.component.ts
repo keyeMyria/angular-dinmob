@@ -32,7 +32,7 @@ export class DesarrollosComponent implements OnInit {
 
     this.route.data
       .subscribe((data: { obras: any[] }) => {
-        //console.log("resusltado resolve ", data);
+        //console.log("resultado resolve ", data);
         this.obras = data.obras;
       });
 
@@ -45,7 +45,7 @@ export class DesarrollosComponent implements OnInit {
           return of({});
         }
       }).subscribe(obra => {
-        console.log("obra", obra);
+        //console.log("obra", obra);
         this.obra = obra
       });
 

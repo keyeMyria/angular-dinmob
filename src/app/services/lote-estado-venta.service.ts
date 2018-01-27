@@ -21,10 +21,7 @@ export class LoteEstadoVentaService {
 
   getEstados() {
     return this.http.get(this.url)
-      .pipe(
-      tap(response => console.log("response", response)),
-      catchError(this.handleError("getEstados"))
-      );
+      .pipe(catchError(this.handleError("getEstados")));
 
   }
 

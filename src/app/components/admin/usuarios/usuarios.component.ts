@@ -25,7 +25,7 @@ export class UsuariosComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-    console.log("get roles");
+    
     this.usuarioSrv.getRoles()
       .subscribe(res => this.roles = res);
 

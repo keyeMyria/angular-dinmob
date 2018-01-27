@@ -20,10 +20,7 @@ export class TipoPagoService {
 
   getTipos() {
     return this.http.get(this.url)
-      .pipe(
-      tap(response => console.log("response", response)),
-      catchError(this.handleError("getTipos"))
-      );
+      .pipe(catchError(this.handleError("getTipos")));
 
   }
 

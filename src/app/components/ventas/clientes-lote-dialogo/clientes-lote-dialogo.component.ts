@@ -8,7 +8,7 @@ import { Cliente } from 'app/model/cliente';
   styleUrls: ['./clientes-lote-dialogo.component.scss']
 })
 export class ClientesLoteDialogoComponent implements OnInit {
-  cliente: any;
+  clientes: any[]=[];
   cliente_selected: any = { pagos: [] };
 
   constructor(
@@ -17,7 +17,7 @@ export class ClientesLoteDialogoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.cliente = this.data.cliente;
+  
   }
 
 

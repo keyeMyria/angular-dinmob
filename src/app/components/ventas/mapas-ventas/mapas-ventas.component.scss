@@ -1,10 +1,11 @@
 .content {
     /*********funciona cuando  pantalla > 600px **********/
-    height: 100%;
-    position: relative;
+    //height: 100%;
+    //position: relative;
     /**************************************************/
 
 
+    height: calc(100vh - 64px);
     display: flex;
     flex-direction: column;
 
@@ -51,6 +52,5 @@
 :host /deep/ label.mat-slide-toggle-label {
     margin-bottom: 0 !important;
 }
-
 
 
