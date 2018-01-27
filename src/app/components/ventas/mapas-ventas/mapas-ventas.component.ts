@@ -37,18 +37,18 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
       });
   }
 
-  gotoLote() {
+  verClientes() {
 
     let dialogRef = this.dialog.open(ClientesLoteDialogoComponent, {
-      data: {  
+      data: {
       },
       width: "800px"
     });
     dialogRef.afterClosed().subscribe(result => {
 
-      if (result === true) { 
+      if (result === true) {
 
-      } else if (result.error) {     
+      } else if (result.error) {
 
       }
     });
@@ -58,6 +58,16 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
     if (this.map) {
       this.map.remove();
     }
+  }
+
+
+  toggleVerLeyenda(event) {
+    //console.log("ver leyenda", event.checked);
+   $(".jvectormap-legend-cnt.jvectormap-legend-cnt-v").toggleClass("d-none");
+    //let items= $(".jvectormap-legend-cnt.jvectormap-legend-cnt-v");
+    //console.log(items);
+    
+
   }
 
   getMapa() {

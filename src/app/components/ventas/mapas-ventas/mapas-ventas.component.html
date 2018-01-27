@@ -1,38 +1,77 @@
-
-<button mat-fab style="position:fixed; bottom:20px; right:20px; z-index:100" (click)="gotoLote()" >
-    <mat-icon aria-label="fab-button">person</mat-icon>
+<button mat-fab style="position:fixed; bottom:20px; right:20px; z-index:100" (click)="verClientes()">
+  <!-- <mat-icon aria-label="fab-button">person</mat-icon> --> <small>M9L11</small>   
 </button>
 
-<div class="content container-fluid pb-2">
+<div class="content p-2">
   <!-- <div class="map-header container pt-2"> -->
-    <!--     <select class="form-control" name="" id="">
+  <!--     <select class="form-control" name="" id="">
       <option value="">Seleccionar...</option>
       <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>
     </select> -->
 
-    <mat-form-field class="w-100 pt-2">
-      <mat-select placeholder="Obra" #selObra (change)="getMapa()">
-        <mat-option *ngFor="let obra of obras" [value]="obra.id_obra">{{ obra.nombre }}</mat-option>
-      </mat-select>
-    </mat-form-field>
+  <mat-form-field class="w-100">
+    <mat-select placeholder="Obra" #selObra (change)="getMapa()">
+      <mat-option *ngFor="let obra of obras" [value]="obra.id_obra">{{ obra.nombre }}</mat-option>
+    </mat-select>
+  </mat-form-field>
 
-  
+
 
   <!-- opcion 1 -->
   <!-- <div class="map" id="map"></div> -->
 
 
   <!-- opcion 2 -->
-    <div class="map" style="position:relative">
+  <!-- background-color: yellow; -->
+  <div class="map no-gutters" style="position:relative">
 
-    <div id="map" class="col-12 col-md-9" style="background-color: green">
-      <!-- <div style="background-color: blue; position:relative; width: 100%; height: 100%">mapa</div>  -->
-    </div>
+    <!-- <div class="row"> -->
+
+      <!-- style="background-color: green" -->
+      <div id="map" class="col-12 col-lg-9">
+
+      </div>
 
 
-    <div class="d-none d-md-block col-md-3" style="background-color: red">
-cliente
-    </div>
+      <!-- style="background-color: red" -->
+      <div class="d-none d-lg-block col-lg-3">
+
+        <mat-card>
+
+          <div class="form-group">
+            <label for="lote" class="form-label">Lote</label>
+            <input type="text" class="form-control" name="lote" id="lote">
+          </div>
+          <div class="form-group">
+            <label for="prototipos" class="form-label">Prototipos</label>
+            <input type="text" class="form-control" name="prototipos" id="prototipos">
+          </div>
+          <div class="form-group">
+            <label for="valor_base" class="form-label">Valor Base</label>
+            <input type="text" class="form-control" name="valor_base" id="valor_base">
+          </div>
+          <div class="form-group">
+            <label for="valor_ampliacion" class="form-label">Valor Ampliación</label>
+            <input type="text" class="form-control" name="valor_ampliacion" id="valor_ampliacion">
+          </div>
+          <div class="form-group">
+            <label for="fecha" class="form-label">Fecha Cambio de Estado</label>
+            <input type="text" class="form-control" name="fecha" id="fecha">
+          </div>
+          <div class="form-group">
+            <label for="estado" class="form-label">Estado Venta</label>
+            <input type="text" class="form-control" name="estado" id="estado">
+          </div>
+          <div class="form-group">
+            <mat-slide-toggle checked="true" (change)="toggleVerLeyenda($event)">Leyenda</mat-slide-toggle>
+          </div>
+          <button mat-raised-button color="primary" class="btn-block" (click)="verClientes()">Clientes</button>
+
+        </mat-card>
+
+      </div>
+
+    <!-- </div> -->
 
   </div>
 
