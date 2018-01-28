@@ -123,6 +123,14 @@ table.table-align-middle  {
     cursor: pointer;
 }
 
+.ws-nowrap {
+    white-space: nowrap;
+}
+
+.no-decoration {
+    text-decoration: unset !important;
+}
+
 .col-form-label, .form-label {
     font-weight: 500;
 }
