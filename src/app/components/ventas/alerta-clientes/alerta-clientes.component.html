@@ -18,19 +18,15 @@
 
 
       <div class="card">
-        <div class="card-header padding-card-header">
-          <div class="d-flex">
-            <div class="align-self-center">Alertas</div>
-            <div class="spacer"></div>
-          </div>
+        <div class="card-header">        
+            <div class="">Alertas</div> 
         </div>
         <div>
           <div class="table-responsive">
             <table class="table table-hover table-striped table-align-middle">
               <thead>
                 <tr>
-                  <th>Nombre</th>
-                  <th>Desarrollo</th>
+                  <th>Nombre</th>                  
                   <th>Manzana</th>
                   <th>Lote</th>
                   <th>Entrega</th>
@@ -41,12 +37,11 @@
 
               <tbody>
                 <tr *ngFor="let cliente of clientes">
-                  <td>{{cliente.nombre}}</td>
-                  <td>{{cliente.desarrollo}}</td>
+                  <td>{{cliente.nombre}}</td>                
                   <td>{{cliente.manzana}}</td>
                   <td>{{cliente.lote}}</td>
-                  <td>{{cliente.entrega}}</td>
-                  <td>{{cliente.mensaje}}</td>
+                  <td>{{cliente.fecha_entrega}}</td>
+                  <td>{{cliente.mensaje_alerta}}</td>
                   <td class="text-right">
                     <button mat-button class="no-min" (click)="editarAlerta(cliente)">
                       <i class="fa fa-pencil"></i>

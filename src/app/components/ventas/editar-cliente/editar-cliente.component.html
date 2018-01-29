@@ -1309,10 +1309,10 @@
   <!-- <Alerta> -->
   <mat-tab label="Alerta">
     <div class="container py-3">
-      <form [formGroup]="form" (ngSubmit)="guardar()">
+      <form [formGroup]="formAlerta" (ngSubmit)="guardarAlerta()">
 
         <div class="form-group">
-          <mat-slide-toggle>Alerta Activada</mat-slide-toggle>
+          <mat-slide-toggle formControlName="alerta_activada">Alerta Activada</mat-slide-toggle>
         </div>
 
         <div class="form-group">

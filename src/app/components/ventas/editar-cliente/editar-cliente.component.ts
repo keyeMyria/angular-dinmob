@@ -54,13 +54,11 @@ export class EditarClienteComponent implements OnInit {
   selection = new SelectionModel<any>(false);
 
   //la tab seleccionada inicialmente
-  tab_selected: string="Cliente";
+  tab_selected: string = "Cliente";
 
-  selectedOption: string;
   compra_selected: any = {};
-  pago: Pago;
 
-  form: FormGroup;
+  formAlerta: FormGroup;
 
   constructor(
     private clienteSrv: ClientesService,
@@ -71,8 +69,9 @@ export class EditarClienteComponent implements OnInit {
     private fb: FormBuilder,
   ) {
 
-    this.form = this.fb.group({
-      mensaje_alerta: ["", Validators.required],
+    this.formAlerta = this.fb.group({
+      mensaje_alerta: "",
+      alerta_activada: ""
     });
 
   }
@@ -102,17 +101,21 @@ export class EditarClienteComponent implements OnInit {
         this.compras = response.compras;
         this.documentos_cliente = response.documentos_cliente;
         this.documentos_conyuge = response.documentos_conyuge;
+
+        this.setFormAlertaValue(this.cliente);
+
       });
 
   }
 
-  guardar() {
-    console.log("mensaje alerta", this.form.value)
+  setFormAlertaValue(cliente) {
+    this.formAlerta.get("mensaje_alerta").setValue(cliente.mensaje_alerta);
+    this.formAlerta.get("alerta_activada").setValue(cliente.alerta_activada == "1" ? true : false);
   }
 
 
   selectCompra(compra) {
-    
+
     //this.selection.isEmpty();
     //this.selection.hasValue();
 
@@ -160,12 +163,21 @@ export class EditarClienteComponent implements OnInit {
 
   guardarAlerta() {
     console.log("guardar datos alerta", this.tab_selected);
+    console.log("mensaje alerta", this.formAlerta.value);
+
+    this.clienteSrv.updateCliente(this.cliente.id_cliente, this.formAlerta.value)
+      .subscribe(cliente => {
+        this.cliente = cliente;
+        this.setFormAlertaValue(this.cliente);
+      }, (error) => {
+
+      });
 
   }
 
   onTabChange(event: MatTabChangeEvent) {
     //console.log("tabChange", event.tab.textLabel, event.tab);
-    this.tab_selected= event.tab.textLabel;
+    this.tab_selected = event.tab.textLabel;
 
   }
 
@@ -178,7 +190,7 @@ export class EditarClienteComponent implements OnInit {
       }
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.selectedOption = result;
+
     });
   }
 
@@ -203,7 +215,7 @@ export class EditarClienteComponent implements OnInit {
       }
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.selectedOption = result;
+
     });
   }
 
@@ -217,7 +229,7 @@ export class EditarClienteComponent implements OnInit {
       },
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.selectedOption = result;
+
     });
 
   }
@@ -233,7 +245,7 @@ export class EditarClienteComponent implements OnInit {
       },
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.selectedOption = result;
+     
     });
 
   }
@@ -347,7 +359,7 @@ export class EditarClienteComponent implements OnInit {
     let pendiente = 0;
 
     if (this.compra_selected.valor_operacion) {
-      let valor_operacion= Number(this.compra_selected.valor_operacion.replace(/,/g,""));
+      let valor_operacion = Number(this.compra_selected.valor_operacion.replace(/,/g, ""));
 
       pendiente = valor_operacion - this.totalPagosRealizados();
 
@@ -356,33 +368,33 @@ export class EditarClienteComponent implements OnInit {
 
   }
 
-  createFormCompra(){
+  createFormCompra() {
 
     let formCompra: FormGroup;
 
-    formCompra= this.fb.group({
+    formCompra = this.fb.group({
 
-      proyecto:"",
-      desarrollador:"",
-      valor_operacion:"",
-      ubicacion:"",
-      cp:"",
-      id_tipo_operacion:"",
-      id_institucion_credito:"",
-      banco_credito:"",
-      otra_credito:"",
-      asesor_inmobiliario:"",
-      id_asesor:"",
-      notas_escrituracion:"",
-      notas_cancelacion:"",
-      comentarios_entrega_fisica:"",
-      fecha_firma_contrato:"",
-      fehca_entrega:"",
-      fecha_entrega_fisica:""
+      proyecto: "",
+      desarrollador: "",
+      valor_operacion: "",
+      ubicacion: "",
+      cp: "",
+      id_tipo_operacion: "",
+      id_institucion_credito: "",
+      banco_credito: "",
+      otra_credito: "",
+      asesor_inmobiliario: "",
+      id_asesor: "",
+      notas_escrituracion: "",
+      notas_cancelacion: "",
+      comentarios_entrega_fisica: "",
+      fecha_firma_contrato: "",
+      fehca_entrega: "",
+      fecha_entrega_fisica: ""
 
     });
 
-   
+
 
 
   }
