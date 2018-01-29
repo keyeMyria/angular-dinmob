@@ -20,37 +20,41 @@ export class ClientesService {
     this.url = this.config.api_url + "ventas_clientes/";
   }
 
+  /* 
+    getClientes(): Observable<Cliente[]> {
+      return this.http.get(this.url)
+        .map(this.extractData)
+        .catch(this.handleError);
+    } */
 
-  getClientes(): Observable<Cliente[]> {
-    return this.http.get(this.url)
-      .map(this.extractData)
-      .catch(this.handleError);
-  }
-
+  //ok
   getClientesObra(id_obra) {
     return this.http.get(this.url + "get_clientes_obra/" + id_obra)
       .map(this.extractData)
       .catch(this.handleError);
   }
 
-  getCliente(id_cliente): Observable<Cliente> {
-    return this.http.get(this.url + 'get_cliente/' + id_cliente)
-      .map(this.extractData)
-      .catch(this.handleError);
-  }
+  /*   getCliente(id_cliente): Observable<Cliente> {
+      return this.http.get(this.url + 'get_cliente/' + id_cliente)
+        .map(this.extractData)
+        .catch(this.handleError);
+    } */
 
+
+  //ok
   getClienteConComprasYDocumentos(id_cliente) {
     return this.http.get(this.url + 'get_cliente_documentos_compras/' + id_cliente)
       .map(this.extractData)
       .catch(this.handleError);
   }
 
-  getCompras(id_cliente) {
-    return this.http.get(this.url + 'get_compras/' + id_cliente)
-      .map(this.extractData)
-      .catch(this.handleError);
-  }
+  /*   getCompras(id_cliente) {
+      return this.http.get(this.url + 'get_compras/' + id_cliente)
+        .map(this.extractData)
+        .catch(this.handleError);
+    } */
 
+  //ok
   createCliente(cliente) {
     return this.http.post(this.url + 'create_cliente', { cliente: cliente })
       .map(this.extractData)
@@ -58,28 +62,37 @@ export class ClientesService {
 
   }
 
+  //ok
   updateCliente(id, cliente) {
     return this.http.post(this.url + 'update_cliente/' + id, { cliente: cliente })
       .map(this.extractData)
       .catch(this.handleError);
   }
 
+  //ok
+  updateCompra(id_cliente, id_lote, compra) {
+    return this.http.post(this.url + 'update_compra/' + id_cliente, { id_lote: id_lote, compra: compra })
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  //ok
   delCliente(id) {
     return this.http.post(this.url + 'del_cliente/' + id, {})
       .map(this.extractData)
       .catch(this.handleError);
   }
 
-  searchCliente(term: string) {
-    if (term === "") {
-      return of.call([]);
-    }
-
-    return this.http.get(this.url + "search_cliente/" + term)
-      .map(this.extractData)
-      .catch(this.handleError);
-
-  }
+  /*   searchCliente(term: string) {
+      if (term === "") {
+        return of.call([]);
+      }
+  
+      return this.http.get(this.url + "search_cliente/" + term)
+        .map(this.extractData)
+        .catch(this.handleError);
+  
+    } */
 
 
 

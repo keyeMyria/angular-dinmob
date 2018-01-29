@@ -347,11 +347,43 @@ export class EditarClienteComponent implements OnInit {
     let pendiente = 0;
 
     if (this.compra_selected.valor_operacion) {
+      let valor_operacion= Number(this.compra_selected.valor_operacion.replace(/,/g,""));
 
-      pendiente = +this.compra_selected.valor_operacion - this.totalPagosRealizados();
+      pendiente = valor_operacion - this.totalPagosRealizados();
 
     }
     return pendiente;
+
+  }
+
+  createFormCompra(){
+
+    let formCompra: FormGroup;
+
+    formCompra= this.fb.group({
+
+      proyecto:"",
+      desarrollador:"",
+      valor_operacion:"",
+      ubicacion:"",
+      cp:"",
+      id_tipo_operacion:"",
+      id_institucion_credito:"",
+      banco_credito:"",
+      otra_credito:"",
+      asesor_inmobiliario:"",
+      id_asesor:"",
+      notas_escrituracion:"",
+      notas_cancelacion:"",
+      comentarios_entrega_fisica:"",
+      fecha_firma_contrato:"",
+      fehca_entrega:"",
+      fecha_entrega_fisica:""
+
+    });
+
+   
+
 
   }
 

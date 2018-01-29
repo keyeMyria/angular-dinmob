@@ -36,6 +36,7 @@ import { AuthGuard } from "app/guards/auth.guard";
 
 //pipes
 import { NumberToYesNoPipe } from './pipes/number-to-yes-no.pipe';
+import { UnmaskNumberPipe } from './pipes/unmask-number.pipe';
 
 //app component
 import { AppComponent } from './app.component';
@@ -148,6 +149,7 @@ import { ClientesLoteDialogoComponent } from './components/ventas/clientes-lote-
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -209,6 +211,7 @@ import { ClientesLoteDialogoComponent } from './components/ventas/clientes-lote-
     ClienteSinLoteComponent,
     EstadisticasVentasComponent,
     ClientesLoteDialogoComponent,
+    UnmaskNumberPipe,
 
 
 
