@@ -1,6 +1,22 @@
+<button mat-fab *ngIf="tab_selected=='Cliente'" (click)="guardarGenerales()" style="position:fixed; top:120px; right:20px; z-index: 10">
+  <mat-icon>save</mat-icon>G
+</button>
 
-<mat-tab-group>
-  
+<button mat-fab *ngIf="tab_selected=='Datos laborales'" (click)="guardarLaborales()" style="position:fixed; top:120px; right:20px; z-index: 10">
+  <mat-icon>save</mat-icon>L
+</button>
+
+<button mat-fab *ngIf="tab_selected=='Apoderado'" (click)="guardarApoderado()" style="position:fixed; top:120px; right:20px; z-index: 10">
+  <mat-icon>save</mat-icon>A
+</button>
+
+<button mat-fab *ngIf="tab_selected=='Cónyuge'" (click)="guardarConyuge()" style="position:fixed; top:120px; right:20px; z-index: 10">
+  <mat-icon>save</mat-icon>C
+</button>
+
+
+<mat-tab-group (selectedTabChange)="onTabChange($event)">
+
   <!-- Datos Generales -->
   <mat-tab label="Cliente">
     <div class="container py-3">
@@ -333,10 +349,13 @@
           </div>
         </div>
 
-
-
-
       </div>
+      <div class="form-group">
+        <div class="text-center">
+          <button mat-raised-button type="button" color="primary">GUARDAR GENERALES</button>
+        </div>
+      </div>
+
     </div>
   </mat-tab>
 
@@ -404,11 +423,16 @@
             ui-mask="(999) 999-9999" ui-mask-placeholder ui-mask-placeholder-char="_">
         </div>
       </div>
+      <div class="form-group">
+        <div class="text-center">
+          <button mat-raised-button type="button" color="primary">GUARDAR LABORALES</button>
+        </div>
+      </div>
     </div>
   </mat-tab>
 
   <!-- conyuge -->
-  <mat-tab label="Conyuge" *ngIf="cliente.persona_moral === '0' && cliente.regimen_conyugal_persona_fisica === '1'">
+  <mat-tab label="Cónyuge" *ngIf="cliente.persona_moral === '0' && cliente.regimen_conyugal_persona_fisica === '1'">
     <div class="container py-3">
       <div class="form-group row">
         <label class="col-form-label col-sm-3">Nombre completo</label>
@@ -573,7 +597,11 @@
           <input type="text" class="form-control" name="df_estado_conyuge" [(ngModel)]="cliente.df_estado_conyuge">
         </div>
       </div>
-
+      <div class="form-group">
+        <div class="text-center">
+          <button mat-raised-button type="button" color="primary">GUARDAR CÓNYUGE</button>
+        </div>
+      </div>
     </div>
   </mat-tab>
 
@@ -688,6 +716,16 @@
         <div class="col-sm-9">
           <input [textMask]="{mask: maskCURP}" type="text" class="form-control" name="curp_apoderado" [(ngModel)]="cliente.curp_apoderado"
             ui-mask="****-999999-A-AA-***-*9" ui-mask-placeholder ui-mask-placeholder-char="_">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="text-center">
+          <button mat-raised-button type="button" color="primary">GUARDAR APODERADO</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="text-center">
+          <button mat-raised-button type="button" color="primary">GUARDAR APODERADO</button>
         </div>
       </div>
     </div>

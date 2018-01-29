@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Cliente } from "app/model/cliente";
 import { ClientesService } from "app/services/clientes.service";
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
+import { MatTabChangeEvent } from "@angular/material";
 
 @Component({
   selector: 'app-nuevo-cliente',
@@ -23,6 +24,7 @@ export class NuevoClienteComponent implements OnInit {
   multi: boolean = false;
   hideToggle: boolean = false;
   showPanel3 = true;
+  tab_selected: string="Cliente";
 
   constructor(public clienteSrv: ClientesService) {
     this.cliente = new Cliente();
@@ -39,7 +41,30 @@ export class NuevoClienteComponent implements OnInit {
 
   }
 
-  onFechaChange(){
-    
+  onFechaChange(){    
+  }
+
+  guardarGenerales() {
+    console.log("guardar datos generales", this.tab_selected);
+  }
+  guardarLaborales() {
+    console.log("guardar datos laborales", this.tab_selected);
+  }
+  guardarApoderado() {
+    console.log("guardar datos apoderado", this.tab_selected);
+  }
+  guardarConyuge() {
+    console.log("guardar datos conyuge", this.tab_selected);
+  }
+  guardarInmueble() {
+    console.log("guardar datos inmueble", this.tab_selected);
+  }
+  guardarAlerta() {
+    console.log("guardar datos alerta", this.tab_selected);
+  }
+  onTabChange(event: MatTabChangeEvent) {
+    //console.log("tabChange", event.tab.textLabel, event.tab);
+    this.tab_selected= event.tab.textLabel;
+
   }
 }
