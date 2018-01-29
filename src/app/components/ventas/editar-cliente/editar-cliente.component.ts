@@ -59,6 +59,11 @@ export class EditarClienteComponent implements OnInit {
   compra_selected: any = {};
 
   formAlerta: FormGroup;
+  formGenerales: FormGroup;
+  formLaborales: FormGroup;
+  formConyuge: FormGroup;
+  formApoderado: FormGroup;
+  formInmueble: FormGroup;
 
   constructor(
     private clienteSrv: ClientesService,
@@ -68,10 +73,127 @@ export class EditarClienteComponent implements OnInit {
     public snackBar: MatSnackBar,
     private fb: FormBuilder,
   ) {
-
     this.formAlerta = this.fb.group({
       mensaje_alerta: "",
-      alerta_activada: ""
+      alerta_activada: "",
+    });
+
+    this.formGenerales = this.fb.group({
+      persona_moral: "",
+      nombre_persona_fisica: "",
+      nacionalidad_persona_fisica: "",
+      lugar_nacimiento_persona_fisica: "",
+      fecha_nacimiento_persona_fisica: "",
+      pais_nacimiento_persona_fisica: "",
+      lugar_residencia_persona_fisica: "",
+      domicilio_persona_fisica: "",
+      cp_persona_fisica: "",
+      ciudad_persona_fisica: "",
+      telefono_persona_fisica: "",
+      celular_persona_fisica: "",
+      email_persona_fisica: "",
+      identificacion_oficial_persona_fisica: "",
+      num_identificacion_persona_fisica: "",
+      rfc_persona_fisica: "",
+      curp_persona_fisica: "",
+      estado_civil_persona_fisica: "",
+      regimen_conyugal_persona_fisica: "",
+      df_calle_persona_fisica: "",
+      df_num_exterior_persona_fisica: "",
+      df_num_interior_persona_fisica: "",
+      df_colonia_persona_fisica: "",
+      df_cp_persona_fisica: "",
+      df_localidad_persona_fisica: "",
+      df_municipio_persona_fisica: "",
+      df_estado_persona_fisica: "",
+
+      razon_social_persona_moral: "",
+      nacionalidad_persona_moral: "",
+      fecha_constitucion_persona_moral: "",
+      actividad_persona_moral: "",
+      telefono_persona_moral: "",
+      email_persona_moral: "",
+      rfc_persona_moral: "",
+      apoderado_legal_persona_moral: "",
+      instrumento_publico_persona_moral: "",
+      poderes_representante_persona_moral: "",
+      df_calle_persona_moral: "",
+      df_num_exterior_persona_moral: "",
+      df_num_interior_persona_moral: "",
+      df_colonia_persona_moral: "",
+      df_cp_persona_moral: "",
+      df_localidad_persona_moral: "",
+      df_municipio_persona_moral: "",
+      df_estado_persona_moral: "",
+    });
+
+    this.formLaborales = this.fb.group({
+      profesion_laboral: "",
+      ocupacion_laboral: "",
+      empresa_laboral: "",
+      puesto_laboral: "",
+      jefe_inmediato_laboral: "",
+      giro_empresa_laboral: "",
+      domicilio_empresa_laboral: "",
+      cp_laboral: "",
+      ciudad_laboral: "",
+      telefono_laboral: "",
+    });
+
+    this.formConyuge = this.fb.group({
+      nombre_conyuge: "",
+      nacionalidad_conyuge: "",
+      lugar_nacimiento_conyuge: "",
+      fecha_nacimiento_conyuge: "",
+      pais_nacimiento_conyuge: "",
+      lugar_residencia_conyuge: "",
+      domicilio_conyuge: "",
+      cp_conyuge: "",
+      ciudad_conyuge: "",
+      telefono_conyuge: "",
+      celular_conyuge: "",
+      email_conyuge: "",
+      identificacion_oficial_conyuge: "",
+      rfc_conyuge: "",
+      curp_conyuge: "",
+    });
+    this.formApoderado = this.fb.group({
+      nombre_apoderado: "",
+      nacionalidad_apoderado: "",
+      lugar_nacimiento_apoderado: "",
+      fecha_nacimiento_apoderado: "",
+      pais_nacimiento_apoderado: "",
+      lugar_residencia_apoderado: "",
+      domicilio_apoderado: "",
+      cp_apoderado: "",
+      ciudad_apoderado: "",
+      telefono_apoderado: "",
+      celular_apoderado: "",
+      email_apoderado: "",
+      identificacion_oficial_apoderado:"",
+      num_identificacion_apoderado:"",
+      rfc_apoderado:"",
+      curp_apoderado:"",      
+    });
+
+    this.formInmueble = this.fb.group({
+      proyecto:"",
+      desarrollador:"",
+      valor_operacion:"",
+      ubicacion:"",
+      cp:"",
+      id_tipo_operacion:"",
+      id_institucion_credito:"",
+      banco_credito:"",
+      otra_credito:"",
+      fecha_firma_contrato:"",
+      fecha_entrega:"",
+      asesor_inmobiliario:"",
+      id_asesor:"",
+      notas_escrituracion:"",
+      notas_cancelacion:"",
+      fecha_entrega_fisica:"",
+      comentarios_entrega_fisica:"",
     });
 
   }
@@ -245,7 +367,7 @@ export class EditarClienteComponent implements OnInit {
       },
     });
     dialogRef.afterClosed().subscribe(result => {
-     
+
     });
 
   }

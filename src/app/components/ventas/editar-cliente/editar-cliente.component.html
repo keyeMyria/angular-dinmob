@@ -28,363 +28,358 @@
   <!-- Datos Generales -->
   <mat-tab label="Cliente">
     <div class="container py-3">
+      <form [formGroup]="formGenerales" id="id_form" >
 
-      <!-- Persona Fisica/Moral -->
-      <div class="form-group row">
-        <label class="col-form-label col-sm-3">Actividad Económica</label>
-        <div class="col-sm-9">
-          <select class="form-control" name="persona_moral" [(ngModel)]="cliente.persona_moral">
-            <option value="0">Persona Física</option>
-            <option value="1">Persona Moral</option>
-          </select>
-        </div>
-      </div>
 
-      <!-- Persona Fisica -->
-      <div *ngIf="cliente.persona_moral === '0'">
-        <div class="form-group row" [ngClass]="{'has-danger':( nombre_persona_fisica.invalid && ( nombre_persona_fisica.dirty || nombre_persona_fisica.touched ))}">
-          <label class="col-form-label col-sm-3">Nombre completo</label>
-          <div class="col-sm-9">
-            <input type="text" #nombre_persona_fisica="ngModel" name="nombre_persona_fisica" class="form-control" [(ngModel)]="cliente.nombre_persona_fisica"
-              [required]="cliente.persona_moral === '0'">
-            <!--  <div *ngIf="nombrePersonaFisica.errors.required" class="form-control-feedback">Escriba un nombre</div> -->
-          </div>
-        </div>
-        <!-- <div> nombre persona fisica: {{nombre_persona_fisica.errors|json}} </div> -->
-
+        <!-- Persona Fisica/Moral -->
         <div class="form-group row">
-          <label class="col-form-label col-sm-3">Nacionalidad</label>
+          <label class="col-form-label col-sm-3">Actividad Económica</label>
           <div class="col-sm-9">
-            <input type="text" class="form-control" name="nacionalidad_persona_fisica" [(ngModel)]="cliente.nacionalidad_persona_fisica">
+            <select class="form-control" name="persona_moral" formControlName="persona_moral">
+              <option value="0">Persona Física</option>
+              <option value="1">Persona Moral</option>
+            </select>
           </div>
         </div>
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">Lugar de nacimiento</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" name="lugar_nacimiento_persona_fisica" [(ngModel)]="cliente.lugar_nacimiento_persona_fisica">
+
+        <!-- Persona Fisica -->
+        <div *ngIf="cliente.persona_moral === '0'">
+          <div class="form-group row"> <!-- [ngClass]="{'has-danger':( nombre_persona_fisica.invalid && ( nombre_persona_fisica.dirty || nombre_persona_fisica.touched ))}" -->
+            <label class="col-form-label col-sm-3">Nombre completo</label>
+            <div class="col-sm-9">
+              <input type="text" name="nombre_persona_fisica" class="form-control" formControlName="nombre_persona_fisica"
+                [required]="cliente.persona_moral === '0'">
+              <!--  <div *ngIf="nombrePersonaFisica.errors.required" class="form-control-feedback">Escriba un nombre</div> -->
+            </div>
           </div>
-        </div>
-        <!-- <div class="form-group row">
+          <!-- <div> nombre persona fisica: {{nombre_persona_fisica.errors|json}} </div> -->
+
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">Nacionalidad</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="nacionalidad_persona_fisica" formControlName="nacionalidad_persona_fisica">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">Lugar de nacimiento</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="lugar_nacimiento_persona_fisica" formControlName="lugar_nacimiento_persona_fisica">
+            </div>
+          </div>
+          <!-- <div class="form-group row">
                       <label class="col-form-label col-sm-3">Fecha de nacimiento</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="fecha_nacimiento_persona_fisica" [(ngModel)]="cliente.fecha_nacimiento_persona_fisica"
+                        <input type="text" class="form-control" name="fecha_nacimiento_persona_fisica" formControlName="fecha_nacimiento_persona_fisica"
                           date-picker>
                       </div>
                     </div> -->
 
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3" for="fecha_nacimiento_persona_fisica">Fecha de nacimiento</label>
-          <div class="col-sm-9">
-            <div class="input-group">
-              <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_nacimiento_persona_fisica" id="fecha_nacimiento_persona_fisica"
-                [(ngModel)]="cliente.fecha_nacimiento_persona_fisica" [matDatepicker]="dpFechaNacimientoPF" (ngModelChange)="onFechaChange()">
-              <span class="input-group-btn">
-                <button class="btn btn-secondary" type="button" (click)="dpFechaNacimientoPF.open()">
-                  <i class="fa fa-calendar"></i>
-                </button>
-              </span>
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3" for="fecha_nacimiento_persona_fisica">Fecha de nacimiento</label>
+            <div class="col-sm-9">
+              <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_nacimiento_persona_fisica" id="fecha_nacimiento_persona_fisica"
+                  formControlName="fecha_nacimiento_persona_fisica" [matDatepicker]="dpFechaNacimientoPF" (ngModelChange)="onFechaChange()">
+                <span class="input-group-btn">
+                  <button class="btn btn-secondary" type="button" (click)="dpFechaNacimientoPF.open()">
+                    <i class="fa fa-calendar"></i>
+                  </button>
+                </span>
+              </div>
+              <mat-datepicker touchUi="true" #dpFechaNacimientoPF></mat-datepicker>
             </div>
-            <mat-datepicker touchUi="true" #dpFechaNacimientoPF></mat-datepicker>
           </div>
+
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">País de nacimiento</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="pais_nacimiento_persona_fisica" formControlName="pais_nacimiento_persona_fisica">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">Lugar de residencia</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="lugar_residencia_persona_fisica" formControlName="lugar_residencia_persona_fisica">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">Domicilio Particular</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="domicilio_persona_fisica" formControlName="domicilio_persona_fisica">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">C.P.</label>
+            <div class="col-sm-9">
+              <input [textMask]="{mask: maskCP}" type="text" class="form-control" name="cp_persona_fisica" formControlName="cp_persona_fisica">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">Ciudad</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="ciudad_persona_fisica" formControlName="ciudad_persona_fisica">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">Teléfono particular</label>
+            <div class="col-sm-9">
+              <input [textMask]="{mask: maskPhone}" type="text" class="form-control" name="telefono_persona_fisica" formControlName="telefono_persona_fisica"
+                ui-mask="(999) 999-9999" ui-mask-placeholder ui-mask-placeholder-char="_">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">Número de celular</label>
+            <div class="col-sm-9">
+              <input [textMask]="{mask: maskPhone}" type="text" class="form-control" name="celular_persona_fisica" formControlName="celular_persona_fisica"
+                ui-mask="(999) 999-9999" ui-mask-placeholder ui-mask-placeholder-char="_">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">Correo eletrónico</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="email_persona_fisica" formControlName="email_persona_fisica">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">Identificación oficial</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="identificacion_oficial_persona_fisica" formControlName="identificacion_oficial_persona_fisica">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">Número de identificación</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="num_identificacion_persona_fisica" formControlName="num_identificacion_persona_fisica">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">RFC</label>
+            <div class="col-sm-9">
+              <input [textMask]="{mask: maskRFC}" type="text" class="form-control" name="rfc_persona_fisica" formControlName="rfc_persona_fisica"
+                ui-mask="****-999999-***" ui-mask-placeholder ui-mask-placeholder-char="_">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">CURP</label>
+            <div class="col-sm-9">
+              <input [textMask]="{mask: maskCURP}" type="text" class="form-control" name="curp_persona_fisica" formControlName="curp_persona_fisica"
+                ui-mask="****-999999-A-AA-***-*9" ui-mask-placeholder ui-mask-placeholder-char="_">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">Estado civil</label>
+            <div class="col-sm-9">
+              <select class="form-control" name="estado_civil_persona_fisica" formControlName="estado_civil_persona_fisica">
+                <option value="0">Soltero</option>
+                <option value="1">Casado</option>
+              </select>
+
+            </div>
+          </div>
+          <div class="form-group row" *ngIf="cliente.estado_civil_persona_fisica === '1'">
+            <label class="col-form-label col-sm-3">Régimen</label>
+            <div class="col-sm-9">
+              <select class="form-control" name="regimen_conyugal_persona_fisica" formControlName="regimen_conyugal_persona_fisica">
+                <option value="0">Separación de Bienes</option>
+                <option value="1">Sociedad Conyugal</option>
+              </select>
+            </div>
+          </div>
+          <!-- Domicilio Fiscal persona fisica -->
+          <h4 class="">Domicilio Fiscal</h4>
+          <hr>
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">Calle</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="df_calle_persona_fisica" formControlName="df_calle_persona_fisica">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">Núm. Exterior</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="df_num_exterior_persona_fisica" formControlName="df_num_exterior_persona_fisica">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">Núm. Interior</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="df_num_interior_persona_fisica" formControlName="df_num_interior_persona_fisica">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">Colonia</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="df_colonia_persona_fisica" formControlName="df_colonia_persona_fisica">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">C.P.</label>
+            <div class="col-sm-9">
+              <input [textMask]="{mask: maskCP}" type="text" class="form-control" name="df_cp_persona_fisica" formControlName="df_cp_persona_fisica">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">Localidad</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="df_localidad_persona_fisica" formControlName="df_localidad_persona_fisica">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">Municipio</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="df_municipio_persona_fisica" formControlName="df_municipio_persona_fisica">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">Estado</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="df_estado_persona_fisica" formControlName="df_estado_persona_fisica">
+            </div>
+          </div>
+
         </div>
 
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">País de nacimiento</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" name="pais_nacimiento_persona_fisica" [(ngModel)]="cliente.pais_nacimiento_persona_fisica">
+        <!-- Persona Moral -->
+        <div *ngIf="cliente.persona_moral === '1'">
+          <div class="form-group row" [ngClass]="{'has-danger':(razon_social_persona_moral.$touched)}">
+            <label class="col-form-label col-sm-3">Razón social</label>
+            <div class="col-sm-9">
+              <input #razon_social_persona_moral type="text" name="razon_social_persona_moral" class="form-control" formControlName="razon_social_persona_moral"
+                [required]="cliente.persona_moral === '1'">
+              <!-- <div *ngIf="razon_social_persona_moral.errors.required" class="form-control-feedback">Escriba un nombre</div>           -->
+            </div>
           </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">Lugar de residencia</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" name="lugar_residencia_persona_fisica" [(ngModel)]="cliente.lugar_residencia_persona_fisica">
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">Nacionalidad</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="nacionalidad_persona_moral" formControlName="nacionalidad_persona_moral">
+            </div>
           </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">Domicilio Particular</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" name="domicilio_persona_fisica" [(ngModel)]="cliente.domicilio_persona_fisica">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">C.P.</label>
-          <div class="col-sm-9">
-            <input [textMask]="{mask: maskCP}" type="text" class="form-control" name="cp_persona_fisica" [(ngModel)]="cliente.cp_persona_fisica">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">Ciudad</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" name="ciudad_persona_fisica" [(ngModel)]="cliente.ciudad_persona_fisica">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">Teléfono particular</label>
-          <div class="col-sm-9">
-            <input [textMask]="{mask: maskPhone}" type="text" class="form-control" name="telefono_persona_fisica" [(ngModel)]="cliente.telefono_persona_fisica"
-              ui-mask="(999) 999-9999" ui-mask-placeholder ui-mask-placeholder-char="_">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">Número de celular</label>
-          <div class="col-sm-9">
-            <input [textMask]="{mask: maskPhone}" type="text" class="form-control" name="celular_persona_fisica" [(ngModel)]="cliente.celular_persona_fisica"
-              ui-mask="(999) 999-9999" ui-mask-placeholder ui-mask-placeholder-char="_">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">Correo eletrónico</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" name="email_persona_fisica" [(ngModel)]="cliente.email_persona_fisica">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">Identificación oficial</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" name="identificacion_oficial_persona_fisica" [(ngModel)]="cliente.identificacion_oficial_persona_fisica">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">Número de identificación</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" name="num_identificacion_persona_fisica" [(ngModel)]="cliente.num_identificacion_persona_fisica">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">RFC</label>
-          <div class="col-sm-9">
-            <input [textMask]="{mask: maskRFC}" type="text" class="form-control" name="rfc_persona_fisica" [(ngModel)]="cliente.rfc_persona_fisica"
-              ui-mask="****-999999-***" ui-mask-placeholder ui-mask-placeholder-char="_">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">CURP</label>
-          <div class="col-sm-9">
-            <input [textMask]="{mask: maskCURP}" type="text" class="form-control" name="curp_persona_fisica" [(ngModel)]="cliente.curp_persona_fisica"
-              ui-mask="****-999999-A-AA-***-*9" ui-mask-placeholder ui-mask-placeholder-char="_">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">Estado civil</label>
-          <div class="col-sm-9">
-            <select class="form-control" name="estado_civil_persona_fisica" [(ngModel)]="cliente.estado_civil_persona_fisica">
-              <option value="0">Soltero</option>
-              <option value="1">Casado</option>
-            </select>
-
-          </div>
-        </div>
-        <div class="form-group row" *ngIf="cliente.estado_civil_persona_fisica === '1'">
-          <label class="col-form-label col-sm-3">Régimen</label>
-          <div class="col-sm-9">
-            <select class="form-control" name="regimen_conyugal_persona_fisica" [(ngModel)]="cliente.regimen_conyugal_persona_fisica">
-              <option value="0">Separación de Bienes</option>
-              <option value="1">Sociedad Conyugal</option>
-            </select>
-          </div>
-        </div>
-        <!-- Domicilio Fiscal persona fisica -->
-        <h4 class="">Domicilio Fiscal</h4>
-        <hr>
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">Calle</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" name="df_calle_persona_fisica" [(ngModel)]="cliente.df_calle_persona_fisica">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">Núm. Exterior</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" name="df_num_exterior_persona_fisica" [(ngModel)]="cliente.df_num_exterior_persona_fisica">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">Núm. Interior</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" name="df_num_interior_persona_fisica" [(ngModel)]="cliente.df_num_interior_persona_fisica">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">Colonia</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" name="df_colonia_persona_fisica" [(ngModel)]="cliente.df_colonia_persona_fisica">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">C.P.</label>
-          <div class="col-sm-9">
-            <input [textMask]="{mask: maskCP}" type="text" class="form-control" name="df_cp_persona_fisica" [(ngModel)]="cliente.df_cp_persona_fisica">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">Localidad</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" name="df_localidad_persona_fisica" [(ngModel)]="cliente.df_localidad_persona_fisica">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">Municipio</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" name="df_municipio_persona_fisica" [(ngModel)]="cliente.df_municipio_persona_fisica">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">Estado</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" name="df_estado_persona_fisica" [(ngModel)]="cliente.df_estado_persona_fisica">
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Persona Moral -->
-      <div *ngIf="cliente.persona_moral === '1'">
-        <div class="form-group row" [ngClass]="{'has-danger':(razon_social_persona_moral.$touched)}">
-          <label class="col-form-label col-sm-3">Razón social</label>
-          <div class="col-sm-9">
-            <input #razon_social_persona_moral type="text" name="razon_social_persona_moral" class="form-control" [(ngModel)]="cliente.razon_social_persona_moral"
-              [required]="cliente.persona_moral === '1'">
-            <!-- <div *ngIf="razon_social_persona_moral.errors.required" class="form-control-feedback">Escriba un nombre</div>           -->
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">Nacionalidad</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" name="nacionalidad_persona_moral" [(ngModel)]="cliente.nacionalidad_persona_moral">
-          </div>
-        </div>
-        <!--   <div class="form-group row">
+          <!--   <div class="form-group row">
                       <label class="col-form-label col-sm-3">Fecha de constitución</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="fecha_constitucion_persona_moral" [(ngModel)]="cliente.fecha_constitucion_persona_moral"
+                        <input type="text" class="form-control" name="fecha_constitucion_persona_moral" formControlName="fecha_constitucion_persona_moral"
                           date-picker>
                       </div>
                     </div> -->
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">Fecha de constitución</label>
-          <div class="col-sm-9">
-            <div class="input-group">
-              <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_constitucion_persona_moral" id="fecha_constitucion_persona_moral"
-                [(ngModel)]="cliente.fecha_constitucion_persona_moral" [matDatepicker]="dpFechaConstitucion" (ngModelChange)="onFechaChange()">
-              <span class="input-group-btn">
-                <button class="btn btn-secondary" type="button" (click)="dpFechaConstitucion.open()">
-                  <i class="fa fa-calendar"></i>
-                </button>
-              </span>
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">Fecha de constitución</label>
+            <div class="col-sm-9">
+              <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_constitucion_persona_moral" id="fecha_constitucion_persona_moral"
+                  formControlName="fecha_constitucion_persona_moral" [matDatepicker]="dpFechaConstitucion" (ngModelChange)="onFechaChange()">
+                <span class="input-group-btn">
+                  <button class="btn btn-secondary" type="button" (click)="dpFechaConstitucion.open()">
+                    <i class="fa fa-calendar"></i>
+                  </button>
+                </span>
+              </div>
+              <mat-datepicker touchUi="true" #dpFechaConstitucion></mat-datepicker>
             </div>
-            <mat-datepicker touchUi="true" #dpFechaConstitucion></mat-datepicker>
           </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">Actividad o giro mercantil</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" name="actividad_persona_moral" [(ngModel)]="cliente.actividad_persona_moral">
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">Actividad o giro mercantil</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="actividad_persona_moral" formControlName="actividad_persona_moral">
+            </div>
           </div>
-        </div>
 
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">Número de teléfono</label>
-          <div class="col-sm-9">
-            <input [textMask]="{mask: maskPhone}" type="text" class="form-control" name="telefono_persona_moral" [(ngModel)]="cliente.telefono_persona_moral">
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">Número de teléfono</label>
+            <div class="col-sm-9">
+              <input [textMask]="{mask: maskPhone}" type="text" class="form-control" name="telefono_persona_moral" formControlName="telefono_persona_moral">
+            </div>
           </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">Correo electrónico</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" name="email_persona_moral" [(ngModel)]="cliente.email_persona_moral">
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">Correo electrónico</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="email_persona_moral" formControlName="email_persona_moral">
+            </div>
           </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">RFC</label>
-          <div class="col-sm-9">
-            <input [textMask]="{mask: maskRFCM}" type="text" class="form-control" name="rfc_persona_moral" [(ngModel)]="cliente.rfc_persona_moral"
-              ui-mask="***-999999-***" ui-mask-placeholder ui-mask-placeholder-char="_">
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">RFC</label>
+            <div class="col-sm-9">
+              <input [textMask]="{mask: maskRFCM}" type="text" class="form-control" name="rfc_persona_moral" formControlName="rfc_persona_moral"
+                ui-mask="***-999999-***" ui-mask-placeholder ui-mask-placeholder-char="_">
+            </div>
           </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">Apoderado legal</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" name="apoderado_legal_persona_moral" [(ngModel)]="cliente.apoderado_legal_persona_moral">
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">Apoderado legal</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="apoderado_legal_persona_moral" formControlName="apoderado_legal_persona_moral">
+            </div>
           </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">Instrumento público</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" name="instrumento_publico_persona_moral" [(ngModel)]="cliente.instrumento_publico_persona_moral">
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">Instrumento público</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="instrumento_publico_persona_moral" formControlName="instrumento_publico_persona_moral">
+            </div>
           </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">Poderes del representante legal</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" name="poderes_representante_persona_moral" [(ngModel)]="cliente.poderes_representante_persona_moral">
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">Poderes del representante legal</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="poderes_representante_persona_moral" formControlName="poderes_representante_persona_moral">
+            </div>
           </div>
-        </div>
 
-        <!-- Domicilio Fiscal persona moral -->
-        <h4 class="box-title">Domicilio Fiscal</h4>
-        <hr>
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">Calle</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" name="df_calle_persona_moral" [(ngModel)]="cliente.df_calle_persona_moral">
+          <!-- Domicilio Fiscal persona moral -->
+          <h4 class="box-title">Domicilio Fiscal</h4>
+          <hr>
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">Calle</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="df_calle_persona_moral" formControlName="df_calle_persona_moral">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">Núm. Exterior</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="df_num_exterior_persona_moral" formControlName="df_num_exterior_persona_moral">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">Núm. Interior</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="df_num_interior_persona_moral" formControlName="df_num_interior_persona_moral">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">Colonia</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="df_colonia_persona_moral" formControlName="df_colonia_persona_moral">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">C.P.</label>
+            <div class="col-sm-9">
+              <input [textMask]="{mask: maskCP}" type="text" class="form-control" name="df_cp_persona_moral" formControlName="df_cp_persona_moral">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">Localidad</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="df_localidad_persona_moral" formControlName="df_localidad_persona_moral">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">Municipio</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="df_municipio_persona_moral" formControlName="df_municipio_persona_moral">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">Estado</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="df_estado_persona_moral" formControlName="df_estado_persona_moral">
+            </div>
           </div>
         </div>
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">Núm. Exterior</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" name="df_num_exterior_persona_moral" [(ngModel)]="cliente.df_num_exterior_persona_moral">
+        <div class="form-group">
+          <div class="text-center">
+            <button mat-raised-button type="button" color="primary">GUARDAR GENERALES</button>
           </div>
         </div>
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">Núm. Interior</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" name="df_num_interior_persona_moral" [(ngModel)]="cliente.df_num_interior_persona_moral">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">Colonia</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" name="df_colonia_persona_moral" [(ngModel)]="cliente.df_colonia_persona_moral">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">C.P.</label>
-          <div class="col-sm-9">
-            <input [textMask]="{mask: maskCP}" type="text" class="form-control" name="df_cp_persona_moral" [(ngModel)]="cliente.df_cp_persona_moral">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">Localidad</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" name="df_localidad_persona_moral" [(ngModel)]="cliente.df_localidad_persona_moral">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">Municipio</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" name="df_municipio_persona_moral" [(ngModel)]="cliente.df_municipio_persona_moral">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">Estado</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control" name="df_estado_persona_moral" [(ngModel)]="cliente.df_estado_persona_moral">
-          </div>
-        </div>
-
-
-
-
-      </div>
-
-
-      <div class="form-group">
-        <div class="text-center">
-          <button mat-raised-button type="button" color="primary">GUARDAR GENERALES</button>
-        </div>
-      </div>
-
-
+      </form>
     </div>
   </mat-tab>
 
@@ -939,7 +934,6 @@
         <div class="col-sm-9">
           <div class="input-group">
             <select class="form-control">
-              <!-- [(ngModel)]='compra_selected.id_estado_venta' -->
               <option *ngFor="let estado of estados" [value]="estado.id_estado_lote">{{estado.descripcion}}</option>
             </select>
             <div class="input-group-btn">
@@ -948,12 +942,7 @@
           </div>
         </div>
       </div>
-      <!--    <div class="form-group row">
-                                      <label class="col-form-label col-sm-3">Fecha Estado</label>
-                                      <div class="col-sm-9">
-                                        <span class="form-control">{{compra_selected.fecha_cambio_estado}} </span>
-                                      </div>
-                                    </div> -->
+
       <div class="form-group row">
         <label class="col-form-label col-sm-3" for="fecha_estado">Fecha Estado</label>
         <div class="col-sm-9">
@@ -971,10 +960,9 @@
       </div>
 
       <div class="form-group row">
-        <label class="col-form-label col-sm-3">Precio de Lista</label>
+        <label for="" class="col-form-label col-sm-3">Precio de Lista</label>
         <div class="col-sm-9">
-          <!-- <span class="form-control">{{compra_selected.valor_base|currency}} </span> -->
-          <input [textMask]="{mask: numbermask}" type="text" class="form-control" name="">
+          <input [textMask]="{mask: numbermask}" type="text" class="form-control">
         </div>
       </div>
 
@@ -1124,8 +1112,7 @@
         <div class="form-group row">
           <label class="col-form-label col-sm-3">Comentarios Entrega Física</label>
           <div class="col-sm-9">
-            <textarea class="form-control" rows="6" name="comentarios_entrega_fisica" [(ngModel)]="compra_selected.comentarios_entrega_fisica">
-                                                    </textarea>
+            <textarea class="form-control" rows="6" name="comentarios_entrega_fisica" [(ngModel)]="compra_selected.comentarios_entrega_fisica"></textarea>
           </div>
         </div>
       </fieldset>
