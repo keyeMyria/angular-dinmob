@@ -245,7 +245,7 @@ export class EditarClienteComponent implements OnInit {
       },
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.selectedOption = result;
+     
     });
 
   }
