@@ -17,25 +17,26 @@ export class MapasService {
   }
 
   getMapaObra(path) {
-    return this.http.get('./assets/mapas/' + path)
+    // './assets/mapas/'
+    return this.http.get("./assets/mapas/" + path)
       .map(this.extractData)
       .catch(this.handleError);
   }
 
   getLotesObra(id_obra) {
-    return this.http.get(this.url + 'mapas/get_lotes_obra/' + id_obra)
+    return this.http.get(this.url + 'get_lotes_obra/' + id_obra)
       .map(this.extractData)
       .catch(this.handleError);
   }
 
   getValorAvanceLotesObra(id_obra) {
-    return this.http.get(this.url + 'mapas/get_valor_avance_lotes_obra/' + id_obra)
+    return this.http.get(this.url + 'get_valor_avance_lotes_obra/' + id_obra)
       .map(this.extractData)
       .catch(this.handleError);
   }
 
   getValues(id_obra) {
-    return this.http.get(this.url + 'obras/estado_lotes/' + id_obra)
+    return this.http.get(this.url + 'estado_lotes/' + id_obra)
       .map(this.extractData)
       .catch(this.handleError);
   }

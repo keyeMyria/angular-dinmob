@@ -24,6 +24,8 @@
 }
 
 
+
+
 .map {
    
     display: flex;
@@ -33,10 +35,7 @@
   
 }
 
-/* .map-header {
-    background-color: yellow;
-}
- */
+
 .map-toolbar {
     display: flex;
     flex-grow: 1;
@@ -54,3 +53,6 @@
 }
 
 
+.texto{
+    min-height: 24px;
+}

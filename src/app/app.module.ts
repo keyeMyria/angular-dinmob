@@ -140,6 +140,8 @@ import { AlertaClientesComponent } from './components/ventas/alerta-clientes/ale
 import { ClienteSinLoteComponent } from './components/ventas/cliente-sin-lote/cliente-sin-lote.component';
 import { EstadisticasVentasComponent } from './components/ventas/estadisticas-ventas/estadisticas-ventas.component';
 import { ClientesLoteDialogoComponent } from './components/ventas/clientes-lote-dialogo/clientes-lote-dialogo.component';
+import { AlertaDialogoComponent } from './components/admin/alerta-dialogo/alerta-dialogo.component';
+import { PrototiposToStringPipe } from './pipes/prototipos-to-string.pipe';
 
 
 
@@ -212,6 +214,8 @@ import { ClientesLoteDialogoComponent } from './components/ventas/clientes-lote-
     EstadisticasVentasComponent,
     ClientesLoteDialogoComponent,
     UnmaskNumberPipe,
+    AlertaDialogoComponent,
+    PrototiposToStringPipe,
 
 
 
@@ -261,7 +265,8 @@ import { ClientesLoteDialogoComponent } from './components/ventas/clientes-lote-
     EditarLoteDialogoComponent,
     EditarUsuarioDialogoComponent,
     VerCedulaFiscalDialogoComponent,
-    ClientesLoteDialogoComponent
+    ClientesLoteDialogoComponent,
+    AlertaDialogoComponent
 
 
 
@@ -269,6 +274,7 @@ import { ClientesLoteDialogoComponent } from './components/ventas/clientes-lote-
 
   providers: [
  
+    
     AuthGuard,
     ConfigService,
     AuthService,

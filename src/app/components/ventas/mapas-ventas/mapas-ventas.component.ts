@@ -1,32 +1,43 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MapasService } from "app/services/mapas.service";
 import 'jvectormap';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { ClientesLoteDialogoComponent } from 'app/components/ventas/clientes-lote-dialogo/clientes-lote-dialogo.component';
 import { MatDialog, MatSnackBar } from '@angular/material';
+import { of } from "rxjs/observable/of";
+import { Observable } from 'rxjs/Observable';
+import { CurrencyPipe } from '@angular/common';
+import { LotesService } from 'app/services/lotes.service';
+
+
 declare var jQuery: any;
 declare var $: any;
 
 @Component({
   selector: 'app-mapas-ventas',
   templateUrl: './mapas-ventas.component.html',
-  styleUrls: ['./mapas-ventas.component.scss']
+  styleUrls: ['./mapas-ventas.component.scss'],
+  providers: [CurrencyPipe]
 })
 export class MapasVentasComponent implements OnInit, OnDestroy {
+  self = this;
+
   map: any;
-  loteSelected: any;
-  compras: any;
-  compra_selected: any;
-  obra_selected: any;
-  lotes: any;
+  lote_selected: any = null;
+  obra_selected: any = "";
+  lotes: any = [];
   obras: any[] = [];
-  map_values: any;
+  jsonMap: any = {};
 
   constructor(
+    private router: Router,
     private mapaSrv: MapasService,
+    private loteSrv: LotesService,
     private route: ActivatedRoute,
     public dialog: MatDialog,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    private currecyPipe: CurrencyPipe
+
   ) { }
 
   ngOnInit() {
@@ -35,23 +46,90 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
         // console.log("resultado resolve ", data);
         this.obras = data.obras;
       });
+
+    //this.obras= this.route.snapshot.data["obras"];
+
+    this.route.paramMap
+      .switchMap((params: ParamMap) => {
+        if (params.has("obra")) {
+          this.obra_selected = params.get("obra");
+
+          let obra = this.getObra(this.obra_selected);
+
+          //unimos la consulta de los valores y el mapa
+          return Observable.forkJoin(
+            this.mapaSrv.getLotesObra(obra.id_obra),
+            this.mapaSrv.getMapaObra(obra.mapa)
+          )
+
+        } else {
+          return of([[], {}]);
+        }
+
+      }).subscribe(res => {
+
+        this.lotes = res[0];
+        this.jsonMap = res[1];
+
+        let values = {};
+
+        this.lotes.forEach(lote => {
+          values[lote.code] = lote.estado_venta;
+        });
+
+        this.crearMapa(values);
+
+      });
+
+  }
+
+  cargarObra(id_obra) {
+
+    //console.log("cargar obra", this.obras.find(obra => obra.id_obra == id_obra));
+
+
+    if (id_obra) {
+      this.router.navigate([".", { obra: id_obra }]);
+    } else {
+      this.router.navigate([".", {}]);
+
+    }
+
+  }
+
+  private getObra(id_obra) {
+    return this.obras.find(obra => obra.id_obra == id_obra);
   }
 
   verClientes() {
 
-    let dialogRef = this.dialog.open(ClientesLoteDialogoComponent, {
-      data: {
-      },
-      width: "800px"
-    });
-    dialogRef.afterClosed().subscribe(result => {
+    this.loteSrv.getDetallesLoteVentas(this.lote_selected.id_lote)
+      .subscribe(res => {
 
-      if (result === true) {
+        console.log("res", res);
+        
 
-      } else if (result.error) {
+        let dialogRef = this.dialog.open(ClientesLoteDialogoComponent, {
+          data: {
+            lote: res.lote,
+            clientes: res.clientes,
+            obra:res.obra
+          },
+          width: "800px"
+        });
+        dialogRef.afterClosed().subscribe(result => {
 
-      }
-    });
+          if (result === true) {
+
+          } else if (result.error) {
+
+          }
+        });
+
+
+      });
+
+
   }
 
   ngOnDestroy() {
@@ -63,294 +141,138 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
 
   toggleVerLeyenda(event) {
     //console.log("ver leyenda", event.checked);
-   $(".jvectormap-legend-cnt.jvectormap-legend-cnt-v").toggleClass("d-none");
+    $(".jvectormap-legend-cnt.jvectormap-legend-cnt-v").toggleClass("d-none");
     //let items= $(".jvectormap-legend-cnt.jvectormap-legend-cnt-v");
     //console.log(items);
-    
+
 
   }
 
-  getMapa() {
-    let obra = { id_obra: 1, mapa: "tresMarias_codes.json" };
 
-    this.mapaSrv.getMapaObra(obra.mapa)
-      .subscribe(response => {
+  crearMapa(values) {
 
-
-        jQuery.fn.vectorMap('addMap', 'map', response.mapa);
-        $("#map").vectorMap({
-          map: 'map',
-          backgroundColor: "transparent",
-          //regionsSelectable: true,
-          //regionsSelectableOne: true,
-          regionStyle: {
-            initial: {
-              fill: '#e4e4e4',
-              "fill-opacity": 1,
-              stroke: 'black',
-              "stroke-width": 0.3,
-              "stroke-opacity": 1
-            }
-          },
-          focusOn: {
-            scale: 1,
-            x: 0.5,
-            y: 0.5
-          },
-          markers: [
-
-          ],
-          regionLabelStyle: {
-            initial: {
-              fill: 'black'
-            },
-            hover: {
-              fill: 'red'
-            }
-          },
-
-          series: {
-            regions: [
-              {
-                values: [],//this.map_values,
-                scale: {
-                  'Libre': '#00a65a', //green
-                  'Apartado': '#f39c12', //amarillo     
-                  'Bloqueado': '#d81b60', //maroon 
-                  'Contrato': '#00c0ef', //aqua        
-                  'Escriturado': '#605ca8' //purple
-
-                },
-                legend: {
-                  vertical: true,
-                  title: 'Estado',
-                  labelRender: function (scale) {
-                    return scale;
-                  }
-                }
-              },
-              {
-                scale: {
-                  'Terreno': 'white',
-                  'Letras': 'black', // '#e4e4e4',
-                  'What': 'red'
-                },
-                attribute: 'fill',
-                //las regiones que son texto
-                values: [],//response.data.texto
-              }
-            ]
-
-          }
-
-
-        });
-
-        this.map = $("#map").vectorMap('get', 'mapObject');
-
-
-
-
-
-      });
-
-  }
-
-  getMapaObra(obra) {
-    console.log("getMapaObra", obra);
-
-
-    //inicializamos los datos cada vez que se cambie de obra
-    this.loteSelected = null;
-    this.compra_selected = { pagos: [] };
-    this.compras = [];
-
-
-    if (obra.mapa) {
-
-      this.mapaSrv.getLotesObra(obra.id_obra)
-        .subscribe(response => {
-          //console.log("response", response.data);
-          this.lotes = response;
-
-          /*   this.map_values = _.reduce(this.lotes, function (memo, item) {
-              memo[item.code] = item.estado_venta;
-              return memo;
-            }, {}); */
-
-          //console.log("values", this.map_values);
-          /*
-          this.mapaSrv.getMapaObra(obra.mapa).subscribe( (response)=> {
-            //console.log(response);
-            if (this.map) {
-              this.map.remove();
-            }
-  
-            jQuery.fn.vectorMap('addMap', 'map', response.data.mapa);
-            $("#map").vectorMap({
-              map: 'map',
-              backgroundColor: "transparent",
-              //regionsSelectable: true,
-              //regionsSelectableOne: true,
-              regionStyle: {
-                initial: {
-                  fill: '#e4e4e4',
-                  "fill-opacity": 1,
-                  stroke: 'black',
-                  "stroke-width": 0.3,
-                  "stroke-opacity": 1
-                }
-              },
-              focusOn: {
-                scale: 1,
-                x: 0.5,
-                y: 0.5
-              },
-              markers: [
-  
-              ],
-              regionLabelStyle: {
-                initial: {
-                  fill: 'black'
-                },
-                hover: {
-                  fill: 'red'
-                }
-              },
-  
-              series: {
-                regions: [
-                  {
-                    values: this.map_values,
-                    scale: {
-                      'Libre': '#00a65a', //green
-                      'Apartado': '#f39c12', //amarillo     '#ff851b', //orange
-                      'Bloqueado': '#d81b60', //maroon 
-                      'Contrato': '#00c0ef', //aqua         #0073b7',//blue
-                      'Escriturado': '#605ca8' //purple
-  
-                    },
-                    legend: {
-                      vertical: true,
-                      title: 'Estado',
-                      labelRender: function (scale) {
-                        return scale;
-                      }
-                    }
-                  },
-                  {
-                    scale: {
-                      'Terreno': 'white',
-                      'Letras': 'black', // '#e4e4e4',
-                      'What': 'red'
-                    },
-                    attribute: 'fill',
-                    //las regiones que son texto
-                    values: response.data.texto
-                  }
-                ]
-  
-              },
-              onRegionTipShow: function (e, tip, code) {
-  
-                //tip.html(el.html() + ' - ' + code);
-                // code= M1L1-112
-                // devuelve 112
-                //var id = code.split('-')[1];
-                //if (id) {
-                //buscamos el lote por id para acceder a sus propiedades
-                var lote = _.findWhere(this.lotes, { code: code });
-                if (lote !== undefined) {
-  
-                  var tooltip = lote.nombre_manzana + ' ' + lote.nombre;
-  
-                  if (this.options.get_rol_usuario() !== 3) {
-                    tooltip += ' <br> ' + numeral(lote.valor_base).format("$0,0.00");
-                  }
-  
-                  if (lote.fecha_entrega) {
-                    tooltip += ' <br> Entrega: ' + lote.fecha_entrega;
-                  }
-                  if (lote.prototipos) {
-                    for (var i = 0; i < lote.prototipos.length; i++) {
-                      tooltip += ' <br> ' + lote.prototipos[i].nombre;
-                    }
-                  }
-  
-  
-  
-                  tip.html(tooltip);
-                } else {
-                  //no encontramos el lote
-                  e.preventDefault();
-                }
-  
-              },
-              onRegionClick: function (e, code) {
-  
-  
-  
-                //buscamos el lote por id para acceder a sus propiedades
-                var lote = _.findWhere(this.lotes, { code: code });
-                if (lote !== undefined) {
-  
-  
-                  $scope.$apply(function () {
-                    this.loteSelected = lote;
-                  });
-  
-                } else {
-                  //no encontramos el lote
-                  $scope.$apply(function () {
-                    this.loteSelected = null;
-                  });
-                }
-  
-              },
-              onRegionSelected: function (e, code, isSelected, selectedRegions) {
-  
-  
-                if (code.startsWith("M")) {
-                  var id = code.split('-')[1];
-                  if (id) {
-                    //buscamos el lote por id para acceder a sus propiedades
-                    var lote = _.findWhere(this.lotes, { id_lote: id });
-                    if (lote !== undefined) {
-  
-  
-                      $scope.$apply(function () {
-                        this.loteSelected = lote;
-                      });
-  
-                    } else {
-                      //no encontramos el lote
-                      //e.preventDefault();
-                    }
-                  }
-                } else {
-                  //e.preventDefault();
-                }
-  
-              }
-  
-            });
-  
-  
-            this.map = $("#map").vectorMap('get', 'mapObject');
-            //this.map.container.click(this.clickmap);
-  
-  
-          });
-          */
-
-
-        });
-
-    } else {
-      this.obra_selected = null;
-      //$("#modalAlert").modal("show");
+    //borramos el mapa si ya hemos creado alguno
+    if (this.map) {
+      //funcion de la API de jvectormap
+      this.map.remove();
     }
 
-  };
+    jQuery.fn.vectorMap('addMap', 'map', this.jsonMap.mapa);
+    $("#map").vectorMap({
+      map: 'map',
+      backgroundColor: "transparent",
+      //regionsSelectable: true,
+      //regionsSelectableOne: true,
+      regionStyle: {
+        initial: {
+          fill: '#e4e4e4',
+          "fill-opacity": 1,
+          stroke: 'black',
+          "stroke-width": 0.3,
+          "stroke-opacity": 1
+        }
+      },
+
+      focusOn: {
+        scale: 1,
+        x: 0.5,
+        y: 0.5
+      },
+
+      markers: [],
+
+      regionLabelStyle: {
+        initial: {
+          fill: 'black'
+        },
+        hover: {
+          fill: 'red'
+        }
+      },
+
+      series: {
+        regions: [
+          {
+            values: values,
+            scale: {
+              'Libre': '#00a65a', //green
+              'Apartado': '#f39c12', //amarillo     
+              'Bloqueado': '#d81b60', //maroon 
+              'Contrato': '#00c0ef', //aqua        
+              'Escriturado': '#605ca8' //purple
+
+            },
+            legend: {
+              vertical: true,
+              title: 'Estado',
+              labelRender: function (scale) {
+                return scale;
+              }
+            }
+          },
+          {
+            scale: {
+              'Terreno': 'white',
+              'Letras': 'black',
+              'What': 'red'
+            },
+            attribute: 'fill',
+            //las regiones que son texto
+            values: this.jsonMap.texto
+          }
+        ]
+
+      },
+
+      onRegionTipShow: (e, tip, code) => {
+
+        //console.log("regiontipshow", code);
+
+
+
+        //buscamos el lote por id para acceder a sus propiedades
+        let lote = this.lotes.find(lote => lote.code == code);
+        if (lote !== undefined) {
+
+          let tooltip = lote.nombre_manzana + " " + lote.nombre;
+
+          tooltip += " <br> " + this.currecyPipe.transform(lote.valor_base);
+
+          if (lote.fecha_entrega) {
+            tooltip += " <br> Entrega: " + lote.fecha_entrega;
+          }
+
+          if (lote.prototipos) {
+            for (let i = 0; i < lote.prototipos.length; i++) {
+              tooltip += " <br> " + lote.prototipos[i].nombre;
+            }
+          }
+
+          tip.html(tooltip);
+
+        } else {
+
+          // no encontramos el lote
+          // evitamos que se muestre el tooltip
+          e.preventDefault();
+        }
+
+      },
+
+      onRegionClick: (e, code) => {
+
+        this.lote_selected = this.lotes.find(lote => lote.code == code);
+        console.log("find on click", this.lote_selected);
+
+      },
+
+
+    });
+
+    this.map = $("#map").vectorMap('get', 'mapObject');
+
+
+  }
+
 
 }

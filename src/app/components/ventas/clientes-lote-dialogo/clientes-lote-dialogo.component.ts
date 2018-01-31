@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Cliente } from 'app/model/cliente';
+import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-clientes-lote-dialogo',
@@ -8,8 +9,11 @@ import { Cliente } from 'app/model/cliente';
   styleUrls: ['./clientes-lote-dialogo.component.scss']
 })
 export class ClientesLoteDialogoComponent implements OnInit {
-  clientes: any[]=[];
+ 
   cliente_selected: any = { pagos: [] };
+
+  //selector de clientes
+  selection = new SelectionModel<any>(false);
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -17,45 +21,48 @@ export class ClientesLoteDialogoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-  
+
   }
+  selectCliente(cliente) {
 
+    //this.selection.isEmpty();
+    //this.selection.hasValue();
 
-  seleccionarCliente(event, cliente) {
-    console.log("cliente", event.checked);
-    if (event.checked) {
-      this.cliente_selected = cliente;
+    this.selection.toggle(cliente);
+    if (this.selection.selected.length > 0) {
+      this.cliente_selected = this.selection.selected[0];
+
     } else {
-      this.cliente_selected = { pagos: [] };
-    };
-    //this.cliente_selected = cliente;
+      this.cliente_selected = {};
+    }
+
   }
 
-  totalPagosRealizados(compra) {
-    //console.log("pagos realizados");
+  totalPagosRealizados() {
     let total = 0;
-    compra.pagos.forEach(pago => {
-      if (pago.fecha_pago) {
-        let monto = parseFloat(pago.monto);
-        if (isNaN(monto)) {
-          monto = 0;
-        }
-        total += monto;
 
-      }
-    });
-    return Math.round(total * 100) / 100;
+    if (this.cliente_selected.pagos) {
+      this.cliente_selected.pagos.forEach(pago => {
+        total += +pago.monto;
+
+      });
+    }
+    return total;
   }
 
-  saldoPendiente(compra) {
-    //console.log("saldo pendiente");
+  saldoPendiente() {
 
-    let valor = parseFloat(compra.valor_operacion);
-    if (isNaN(valor))
-      valor = 0;
+    let pendiente = 0;
 
-    let saldo = valor - this.totalPagosRealizados(compra);
-    return saldo;
+    if (this.cliente_selected.valor_operacion) {
+
+      pendiente = +this.cliente_selected.valor_operacion - this.totalPagosRealizados();
+
+    }
+    return pendiente;
+
   }
+
+
 
 }

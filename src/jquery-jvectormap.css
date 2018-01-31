@@ -5,8 +5,7 @@ svg {
 .jvectormap-container {
     width: 100%;
     height: 100%;
-    position: relative; 
-    /* flex-grow: 1; */
+    position: relative;     
     overflow: hidden;
     touch-action: none;
 }
@@ -21,6 +20,9 @@ svg {
     font-family: sans-serif, Verdana;
     font-size: smaller;
     padding: 3px;
+    /* ini rja */
+    z-index: 100;
+    /* fin */
 }
 
 .jvectormap-zoomin, .jvectormap-zoomout, .jvectormap-goback {
