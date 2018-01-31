@@ -1,4 +1,9 @@
 <section class="container mt-2 mb-5">
+
+    <div *ngIf="loading">
+        <mat-spinner class="loading"></mat-spinner>
+    </div>
+    
     <div class="row">
         <div class="col-12 col-md-8">
 
@@ -139,7 +144,7 @@
             <!-- Operaciones -->
             <mat-expansion-panel class="mt-2" expanded="true">
                 <!-- class="bg-info text-white" -->
-                <mat-expansion-panel-header class="bg-primary text-white" >
+                <mat-expansion-panel-header class="bg-primary text-white">
                     Operaciones
                 </mat-expansion-panel-header>
 

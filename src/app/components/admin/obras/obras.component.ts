@@ -29,6 +29,7 @@ export class ObrasComponent implements OnInit {
 
 
   ngOnInit() {
+    this.loading = true;
 
     this.route.data
       .subscribe((data: { obras: any[], residentes: any[], almacenistas: any[], control_almacen: any[] }) => {
@@ -43,7 +44,11 @@ export class ObrasComponent implements OnInit {
 
 
     this.obrasSrv.getObrasConUsuarios()
-      .subscribe(response => this.obras = response);
+      .subscribe(response => {
+        this.obras = response;
+        this.loading = false;
+      });
+
   }
 
   openDialogCreateObra(): void {

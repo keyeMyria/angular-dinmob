@@ -1,14 +1,12 @@
 <div class="container mt-2 mb-5">
+
+  <div *ngIf="loading">
+    <mat-spinner class="loading"></mat-spinner>
+  </div>
+
   <div class="row">
     <div class="col-12">
-      <!-- 
-      <div class="mb-2">
-        <select class="form-control" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)">
-          <option value="">Seleccionar...</option>
-          <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>
-        </select>
-      </div> -->
-
+      
       <div>
         <mat-form-field class="w-100">
           <mat-select placeholder="Obra" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)">

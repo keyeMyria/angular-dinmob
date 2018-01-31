@@ -29,6 +29,7 @@ import { PrototiposService } from 'app/services/prototipos.service';
 })
 export class EstructuraObraComponent implements OnInit {
 
+  loading: boolean;
   maskDosDigitos = [/[1-9]/, /\d/];
   guide: boolean = false;
 
@@ -76,7 +77,7 @@ export class EstructuraObraComponent implements OnInit {
 
   /* obtenemos las obras del usurio del resolve y consultamos la obra requerida como routeParam */
   ngOnInit() {
-
+    this.loading = true;
     this.route.data
       .subscribe((data: { obras: any[] }) => {
         //console.log("resusltado resolve ", data);
@@ -108,6 +109,7 @@ export class EstructuraObraComponent implements OnInit {
         for (let i = 0; i < this.obra.manzanas.length; i++) {
           this.selection.push(new SelectionModel<any>(true, []));
         }
+        this.loading = false;
 
 
       });
