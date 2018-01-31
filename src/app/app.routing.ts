@@ -45,6 +45,13 @@ import { InstitucionesCreditoResolverService } from 'app/resolvers/instituciones
 import { TipoOperacionService } from 'app/services/tipo-operacion.service';
 import { TiposOperacionResolverService } from 'app/resolvers/tipos-operacion-resolver.service';
 import { TiposPagoResolverService } from 'app/resolvers/tipos-pago-resolver.service';
+import { SalidasComponent } from 'app/components/almacen/salidas/salidas.component';
+import { EntradasComponent } from 'app/components/almacen/entradas/entradas.component';
+import { InventarioComponent } from 'app/components/almacen/inventario/inventario.component';
+import { NuevaSalidaComponent } from 'app/components/almacen/nueva-salida/nueva-salida.component';
+import { NuevaEntradaComponent } from 'app/components/almacen/nueva-entrada/nueva-entrada.component';
+import { TrabajadoresComponent } from 'app/components/admin/trabajadores/trabajadores.component';
+import { AsignarTrabajadoresComponent } from 'app/components/admin/asignar-trabajadores/asignar-trabajadores.component';
 
 
 
@@ -155,6 +162,25 @@ export const ROUTES: Routes = [
                     obras: ObrasUsuarioResolverService
                 }
             },
+            {
+                path: 'salidas', component: SalidasComponent,
+                resolve: {
+                    obras: ObrasUsuarioResolverService
+                }
+            },
+            {
+                path: 'entradas', component: EntradasComponent,
+                resolve: {
+                    obras: ObrasUsuarioResolverService
+                }
+            },
+            { path: 'inventario', component: InventarioComponent },
+            { path: 'nueva-salida', component: NuevaSalidaComponent },
+            { path: 'nueva-entrada', component: NuevaEntradaComponent },
+            { path: 'trabajadores', component: TrabajadoresComponent },
+            { path: 'asignar-trabajadores', component: AsignarTrabajadoresComponent },
+
+
 
 
 

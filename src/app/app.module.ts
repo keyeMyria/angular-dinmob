@@ -140,6 +140,17 @@ import { AlertaClientesComponent } from './components/ventas/alerta-clientes/ale
 import { ClienteSinLoteComponent } from './components/ventas/cliente-sin-lote/cliente-sin-lote.component';
 import { EstadisticasVentasComponent } from './components/ventas/estadisticas-ventas/estadisticas-ventas.component';
 import { ClientesLoteDialogoComponent } from './components/ventas/clientes-lote-dialogo/clientes-lote-dialogo.component';
+import { SalidasComponent } from './components/almacen/salidas/salidas.component';
+import { EntradasComponent } from './components/almacen/entradas/entradas.component';
+import { InventarioComponent } from './components/almacen/inventario/inventario.component';
+import { NuevaSalidaComponent } from './components/almacen/nueva-salida/nueva-salida.component';
+import { NuevaEntradaComponent } from './components/almacen/nueva-entrada/nueva-entrada.component';
+import { EditarMaterialDialogoComponent } from './components/almacen/editar-material-dialogo/editar-material-dialogo.component';
+import { NuevoMaterialDialogoComponent } from './components/almacen/nuevo-material-dialogo/nuevo-material-dialogo.component';
+import { TrabajadoresComponent } from './components/admin/trabajadores/trabajadores.component';
+import { NuevoTrabajadorDialogoComponent } from './components/admin/nuevo-trabajador-dialogo/nuevo-trabajador-dialogo.component';
+import { AsignarTrabajadoresComponent } from './components/admin/asignar-trabajadores/asignar-trabajadores.component';
+import { EditarTrabajadorDialogoComponent } from './components/admin/editar-trabajador-dialogo/editar-trabajador-dialogo.component';
 
 
 
@@ -212,6 +223,17 @@ import { ClientesLoteDialogoComponent } from './components/ventas/clientes-lote-
     EstadisticasVentasComponent,
     ClientesLoteDialogoComponent,
     UnmaskNumberPipe,
+    SalidasComponent,
+    EntradasComponent,
+    InventarioComponent,
+    NuevaSalidaComponent,
+    NuevaEntradaComponent,
+    EditarMaterialDialogoComponent,
+    NuevoMaterialDialogoComponent,
+    TrabajadoresComponent,
+    NuevoTrabajadorDialogoComponent,
+    AsignarTrabajadoresComponent,
+    EditarTrabajadorDialogoComponent,
 
 
 
@@ -261,7 +283,11 @@ import { ClientesLoteDialogoComponent } from './components/ventas/clientes-lote-
     EditarLoteDialogoComponent,
     EditarUsuarioDialogoComponent,
     VerCedulaFiscalDialogoComponent,
-    ClientesLoteDialogoComponent
+    ClientesLoteDialogoComponent,
+    EditarMaterialDialogoComponent,
+    NuevoMaterialDialogoComponent,
+    NuevoTrabajadorDialogoComponent,
+    EditarTrabajadorDialogoComponent,
 
 
 
