@@ -156,6 +156,14 @@ export class EditarClienteComponent implements OnInit {
       identificacion_oficial_conyuge: "",
       rfc_conyuge: "",
       curp_conyuge: "",
+      df_calle_conyuge: "",
+      df_num_exterior_conyuge: "",
+      df_num_interior_conyuge: "",
+      df_colonia_conyuge: "",
+      df_cp_conyuge: "",
+      df_localidad_conyuge: "",
+      df_municipio_conyuge: "",
+      df_estado_conyuge: "",
     });
     this.formApoderado = this.fb.group({
       nombre_apoderado: "",
@@ -170,30 +178,30 @@ export class EditarClienteComponent implements OnInit {
       telefono_apoderado: "",
       celular_apoderado: "",
       email_apoderado: "",
-      identificacion_oficial_apoderado:"",
-      num_identificacion_apoderado:"",
-      rfc_apoderado:"",
-      curp_apoderado:"",      
+      identificacion_oficial_apoderado: "",
+      num_identificacion_apoderado: "",
+      rfc_apoderado: "",
+      curp_apoderado: "",
     });
 
     this.formInmueble = this.fb.group({
-      proyecto:"",
-      desarrollador:"",
-      valor_operacion:"",
-      ubicacion:"",
-      cp:"",
-      id_tipo_operacion:"",
-      id_institucion_credito:"",
-      banco_credito:"",
-      otra_credito:"",
-      fecha_firma_contrato:"",
-      fecha_entrega:"",
-      asesor_inmobiliario:"",
-      id_asesor:"",
-      notas_escrituracion:"",
-      notas_cancelacion:"",
-      fecha_entrega_fisica:"",
-      comentarios_entrega_fisica:"",
+      proyecto: "",
+      desarrollador: "",
+      valor_operacion: "",
+      ubicacion: "",
+      cp: "",
+      id_tipo_operacion: "",
+      id_institucion_credito: "",
+      banco_credito: "",
+      otra_credito: "",
+      fecha_firma_contrato: "",
+      fecha_entrega: "",
+      asesor_inmobiliario: "",
+      id_asesor: "",
+      notas_escrituracion: "",
+      notas_cancelacion: "",
+      fecha_entrega_fisica: "",
+      comentarios_entrega_fisica: "",
     });
 
   }
@@ -225,6 +233,11 @@ export class EditarClienteComponent implements OnInit {
         this.documentos_conyuge = response.documentos_conyuge;
 
         this.setFormAlertaValue(this.cliente);
+        this.formGenerales.patchValue(this.cliente);
+        this.formLaborales.patchValue(this.cliente);
+        this.formConyuge.patchValue(this.cliente);
+        this.formApoderado.patchValue(this.cliente);
+        this.formInmueble.patchValue(this.cliente);
 
       });
 
