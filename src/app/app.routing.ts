@@ -174,10 +174,25 @@ export const ROUTES: Routes = [
                     obras: ObrasUsuarioResolverService
                 }
             },
-            { path: 'inventario', component: InventarioComponent },
+            {
+                path: 'inventario', component: InventarioComponent,
+                resolve: {
+                    obras: ObrasUsuarioResolverService
+                }
+            },
             { path: 'nueva-salida', component: NuevaSalidaComponent },
-            { path: 'nueva-entrada', component: NuevaEntradaComponent },
-            { path: 'trabajadores', component: TrabajadoresComponent },
+            {
+                path: 'nueva-entrada', component: NuevaEntradaComponent,
+                resolve: {
+                    obras: ObrasUsuarioResolverService
+                }
+            },
+            {
+                path: 'trabajadores', component: TrabajadoresComponent,
+                resolve: {
+                    obras: ObrasUsuarioResolverService
+                }
+            },
             { path: 'asignar-trabajadores', component: AsignarTrabajadoresComponent },
 
 

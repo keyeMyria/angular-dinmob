@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-nueva-entrada',
@@ -6,10 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nueva-entrada.component.scss']
 })
 export class NuevaEntradaComponent implements OnInit {
+  loading: boolean;
+  obras: any = [];
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+  ) { }
 
   ngOnInit() {
+    this.route.data
+    .subscribe((data: { obras: any[] }) => {
+      this.obras = data.obras;
+    });
+
+  //this.loading = true;
   }
 
 }
