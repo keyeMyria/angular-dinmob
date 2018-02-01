@@ -64,7 +64,7 @@ export class ClientesService {
 
 
   //ok
-  getClienteConComprasYDocumentos(id_cliente) {
+  getClienteConComprasYDocumentos(id_cliente) :Observable<any> {
     return this.http.get(this.url + 'get_cliente_documentos_compras/' + id_cliente)
       .pipe(
       tap(response => console.log("response", response)),
@@ -89,7 +89,7 @@ export class ClientesService {
   }
 
   //ok
-  updateCliente(id, cliente) {
+  updateCliente(id, cliente): Observable<any> {
     return this.http.post(this.url + 'update_cliente/' + id, { cliente: cliente })
       .pipe(
       tap(response => console.log("response", response)),
