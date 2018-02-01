@@ -87,8 +87,7 @@ export class ObrasComponent implements OnInit {
 
   delObra(obra: Obra) {
 
-    let newpassword: string;
-
+   
     let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
       data: {
         title: "Eliminar Obra",
