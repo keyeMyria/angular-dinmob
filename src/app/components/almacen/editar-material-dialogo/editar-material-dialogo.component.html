@@ -1,3 +1,34 @@
-<p>
-  editar-material-dialogo works!
-</p>
+<h1 mat-dialog-title>Editar Material</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
+    <div class="form-group">
+      <label for="codigo" class="col-form-label">Código</label>
+      <input class="form-control" type="text" id="codigo" name="codigo" formControlName="codigo" [ngClass]="{'is-invalid': form.get('codigo').invalid  && (form.get('codigo').dirty || form.get('codigo').touched) }">
+      <div class="invalid-feedback">Proporcione un código</div>
+    </div>
+
+    <div class="form-group">
+      <label for="nombre" class="col-form-label">Nombre</label>
+      <input class="form-control" type="text" id="nombre" name="nombre" formControlName="nombre" [ngClass]="{'is-invalid': form.get('nombre').invalid  && (form.get('nombre').dirty || form.get('nombre').touched) }">
+      <div class="invalid-feedback">Proporcione un nombre</div>
+    </div>
+
+    <div class="form-group">
+      <label for="unidad" class="col-form-label">Unidad</label>
+      <input class="form-control" type="text" id="nombre" name="unidad" formControlName="unidad" [ngClass]="{'is-invalid': form.get('unidad').invalid  && (form.get('unidad').dirty || form.get('unidad').touched) }">
+      <div class="invalid-feedback">Proporcione una unidad</div>
+    </div>
+
+    <div class="form-group">
+      <label for="existencias" class="col-form-label">Existencias</label>
+      <input class="form-control" type="text" id="existencias" name="existencias" formControlName="existencias" [ngClass]="{'is-invalid': form.get('existencias').invalid  && (form.get('existencias').dirty || form.get('existencias').touched) }">
+      <div class="invalid-feedback">Proporcione una existencias</div>
+    </div>
+
+
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button type="button" [mat-dialog-close]="false">CANCELAR</button>
+  <button mat-button type="submit" form="id_form" [disabled]="form.invalid" color="primary">GUARDAR</button>
+</div>
