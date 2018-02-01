@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { ObrasService } from "app/services/obras.service";
 import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { ClientesService } from 'app/services/clientes.service';
 
 @Component({
   selector: 'app-nueva-compra-dialogo',
@@ -22,7 +23,8 @@ export class NuevaCompraDialogoComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<NuevaCompraDialogoComponent>,
     private fb: FormBuilder,
-    private obraSrv: ObrasService
+    private obraSrv: ObrasService,
+    private clienteSrv: ClientesService
   ) {
     this.form = this.fb.group({
       obra: ["", Validators.required],
@@ -60,6 +62,20 @@ export class NuevaCompraDialogoComponent implements OnInit {
   guardar() {
 
     console.log("nuevo pago", this.form.value);
+
+    this.clienteSrv.asociarClienteLote(this.data.id_cliente, this.form.value.lote)
+      .subscribe(compra => {
+
+        console.log("compra", compra);
+
+        this.data.compras.push(compra);
+        this.dialogRef.close(true);
+
+
+      }, (error) => {
+
+        this.dialogRef.close(error);
+      });
 
   }
 

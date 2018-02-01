@@ -22,7 +22,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 })
 export class EditarClienteComponent implements OnInit {
 
-  loading:boolean;
+  loading: boolean;
 
   numbermask = createNumberMask({
     allowDecimal: true,
@@ -211,8 +211,6 @@ export class EditarClienteComponent implements OnInit {
   }
 
   ngOnInit() {
-    /* this.cliente = new Cliente();
-    this.cliente.persona_moral = "0"; */
 
     this.route.data
       .subscribe((data: { obras: any[], formas_pago: any[], instituciones_credito: any[], tipos_operacion: any[], tipos_pago: any[], estados: any[] }) => {
@@ -237,7 +235,7 @@ export class EditarClienteComponent implements OnInit {
         this.documentos_conyuge = response.documentos_conyuge;
 
         this.setFormsValue(this.cliente);
-   
+
       });
 
   }
@@ -341,14 +339,14 @@ export class EditarClienteComponent implements OnInit {
   }
 
   updateCliente(cliente) {
-    this.loading=true;
+    this.loading = true;
     this.clienteSrv.updateCliente(this.cliente.id_cliente, cliente)
       .subscribe(res => {
-        
+
         this.cliente = res;
         //asignamos todos los formularios
         this.setFormsValue(this.cliente);
-        this.loading=false;
+        this.loading = false;
         this.snackBar.open("Cliente Actualizado", "", {
           duration: 2000
         });
@@ -366,10 +364,25 @@ export class EditarClienteComponent implements OnInit {
     let dialogRef = this.dialog.open(NuevaCompraDialogoComponent, {
       width: '400px',
       data: {
-        obras: this.obras
+        obras: this.obras,
+        compras: this.compras,
+        id_cliente: this.cliente.id_cliente
       }
     });
     dialogRef.afterClosed().subscribe(result => {
+
+      if (result===true) {
+        this.snackBar.open("Cliente Actualizado", "", {
+          duration: 2000
+        });
+
+      } else {
+        //console.log("error",result);
+        
+        this.snackBar.open(result.error, "", {
+          duration: 3000
+        });
+      }
 
     });
   }
