@@ -58,7 +58,7 @@ export class TableroComponent implements OnInit {
   }
 
   gotoClienteSinLote() {
-    this.router.navigate(["/clientes-sin-lote", this.obra_default]);
+    this.router.navigate(["/clientes-sin-lote"]);
   }
 
 

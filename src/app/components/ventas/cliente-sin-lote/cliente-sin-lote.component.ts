@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ClientesService } from 'app/services/clientes.service';
 
 @Component({
   selector: 'app-cliente-sin-lote',
@@ -7,34 +8,24 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./cliente-sin-lote.component.scss']
 })
 export class ClienteSinLoteComponent implements OnInit {
-  cliente: any;
-  clientes: any;
-  obras: any = [];
-  obra: any = {};
-  obra_selected: string = "";
+ 
+  clientes: any[]=[];
+ 
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private clienteSrv:ClientesService
   ) { }
 
   ngOnInit() {
-    this.route.data
-      .subscribe((data: { obras: any[] }) => {
-        //console.log("resusltado resolve ", data);
-        this.obras = data.obras;
+   
+      this.clienteSrv.getClientesSinLote()
+      .subscribe(clientes=>{
+        this.clientes=clientes;
       });
   }
 
-  cargarObra(id_obra) {
-
-    if (id_obra) {
-      this.router.navigate([".", { obra: id_obra }]);
-    } else {
-      this.router.navigate([".", {}]);
-    }
-
-  }
 
   editarCliente(cliente) {
     this.router.navigate(["/editar-cliente", cliente.id_cliente]);

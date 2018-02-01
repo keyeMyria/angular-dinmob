@@ -26,7 +26,7 @@
             <table class="table table-hover table-striped table-align-middle">
               <thead>
                 <tr>
-                  <th>Nombre</th>                  
+                  <th>Cliente</th>                  
                   <th>Manzana</th>
                   <th>Lote</th>
                   <th>Entrega</th>
@@ -38,9 +38,9 @@
               <tbody>
                 <tr *ngFor="let cliente of clientes">
                   <td>{{cliente.nombre}}</td>                
-                  <td>{{cliente.manzana}}</td>
-                  <td>{{cliente.lote}}</td>
-                  <td>{{cliente.fecha_entrega}}</td>
+                  <td class="ws-nowrap">{{cliente.manzana}}</td>
+                  <td class="ws-nowrap">{{cliente.lote}}</td>
+                  <td class="ws-nowrap">{{cliente.fecha_entrega| date:'mediumDate':'':'es'}}</td>
                   <td>{{cliente.mensaje_alerta}}</td>
                   <td class="text-right">
                     <button mat-button class="no-min" (click)="editarAlerta(cliente)">

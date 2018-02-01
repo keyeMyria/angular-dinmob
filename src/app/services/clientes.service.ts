@@ -34,6 +34,13 @@ export class ClientesService {
       .catch(this.handleError);
   }
 
+    //ok
+    getClientesSinLote() {
+      return this.http.get(this.url + "sin_lote")
+        .map(this.extractData)
+        .catch(this.handleError);
+    }
+
   //ok
   getAlertasObra(id_obra) {
     return this.http.get(this.url + "alertas_obra/"+ id_obra)

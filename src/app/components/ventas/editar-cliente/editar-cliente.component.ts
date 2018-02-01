@@ -22,6 +22,8 @@ import { SelectionModel } from '@angular/cdk/collections';
 })
 export class EditarClienteComponent implements OnInit {
 
+  loading:boolean;
+
   numbermask = createNumberMask({
     allowDecimal: true,
     prefix: '',
@@ -74,134 +76,136 @@ export class EditarClienteComponent implements OnInit {
     private fb: FormBuilder,
   ) {
     this.formAlerta = this.fb.group({
-      mensaje_alerta: "",
-      alerta_activada: "",
+      mensaje_alerta: null,
+      alerta_activada: null,
     });
 
     this.formGenerales = this.fb.group({
-      persona_moral: "",
-      nombre_persona_fisica: "",
-      nacionalidad_persona_fisica: "",
-      lugar_nacimiento_persona_fisica: "",
-      fecha_nacimiento_persona_fisica: "",
-      pais_nacimiento_persona_fisica: "",
-      lugar_residencia_persona_fisica: "",
-      domicilio_persona_fisica: "",
-      cp_persona_fisica: "",
-      ciudad_persona_fisica: "",
-      telefono_persona_fisica: "",
-      celular_persona_fisica: "",
-      email_persona_fisica: "",
-      identificacion_oficial_persona_fisica: "",
-      num_identificacion_persona_fisica: "",
-      rfc_persona_fisica: "",
-      curp_persona_fisica: "",
-      estado_civil_persona_fisica: "",
-      regimen_conyugal_persona_fisica: "",
-      df_calle_persona_fisica: "",
-      df_num_exterior_persona_fisica: "",
-      df_num_interior_persona_fisica: "",
-      df_colonia_persona_fisica: "",
-      df_cp_persona_fisica: "",
-      df_localidad_persona_fisica: "",
-      df_municipio_persona_fisica: "",
-      df_estado_persona_fisica: "",
+      //persona fisica
+      persona_moral: [null, Validators.required],
+      nombre: [null, Validators.required],
+      nacionalidad_persona_fisica: null,
+      lugar_nacimiento_persona_fisica: null,
+      fecha_nacimiento_persona_fisica: null,
+      pais_nacimiento_persona_fisica: null,
+      lugar_residencia_persona_fisica: null,
+      domicilio_persona_fisica: null,
+      cp_persona_fisica: null,
+      ciudad_persona_fisica: null,
+      telefono_persona_fisica: null,
+      celular_persona_fisica: null,
+      email_persona_fisica: null,
+      identificacion_oficial_persona_fisica: null,
+      num_identificacion_persona_fisica: null,
+      rfc_persona_fisica: null,
+      curp_persona_fisica: null,
+      estado_civil_persona_fisica: null,
+      regimen_conyugal_persona_fisica: null,
+      df_calle_persona_fisica: null,
+      df_num_exterior_persona_fisica: null,
+      df_num_interior_persona_fisica: null,
+      df_colonia_persona_fisica: null,
+      df_cp_persona_fisica: null,
+      df_localidad_persona_fisica: null,
+      df_municipio_persona_fisica: null,
+      df_estado_persona_fisica: null,
 
-      razon_social_persona_moral: "",
-      nacionalidad_persona_moral: "",
-      fecha_constitucion_persona_moral: "",
-      actividad_persona_moral: "",
-      telefono_persona_moral: "",
-      email_persona_moral: "",
-      rfc_persona_moral: "",
-      apoderado_legal_persona_moral: "",
-      instrumento_publico_persona_moral: "",
-      poderes_representante_persona_moral: "",
-      df_calle_persona_moral: "",
-      df_num_exterior_persona_moral: "",
-      df_num_interior_persona_moral: "",
-      df_colonia_persona_moral: "",
-      df_cp_persona_moral: "",
-      df_localidad_persona_moral: "",
-      df_municipio_persona_moral: "",
-      df_estado_persona_moral: "",
+      //persona moral
+      nacionalidad_persona_moral: null,
+      fecha_constitucion_persona_moral: null,
+      actividad_persona_moral: null,
+      telefono_persona_moral: null,
+      email_persona_moral: null,
+      rfc_persona_moral: null,
+      apoderado_legal_persona_moral: null,
+      instrumento_publico_persona_moral: null,
+      poderes_representante_persona_moral: null,
+      df_calle_persona_moral: null,
+      df_num_exterior_persona_moral: null,
+      df_num_interior_persona_moral: null,
+      df_colonia_persona_moral: null,
+      df_cp_persona_moral: null,
+      df_localidad_persona_moral: null,
+      df_municipio_persona_moral: null,
+      df_estado_persona_moral: null,
     });
 
     this.formLaborales = this.fb.group({
-      profesion_laboral: "",
-      ocupacion_laboral: "",
-      empresa_laboral: "",
-      puesto_laboral: "",
-      jefe_inmediato_laboral: "",
-      giro_empresa_laboral: "",
-      domicilio_empresa_laboral: "",
-      cp_laboral: "",
-      ciudad_laboral: "",
-      telefono_laboral: "",
+      profesion_laboral: null,
+      ocupacion_laboral: null,
+      empresa_laboral: null,
+      puesto_laboral: null,
+      jefe_inmediato_laboral: null,
+      giro_empresa_laboral: null,
+      domicilio_empresa_laboral: null,
+      cp_laboral: null,
+      ciudad_laboral: null,
+      telefono_laboral: null,
     });
 
     this.formConyuge = this.fb.group({
-      nombre_conyuge: "",
-      nacionalidad_conyuge: "",
-      lugar_nacimiento_conyuge: "",
-      fecha_nacimiento_conyuge: "",
-      pais_nacimiento_conyuge: "",
-      lugar_residencia_conyuge: "",
-      domicilio_conyuge: "",
-      cp_conyuge: "",
-      ciudad_conyuge: "",
-      telefono_conyuge: "",
-      celular_conyuge: "",
-      email_conyuge: "",
-      identificacion_oficial_conyuge: "",
-      rfc_conyuge: "",
-      curp_conyuge: "",
-      df_calle_conyuge: "",
-      df_num_exterior_conyuge: "",
-      df_num_interior_conyuge: "",
-      df_colonia_conyuge: "",
-      df_cp_conyuge: "",
-      df_localidad_conyuge: "",
-      df_municipio_conyuge: "",
-      df_estado_conyuge: "",
+      nombre_conyuge: null,
+      nacionalidad_conyuge: null,
+      lugar_nacimiento_conyuge: null,
+      fecha_nacimiento_conyuge: null,
+      pais_nacimiento_conyuge: null,
+      lugar_residencia_conyuge: null,
+      domicilio_conyuge: null,
+      cp_conyuge: null,
+      ciudad_conyuge: null,
+      telefono_conyuge: null,
+      celular_conyuge: null,
+      email_conyuge: null,
+      identificacion_oficial_conyuge: null,
+      rfc_conyuge: null,
+      curp_conyuge: null,
+      df_calle_conyuge: null,
+      df_num_exterior_conyuge: null,
+      df_num_interior_conyuge: null,
+      df_colonia_conyuge: null,
+      df_cp_conyuge: null,
+      df_localidad_conyuge: null,
+      df_municipio_conyuge: null,
+      df_estado_conyuge: null,
     });
+
     this.formApoderado = this.fb.group({
-      nombre_apoderado: "",
-      nacionalidad_apoderado: "",
-      lugar_nacimiento_apoderado: "",
-      fecha_nacimiento_apoderado: "",
-      pais_nacimiento_apoderado: "",
-      lugar_residencia_apoderado: "",
-      domicilio_apoderado: "",
-      cp_apoderado: "",
-      ciudad_apoderado: "",
-      telefono_apoderado: "",
-      celular_apoderado: "",
-      email_apoderado: "",
-      identificacion_oficial_apoderado: "",
-      num_identificacion_apoderado: "",
-      rfc_apoderado: "",
-      curp_apoderado: "",
+      nombre_apoderado: null,
+      nacionalidad_apoderado: null,
+      lugar_nacimiento_apoderado: null,
+      fecha_nacimiento_apoderado: null,
+      pais_nacimiento_apoderado: null,
+      lugar_residencia_apoderado: null,
+      domicilio_apoderado: null,
+      cp_apoderado: null,
+      ciudad_apoderado: null,
+      telefono_apoderado: null,
+      celular_apoderado: null,
+      email_apoderado: null,
+      identificacion_oficial_apoderado: null,
+      num_identificacion_apoderado: null,
+      rfc_apoderado: null,
+      curp_apoderado: null,
     });
 
     this.formInmueble = this.fb.group({
-      proyecto: "",
-      desarrollador: "",
-      valor_operacion: "",
-      ubicacion: "",
-      cp: "",
-      id_tipo_operacion: "",
-      id_institucion_credito: "",
-      banco_credito: "",
-      otra_credito: "",
-      fecha_firma_contrato: "",
-      fecha_entrega: "",
-      asesor_inmobiliario: "",
-      id_asesor: "",
-      notas_escrituracion: "",
-      notas_cancelacion: "",
-      fecha_entrega_fisica: "",
-      comentarios_entrega_fisica: "",
+      proyecto: null,
+      desarrollador: null,
+      valor_operacion: null,
+      ubicacion: null,
+      cp: null,
+      id_tipo_operacion: null,
+      id_institucion_credito: null,
+      banco_credito: null,
+      otra_credito: null,
+      fecha_firma_contrato: null,
+      fecha_entrega: null,
+      asesor_inmobiliario: null,
+      id_asesor: null,
+      notas_escrituracion: null,
+      notas_cancelacion: null,
+      fecha_entrega_fisica: null,
+      comentarios_entrega_fisica: null,
     });
 
   }
@@ -232,20 +236,23 @@ export class EditarClienteComponent implements OnInit {
         this.documentos_cliente = response.documentos_cliente;
         this.documentos_conyuge = response.documentos_conyuge;
 
-        this.setFormAlertaValue(this.cliente);
-        this.formGenerales.patchValue(this.cliente);
-        this.formLaborales.patchValue(this.cliente);
-        this.formConyuge.patchValue(this.cliente);
-        this.formApoderado.patchValue(this.cliente);
-        this.formInmueble.patchValue(this.cliente);
-
+        this.setFormsValue(this.cliente);
+   
       });
 
   }
 
-  setFormAlertaValue(cliente) {
+  setFormsValue(cliente) {
     this.formAlerta.get("mensaje_alerta").setValue(cliente.mensaje_alerta);
     this.formAlerta.get("alerta_activada").setValue(cliente.alerta_activada == "1" ? true : false);
+
+    this.formGenerales.patchValue(this.cliente);
+    this.formLaborales.patchValue(this.cliente);
+    this.formConyuge.patchValue(this.cliente);
+    this.formApoderado.patchValue(this.cliente);
+    this.formInmueble.patchValue(this.cliente);
+
+
   }
 
 
@@ -273,26 +280,36 @@ export class EditarClienteComponent implements OnInit {
 
   guardarGenerales() {
     console.log("guardar datos generales", this.tab_selected);
+    console.log(this.formGenerales.value);
+    this.updateCliente(this.formGenerales.value);
+
 
   }
 
   guardarLaborales() {
     console.log("guardar datos laborales", this.tab_selected);
+    console.log(this.formLaborales.value);
+    this.updateCliente(this.formLaborales.value);
 
   }
 
   guardarApoderado() {
     console.log("guardar datos apoderado", this.tab_selected);
+    console.log(this.formApoderado.value);
+    this.updateCliente(this.formApoderado.value);
 
   }
 
   guardarConyuge() {
     console.log("guardar datos conyuge", this.tab_selected);
+    console.log(this.formConyuge.value);
+    this.updateCliente(this.formConyuge.value);
 
   }
 
   guardarInmueble() {
     console.log("guardar datos inmueble", this.tab_selected);
+    console.log(this.formInmueble.value);
 
   }
 
@@ -300,13 +317,7 @@ export class EditarClienteComponent implements OnInit {
     console.log("guardar datos alerta", this.tab_selected);
     console.log("mensaje alerta", this.formAlerta.value);
 
-    this.clienteSrv.updateCliente(this.cliente.id_cliente, this.formAlerta.value)
-      .subscribe(cliente => {
-        this.cliente = cliente;
-        this.setFormAlertaValue(this.cliente);
-      }, (error) => {
-
-      });
+    this.updateCliente(this.formAlerta.value);
 
   }
 
@@ -329,14 +340,23 @@ export class EditarClienteComponent implements OnInit {
     });
   }
 
-  updateCliente() {
-    this.clienteSrv.updateCliente(this.cliente.id_cliente, this.cliente)
+  updateCliente(cliente) {
+    this.loading=true;
+    this.clienteSrv.updateCliente(this.cliente.id_cliente, cliente)
       .subscribe(res => {
+        
         this.cliente = res;
-        this.snackBar.open("Cliente Actualizado", "Cerrar", {
+        //asignamos todos los formularios
+        this.setFormsValue(this.cliente);
+        this.loading=false;
+        this.snackBar.open("Cliente Actualizado", "", {
           duration: 2000
         });
 
+      }, (error) => {
+        this.snackBar.open("Ha ocurrido un error. Inténtelo más tarde", "", {
+          duration: 3000
+        });
       });
 
   }
@@ -469,12 +489,6 @@ export class EditarClienteComponent implements OnInit {
 
   irLote(compra) {
     this.router.navigate(["/ventas/lote", compra.id_lote]);
-  }
-
-
-
-  onFechaChange() {
-
   }
 
   totalPagosRealizados() {

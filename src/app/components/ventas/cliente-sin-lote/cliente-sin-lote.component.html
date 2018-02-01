@@ -6,15 +6,7 @@
 
   <div class="row">
     <div class="col-12">
-
-
-      <div>
-        <mat-form-field class="w-100">
-          <mat-select placeholder="Obra" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)">
-            <mat-option *ngFor="let obra of obras" [value]="obra.id_obra">{{ obra.nombre }}</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
+ 
 
 
       <div class="card">
@@ -25,6 +17,7 @@
           </div>
         </div>
         <div>
+         
           <div class="table-responsive">
             <table class="table table-hover table-striped table-align-middle">
               <thead>
@@ -47,22 +40,11 @@
                       <i class="fa fa-times"></i>
                     </button>
                   </td>
-                </tr>
-                <tr>
-                  <td>Fulano</td>
-                  <td>45604GHDH4H4</td>
-                  <td class="text-right">
-                    <button mat-button class="no-min" (click)="editarCliente(cliente)">
-                      <i class="fa fa-pencil"></i>
-                    </button>
-                    <button mat-button class="no-min" (click)="delCliente()">
-                      <i class="fa fa-times"></i>
-                    </button>
-                  </td>
-                </tr>
+                </tr>    
               </tbody>
             </table>
           </div>
+
         </div>
       </div>
 

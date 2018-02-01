@@ -106,24 +106,15 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
     this.loteSrv.getDetallesLoteVentas(this.lote_selected.id_lote)
       .subscribe(res => {
 
-        console.log("res", res);
-        
+        //console.log("res", res);
+
 
         let dialogRef = this.dialog.open(ClientesLoteDialogoComponent, {
           data: {
             lote: res.lote,
-            clientes: res.clientes,
-            obra:res.obra
+            clientes: res.clientes
           },
           width: "800px"
-        });
-        dialogRef.afterClosed().subscribe(result => {
-
-          if (result === true) {
-
-          } else if (result.error) {
-
-          }
         });
 
 
@@ -234,7 +225,7 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
         let lote = this.lotes.find(lote => lote.code == code);
         if (lote !== undefined) {
 
-          let tooltip = lote.nombre_manzana + " " + lote.nombre;
+          let tooltip = lote.manzana + " " + lote.nombre;
 
           tooltip += " <br> " + this.currecyPipe.transform(lote.valor_base);
 
@@ -262,7 +253,7 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
       onRegionClick: (e, code) => {
 
         this.lote_selected = this.lotes.find(lote => lote.code == code);
-        console.log("find on click", this.lote_selected);
+        //console.log("find on click", this.lote_selected);
 
       },
 

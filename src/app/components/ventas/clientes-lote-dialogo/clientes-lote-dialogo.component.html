@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Clientes</h1>
+<h1 mat-dialog-title>{{data.lote.manzana||''}} {{data.lote.nombre||''}}</h1>
 <div mat-dialog-content>
 
 
@@ -22,10 +22,7 @@
             <mat-checkbox class="pl-2" (click)="$event.stopPropagation()" (change)="$event ? selectCliente(cliente) : null" [checked]="selection.isSelected(cliente)"></mat-checkbox>
           </td>
 
-          <td class="ws-nowrap">
-            <span *ngIf="cliente.persona_moral === '0'">{{cliente.nombre_persona_fisica}}</span>
-            <span *ngIf="cliente.persona_moral === '1'">{{cliente.razon_social_persona_moral}}</span>
-          </td>
+          <td class="ws-nowrap">{{cliente.nombre}}</td>
           <td>{{cliente.activo|numberToYesNo:'AC'}}</td>
           <td class="ws-nowrap">{{cliente.fecha_activo| date:'mediumDate':'':'es'}}</td>
           <td class="ws-nowrap">{{cliente.fecha_cancelacion| date:'mediumDate':'':'es'}}</td>
