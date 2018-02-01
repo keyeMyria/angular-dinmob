@@ -1,11 +1,12 @@
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
 import { Injectable } from '@angular/core';
-import { Http, Response } from "@angular/http";
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from "rxjs/Observable";
 import { of } from "rxjs/observable/of";
 import { Cliente } from 'app/model/cliente';
 import { ConfigService } from 'app/services/config.service';
+import { catchError, map, tap } from 'rxjs/operators';
+//esta es la forma correcta
+import "rxjs/add/observable/throw";
 
 
 @Injectable()
@@ -14,7 +15,7 @@ export class ClientesService {
   url: string;
 
   constructor(
-    private http: Http,
+    private http: HttpClient,
     private config: ConfigService
   ) {
     this.url = this.config.api_url + "ventas_clientes/";
@@ -30,22 +31,28 @@ export class ClientesService {
   //ok
   getClientesObra(id_obra) {
     return this.http.get(this.url + "get_clientes_obra/" + id_obra)
-      .map(this.extractData)
-      .catch(this.handleError);
+      .pipe(
+      tap(response => console.log("response", response)),
+      catchError(this.handleError("getClientesObra", {}))
+      )
   }
 
-    //ok
-    getClientesSinLote() {
-      return this.http.get(this.url + "sin_lote")
-        .map(this.extractData)
-        .catch(this.handleError);
-    }
+  //ok
+  getClientesSinLote() {
+    return this.http.get(this.url + "sin_lote")
+      .pipe(
+      tap(response => console.log("response", response)),
+      catchError(this.handleError("getClientesSinLote", {}))
+      )
+  }
 
   //ok
   getAlertasObra(id_obra) {
-    return this.http.get(this.url + "alertas_obra/"+ id_obra)
-      .map(this.extractData)
-      .catch(this.handleError);
+    return this.http.get(this.url + "alertas_obra/" + id_obra)
+      .pipe(
+      tap(response => console.log("response", response)),
+      catchError(this.handleError("getAlertasObra", {}))
+      )
   }
 
 
@@ -59,8 +66,10 @@ export class ClientesService {
   //ok
   getClienteConComprasYDocumentos(id_cliente) {
     return this.http.get(this.url + 'get_cliente_documentos_compras/' + id_cliente)
-      .map(this.extractData)
-      .catch(this.handleError);
+      .pipe(
+      tap(response => console.log("response", response)),
+      catchError(this.handleError("getClienteConComprasYDocumentos", {}))
+      )
   }
 
   /*   getCompras(id_cliente) {
@@ -72,30 +81,47 @@ export class ClientesService {
   //ok
   createCliente(cliente) {
     return this.http.post(this.url + 'create_cliente', { cliente: cliente })
-      .map(this.extractData)
-      .catch(this.handleError);
+      .pipe(
+      tap(response => console.log("response", response)),
+      catchError(this.handleError("createCliente", {}))
+      )
 
   }
 
   //ok
   updateCliente(id, cliente) {
     return this.http.post(this.url + 'update_cliente/' + id, { cliente: cliente })
-      .map(this.extractData)
-      .catch(this.handleError);
+      .pipe(
+      tap(response => console.log("response", response)),
+      catchError(this.handleError("updateCliente", {}))
+      )
   }
 
   //ok
   updateCompra(id_cliente, id_lote, compra) {
     return this.http.post(this.url + 'update_compra/' + id_cliente, { id_lote: id_lote, compra: compra })
-      .map(this.extractData)
-      .catch(this.handleError);
+      .pipe(
+      tap(response => console.log("response", response)),
+      catchError(this.handleError("updateCompra", {}))
+      )
   }
 
   //ok
   delCliente(id) {
     return this.http.post(this.url + 'del_cliente/' + id, {})
-      .map(this.extractData)
-      .catch(this.handleError);
+      .pipe(
+      tap(response => console.log("response", response)),
+      catchError(this.handleError("delCliente", {}))
+      )
+  }
+
+  //ok
+  asociarClienteLote(id_cliente, id_lote) {
+    return this.http.post(this.url + 'asociar_cliente_lote/' + id_cliente, { id_lote: id_lote })
+      .pipe(
+      tap(response => console.log("response", response)),
+      catchError(this.handleError("asociarClienteLote", {}))
+      )
   }
 
   /*   searchCliente(term: string) {
@@ -110,24 +136,17 @@ export class ClientesService {
     } */
 
 
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: HttpErrorResponse): Observable<T> => {
 
-  private extractData(res: Response) {
-    let body = res.json();
-    return body || {};
-  }
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
 
-  private handleError(error: Response | any) {
-    // In a real world app, you might use a remote logging infrastructure
-    let errMsg: string;
-    if (error instanceof Response) {
-      const body = error.json() || '';
-      const err = body.error || JSON.stringify(body);
-      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
-    } else {
-      errMsg = error.message ? error.message : error.toString();
-    }
-    console.error(errMsg);
-    return Observable.throw(errMsg);
+      // TODO: better job of transforming error for user consumption
+      console.log(`${operation} failed: ${error.message} (${error.status}- ${error.statusText})`);
+
+      return Observable.throw(error);
+    };
   }
 
 }
