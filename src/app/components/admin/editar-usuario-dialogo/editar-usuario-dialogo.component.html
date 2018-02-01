@@ -13,7 +13,6 @@
     <div class="form-group row">
       <label for="email" class="col-sm-3 col-form-label">Email</label>
       <div class="col-sm-9">
-
         <input class="form-control" type="text" id="email" name="email" formControlName="email" 
         [ngClass]="{'is-invalid': form.get('email').invalid  && (form.get('email').dirty || form.get('email').touched) }">
         <div class="invalid-feedback">Proporcione un email</div>
