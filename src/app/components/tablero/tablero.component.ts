@@ -78,6 +78,22 @@ export class TableroComponent implements OnInit {
     this.router.navigate(["/avances", this.obra_default]);
   }
 
+  gotoSalidas() {
+    this.router.navigate(["/salidas"]);
+  }
+
+  gotoEntradas() {
+    this.router.navigate(["/entradas"]);
+  }
+
+  gotoInventario() {
+    this.router.navigate(["/inventario"]);
+  }
+
+  gotoTrabajadores() {
+    this.router.navigate(["/trabajadores"]);
+  }
+
 
 
 
