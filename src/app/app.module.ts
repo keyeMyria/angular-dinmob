@@ -140,10 +140,8 @@ import { AlertaClientesComponent } from './components/ventas/alerta-clientes/ale
 import { ClienteSinLoteComponent } from './components/ventas/cliente-sin-lote/cliente-sin-lote.component';
 import { EstadisticasVentasComponent } from './components/ventas/estadisticas-ventas/estadisticas-ventas.component';
 import { ClientesLoteDialogoComponent } from './components/ventas/clientes-lote-dialogo/clientes-lote-dialogo.component';
-<<<<<<< HEAD
 import { AlertaDialogoComponent } from './components/admin/alerta-dialogo/alerta-dialogo.component';
 import { PrototiposToStringPipe } from './pipes/prototipos-to-string.pipe';
-=======
 import { SalidasComponent } from './components/almacen/salidas/salidas.component';
 import { EntradasComponent } from './components/almacen/entradas/entradas.component';
 import { InventarioComponent } from './components/almacen/inventario/inventario.component';
@@ -155,7 +153,6 @@ import { TrabajadoresComponent } from './components/admin/trabajadores/trabajado
 import { NuevoTrabajadorDialogoComponent } from './components/admin/nuevo-trabajador-dialogo/nuevo-trabajador-dialogo.component';
 import { AsignarTrabajadoresComponent } from './components/admin/asignar-trabajadores/asignar-trabajadores.component';
 import { EditarTrabajadorDialogoComponent } from './components/admin/editar-trabajador-dialogo/editar-trabajador-dialogo.component';
->>>>>>> e8b8813e4b179c67db493e03b4749e7cc9bf8f61
 
 
 
@@ -228,10 +225,8 @@ import { EditarTrabajadorDialogoComponent } from './components/admin/editar-trab
     EstadisticasVentasComponent,
     ClientesLoteDialogoComponent,
     UnmaskNumberPipe,
-<<<<<<< HEAD
     AlertaDialogoComponent,
     PrototiposToStringPipe,
-=======
     SalidasComponent,
     EntradasComponent,
     InventarioComponent,
@@ -243,7 +238,6 @@ import { EditarTrabajadorDialogoComponent } from './components/admin/editar-trab
     NuevoTrabajadorDialogoComponent,
     AsignarTrabajadoresComponent,
     EditarTrabajadorDialogoComponent,
->>>>>>> e8b8813e4b179c67db493e03b4749e7cc9bf8f61
 
 
 
@@ -294,7 +288,7 @@ import { EditarTrabajadorDialogoComponent } from './components/admin/editar-trab
     EditarUsuarioDialogoComponent,
     VerCedulaFiscalDialogoComponent,
     ClientesLoteDialogoComponent,
-    AlertaDialogoComponent
+    AlertaDialogoComponent,
     EditarMaterialDialogoComponent,
     NuevoMaterialDialogoComponent,
     NuevoTrabajadorDialogoComponent,

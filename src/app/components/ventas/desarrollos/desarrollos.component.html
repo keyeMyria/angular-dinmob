@@ -6,7 +6,7 @@
 
   <div class="row">
     <div class="col-12">
-      
+
       <div>
         <mat-form-field class="w-100">
           <mat-select placeholder="Obra" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)">
@@ -21,7 +21,7 @@
         </div>
         <div>
           <div class="table-responsive">
-            <table class="table table-striped">
+            <table class="table table-striped table-align-middle">
               <thead>
                 <tr>
                   <th>Manzana</th>
@@ -38,21 +38,21 @@
               </thead>
               <tbody>
                 <tr *ngFor="let lote of obra.lotes">
-                  <td>{{lote.manzana}}</td>
-                  <td>{{lote.nombre}}</td>
+                  <td class="ws-nowrap">{{lote.manzana}}</td>
+                  <td class="ws-nowrap">{{lote.nombre}}</td>
                   <td>{{lote.valor_base|currency}}</td>
                   <td>
                     <span class="badge badge-{{lote.estado_venta|lowercase}}">{{lote.estado_venta}}</span>
                   </td>
-                  <td>{{lote.fecha_cambio_estado|date:'mediumDate':'':'es'}}</td>
+                  <td class="ws-nowrap">{{lote.fecha_cambio_estado|date:'mediumDate':'':'es'}}</td>
                   <td>
-                    <span *ngIf="(lote.id_cliente && lote.id_estado_venta === '1')" matTooltip="El lote tiene cliente pero está en estado libre"
-                      class="fa fa-exclamation-triangle text-danger"></span>
-                    <span *ngIf="(!lote.id_cliente && lote.id_estado_venta !== '1')" matTooltip="El lote no tiene cliente asociado" class="fa fa-exclamation-triangle text-warning"></span>
+                      <i *ngIf="(lote.id_cliente && lote.id_estado_venta === '1')" matTooltip="El lote tiene cliente pero está en estado libre"
+                        class="fa fa-exclamation-triangle text-danger"></i>
+                      <i *ngIf="(!lote.id_cliente && lote.id_estado_venta !== '1')" matTooltip="El lote no tiene cliente asociado" class="fa fa-exclamation-triangle text-warning"></i>
                   </td>
                   <td class="text-right">
                     <button mat-button class="no-min" (click)="ventasLote(lote)">
-                      <mat-icon>create</mat-icon>
+                      <i class="fa fa-pencil"></i>
                     </button>
                   </td>
                 </tr>

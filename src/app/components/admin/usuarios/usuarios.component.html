@@ -25,7 +25,7 @@
             <table matSort (matSortChange)="ordenarDatos($event)" class="table table-hover table-striped table-align-middle">
               <thead>
                 <tr>
-                  <th mat-sort-header="id">Id</th>
+                  <!-- <th mat-sort-header="id">Id</th> -->
                   <th mat-sort-header="nombre">Nombre</th>
                   <th mat-sort-header="email">Email</th>
                   <th mat-sort-header="rol">Rol</th>
@@ -35,7 +35,7 @@
 
               <tbody>
                 <tr *ngFor="let usuario of usuariosOrdenados; let i = index">
-                  <td>{{usuario.id_usuario}}</td>
+                  <!-- <td>{{usuario.id_usuario}}</td> -->
                   <td>{{usuario.nombre}}</td>
                   <td>{{usuario.email}}</td>
                   <td>{{usuario.tipo_usuario}}</td>

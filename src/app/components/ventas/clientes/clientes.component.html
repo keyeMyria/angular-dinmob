@@ -56,8 +56,8 @@
                 <tr *ngFor="let cliente of clientes">
                   <!-- <td>{{cliente.id_cliente}}</td> -->
                   <td>{{cliente.nombre}}</td>
-                  <td>{{cliente.manzana}}</td>
-                  <td>{{cliente.lote}}</td>
+                  <td class="ws-nowrap">{{cliente.manzana}}</td>
+                  <td class="ws-nowrap">{{cliente.lote}}</td>
                   <td>
                     <span class="badge badge-{{cliente.estado_lote|lowercase}}">{{cliente.estado_lote}}</span>
                   </td>

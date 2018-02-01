@@ -39,11 +39,11 @@
         </div>
         <div>
           <div class="table-responsive">
-            <table class="table table-hover table-striped">
+            <table class="table table-hover table-striped table-align-middle">
               <thead>
                 <tr>
                   <th>Nombre</th>
-                  <th>Fecha de creación</th>
+                  <th>Creación</th>
 
                 </tr>
               </thead>
@@ -51,7 +51,7 @@
               <tbody>
                 <tr *ngFor="let prototipo of prototipos">
                   <td>{{prototipo.nombre}}</td>
-                  <td>{{prototipo.fecha_creacion| date:'mediumDate':'':'es'}}</td>
+                  <td class="ws-nowrap">{{prototipo.fecha_creacion| date:'mediumDate':'':'es'}}</td>
                   <td class="text-right">
                     <button mat-icon-button [matMenuTriggerFor]="menu">
                       <mat-icon>more_vert</mat-icon>
