@@ -47,12 +47,12 @@
               </thead>
 
               <tbody>
-                <tr>
-                  <td>Hola</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                <tr *ngFor="let material of materiales">
+                  <td>{{material.extra}}</td>
+                  <td>{{material.codigo}}</td>
+                  <td>{{material.insumo}}</td>
+                  <td>{{material.unidad}}</td>
+                  <td>{{material.existencias}}</td>
                   <td class="text-right">
                     <button mat-button class="no-min" (click)="editarMaterial()">
                       <i class="fa fa-pencil"></i>

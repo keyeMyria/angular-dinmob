@@ -26,6 +26,7 @@ import { FormaPagoService } from 'app/services/forma-pago.service';
 import { InstitucionCreditoService } from 'app/services/institucion-credito.service';
 import { TipoOperacionService } from 'app/services/tipo-operacion.service';
 import { TipoPagoService } from 'app/services/tipo-pago.service';
+import { InsumoService } from 'app/services/insumo.service';
 
 
 //helpers
@@ -326,6 +327,7 @@ import { VerSalidaDialogoComponent } from './components/almacen/ver-salida-dialo
     InstitucionCreditoService,
     TipoOperacionService,
     TipoPagoService,
+    InsumoService,
 
     ObrasUsuarioResolverService,
     UsuariosAlmacenistasResolverService,
