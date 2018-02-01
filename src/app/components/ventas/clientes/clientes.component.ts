@@ -43,7 +43,7 @@ export class ClientesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    this.loading = true;
     this.route.data
       .subscribe((data: { obras: any[] }) => {
         //console.log("resultado resolve ", data);
@@ -62,7 +62,9 @@ export class ClientesComponent implements OnInit {
 
       }).subscribe(clientes => {
         this.clientes = clientes;
+        this.loading = false;
       });
+      
 
 
 

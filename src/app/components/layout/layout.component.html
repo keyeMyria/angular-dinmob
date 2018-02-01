@@ -61,9 +61,27 @@
 
         <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/estructura-obra', obra_default]" routerLinkActive="active">Estructura obra</a>
 
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/trabajadores']" routerLinkActive="active">Trabajadores</a>
+
 
 
       </mat-nav-list>
+
+      <mat-nav-list class="mb-5">
+          <h3 class="sidenav-title">Almacén</h3>
+  
+          <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/salidas']" routerLinkActive="active">Salidas</a>
+  
+          <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/entradas']" routerLinkActive="active">Entradas</a>
+  
+          <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/inventario']" routerLinkActive="active">Inventario</a>
+  
+          <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/nueva-salida']" routerLinkActive="active">Nueva Salida</a>
+  
+          <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/nueva-entrada']" routerLinkActive="active">Nueva Entrada</a>
+
+        </mat-nav-list>
+
 
       <mat-nav-list class="mb-5">
         <!-- *ngIf="auth.hasRole([auth.Rol.Ventas])" -->
