@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { tokenNotExpired } from "angular2-jwt/angular2-jwt";
 import { Observable } from "rxjs/Observable";
 import { of } from 'rxjs/observable/of';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ConfigService } from 'app/services/config.service';
 import { catchError, map, tap } from 'rxjs/operators';
 //esta es la forma correcta
 import "rxjs/add/observable/throw";
-import { HttpErrorResponse } from '@angular/common/http';
+
 
 /* export const ROLES = {
  
