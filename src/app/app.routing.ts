@@ -52,6 +52,7 @@ import { NuevaSalidaComponent } from 'app/components/almacen/nueva-salida/nueva-
 import { NuevaEntradaComponent } from 'app/components/almacen/nueva-entrada/nueva-entrada.component';
 import { TrabajadoresComponent } from 'app/components/admin/trabajadores/trabajadores.component';
 import { AsignarTrabajadoresComponent } from 'app/components/admin/asignar-trabajadores/asignar-trabajadores.component';
+import { EditarEntradaComponent } from 'app/components/almacen/editar-entrada/editar-entrada.component';
 
 
 
@@ -194,6 +195,7 @@ export const ROUTES: Routes = [
                 }
             },
             { path: 'asignar-trabajadores', component: AsignarTrabajadoresComponent },
+            { path: 'editar-entrada', component: EditarEntradaComponent },
 
 
 

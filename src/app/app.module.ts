@@ -153,6 +153,9 @@ import { TrabajadoresComponent } from './components/admin/trabajadores/trabajado
 import { NuevoTrabajadorDialogoComponent } from './components/admin/nuevo-trabajador-dialogo/nuevo-trabajador-dialogo.component';
 import { AsignarTrabajadoresComponent } from './components/admin/asignar-trabajadores/asignar-trabajadores.component';
 import { EditarTrabajadorDialogoComponent } from './components/admin/editar-trabajador-dialogo/editar-trabajador-dialogo.component';
+import { EditarEntradaDialogoComponent } from './components/almacen/editar-entrada-dialogo/editar-entrada-dialogo.component';
+import { EditarEntradaComponent } from './components/almacen/editar-entrada/editar-entrada.component';
+import { VerSalidaDialogoComponent } from './components/almacen/ver-salida-dialogo/ver-salida-dialogo.component';
 
 
 
@@ -238,6 +241,9 @@ import { EditarTrabajadorDialogoComponent } from './components/admin/editar-trab
     NuevoTrabajadorDialogoComponent,
     AsignarTrabajadoresComponent,
     EditarTrabajadorDialogoComponent,
+    EditarEntradaDialogoComponent,
+    EditarEntradaComponent,
+    VerSalidaDialogoComponent,
 
 
 
@@ -293,6 +299,8 @@ import { EditarTrabajadorDialogoComponent } from './components/admin/editar-trab
     NuevoMaterialDialogoComponent,
     NuevoTrabajadorDialogoComponent,
     EditarTrabajadorDialogoComponent,
+    EditarEntradaDialogoComponent,
+    VerSalidaDialogoComponent
 
 
 
