@@ -29,29 +29,29 @@ export class ClientesService {
     } */
 
   //ok
-  getClientesObra(id_obra) {
+  getClientesObra(id_obra): Observable<any> {
     return this.http.get(this.url + "get_clientes_obra/" + id_obra)
       .pipe(
       tap(response => console.log("response", response)),
-      catchError(this.handleError("getClientesObra", {}))
+      catchError(this.handleError("getClientesObra", []))
       )
   }
 
   //ok
-  getClientesSinLote() {
+  getClientesSinLote(): Observable<any> {
     return this.http.get(this.url + "sin_lote")
       .pipe(
       tap(response => console.log("response", response)),
-      catchError(this.handleError("getClientesSinLote", {}))
+      catchError(this.handleError("getClientesSinLote", []))
       )
   }
 
   //ok
-  getAlertasObra(id_obra) {
+  getAlertasObra(id_obra): Observable<any> {
     return this.http.get(this.url + "alertas_obra/" + id_obra)
       .pipe(
       tap(response => console.log("response", response)),
-      catchError(this.handleError("getAlertasObra", {}))
+      catchError(this.handleError("getAlertasObra", []))
       )
   }
 
@@ -64,7 +64,7 @@ export class ClientesService {
 
 
   //ok
-  getClienteConComprasYDocumentos(id_cliente) :Observable<any> {
+  getClienteConComprasYDocumentos(id_cliente): Observable<any> {
     return this.http.get(this.url + 'get_cliente_documentos_compras/' + id_cliente)
       .pipe(
       tap(response => console.log("response", response)),
@@ -79,7 +79,7 @@ export class ClientesService {
     } */
 
   //ok
-  createCliente(cliente) {
+  createCliente(cliente): Observable<any> {
     return this.http.post(this.url + 'create_cliente', { cliente: cliente })
       .pipe(
       tap(response => console.log("response", response)),
@@ -98,7 +98,7 @@ export class ClientesService {
   }
 
   //ok
-  updateCompra(id_cliente, id_lote, compra) {
+  updateCompra(id_cliente, id_lote, compra): Observable<any> {
     return this.http.post(this.url + 'update_compra/' + id_cliente, { id_lote: id_lote, compra: compra })
       .pipe(
       tap(response => console.log("response", response)),
@@ -107,7 +107,7 @@ export class ClientesService {
   }
 
   //ok
-  delCliente(id) {
+  delCliente(id): Observable<any> {
     return this.http.post(this.url + 'del_cliente/' + id, {})
       .pipe(
       tap(response => console.log("response", response)),
@@ -116,7 +116,7 @@ export class ClientesService {
   }
 
   //ok
-  asociarClienteLote(id_cliente, id_lote) {
+  asociarClienteLote(id_cliente, id_lote): Observable<any> {
     return this.http.post(this.url + 'asociar_cliente_lote/' + id_cliente, { id_lote: id_lote })
       .pipe(
       tap(response => console.log("response", response)),

@@ -12,7 +12,6 @@ import { of } from "rxjs/observable/of";
 export class AlertaClientesComponent implements OnInit {
   clientes: any[] = [];
   obras: any = [];
-
   obra_selected: string = "";
 
 
