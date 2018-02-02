@@ -886,26 +886,21 @@
               <td>{{compra.activo|numberToYesNo:'AC'}}</td>
               <td class="ws-nowrap">{{compra.fecha_activo| date:'mediumDate':'':'es'}}</td>
               <td class="ws-nowrap">{{compra.fecha_cancelacion| date:'mediumDate':'':'es'}}</td>
-              <td class="text-right">
-                <!--  <button type="button" class="btn btn-default btn-sm" (click)="cancelarAsociacion(compra, $event)">{{compra.activo}}</button>
-                            <button type="button" class="btn btn-default btn-sm">Eliminar</button>
-                            <button type="button" class="btn btn-default btn-sm">Reporte</button>
-                            <button type="button" title="Ir a lote" class="btn btn-default btn-sm" ui-sref="^.ventas_lote({id_lote:compra.id_lote})">
-                              <span class="fa fa-home"></span>
-                            </button> -->
+              <td class="text-right">           
                 <button mat-icon-button [matMenuTriggerFor]="menu3" (click)="$event.stopPropagation()">
                   <mat-icon>more_vert</mat-icon>
                 </button>
                 <mat-menu #menu3="matMenu">
-                  <button mat-menu-item>
+                  <button mat-menu-item (click)="toggleActivacionCompra(compra)">
                     <mat-icon>cancel</mat-icon>
                     <span>Cancelar</span>
+                    <!-- <span *ngIf="form.get('activo').value=='0'">Activar</span> -->
                   </button>
-                  <button mat-menu-item (click)="delLote(compra)">
+                  <button mat-menu-item (click)="delCompra(compra)">
                     <mat-icon>delete</mat-icon>
                     <span>Eliminar</span>
                   </button>
-                  <button mat-menu-item (click)="reporteAsociacion(compra, $event)">
+                  <button mat-menu-item (click)="reporteCompra(compra)">
                     <mat-icon>report</mat-icon>
                     <span>Reporte</span>
                   </button>

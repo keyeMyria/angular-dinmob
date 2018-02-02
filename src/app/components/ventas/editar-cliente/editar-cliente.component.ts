@@ -253,7 +253,6 @@ export class EditarClienteComponent implements OnInit {
 
   }
 
-
   selectCompra(compra) {
 
     //this.selection.isEmpty();
@@ -268,8 +267,6 @@ export class EditarClienteComponent implements OnInit {
     }
 
   }
-
-
 
   showSelection() {
     console.log(this.selection.selected);
@@ -371,14 +368,14 @@ export class EditarClienteComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
 
-      if (result===true) {
+      if (result === true) {
         this.snackBar.open("Cliente Actualizado", "", {
           duration: 2000
         });
 
       } else {
         //console.log("error",result);
-        
+
         this.snackBar.open(result.error, "", {
           duration: 3000
         });
@@ -558,6 +555,21 @@ export class EditarClienteComponent implements OnInit {
 
 
 
+
+  }
+
+  toggleActivacionCompra(compra) {
+    console.log("toggleActivacion", compra);
+
+  }
+
+  delCompra(compra) {
+    console.log("delCompra", compra);
+
+  }
+
+  reporteCompra(compra) {
+    console.log("reporte compra", compra);
 
   }
 
