@@ -21,13 +21,13 @@ export class InsumoService {
     return this.http.get(this.url + 'materiales_obra/'+id_obra)
       .pipe(
       tap(response => console.log("response", response)),
-      catchError(this.handleError("getMaterialesObra", []))
+      catchError(this.handleError("getMaterialesObra"))
       )
   }
 
 
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: HttpErrorResponse): Observable<T> => {
+  private handleError<T>(operation = 'operation') {
+    return (error: HttpErrorResponse) => {
 
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
