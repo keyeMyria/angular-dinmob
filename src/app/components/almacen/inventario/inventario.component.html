@@ -47,14 +47,14 @@
               </thead>
 
               <tbody>
-                <tr *ngFor="let prototipo of prototipos">
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                <tr *ngFor="let material of materiales">
+                  <td>{{material.extra}}</td>
+                  <td>{{material.codigo}}</td>
+                  <td>{{material.insumo}}</td>
+                  <td>{{material.unidad}}</td>
+                  <td>{{material.existencias}}</td>
                   <td class="text-right">
-                    <button mat-button class="no-min" (click)="editarInsumo(insumo)">
+                    <button mat-button class="no-min" (click)="editarMaterial()">
                       <i class="fa fa-pencil"></i>
                     </button>
                   </td>

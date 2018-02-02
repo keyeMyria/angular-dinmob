@@ -17,11 +17,11 @@ export class InsumoService {
     this.url = this.config.api_url + "insumos/";
   }
 
-  getMaterialesObra(id_obra) {
+  getMaterialesObra(id_obra):Observable<any> {
     return this.http.get(this.url + 'materiales_obra/'+id_obra)
       .pipe(
       tap(response => console.log("response", response)),
-      catchError(this.handleError("getMaterialesObra", {}))
+      catchError(this.handleError("getMaterialesObra", []))
       )
   }
 

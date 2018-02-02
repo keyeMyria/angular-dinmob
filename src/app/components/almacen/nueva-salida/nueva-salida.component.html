@@ -1,3 +1,115 @@
-<p>
-  nueva-salida works!
-</p>
+<div class="container mt-3 mb-5">
+  <div class="row">
+    <div class="col-12">
+
+      <div class="card">
+        <div class="card-body">
+
+          <mat-form-field class="w-100">
+            <mat-select placeholder="Seleccione Partida">
+              <mat-option>seleccione</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div class="table-responsive">
+            <table class="table table-hover table-striped table-align-middle">
+              <thead>
+                <tr>
+                  <th>Material</th>
+                  <th>Unidad</th>
+                  <th>Programado</th>
+                  <th>Consumido</th>
+                  <th>Existencias</th>
+                  <th>Salidas</th>
+                  <th>Excedente</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mt-3">
+        <div class="card-header">
+          Datos del Vale
+        </div>
+        <div class="card-body">
+          <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
+            <div class="form-group row">
+              <label for="partida" class="col-sm-3 col-form-label">Partida</label>
+              <div class="col-sm-9">
+                <input [textMask]="{mask: numberMask}" class="form-control" type="text" id="partida" name="partida" formControlName="partida"
+                  disabled>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="entrega" class="col-sm-3 col-form-label">Entrega</label>
+              <div class="col-sm-9">
+                <input [textMask]="{mask: numberMask}" class="form-control" type="text" id="entrega" name="entrega" formControlName="entrega"
+                  disabled>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="recibe" class="col-sm-3 col-form-label">Recibe</label>
+              <div class="col-sm-9">
+                <select class="form-control" id="recibe" name="recibe" formControlName="recibe" [ngClass]="{'is-invalid': form.get('recibe').invalid  && (form.get('recibe').dirty || form.get('recibe').touched) }">
+                  <option value="">Seleccionar...</option>
+                  <option [value]=""></option>
+                </select>
+                <div class="invalid-feedback">Seleccione un trabajador</div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="autoriza" class="col-sm-3 col-form-label">Autoriza</label>
+              <div class="col-sm-9">
+                <select class="form-control" id="autoriza" name="autoriza" formControlName="autoriza" [ngClass]="{'is-invalid': form.get('autoriza').invalid  && (form.get('autoriza').dirty || form.get('autoriza').touched) }">
+                  <option value="">Seleccionar...</option>
+                  <option [value]=""></option>
+                </select>
+                <div class="invalid-feedback">Seleccione un residente</div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="num_vale" class="col-sm-3 col-form-label">Num. Vale</label>
+              <div class="col-sm-9">
+                <input class="form-control" type="text" id="num_vale" name="num_vale" formControlName="num_vale">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="notas" class="col-sm-3 col-form-label">Notas</label>
+              <div class="col-sm-9">
+                <textarea class="form-control" type="text" id="notas" name="notas" formControlName="notas" row="3"></textarea>
+              </div>
+            </div>
+
+
+          </form>
+          <div class="form-group">
+            <div class="text-center">
+              <button mat-raised-button type="submit" form="id_form" [disabled]="form.invalid" color="primary" (click)="guardar()">GUARDAR</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>

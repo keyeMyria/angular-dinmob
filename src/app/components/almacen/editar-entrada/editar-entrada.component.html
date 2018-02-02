@@ -1,0 +1,116 @@
+<div class="container mt-3 mb-5">
+  <div *ngIf="loading">
+    <mat-spinner class="loading"></mat-spinner>
+  </div>
+  <div class="row">
+    <div class="col-12">
+
+      <mat-tab-group>
+        <mat-tab label="Datos">
+          <div class="container py-3">
+
+            <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
+
+              <div class="form-group row">
+                <label for="proveedor" class="col-sm-3 col-form-label">Proveedor</label>
+                <div class="col-sm-9">
+                  <input class="form-control" type="text" id="proveedor" name="proveedor" formControlName="proveedor" [ngClass]="{'is-invalid': form.get('proveedor').invalid  && (form.get('proveedor').dirty || form.get('proveedor').touched) }">
+                  <div class="invalid-feedback">Proporcione un proveedor</div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="fecha_entrada" class="col-sm-3 col-form-label">Fecha</label>
+                <div class="col-sm-9">
+                  <div class="input-group">
+                    <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_entrada" id="fecha_entrada" placement="bottom-left"
+                      [matDatepicker]="dpFechaProgramada" formControlName="fecha_entrada" [ngClass]="{'is-invalid':form.get('fecha_entrada').invalid && form.get('fecha_entrada').touched }">
+                    <span class="input-group-btn">
+                      <button class="btn btn-secondary" type="button" (click)="dpFechaProgramada.open()">
+                        <i class="fa fa-calendar"></i>
+                      </button>
+                    </span>
+                  </div>
+                  <div *ngIf="form.get('fecha_entrada').invalid && form.get('fecha_entrada').touched " class="visible invalid-feedback">
+                    Seleccione una fecha
+                  </div>
+                  <mat-datepicker touchUi="true" #dpFechaProgramada></mat-datepicker>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="folio" class="col-sm-3 col-form-label">Folio</label>
+                <div class="col-sm-9">
+                  <input class="form-control" type="text" id="folio" name="folio" formControlName="folio" [ngClass]="{'is-invalid': form.get('folio').invalid  && (form.get('folio').dirty || form.get('folio').touched) }">
+                  <div class="invalid-feedback">Proporcione un folio</div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="total" class="col-sm-3 col-form-label">Total</label>
+                <div class="col-sm-9">
+                  <input [textMask]="{mask: numberMask}" class="form-control" type="text" id="total" name="total" formControlName="total" [ngClass]="{'is-invalid': form.get('total').invalid  && (form.get('total').dirty || form.get('total').touched) }">
+                  <div class="invalid-feedback">Proporcione una cantidad</div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="forma_pago" class="col-sm-3 col-form-label">Forma de Pago</label>
+                <div class="col-sm-9">
+                  <select class="form-control" id="forma_pago" name="forma_pago" formControlName="forma_pago" [ngClass]="{'is-invalid': form.get('forma_pago').invalid  && (form.get('forma_pago').dirty || form.get('forma_pago').touched) }">
+                    <option value="">Seleccionar...</option>
+                    <option [value]=""></option>
+                  </select>
+                  <div class="invalid-feedback">Seleccione un tipo de pago</div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="documento" class="col-sm-3 col-form-label">Documento</label>
+                <div class="col-sm-9">
+                  <select class="form-control" id="documento" name="documento" formControlName="documento" [ngClass]="{'is-invalid': form.get('documento').invalid  && (form.get('documento').dirty || form.get('documento').touched) }">
+                    <option value="">Seleccionar...</option>
+                    <option [value]=""></option>
+                  </select>
+                  <div class="invalid-feedback">Seleccione documento</div>
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </mat-tab>
+        <mat-tab label="Materiales">
+
+
+          <div class="table-responsive mt-3">
+            <table class="table table-striped my-table-sm table-align-middle">
+              <thead>
+                <tr>
+                  <th>Insumo</th>
+                  <th>Cantidad</th>
+                  <th>Unidad</th>
+
+
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <button type="button" class="btn btn-primary" (click)="gotoEntradas()" >Lista de Entradas</button>
+
+        </mat-tab>
+      </mat-tab-group>
+
+    </div>
+  </div>
+</div>
