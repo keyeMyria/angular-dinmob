@@ -206,12 +206,27 @@ export class EstructuraObraComponent implements OnInit {
   addManzanas() {
     let dialogRef = this.dialog.open(AgregarManzanaDialogoComponent, {
       data: {
-        obra: this.obra.datos
+        obra: this.obra,
+        selection:this.selection
       },
       width: "500px"
     });
 
     dialogRef.afterClosed().subscribe(result => {
+
+      if (result===true) {
+
+        this.snackBar.open("Obra Actualizada", "Cerrar", {
+          duration: 2000
+        });
+        
+      } else {
+
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "Cerrar", {
+          duration: 3000
+        });
+        
+      }
 
     });
 

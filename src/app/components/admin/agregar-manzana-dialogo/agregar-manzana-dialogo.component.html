@@ -15,7 +15,7 @@
 
     <div class="form-group">
       <label>Manzana (nombre)</label>
-      <input type="text" placeholder="ej. Lote 1" class="form-control" formControlName="nombre" 
+      <input type="text" placeholder="ej. Manzana 1" class="form-control" formControlName="nombre" 
       [ngClass]="{'is-invalid': formManzana.get('nombre').invalid && formManzana.get('nombre').touched }">
       <div class="invalid-feedback" *ngIf="formManzana.get('nombre').invalid">
         Escriba un nombre con máximo 30 caracteres
