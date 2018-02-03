@@ -1,3 +1,8 @@
+<div *ngIf="loading">
+  <mat-spinner class="loading"></mat-spinner>
+</div>
+
+
 <h1 mat-dialog-title>Agregar Lotes</h1>
 <div mat-dialog-content>
 
@@ -51,7 +56,7 @@
       <div class="form-text text-danger" *ngIf="formLote.get('prefijo').errors && formLote.get('prefijo').invalid && formLote.get('prefijo').touched ">Escriba un prefijo con máximo 30 caracteres.</div>
       <div class="form-text text-danger" *ngIf="formLote.get('ini').errors && formLote.get('ini').invalid && formLote.get('ini').touched">El número inicial debe ser mayor o igual a 0.</div>
       <div class="form-text text-danger" *ngIf="formLote.get('fin').errors?.menorqueini && formLote.get('fin').invalid && formLote.get('fin').dirty">El número final debe ser mayor o igual al número inicial.</div>
-      <div class="form-text text-danger" *ngIf="formLote.get('fin').errors?.masde20 && formLote.get('fin').invalid && formLote.get('fin').dirty">Sólo pueden agregar 20 lotes a la vez.</div>
+      <div class="form-text text-danger" *ngIf="formLote.get('fin').errors?.masde30 && formLote.get('fin').invalid && formLote.get('fin').dirty">Sólo pueden agregar 30 lotes a la vez.</div>
     </div>
 
 
@@ -62,6 +67,6 @@
 
 </div>
 <div mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="false">CANCELAR</button>
+  <button mat-button type="button" [mat-dialog-close]="false">CANCELAR</button>
   <button type="submit" mat-button form="id_formLote" color="primary" [disabled]="formLote.invalid">AGREGAR</button>
 </div>

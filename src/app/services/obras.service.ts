@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from "@angular/http";
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from "rxjs/Observable";
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
 import { ConfigService } from 'app/services/config.service';
+import { catchError, map, tap } from 'rxjs/operators';
+//esta es la forma correcta
+import "rxjs/add/observable/throw";
 
 @Injectable()
 export class ObrasService {
@@ -11,7 +12,7 @@ export class ObrasService {
   url: string;
 
   constructor(
-    private http: Http,
+    private http: HttpClient,
     private config: ConfigService
   ) {
     this.url = this.config.api_url + "obras/";
@@ -22,8 +23,9 @@ export class ObrasService {
     return this.http.post(this.url + 'create_obra', {
       obra: obra
     })
-      .map(this.extractData)
-      .catch(this.handleError);
+      .pipe(
+      catchError(this.handleError("createObra"))
+      )
   }
 
   //ok
@@ -31,8 +33,9 @@ export class ObrasService {
     return this.http.post(this.url + 'update_obra/' + id_obra, {
       obra: obra
     })
-      .map(this.extractData)
-      .catch(this.handleError);
+      .pipe(
+      catchError(this.handleError("updateObra"))
+      )
   }
 
 
@@ -40,8 +43,9 @@ export class ObrasService {
   //ok
   getAcordeonManzanas(id_obra) {
     return this.http.get(this.url + 'get_manzanas_lotes/' + id_obra)
-      .map(this.extractData)
-      .catch(this.handleError);
+      .pipe(
+      catchError(this.handleError("getAcordeonManzanas"))
+      )
   }
 
 
@@ -49,38 +53,51 @@ export class ObrasService {
   //ok
   getLotesEnVentaLibres(id_obra) {
     return this.http.get(this.url + 'get_manzanas_lotes_en_venta_libres/' + id_obra)
-      .map(this.extractData)
-      .catch(this.handleError);
+      .pipe(
+      catchError(this.handleError("getLotesEnVentaLibres"))
+      )
   }
 
 
   //ok
   getLotes(id_obra) {
     return this.http.get(this.url + 'get_lotes/' + id_obra)
-      .map(this.extractData)
-      .catch(this.handleError);
+      .pipe(
+      catchError(this.handleError("getLotes"))
+      )
+  }
+
+  //ok
+  getLotesEnVenta(id_obra) {
+    return this.http.get(this.url + 'get_lotes_en_venta/' + id_obra)
+      .pipe(
+      catchError(this.handleError("getLotes"))
+      )
   }
 
 
   //ok
   getObrasUsuario(id) {
     return this.http.get(this.url + 'usuario/' + id)
-      .map(this.extractData)
-      .catch(this.handleError);
+      .pipe(
+      catchError(this.handleError("getObrasUsuario"))
+      )
   }
 
   //ok
   getMapasUsuario(id) {
     return this.http.get(this.url + 'usuario_mapas/' + id)
-      .map(this.extractData)
-      .catch(this.handleError);
+      .pipe(
+      catchError(this.handleError("getMapasUsuario"))
+      )
   }
 
   //ok
   getObrasConUsuarios() {
     return this.http.get(this.url + "get_obras_con_usuarios")
-      .map(this.extractData)
-      .catch(this.handleError);
+      .pipe(
+      catchError(this.handleError("getObrasConUsuarios"))
+      )
   }
 
 
@@ -88,28 +105,23 @@ export class ObrasService {
 
   delObra(id_obra) {
     return this.http.post(this.url + "delete", { id_obra: id_obra })
-      .map(this.extractData)
-      .catch(this.handleError);
+      .pipe(
+      catchError(this.handleError("delObra"))
+      )
   }
 
 
-  private extractData(res: Response) {
-    let body = res.json();
-    return body || {};
-  }
+  private handleError<T>(operation = 'operation') {
+    return (error: HttpErrorResponse) => {
 
-  private handleError(error: Response | any) {
-    // In a real world app, you might use a remote logging infrastructure
-    let errMsg: string;
-    if (error instanceof Response) {
-      const body = error.json() || '';
-      const err = body.error || JSON.stringify(body);
-      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
-    } else {
-      errMsg = error.message ? error.message : error.toString();
-    }
-    console.error(errMsg);
-    return Observable.throw(errMsg);
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+
+      // TODO: better job of transforming error for user consumption
+      console.log(`${operation} failed: ${error.message} (${error.status}- ${error.statusText})`);
+
+      return Observable.throw(error);
+    };
   }
 
 }

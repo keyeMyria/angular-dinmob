@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ObrasService } from "app/services/obras.service";
-import { Usuario } from "app/model/usuario";
-import { AuthService } from "app/services/auth.service";
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import { EditarManzanaDialogoComponent } from 'app/components/admin/editar-manzana-dialogo/editar-manzana-dialogo.component';
 import { MatDialog, MatSnackBar } from '@angular/material';
@@ -10,7 +8,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import "rxjs/add/observable/of";
 import "rxjs/add/observable/forkJoin";
 import { Observable } from 'rxjs/Observable';
-import { NgForm, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { AgregarManzanaDialogoComponent } from 'app/components/admin/agregar-manzana-dialogo/agregar-manzana-dialogo.component';
 import { AgregarLoteDialogoComponent } from 'app/components/admin/agregar-lote-dialogo/agregar-lote-dialogo.component';
 import { LotesService } from 'app/services/lotes.service';
@@ -30,23 +28,26 @@ import { PrototiposService } from 'app/services/prototipos.service';
 export class EstructuraObraComponent implements OnInit {
 
   loading: boolean;
-  maskDosDigitos = [/[1-9]/, /\d/];
-  guide: boolean = false;
+
+  numbermask = createNumberMask({
+    allowDecimal: true,
+    prefix: '',
+    decimalLimit: 2
+  });
+
+ 
+
 
   lotesMapping:
     { [k: string]: string } = { '=0': 'Ningún lote seleccionado', '=1': 'Un lote seleccionado', 'other': '# lotes seleccionados' };
 
 
-  obras: any = [];
-  prototipos: any = [];
+  obras: any[] = [];
+  prototipos: any[] = [];
 
-  obra: any = {
-    datos: {}
-  };
+  obra: any = {};
 
   obra_selected: string = "";
-
-  lotes_selected: any = {};
 
 
   opPrototipo = new FormControl("", Validators.required);
@@ -69,10 +70,7 @@ export class EstructuraObraComponent implements OnInit {
     private loteSrv: LotesService,
     private manzanaSrv: ManzanasService,
     private snackBar: MatSnackBar
-  ) {
-    // console.log("-------------constructor-----");
-
-  }
+  ) { }
 
 
   /* obtenemos las obras del usurio del resolve y consultamos la obra requerida como routeParam */
@@ -202,36 +200,37 @@ export class EstructuraObraComponent implements OnInit {
     });
   }
 
-
+  /* abrimos el dialogo para crear los lotes por nombre o numero */
   addManzanas() {
     let dialogRef = this.dialog.open(AgregarManzanaDialogoComponent, {
       data: {
         obra: this.obra,
-        selection:this.selection
+        selection: this.selection
       },
       width: "500px"
     });
 
     dialogRef.afterClosed().subscribe(result => {
 
-      if (result===true) {
+      if (result === true) {
 
         this.snackBar.open("Obra Actualizada", "Cerrar", {
           duration: 2000
         });
-        
+
       } else {
 
         this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "Cerrar", {
           duration: 3000
         });
-        
+
       }
 
     });
 
   }
 
+  /* mostramos el dialogo para agregar lotes a la manzana seleccionada */
   addLotes(manzana) {
     let dialogRef = this.dialog.open(AgregarLoteDialogoComponent, {
       data: {
@@ -241,8 +240,22 @@ export class EstructuraObraComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log("dialogo cerrado");
 
+      if (result === true) {
+
+        this.snackBar.open("Obra Actualizada", "Cerrar", {
+          duration: 2000
+        });
+
+      } else if (result === false) {
+
+      } else {
+
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "Cerrar", {
+          duration: 3000
+        });
+
+      }
 
     });
 
@@ -291,8 +304,8 @@ export class EstructuraObraComponent implements OnInit {
       id_lotes.push(lote.id_lote);
     });
 
-
-    this.loteSrv.bulkUpdate(id_lotes, { valor_base: this.opValorBase.value })
+    let valor = this.opValorBase.value.replace(/,/g, "");
+    this.loteSrv.bulkUpdate(id_lotes, { valor_base: valor })
       .subscribe(res => {
         console.log("respuesta", res);
 
@@ -302,7 +315,7 @@ export class EstructuraObraComponent implements OnInit {
 
           //actualizamos la vista
           this.selection[this.manzana_selected].selected.forEach(lote => {
-            lote.valor_base = this.opValorBase.value;
+            lote.valor_base = valor;
           });
 
           //eliminamos la seleccion
@@ -343,8 +356,8 @@ export class EstructuraObraComponent implements OnInit {
       id_lotes.push(lote.id_lote);
     });
 
-
-    this.loteSrv.bulkUpdate(id_lotes, { valor_ampliacion: this.opValorAmpliacion.value })
+    let valor = this.opValorAmpliacion.value.replace(/,/g, "");
+    this.loteSrv.bulkUpdate(id_lotes, { valor_ampliacion: valor })
       .subscribe(res => {
         console.log("respuesta", res);
 
@@ -354,7 +367,7 @@ export class EstructuraObraComponent implements OnInit {
 
           //actualizamos la vista
           this.selection[this.manzana_selected].selected.forEach(lote => {
-            lote.valor_ampliacion = this.opValorAmpliacion.value;
+            lote.valor_ampliacion = valor;
           });
 
           //eliminamos la seleccion
@@ -500,17 +513,6 @@ export class EstructuraObraComponent implements OnInit {
       this.selection[i].clear() :
       this.obra.manzanas[i].lotes.forEach(lote => this.selection[i].select(lote));
   }
-
-  //para consultar los lotes seleccionados
-  debugSelection() {
-    //console.log(this.selection.selected);
-    console.log("manzana selected", this.manzana_selected);
-    this.manzana_selected === null ? console.log("ninguna manzana seleccionada") : console.log(this.selection[this.manzana_selected].selected);
-
-
-
-  }
-
 
 
 }

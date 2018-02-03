@@ -29,29 +29,29 @@ export class ClientesService {
     } */
 
   //ok
-  getClientesObra(id_obra): Observable<any> {
+  getClientesObra(id_obra) {
     return this.http.get(this.url + "get_clientes_obra/" + id_obra)
       .pipe(
       tap(response => console.log("response", response)),
-      catchError(this.handleError("getClientesObra", []))
+      catchError(this.handleError("getClientesObra"))
       )
   }
 
   //ok
-  getClientesSinLote(): Observable<any> {
+  getClientesSinLote() {
     return this.http.get(this.url + "sin_lote")
       .pipe(
       tap(response => console.log("response", response)),
-      catchError(this.handleError("getClientesSinLote", []))
+      catchError(this.handleError("getClientesSinLote"))
       )
   }
 
   //ok
-  getAlertasObra(id_obra): Observable<any> {
+  getAlertasObra(id_obra) {
     return this.http.get(this.url + "alertas_obra/" + id_obra)
       .pipe(
       tap(response => console.log("response", response)),
-      catchError(this.handleError("getAlertasObra", []))
+      catchError(this.handleError("getAlertasObra"))
       )
   }
 
@@ -64,11 +64,11 @@ export class ClientesService {
 
 
   //ok
-  getClienteConComprasYDocumentos(id_cliente): Observable<any> {
+  getClienteConComprasYDocumentos(id_cliente) {
     return this.http.get(this.url + 'get_cliente_documentos_compras/' + id_cliente)
       .pipe(
       tap(response => console.log("response", response)),
-      catchError(this.handleError("getClienteConComprasYDocumentos", {}))
+      catchError(this.handleError("getClienteConComprasYDocumentos"))
       )
   }
 
@@ -79,48 +79,48 @@ export class ClientesService {
     } */
 
   //ok
-  createCliente(cliente): Observable<any> {
+  createCliente(cliente) {
     return this.http.post(this.url + 'create_cliente', { cliente: cliente })
       .pipe(
       tap(response => console.log("response", response)),
-      catchError(this.handleError("createCliente", {}))
+      catchError(this.handleError("createCliente"))
       )
 
   }
 
   //ok
-  updateCliente(id, cliente): Observable<any> {
+  updateCliente(id, cliente) {
     return this.http.post(this.url + 'update_cliente/' + id, { cliente: cliente })
       .pipe(
       tap(response => console.log("response", response)),
-      catchError(this.handleError("updateCliente", {}))
+      catchError(this.handleError("updateCliente"))
       )
   }
 
   //ok
-  updateCompra(id_cliente, id_lote, compra): Observable<any> {
+  updateCompra(id_cliente, id_lote, compra) {
     return this.http.post(this.url + 'update_compra/' + id_cliente, { id_lote: id_lote, compra: compra })
       .pipe(
       tap(response => console.log("response", response)),
-      catchError(this.handleError("updateCompra", {}))
+      catchError(this.handleError("updateCompra"))
       )
   }
 
   //ok
-  delCliente(id): Observable<any> {
+  delCliente(id) {
     return this.http.post(this.url + 'del_cliente/' + id, {})
       .pipe(
       tap(response => console.log("response", response)),
-      catchError(this.handleError("delCliente", {}))
+      catchError(this.handleError("delCliente"))
       )
   }
 
   //ok
-  asociarClienteLote(id_cliente, id_lote): Observable<any> {
+  asociarClienteLote(id_cliente, id_lote) {
     return this.http.post(this.url + 'asociar_cliente_lote/' + id_cliente, { id_lote: id_lote })
       .pipe(
       tap(response => console.log("response", response)),
-      catchError(this.handleError("asociarClienteLote", {}))
+      catchError(this.handleError("asociarClienteLote"))
       )
   }
 
@@ -136,8 +136,8 @@ export class ClientesService {
     } */
 
 
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: HttpErrorResponse): Observable<T> => {
+  private handleError<T>(operation = 'operation') {
+    return (error: HttpErrorResponse) => {
 
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead

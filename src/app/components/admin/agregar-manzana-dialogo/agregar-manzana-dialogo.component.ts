@@ -77,8 +77,8 @@ export class AgregarManzanaDialogoComponent implements OnInit {
 
   createManzanas() {
 
-    console.log("createManzanas");  
-    console.log("obra", this.data.obra);
+    //console.log("createManzanas");  
+    //console.log("obra", this.data.obra);
     
 
     if (this.formManzana.value.tipo == "nombre") {

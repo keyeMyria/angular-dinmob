@@ -41,7 +41,7 @@ export class DesarrollosComponent implements OnInit {
       .switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
-          return this.obraSrv.getLotes(params.get("obra"));
+          return this.obraSrv.getLotesEnVenta(params.get("obra"));
         } else {
           return of({});
         }

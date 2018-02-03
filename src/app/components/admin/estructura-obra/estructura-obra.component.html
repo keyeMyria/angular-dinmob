@@ -189,7 +189,7 @@
                     <div class="form-group">
                         <label class="form-label">Valor Base</label>
                         <div class="input-group">
-                            <input name="valor_base" type="text" class="form-control" [formControl]="opValorBase">
+                            <input name="valor_base" [textMask]="{mask: numbermask}" type="text" class="form-control" [formControl]="opValorBase">
                             <div class="input-group-btn">
                                 <button class="btn btn-primary" (click)="updateValorBase()" [disabled]=" manzana_selected==null || !selection[manzana_selected].selected.length  || opValorBase.errors">Asignar</button>
                             </div>
@@ -201,14 +201,13 @@
                     <div class="form-group">
                         <label class="form-label">Valor Ampliación</label>
                         <div class="input-group">
-                            <input name="valor_ampliacion" type="text" class="form-control" [formControl]="opValorAmpliacion">
+                            <input name="valor_ampliacion" [textMask]="{mask: numbermask}" type="text" class="form-control" [formControl]="opValorAmpliacion">
                             <div class="input-group-btn">
                                 <button class="btn btn-primary" (click)="updateValorAmpliacion()" [disabled]=" manzana_selected==null || !selection[manzana_selected].selected.length  || opValorAmpliacion.errors">Asignar</button>
                             </div>
                         </div>
                     </div>
-
-                    <button type="button" class="btn btn-primary" (click)="debugSelection()">ver seleccionados</button>
+                    
 
                 </div>
 

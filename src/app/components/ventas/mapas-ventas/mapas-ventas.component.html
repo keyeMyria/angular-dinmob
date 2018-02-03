@@ -3,6 +3,11 @@
   <small>{{lote_selected?.code}}</small>
 </button>
 
+<div *ngIf="loading">
+  <mat-spinner class="loading"></mat-spinner>
+</div>
+
+
 <div class="content p-2">
   <!-- <div class="map-header container pt-2"> -->
   <!--     <select class="form-control" name="" id="">
@@ -72,9 +77,11 @@
         </div>
 
         <div class="form-group">
-          <mat-slide-toggle checked="true" (change)="toggleVerLeyenda($event)">Leyenda</mat-slide-toggle>
+          <mat-slide-toggle [checked]="verLeyenda" (change)="toggleVerLeyenda($event)">Leyenda</mat-slide-toggle>
         </div>
         <button mat-raised-button color="primary" class="btn-block" (click)="verClientes()" [disabled]="!lote_selected">Clientes</button>
+
+        
 
       </mat-card>
 

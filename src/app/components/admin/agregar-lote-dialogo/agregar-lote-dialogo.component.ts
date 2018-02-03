@@ -12,6 +12,7 @@ import { LotesService } from 'app/services/lotes.service';
 export class AgregarLoteDialogoComponent implements OnInit {
 
   formLote: FormGroup;
+  loading:boolean;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -24,7 +25,7 @@ export class AgregarLoteDialogoComponent implements OnInit {
       nombre: ["", [Validators.required, Validators.maxLength(30)]],
       ini: ["", Validators.required],
       fin: "",
-      prefijo: ["", [Validators.required, Validators.maxLength(30)]]
+      prefijo: ["Lote", [Validators.required, Validators.maxLength(30)]]
     });
 
     this.formLote.get("fin").setValidators([Validators.required, this.checkLoteFin.bind(this.formLote)]);
@@ -63,13 +64,13 @@ export class AgregarLoteDialogoComponent implements OnInit {
   checkLoteFin(control: FormControl): { [key: string]: boolean } {
 
     let form: any = this;
-    console.log(form);
+    //console.log(form);
 
 
     if (control.value < form.get("ini").value) {
       return { menorqueini: true };
-    } else if (control.value - form.get("ini").value > 20) {
-      return { masde20: true };
+    } else if (control.value - form.get("ini").value > 30) {
+      return { masde30: true };
     } else {
       return null;
     }
@@ -78,7 +79,7 @@ export class AgregarLoteDialogoComponent implements OnInit {
   createLotes() {
 
     //console.log("createLotes");
-    this.dialogRef.close();
+   this.loading=true;
 
     if (this.formLote.value.tipo == "nombre") {
 
@@ -86,14 +87,24 @@ export class AgregarLoteDialogoComponent implements OnInit {
         .subscribe(lote => {
 
           this.data.manzana.lotes.push(lote);
+          this.loading=false;
+          this.dialogRef.close(true);
 
+        }, (error) => {
+          this.loading=false;
+          this.dialogRef.close(error);
         });
 
     } else {
-      let id_manzana = 1;
+     
       this.loteSrv.addLoteByNumero(this.formLote.value.prefijo, this.formLote.value.ini, this.formLote.value.fin, this.data.manzana.id_manzana)
         .subscribe(lotes => {
           this.data.manzana.lotes.push(...lotes);
+          this.loading=false;
+          this.dialogRef.close(true);
+        }, (error) => {
+          this.loading=false;
+          this.dialogRef.close(error);
         });
     }
 
