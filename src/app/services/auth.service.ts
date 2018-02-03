@@ -1,17 +1,12 @@
 import { Injectable } from '@angular/core';
 import { tokenNotExpired } from "angular2-jwt/angular2-jwt";
 import { Observable } from "rxjs/Observable";
-import { of } from 'rxjs/observable/of';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ConfigService } from 'app/services/config.service';
 import { catchError, map, tap } from 'rxjs/operators';
 //esta es la forma correcta
 import "rxjs/add/observable/throw";
 
-
-/* export const ROLES = {
- 
-} */
 
 
 @Injectable()
@@ -46,14 +41,14 @@ export class AuthService {
     return this.http.post(this.url + 'login', { usuario: usuario })
       .pipe(
       tap(response => console.log("response", response)),
-      catchError(this.handleError("login", {}))
+      catchError(this.handleError("login"))
       )
   }
 
   logout() {
     localStorage.removeItem("token");
     localStorage.removeItem("usuario");
-    console.log("loggedout");
+    //console.log("loggedout");
   }
 
   loggedIn() {
@@ -79,7 +74,7 @@ export class AuthService {
   getRolUsuario() {
     let usuario = this.getUsuario();
     if (usuario) {
-      return Number(usuario.id_rol);
+      return Number(usuario.id_tipo_usuario);
     } else {
       return -1;
     }
@@ -116,8 +111,8 @@ export class AuthService {
 
 
 
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: HttpErrorResponse): Observable<T> => {
+  private handleError<T>(operation = 'operation') {
+    return (error: HttpErrorResponse) => {
 
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead

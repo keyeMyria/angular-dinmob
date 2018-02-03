@@ -25,14 +25,14 @@ export class UsuariosComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-    
+
     this.usuarioSrv.getRoles()
       .subscribe(res => this.roles = res);
 
     this.usuarioSrv.getUsuarios()
       .subscribe(res => {
         this.usuarios = res;
-        this.usuariosOrdenados= this.usuarios.slice();
+        this.usuariosOrdenados = this.usuarios.slice();
         this.loading = false;
       });
   }
@@ -85,23 +85,31 @@ export class UsuariosComponent implements OnInit {
 
         this.usuarioSrv.delUsuario(usuario.id_usuario)
           .subscribe(res => {
-
+            this.loading = false;
             if (res.count === 1) {
 
               let i = this.usuarios.indexOf(usuario);
               this.usuarios.splice(i, 1);
+              let j = this.usuariosOrdenados.indexOf(usuario);
+              this.usuariosOrdenados.splice(j, 1);
 
-              this.loading = false;
+
               this.snackBar.open("Usuario Eliminado", "Cerrar", {
                 duration: 2000
               });
 
             } else {
+              this.loading = false;
               this.snackBar.open("Ha ocurrido un error", "Cerrar", {
                 duration: 3000
               });
             }
 
+          }, (error) => {
+            this.loading = false;
+            this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "Cerrar", {
+              duration: 3000
+            });
           });
 
 
@@ -177,7 +185,7 @@ export class UsuariosComponent implements OnInit {
   }
 
   ordenarDatos(sort: Sort) {
-    console.log("ordenarDatos", sort);
+    //console.log("ordenarDatos", sort);
 
     const data = this.usuarios.slice();
     if (!sort.active || sort.direction == '') {
@@ -191,7 +199,7 @@ export class UsuariosComponent implements OnInit {
         case 'id': return compare(+a.id_usuario, +b.id_usuario, isAsc);
         case 'nombre': return compare(a.nombre, b.nombre, isAsc);
         case 'email': return compare(a.email, b.email, isAsc);
-        case 'rol': return compare(a.tipo_usuario, b.tipo_usuario, isAsc);      
+        case 'rol': return compare(a.tipo_usuario, b.tipo_usuario, isAsc);
         default: return 0;
       }
     });

@@ -102,9 +102,9 @@ export class ObrasService {
 
 
 
-
+  //ok
   delObra(id_obra) {
-    return this.http.post(this.url + "delete", { id_obra: id_obra })
+    return this.http.post(this.url + "del_obra/" + id_obra, {})
       .pipe(
       catchError(this.handleError("delObra"))
       )

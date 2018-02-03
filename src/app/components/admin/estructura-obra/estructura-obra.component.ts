@@ -35,7 +35,7 @@ export class EstructuraObraComponent implements OnInit {
     decimalLimit: 2
   });
 
- 
+
 
 
   lotesMapping:
@@ -110,6 +110,8 @@ export class EstructuraObraComponent implements OnInit {
         this.loading = false;
 
 
+      }, (error) => {
+        this.loading = false;
       });
 
   }
@@ -261,6 +263,7 @@ export class EstructuraObraComponent implements OnInit {
 
   }
 
+  /* eliminamos el lote seleccionado */
   delLote(manzana, lote, event) {
 
     event.stopPropagation();
@@ -275,11 +278,42 @@ export class EstructuraObraComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
 
+      if (result === true) {
+
+        this.loteSrv.delLote(lote.id_lote)
+          .subscribe(res => {
+
+            if (res.count == 1) {
+
+              let i = manzana.lotes.indexOf(lote);
+              manzana.lotes.splice(i, 1);
+
+
+              this.snackBar.open("Obra Actualizada", "Cerrar", {
+                duration: 2000
+              });
+            } else {
+              this.snackBar.open("Su solicitud no se ha podido completar.", "Cerrar", {
+                duration: 3000
+              });
+            }
+
+          }, (error) => {
+
+            this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "Cerrar", {
+              duration: 3000
+            });
+
+          });
+
+
+      }
+
     });
 
   }
 
-
+  /* eliminamos la manzana seleccionada */
   delManzana(manzana) {
     let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
       data: {
@@ -290,6 +324,37 @@ export class EstructuraObraComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+
+      if (result === true) {
+
+        this.manzanaSrv.delManzana(manzana.id_manzana)
+          .subscribe(res => {
+
+            if (res.count == 1) {
+
+              let i = this.obra.manzanas.indexOf(manzana);
+              this.obra.manzanas.splice(i, 1);
+
+
+              this.snackBar.open("Obra Actualizada", "Cerrar", {
+                duration: 2000
+              });
+            } else {
+              this.snackBar.open("Su solicitud no se ha podido completar.", "Cerrar", {
+                duration: 3000
+              });
+            }
+
+          }, (error) => {
+
+            this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "Cerrar", {
+              duration: 3000
+            });
+
+          });
+
+
+      }
 
     });
 

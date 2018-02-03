@@ -51,8 +51,7 @@ export class ObrasComponent implements OnInit {
 
   }
 
-  openDialogCreateObra(): void {
-    let obra = new Obra();
+  openDialogCreateObra() {
 
     let dialogRef = this.dialog.open(AgregarObraDialogoComponent, {
       data: {
@@ -69,7 +68,7 @@ export class ObrasComponent implements OnInit {
 
       if (result === true) {
 
-        this.snackBar.open("Obra Actualizada", "Cerrar", {
+        this.snackBar.open("Obra Creada", "Cerrar", {
           duration: 2000
         });
 
@@ -87,7 +86,7 @@ export class ObrasComponent implements OnInit {
 
   delObra(obra: Obra) {
 
-   
+
     let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
       data: {
         title: "Eliminar Obra",
@@ -104,22 +103,28 @@ export class ObrasComponent implements OnInit {
         this.obrasSrv.delObra(obra.id_obra)
           .subscribe(res => {
 
+            this.loading = false;
             if (res.count === 1) {
 
               let i = this.obras.indexOf(obra);
               this.obras.splice(i, 1);
 
-              this.loading = false;
+
               this.snackBar.open("Obra Eliminada", "Cerrar", {
                 duration: 2000
               });
 
             } else {
-              this.snackBar.open("Ha ocurrido un error", "Cerrar", {
-                duration: 2000
+              this.snackBar.open("La operación no ha podido ser completada", "Cerrar", {
+                duration: 3000
               });
             }
 
+          }, (error) => {
+            this.loading = false;
+            this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "Cerrar", {
+              duration: 3000
+            });
           });
 
 

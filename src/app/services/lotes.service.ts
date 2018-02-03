@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from "@angular/http";
 import { Observable } from "rxjs/Observable";
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
 import { ConfigService } from 'app/services/config.service';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { catchError, map, tap } from 'rxjs/operators';
+//esta es la forma correcta
+import "rxjs/add/observable/throw";
 
 @Injectable()
 export class LotesService {
   url: string;
 
   constructor(
-    private http: Http,
+    private http: HttpClient,
     private config: ConfigService
   ) {
     this.url = this.config.api_url + "lotes/";
@@ -31,22 +32,31 @@ export class LotesService {
        return this.http.post(this.url + 'del_foto/' + id_foto);
    }*/
 
+  //ok
   updateLote(id_lote, lote) {
     return this.http.post(this.url + 'update_lote/' + id_lote, { lote: lote })
-      .map(this.extractData)
-      .catch(this.handleError);
+      .pipe(
+      tap(response => console.log("response", response)),
+      catchError(this.handleError("updateLote"))
+      )
   }
 
+  //ok
   bulkUpdate(ids, props) {
     return this.http.post(this.url + 'bulk_update', { ids: ids, props: props })
-      .map(this.extractData)
-      .catch(this.handleError);
+      .pipe(
+      tap(response => console.log("response", response)),
+      catchError(this.handleError("bulkUpdate"))
+      )
   }
 
+  //ok
   bulkAddLotePrototipo(ids_lotes, id_prototipo) {
     return this.http.post(this.url + 'bulk_add_lote_prototipo', { ids: ids_lotes, id_prototipo: id_prototipo })
-      .map(this.extractData)
-      .catch(this.handleError);
+      .pipe(
+      tap(response => console.log("response", response)),
+      catchError(this.handleError("bulkAddLotePrototipo"))
+      )
   }
 
   /*   addLotePrototipo(id_lote, id_prototipo) {
@@ -55,20 +65,27 @@ export class LotesService {
         .catch(this.handleError);
     } */
 
+  //ok
   getDetallesLoteVentas(id_lote) {
     return this.http.get(this.url + 'ventas_detalle/' + id_lote)
-      .map(this.extractData)
-      .catch(this.handleError);
+      .pipe(
+      tap(response => console.log("response", response)),
+      catchError(this.handleError("getDetallesLoteVentas"))
+      )
   }
 
   /*    getTrabajadoresLote(id_lote) {
           return  this.http.post(this.url + "especialidades/" + id_lote);
       }
 */
+
+  //ok
   getAvances(id_lote) {
     return this.http.get(this.url + "get_avances/" + id_lote)
-      .map(this.extractData)
-      .catch(this.handleError);
+      .pipe(
+      tap(response => console.log("response", response)),
+      catchError(this.handleError("getAvances"))
+      )
   }
 
   /*   getArranque(id_lote) {
@@ -108,16 +125,22 @@ export class LotesService {
         .catch(this.handleError);
     } */
 
+  //ok
   addLoteByNombre(nombre, id_manzana) {
     return this.http.post(this.url + 'add_by_nombre', { nombre: nombre, id_manzana: id_manzana })
-      .map(this.extractData)
-      .catch(this.handleError);
+      .pipe(
+      tap(response => console.log("response", response)),
+      catchError(this.handleError("addLoteByNombre"))
+      )
   }
 
+  //ok
   addLoteByNumero(prefijo, ini, fin, id_manzana) {
     return this.http.post(this.url + 'add_by_numero', { prefijo: prefijo, ini: ini, fin: fin, id_manzana: id_manzana })
-      .map(this.extractData)
-      .catch(this.handleError);
+      .pipe(
+      tap(response => console.log("response", response)),
+      catchError(this.handleError("addLoteByNumero"))
+      )
   }
 
   /*   asignarPrototipo(ids, id_prototipo) {
@@ -138,11 +161,14 @@ export class LotesService {
         .catch(this.handleError);
     } */
 
-  /*   delLote(id_lote) {
-      return this.http.post(this.url + "del_lote", { id_lote: id_lote })
-        .map(this.extractData)
-        .catch(this.handleError);
-    } */
+  //ok
+  delLote(id_lote) {
+    return this.http.post(this.url + "del_lote/" + id_lote, {})
+      .pipe(
+      tap(response => console.log("response", response)),
+      catchError(this.handleError("delLote"))
+      )
+  }
 
   /*   delLotePrototipo(id_lote, id_prototipo) {
       return this.http.post(this.url + "del_prototipo", { id_lote: id_lote, id_prototipo: id_prototipo })
@@ -169,23 +195,18 @@ export class LotesService {
 
 
 
-  private extractData(res: Response) {
-    let body = res.json();
-    return body || {};
+  private handleError<T>(operation = 'operation') {
+    return (error: HttpErrorResponse) => {
+
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+
+      // TODO: better job of transforming error for user consumption
+      console.log(`${operation} failed: ${error.message} (${error.status}- ${error.statusText})`);
+
+      return Observable.throw(error);
+    };
   }
 
-  private handleError(error: Response | any) {
-    // In a real world app, you might use a remote logging infrastructure
-    let errMsg: string;
-    if (error instanceof Response) {
-      const body = error.json() || '';
-      const err = body.error || JSON.stringify(body);
-      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
-    } else {
-      errMsg = error.message ? error.message : error.toString();
-    }
-    console.error(errMsg);
-    return Observable.throw(errMsg);
-  }
 
 }

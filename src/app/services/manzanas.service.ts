@@ -17,20 +17,30 @@ export class ManzanasService {
     this.url = this.config.api_url + "manzanas/";
   }
 
-
+  //ok
   addManzanaByNombre(nombre, id_obra) {
     return this.http.post(this.url + 'create_manzana_por_nombre', { nombre: nombre, id_obra: id_obra })
-    .pipe(
+      .pipe(
       tap(response => console.log("response", response)),
       catchError(this.handleError("addManzanaByNombre"))
       )
   }
 
+  //ok
   addManzanaByNumero(prefijo, ini, fin, id_obra) {
     return this.http.post(this.url + 'create_manzana_por_numero', { prefijo: prefijo, ini: ini, fin: fin, id_obra: id_obra })
-    .pipe(
+      .pipe(
       tap(response => console.log("response", response)),
       catchError(this.handleError("addManzanaByNumero"))
+      )
+  }
+
+  //ok
+  delManzana(id_manzana) {
+    return this.http.post(this.url + "del_manzana/" + id_manzana, {})
+      .pipe(
+      tap(response => console.log("response", response)),
+      catchError(this.handleError("delManzana"))
       )
   }
 

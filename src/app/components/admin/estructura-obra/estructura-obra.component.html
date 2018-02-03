@@ -3,18 +3,9 @@
     <div *ngIf="loading">
         <mat-spinner class="loading"></mat-spinner>
     </div>
-    
+
     <div class="row">
         <div class="col-12 col-md-8">
-
-            <!-- Seleccionar Obra -->
-            <!--         <div class="mb-2">
-                <select class="form-control" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)">
-                    <option value="">Seleccionar...</option>
-                    <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>
-                </select>
-
-            </div> -->
 
             <div>
                 <mat-form-field class="w-100">
@@ -49,7 +40,7 @@
 
                 <!-- acordeon de manzanas -->
                 <mat-accordion [displayMode]="'default'">
-                    <mat-expansion-panel [hideToggle]="false" (opened)="selectManzana(i)" (closed)="onClosedManzana(i)" *ngFor="let manzana of obra.manzanas; let i=index"
+                    <mat-expansion-panel [hideToggle]="true" (opened)="selectManzana(i)" (closed)="onClosedManzana(i)" *ngFor="let manzana of obra.manzanas; let i=index"
                         #panel>
                         <mat-expansion-panel-header [ngClass]="{'bg-primary text-white':panel.expanded}">
                             <span class="align-self-center">{{manzana.nombre}}</span>
@@ -81,32 +72,29 @@
                             <table class="table table-sm table-align-middle table-striped">
                                 <thead>
                                     <tr>
-                                        <th style="cursor: pointer; width:30px;">
-                                            <!-- <mat-icon style="font-size: 20px">{{ manzana.selected?'check_box':'check_box_outline_blank'}}</mat-icon> -->
-                                            <mat-checkbox color="accent" (change)="$event ? masterToggle(i) : null" [checked]="selection[i].hasValue() && isAllSelected(i)"
+                                        <th style="">                                            
+                                            <mat-checkbox class="pl-3" color="accent" (change)="$event ? masterToggle(i) : null" [checked]="selection[i].hasValue() && isAllSelected(i)"
                                                 [indeterminate]="selection[i].hasValue() && !isAllSelected(i)">
                                             </mat-checkbox>
                                         </th>
                                         <th>Lote</th>
-                                        <th class="hidden-xs hidden-sm hidden-md">Código</th>
+                                        <th class="d-none d-md-table-cell">Código</th>
                                         <th>Prototipos</th>
                                         <th>Base</th>
                                         <th>Ampliación</th>
                                         <th>En Venta</th>
-                                        <th> </th>
+                                        <th style="width: 90px"> </th>
 
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- (click)="toggleSelectionLote(manzana, lote)" class="pointer" [ngClass]="{'table-primary':lote.selected}" [ngClass]="{'bg-primary text-white':lote.selected}" -->
                                     <tr *ngFor="let lote of manzana.lotes" (click)="selection[i].toggle(lote)" class="pointer" [ngClass]="{'table-primary':selection[i].isSelected(lote)}">
                                         <td>
-                                            <!-- <mat-icon style="font-size: 20px">{{ lote.selected?'check_box':'check_box_outline_blank'}}</mat-icon> -->
-                                            <mat-checkbox color="accent" (click)="$event.stopPropagation()" (change)="$event ? selection[i].toggle(lote) : null" [checked]="selection[i].isSelected(lote)">
+                                            <mat-checkbox class="pl-3" color="accent" (click)="$event.stopPropagation()" (change)="$event ? selection[i].toggle(lote) : null" [checked]="selection[i].isSelected(lote)">
                                             </mat-checkbox>
                                         </td>
-                                        <td>{{ lote.nombre}}</td>
-                                        <td class="hidden-xs hidden-sm hidden-md">{{lote.code}}</td>
+                                        <td class="ws-nowrap">{{ lote.nombre}}</td>
+                                        <td class="d-none d-md-table-cell">{{lote.code}}</td>
                                         <td>
                                             <span *ngFor="let prototipo of lote.prototipos">
                                                 {{prototipo.nombre}}
@@ -116,7 +104,7 @@
                                         <td>{{lote.valor_base|currency}}</td>
                                         <td>{{lote.valor_ampliacion|currency}}</td>
                                         <td>{{lote.en_venta| numberToYesNo}}</td>
-                                        <td class="text-right">
+                                        <td class="text-right ws-nowrap">
 
                                             <button mat-button class="no-min" (click)="editarLote(manzana,lote, $event)">
                                                 <i class="fa fa-pencil"></i>
@@ -140,10 +128,9 @@
 
         <div class="col-12 col-md-4 mt-2">
 
-
             <!-- Operaciones -->
             <mat-expansion-panel class="mt-2" expanded="true">
-                <!-- class="bg-info text-white" -->
+                
                 <mat-expansion-panel-header class="bg-primary text-white">
                     Operaciones
                 </mat-expansion-panel-header>
@@ -207,7 +194,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
 
                 </div>
 
