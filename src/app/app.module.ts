@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RoutingModule } from "app/app.routing";
 import { TextMaskModule } from "angular2-text-mask";
 import { AuthModule } from "app/modules/auth.module";
+import { FileUploadModule } from 'ng2-file-upload/file-upload/file-upload.module';
 
 import "hammerjs";
 
@@ -169,6 +170,7 @@ import { SalidasService } from 'app/services/salidas.service';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -259,6 +261,7 @@ import { SalidasService } from 'app/services/salidas.service';
     HttpClientModule,
     HttpModule,
     FormsModule,
+    FileUploadModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     AuthModule,
