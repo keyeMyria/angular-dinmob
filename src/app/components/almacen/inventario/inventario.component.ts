@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material';
 import { NuevoMaterialDialogoComponent } from 'app/components/almacen/nuevo-material-dialogo/nuevo-material-dialogo.component';
 import { InsumoService } from 'app/services/insumo.service';
 import { of } from "rxjs/observable/of";
+import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
 
 @Component({
   selector: 'app-inventario',
@@ -50,14 +51,31 @@ export class InventarioComponent implements OnInit {
 
   }
 
-  editarMaterial() {
+  editarMaterial(material) {
     let dialogRef = this.dialog.open(EditarMaterialDialogoComponent, {
       data: {
+        material: material
       },
       width: '500px'
     });
     dialogRef.afterClosed().subscribe(result => {
     });
+  }
+
+  delInventario(material) {
+    let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
+      data: {
+        title: "Eliminar Insumo",
+        content: `¿Desea eliminar el Insumo: ${material.insumo}?`
+      },
+      width: '500px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+      }
+    });
+
   }
 
   nuevoMaterial() {
