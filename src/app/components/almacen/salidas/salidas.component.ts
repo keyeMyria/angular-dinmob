@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { VerSalidaDialogoComponent } from 'app/components/almacen/ver-salida-dialogo/ver-salida-dialogo.component';
 import { MatDialog } from '@angular/material';
+import { SalidasService } from 'app/services/salidas.service';
+import { of } from "rxjs/observable/of";
 
 @Component({
   selector: 'app-salidas',
@@ -11,11 +13,14 @@ import { MatDialog } from '@angular/material';
 export class SalidasComponent implements OnInit {
   obras: any = [];
   loading: boolean;
+  obra_selected: string = "";
+  salidas: any[] = [];
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     public dialog: MatDialog,
+    private salidaSrv: SalidasService,
   ) { }
 
   ngOnInit() {
@@ -23,6 +28,20 @@ export class SalidasComponent implements OnInit {
     this.route.data
       .subscribe((data: { obras: any[] }) => {
         this.obras = data.obras;
+      });
+    this.loading = true;
+    this.route.paramMap
+      .switchMap((params: ParamMap) => {
+        if (params.has("obra")) {
+          this.obra_selected = params.get("obra");
+          return this.salidaSrv.getSalidasObra(params.get("obra"));
+        } else {
+          return of([]);
+        }
+      }).subscribe(salidas => {
+        this.salidas = salidas;
+        this.loading = false;
+
       });
   }
 
@@ -38,6 +57,17 @@ export class SalidasComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
     });
+  }
+
+  cargarObra(id_obra) {
+
+    if (id_obra) {
+      this.router.navigate([".", { obra: id_obra }]);
+    } else {
+      this.router.navigate([".", {}]);
+
+    }
+
   }
 
 }

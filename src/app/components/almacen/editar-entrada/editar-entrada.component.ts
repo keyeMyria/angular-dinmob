@@ -20,12 +20,12 @@ export class EditarEntradaComponent implements OnInit {
     private router: Router,
   ) {
     this.form = this.fb.group({
-      proveedor: ["", Validators.required],
-      fecha_entrada: [moment("", "YYYY-MM-DD"), Validators.required],
-      folio: ["", Validators.required],
-      total: ["", Validators.required],
-      forma_pago: ["", Validators.required],
-      documento: ["", Validators.required],
+      proveedor: [null, Validators.required],
+      fecha_entrada: [moment(null, "YYYY-MM-DD"), Validators.required],
+      folio: [null, Validators.required],
+      total: [null, Validators.required],
+      forma_pago: [null, Validators.required],
+      documento: [null, Validators.required],
     });
   }
 
@@ -33,7 +33,7 @@ export class EditarEntradaComponent implements OnInit {
   }
 
   guardar() {
-    console.log("pago", this.form.value);
+    console.log("datos", this.form.value);
   }
 
   gotoEntradas(){
