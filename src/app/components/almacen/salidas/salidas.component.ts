@@ -4,6 +4,7 @@ import { VerSalidaDialogoComponent } from 'app/components/almacen/ver-salida-dia
 import { MatDialog } from '@angular/material';
 import { SalidasService } from 'app/services/salidas.service';
 import { of } from "rxjs/observable/of";
+import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
 
 @Component({
   selector: 'app-salidas',
@@ -49,15 +50,33 @@ export class SalidasComponent implements OnInit {
     this.router.navigate(["/nueva-salida"]);
   }
 
-  verSalida() {
+  verSalida(salida) {
     let dialogRef = this.dialog.open(VerSalidaDialogoComponent, {
       data: {
+        salida: salida
       },
-      width: '500px'
+      width: '800px'
     });
     dialogRef.afterClosed().subscribe(result => {
     });
   }
+
+  delSalida(salida) {
+    let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
+      data: {
+        title: "Eliminar Salida",
+        content: `¿Desea eliminar la salida del: ${salida.fecha}?`
+      },
+      width: '500px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+      }
+    });
+
+  }
+
 
   cargarObra(id_obra) {
 

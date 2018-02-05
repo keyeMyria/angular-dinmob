@@ -3,6 +3,7 @@ import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
 import * as moment from 'moment';
 import { ActivatedRoute, Router } from '@angular/router';
+import { EntradasService } from 'app/services/entradas.service';
 
 @Component({
   selector: 'app-editar-entrada',
@@ -18,6 +19,7 @@ export class EditarEntradaComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
+    private entradaSrv: EntradasService
   ) {
     this.form = this.fb.group({
       proveedor: [null, Validators.required],
