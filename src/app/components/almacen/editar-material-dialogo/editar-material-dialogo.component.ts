@@ -14,15 +14,16 @@ export class EditarMaterialDialogoComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<EditarMaterialDialogoComponent>,
     private fb: FormBuilder,
-  ) { }
+  ) {
+    this.form = this.fb.group({
+      codigo: [data.material.codigo, Validators.required],
+      nombre: [data.material.insumo, Validators.required],
+      unidad: [data.material.unidad, Validators.required],
+      existencias: [data.material.existencias, Validators.required]
+    });
+  }
 
   ngOnInit() {
-    this.form = this.fb.group({
-      codigo: ["", Validators.required],
-      nombre: ["", Validators.required],
-      unidad: ["", Validators.required],
-      existencias: ["", Validators.required]
-    });
   }
 
   guardar() {

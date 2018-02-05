@@ -175,7 +175,8 @@ export class EditarPrototipoComponent implements OnInit {
       data: {
         title: "Eliminar Partida",
         content: `¿Desea eliminar la partida: ${partida.nombre}?`
-      }
+      },
+      width: '500px',
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
@@ -192,7 +193,8 @@ export class EditarPrototipoComponent implements OnInit {
       data: {
         title: "Eliminar Subpartida",
         content: `¿Desea eliminar la Subpartida: ${subpartida.nombre}?`
-      }
+      },
+      width: '500px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -206,7 +208,8 @@ export class EditarPrototipoComponent implements OnInit {
       data: {
         title: "Eliminar Insumo",
         content: `¿Desea eliminar el Insumo: ${insumo.insumo}?`
-      }
+      },
+      width: '500px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
