@@ -46,6 +46,10 @@ export class ClientesService {
       )
   }
 
+  getUploadDocumentClienteURL(){
+    return this.url + "upload_document";
+  }
+
   //ok
   getAlertasObra(id_obra) {
     return this.http.get(this.url + "alertas_obra/" + id_obra)
