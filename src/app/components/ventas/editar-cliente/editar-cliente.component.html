@@ -1,5 +1,5 @@
 <!-- [disabled]="formGenerales.invalid"  -->
-<button mat-fab *ngIf="tab_selected=='Cliente'"  [disabled]="formGenerales.invalid" (click)="guardarGenerales()" style="position:fixed; top:120px; right:20px; z-index: 10">
+<button mat-fab *ngIf="tab_selected=='Cliente'" [disabled]="formGenerales.invalid" (click)="guardarGenerales()" style="position:fixed; top:120px; right:20px; z-index: 10">
   <mat-icon>save</mat-icon>G
 </button>
 
@@ -47,7 +47,7 @@
           </div>
         </div>
 
-        <div class="form-group row">        
+        <div class="form-group row">
           <label *ngIf="formGenerales.get('persona_moral').value === '0'" class="col-form-label col-sm-3">Nombre completo</label>
           <label *ngIf="formGenerales.get('persona_moral').value === '1'" class="col-form-label col-sm-3">Razón Social</label>
           <div class="col-sm-9">
@@ -387,8 +387,8 @@
 
         <div class="form-group">
           <div class="text-center">
-              <!-- [disabled]="formGenerales.invalid" -->
-            <button mat-raised-button type="submit" color="primary" >GUARDAR GENERALES</button>
+            <!-- [disabled]="formGenerales.invalid" -->
+            <button mat-raised-button type="submit" color="primary">GUARDAR GENERALES</button>
           </div>
         </div>
 
@@ -886,7 +886,7 @@
               <td>{{compra.activo|numberToYesNo:'AC'}}</td>
               <td class="ws-nowrap">{{compra.fecha_activo| date:'mediumDate':'':'es'}}</td>
               <td class="ws-nowrap">{{compra.fecha_cancelacion| date:'mediumDate':'':'es'}}</td>
-              <td class="text-right">           
+              <td class="text-right">
                 <button mat-icon-button [matMenuTriggerFor]="menu3" (click)="$event.stopPropagation()">
                   <mat-icon>more_vert</mat-icon>
                 </button>
@@ -919,49 +919,47 @@
 
       <button class="btn btn-outline-dark" (click)="showSelection()">show selection</button>
 
-      <!-- <div class="text-center margin-bottom">
-        <button type="button" class="btn btn-secondary" (click)="nuevaCompra()">Nueva Compra</button>
-      </div>
-
-      <br> -->
 
 
 
-      <div class="form-group row">
-        <label class="col-form-label col-sm-3">Estado Lote</label>
-        <div class="col-sm-9">
-          <div class="input-group">
-            <select class="form-control">
-              <option *ngFor="let estado of estados" [value]="estado.id_estado_lote">{{estado.descripcion}}</option>
-            </select>
-            <div class="input-group-btn">
-              <button type="button" class="btn btn-secondary" (click)="actualizarEstadoLote(compra_selected)">Actualizar</button>
+      <div class="card text-white bg-secondary px-3 mb-3">
+
+        <div class="form-group row mt-3">
+          <label class="col-form-label col-sm-3">Estado Lote</label>
+          <div class="col-sm-9">
+            <div class="input-group">
+              <select class="form-control">
+                <option *ngFor="let estado of estados" [value]="estado.id_estado_lote">{{estado.descripcion}}</option>
+              </select>
+              <div class="input-group-btn">
+                <button type="button" class="btn btn-light" (click)="actualizarEstadoLote(compra_selected)">Actualizar</button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="form-group row">
-        <label class="col-form-label col-sm-3" for="fecha_estado">Fecha Estado</label>
-        <div class="col-sm-9">
-          <div class="input-group">
-            <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_estado" id="fecha_estado" [matDatepicker]="dpFechaEstado"
-              (ngModelChange)="onFechaChange()">
-            <span class="input-group-btn">
-              <button class="btn btn-secondary" type="button" (click)="dpFechaEstado.open()">
-                <i class="fa fa-calendar"></i>
-              </button>
-            </span>
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3" for="fecha_estado">Fecha Estado</label>
+          <div class="col-sm-9">
+            <div class="input-group">
+              <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_estado" id="fecha_estado" [matDatepicker]="dpFechaEstado">
+              <span class="input-group-btn">
+                <button class="btn btn-light" type="button" (click)="dpFechaEstado.open()">
+                  <i class="fa fa-calendar"></i>
+                </button>
+              </span>
+            </div>
+            <mat-datepicker touchUi="true" #dpFechaEstado></mat-datepicker>
           </div>
-          <mat-datepicker touchUi="true" #dpFechaEstado></mat-datepicker>
         </div>
-      </div>
 
-      <div class="form-group row">
-        <label for="" class="col-form-label col-sm-3">Precio de Lista</label>
-        <div class="col-sm-9">
-          <input [textMask]="{mask: numbermask}" type="text" class="form-control">
+        <div class="form-group row">
+          <label for="" class="col-form-label col-sm-3">Precio de Lista</label>
+          <div class="col-sm-9">
+            <input [textMask]="{mask: numbermask}" type="text" class="form-control">
+          </div>
         </div>
+
       </div>
 
       <form [formGroup]="formInmueble" (ngSubmit)="actualizarCompra(compra_selected)">

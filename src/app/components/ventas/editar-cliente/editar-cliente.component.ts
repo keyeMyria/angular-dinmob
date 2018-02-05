@@ -240,6 +240,7 @@ export class EditarClienteComponent implements OnInit {
 
   }
 
+  //relleno todos los formularios despues de leer el cliente
   setFormsValue(cliente) {
     this.formAlerta.get("mensaje_alerta").setValue(cliente.mensaje_alerta);
     this.formAlerta.get("alerta_activada").setValue(cliente.alerta_activada == "1" ? true : false);
@@ -253,6 +254,7 @@ export class EditarClienteComponent implements OnInit {
 
   }
 
+  //selecciona la compra seleccionada
   selectCompra(compra) {
 
     //this.selection.isEmpty();
@@ -268,11 +270,13 @@ export class EditarClienteComponent implements OnInit {
 
   }
 
+  //debug
   showSelection() {
     console.log(this.selection.selected);
 
   }
 
+  //guarda el formulario
   guardarGenerales() {
     console.log("guardar datos generales", this.tab_selected);
     console.log(this.formGenerales.value);
@@ -281,6 +285,7 @@ export class EditarClienteComponent implements OnInit {
 
   }
 
+  //guarda el formulario
   guardarLaborales() {
     console.log("guardar datos laborales", this.tab_selected);
     console.log(this.formLaborales.value);
@@ -288,6 +293,7 @@ export class EditarClienteComponent implements OnInit {
 
   }
 
+  //guarda el formulario
   guardarApoderado() {
     console.log("guardar datos apoderado", this.tab_selected);
     console.log(this.formApoderado.value);
@@ -295,6 +301,7 @@ export class EditarClienteComponent implements OnInit {
 
   }
 
+  //guarda el formulario
   guardarConyuge() {
     console.log("guardar datos conyuge", this.tab_selected);
     console.log(this.formConyuge.value);
@@ -302,12 +309,14 @@ export class EditarClienteComponent implements OnInit {
 
   }
 
+  //guarda el formulario
   guardarInmueble() {
     console.log("guardar datos inmueble", this.tab_selected);
     console.log(this.formInmueble.value);
 
   }
 
+  //guarda el formulario
   guardarAlerta() {
     console.log("guardar datos alerta", this.tab_selected);
     console.log("mensaje alerta", this.formAlerta.value);
@@ -316,6 +325,7 @@ export class EditarClienteComponent implements OnInit {
 
   }
 
+  //guardamos el nombre de la tab seleccionada cuando ocurre el evento tabChange de tab group
   onTabChange(event: MatTabChangeEvent) {
     //console.log("tabChange", event.tab.textLabel, event.tab);
     this.tab_selected = event.tab.textLabel;
@@ -328,6 +338,7 @@ export class EditarClienteComponent implements OnInit {
     console.log();
     let dialogRef = this.dialog.open(AgregarDocumentoDialogoComponent, {
       data: {
+        cliente: this.cliente
       }
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -335,6 +346,7 @@ export class EditarClienteComponent implements OnInit {
     });
   }
 
+  //actualiza el cliente
   updateCliente(cliente) {
     this.loading = true;
     this.clienteSrv.updateCliente(this.cliente.id_cliente, cliente)
