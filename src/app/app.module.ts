@@ -157,6 +157,8 @@ import { EditarTrabajadorDialogoComponent } from './components/admin/editar-trab
 import { EditarEntradaDialogoComponent } from './components/almacen/editar-entrada-dialogo/editar-entrada-dialogo.component';
 import { EditarEntradaComponent } from './components/almacen/editar-entrada/editar-entrada.component';
 import { VerSalidaDialogoComponent } from './components/almacen/ver-salida-dialogo/ver-salida-dialogo.component';
+import { EntradasService } from 'app/services/entradas.service';
+import { SalidasService } from 'app/services/salidas.service';
 
 
 
@@ -328,6 +330,8 @@ import { VerSalidaDialogoComponent } from './components/almacen/ver-salida-dialo
     TipoOperacionService,
     TipoPagoService,
     InsumoService,
+    EntradasService,
+    SalidasService,
 
     ObrasUsuarioResolverService,
     UsuariosAlmacenistasResolverService,
