@@ -30,6 +30,9 @@ export class AuthService {
 
   redirectUrl: string;
 
+  keyToken: string = "token";
+  keyUser:string="usuario";
+
   constructor(
     private http: HttpClient,
     private config: ConfigService
@@ -46,8 +49,8 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("usuario");
+    localStorage.removeItem(this.keyToken);
+    localStorage.removeItem(this.keyUser);
     //console.log("loggedout");
   }
 
@@ -55,8 +58,12 @@ export class AuthService {
     return tokenNotExpired();
   }
 
+  getToken() {
+    return localStorage.getItem(this.keyToken);
+  }
+
   getUsuario() {
-    let strUsuario = localStorage.getItem("usuario");
+    let strUsuario = localStorage.getItem(this.keyUser);
 
     if (strUsuario) {
       let usuario = JSON.parse(strUsuario);

@@ -25,6 +25,14 @@ export class SalidasService {
       )
   }
 
+  //ok
+  getSalida(id_salida) {
+    return this.http.get(this.url + 'get_salida/' + id_salida)
+      .pipe(
+      catchError(this.handleError("getSalida"))
+      )
+  }
+
   private handleError<T>(operation = 'operation') {
     return (error: HttpErrorResponse) => {
 

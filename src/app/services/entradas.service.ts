@@ -28,6 +28,14 @@ export class EntradasService {
       )
   }
 
+  //ok
+  getEntrada(id_entrada) {
+    return this.http.get(this.url + 'get_entrada/' + id_entrada)
+      .pipe(
+      catchError(this.handleError("getEntrada"))
+      )
+  }
+
   private handleError<T>(operation = 'operation') {
     return (error: HttpErrorResponse) => {
 
