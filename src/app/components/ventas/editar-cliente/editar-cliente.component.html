@@ -878,7 +878,6 @@
           <tbody>
             <tr *ngFor="let compra of compras" class="pointer" (click)="selectCompra(compra)" [ngClass]="{'table-primary':selection.isSelected(compra)}">
               <td>
-                <!-- <mat-icon>{{ compra.selected?'check_box':'check_box_outline_blank'}}</mat-icon> -->
                 <mat-checkbox class="pl-2" (click)="$event.stopPropagation()" (change)="$event ? selectCompra(compra) : null" [checked]="selection.isSelected(compra)"></mat-checkbox>
               </td>
               <td class="ws-nowrap">{{compra.obra + " / " + compra.manzana + " / "}}
@@ -920,8 +919,8 @@
 
       <!-- <button class="btn btn-outline-dark" (click)="showSelection()">show selection</button> -->
 
-
-      <div class="card text-white bg-secondary px-3 mb-3">
+      <!-- propiedades del lote -->
+      <div class="card text-white bg-secondary px-3 my-3">
 
         <div class="form-group row mt-3">
           <label class="col-form-label col-sm-3">Estado Lote</label>
@@ -963,36 +962,42 @@
 
       <form [formGroup]="formInmueble" (ngSubmit)="actualizarCompra(compra_selected)">
         <fieldset [disabled]="selection.isEmpty()">
+
           <div class="form-group row">
             <label class="col-form-label col-sm-3">Proyecto</label>
             <div class="col-sm-9">
               <input type="text" class="form-control" name="proyecto" formControlName="proyecto">
             </div>
           </div>
+
           <div class="form-group row">
             <label class="col-form-label col-sm-3">Desarrollador</label>
             <div class="col-sm-9">
               <input type="text" class="form-control" name="desarrollador" formControlName="desarrollador">
             </div>
           </div>
+
           <div class="form-group row">
             <label class="col-form-label col-sm-3">Valor de operación</label>
             <div class="col-sm-9">
               <input [textMask]="{mask: numbermask}" type="text" class="form-control" name="valor_operacion" formControlName="valor_operacion">
             </div>
           </div>
+
           <div class="form-group row">
             <label class="col-form-label col-sm-3">Ubicación</label>
             <div class="col-sm-9">
               <input type="text" class="form-control" name="ubicacion" formControlName="ubicacion">
             </div>
           </div>
+
           <div class="form-group row">
             <label class="col-form-label col-sm-3">Código postal</label>
             <div class="col-sm-9">
               <input [textMask]="{mask: maskCP}" type="text" class="form-control" name="cp" formControlName="cp">
             </div>
           </div>
+
           <div class="form-group row">
             <label class="col-form-label col-sm-3">Tipo de operación</label>
             <div class="col-sm-9">
@@ -1003,23 +1008,24 @@
             </div>
           </div>
 
-          <div class="form-group row" *ngIf="compra_selected.id_tipo_operacion === '1'">
+          <div class="form-group row" *ngIf="formInmueble.get('id_tipo_operacion').value === '1'">
             <label class="col-form-label col-sm-3">Institución Crédito</label>
             <div class="col-sm-9">
               <select class="form-control" name="id_institucion_credito" formControlName="id_institucion_credito">
                 <option [value]="">Seleccionar...</option>
-                <option *ngFor="let inst of instituciones_credito" [value]="inst.id_istitucion_credito">{{inst.nombre}}</option>
+                <option *ngFor="let inst of instituciones_credito" [value]="inst.id_institucion_credito">{{inst.nombre}}</option>
               </select>
             </div>
           </div>
 
-          <div class="form-group row" *ngIf="compra_selected.id_tipo_operacion === '1' && compra_selected.id_institucion_credito === '1'">
+          <div class="form-group row" *ngIf="formInmueble.get('id_tipo_operacion').value === '1' && formInmueble.get('id_institucion_credito').value === '1'">
             <label class="col-form-label col-sm-3">Banco</label>
             <div class="col-sm-9">
               <input type="text" class="form-control" name="banco_credito" formControlName="banco_credito">
             </div>
           </div>
-          <div class="form-group row" *ngIf="compra_selected.id_institucion_credito === '10'">
+
+          <div class="form-group row" *ngIf="formInmueble.get('id_institucion_credito').value === '10'">
             <label class="col-form-label col-sm-3">Institución</label>
             <div class="col-sm-9">
               <input type="text" class="form-control" name="otra_credito" formControlName="otra_credito">
@@ -1064,6 +1070,7 @@
               <input type="text" class="form-control" name="asesor_inmobiliario" formControlName="asesor_inmobiliario">
             </div>
           </div>
+
           <div class="form-group row">
             <label class="col-form-label col-sm-3">Asesor</label>
             <div class="col-sm-9">
@@ -1073,14 +1080,17 @@
               </select>
             </div>
           </div>
-          <div class="form-group row" *ngIf="compra_selected.id_estado_venta === '5'">
+
+          <!-- *ngIf="formInmueble.get('id_estado_venta').value === '5'" -->
+          <div class="form-group row">
             <label class="col-form-label col-sm-3">Datos de Firma</label>
             <div class="col-sm-9">
-              <textarea class="form-control" rows="6" name="notas_escrituracion" formControlName="notas_escrituracion">
-                                                    </textarea>
+              <textarea class="form-control" rows="6" name="notas_escrituracion" formControlName="notas_escrituracion"></textarea>
             </div>
           </div>
-          <div class="form-group row" *ngIf="compra_selected.activo === '0'">
+
+          <!-- *ngIf="formInmueble.get('activo').value === '0'" -->
+          <div class="form-group row" >
             <label class="col-form-label col-sm-3">Motivo Cancelación</label>
             <div class="col-sm-9">
               <textarea class="form-control" rows="4" name="notas_cancelacion" formControlName="notas_cancelacion"></textarea>

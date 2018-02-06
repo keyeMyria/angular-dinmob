@@ -194,8 +194,8 @@ export class EditarClienteComponent implements OnInit {
       valor_operacion: null,
       ubicacion: null,
       cp: null,
-      id_tipo_operacion: null,
-      id_institucion_credito: null,
+      id_tipo_operacion: "",
+      id_institucion_credito: "",
       banco_credito: null,
       otra_credito: null,
       fecha_firma_contrato: null,
@@ -249,7 +249,7 @@ export class EditarClienteComponent implements OnInit {
     this.formLaborales.patchValue(this.cliente);
     this.formConyuge.patchValue(this.cliente);
     this.formApoderado.patchValue(this.cliente);
-    this.formInmueble.patchValue(this.cliente);
+    
 
 
   }
@@ -263,9 +263,11 @@ export class EditarClienteComponent implements OnInit {
     this.selection.toggle(compra);
     if (this.selection.selected.length > 0) {
       this.compra_selected = this.selection.selected[0];
+      this.formInmueble.patchValue(this.compra_selected);
 
     } else {
       this.compra_selected = {};
+      this.formInmueble.reset();
     }
 
   }
