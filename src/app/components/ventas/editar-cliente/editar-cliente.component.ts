@@ -474,7 +474,7 @@ export class EditarClienteComponent implements OnInit {
     });
   }
 
-  delDocumento(doc) {
+  delDocumento(doc, documentos) {
 
     let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
       data: {
@@ -485,7 +485,33 @@ export class EditarClienteComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
 
+      if (result == true) {
 
+        this.clienteSrv.delDocumento(doc.id_documento)
+          .subscribe(res => {
+            if (res.count == "1") {
+
+              let i = documentos.indexOf(doc);
+              documentos.splice(i, 1);
+
+              this.snackBar.open("Documento Eliminado", "", {
+                duration: 2000
+              });
+
+            } else {
+
+              this.snackBar.open("Ha ocurrido un error. Inténtelo más tarde", "", {
+                duration: 3000
+              });
+
+            }
+          }, (error) => {
+            this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+              duration: 3000
+            });
+          })
+
+      }
 
     });
 

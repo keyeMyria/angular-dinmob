@@ -81,7 +81,7 @@
               <div class="input-group">
                 <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_nacimiento_persona_fisica" id="fecha_nacimiento_persona_fisica"
                   formControlName="fecha_nacimiento_persona_fisica" [matDatepicker]="dpFechaNacimientoPF">
-                <span class="input-group-btn">
+                <span class="input-group-append">
                   <button class="btn btn-secondary" type="button" (click)="dpFechaNacimientoPF.open()">
                     <i class="fa fa-calendar"></i>
                   </button>
@@ -269,7 +269,7 @@
               <div class="input-group">
                 <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_constitucion_persona_moral" id="fecha_constitucion_persona_moral"
                   formControlName="fecha_constitucion_persona_moral" [matDatepicker]="dpFechaConstitucion">
-                <span class="input-group-btn">
+                <span class="input-group-append">
                   <button class="btn btn-secondary" type="button" (click)="dpFechaConstitucion.open()">
                     <i class="fa fa-calendar"></i>
                   </button>
@@ -506,7 +506,7 @@
             <div class="input-group">
               <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_nacimiento_conyuge" id="fecha_nacimiento_conyuge"
                 formControlName="fecha_nacimiento_conyuge" [matDatepicker]="dpFechaNacimientoConyugue">
-              <span class="input-group-btn">
+              <span class="input-group-append">
                 <button class="btn btn-secondary" type="button" (click)="dpFechaNacimientoConyugue.open()">
                   <i class="fa fa-calendar"></i>
                 </button>
@@ -680,7 +680,7 @@
             <div class="input-group">
               <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_nacimiento_apoderado" id="fecha_nacimiento_apoderado"
                 formControlName="fecha_nacimiento_apoderado" [matDatepicker]="dpFechaNacimientoApoderado">
-              <span class="input-group-btn">
+              <span class="input-group-append">
                 <button class="btn btn-secondary" type="button" (click)="dpFechaNacimientoApoderado.open()">
                   <i class="fa fa-calendar"></i>
                 </button>
@@ -801,7 +801,7 @@
                 <button mat-button class="no-min" (click)="editarDocumento(doc, documentos_cliente)">
                   <i class="fa fa-pencil"></i>
                 </button>
-                <button mat-button class="no-min" (click)="delDocumento(doc)">
+                <button mat-button class="no-min" (click)="delDocumento(doc, documentos_cliente)">
                   <i class="fa fa-times"></i>
                 </button>
               </td>
@@ -836,7 +836,7 @@
                 <button mat-button class="no-min" (click)="editarDocumento(doc, documentos_conyuge)">
                   <i class="fa fa-pencil"></i>
                 </button>
-                <button mat-button class="no-min" (click)="delLote()">
+                <button mat-button class="no-min" (click)="delDocumento(doc, documentos_conyuge)">
                   <i class="fa fa-times"></i>
                 </button>
               </td>
@@ -918,9 +918,7 @@
         </table>
       </div>
 
-      <button class="btn btn-outline-dark" (click)="showSelection()">show selection</button>
-
-
+      <!-- <button class="btn btn-outline-dark" (click)="showSelection()">show selection</button> -->
 
 
       <div class="card text-white bg-secondary px-3 mb-3">
@@ -932,7 +930,7 @@
               <select class="form-control">
                 <option *ngFor="let estado of estados" [value]="estado.id_estado_lote">{{estado.descripcion}}</option>
               </select>
-              <div class="input-group-btn">
+              <div class="input-group-append">
                 <button type="button" class="btn btn-light" (click)="actualizarEstadoLote(compra_selected)">Actualizar</button>
               </div>
             </div>
@@ -944,7 +942,7 @@
           <div class="col-sm-9">
             <div class="input-group">
               <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_estado" id="fecha_estado" [matDatepicker]="dpFechaEstado">
-              <span class="input-group-btn">
+              <span class="input-group-append">
                 <button class="btn btn-light" type="button" (click)="dpFechaEstado.open()">
                   <i class="fa fa-calendar"></i>
                 </button>
@@ -1034,7 +1032,7 @@
               <div class="input-group">
                 <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_firma_contrato" id="fecha_firma_contrato" [matDatepicker]="dpFechaFirmaContrato"
                   (ngModelChange)="onFechaChange()">
-                <span class="input-group-btn">
+                <span class="input-group-append">
                   <button class="btn btn-secondary" type="button" (click)="dpFechaFirmaContrato.open()">
                     <i class="fa fa-calendar"></i>
                   </button>
@@ -1050,7 +1048,7 @@
               <div class="input-group">
                 <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_entrega" id="fecha_entrega" [matDatepicker]="dpFechaEntrega"
                   (ngModelChange)="onFechaChange()">
-                <span class="input-group-btn">
+                <span class="input-group-append">
                   <button class="btn btn-secondary" type="button" (click)="dpFechaEntrega.open()">
                     <i class="fa fa-calendar"></i>
                   </button>
@@ -1095,7 +1093,7 @@
               <div class="input-group">
                 <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_entrega_fisica" id="fecha_entrega_fisica" [matDatepicker]="dpFechaEntregaFisica"
                   (ngModelChange)="onFechaChange()">
-                <span class="input-group-btn">
+                <span class="input-group-append">
                   <button class="btn btn-secondary" type="button" (click)="dpFechaEntregaFisica.open()">
                     <i class="fa fa-calendar"></i>
                   </button>

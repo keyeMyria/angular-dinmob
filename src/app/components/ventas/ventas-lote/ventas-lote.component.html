@@ -42,7 +42,7 @@
           <div class="input-group">
             <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_cambio_estado" id="fecha_cambio_estado" [(ngModel)]="lote.lote.fecha_cambio_estado"
               [matDatepicker]="dpFechaEstado" (ngModelChange)="onFechaChange()">
-            <span class="input-group-btn">
+            <span class="input-group-append">
               <button class="btn btn-secondary" type="button" (click)="dpFechaEstado.open()">
                 <i class="fa fa-calendar"></i>
               </button>

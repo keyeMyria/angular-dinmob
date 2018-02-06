@@ -18,7 +18,7 @@
       <div class="input-group">
         <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="fecha_ini" placement="bottom-left" [matDatepicker]="dpFechaInicio"
           formControlName="fecha_ini" [ngClass]="{'is-invalid':form.get('fecha_ini').invalid && form.get('fecha_ini').touched }">
-        <span class="input-group-btn">
+        <span class="input-group-append">
           <button class="btn btn-secondary" type="button" (click)="dpFechaInicio.open()">
             <i class="fa fa-calendar"></i>
           </button>
@@ -55,7 +55,7 @@
             <option value="">Elegir usuario...</option>
             <option *ngFor="let res of data.residentes" [value]="res.id_usuario">{{res.nombre}}</option>
           </select>
-          <span class="input-group-btn">
+          <span class="input-group-append">
             <button class="btn btn-secondary" (click)="delResidente(i)">
               <i class="fa fa-minus" aria-hidden="true"></i>
             </button>
@@ -79,7 +79,7 @@
             <option value="">Elegir usuario...</option>
             <option *ngFor="let alm of data.almacenistas" [value]="alm.id_usuario">{{alm.nombre}}</option>
           </select>
-          <span class="input-group-btn">
+          <span class="input-group-append">
             <button class="btn btn-secondary" (click)="delAlmacenista(i)">
               <i class="fa fa-minus" aria-hidden="true"></i>
             </button>
@@ -103,7 +103,7 @@
             <option value="">Elegir usuario...</option>
             <option *ngFor="let alm of data.control_almacen" [value]="alm.id_usuario">{{alm.nombre}}</option>
           </select>
-          <span class="input-group-btn">
+          <span class="input-group-append">
             <button class="btn btn-secondary" (click)="delControlAlmacen(i)">
               <i class="fa fa-minus" aria-hidden="true"></i>
             </button>

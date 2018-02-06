@@ -46,7 +46,7 @@ export class ClientesService {
       )
   }
 
-  getUploadDocumentClienteURL(){
+  getUploadDocumentClienteURL() {
     return this.url + "upload_document";
   }
 
@@ -101,14 +101,23 @@ export class ClientesService {
       )
   }
 
-    //ok
-    updateDocumento(id_documento, documento) {
-      return this.http.post(this.url + 'update_documento_cliente/' + id_documento, { documento: documento })
-        .pipe(
-        tap(response => console.log("response", response)),
-        catchError(this.handleError("updateDocumentoCliente"))
-        )
-    }
+  //ok
+  updateDocumento(id_documento, documento) {
+    return this.http.post(this.url + 'update_documento_cliente/' + id_documento, { documento: documento })
+      .pipe(
+      tap(response => console.log("response", response)),
+      catchError(this.handleError("updateDocumentoCliente"))
+      )
+  }
+
+  //ok
+  delDocumento(id_documento) {
+    return this.http.post(this.url + 'del_documento_cliente/' + id_documento, {})
+      .pipe(
+      tap(response => console.log("response", response)),
+      catchError(this.handleError("delDocumento"))
+      )
+  }
 
   //ok
   updateCompra(id_cliente, id_lote, compra) {
