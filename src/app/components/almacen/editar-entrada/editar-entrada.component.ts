@@ -15,30 +15,39 @@ export class EditarEntradaComponent implements OnInit {
     allowDecimal: true
   });
   form: FormGroup;
+  entrada: any;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private entradaSrv: EntradasService
+    private entradaSrv: EntradasService,
+    private route: ActivatedRoute,
   ) {
     this.form = this.fb.group({
-      proveedor: [null, Validators.required],
-      fecha_entrada: [moment(null, "YYYY-MM-DD"), Validators.required],
-      folio: [null, Validators.required],
-      total: [null, Validators.required],
-      forma_pago: [null, Validators.required],
-      documento: [null, Validators.required],
+      proveedor: ["", Validators.required],
+      fecha: [moment("", "YYYY-MM-DD"), Validators.required],
+      folio: ["", Validators.required],
+      total: ["", Validators.required],   
+      al_contado: ["", Validators.required],  
+      es_factura: ["", Validators.required],  
     });
   }
 
   ngOnInit() {
+    let id = this.route.snapshot.paramMap.get('id');
+    this.entradaSrv.getEntrada(id)
+      .subscribe(entrada => {
+        console.log("entrada OK", entrada);
+        this.entrada = entrada;
+        this.form.patchValue(this.entrada.datos);
+      });
   }
 
   guardar() {
     console.log("datos", this.form.value);
   }
 
-  gotoEntradas(){
+  gotoEntradas() {
     this.router.navigate(["/entradas"]);
   }
 
