@@ -779,6 +779,7 @@
     <div class="container py-3">
 
 
+      <!-- documentos titular -->
       <div class="table-responsive">
         <table class="table table-striped table-hover table-sm table-align-middle">
           <thead>
@@ -794,10 +795,10 @@
           <tbody>
             <tr *ngFor="let doc of documentos_cliente">
               <td>
-                <a class="no-decoration" href="" target="_blank">{{doc.nombre}}</a>
+                <a class="no-decoration" [href]="doc.url" target="_blank">{{doc.nombre}}</a>
               </td>
               <td class="text-right">
-                <button mat-button class="no-min" (click)="editarDocumento(doc)">
+                <button mat-button class="no-min" (click)="editarDocumento(doc, documentos_cliente)">
                   <i class="fa fa-pencil"></i>
                 </button>
                 <button mat-button class="no-min" (click)="delDocumento(doc)">
@@ -813,7 +814,7 @@
       </div>
 
 
-
+      <!-- documentos conyuge -->
       <div class="table-responsive">
         <table class="table table-striped table-hover table-sm table-align-middle mt-3">
           <thead>
@@ -829,13 +830,13 @@
           <tbody>
             <tr *ngFor="let doc of documentos_conyuge">
               <td>
-                <a class="no-decoration" href="" target="_blank">{{doc.nombre}}</a>
+                <a class="no-decoration" [href]="doc.url" target="_blank">{{doc.nombre}}</a>
               </td>
               <td class="text-right">
-                <button mat-button class="no-min" (click)="editarDocumento(doc)">
+                <button mat-button class="no-min" (click)="editarDocumento(doc, documentos_conyuge)">
                   <i class="fa fa-pencil"></i>
                 </button>
-                <button mat-button class="no-min" (click)="delLote(manzana,lote, $event)">
+                <button mat-button class="no-min" (click)="delLote()">
                   <i class="fa fa-times"></i>
                 </button>
               </td>

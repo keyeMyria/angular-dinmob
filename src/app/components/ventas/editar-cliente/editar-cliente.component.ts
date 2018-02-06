@@ -335,16 +335,30 @@ export class EditarClienteComponent implements OnInit {
 
   agregarDocumento(es_de_conyuge) {
 
-    console.log();
+    //console.log("agregar documento", es_de_conyuge);
+
     let dialogRef = this.dialog.open(AgregarDocumentoDialogoComponent, {
       data: {
         cliente: this.cliente,
-        conyuge:es_de_conyuge
+        conyuge: es_de_conyuge,
+        documentos: es_de_conyuge == 1 ? this.documentos_conyuge : this.documentos_cliente
       }
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      
+      if (result == true) {
+        this.snackBar.open("Documento Agregado", "", {
+          duration: 2000
+        });
+      } else if (result == false) {
+        this.snackBar.open("Ha ocurrido un error. Inténtelo más tarde", "", {
+          duration: 3000
+        });
+      } else {
+        this.snackBar.open(result, "", {
+          duration: 3000
+        });
+      }
+
     });
   }
 
@@ -429,16 +443,33 @@ export class EditarClienteComponent implements OnInit {
 
   }
 
-  editarDocumento(doc) {
+  editarDocumento(doc, documentos) {
 
     let dialogRef = this.dialog.open(EditarDocumentoDialogoComponent, {
       data: {
-        doc: doc
+        doc: doc,
+        documentos: documentos
       },
       width: '500px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
+
+      if (result == true) {
+
+        this.snackBar.open("Documento Actualizado", "", {
+          duration: 2000
+        });
+
+      } else if (result == false) {
+
+      } else {
+
+        this.snackBar.open(result, "", {
+          duration: 3000
+        });
+
+      }
 
     });
   }

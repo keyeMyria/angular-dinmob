@@ -101,6 +101,15 @@ export class ClientesService {
       )
   }
 
+    //ok
+    updateDocumento(id_documento, documento) {
+      return this.http.post(this.url + 'update_documento_cliente/' + id_documento, { documento: documento })
+        .pipe(
+        tap(response => console.log("response", response)),
+        catchError(this.handleError("updateDocumentoCliente"))
+        )
+    }
+
   //ok
   updateCompra(id_cliente, id_lote, compra) {
     return this.http.post(this.url + 'update_compra/' + id_cliente, { id_lote: id_lote, compra: compra })

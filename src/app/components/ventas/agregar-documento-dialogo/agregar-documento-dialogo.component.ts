@@ -13,7 +13,9 @@ export class AgregarDocumentoDialogoComponent {
   @ViewChild("inputFile") inputFile: any;
   uploader: FileUploader;
 
-  nombre:string;
+  nombre: string;
+
+  result: any;
 
 
   constructor(
@@ -27,20 +29,14 @@ export class AgregarDocumentoDialogoComponent {
       url: this.clienteSrv.getUploadDocumentClienteURL(),
       authToken: "Bearer " + this.auth.getToken(),
       queueLimit: 1,
-      removeAfterUpload: true,
-      additionalParameter: {
-
-        /*        id_propiedad: this.data.propiedad.id_propiedad,
-               descripion: null,
-               es_portada: 0 */
-      }
-
+      removeAfterUpload: true
     });
 
     this.uploader.onCompleteAll = () => {
-      console.log(this.inputFile.nativeElement.files);
+      //console.log(this.inputFile.nativeElement.files);
       this.inputFile.nativeElement.value = "";
-      console.log(this.inputFile.nativeElement.files);
+      //console.log(this.inputFile.nativeElement.files);
+      this.dialogRef.close(this.result);
     };
 
     this.uploader.onBuildItemForm = (item: any, form: any) => {
@@ -53,35 +49,59 @@ export class AgregarDocumentoDialogoComponent {
 
     };
 
-    this.uploader.onSuccessItem = (item: any, response: any, statu: any, headers: any) => {
+    this.uploader._onErrorItem = (item: any, response: any, status: any, headers: any) => {
+
+      //console.log("success item", item);
+      console.log("success response", response);
+      console.log("success status", status);
+      console.log("success headers", headers);
+
+
+      if (status == 400) {
+
+        this.result = "";
+
+        let errores= JSON.parse(response);
+        errores.forEach(error => {
+          this.result += " " + error;
+        });
+        console.log("result", this.result);
+
+
+      } else {
+        this.result = false;
+      }
+    };
+
+    this.uploader.onSuccessItem = (item: any, response: any, status: any, headers: any) => {
       //console.log("success item", item);
       //console.log("success response", response);
       //console.log("success status", status);
       //console.log("success headers", headers);
 
-    };
-
-    this.uploader.onAfterAddingFile= (file: FileItem)=>{
-
-     // console.log("afterAddingFile", file);
-      
+      if (status == 200) {
+        this.data.documentos.push(JSON.parse(response).doc);
+        this.result = true;
+      }
 
     };
 
-    this.uploader.onWhenAddingFileFailed= (item: FileLikeObject, filter: any, options: any)=>{
+    this.uploader.onAfterAddingFile = (file: FileItem) => {
+      // console.log("onAfterAddingFile", file);
+    };
 
-      console.log("whenAddingFileFailde", item, filter, options );
+    this.uploader.onWhenAddingFileFailed = (item: FileLikeObject, filter: any, options: any) => {
+      //console.log("onWhenAddingFileFailed", item, filter, options );
 
       //si falla porque ya tenemos un archivo, entonces lo reemplazamos
-      if (filter.name=="queueLimit") {
+      if (filter.name == "queueLimit") {
         this.uploader.clearQueue();
         this.uploader.addToQueue(this.inputFile.nativeElement.files);
       }
-      
 
     };
 
-    
+
 
 
 
@@ -90,7 +110,7 @@ export class AgregarDocumentoDialogoComponent {
   debug() {
     console.log(this.inputFile.nativeElement.files, this.inputFile.nativeElement.value);
     console.log(this.uploader);
-    
+
 
   }
 

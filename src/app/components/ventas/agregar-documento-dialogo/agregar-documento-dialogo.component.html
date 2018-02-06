@@ -9,6 +9,8 @@
         <input type="file" #inputFile ng2FileSelect [uploader]="uploader" class="custom-file-input" id="customFileLang" lang="es">
         <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
       </div>
+      <small class="form-text text-muted">Extensiones permitidas: txt, cvs, xls, xlsx, pdf, png, jpg, jpeg</small>
+      <small class="form-text text-muted">Máximo tamaño permitido 10MB</small>
     </div>
 
     <div class="form-group" *ngFor="let item of uploader.queue">
