@@ -195,7 +195,12 @@ export const ROUTES: Routes = [
                 }
             },
             { path: 'asignar-trabajadores', component: AsignarTrabajadoresComponent },
-            { path: 'editar-entrada', component: EditarEntradaComponent },
+            {
+                path: 'editar-entrada/:id', component: EditarEntradaComponent,
+                resolve: {
+                    estados: EstadosVentaLoteResolverService
+                }
+            },
 
 
 

@@ -42,17 +42,17 @@
                 </thead>
   
                 <tbody>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                  <tr *ngFor="let entrada of entradas">
+                    <td>{{entrada.fecha}}</td>
+                    <td>{{entrada.folio}}</td>
+                    <td>{{entrada.proveedor}}</td>
+                    <td>{{entrada.total}}</td>
                     <td class="text-right">
                       <button mat-icon-button [matMenuTriggerFor]="menu">
                         <mat-icon>more_vert</mat-icon>
                       </button>
                       <mat-menu #menu="matMenu">
-                        <button mat-menu-item (click)="editarEntrada()">
+                        <button mat-menu-item (click)="editarEntrada(entrada)">
                           <mat-icon>create</mat-icon>
                           <span>Editar Entrada</span>
                         </button>
@@ -60,7 +60,7 @@
                           <mat-icon>file_download</mat-icon>
                           <span>Reporte</span>
                         </button>                      
-                        <button mat-menu-item (click)="delEntrada()">
+                        <button mat-menu-item (click)="delEntrada(entrada)">
                           <mat-icon>delete</mat-icon>
                           <span>Eliminar</span>
                         </button>
