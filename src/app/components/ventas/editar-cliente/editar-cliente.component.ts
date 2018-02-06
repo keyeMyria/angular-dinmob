@@ -333,16 +333,18 @@ export class EditarClienteComponent implements OnInit {
   }
 
 
-  agregarDocumento() {
+  agregarDocumento(es_de_conyuge) {
 
     console.log();
     let dialogRef = this.dialog.open(AgregarDocumentoDialogoComponent, {
       data: {
-        cliente: this.cliente
+        cliente: this.cliente,
+        conyuge:es_de_conyuge
       }
     });
     dialogRef.afterClosed().subscribe(result => {
-
+      console.log(result);
+      
     });
   }
 
