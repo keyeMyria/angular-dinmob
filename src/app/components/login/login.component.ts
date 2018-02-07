@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from "app/services/usuario.service";
 import { Router } from "@angular/router";
-import { JwtHelper } from "angular2-jwt/angular2-jwt";
 import { AuthService } from "app/services/auth.service";
 
 
