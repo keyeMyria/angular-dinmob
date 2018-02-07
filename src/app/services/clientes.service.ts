@@ -52,8 +52,8 @@ export class ClientesService {
   }
 
   //ok
-  createCliente(cliente) {
-    return this.http.post(this.url + 'create_cliente', { cliente: cliente })
+  createCliente(cliente, id_lote) {
+    return this.http.post(this.url + 'create_cliente', { cliente: cliente, id_lote: id_lote })
       .pipe(catchError(this.handleError("createCliente")));
 
   }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ClientesService } from "app/services/clientes.service";
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ObrasService } from 'app/services/obras.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -24,11 +25,16 @@ export class NuevoClienteComponent {
   formInmueble: FormGroup;
 
   constructor(
+    private route: ActivatedRoute,
+    private router: Router,
     public clienteSrv: ClientesService,
     private fb: FormBuilder,
     private obraSrv: ObrasService,
   ) {
-
+    this.route.data
+      .subscribe((data: { obras: any[] }) => {
+        this.obras = data.obras;
+      });
 
 
     this.form = this.fb.group({
@@ -148,14 +154,15 @@ export class NuevoClienteComponent {
 
   cargarObra(id_obra) {
 
-    console.log("cargar obra", id_obra);
+    //console.log("cargar obra", id_obra);
 
     if (id_obra) {
       this.loading = true;
       this.obraSrv.getLotesEnVentaLibres(id_obra)
         .subscribe(obra => {
-          console.log("getLotes", obra.manzanas);
+          //console.log("getLotes", obra.manzanas);
           this.manzanas = obra.manzanas;
+          this.formInmueble.get("lote").setValue("");
           this.loading = false;
         }, (error) => {
           this.loading = false;
@@ -171,8 +178,21 @@ export class NuevoClienteComponent {
 
 
   createCliente() {
-    this.clienteSrv.createCliente(this.form.value)
-      .subscribe(res => console.log("Cliente Creado", res));
+
+    //console.log("inmueble", this.formInmueble.value);
+
+
+    this.clienteSrv.createCliente(this.form.value, this.formInmueble.get('lote').value)
+      .subscribe(res => {
+
+        console.log("Cliente Creado", res);
+
+        this.router.navigate(["clientes"]);
+
+      }, (error) => {
+        this.router.navigate(["clientes-sin-lote"]);
+      });
+
 
   }
 

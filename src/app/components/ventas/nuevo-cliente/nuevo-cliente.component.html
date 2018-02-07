@@ -762,28 +762,37 @@
 
       <form [formGroup]="formInmueble">
 
-        <div class="form-group">
-          <label class="form-label" for="obra">Obra</label>
-          <select class="form-control" name="obra" #obra (change)="cargarObra(obra.value)" formControlName="obra" [ngClass]="{'is-invalid': formInmueble.get('obra').invalid  && (formInmueble.get('obra').dirty || formInmueble.get('obra').touched )}">
-            <option value="">Seleccionar...</option>
-            <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>
-          </select>
-          <div class="invalid-feedback">Seleccione una obra</div>
+         <div class="form-group row">
+          <label class="col-form-label col-sm-2" for="obra">Obra</label>
+          <div class="col-sm-10">
+            <select class="form-control" name="obra" #obra (change)="cargarObra(obra.value)" formControlName="obra" [ngClass]="{'is-invalid': formInmueble.get('obra').invalid  && (formInmueble.get('obra').dirty || formInmueble.get('obra').touched )}">
+              <option value="">Seleccionar...</option>
+              <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>
+            </select>
+            <div class="invalid-feedback">Seleccione una obra</div>
+          </div>
         </div>
 
-        <div class="form-group">
-          <label class="form-label" for="lote">Lote
+        <div class="form-group row">
+
+          <label class="col-form-label col-sm-2" for="lote">Lote
             <i *ngIf="loading" class="fa fa-spinner fa-spin fa-fw"></i>
           </label>
-          <select class="form-control" name="lote" formControlName="lote" [ngClass]="{'is-invalid': formInmueble.get('lote').invalid  && (formInmueble.get('lote').dirty || formInmueble.get('lote').touched )}">
-            <option value="">Seleccionar...</option>
-            <ng-container *ngFor="let manzana of manzanas">
-              <option [value]="lote.id_lote" *ngFor="let lote of manzana.lotes">{{manzana.nombre + " / " + lote.nombre}}</option>
-            </ng-container>
 
-          </select>
-          <small class="fomr-text text-muted">Sólo se muestran los lotes en estado LIBRE</small>
-          <div class="invalid-feedback">Seleccione un lote</div>
+          <div class="col-sm-10">
+
+            <select class="form-control" name="lote" formControlName="lote" [ngClass]="{'is-invalid': formInmueble.get('lote').invalid  && (formInmueble.get('lote').dirty || formInmueble.get('lote').touched )}">
+              <option value="">Seleccionar...</option>
+              <ng-container *ngFor="let manzana of manzanas">
+                <option [value]="lote.id_lote" *ngFor="let lote of manzana.lotes">{{manzana.nombre + " / " + lote.nombre}}</option>
+              </ng-container>
+
+            </select>
+            <small class="fomr-text text-muted">Sólo se muestran los lotes en estado LIBRE</small>
+            <div class="invalid-feedback">Seleccione un lote</div>
+
+          </div>
+
         </div>
 
       </form>
