@@ -10,43 +10,29 @@ import { AuthService } from "app/services/auth.service";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   loading: boolean = false;
   usuario: any = { email: "", password: "" };
   alert: string;
-  jwtHelper: JwtHelper = new JwtHelper();
-
-  constructor(private auth: AuthService, private router: Router) { }
 
 
-  ngOnInit() {
-  }
+  constructor(
+    private auth: AuthService,
+    private router: Router) { }
 
-  login2(usuario) {
-    this.router.navigate(['/tablero']);
-  }
 
   login(usuario) {
 
     this.loading = true;
 
     this.auth.login(usuario)
-      .subscribe(
-      (res: any) => {
-
-        //console.log("desde el login", res);
+      .subscribe((res: any) => {
 
 
         this.loading = false;
 
-
-
-        //console.log("login", res);
-
-        this.auth.setInLocalStorage('token', res.token);
-        this.auth.setInLocalStorage('usuario', JSON.stringify(res.usuario));
-        /* localStorage.setItem('token', res.token);
-        localStorage.setItem('usuario', JSON.stringify(res.usuario)); */
+        this.auth.setToken(res.token);
+        this.auth.setUsuario(JSON.stringify(res.usuario));
 
         // reset form properties
         this.usuario = { email: "", password: "" };
@@ -100,15 +86,13 @@ export class LoginComponent implements OnInit {
 
 
         }
-      },
-      (error: any) => {
+      }, (error: any) => {
         this.loading = false;
         if (error.status == 401 /* Unauthorized */) {
           this.alert = error.error;
         } else {
-
-          //this.alert = "Error en la conexión";
-          this.alert = error;
+          this.alert = "Error en la conexión";
+          //this.alert = error;
         }
 
       }

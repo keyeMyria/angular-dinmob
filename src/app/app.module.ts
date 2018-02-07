@@ -7,6 +7,7 @@ import { RoutingModule } from "app/app.routing";
 import { TextMaskModule } from "angular2-text-mask";
 import { AuthModule } from "app/modules/auth.module";
 import { FileUploadModule } from 'ng2-file-upload/file-upload/file-upload.module';
+import { JwtModule } from '@auth0/angular-jwt';
 
 import "hammerjs";
 
@@ -259,12 +260,21 @@ import { SalidasService } from 'app/services/salidas.service';
   imports: [
     BrowserModule,
     HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          //console.log("tokenGetter", localStorage.getItem('token'));
+          return localStorage.getItem('token');
+        },
+        whitelistedDomains: ['localhost:8080']
+      }
+    }),
     HttpModule,
     FormsModule,
     FileUploadModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    AuthModule,
+    //AuthModule,
     AngularMaterialModule,
     TextMaskModule,
     RoutingModule
@@ -313,8 +323,8 @@ import { SalidasService } from 'app/services/salidas.service';
   ],
 
   providers: [
- 
-    
+
+
     AuthGuard,
     ConfigService,
     AuthService,

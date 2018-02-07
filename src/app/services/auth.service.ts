@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { tokenNotExpired } from "angular2-jwt/angular2-jwt";
+//import { tokenNotExpired } from "angular2-jwt/angular2-jwt";
+import { JwtHelperService } from "@auth0/angular-jwt";
 import { Observable } from "rxjs/Observable";
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ConfigService } from 'app/services/config.service';
@@ -31,11 +32,12 @@ export class AuthService {
   redirectUrl: string;
 
   keyToken: string = "token";
-  keyUser:string="usuario";
+  keyUser: string = "usuario";
 
   constructor(
     private http: HttpClient,
-    private config: ConfigService
+    private config: ConfigService,
+    private jwtHelper:JwtHelperService
   ) {
     this.url = this.config.api_url + "auth/";
   }
@@ -47,12 +49,12 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem(this.keyToken);
-    localStorage.removeItem(this.keyUser);
-    //console.log("loggedout");
+    localStorage.removeItem(this.keyUser);   
   }
 
-  loggedIn() {
-    return tokenNotExpired();
+  IsLoggedIn() {
+    return this.jwtHelper.isTokenExpired();
+    //return tokenNotExpired();
   }
 
   getToken() {
@@ -69,6 +71,14 @@ export class AuthService {
     } else {
       return null;
     }
+  }
+
+  setUsuario(usuario) {
+    localStorage.setItem(this.keyUser, usuario);
+  }
+
+  setToken(token) {
+    localStorage.setItem(this.keyToken, token);
   }
 
   setInLocalStorage(key: string, value: string) {

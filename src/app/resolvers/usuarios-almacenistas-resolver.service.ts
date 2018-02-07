@@ -5,13 +5,13 @@ import { Observable } from 'rxjs/Observable';
 import { UsuarioService } from 'app/services/usuario.service';
 
 @Injectable()
-export class UsuariosAlmacenistasResolverService implements Resolve<any[]> {
+export class UsuariosAlmacenistasResolverService implements Resolve<any> {
   constructor(
     private router: Router,
     private usuarioSrv: UsuarioService
   ) { }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any[]> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
 
 
     return this.usuarioSrv.getUsuariosAlmacenistas().take(1).map(usuarios => {

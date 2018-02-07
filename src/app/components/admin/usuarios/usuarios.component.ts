@@ -15,9 +15,9 @@ import { log } from 'util';
 })
 export class UsuariosComponent implements OnInit {
   loading: boolean;
-  usuarios: Usuario[];
+  usuarios: any;
   usuariosOrdenados: Usuario[];
-  roles: any[];
+  roles: any;
   selectedOption: string;
 
 
@@ -84,7 +84,7 @@ export class UsuariosComponent implements OnInit {
         this.loading = true;
 
         this.usuarioSrv.delUsuario(usuario.id_usuario)
-          .subscribe(res => {
+          .subscribe((res:any) => {
             this.loading = false;
             if (res.count === 1) {
 

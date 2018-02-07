@@ -33,9 +33,7 @@ export class ObrasComponent implements OnInit {
 
     this.route.data
       .subscribe((data: { obras: any[], residentes: any[], almacenistas: any[], control_almacen: any[] }) => {
-
-        //console.log("resusltado resolve ", data);
-
+        
         this.residentes = data.residentes;
         this.almacenistas = data.almacenistas;
         this.control_almacen = data.control_almacen;
@@ -45,8 +43,17 @@ export class ObrasComponent implements OnInit {
 
     this.obrasSrv.getObrasConUsuarios()
       .subscribe(response => {
+
         this.obras = response;
         this.loading = false;
+
+      }, (error) => {
+
+        this.loading = false;
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+          duration: 3000
+        });
+
       });
 
   }

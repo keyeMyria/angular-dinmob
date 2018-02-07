@@ -19,7 +19,7 @@ export class CrearUsuarioComponent implements OnInit {
 
   ngOnInit() {
     this.usuarioSrv.getRoles()
-      .subscribe(res => this.roles = res);
+      .subscribe((res:any) => this.roles = res);
   }
 
   createUsuario() {

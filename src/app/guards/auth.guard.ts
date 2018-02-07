@@ -6,32 +6,27 @@ import { AuthService } from "app/services/auth.service";
 @Injectable()
 export class AuthGuard implements CanActivate {
 
-  constructor(private authSrv: AuthService, private router: Router)
-  { }
+  constructor(private authSrv: AuthService, private router: Router) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    //console.log("AuthGuard");
+
     let url: string = state.url;
 
     return this.checkLogin(url);
-    //console.log("check: ", check);
 
-
-    //return true;
   }
 
 
   checkLogin(url: string): boolean {
 
-    if (this.authSrv.loggedIn()) {
-
+    if (!this.authSrv.IsLoggedIn()) {
       console.log("is logged in, guard passed!!");
       return true;
     }
 
-    console.log("is not logged in, redirect to login route");
+    console.log("is not logged in, redirect to login");
     //store the url for redirecting
     this.authSrv.redirectUrl = url;
 

@@ -32,6 +32,8 @@ export class LayoutComponent implements OnInit {
 
   ngOnInit() {
     this.usuario = this.auth.getUsuario();
+    console.log("layout on init", this.usuario);
+    
     this.username = this.usuario.nombre.split(" ")[0];
 
     if (this.usuario.id_obra_default) {

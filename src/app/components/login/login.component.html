@@ -1,27 +1,29 @@
+<div *ngIf="loading">
+  <mat-spinner class="loading"></mat-spinner>
+</div>
+
 <div class="login-container">
-  <div *ngIf="loading">
-    <mat-spinner class="loading"></mat-spinner>
-  </div>
+
   <div class="row">
     <div class="col-12">
 
       <form class="form-signin" (ngSubmit)="login(usuario)">
+
         <h4 class="form-signin-heading">DINMOB</h4>
+
         <label for="email" class="sr-only">Email</label>
         <input type="email" id="email" name="email" class="form-control" placeholder="Email" [(ngModel)]="usuario.email" required
           autofocus>
+
         <label for="password" class="sr-only">Password</label>
         <input type="password" id="password" name="password" class="form-control" placeholder="Password" [(ngModel)]="usuario.password"
           required>
 
-        <!--   <div class="checkbox"> 
-          <label>
-            <input type="checkbox" value="remember-me"> Recordar
-          </label>
-        </div> -->
         <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar sesión</button>
+
       </form>
-      <div class="text-danger text-center" *ngIf="alert">{{alert|json}}</div>
+
+      <div class="text-danger text-center" *ngIf="alert">{{alert}}</div>
 
     </div>
   </div>

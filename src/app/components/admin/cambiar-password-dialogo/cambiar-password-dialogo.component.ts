@@ -56,7 +56,7 @@ export class CambiarPasswordDialogoComponent implements OnInit {
 
     console.log("usuario", this.form.value);
     this.usuarioSrv.updatePassword(this.data.usuario.id_usuario, this.form.get('password').value)
-      .subscribe(res => {
+      .subscribe((res:any) => {
 
         if (res.count === 1) {
           this.dialogRef.close(true);

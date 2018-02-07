@@ -5,6 +5,7 @@ import { ConfigService } from 'app/services/config.service';
 import { catchError, map, tap } from 'rxjs/operators';
 //esta es la forma correcta
 import "rxjs/add/observable/throw";
+//import { AuthHttp } from 'angular2-jwt';
 
 @Injectable()
 export class ObrasService {
@@ -13,7 +14,8 @@ export class ObrasService {
 
   constructor(
     private http: HttpClient,
-    private config: ConfigService
+    private config: ConfigService,
+    //private authHttp: AuthHttp
   ) {
     this.url = this.config.api_url + "obras/";
   }
@@ -60,15 +62,15 @@ export class ObrasService {
   }
 
 
-  //ok
-  getObrasUsuario(id) {
-    return this.http.get(this.url + 'usuario/' + id)
+  //Devuelve las obras del usuario con una sesión iniciada
+  getObrasUsuario() {
+    return this.http.get(this.url + 'usuario/')
       .pipe(catchError(this.handleError("getObrasUsuario")));
   }
 
-  //ok
-  getMapasUsuario(id) {
-    return this.http.get(this.url + 'usuario_mapas/' + id)
+  //Devuelve los mapas de las obras del usuario con una sesión iniciada
+  getMapasUsuario() {
+    return this.http.get(this.url + 'usuario_mapas/')
       .pipe(catchError(this.handleError("getMapasUsuario")));
   }
 

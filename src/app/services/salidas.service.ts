@@ -20,17 +20,13 @@ export class SalidasService {
   //ok
   getSalidasObra(id_obra) {
     return this.http.get(this.url + 'obra/' + id_obra)
-      .pipe(
-      catchError(this.handleError("getSalidasObra"))
-      )
+      .pipe(catchError(this.handleError("getSalidasObra")));
   }
 
   //ok
   getSalida(id_salida) {
     return this.http.get(this.url + 'get_salida/' + id_salida)
-      .pipe(
-      catchError(this.handleError("getSalida"))
-      )
+      .pipe(catchError(this.handleError("getSalida")));
   }
 
   private handleError<T>(operation = 'operation') {

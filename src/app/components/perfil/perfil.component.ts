@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "app/services/auth.service";
-import { Usuario } from "app/model/usuario";
 import { Obra } from "app/model/obra";
 import { UsuarioService } from 'app/services/usuario.service';
 import { ObrasService } from 'app/services/obras.service';
@@ -19,7 +18,7 @@ export class PerfilComponent implements OnInit {
   formDatos: FormGroup;
   formPassword: FormGroup;
   obras: Obra[];
-  usuario: Usuario;
+  usuario: any;
 
 
   constructor(
@@ -29,6 +28,7 @@ export class PerfilComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute
   ) {
+
     this.formDatos = this.fb.group({
       nombre: ["", Validators.required],
       email: ["", Validators.required],
@@ -38,32 +38,23 @@ export class PerfilComponent implements OnInit {
 
     this.formPassword = this.fb.group({
       password: ["", Validators.required]
-
     });
 
   }
 
   ngOnInit() {
-    this.usuario = this.auth.getUsuario();
-    console.log("ok", this.usuario);
+
+
+    this.usuario = this.auth.getUsuario();    
     this.formDatos.patchValue(this.usuario);
-    //this.copiarUsuario();
+  
+
     this.route.data
-      .subscribe((data: { obras: any[] }) => {
-        //console.log("resusltado resolve ", data);
+      .subscribe((data: { obras: any[] }) => {        
         this.obras = data.obras;
       });
 
   }
-
-  /*   private copiarUsuario() {
-      this.copia.nombre = this.usuario.nombre;
-      this.copia.email = this.usuario.email;
-      this.copia.id_obra_default = this.usuario.id_obra_default;
-    } */
-
-
-
 
 
   updateUsuario() {
@@ -72,13 +63,14 @@ export class PerfilComponent implements OnInit {
       .subscribe(usuario => {
         this.usuario = usuario;
         console.log("datos", usuario);
+        
         this.auth.setInLocalStorage('usuario', JSON.stringify(usuario));        
         //actualizamos los datos
-        //this.copiarUsuario();
+      
       },
       (error) => {
         //recuperamos los datos
-        //this.copiarUsuario();
+       
       });
   }
 
