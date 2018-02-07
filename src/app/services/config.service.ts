@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 export class ConfigService {
 
   //cambiar MANUALMENTE
-  prod: boolean = true;
+  prod: boolean = false;
 
   //se usa en todos los servicios
   api_url: string = "/api/index.php/";

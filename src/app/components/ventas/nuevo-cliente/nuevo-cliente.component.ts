@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ClientesService } from "app/services/clientes.service";
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { ObrasService } from 'app/services/obras.service';
 
 
 @Component({
@@ -11,6 +12,8 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 export class NuevoClienteComponent {
 
   loading: boolean;
+  manzanas: any = [];
+  obras: any = [];
 
   public maskRFC = [/[A-Z0-9]/i, /[A-Z0-9]/i, /[A-Z0-9]/i, /[A-Z0-9]/i, '-', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /[A-Z0-9]/i, /[A-Z0-9]/i, /[A-Z0-9]/i,]
   public maskCURP = [/[A-Z0-9]/i, /[A-Z0-9]/i, /[A-Z0-9]/i, /[A-Z0-9]/i, '-', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /[A-Z]/i, '-', /[A-Z]/i, /[A-Z]/i, '-', /[A-Z0-9]/i, /[A-Z0-9]/i, /[A-Z0-9]/i, '-', /[A-Z0-9]/i, /[A-Z0-9]/i]
@@ -18,10 +21,12 @@ export class NuevoClienteComponent {
   public maskPhone = ['(', /\d/, /\d/, /\d/, ')', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
   public maskRFCM = [/[A-Z0-9]/i, /[A-Z0-9]/i, /[A-Z0-9]/i, '-', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /[A-Z0-9]/i, /[A-Z0-9]/i, /[A-Z0-9]/i,]
   form: FormGroup;
+  formInmueble: FormGroup;
 
   constructor(
     public clienteSrv: ClientesService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private obraSrv: ObrasService,
   ) {
 
 
@@ -134,9 +139,34 @@ export class NuevoClienteComponent {
       curp_apoderado: null,
     });
 
-
+    this.formInmueble = this.fb.group({
+      obra: ["", Validators.required],
+      lote: ["", Validators.required]
+    });
 
   }
+
+  cargarObra(id_obra) {
+
+    console.log("cargar obra", id_obra);
+
+    if (id_obra) {
+      this.loading = true;
+      this.obraSrv.getLotesEnVentaLibres(id_obra)
+        .subscribe(obra => {
+          console.log("getLotes", obra.manzanas);
+          this.manzanas = obra.manzanas;
+          this.loading = false;
+        }, (error) => {
+          this.loading = false;
+        });
+
+    } else {
+      this.manzanas = [];
+    }
+
+  }
+
 
 
 
