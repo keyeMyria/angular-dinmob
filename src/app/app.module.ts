@@ -5,7 +5,6 @@ import { HttpModule } from "@angular/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RoutingModule } from "app/app.routing";
 import { TextMaskModule } from "angular2-text-mask";
-import { AuthModule } from "app/modules/auth.module";
 import { FileUploadModule } from 'ng2-file-upload/file-upload/file-upload.module';
 import { JwtModule } from '@auth0/angular-jwt';
 
