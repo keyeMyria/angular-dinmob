@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 export class ConfigService {
 
   //cambiar MANUALMENTE
-  prod: boolean = false;
+  prod: boolean = true;
 
   //se usa en todos los servicios
   api_url: string = "/api/index.php/";
@@ -14,8 +14,8 @@ export class ConfigService {
     let localhost;
     if (this.prod) {
       //produccion ->subdominio
-      localhost = "";
-
+      //localhost = "";
+      localhost="/ramiro";
     } else {
       //desarrollo -> localhost
       localhost = "http://localhost:8080/dinmob";

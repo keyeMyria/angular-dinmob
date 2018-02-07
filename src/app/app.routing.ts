@@ -59,6 +59,10 @@ import { EditarEntradaComponent } from 'app/components/almacen/editar-entrada/ed
 
 
 export const ROUTES: Routes = [
+
+
+    { path: 'login', component: LoginComponent },
+
     {
         path: '',
         component: LayoutComponent,
@@ -203,22 +207,13 @@ export const ROUTES: Routes = [
             },
 
 
-
-
-
-
-
-
-
-
-
         ]
     },
 
-    { path: 'login', component: LoginComponent },
+
 
     //not found
-    { path: '**', redirectTo: 'tablero' }
+    { path: '**', redirectTo: 'login' }
 
 
 ];

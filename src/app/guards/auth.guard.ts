@@ -21,7 +21,7 @@ export class AuthGuard implements CanActivate {
 
   checkLogin(url: string): boolean {
 
-    if (!this.authSrv.IsLoggedIn()) {
+    if (this.authSrv.IsLoggedIn()) {
       console.log("is logged in, guard passed!!");
       return true;
     }

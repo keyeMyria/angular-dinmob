@@ -37,8 +37,8 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private config: ConfigService,
-    private jwtHelper:JwtHelperService,
-    private usuarioSrv:UsuarioService
+    private jwtHelper: JwtHelperService,
+    private usuarioSrv: UsuarioService
 
   ) {
     this.url = this.config.api_url + "auth/";
@@ -55,27 +55,34 @@ export class AuthService {
   }
 
   IsLoggedIn() {
-    return this.jwtHelper.isTokenExpired();    
+    let token = this.getToken();
+    //console.log("from local storage", token);
+
+    if (token === null) {
+      return false;
+    }
+    return !this.jwtHelper.isTokenExpired(token);
+
   }
 
   getToken() {
     return localStorage.getItem(this.keyToken);
   }
 
-/*   getUsuario() {
-    let strUsuario = localStorage.getItem(this.keyUser);
+  /*   getUsuario() {
+      let strUsuario = localStorage.getItem(this.keyUser);
+  
+      if (strUsuario) {
+        let usuario = JSON.parse(strUsuario);      
+        return usuario;
+      } else {
+        return null;
+      }
+    } */
 
-    if (strUsuario) {
-      let usuario = JSON.parse(strUsuario);      
-      return usuario;
-    } else {
-      return null;
-    }
-  } */
-
-/*   setUsuario(usuario) {
-    localStorage.setItem(this.keyUser, usuario);
-  } */
+  /*   setUsuario(usuario) {
+      localStorage.setItem(this.keyUser, usuario);
+    } */
 
   setToken(token) {
     localStorage.setItem(this.keyToken, token);
@@ -85,15 +92,15 @@ export class AuthService {
     localStorage.setItem(key, value);
   }
 
-/*   getRolUsuario() {
-    let usuario = this.getUsuario();
-    if (usuario) {
-      return Number(usuario.id_tipo_usuario);
-    } else {
-      return -1;
-    }
-
-  } */
+  /*   getRolUsuario() {
+      let usuario = this.getUsuario();
+      if (usuario) {
+        return Number(usuario.id_tipo_usuario);
+      } else {
+        return -1;
+      }
+  
+    } */
 
   /*   getUsername() {
       let usuario = this.getUsuario();
@@ -101,18 +108,18 @@ export class AuthService {
   
     } */
 
-/*   hasRole(roles: any[]) {
-    var visible = false;
-    var mi_rol = this.getRolUsuario();
-
-    var i = roles.indexOf(mi_rol);
-
-    if (i >= 0) {
-      visible = true;
-    }
-    return visible;
-
-  } */
+  /*   hasRole(roles: any[]) {
+      var visible = false;
+      var mi_rol = this.getRolUsuario();
+  
+      var i = roles.indexOf(mi_rol);
+  
+      if (i >= 0) {
+        visible = true;
+      }
+      return visible;
+  
+    } */
 
 
 

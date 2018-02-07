@@ -1,0 +1,19 @@
+<IfModule rewrite_module>
+RewriteEngine On
+
+# .* indica cualquier uri
+# -(dash) indica que no se debe realizar ninguna substitucion 
+# solo se aplica asigna el flag indicado
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+# If an existing asset or directory is requested go to it as it is
+RewriteCond "%{REQUEST_URI}" "^/ramiro/api/" [OR]
+RewriteCond "%{REQUEST_URI}" "^/ramiro-api/" [OR]
+RewriteCond "%{REQUEST_URI}" "^/api/" [OR]
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -f [OR]
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -d
+RewriteRule ^ - [L]
+
+# If the requested resource doesn't exist, use index.html
+RewriteRule ^ index.html
+</IfModule>
