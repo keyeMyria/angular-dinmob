@@ -42,10 +42,7 @@ export class AuthService {
 
   login(usuario) {
     return this.http.post(this.url + 'login', { usuario: usuario })
-      .pipe(
-      tap(response => console.log("response", response)),
-      catchError(this.handleError("login"))
-      )
+      .pipe(catchError(this.handleError("login")));
   }
 
   logout() {
@@ -126,9 +123,6 @@ export class AuthService {
 
       // TODO: better job of transforming error for user consumption
       console.log(`${operation} failed: ${error.message} (${error.status}- ${error.statusText})`);
-
-      // Let the app keep running by returning an empty result.
-      //return of(result as T);
 
       return Observable.throw(error);
     };

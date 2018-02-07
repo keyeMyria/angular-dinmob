@@ -9,12 +9,7 @@ export class ConfigService {
   //se usa en todos los servicios
   api_url: string = "/api/index.php/";
 
-  /*  upload_colonias_url: string = "colonias/upload_excel";
-   upload_secciones_url: string = "secciones/upload_excel";
-   upload_registros_url: string = "registros/upload_excel"; */
-
-
-  constructor() {
+ constructor() {
 
     let localhost;
     if (this.prod) {
@@ -28,9 +23,6 @@ export class ConfigService {
 
     }
     this.api_url = localhost + this.api_url;
-    /*   this.upload_colonias_url = this.api_url + this.upload_colonias_url;
-      this.upload_secciones_url = this.api_url + this.upload_secciones_url;
-      this.upload_registros_url = this.api_url + this.upload_registros_url; */
 
   }
 

@@ -20,22 +20,14 @@ export class ObrasService {
 
   //ok
   createObra(obra) {
-    return this.http.post(this.url + 'create_obra', {
-      obra: obra
-    })
-      .pipe(
-      catchError(this.handleError("createObra"))
-      )
+    return this.http.post(this.url + 'create_obra', { obra: obra })
+      .pipe(catchError(this.handleError("createObra")));
   }
 
   //ok
   updateObra(id_obra, obra) {
-    return this.http.post(this.url + 'update_obra/' + id_obra, {
-      obra: obra
-    })
-      .pipe(
-      catchError(this.handleError("updateObra"))
-      )
+    return this.http.post(this.url + 'update_obra/' + id_obra, { obra: obra })
+      .pipe(catchError(this.handleError("updateObra")));
   }
 
 
@@ -43,9 +35,7 @@ export class ObrasService {
   //ok
   getAcordeonManzanas(id_obra) {
     return this.http.get(this.url + 'get_manzanas_lotes/' + id_obra)
-      .pipe(
-      catchError(this.handleError("getAcordeonManzanas"))
-      )
+      .pipe(catchError(this.handleError("getAcordeonManzanas")));
   }
 
 
@@ -53,61 +43,46 @@ export class ObrasService {
   //ok
   getLotesEnVentaLibres(id_obra) {
     return this.http.get(this.url + 'get_manzanas_lotes_en_venta_libres/' + id_obra)
-      .pipe(
-      catchError(this.handleError("getLotesEnVentaLibres"))
-      )
+      .pipe(catchError(this.handleError("getLotesEnVentaLibres")));
   }
 
 
   //ok
   getLotes(id_obra) {
     return this.http.get(this.url + 'get_lotes/' + id_obra)
-      .pipe(
-      catchError(this.handleError("getLotes"))
-      )
+      .pipe(catchError(this.handleError("getLotes")));
   }
 
   //ok
   getLotesEnVenta(id_obra) {
     return this.http.get(this.url + 'get_lotes_en_venta/' + id_obra)
-      .pipe(
-      catchError(this.handleError("getLotes"))
-      )
+      .pipe(catchError(this.handleError("getLotes")));
   }
 
 
   //ok
   getObrasUsuario(id) {
     return this.http.get(this.url + 'usuario/' + id)
-      .pipe(
-      catchError(this.handleError("getObrasUsuario"))
-      )
+      .pipe(catchError(this.handleError("getObrasUsuario")));
   }
 
   //ok
   getMapasUsuario(id) {
     return this.http.get(this.url + 'usuario_mapas/' + id)
-      .pipe(
-      catchError(this.handleError("getMapasUsuario"))
-      )
+      .pipe(catchError(this.handleError("getMapasUsuario")));
   }
 
   //ok
   getObrasConUsuarios() {
     return this.http.get(this.url + "get_obras_con_usuarios")
-      .pipe(
-      catchError(this.handleError("getObrasConUsuarios"))
-      )
+      .pipe(catchError(this.handleError("getObrasConUsuarios")));
   }
-
 
 
   //ok
   delObra(id_obra) {
     return this.http.post(this.url + "del_obra/" + id_obra, {})
-      .pipe(
-      catchError(this.handleError("delObra"))
-      )
+      .pipe(catchError(this.handleError("delObra")));
   }
 
 

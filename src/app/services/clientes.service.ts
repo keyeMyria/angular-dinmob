@@ -21,29 +21,18 @@ export class ClientesService {
     this.url = this.config.api_url + "ventas_clientes/";
   }
 
-  /* 
-    getClientes(): Observable<Cliente[]> {
-      return this.http.get(this.url)
-        .map(this.extractData)
-        .catch(this.handleError);
-    } */
+
 
   //ok
   getClientesObra(id_obra) {
     return this.http.get(this.url + "get_clientes_obra/" + id_obra)
-      .pipe(
-      tap(response => console.log("response", response)),
-      catchError(this.handleError("getClientesObra"))
-      )
+      .pipe(catchError(this.handleError("getClientesObra")));
   }
 
   //ok
   getClientesSinLote() {
     return this.http.get(this.url + "sin_lote")
-      .pipe(
-      tap(response => console.log("response", response)),
-      catchError(this.handleError("getClientesSinLote"))
-      )
+      .pipe(catchError(this.handleError("getClientesSinLote")));
   }
 
   getUploadDocumentClienteURL() {
@@ -53,109 +42,57 @@ export class ClientesService {
   //ok
   getAlertasObra(id_obra) {
     return this.http.get(this.url + "alertas_obra/" + id_obra)
-      .pipe(
-      tap(response => console.log("response", response)),
-      catchError(this.handleError("getAlertasObra"))
-      )
+      .pipe(catchError(this.handleError("getAlertasObra")));
   }
-
-
-  /*   getCliente(id_cliente): Observable<Cliente> {
-      return this.http.get(this.url + 'get_cliente/' + id_cliente)
-        .map(this.extractData)
-        .catch(this.handleError);
-    } */
-
 
   //ok
   getClienteConComprasYDocumentos(id_cliente) {
     return this.http.get(this.url + 'get_cliente_documentos_compras/' + id_cliente)
-      .pipe(
-      tap(response => console.log("response", response)),
-      catchError(this.handleError("getClienteConComprasYDocumentos"))
-      )
+      .pipe(catchError(this.handleError("getClienteConComprasYDocumentos")));
   }
-
-  /*   getCompras(id_cliente) {
-      return this.http.get(this.url + 'get_compras/' + id_cliente)
-        .map(this.extractData)
-        .catch(this.handleError);
-    } */
 
   //ok
   createCliente(cliente) {
     return this.http.post(this.url + 'create_cliente', { cliente: cliente })
-      .pipe(
-      tap(response => console.log("response", response)),
-      catchError(this.handleError("createCliente"))
-      )
+      .pipe(catchError(this.handleError("createCliente")));
 
   }
 
   //ok
   updateCliente(id, cliente) {
     return this.http.post(this.url + 'update_cliente/' + id, { cliente: cliente })
-      .pipe(
-      tap(response => console.log("response", response)),
-      catchError(this.handleError("updateCliente"))
-      )
+      .pipe(catchError(this.handleError("updateCliente")));
   }
 
   //ok
   updateDocumento(id_documento, documento) {
     return this.http.post(this.url + 'update_documento_cliente/' + id_documento, { documento: documento })
-      .pipe(
-      tap(response => console.log("response", response)),
-      catchError(this.handleError("updateDocumentoCliente"))
-      )
+      .pipe(catchError(this.handleError("updateDocumentoCliente")));
   }
 
   //ok
   delDocumento(id_documento) {
     return this.http.post(this.url + 'del_documento_cliente/' + id_documento, {})
-      .pipe(
-      tap(response => console.log("response", response)),
-      catchError(this.handleError("delDocumento"))
-      )
+      .pipe(catchError(this.handleError("delDocumento")));
   }
 
   //ok
   updateCompra(id_cliente, id_lote, compra) {
     return this.http.post(this.url + 'update_compra/' + id_cliente, { id_lote: id_lote, compra: compra })
-      .pipe(
-      tap(response => console.log("response", response)),
-      catchError(this.handleError("updateCompra"))
-      )
+      .pipe(catchError(this.handleError("updateCompra")));
   }
 
   //ok
   delCliente(id) {
     return this.http.post(this.url + 'del_cliente/' + id, {})
-      .pipe(
-      tap(response => console.log("response", response)),
-      catchError(this.handleError("delCliente"))
-      )
+      .pipe(catchError(this.handleError("delCliente")));
   }
 
   //ok
   asociarClienteLote(id_cliente, id_lote) {
     return this.http.post(this.url + 'asociar_cliente_lote/' + id_cliente, { id_lote: id_lote })
-      .pipe(
-      tap(response => console.log("response", response)),
-      catchError(this.handleError("asociarClienteLote"))
-      )
+      .pipe(catchError(this.handleError("asociarClienteLote")));
   }
-
-  /*   searchCliente(term: string) {
-      if (term === "") {
-        return of.call([]);
-      }
-  
-      return this.http.get(this.url + "search_cliente/" + term)
-        .map(this.extractData)
-        .catch(this.handleError);
-  
-    } */
 
 
   private handleError<T>(operation = 'operation') {

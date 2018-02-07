@@ -22,18 +22,13 @@ export class EntradasService {
   //ok
   getEntradasObra(id_obra): Observable<any> {
     return this.http.get(this.url + 'obra/' + id_obra)
-      .pipe(
-      tap(response => console.log("response", response)),
-      catchError(this.handleError("getEntradasObra"))
-      )
+      .pipe(catchError(this.handleError("getEntradasObra")));
   }
 
   //ok
   getEntrada(id_entrada) {
     return this.http.get(this.url + 'get_entrada/' + id_entrada)
-      .pipe(
-      catchError(this.handleError("getEntrada"))
-      )
+      .pipe(catchError(this.handleError("getEntrada")));
   }
 
   private handleError<T>(operation = 'operation') {

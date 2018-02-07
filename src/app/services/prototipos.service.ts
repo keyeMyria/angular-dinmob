@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from "@angular/http";
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from "rxjs/Observable";
 import { ConfigService } from 'app/services/config.service';
+import { catchError, tap } from 'rxjs/operators';
+//esta es la forma correcta
+import "rxjs/add/observable/throw";
 
 @Injectable()
 export class PrototiposService {
   url: string;
 
   constructor(
-    private http: Http,
+    private http: HttpClient,
     private config: ConfigService
   ) {
     this.url = this.config.api_url + "prototipos/";
@@ -17,39 +20,30 @@ export class PrototiposService {
 
   getPrototipos() {
     return this.http.get(this.url)
-      .map(this.extractData)
-      .catch(this.handleError);
+      .pipe(catchError(this.handleError("getPrototipos")));
   }
 
   getPrototiposObra(id_obra) {
     return this.http.get(this.url + "get_prototipos_obra/" + id_obra)
-      .map(this.extractData)
-      .catch(this.handleError);
+      .pipe(catchError(this.handleError("getPrototiposObra")));
   }
 
   getPrototipo(id_prototipo) {
     return this.http.get(this.url + 'get_prototipo/' + id_prototipo)
-      .map(this.extractData)
-      .catch(this.handleError);
+      .pipe(catchError(this.handleError("getPrototipo")));
   }
 
-  private extractData(res: Response) {
-    let body = res.json();
-    return body || {};
-  }
+  private handleError<T>(operation = 'operation') {
+    return (error: HttpErrorResponse) => {
 
-  private handleError(error: Response | any) {
-    // In a real world app, you might use a remote logging infrastructure
-    let errMsg: string;
-    if (error instanceof Response) {
-      const body = error.json() || '';
-      const err = body.error || JSON.stringify(body);
-      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
-    } else {
-      errMsg = error.message ? error.message : error.toString();
-    }
-    console.error(errMsg);
-    return Observable.throw(errMsg);
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+
+      // TODO: better job of transforming error for user consumption
+      console.log(`${operation} failed: ${error.message} (${error.status}- ${error.statusText})`);
+
+      return Observable.throw(error);
+    };
   }
 
 }

@@ -19,10 +19,7 @@ export class InsumoService {
 
   getMaterialesObra(id_obra):Observable<any> {
     return this.http.get(this.url + 'materiales_obra/'+id_obra)
-      .pipe(
-      tap(response => console.log("response", response)),
-      catchError(this.handleError("getMaterialesObra"))
-      )
+      .pipe(catchError(this.handleError("getMaterialesObra")));
   }
 
 

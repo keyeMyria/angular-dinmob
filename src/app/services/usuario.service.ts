@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from "@angular/http";
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from "rxjs/Observable";
 import { Usuario } from "app/model/usuario";
 import { AuthHttp } from "angular2-jwt/angular2-jwt";
 import { ConfigService } from 'app/services/config.service';
+import { catchError, tap } from 'rxjs/operators';
+//esta es la forma correcta
+import "rxjs/add/observable/throw";
 
 @Injectable()
 export class UsuarioService {
@@ -11,91 +14,74 @@ export class UsuarioService {
   url: string;
 
   constructor(
-    private http: Http,
+    private http: HttpClient,
     private authHttp: AuthHttp,
     private config: ConfigService
   ) {
     this.url = this.config.api_url + "usuarios/";
   }
 
-  getUsuarios(): Observable<Usuario[]> {
+  getUsuarios() {
     return this.http.get(this.url)
-      .map(this.extractData)
-      .catch(this.handleError);
+    .pipe(catchError(this.handleError("getUsuarios")));
   }
 
   getRoles() {
     return this.http.get(this.url + 'get_roles')
-      .map(this.extractData)
-      .catch(this.handleError);
+    .pipe(catchError(this.handleError("getRoles")));
   }
 
   getUsuariosResidentes(){
     return this.http.get(this.url + 'residentes')
-    .map(this.extractData)
-    .catch(this.handleError);
+    .pipe(catchError(this.handleError("getUsuariosResidentes")));
   }
   getUsuariosAlmacenistas(){
     return this.http.get(this.url + 'almacenistas')
-    .map(this.extractData)
-    .catch(this.handleError);
+    .pipe(catchError(this.handleError("getUsuariosAlmacenistas")));
   }
   getUsuariosControlAlmacen(){
     return this.http.get(this.url + 'control_almacen')
-    .map(this.extractData)
-    .catch(this.handleError);
+    .pipe(catchError(this.handleError("getUsuariosControlAlmacen")));
   }
   getUsuariosAsesores(){
     return this.http.get(this.url + 'asesores')
-    .map(this.extractData)
-    .catch(this.handleError);
+    .pipe(catchError(this.handleError("getUsuariosAsesores")));
   }
-
 
 
   createUsuario(usuario) {
     return this.http.post(this.url + 'create_usuario', { usuario: usuario })
-      .map(this.extractData)
-      .catch(this.handleError);
+    .pipe(catchError(this.handleError("createUsuario")));
   }
 
   updateUsuario(id, usuario) {
     return this.http.post(this.url + 'update_usuario/' + id, { usuario: usuario })
-      .map(this.extractData)
-      .catch(this.handleError);
+    .pipe(catchError(this.handleError("updateUsuario")));
   }
 
   updatePassword(id, password) {
     return this.http.post(this.url + 'update_password/' + id, { password: password })
-      .map(this.extractData)
-      .catch(this.handleError);
+    .pipe(catchError(this.handleError("updatePassword")));
   }
 
   delUsuario(id) {
     return this.http.post(this.url + 'del_usuario/' + id, {})
-      .map(this.extractData)
-      .catch(this.handleError);
+    .pipe(catchError(this.handleError("delUsuario")));
   }
 
 
 
-  private extractData(res: Response) {
-    let body = res.json();
-    return body || {};
-  }
+  private handleError<T>(operation = 'operation') {
+    return (error: HttpErrorResponse): Observable<T> => {
 
-  private handleError(error: Response | any) {
-    // In a real world app, you might use a remote logging infrastructure
-    let errMsg: string;
-    if (error instanceof Response) {
-      const body = error.json() || '';
-      const err = body.error || JSON.stringify(body);
-      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
-    } else {
-      errMsg = error.message ? error.message : error.toString();
-    }
-    console.error(errMsg);
-    return Observable.throw(errMsg);
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+
+      // TODO: better job of transforming error for user consumption
+      console.log(`${operation} failed: ${error.message} (${error.status}- ${error.statusText})`);
+
+      return Observable.throw(error);
+    };
   }
 
 }

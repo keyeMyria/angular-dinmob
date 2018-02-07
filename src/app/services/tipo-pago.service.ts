@@ -25,7 +25,7 @@ export class TipoPagoService {
   }
 
   private handleError<T>(operation = 'operation') {
-    return (error: HttpErrorResponse): Observable<T> => {
+    return (error: HttpErrorResponse) => {
 
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
