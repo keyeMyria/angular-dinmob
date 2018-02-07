@@ -6,6 +6,7 @@ import { ConfigService } from 'app/services/config.service';
 import { catchError, map, tap } from 'rxjs/operators';
 //esta es la forma correcta
 import "rxjs/add/observable/throw";
+import { UsuarioService } from 'app/services/usuario.service';
 
 
 
@@ -31,12 +32,14 @@ export class AuthService {
   redirectUrl: string;
 
   keyToken: string = "token";
-  keyUser: string = "usuario";
+  //keyUser: string = "usuario";
 
   constructor(
     private http: HttpClient,
     private config: ConfigService,
-    private jwtHelper:JwtHelperService
+    private jwtHelper:JwtHelperService,
+    private usuarioSrv:UsuarioService
+
   ) {
     this.url = this.config.api_url + "auth/";
   }
@@ -48,7 +51,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem(this.keyToken);
-    localStorage.removeItem(this.keyUser);   
+    //localStorage.removeItem(this.keyUser);   
   }
 
   IsLoggedIn() {
@@ -59,21 +62,20 @@ export class AuthService {
     return localStorage.getItem(this.keyToken);
   }
 
-  getUsuario() {
+/*   getUsuario() {
     let strUsuario = localStorage.getItem(this.keyUser);
 
     if (strUsuario) {
-      let usuario = JSON.parse(strUsuario);
-      //console.log("usurio from local storage", usuario);
+      let usuario = JSON.parse(strUsuario);      
       return usuario;
     } else {
       return null;
     }
-  }
+  } */
 
-  setUsuario(usuario) {
+/*   setUsuario(usuario) {
     localStorage.setItem(this.keyUser, usuario);
-  }
+  } */
 
   setToken(token) {
     localStorage.setItem(this.keyToken, token);
@@ -83,7 +85,7 @@ export class AuthService {
     localStorage.setItem(key, value);
   }
 
-  getRolUsuario() {
+/*   getRolUsuario() {
     let usuario = this.getUsuario();
     if (usuario) {
       return Number(usuario.id_tipo_usuario);
@@ -91,7 +93,7 @@ export class AuthService {
       return -1;
     }
 
-  }
+  } */
 
   /*   getUsername() {
       let usuario = this.getUsuario();
@@ -99,7 +101,7 @@ export class AuthService {
   
     } */
 
-  hasRole(roles: any[]) {
+/*   hasRole(roles: any[]) {
     var visible = false;
     var mi_rol = this.getRolUsuario();
 
@@ -108,15 +110,9 @@ export class AuthService {
     if (i >= 0) {
       visible = true;
     }
-    /*     console.log("------------------------------");
-        console.log("roles", roles);
-        console.log("mi rol ", mi_rol);
-        console.log("index ", i);
-        console.log("visible ", visible);
-        console.log("------------------------------"); */
     return visible;
 
-  }
+  } */
 
 
 

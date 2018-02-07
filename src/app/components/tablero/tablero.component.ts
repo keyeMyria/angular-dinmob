@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
-import { AuthService } from 'app/services/auth.service';
+import { UsuarioService } from 'app/services/usuario.service';
 
 @Component({
   selector: 'app-tablero',
@@ -15,18 +15,25 @@ export class TableroComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private auth: AuthService
+    private usuarioSrv: UsuarioService
   ) { }
 
   ngOnInit() {
-    this.usuario = this.auth.getUsuario();
 
-    if (this.usuario.id_obra_default) {
-      this.obra_default = { obra: this.usuario.id_obra_default };
-    } else {
-      this.obra_default = {};
+    this.usuarioSrv.getUsuarioLogged()
+      .subscribe(usuario => {
+        this.usuario = usuario;
 
-    }
+        if (this.usuario.id_obra_default) {
+          this.obra_default = { obra: this.usuario.id_obra_default };
+        } else {
+          this.obra_default = {};
+        }
+
+      }, (error) => {
+        this.router.navigate(['/login']);
+      });
+
   }
 
   gotoClientes() {

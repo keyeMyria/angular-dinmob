@@ -28,11 +28,11 @@ export class LoginComponent {
     this.auth.login(usuario)
       .subscribe((res: any) => {
 
-
         this.loading = false;
 
+        //guardamos el token el el localStorage
         this.auth.setToken(res.token);
-        this.auth.setUsuario(JSON.stringify(res.usuario));
+        //this.auth.setUsuario(JSON.stringify(res.usuario));
 
         // reset form properties
         this.usuario = { email: "", password: "" };

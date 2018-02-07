@@ -13,58 +13,66 @@ export class UsuarioService {
   url: string;
 
   constructor(
-    private http: HttpClient,    
+    private http: HttpClient,
     private config: ConfigService
   ) {
     this.url = this.config.api_url + "usuarios/";
   }
 
+  getUsuarioLogged() {
+    return this.http.get(this.url+"logged")
+      .pipe(catchError(this.handleError("getUsuarioLogged")));
+  }
+
   getUsuarios() {
     return this.http.get(this.url)
-    .pipe(catchError(this.handleError("getUsuarios")));
+      .pipe(catchError(this.handleError("getUsuarios")));
   }
 
   getRoles() {
     return this.http.get(this.url + 'get_roles')
-    .pipe(catchError(this.handleError("getRoles")));
+      .pipe(catchError(this.handleError("getRoles")));
   }
 
-  getUsuariosResidentes(){
+  getUsuariosResidentes() {
     return this.http.get(this.url + 'residentes')
-    .pipe(catchError(this.handleError("getUsuariosResidentes")));
+      .pipe(catchError(this.handleError("getUsuariosResidentes")));
   }
-  getUsuariosAlmacenistas(){
+
+  getUsuariosAlmacenistas() {
     return this.http.get(this.url + 'almacenistas')
-    .pipe(catchError(this.handleError("getUsuariosAlmacenistas")));
+      .pipe(catchError(this.handleError("getUsuariosAlmacenistas")));
   }
-  getUsuariosControlAlmacen(){
+
+  getUsuariosControlAlmacen() {
     return this.http.get(this.url + 'control_almacen')
-    .pipe(catchError(this.handleError("getUsuariosControlAlmacen")));
+      .pipe(catchError(this.handleError("getUsuariosControlAlmacen")));
   }
-  getUsuariosAsesores(){
+
+  getUsuariosAsesores() {
     return this.http.get(this.url + 'asesores')
-    .pipe(catchError(this.handleError("getUsuariosAsesores")));
+      .pipe(catchError(this.handleError("getUsuariosAsesores")));
   }
 
 
   createUsuario(usuario) {
     return this.http.post(this.url + 'create_usuario', { usuario: usuario })
-    .pipe(catchError(this.handleError("createUsuario")));
+      .pipe(catchError(this.handleError("createUsuario")));
   }
 
   updateUsuario(id, usuario) {
     return this.http.post(this.url + 'update_usuario/' + id, { usuario: usuario })
-    .pipe(catchError(this.handleError("updateUsuario")));
+      .pipe(catchError(this.handleError("updateUsuario")));
   }
 
   updatePassword(id, password) {
     return this.http.post(this.url + 'update_password/' + id, { password: password })
-    .pipe(catchError(this.handleError("updatePassword")));
+      .pipe(catchError(this.handleError("updatePassword")));
   }
 
   delUsuario(id) {
     return this.http.post(this.url + 'del_usuario/' + id, {})
-    .pipe(catchError(this.handleError("delUsuario")));
+      .pipe(catchError(this.handleError("delUsuario")));
   }
 
 
