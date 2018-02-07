@@ -86,7 +86,12 @@ export const ROUTES: Routes = [
                     obras: ObrasUsuarioResolverService
                 }
             },
-            { path: 'nuevo-cliente', component: NuevoClienteComponent },
+            {
+                path: 'nuevo-cliente', component: NuevoClienteComponent,
+                resolve: {
+                    obras: ObrasUsuarioResolverService
+                }
+            },
             { path: 'cliente/:id', component: ClienteComponent },
             {
                 path: 'obras', component: ObrasComponent,
