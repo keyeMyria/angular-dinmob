@@ -5,7 +5,7 @@ import { ConfigService } from 'app/services/config.service';
 import { catchError, map, tap } from 'rxjs/operators';
 //esta es la forma correcta
 import "rxjs/add/observable/throw";
-//import { AuthHttp } from 'angular2-jwt';
+
 
 @Injectable()
 export class ObrasService {
@@ -14,8 +14,7 @@ export class ObrasService {
 
   constructor(
     private http: HttpClient,
-    private config: ConfigService,
-    //private authHttp: AuthHttp
+    private config: ConfigService,    
   ) {
     this.url = this.config.api_url + "obras/";
   }

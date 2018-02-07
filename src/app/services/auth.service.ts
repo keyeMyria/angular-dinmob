@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-//import { tokenNotExpired } from "angular2-jwt/angular2-jwt";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { Observable } from "rxjs/Observable";
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
@@ -53,8 +52,7 @@ export class AuthService {
   }
 
   IsLoggedIn() {
-    return this.jwtHelper.isTokenExpired();
-    //return tokenNotExpired();
+    return this.jwtHelper.isTokenExpired();    
   }
 
   getToken() {

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from "rxjs/Observable";
 import { Usuario } from "app/model/usuario";
-//import { AuthHttp } from "angular2-jwt/angular2-jwt";
 import { ConfigService } from 'app/services/config.service';
 import { catchError, tap } from 'rxjs/operators';
 //esta es la forma correcta
@@ -14,8 +13,7 @@ export class UsuarioService {
   url: string;
 
   constructor(
-    private http: HttpClient,
-    //private authHttp: AuthHttp,
+    private http: HttpClient,    
     private config: ConfigService
   ) {
     this.url = this.config.api_url + "usuarios/";
