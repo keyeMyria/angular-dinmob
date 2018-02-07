@@ -47,8 +47,4 @@ export class EditarEntradaComponent implements OnInit {
     console.log("datos", this.form.value);
   }
 
-  gotoEntradas() {
-    this.router.navigate(["/entradas"]);
-  }
-
 }

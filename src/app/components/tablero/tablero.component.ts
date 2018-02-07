@@ -36,7 +36,23 @@ export class TableroComponent implements OnInit {
 
   }
 
-  gotoClientes() {
+  gotoAdmin() {
+    this.router.navigate(["/tablero-admin"]);
+  }
+
+  gotoAvances() {
+    this.router.navigate(["/tablero-avances"]);
+  }
+
+  gotoVentas() {
+    this.router.navigate(["/tablero-ventas"]);
+  }
+
+  gotoAlmacen() {
+    this.router.navigate(["/tablero-almacen"]);
+  }
+
+/*   gotoClientes() {
     this.router.navigate(["/clientes", this.obra_default]);
   }
 
@@ -99,7 +115,7 @@ export class TableroComponent implements OnInit {
 
   gotoTrabajadores() {
     this.router.navigate(["/trabajadores"]);
-  }
+  } */
 
 
 

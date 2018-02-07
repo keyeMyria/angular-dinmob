@@ -53,6 +53,11 @@ import { NuevaEntradaComponent } from 'app/components/almacen/nueva-entrada/nuev
 import { TrabajadoresComponent } from 'app/components/admin/trabajadores/trabajadores.component';
 import { AsignarTrabajadoresComponent } from 'app/components/admin/asignar-trabajadores/asignar-trabajadores.component';
 import { EditarEntradaComponent } from 'app/components/almacen/editar-entrada/editar-entrada.component';
+import { TableroAdminComponent } from 'app/components/tablero-admin/tablero-admin.component';
+import { TableroAvancesComponent } from 'app/components/tablero-avances/tablero-avances.component';
+import { TableroVentasComponent } from 'app/components/tablero-ventas/tablero-ventas.component';
+import { TableroAlmacenComponent } from 'app/components/tablero-almacen/tablero-almacen.component';
+import { VentasPagosComponent } from 'app/components/ventas-pagos/ventas-pagos.component';
 
 
 
@@ -205,6 +210,11 @@ export const ROUTES: Routes = [
                     estados: EstadosVentaLoteResolverService
                 }
             },
+            { path: 'tablero-admin', component: TableroAdminComponent },
+            { path: 'tablero-avances', component: TableroAvancesComponent },
+            { path: 'tablero-ventas', component: TableroVentasComponent },
+            { path: 'tablero-almacen', component: TableroAlmacenComponent },
+            { path: 'ventas-pagos', component: VentasPagosComponent },
 
 
         ]

@@ -160,6 +160,11 @@ import { EditarEntradaComponent } from './components/almacen/editar-entrada/edit
 import { VerSalidaDialogoComponent } from './components/almacen/ver-salida-dialogo/ver-salida-dialogo.component';
 import { EntradasService } from 'app/services/entradas.service';
 import { SalidasService } from 'app/services/salidas.service';
+import { TableroAdminComponent } from './components/tablero-admin/tablero-admin.component';
+import { TableroAvancesComponent } from './components/tablero-avances/tablero-avances.component';
+import { TableroVentasComponent } from './components/tablero-ventas/tablero-ventas.component';
+import { TableroAlmacenComponent } from './components/tablero-almacen/tablero-almacen.component';
+import { VentasPagosComponent } from './components/ventas-pagos/ventas-pagos.component';
 
 
 
@@ -249,6 +254,11 @@ import { SalidasService } from 'app/services/salidas.service';
     EditarEntradaDialogoComponent,
     EditarEntradaComponent,
     VerSalidaDialogoComponent,
+    TableroAdminComponent,
+    TableroAvancesComponent,
+    TableroVentasComponent,
+    TableroAlmacenComponent,
+    VentasPagosComponent,
 
 
 

@@ -1,6 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { SalidasService } from 'app/services/salidas.service';
 
 @Component({
   selector: 'app-ver-salida-dialogo',
@@ -9,16 +11,21 @@ import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@ang
 })
 export class VerSalidaDialogoComponent implements OnInit {
   form: FormGroup;
+  datos: any;
+  insumos: any;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<VerSalidaDialogoComponent>,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private salidasSrv: SalidasService,
   ) {
+
     this.form = this.fb.group({
       folio: [data.salida.folio],
       num_vale: [data.salida.num_vale],
-      tipo: [data.salida.tipo],
+      tipo_salida: [data.salida.tipo],
       fecha: [data.salida.fecha],
       obra_destino: [data.salida.obra_destino],
       nombre_lote: [data.salida.nombre_lote],
@@ -34,6 +41,14 @@ export class VerSalidaDialogoComponent implements OnInit {
   }
 
   ngOnInit() {
+  
+    this.salidasSrv.getSalida(this.data.salida.id_salida)
+      .subscribe(res => {
+        console.log("salida OK", res);
+        this.datos = res.datos;
+        this.insumos = res.insumos;
+        //this.form.patchValue(this.salida.datos);
+      });
   }
 
 }
