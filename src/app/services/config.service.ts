@@ -14,8 +14,8 @@ export class ConfigService {
     let localhost;
     if (this.prod) {
       //produccion ->subdominio
-      //localhost = "";
-      localhost="/ramiro";
+      localhost = "";
+      //localhost="/ramiro";
     } else {
       //desarrollo -> localhost
       localhost = "http://localhost:8080/dinmob";

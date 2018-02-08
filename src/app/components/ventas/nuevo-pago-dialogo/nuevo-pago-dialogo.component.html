@@ -14,7 +14,7 @@
       <div class="input-group">
         <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_entrega" id="fecha_entrega" placement="bottom-left"
           [matDatepicker]="dpFechaEntrega" formControlName="fecha_entrega" [ngClass]="{'is-invalid':form.get('fecha_entrega').invalid && form.get('fecha_entrega').touched }">
-        <span class="input-group-btn">
+        <span class="input-group-append">
           <button class="btn btn-secondary" type="button" (click)="dpFechaEntrega.open()">
             <i class="fa fa-calendar"></i>
           </button>

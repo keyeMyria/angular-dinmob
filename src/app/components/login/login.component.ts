@@ -45,11 +45,11 @@ export class LoginComponent {
             break;
 
           case this.auth.Rol.Almacenista:
-            this.router.navigate(['/tablero']);
+            this.router.navigate(['/tablero-almacen']);
             break;
 
           case this.auth.Rol.AsesorVentas:
-            this.router.navigate(['/tablero']);
+            this.router.navigate(['/tablero-ventas']);
             break;
 
           case this.auth.Rol.Contabilidad:
@@ -73,19 +73,19 @@ export class LoginComponent {
             break;
 
           case this.auth.Rol.Residente:
-            this.router.navigate(['/tablero']);
+            this.router.navigate(['/tablero-avances']);
             break;
 
           case this.auth.Rol.Ventas:
-            this.router.navigate(['/tablero']);
+            this.router.navigate(['/tablero-ventas']);
             break;
 
           default:
             this.router.navigate(['/login']);
             break;
-
-
         }
+
+        
       }, (error: any) => {
         this.loading = false;
         if (error.status == 401 /* Unauthorized */) {

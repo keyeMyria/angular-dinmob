@@ -2,33 +2,43 @@
   <div class="row">
 
     <div class="col-12 col-md-6 col-lg-6 p-2">
-      <mat-card class="d-flex align-items-center card-pointer" (click)="gotoAdmin()">
-        <mat-card-title class="mb-0">Administracion</mat-card-title>
-        <span class="spacer"></span>
-        <i class="material-icons icono-tablero">folder_shared
-</i>
-      </mat-card>
+      <a class="no-decoration" routerLink="/tablero-admin">
+        <mat-card class="d-flex align-items-center card-pointer">
+          <mat-card-title class="mb-0">Administración</mat-card-title>
+          <span class="spacer"></span>
+          <i class="material-icons icono-tablero">folder_shared</i>
+        </mat-card>
+      </a>
     </div>
+
     <div class="col-12 col-md-6 col-lg-6 p-2">
-      <mat-card class="d-flex align-items-center card-pointer" (click)="gotoAvances()">
-        <mat-card-title class="mb-0">Avances</mat-card-title>
-        <span class="spacer"></span>
-        <i class="material-icons icono-tablero">show_chart</i>
-      </mat-card>
+      <a class="no-decoration" routerLink="/tablero-ventas">
+        <mat-card class="d-flex align-items-center card-pointer">
+          <mat-card-title class="mb-0">Ventas</mat-card-title>
+          <span class="spacer"></span>
+          <i class="material-icons icono-tablero">contacts</i>
+        </mat-card>
+      </a>
     </div>
+
     <div class="col-12 col-md-6 col-lg-6 p-2">
-      <mat-card class="d-flex align-items-center card-pointer" (click)="gotoVentas()">
-        <mat-card-title class="mb-0">Ventas</mat-card-title>
-        <span class="spacer"></span>
-        <i class="material-icons icono-tablero">contacts</i>
-      </mat-card>
+      <a class="no-decoration" routerLink="/tablero-avances">
+        <mat-card class="d-flex align-items-center card-pointer">
+          <mat-card-title class="mb-0">Avances</mat-card-title>
+          <span class="spacer"></span>
+          <i class="material-icons icono-tablero">show_chart</i>
+        </mat-card>
+      </a>
     </div>
+
     <div class="col-12 col-md-6 col-lg-6 p-2">
-      <mat-card class="d-flex align-items-center card-pointer" (click)="gotoAlmacen()">
-        <mat-card-title class="mb-0">Almacen</mat-card-title>
-        <span class="spacer"></span>
-        <i class="material-icons icono-tablero">contacts</i>
-      </mat-card>
+      <a class="no-decoration" routerLink="/tablero-almacen">
+        <mat-card class="d-flex align-items-center card-pointer">
+          <mat-card-title class="mb-0">Almacén</mat-card-title>
+          <span class="spacer"></span>
+          <i class="material-icons icono-tablero">contacts</i>
+        </mat-card>
+      </a>
     </div>
 
 

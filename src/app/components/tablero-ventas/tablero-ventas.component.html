@@ -1,5 +1,6 @@
 <div class="container mt-3 mb-5">
   <div class="row">
+
     <div class="col-12 col-md-6 col-lg-4 p-2">
       <mat-card class="d-flex align-items-center card-pointer" (click)="gotoMapas()">
         <mat-card-title class="mb-0">Mapas Ventas</mat-card-title>
@@ -7,6 +8,7 @@
         <i class="material-icons icono-tablero">map</i>
       </mat-card>
     </div>
+
     <div class="col-12 col-md-6 col-lg-4 p-2">
       <mat-card class="d-flex align-items-center card-pointer" (click)="gotoClientes()">
         <mat-card-title class="mb-0">Clientes</mat-card-title>
@@ -14,6 +16,7 @@
         <i class="material-icons icono-tablero">contacts</i>
       </mat-card>
     </div>
+
     <div class="col-12 col-md-6 col-lg-4 p-2">
       <mat-card class="d-flex align-items-center card-pointer" (click)="gotoDesarrollos()">
         <mat-card-title class="mb-0">Desarrollos</mat-card-title>
@@ -21,6 +24,7 @@
         <i class="material-icons icono-tablero">assignment_turned_in</i>
       </mat-card>
     </div>
+
     <div class="col-12 col-md-6 col-lg-4 p-2">
       <mat-card class="d-flex align-items-center card-pointer" (click)="gotoAlertaClientes()">
         <mat-card-title class="mb-0">Alerta Clientes</mat-card-title>
@@ -28,6 +32,7 @@
         <i class="material-icons icono-tablero">notifications</i>
       </mat-card>
     </div>
+
     <div class="col-12 col-md-6 col-lg-4 p-2">
       <mat-card class="d-flex align-items-center card-pointer" (click)="gotoClienteSinLote()">
         <mat-card-title class="mb-0">Clientes Sin Lote</mat-card-title>
@@ -37,8 +42,18 @@
     </div>
 
     <div class="col-12 col-md-6 col-lg-4 p-2">
+      <a routerLink="/nuevo-cliente" class="no-decoration">
+        <mat-card class="d-flex align-items-center card-pointer">
+          <mat-card-title class="mb-0">Nuevo Cliente</mat-card-title>
+          <span class="spacer"></span>
+          <i class="material-icons icono-tablero">person_outline</i>
+        </mat-card>
+      </a>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-4 p-2">
       <mat-card class="d-flex align-items-center card-pointer" (click)="gotoEstadisticas()">
-        <mat-card-title class="mb-0">Estadisticas Ventas</mat-card-title>
+        <mat-card-title class="mb-0">Estadísticas Ventas</mat-card-title>
         <span class="spacer"></span>
         <i class="material-icons icono-tablero">assessment</i>
       </mat-card>

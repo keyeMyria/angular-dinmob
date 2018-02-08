@@ -14,11 +14,12 @@ import { EditarObraDialogoComponent } from 'app/components/admin/editar-obra-dia
   styleUrls: ['./obras.component.scss']
 })
 export class ObrasComponent implements OnInit {
+
   loading: boolean;
-  obras: any[] = [];
-  residentes: any[] = [];
-  almacenistas: any[] = [];
-  control_almacen: any[] = [];
+  obras: any = [];
+  residentes: any = [];
+  almacenistas: any = [];
+  control_almacen: any = [];
 
   constructor(
     private router: Router,
@@ -32,8 +33,8 @@ export class ObrasComponent implements OnInit {
     this.loading = true;
 
     this.route.data
-      .subscribe((data: { obras: any[], residentes: any[], almacenistas: any[], control_almacen: any[] }) => {
-        
+      .subscribe((data: { obras: any, residentes: any, almacenistas: any, control_almacen: any }) => {
+
         this.residentes = data.residentes;
         this.almacenistas = data.almacenistas;
         this.control_almacen = data.control_almacen;
@@ -42,9 +43,9 @@ export class ObrasComponent implements OnInit {
 
 
     this.obrasSrv.getObrasConUsuarios()
-      .subscribe(response => {
+      .subscribe(res => {
 
-        this.obras = response;
+        this.obras = res;
         this.loading = false;
 
       }, (error) => {
@@ -75,20 +76,22 @@ export class ObrasComponent implements OnInit {
 
       if (result === true) {
 
-        this.snackBar.open("Obra Creada", "Cerrar", {
-          duration: 2000
+        this.snackBar.open("Obra Creada", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
         });
 
       } else if (result.error) {
 
-        this.snackBar.open(result.error, "Cerrar", {
-          duration: 2000
+        this.snackBar.open(result.error, "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
         });
 
       }
 
-      //console.log('The dialog was closed');
     });
+
   }
 
   delObra(obra: Obra) {
@@ -117,20 +120,23 @@ export class ObrasComponent implements OnInit {
               this.obras.splice(i, 1);
 
 
-              this.snackBar.open("Obra Eliminada", "Cerrar", {
-                duration: 2000
+              this.snackBar.open("Obra Eliminada", "", {
+                duration: 2000,
+                panelClass: ["bg-success", "text-white"]
               });
 
             } else {
-              this.snackBar.open("La operación no ha podido ser completada", "Cerrar", {
-                duration: 3000
+              this.snackBar.open("La operación no ha podido ser completada. Inténtelo más tarde", "", {
+                duration: 3000,
+                panelClass: ["bg-danger", "text-white"]
               });
             }
 
           }, (error) => {
             this.loading = false;
-            this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "Cerrar", {
-              duration: 3000
+            this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+              duration: 3000,
+              panelClass: ["bg-danger", "text-white"]
             });
           });
 
@@ -162,14 +168,16 @@ export class ObrasComponent implements OnInit {
 
       if (result === true) {
 
-        this.snackBar.open("Obra Actualizada", "Cerrar", {
-          duration: 2000
+        this.snackBar.open("Obra Actualizada", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
         });
 
       } else if (result.error) {
 
-        this.snackBar.open(result.error, "Cerrar", {
-          duration: 2000
+        this.snackBar.open(result.error, "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
         });
 
       }

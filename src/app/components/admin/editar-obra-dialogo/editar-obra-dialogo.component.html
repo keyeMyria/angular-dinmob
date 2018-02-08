@@ -1,3 +1,7 @@
+<div *ngIf="loading">
+  <mat-spinner class="loading"></mat-spinner>
+</div>
+
 <h1 mat-dialog-title>Editar Obra</h1>
 <div mat-dialog-content>
 
@@ -5,7 +9,7 @@
 
     <div class="form-group">
       <label class="col-form-label">Nombre</label>
-      <input type="text" class="form-control" formControlName="nombre" [ngClass]="{'is-invalid':form.get('nombre').invalid && form.get('nombre').touched }">
+      <input type="text" class="form-control" formControlName="nombre" [ngClass]="{'is-invalid':form.get('nombre').invalid && (form.get('nombre').dirty || form.get('nombre').touched) }">
       <div class="invalid-feedback">
         Escriba un nombre
       </div>
@@ -17,7 +21,7 @@
 
       <div class="input-group">
         <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="fecha_ini" placement="bottom-left" [matDatepicker]="dpFechaInicio"
-          formControlName="fecha_ini" [ngClass]="{'is-invalid':form.get('fecha_ini').invalid && form.get('fecha_ini').touched }">
+          formControlName="fecha_ini" [ngClass]="{'is-invalid':form.get('fecha_ini').invalid && (form.get('fecha_ini').dirty || form.get('fecha_ini').touched) }">
         <span class="input-group-append">
           <button class="btn btn-secondary" type="button" (click)="dpFechaInicio.open()">
             <i class="fa fa-calendar"></i>

@@ -14,7 +14,7 @@
       <div class="input-group">
         <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_programada" id="fecha_programada" placement="bottom-left"
           [matDatepicker]="dpFechaProgramada" formControlName="fecha_programada" [ngClass]="{'is-invalid':form.get('fecha_programada').invalid && form.get('fecha_programada').touched }">
-        <span class="input-group-btn">
+        <span class="input-group-append">
           <button class="btn btn-secondary" type="button" (click)="dpFechaProgramada.open()">
             <i class="fa fa-calendar"></i>
           </button>
@@ -31,7 +31,7 @@
       <div class="input-group">
         <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_pago" id="fecha_pago" placement="bottom-left"
           [matDatepicker]="dpFechaPago" formControlName="fecha_pago" [ngClass]="{'is-invalid':form.get('fecha_pago').invalid && form.get('fecha_pago').touched }">
-        <span class="input-group-btn">
+        <span class="input-group-append">
           <button class="btn btn-secondary" type="button" (click)="dpFechaPago.open()">
             <i class="fa fa-calendar"></i>
           </button>

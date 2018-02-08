@@ -14,6 +14,7 @@ import * as moment from 'moment';
 export class EditarObraDialogoComponent implements OnInit {
 
   form: FormGroup;
+  loading: boolean;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -91,18 +92,21 @@ export class EditarObraDialogoComponent implements OnInit {
   }
 
   guardar() {
-    console.log("guardar");
-    this.dialogRef.close(true);
+    //console.log("guardar");
+
+    this.loading = true;
 
     this.obraSrv.updateObra(this.data.obra.id_obra, this.form.value)
-      .subscribe(
-      obra => {
+      .subscribe(obra => {
 
+        this.loading = false;
         let i = this.data.obras.indexOf(this.data.obra);
         this.data.obras[i] = obra;
+        this.dialogRef.close(true);
 
       }, (error) => {
-        this.dialogRef.close({ error: "Ha ocurrido un error. Vuelva a intentarlo más tarde." });
+        this.loading = false;
+        this.dialogRef.close({ error: "Ha ocurrido un error de conexión. Inténtelo más tarde" });
       });
   }
 

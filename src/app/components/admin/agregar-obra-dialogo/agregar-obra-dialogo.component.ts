@@ -15,6 +15,7 @@ import * as moment from 'moment';
 })
 export class AgregarObraDialogoComponent implements OnInit {
   form: FormGroup;
+  loading: boolean;
 
   constructor(
     private obrasSrv: ObrasService,
@@ -87,24 +88,22 @@ export class AgregarObraDialogoComponent implements OnInit {
   }
 
   crear() {
-    console.log("-----------CREAR OBRA--------");
-    
 
+    this.loading = true;
     this.obrasSrv.createObra(this.form.value)
       .subscribe(obra => {
 
-        console.log("response createobra", obra);
+        this.loading = false;
 
         this.data.obras.push(obra);
 
         this.dialogRef.close(true);
 
+      }, (error) => {
+        this.loading = false;
+        this.dialogRef.close({ error: "Ha ocurrido un error de conexión. Inténtelo más tarde" });
+      });
 
-      },
-      (error) => {
-        this.dialogRef.close({ error: "Ha ocurrido un error. Vuelva a intentarlo más tarde." });
-      }
-      );
   }
 
 

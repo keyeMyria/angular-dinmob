@@ -8,7 +8,7 @@
 
 
     <!-- <span>Dinmob</span> -->
-    <button mat-button [routerLink]="[ '/tablero']">DinMob</button>
+    <button mat-button (click)="gotoTablero()">DinMob</button>
 
     <span class="spacer"></span>
 
@@ -17,9 +17,9 @@
       <mat-icon>person</mat-icon>
     </button>
 
-    <button mat-icon-button (click)="navRight.toggle()">
+<!--     <button mat-icon-button (click)="navRight.toggle()">
       <mat-icon>more_vert</mat-icon>
-    </button>
+    </button> -->
 
     <mat-menu #userMenu="matMenu">
       <button mat-menu-item routerLink="/perfil"> Perfil </button>
@@ -35,8 +35,8 @@
     <mat-sidenav #navLeft class="app-sidenav-start" mode="over" align="start" opened="false" [fixedInViewport]="mobileQuery.matches"
       fixedTopGap="56">
 
-      <mat-nav-list class="mb-5">
-        <!-- *ngIf="auth.hasRole([auth.Rol.Administrador])" -->
+      <mat-nav-list class="mb-5" *ngIf="usuario.tipo_usuario=='Administrador'">
+
         <h3 class="sidenav-title">Administración</h3>
 
         <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/login']" routerLinkActive="active">Login</a>
@@ -69,26 +69,26 @@
 
       </mat-nav-list>
 
-      <mat-nav-list class="mb-5">
-          <h3 class="sidenav-title">Almacén</h3>
-  
-          <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/salidas']" routerLinkActive="active">Salidas</a>
-  
-          <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/entradas']" routerLinkActive="active">Entradas</a>
-  
-          <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/inventario']" routerLinkActive="active">Inventario</a>
-  
-          <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/nueva-salida']" routerLinkActive="active">Nueva Salida</a>
-  
-          <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/nueva-entrada']" routerLinkActive="active">Nueva Entrada</a>
+      <mat-nav-list class="mb-5" *ngIf="usuario.tipo_usuario=='Administrador'">
 
-        </mat-nav-list>
+        <h3 class="sidenav-title">Almacén</h3>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/salidas']" routerLinkActive="active">Salidas</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/entradas']" routerLinkActive="active">Entradas</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/inventario']" routerLinkActive="active">Inventario</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/nueva-salida']" routerLinkActive="active">Nueva Salida</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/nueva-entrada']" routerLinkActive="active">Nueva Entrada</a>
+
+      </mat-nav-list>
 
 
-      <mat-nav-list class="mb-5">
-        <!-- *ngIf="auth.hasRole([auth.Rol.Ventas])" -->
+      <mat-nav-list class="mb-5" *ngIf="usuario.tipo_usuario=='Administrador' || usuario.tipo_usuario=='Ventas'">
+
         <h3 class="sidenav-title">Ventas</h3>
-
 
         <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/login']" routerLinkActive="active">Login</a>
 
@@ -118,10 +118,9 @@
 
       </mat-nav-list>
 
-      <mat-nav-list class="mb-5">
-        <!-- *ngIf= "auth.hasRole([auth.Rol.Almacen])" -->
-        <h3 class="sidenav-title">Almacén</h3>
+      <mat-nav-list class="mb-5" *ngIf="usuario.tipo_usuario=='Administrador' || usuario.tipo_usuario=='Almacén'">
 
+        <h3 class="sidenav-title">Almacén</h3>
 
         <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/login']" routerLinkActive="active">Login</a>
 
@@ -140,24 +139,20 @@
 
       </mat-nav-list>
 
-      <mat-nav-list class="mb-5">
+      <mat-nav-list class="mb-5" *ngIf="usuario.tipo_usuario=='Administrador' || usuario.tipo_usuario=='Residente'">
 
-        <!-- *ngIf= "auth.hasRole([auth.Rol.Residente])" -->
         <h3 class="sidenav-title">Residente</h3>
+
         <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/avances',obra_default]" routerLinkActive="active">Avances</a>
+
         <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/mapas-avances']" routerLinkActive="active">Mapas avances</a>
-
-
-
-
-
 
       </mat-nav-list>
 
 
     </mat-sidenav>
 
-    <mat-sidenav #navRight class="sidenav-end" mode="over" align="end" opened="false">
+<!--     <mat-sidenav #navRight class="sidenav-end" mode="over" align="end" opened="false">
       <mat-tab-group>
         <mat-tab label="Tab 1">
           <h3>Encabezado</h3>
@@ -171,7 +166,7 @@
           <p>Contenido dos</p>
         </mat-tab>
       </mat-tab-group>
-    </mat-sidenav>
+    </mat-sidenav> -->
 
     <mat-sidenav-content>
 
