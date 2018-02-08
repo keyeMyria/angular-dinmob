@@ -164,7 +164,8 @@ import { TableroAdminComponent } from './components/tablero-admin/tablero-admin.
 import { TableroAvancesComponent } from './components/tablero-avances/tablero-avances.component';
 import { TableroVentasComponent } from './components/tablero-ventas/tablero-ventas.component';
 import { TableroAlmacenComponent } from './components/tablero-almacen/tablero-almacen.component';
-import { VentasPagosComponent } from './components/ventas-pagos/ventas-pagos.component';
+import { VentasPagosComponent } from './components/ventas/ventas-pagos/ventas-pagos.component';
+
 
 
 
@@ -260,6 +261,7 @@ import { VentasPagosComponent } from './components/ventas-pagos/ventas-pagos.com
     TableroVentasComponent,
     TableroAlmacenComponent,
     VentasPagosComponent,
+
 
 
 

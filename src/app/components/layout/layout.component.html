@@ -116,6 +116,8 @@
 
         <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/clientes-sin-lote']" routerLinkActive="active">Clientes sin Lote</a>
 
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/ventas-lotes']" routerLinkActive="active">Ventas Lotes</a>
+
       </mat-nav-list>
 
       <mat-nav-list class="mb-5" *ngIf="usuario.tipo_usuario=='Administrador' || usuario.tipo_usuario=='Almacén'">

@@ -1,0 +1,85 @@
+<div class="container mt-2 mb-5">
+
+  <div *ngIf="loading">
+    <mat-spinner class="loading"></mat-spinner>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+
+
+      <div>
+        <mat-form-field class="w-100">
+          <mat-select placeholder="Obra" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)">
+            <mat-option *ngFor="let obra of obras" [value]="obra.id_obra">{{ obra.nombre }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+
+      <div class="card">
+        <div class="card-header padding-card-header">
+          <div class="d-flex">
+            <div class="align-self-center">Ventas Pagos</div>
+            <div class="spacer"></div>
+            <div>
+              <!--  <button mat-icon-button>
+                <mat-icon>add</mat-icon>
+              </button >-->
+            </div>
+          </div>
+        </div>
+        <div>
+
+          <div class="input-group col-3 mt-2">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Del</span>
+            </div>
+            <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="" id="" [matDatepicker]="dpFechaNacimientoPF">
+            <div class="input-group-append">
+              <span class="input-group-append">
+                <button class="btn btn-secondary" type="button" (click)="dpFechaNacimientoPF.open()">
+                  <i class="fa fa-calendar"></i>
+                </button>
+              </span>
+            </div>
+            <mat-datepicker touchUi="true" #dpFechaNacimientoPF></mat-datepicker>
+          </div>
+
+          
+
+
+          <div class="table-responsive mt-2">
+            <table class="table table-hover table-striped table-align-middle">
+              <thead>
+                <tr>
+                  <th>Cliente</th>
+                  <th>Manzana</th>
+                  <th>Lote</th>
+                  <th>Monto</th>
+                  <th>F.Pago</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+</div>

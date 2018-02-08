@@ -57,8 +57,8 @@ import { TableroAdminComponent } from 'app/components/tablero-admin/tablero-admi
 import { TableroAvancesComponent } from 'app/components/tablero-avances/tablero-avances.component';
 import { TableroVentasComponent } from 'app/components/tablero-ventas/tablero-ventas.component';
 import { TableroAlmacenComponent } from 'app/components/tablero-almacen/tablero-almacen.component';
-import { VentasPagosComponent } from 'app/components/ventas-pagos/ventas-pagos.component';
 import { UsuarioLoggedResolverService } from 'app/resolvers/usuario-logged-resolver.service';
+import { VentasPagosComponent } from 'app/components/ventas/ventas-pagos/ventas-pagos.component';
 
 
 
@@ -223,7 +223,13 @@ export const ROUTES: Routes = [
             { path: 'tablero-avances', component: TableroAvancesComponent },
             { path: 'tablero-ventas', component: TableroVentasComponent },
             { path: 'tablero-almacen', component: TableroAlmacenComponent },
-            { path: 'ventas-pagos', component: VentasPagosComponent },
+            {
+                path: 'ventas-pagos', component: VentasPagosComponent,
+                resolve: {
+                    obras: ObrasUsuarioResolverService
+                }
+            },
+
 
 
         ]
