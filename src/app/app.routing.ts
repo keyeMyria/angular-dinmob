@@ -219,10 +219,30 @@ export const ROUTES: Routes = [
                     estados: EstadosVentaLoteResolverService
                 }
             },
-            { path: 'tablero-admin', component: TableroAdminComponent },
-            { path: 'tablero-avances', component: TableroAvancesComponent },
-            { path: 'tablero-ventas', component: TableroVentasComponent },
-            { path: 'tablero-almacen', component: TableroAlmacenComponent },
+            {
+                path: 'tablero-admin', component: TableroAdminComponent,
+                resolve: {
+                    usuario: UsuarioLoggedResolverService
+                },
+            },
+            {
+                path: 'tablero-avances', component: TableroAvancesComponent,
+                resolve: {
+                    usuario: UsuarioLoggedResolverService
+                },
+            },
+            {
+                path: 'tablero-ventas', component: TableroVentasComponent,
+                resolve: {
+                    usuario: UsuarioLoggedResolverService
+                },
+            },
+            {
+                path: 'tablero-almacen', component: TableroAlmacenComponent,
+                resolve: {
+                    usuario: UsuarioLoggedResolverService
+                },
+            },
             {
                 path: 'ventas-pagos', component: VentasPagosComponent,
                 resolve: {

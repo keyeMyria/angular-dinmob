@@ -2,7 +2,7 @@
   <div class="row">
 
     <div class="col-12 col-md-6 col-lg-4 p-2">
-      <a class="no-decoration" href="/mapas-ventas">
+      <a class="no-decoration" [routerLink]="['/mapas-ventas', obra_default]">
         <mat-card class="d-flex align-items-center card-pointer">
           <mat-card-title class="mb-0">Mapas Ventas</mat-card-title>
           <span class="spacer"></span>
@@ -12,7 +12,7 @@
     </div>
 
     <div class="col-12 col-md-6 col-lg-4 p-2">
-      <a class="no-decoration" routerLink="/clientes">
+      <a class="no-decoration" [routerLink]="['/clientes',obra_default]">
         <mat-card class="d-flex align-items-center card-pointer">
           <mat-card-title class="mb-0">Clientes</mat-card-title>
           <span class="spacer"></span>
@@ -22,7 +22,7 @@
     </div>
 
     <div class="col-12 col-md-6 col-lg-4 p-2">
-      <a class="no-decoration" routerLink="/desarrollos">
+      <a class="no-decoration" [routerLink]="['/desarrollos',obra_default]">
         <mat-card class="d-flex align-items-center card-pointer">
           <mat-card-title class="mb-0">Desarrollos</mat-card-title>
           <span class="spacer"></span>
@@ -32,7 +32,7 @@
     </div>
 
     <div class="col-12 col-md-6 col-lg-4 p-2">
-      <a class="no-decoration" routerLink="/alerta-clientes">
+      <a class="no-decoration" [routerLink]="['/alerta-clientes',obra_default]">
         <mat-card class="d-flex align-items-center card-pointer">
           <mat-card-title class="mb-0">Alerta Clientes</mat-card-title>
           <span class="spacer"></span>
@@ -56,13 +56,13 @@
         <mat-card class="d-flex align-items-center card-pointer">
           <mat-card-title class="mb-0">Nuevo Cliente</mat-card-title>
           <span class="spacer"></span>
-          <i class="material-icons icono-tablero">person_outline</i>
+          <i class="material-icons icono-tablero">person_add</i>
         </mat-card>
       </a>
     </div>
 
     <div class="col-12 col-md-6 col-lg-4 p-2">
-      <a class="no-decoration" routerLink="/estadisticas-ventas">
+      <a class="no-decoration" [routerLink]="['/estadisticas-ventas',obra_default]">
         <mat-card class="d-flex align-items-center card-pointer">
           <mat-card-title class="mb-0">Estadísticas Ventas</mat-card-title>
           <span class="spacer"></span>
@@ -72,7 +72,7 @@
     </div>
 
     <div class="col-12 col-md-6 col-lg-4 p-2">
-      <a class="no-decoration" routerLink="/ventas-pagos">
+      <a class="no-decoration" [routerLink]="['/ventas-pagos',obra_default]">
         <mat-card class="d-flex align-items-center card-pointer">
           <mat-card-title class="mb-0">Ventas Pagos</mat-card-title>
           <span class="spacer"></span>

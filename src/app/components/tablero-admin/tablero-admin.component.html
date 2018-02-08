@@ -22,7 +22,7 @@
     </div>
 
     <div class="col-12 col-md-6 col-lg-4 p-2">
-      <a class="no-decoration" routerLink="/prototipos">
+      <a class="no-decoration" [routerLink]="['/prototipos',obra_default]">
         <mat-card class="d-flex align-items-center card-pointer">
           <mat-card-title class="mb-0">Prototipos</mat-card-title>
           <span class="spacer"></span>
@@ -32,7 +32,7 @@
     </div>
 
     <div class="col-12 col-md-6 col-lg-4 p-2">
-      <a class="no-decoration" routerLink="/estructura-obra">
+      <a class="no-decoration" [routerLink]="['/estructura-obra',obra_default]">
         <mat-card class="d-flex align-items-center card-pointer">
           <mat-card-title class="mb-0">Estructura Obra</mat-card-title>
           <span class="spacer"></span>
@@ -42,12 +42,12 @@
     </div>
 
     <div class="col-12 col-md-6 col-lg-4 p-2">
-      <a class="no-decoration" routerLink="/trabajadores">
-      <mat-card class="d-flex align-items-center card-pointer">
-        <mat-card-title class="mb-0">Trabajadores</mat-card-title>
-        <span class="spacer"></span>
-        <i class="material-icons icono-tablero">supervisor_account</i>
-      </mat-card>
+      <a class="no-decoration" [routerLink]="['/trabajadores',obra_default]">
+        <mat-card class="d-flex align-items-center card-pointer">
+          <mat-card-title class="mb-0">Trabajadores</mat-card-title>
+          <span class="spacer"></span>
+          <i class="material-icons icono-tablero">supervisor_account</i>
+        </mat-card>
       </a>
     </div>
 
