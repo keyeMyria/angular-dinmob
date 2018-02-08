@@ -59,6 +59,7 @@ export class ObrasComponent implements OnInit {
 
   }
 
+  // crear nueva obra
   openDialogCreateObra() {
 
     let dialogRef = this.dialog.open(AgregarObraDialogoComponent, {
@@ -94,6 +95,7 @@ export class ObrasComponent implements OnInit {
 
   }
 
+  // eliminar obra
   delObra(obra: Obra) {
 
 
@@ -147,10 +149,12 @@ export class ObrasComponent implements OnInit {
 
   }
 
+  // navegar hacia el componente de estructura
   gotoEstructuraObra(obra) {
     this.router.navigate(["/estructura-obra", { obra: obra.id_obra }]);
   }
 
+  // editar obra
   openDialogEditarObra(obra: any) {
 
     let dialogRef = this.dialog.open(EditarObraDialogoComponent, {
