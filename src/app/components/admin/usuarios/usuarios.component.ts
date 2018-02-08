@@ -18,7 +18,7 @@ export class UsuariosComponent implements OnInit {
   usuarios: any;
   //usuariosOrdenados: Usuario[];
   roles: any;
-  selectedOption: string;
+  
 
 
   constructor(public dialog: MatDialog, private usuarioSrv: UsuarioService, public snackBar: MatSnackBar) { }
