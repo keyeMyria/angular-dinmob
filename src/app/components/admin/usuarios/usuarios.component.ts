@@ -16,9 +16,9 @@ import { log } from 'util';
 export class UsuariosComponent implements OnInit {
   loading: boolean;
   usuarios: any;
-  usuariosOrdenados: Usuario[];
+  //usuariosOrdenados: Usuario[];
   roles: any;
-  selectedOption: string;
+  
 
 
   constructor(
@@ -35,7 +35,7 @@ export class UsuariosComponent implements OnInit {
     this.usuarioSrv.getUsuarios()
       .subscribe(res => {
         this.usuarios = res;
-        this.usuariosOrdenados = this.usuarios.slice();
+        //this.usuariosOrdenados = this.usuarios.slice();
         this.loading = false;
       });
   }
@@ -95,8 +95,8 @@ export class UsuariosComponent implements OnInit {
 
               let i = this.usuarios.indexOf(usuario);
               this.usuarios.splice(i, 1);
-              let j = this.usuariosOrdenados.indexOf(usuario);
-              this.usuariosOrdenados.splice(j, 1);
+              //let j = this.usuariosOrdenados.indexOf(usuario);
+              //this.usuariosOrdenados.splice(j, 1);
 
 
               this.snackBar.open("Usuario Eliminado", "", {
@@ -195,9 +195,8 @@ export class UsuariosComponent implements OnInit {
 
   }
 
-  ordenarDatos(sort: Sort) {
-    //console.log("ordenarDatos", sort);
-
+/*   ordenarDatos(sort: Sort) {
+   
     const data = this.usuarios.slice();
     if (!sort.active || sort.direction == '') {
       this.usuariosOrdenados = data;
@@ -207,7 +206,6 @@ export class UsuariosComponent implements OnInit {
     this.usuariosOrdenados = data.sort((a, b) => {
       let isAsc = sort.direction == 'asc';
       switch (sort.active) {
-        case 'id': return compare(+a.id_usuario, +b.id_usuario, isAsc);
         case 'nombre': return compare(a.nombre, b.nombre, isAsc);
         case 'email': return compare(a.email, b.email, isAsc);
         case 'rol': return compare(a.tipo_usuario, b.tipo_usuario, isAsc);
@@ -215,11 +213,11 @@ export class UsuariosComponent implements OnInit {
       }
     });
 
-  }
+  } */
 
 }
 
-function compare(a, b, isAsc) {
+/* function compare(a, b, isAsc) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
-
+ */
