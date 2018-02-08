@@ -164,6 +164,22 @@ export class EstructuraObraComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
 
+      if (result === true) {
+
+        this.snackBar.open("Obra Actualizada", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      } else if (result.error) {
+
+        this.snackBar.open(result.error, "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+
+      }
+
     });
   }
 
@@ -187,14 +203,16 @@ export class EstructuraObraComponent implements OnInit {
 
       if (result === true) {
 
-        this.snackBar.open("Lote Actualizado", "Cerrar", {
-          duration: 2000
+        this.snackBar.open("Obra Actualizada", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
         });
 
       } else if (result.error) {
 
-        this.snackBar.open(result.error, "Cerrar", {
-          duration: 2000
+        this.snackBar.open(result.error, "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
         });
 
       }
@@ -216,14 +234,16 @@ export class EstructuraObraComponent implements OnInit {
 
       if (result === true) {
 
-        this.snackBar.open("Obra Actualizada", "Cerrar", {
-          duration: 2000
+        this.snackBar.open("Obra Actualizada", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
         });
 
-      } else {
+      } else if (result.error) {
 
-        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "Cerrar", {
-          duration: 3000
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
         });
 
       }
@@ -245,16 +265,16 @@ export class EstructuraObraComponent implements OnInit {
 
       if (result === true) {
 
-        this.snackBar.open("Obra Actualizada", "Cerrar", {
-          duration: 2000
+        this.snackBar.open("Obra Actualizada", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
         });
 
       } else if (result === false) {
 
-      } else {
-
-        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "Cerrar", {
-          duration: 3000
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
         });
 
       }
@@ -289,19 +309,22 @@ export class EstructuraObraComponent implements OnInit {
               manzana.lotes.splice(i, 1);
 
 
-              this.snackBar.open("Obra Actualizada", "Cerrar", {
-                duration: 2000
+              this.snackBar.open("Obra Actualizada", "", {
+                duration: 2000,
+                panelClass: ["bg-success", "text-white"]
               });
             } else {
-              this.snackBar.open("Su solicitud no se ha podido completar.", "Cerrar", {
-                duration: 3000
+              this.snackBar.open("Su solicitud no se ha podido completar.", "", {
+                duration: 3000,
+                panelClass: ["bg-danger", "text-white"]
               });
             }
 
           }, (error) => {
 
-            this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "Cerrar", {
-              duration: 3000
+            this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+              duration: 3000,
+              panelClass: ["bg-danger", "text-white"]
             });
 
           });
@@ -336,19 +359,22 @@ export class EstructuraObraComponent implements OnInit {
               this.obra.manzanas.splice(i, 1);
 
 
-              this.snackBar.open("Obra Actualizada", "Cerrar", {
-                duration: 2000
+              this.snackBar.open("Obra Actualizada", "", {
+                duration: 2000,
+                panelClass: ["bg-success", "text-white"]
               });
             } else {
-              this.snackBar.open("Su solicitud no se ha podido completar.", "Cerrar", {
-                duration: 3000
+              this.snackBar.open("Su solicitud no se ha podido completar.", "", {
+                duration: 3000,
+                panelClass: ["bg-danger", "text-white"]
               });
             }
 
           }, (error) => {
 
-            this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "Cerrar", {
-              duration: 3000
+            this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+              duration: 3000,
+              panelClass: ["bg-danger", "text-white"]
             });
 
           });
@@ -387,14 +413,16 @@ export class EstructuraObraComponent implements OnInit {
           this.selection[this.manzana_selected].clear();
 
           this.snackBar.open("Actualización completada", "Cerrar", {
-            duration: 2000
+            duration: 2000,
+            panelClass: ["bg-success", "text-white"]
           });
 
         } else {
           //error
 
           this.snackBar.open("Su solicitud no se ha podido completar.", "Cerrar", {
-            duration: 3000
+            duration: 3000,
+            panelClass: ["bg-danger", "text-white"]
           });
 
         }
@@ -404,7 +432,8 @@ export class EstructuraObraComponent implements OnInit {
       (error) => {
 
         this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde.", "Cerrar", {
-          duration: 3000
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
         });
 
       });
@@ -440,14 +469,16 @@ export class EstructuraObraComponent implements OnInit {
 
 
           this.snackBar.open("Actualización completada", "Cerrar", {
-            duration: 2000
+            duration: 2000,
+            panelClass: ["bg-success", "text-white"]
           });
 
         } else {
           //error o count==0
 
           this.snackBar.open("Su solicitud no se ha podido completar.", "Cerrar", {
-            duration: 3000
+            duration: 3000,
+            panelClass: ["bg-danger", "text-white"]
           });
 
         }
@@ -457,7 +488,8 @@ export class EstructuraObraComponent implements OnInit {
       (error) => {
 
         this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde.", "Cerrar", {
-          duration: 3000
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
         });
 
       });
@@ -491,14 +523,16 @@ export class EstructuraObraComponent implements OnInit {
           this.selection[this.manzana_selected].clear();
 
           this.snackBar.open("Actualización completada", "Cerrar", {
-            duration: 2000
+            duration: 2000,
+            panelClass: ["bg-success", "text-white"]
           });
 
         } else {
           //error
 
           this.snackBar.open("Su solicitud no se ha podido completar.", "Cerrar", {
-            duration: 3000
+            duration: 3000,
+            panelClass: ["bg-danger", "text-white"]
           });
 
         }
@@ -508,7 +542,8 @@ export class EstructuraObraComponent implements OnInit {
       (error) => {
 
         this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde.", "Cerrar", {
-          duration: 3000
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
         });
 
       });
@@ -549,7 +584,8 @@ export class EstructuraObraComponent implements OnInit {
         this.selection[this.manzana_selected].clear();
 
         this.snackBar.open("Actualización completada", "Cerrar", {
-          duration: 2000
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
         });
 
 
@@ -557,7 +593,8 @@ export class EstructuraObraComponent implements OnInit {
       (error) => {
 
         this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde.", "Cerrar", {
-          duration: 3000
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
         });
 
       });

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { LotesService } from 'app/services/lotes.service';
 import { ComentarioAvancesDialogoComponent } from 'app/components/residente/comentario-avances-dialogo/comentario-avances-dialogo.component';
-import { MatDialog, MatDrawer } from '@angular/material';
+import { MatDialog, MatDrawer, MatSnackBar } from '@angular/material';
 import { ObrasService } from 'app/services/obras.service';
 import { AuthService } from 'app/services/auth.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
@@ -38,6 +38,7 @@ export class AvancesComponent implements OnInit {
     private loteSrv: LotesService,
     public dialog: MatDialog,
     private auth: AuthService,
+    public snackBar: MatSnackBar
   ) {
 
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
@@ -159,7 +160,21 @@ export class AvancesComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      if (result === true) {
+
+        this.snackBar.open("Foto Agregada", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      } else if (result.error) {
+
+        this.snackBar.open(result.error, "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+
+      }
     });
   }
 

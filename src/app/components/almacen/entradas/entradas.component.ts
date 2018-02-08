@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { EditarEntradaDialogoComponent } from 'app/components/almacen/editar-entrada-dialogo/editar-entrada-dialogo.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { EntradasService } from 'app/services/entradas.service';
 import { of } from "rxjs/observable/of";
 import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
@@ -23,8 +23,7 @@ export class EntradasComponent implements OnInit {
     private route: ActivatedRoute,
     public dialog: MatDialog,
     private entradaSrv: EntradasService,
-
-
+    public snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -53,7 +52,7 @@ export class EntradasComponent implements OnInit {
   }
 
   editarEntrada(entrada) {
-    this.router.navigate(["/editar-entrada",entrada.id_entrada]);
+    this.router.navigate(["/editar-entrada", entrada.id_entrada]);
   }
 
   delEntrada(entrada) {
@@ -67,6 +66,16 @@ export class EntradasComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
+        this.snackBar.open("Entrada Eliminada", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      } else {
+        this.snackBar.open("La operación no ha podido ser completada. Inténtelo más tarde", "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
       }
     });
 

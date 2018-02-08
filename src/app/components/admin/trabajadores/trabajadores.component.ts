@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { NuevoTrabajadorDialogoComponent } from 'app/components/admin/nuevo-trabajador-dialogo/nuevo-trabajador-dialogo.component';
 import { EditarTrabajadorDialogoComponent } from 'app/components/admin/editar-trabajador-dialogo/editar-trabajador-dialogo.component';
 
@@ -16,7 +16,8 @@ export class TrabajadoresComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    public snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -35,6 +36,22 @@ export class TrabajadoresComponent implements OnInit {
       width: "600px"
     });
     dialogRef.afterClosed().subscribe(result => {
+
+      if (result === true) {
+
+        this.snackBar.open("Trabajador Agregado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      } else if (result.error) {
+
+        this.snackBar.open(result.error, "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+
+      }
     });
   }
 
@@ -45,6 +62,22 @@ export class TrabajadoresComponent implements OnInit {
       width: "600px"
     });
     dialogRef.afterClosed().subscribe(result => {
+
+      if (result === true) {
+
+        this.snackBar.open("Trabajador Actulizado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      } else if (result.error) {
+
+        this.snackBar.open(result.error, "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+
+      }
     });
   }
 
