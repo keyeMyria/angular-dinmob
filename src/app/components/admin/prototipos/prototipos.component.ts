@@ -81,9 +81,22 @@ export class PrototiposComponent implements OnInit {
       width: '500px'
     });
     dialogRef.afterClosed().subscribe(result => {
+
       if (result === true) {
+
+        this.snackBar.open("Prototipo Creado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      } else if (result.error) {
+
+        this.snackBar.open(result.error, "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
       }
-      console.log('The dialog was closed');
+
     });
   }
 
@@ -101,8 +114,19 @@ export class PrototiposComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
+
+        this.snackBar.open("Prototipo Actualizado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      } else if (result.error) {
+
+        this.snackBar.open(result.error, "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
       }
-      console.log('The dialog was closed');
     });
   }
 

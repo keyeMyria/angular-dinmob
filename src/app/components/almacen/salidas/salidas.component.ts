@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { VerSalidaDialogoComponent } from 'app/components/almacen/ver-salida-dialogo/ver-salida-dialogo.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { SalidasService } from 'app/services/salidas.service';
 import { of } from "rxjs/observable/of";
 import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
@@ -22,6 +22,7 @@ export class SalidasComponent implements OnInit {
     private route: ActivatedRoute,
     public dialog: MatDialog,
     private salidaSrv: SalidasService,
+    public snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -58,6 +59,7 @@ export class SalidasComponent implements OnInit {
       width: '800px'
     });
     dialogRef.afterClosed().subscribe(result => {
+
     });
   }
 
@@ -71,8 +73,22 @@ export class SalidasComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+
       if (result === true) {
+
+        this.snackBar.open("Obra Creada", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      } else {
+
+        this.snackBar.open("La operación no ha podido ser completada. Inténtelo más tarde", "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
       }
+
     });
 
   }

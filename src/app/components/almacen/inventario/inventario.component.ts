@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { EditarDocumentoDialogoComponent } from 'app/components/ventas/editar-documento-dialogo/editar-documento-dialogo.component';
 import { EditarMaterialDialogoComponent } from 'app/components/almacen/editar-material-dialogo/editar-material-dialogo.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { NuevoMaterialDialogoComponent } from 'app/components/almacen/nuevo-material-dialogo/nuevo-material-dialogo.component';
 import { InsumoService } from 'app/services/insumo.service';
 import { of } from "rxjs/observable/of";
@@ -25,6 +25,7 @@ export class InventarioComponent implements OnInit {
     public dialog: MatDialog,
     private insumoSrv: InsumoService,
     private router: Router,
+    public snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -59,6 +60,23 @@ export class InventarioComponent implements OnInit {
       width: '500px'
     });
     dialogRef.afterClosed().subscribe(result => {
+
+      if (result === true) {
+
+        this.snackBar.open("Inventario Actualizado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      } else if (result.error) {
+
+        this.snackBar.open(result.error, "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+
+      }
+
     });
   }
 
@@ -73,6 +91,19 @@ export class InventarioComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
+
+        this.snackBar.open("Insumo Eliminado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      } else if (result.error) {
+
+        this.snackBar.open(result.error, "Ha ocurrido un error", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+
       }
     });
 
@@ -85,6 +116,22 @@ export class InventarioComponent implements OnInit {
       width: '500px'
     });
     dialogRef.afterClosed().subscribe(result => {
+
+      if (result === true) {
+
+        this.snackBar.open("Inventario Actualizado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      } else if (result.error) {
+
+        this.snackBar.open(result.error, "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+
+      }
     });
   }
 

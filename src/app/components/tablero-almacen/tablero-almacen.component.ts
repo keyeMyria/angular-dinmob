@@ -33,18 +33,6 @@ export class TableroAlmacenComponent implements OnInit {
       });
   }
 
-  gotoSalidas() {
-    this.router.navigate(["/salidas"]);
-  }
-
-  gotoEntradas() {
-    this.router.navigate(["/entradas"]);
-  }
-
-  gotoInventario() {
-    this.router.navigate(["/inventario"]);
-  }
-
 
 
 }

@@ -50,14 +50,16 @@ export class UsuariosComponent implements OnInit {
 
       if (result === true) {
 
-        this.snackBar.open("Usuario Actualizado", "Cerrar", {
-          duration: 2000
+        this.snackBar.open("Usuario Actualizado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
         });
 
       } else if (result.error) {
 
-        this.snackBar.open(result.error, "Cerrar", {
-          duration: 3000
+        this.snackBar.open(result.error, "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
         });
 
       }
@@ -84,7 +86,7 @@ export class UsuariosComponent implements OnInit {
         this.loading = true;
 
         this.usuarioSrv.delUsuario(usuario.id_usuario)
-          .subscribe((res:any) => {
+          .subscribe((res: any) => {
             this.loading = false;
             if (res.count === 1) {
 
@@ -94,21 +96,24 @@ export class UsuariosComponent implements OnInit {
               this.usuariosOrdenados.splice(j, 1);
 
 
-              this.snackBar.open("Usuario Eliminado", "Cerrar", {
-                duration: 2000
+              this.snackBar.open("Usuario Eliminado", "", {
+                duration: 2000,
+                panelClass: ["bg-success", "text-white"]
               });
 
             } else {
               this.loading = false;
-              this.snackBar.open("Ha ocurrido un error", "Cerrar", {
-                duration: 3000
+              this.snackBar.open("Ha ocurrido un error", "", {
+                duration: 3000,
+                panelClass: ["bg-danger", "text-white"]
               });
             }
 
           }, (error) => {
             this.loading = false;
-            this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "Cerrar", {
-              duration: 3000
+            this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+              duration: 3000,
+              panelClass: ["bg-danger", "text-white"]
             });
           });
 
@@ -133,15 +138,16 @@ export class UsuariosComponent implements OnInit {
 
       if (result === true) {
 
-        this.snackBar.open("Usuario Actualizado", "Cerrar", {
+        this.snackBar.open("Usuario Actualizado", "", {
           duration: 2000,
-          //panelClass:['bg-danger', 'text-white']
+          panelClass: ["bg-success", "text-white"]
         });
 
       } else if (result.error) {
 
-        this.snackBar.open(result.error, "Cerrar", {
-          duration: 3000
+        this.snackBar.open(result.error, "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
         });
 
       }
@@ -167,14 +173,16 @@ export class UsuariosComponent implements OnInit {
 
       if (result === true) {
 
-        this.snackBar.open("Usuario Agregado", "Cerrar", {
-          duration: 2000
+        this.snackBar.open("Usuario Agregado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
         });
 
       } else if (result.error) {
 
-        this.snackBar.open(result.error, "Cerrar", {
-          duration: 3000
+        this.snackBar.open(result.error, "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
         });
 
       }
