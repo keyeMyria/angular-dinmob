@@ -19,6 +19,7 @@ export class PerfilComponent implements OnInit {
   formPassword: FormGroup;
   obras: Obra[];
   usuario: any;
+  loading: boolean;
 
 
   constructor(
@@ -37,8 +38,9 @@ export class PerfilComponent implements OnInit {
     });
 
     this.formPassword = this.fb.group({
-      password: ["", Validators.required]
-    });
+      password: ["", Validators.required],
+      confirmar: ["", Validators.required]
+    }, { validator: this.checkIfMatchingPasswords("password", "confirmar") });
 
   }
 
@@ -52,44 +54,88 @@ export class PerfilComponent implements OnInit {
 
       }, (error) => {
 
-        this.snackBar.open("Ha ocurrido un error. Inténtelo más tarde", "", {
-          duration: 3000
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+
         });
 
       });
 
 
     this.route.data
-      .subscribe((data: { obras: any[] }) => {
+      .subscribe((data: { obras: any }) => {
         this.obras = data.obras;
       });
 
   }
 
+  checkIfMatchingPasswords(passwordKey: string, passwordConfirmationKey: string) {
+
+    return (group: FormGroup) => {
+
+      let passwordInput = group.controls[passwordKey];
+      let passwordConfirmationInput = group.controls[passwordConfirmationKey];
+
+      if (passwordInput.value !== passwordConfirmationInput.value) {
+
+        //le asignamos el error al input confirmar
+        return passwordConfirmationInput.setErrors({ notEqual: true });
+
+      } else {
+
+        return passwordConfirmationInput.setErrors(null);
+
+      }
+    }
+  }
+
 
   updateUsuario() {
 
-    //console.log("update", this.formDatos.value);
+    this.loading = true;
     this.usuarioSrv.updateUsuario(this.usuario.id_usuario, this.formDatos.value)
       .subscribe(usuario => {
+        this.loading = false;
         this.usuario = usuario;
         this.formDatos.patchValue(this.usuario);
 
         this.snackBar.open("Usuario Actualizado", "", {
-          duration: 2000
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
         });
 
       }, (error) => {
-
-        this.snackBar.open("Ha ocurrido un error. Inténtelo más tarde", "", {
-          duration: 3000
+        this.loading = false;
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
         });
 
       });
   }
 
   updatePassword() {
-    console.log("Not implemented");
+    this.loading = true;
+    this.usuarioSrv.updatePassword(this.usuario.id_usuario, this.formPassword.get("password").value)
+      .subscribe(usuario => {
+        this.loading = false;
+        
+        this.formPassword.reset();
+
+        this.snackBar.open("Su contraseña ha cambiado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      }, (error) => {
+        this.loading = false;
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+
+      });
   }
 
   print() {

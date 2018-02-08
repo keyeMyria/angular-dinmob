@@ -120,7 +120,7 @@ import { FormasPagoResolverService } from 'app/resolvers/formas-pago-resolver.se
 import { InstitucionesCreditoResolverService } from 'app/resolvers/instituciones-credito-resolver.service';
 import { TiposPagoResolverService } from 'app/resolvers/tipos-pago-resolver.service';
 import { TiposOperacionResolverService } from 'app/resolvers/tipos-operacion-resolver.service';
-
+import { UsuarioLoggedResolverService } from 'app/resolvers/usuario-logged-resolver.service';
 
 
 //components
@@ -165,6 +165,7 @@ import { TableroAvancesComponent } from './components/tablero-avances/tablero-av
 import { TableroVentasComponent } from './components/tablero-ventas/tablero-ventas.component';
 import { TableroAlmacenComponent } from './components/tablero-almacen/tablero-almacen.component';
 import { VentasPagosComponent } from './components/ventas-pagos/ventas-pagos.component';
+
 
 
 
@@ -365,7 +366,8 @@ import { VentasPagosComponent } from './components/ventas-pagos/ventas-pagos.com
     FormasPagoResolverService,
     InstitucionesCreditoResolverService,
     TiposPagoResolverService,
-    TiposOperacionResolverService
+    TiposOperacionResolverService,
+    UsuarioLoggedResolverService
   ],
   bootstrap: [AppComponent]
 })

@@ -58,6 +58,7 @@ import { TableroAvancesComponent } from 'app/components/tablero-avances/tablero-
 import { TableroVentasComponent } from 'app/components/tablero-ventas/tablero-ventas.component';
 import { TableroAlmacenComponent } from 'app/components/tablero-almacen/tablero-almacen.component';
 import { VentasPagosComponent } from 'app/components/ventas-pagos/ventas-pagos.component';
+import { UsuarioLoggedResolverService } from 'app/resolvers/usuario-logged-resolver.service';
 
 
 
@@ -71,6 +72,9 @@ export const ROUTES: Routes = [
     {
         path: '',
         component: LayoutComponent,
+        resolve: {
+            usuario: UsuarioLoggedResolverService
+        },
         canActivate: [AuthGuard],
         children: [
             { path: '', redirectTo: 'tablero', pathMatch: 'full' },

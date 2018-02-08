@@ -1,10 +1,11 @@
 import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { AuthService } from "app/services/auth.service";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { Usuario } from "app/model/usuario";
 import { MediaMatcher } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material';
 import { UsuarioService } from 'app/services/usuario.service';
+
 
 
 @Component({
@@ -25,18 +26,17 @@ export class LayoutComponent implements OnInit {
     private media: MediaMatcher,
     private auth: AuthService,
     private usuarioSrv: UsuarioService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
-  }
 
-  ngOnInit() {
-
-    this.usuarioSrv.getUsuarioLogged()
-      .subscribe(usuario => {
-        this.usuario = usuario;
+    this.route.data
+      .subscribe((data: { usuario: any }) => {
+        
+        this.usuario = data.usuario;
         this.username = this.usuario.nombre.split(" ")[0];
 
         if (this.usuario.id_obra_default) {
@@ -44,12 +44,10 @@ export class LayoutComponent implements OnInit {
         } else {
           this.obra_default = {};
         }
-
-      }, (error) => {
-        this.router.navigate(['/login']);
       });
-
   }
+
+  ngOnInit() { }
 
   //las rutas deben ser las mismas que se especifican en el login component
   gotoTablero() {

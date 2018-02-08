@@ -1,6 +1,13 @@
+<div *ngIf="loading">
+  <mat-spinner class="loading"></mat-spinner>
+</div>
+
+
 <div class="container mt-3 mb-5">
   <div class="row justify-content-center">
     <div class="col-12 col-md-8">
+
+      <!-- perfil -->
       <div class="card">
         <div class="card-header">
           Perfil
@@ -10,14 +17,16 @@
             <div class="form-group row">
               <label for="nombre" class="col-lg-3 col-form-label">Nombre</label>
               <div class="col-lg-9">
-                <input class="form-control" type="text" id="nombre" name="nombre" formControlName="nombre">
+                <input class="form-control" type="text" id="nombre" name="nombre" formControlName="nombre" [ngClass]="{'is-invalid':formDatos.get('nombre').invalid && (formDatos.get('nombre').dirty || formDatos.get('nombre').touched) }">
+                <div class="invalid-feedback">Escriba un nombre</div>
               </div>
             </div>
 
             <div class="form-group row">
               <label for="email" class="col-lg-3 col-form-label">Email</label>
               <div class="col-lg-9">
-                <input class="form-control" type="text" id="email" name="email" formControlName="email">
+                <input class="form-control" type="text" id="email" name="email" formControlName="email" [ngClass]="{'is-invalid':formDatos.get('email').invalid && (formDatos.get('email').dirty || formDatos.get('email').touched) }">
+                <div class="invalid-feedback">Escriba un email</div>
               </div>
             </div>
 
@@ -25,11 +34,11 @@
               <label for="rol" class="col-lg-3 col-form-label">Obra default</label>
               <div class="col-lg-9">
                 <select class="form-control" id="id_obra_default" name="id_obra_default" formControlName="id_obra_default">
+                  <!-- <option value="">Seleccionar...</option> -->
                   <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>
                 </select>
               </div>
             </div>
-            <button type="button" class="btn btn-primary" (click)="print()">Print Usuario</button>
 
           </form>
         </div>
@@ -38,7 +47,7 @@
         </div>
       </div>
 
-
+      <!-- cambiar password -->
       <div class="card mt-5">
         <div class="card-header">
           Cambiar password
@@ -48,14 +57,16 @@
             <div class="form-group row">
               <label for="password" class="col-lg-3 col-form-label">Nuevo Password</label>
               <div class="col-lg-9">
-                <input class="form-control" type="password" id="password" name="password" formControlName="password">
+                <input class="form-control" type="password" id="password" name="password" formControlName="password" [ngClass]="{'is-invalid': formPassword.get('password').invalid  && (formPassword.get('password').dirty || formPassword.get('password').touched) }">
+                <div class="invalid-feedback">Proporcione una contraseña</div>
               </div>
             </div>
 
             <div class="form-group row">
               <label for="confirmar" class="col-lg-3 col-form-label">Confirmar</label>
               <div class="col-lg-9">
-                <input class="form-control" type="password" id="confirmar" name="confirmar">
+                <input class="form-control" type="password" id="confirmar" name="confirmar" formControlName="confirmar" [ngClass]="{'is-invalid': formPassword.get('confirmar').errors?.notEqual  && (formPassword.get('confirmar').dirty || formPassword.get('confirmar').touched) }">
+                <div class="invalid-feedback">No coincide con la contraseña</div>
               </div>
             </div>
 
