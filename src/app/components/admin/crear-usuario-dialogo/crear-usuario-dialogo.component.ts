@@ -11,7 +11,7 @@ import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@ang
 })
 export class CrearUsuarioDialogoComponent implements OnInit {
   form: FormGroup;
-
+  loading: boolean;
 
 
   constructor(
@@ -59,16 +59,17 @@ export class CrearUsuarioDialogoComponent implements OnInit {
 
   guardar() {
 
-    //console.log("usuario", this.form.value);
+    this.loading=true;
     this.usuarioSrv.createUsuario(this.form.value)
       .subscribe(usuario => {
-
+        this.loading=false;
         this.data.usuarios.push(usuario);
         this.dialogRef.close(true);
 
       },
       (error) => {
-        this.dialogRef.close({ error: "Ha ocurrido un error. Vuelva a intentarlo más tarde." });
+        this.loading=false;
+        this.dialogRef.close({ error: "Ha ocurrido un error de conexión. Inténtelo más tarde" });
       });
   }
 

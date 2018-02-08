@@ -26,7 +26,7 @@ export class LoginComponent {
 
     this.auth.login(usuario)
       .subscribe((res: any) => {
-        console.log("hola login");
+        //console.log("hola login");
         
         this.loading = false;
 
