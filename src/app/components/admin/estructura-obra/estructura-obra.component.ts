@@ -412,7 +412,7 @@ export class EstructuraObraComponent implements OnInit {
           //eliminamos la seleccion
           this.selection[this.manzana_selected].clear();
 
-          this.snackBar.open("Actualización completada", "Cerrar", {
+          this.snackBar.open("Actualización completada", "", {
             duration: 2000,
             panelClass: ["bg-success", "text-white"]
           });
@@ -420,7 +420,7 @@ export class EstructuraObraComponent implements OnInit {
         } else {
           //error
 
-          this.snackBar.open("Su solicitud no se ha podido completar.", "Cerrar", {
+          this.snackBar.open("Su solicitud no se ha podido completar.", "", {
             duration: 3000,
             panelClass: ["bg-danger", "text-white"]
           });
@@ -431,7 +431,7 @@ export class EstructuraObraComponent implements OnInit {
       },
       (error) => {
 
-        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde.", "Cerrar", {
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde.", "", {
           duration: 3000,
           panelClass: ["bg-danger", "text-white"]
         });
@@ -468,7 +468,7 @@ export class EstructuraObraComponent implements OnInit {
           this.selection[this.manzana_selected].clear();
 
 
-          this.snackBar.open("Actualización completada", "Cerrar", {
+          this.snackBar.open("Actualización completada", "", {
             duration: 2000,
             panelClass: ["bg-success", "text-white"]
           });
@@ -476,7 +476,7 @@ export class EstructuraObraComponent implements OnInit {
         } else {
           //error o count==0
 
-          this.snackBar.open("Su solicitud no se ha podido completar.", "Cerrar", {
+          this.snackBar.open("Su solicitud no se ha podido completar.", "", {
             duration: 3000,
             panelClass: ["bg-danger", "text-white"]
           });
@@ -487,7 +487,7 @@ export class EstructuraObraComponent implements OnInit {
       },
       (error) => {
 
-        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde.", "Cerrar", {
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde.", "", {
           duration: 3000,
           panelClass: ["bg-danger", "text-white"]
         });
@@ -522,7 +522,7 @@ export class EstructuraObraComponent implements OnInit {
           //eliminamos la seleccion
           this.selection[this.manzana_selected].clear();
 
-          this.snackBar.open("Actualización completada", "Cerrar", {
+          this.snackBar.open("Actualización completada", "", {
             duration: 2000,
             panelClass: ["bg-success", "text-white"]
           });
@@ -530,7 +530,7 @@ export class EstructuraObraComponent implements OnInit {
         } else {
           //error
 
-          this.snackBar.open("Su solicitud no se ha podido completar.", "Cerrar", {
+          this.snackBar.open("Su solicitud no se ha podido completar.", "", {
             duration: 3000,
             panelClass: ["bg-danger", "text-white"]
           });
@@ -541,7 +541,7 @@ export class EstructuraObraComponent implements OnInit {
       },
       (error) => {
 
-        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde.", "Cerrar", {
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde.", "", {
           duration: 3000,
           panelClass: ["bg-danger", "text-white"]
         });
@@ -583,7 +583,7 @@ export class EstructuraObraComponent implements OnInit {
         //eliminamos la seleccion
         this.selection[this.manzana_selected].clear();
 
-        this.snackBar.open("Actualización completada", "Cerrar", {
+        this.snackBar.open("Actualización completada", "", {
           duration: 2000,
           panelClass: ["bg-success", "text-white"]
         });
@@ -592,7 +592,7 @@ export class EstructuraObraComponent implements OnInit {
       },
       (error) => {
 
-        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde.", "Cerrar", {
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde.", "", {
           duration: 3000,
           panelClass: ["bg-danger", "text-white"]
         });

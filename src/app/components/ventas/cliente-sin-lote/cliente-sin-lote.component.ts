@@ -59,19 +59,19 @@ export class ClienteSinLoteComponent implements OnInit {
               let i = this.clientes.indexOf(cliente);
               this.clientes.splice(i, 1);
               
-              this.snackBar.open("Cliente Eliminada", "Cerrar", {
+              this.snackBar.open("Cliente Eliminada", "", {
                 duration: 2000
               });
 
             } else {
-              this.snackBar.open("Ha ocurrido un error", "Cerrar", {
+              this.snackBar.open("Ha ocurrido un error", "", {
                 duration: 2000
               });
             }
 
           }, (error)=>{
             this.loading=false;
-            this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "Cerrar", {
+            this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
               duration: 2000
             });
           });

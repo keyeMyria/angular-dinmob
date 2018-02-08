@@ -188,13 +188,13 @@ export class ClientesComponent implements OnInit {
 
 
               this.loading = false;
-              this.snackBar.open("Cliente Eliminado", "Cerrar", {
+              this.snackBar.open("Cliente Eliminado", "", {
                 duration: 2000,
                 panelClass: ["bg-success", "text-white"]
               });
 
             } else {
-              this.snackBar.open("Ha ocurrido un error", "Cerrar", {
+              this.snackBar.open("Ha ocurrido un error", "", {
                 duration: 3000,
                 panelClass: ["bg-danger", "text-white"]
               });
