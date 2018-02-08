@@ -34,26 +34,6 @@ export class TableroVentasComponent implements OnInit {
       });
   }
 
-  gotoMapas() {
-    this.router.navigate(["/mapas-ventas", this.obra_default]);
-  }
-  gotoClientes() {
-    this.router.navigate(["/clientes", this.obra_default]);
-  }
-  gotoDesarrollos() {
-    this.router.navigate(["/desarrollos", this.obra_default]);
-  }
-  gotoAlertaClientes() {
-    this.router.navigate(["alerta-clientes", this.obra_default]);
-  }
-  gotoClienteSinLote() {
-    this.router.navigate(["/clientes-sin-lote"]);
-  }
-  gotoEstadisticas() {
-    this.router.navigate(["/estadisticas-ventas", this.obra_default]);
-  }
-
-
 
 
 }

@@ -33,21 +33,4 @@ export class TableroAdminComponent implements OnInit {
     });
   }
 
-  
-  gotoUsuarios() {
-    this.router.navigate(["/usuarios"]);
-  }
-  gotoTrabajadores() {
-    this.router.navigate(["/trabajadores"]);
-  } 
-  gotoObras() {
-    this.router.navigate(["/obras"]);
-  }
-  gotoPrototipo() {
-    this.router.navigate(["/prototipos"]);
-  }
-  gotoEstructura() {
-    this.router.navigate(["/estructura-obra"]);
-  }
-
 }

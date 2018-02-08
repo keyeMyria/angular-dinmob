@@ -33,11 +33,4 @@ export class TableroAvancesComponent implements OnInit {
 
   }
 
-  gotoMapas() {
-    this.router.navigate(["/mapas-ventas", this.obra_default]);
-  }
-  gotoAvances() {
-    this.router.navigate(["/avances", this.obra_default]);
-  }
-
 }
