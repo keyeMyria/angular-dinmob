@@ -211,7 +211,7 @@ export class EditarClienteComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.loading = true;
     this.route.data
       .subscribe((data: { obras: any[], formas_pago: any[], instituciones_credito: any[], tipos_operacion: any[], tipos_pago: any[], estados: any[] }) => {
         //console.log("resultado resolve ", data);
@@ -237,7 +237,7 @@ export class EditarClienteComponent implements OnInit {
         this.setFormsValue(this.cliente);
 
       });
-
+    this.loading = false;
   }
 
   //relleno todos los formularios despues de leer el cliente
@@ -249,7 +249,7 @@ export class EditarClienteComponent implements OnInit {
     this.formLaborales.patchValue(this.cliente);
     this.formConyuge.patchValue(this.cliente);
     this.formApoderado.patchValue(this.cliente);
-    
+
 
 
   }
@@ -349,7 +349,8 @@ export class EditarClienteComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result == true) {
         this.snackBar.open("Documento Agregado", "", {
-          duration: 2000
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
         });
       } else if (result == false) {
         this.snackBar.open("Ha ocurrido un error. Inténtelo más tarde", "", {
@@ -357,7 +358,8 @@ export class EditarClienteComponent implements OnInit {
         });
       } else {
         this.snackBar.open(result, "", {
-          duration: 3000
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
         });
       }
 
@@ -375,12 +377,14 @@ export class EditarClienteComponent implements OnInit {
         this.setFormsValue(this.cliente);
         this.loading = false;
         this.snackBar.open("Cliente Actualizado", "", {
-          duration: 2000
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
         });
 
       }, (error) => {
         this.snackBar.open("Ha ocurrido un error. Inténtelo más tarde", "", {
-          duration: 3000
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
         });
       });
 
@@ -400,14 +404,15 @@ export class EditarClienteComponent implements OnInit {
 
       if (result === true) {
         this.snackBar.open("Cliente Actualizado", "", {
-          duration: 2000
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
         });
 
       } else {
-        //console.log("error",result);
 
         this.snackBar.open(result.error, "", {
-          duration: 3000
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
         });
       }
 
@@ -415,7 +420,6 @@ export class EditarClienteComponent implements OnInit {
   }
 
   nuevoPago() {
-    console.log();
     let dialogRef = this.dialog.open(NuevoPagoDialogoComponent, {
       width: '400px',
       data: {
@@ -425,6 +429,21 @@ export class EditarClienteComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
 
+      if (result === true) {
+
+        this.snackBar.open("Pago Agregado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      } else if (result.error) {
+
+        this.snackBar.open(result.error, "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+
+      }
     });
 
   }
@@ -440,6 +459,22 @@ export class EditarClienteComponent implements OnInit {
       },
     });
     dialogRef.afterClosed().subscribe(result => {
+
+      if (result === true) {
+
+        this.snackBar.open("Pago Actualizado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      } else if (result.error) {
+
+        this.snackBar.open(result.error, "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+
+      }
 
     });
 
@@ -460,7 +495,8 @@ export class EditarClienteComponent implements OnInit {
       if (result == true) {
 
         this.snackBar.open("Documento Actualizado", "", {
-          duration: 2000
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
         });
 
       } else if (result == false) {
@@ -468,7 +504,8 @@ export class EditarClienteComponent implements OnInit {
       } else {
 
         this.snackBar.open(result, "", {
-          duration: 3000
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
         });
 
       }
@@ -497,19 +534,22 @@ export class EditarClienteComponent implements OnInit {
               documentos.splice(i, 1);
 
               this.snackBar.open("Documento Eliminado", "", {
-                duration: 2000
+                duration: 2000,
+                panelClass: ["bg-success", "text-white"]
               });
 
             } else {
 
               this.snackBar.open("Ha ocurrido un error. Inténtelo más tarde", "", {
-                duration: 3000
+                duration: 3000,
+                panelClass: ["bg-danger", "text-white"]
               });
 
             }
           }, (error) => {
             this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
-              duration: 3000
+              duration: 3000,
+              panelClass: ["bg-danger", "text-white"]
             });
           })
 
@@ -531,6 +571,21 @@ export class EditarClienteComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
 
 
+      if (result === true) {
+
+        this.snackBar.open("Lote Eliminado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      } else if (result.error) {
+
+        this.snackBar.open(result.error, "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+
+      }
 
     });
 
@@ -548,6 +603,21 @@ export class EditarClienteComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
 
 
+      if (result === true) {
+
+        this.snackBar.open("Pago Eliminado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      } else if (result.error) {
+
+        this.snackBar.open(result.error, "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+
+      }
 
     });
 
@@ -564,7 +634,21 @@ export class EditarClienteComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
 
+      if (result === true) {
 
+        this.snackBar.open("Pago Eliminado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      } else if (result.error) {
+
+        this.snackBar.open(result.error, "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+
+      }
 
     });
 

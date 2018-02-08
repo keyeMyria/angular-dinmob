@@ -26,6 +26,7 @@ export class AvancesComponent implements OnInit {
   obra: any;
   obra_selected: string = "";
   obras: any = [];
+  loading: boolean
 
 
 
@@ -48,14 +49,12 @@ export class AvancesComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.loading = true;
     this.route.data
       .subscribe((data: { obras: any[] }) => {
         //console.log("resusltado resolve ", data);
         this.obras = data.obras;
       });
-
-
     this.route.paramMap
       .switchMap((params: ParamMap) => {
         if (params.has("obra")) {
@@ -66,7 +65,8 @@ export class AvancesComponent implements OnInit {
         }
       }).subscribe(obra => {
         console.log("obra", obra);
-        this.obra = obra
+        this.obra = obra;
+        this.loading = false;
       });
 
 

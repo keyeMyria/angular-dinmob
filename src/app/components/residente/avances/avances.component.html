@@ -2,6 +2,10 @@
     <mat-icon aria-label="toggle side drawer">home</mat-icon>
 </button>
 
+<div *ngIf="loading">
+    <mat-spinner class="loading"></mat-spinner>
+</div>
+
 <mat-drawer-container class="drawer-container">
     <mat-drawer class="estructura" #drawer [mode]="mobileQuery.matches ? 'over':'side'" [opened]="!mobileQuery.matches" style="width:250px">
         <mat-card class="estructura">
@@ -41,7 +45,7 @@
     <mat-drawer-content>
 
         <mat-toolbar>
-            
+
             <button mat-button>Terminar</button>
             <button mat-button>Liberar</button>
             <button mat-icon-button>

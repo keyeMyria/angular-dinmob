@@ -10,24 +10,25 @@ import { MatSnackBar, MatDialog } from '@angular/material';
   styleUrls: ['./cliente-sin-lote.component.scss']
 })
 export class ClienteSinLoteComponent implements OnInit {
- 
-  clientes: any[]=[];
-  loading:boolean;
- 
+
+  clientes: any[] = [];
+  loading: boolean;
+
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private clienteSrv:ClientesService,
+    private clienteSrv: ClientesService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
-   
-      this.clienteSrv.getClientesSinLote()
-      .subscribe(clientes=>{
-        this.clientes=clientes;
+    this.loading = true;
+    this.clienteSrv.getClientesSinLote()
+      .subscribe(clientes => {
+        this.clientes = clientes;
+        this.loading = false;
       });
   }
 
@@ -36,7 +37,7 @@ export class ClienteSinLoteComponent implements OnInit {
     this.router.navigate(["/editar-cliente", cliente.id_cliente]);
   }
 
-  delCliente(cliente){
+  delCliente(cliente) {
     let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
       data: {
         title: "Eliminar Cliente",
@@ -58,7 +59,7 @@ export class ClienteSinLoteComponent implements OnInit {
 
               let i = this.clientes.indexOf(cliente);
               this.clientes.splice(i, 1);
-              
+
               this.snackBar.open("Cliente Eliminada", "", {
                 duration: 2000
               });
@@ -69,8 +70,8 @@ export class ClienteSinLoteComponent implements OnInit {
               });
             }
 
-          }, (error)=>{
-            this.loading=false;
+          }, (error) => {
+            this.loading = false;
             this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
               duration: 2000
             });

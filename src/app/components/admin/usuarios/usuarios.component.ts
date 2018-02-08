@@ -21,7 +21,10 @@ export class UsuariosComponent implements OnInit {
   selectedOption: string;
 
 
-  constructor(public dialog: MatDialog, private usuarioSrv: UsuarioService, public snackBar: MatSnackBar) { }
+  constructor(
+    public dialog: MatDialog, 
+    private usuarioSrv: UsuarioService, 
+    public snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.loading = true;

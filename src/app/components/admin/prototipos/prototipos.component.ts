@@ -41,13 +41,12 @@ export class PrototiposComponent implements OnInit {
 
   ngOnInit() {
 
+    this.loading = true;
     this.route.data
       .subscribe((data: { obras: any[] }) => {
         //console.log("resultado resolve ", data);
         this.obras = data.obras;
       });
-
-    this.loading = true;
 
     this.route.paramMap
       .switchMap((params: ParamMap) => {

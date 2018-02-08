@@ -13,6 +13,7 @@ export class AlertaClientesComponent implements OnInit {
   clientes: any[] = [];
   obras: any = [];
   obra_selected: string = "";
+  loading: boolean;
 
 
   constructor(
@@ -22,14 +23,14 @@ export class AlertaClientesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    this.loading = true;
     this.route.data
       .subscribe((data: { obras: any[] }) => {
         //console.log("resultado resolve ", data);
         this.obras = data.obras;
       });
 
-      this.route.paramMap
+    this.route.paramMap
       .switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
@@ -37,9 +38,9 @@ export class AlertaClientesComponent implements OnInit {
         } else {
           return of([]);
         }
-
       }).subscribe(clientes => {
         this.clientes = clientes;
+        this.loading = false;
       });
 
 
@@ -49,7 +50,7 @@ export class AlertaClientesComponent implements OnInit {
     this.router.navigate(["/editar-cliente", cliente.id_cliente]);
   }
 
-  
+
   cargarObra(id_obra) {
 
     if (id_obra) {
