@@ -82,7 +82,7 @@ export class EditarClienteComponent implements OnInit {
 
     this.formGenerales = this.fb.group({
       //persona fisica
-      persona_moral: [null, Validators.required],
+      persona_moral: ["0", Validators.required],
       nombre: [null, Validators.required],
       nacionalidad_persona_fisica: null,
       lugar_nacimiento_persona_fisica: null,
@@ -211,7 +211,7 @@ export class EditarClienteComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loading = true;
+
     this.route.data
       .subscribe((data: { obras: any[], formas_pago: any[], instituciones_credito: any[], tipos_operacion: any[], tipos_pago: any[], estados: any[] }) => {
         //console.log("resultado resolve ", data);
@@ -226,7 +226,7 @@ export class EditarClienteComponent implements OnInit {
 
     let id = this.route.snapshot.paramMap.get('id');
 
-
+    this.loading = true;
     this.clienteSrv.getClienteConComprasYDocumentos(id)
       .subscribe(response => {
         this.cliente = response.cliente;
@@ -235,9 +235,16 @@ export class EditarClienteComponent implements OnInit {
         this.documentos_conyuge = response.documentos_conyuge;
 
         this.setFormsValue(this.cliente);
+        this.loading = false;
+
+      }, (error) => {
+        this.loading = false;
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+          duration: 3000
+        });
 
       });
-    this.loading = false;
+
   }
 
   //relleno todos los formularios despues de leer el cliente
