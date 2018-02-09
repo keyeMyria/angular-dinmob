@@ -27,15 +27,16 @@
           <td class="ws-nowrap">{{cliente.fecha_activo| date:'mediumDate':'':'es'}}</td>
           <td class="ws-nowrap">{{cliente.fecha_cancelacion| date:'mediumDate':'':'es'}}</td>
           <td class="text-right">
-            <button mat-icon-button [matMenuTriggerFor]="menu3" (click)="$event.stopPropagation()">
-              <mat-icon>more_vert</mat-icon>
+            <button mat-icon-button (click)="$event.stopPropagation();reporteCliente(cliente)">
+              <mat-icon>picture_as_pdf</mat-icon>
             </button>
-            <mat-menu #menu3="matMenu">
+            <!--  <mat-menu #menu3="matMenu">
               <button mat-menu-item (click)="reporteCliente(cliente)">
                 <mat-icon>picture_as_pdf</mat-icon>
                 <span>Reporte</span>
               </button>
-            </mat-menu>
+            </mat-menu> -->
+
           </td>
         </tr>
       </tbody>
