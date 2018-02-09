@@ -16,37 +16,27 @@
         </mat-form-field>
       </div>
 
-
       <div class="card">
-        <div class="card-header padding-card-header">
-          <div class="d-flex">
-            <div class="align-self-center">Ventas Pagos</div>
-            <div class="spacer"></div>
-            <div>
-              <!--  <button mat-icon-button>
-                <mat-icon>add</mat-icon>
-              </button >-->
-            </div>
-          </div>
+        <div class="card-header">
+          Ventas Pagos
         </div>
+
         <div>
 
           <div class="input-group col-3 mt-2">
             <div class="input-group-prepend">
               <span class="input-group-text">Del</span>
             </div>
-            <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="" id="" [matDatepicker]="dpFechaNacimientoPF">
+            <input class="form-control" placeholder="yyyy-mm-dd" type="text" [matDatepicker]="dpFechaNacimientoPF">
             <div class="input-group-append">
-              <span class="input-group-append">
-                <button class="btn btn-secondary" type="button" (click)="dpFechaNacimientoPF.open()">
-                  <i class="fa fa-calendar"></i>
-                </button>
-              </span>
+              <button class="btn btn-secondary" type="button" (click)="dpFechaNacimientoPF.open()">
+                <i class="fa fa-calendar"></i>
+              </button>
             </div>
             <mat-datepicker touchUi="true" #dpFechaNacimientoPF></mat-datepicker>
           </div>
 
-          
+
 
 
           <div class="table-responsive mt-2">
@@ -58,24 +48,25 @@
                   <th>Lote</th>
                   <th>Monto</th>
                   <th>F.Pago</th>
-                  <th>Estado</th>
+                  <th>Validado</th>
                 </tr>
               </thead>
 
               <tbody>
-                <tr>
+                <tr *ngFor="let pago of pagos">
                   <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <td>{{pago.manzana}}</td>
+                  <td>{{pago.lote}}</td>
+                  <td>{{pago.monto|currency}}</td>
+                  <td>{{pago.fecha_pago| date:'mediumDate':'':'es'}}</td>
+                  <td>{{pago.validado}}</td>
                 </tr>
 
               </tbody>
             </table>
           </div>
         </div>
+
       </div>
 
 

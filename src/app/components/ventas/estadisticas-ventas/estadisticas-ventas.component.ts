@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { ObrasService } from 'app/services/obras.service';
+import { of } from "rxjs/observable/of";
 
 @Component({
   selector: 'app-estadisticas-ventas',
@@ -8,19 +10,36 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class EstadisticasVentasComponent implements OnInit {
   obras: any = [];
-  obra: any = {};
+  estadisticas: any = {};
   obra_selected: string = "";
+  loading: boolean;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private obraSrv: ObrasService,
   ) { }
 
   ngOnInit() {
     this.route.data
-      .subscribe((data: { obras: any[] }) => {
-        //console.log("resusltado resolve ", data);
+      .subscribe((data: { obras: any }) => {
         this.obras = data.obras;
+      });
+
+    this.loading = true;
+    this.route.paramMap
+      .switchMap((params: ParamMap) => {
+        if (params.has("obra")) {
+          this.obra_selected = params.get("obra");
+          return this.obraSrv.getEstadisticasVentas(params.get("obra"));
+        } else {
+          return of({});
+        }
+      }).subscribe(res => {
+        this.estadisticas = res;
+        this.loading = false;
+      }, (error) => {
+        this.loading = false;
       });
 
   }

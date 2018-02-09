@@ -8,6 +8,27 @@
 @import "variables";
 
 
+.bg-apartado {
+    background-color: $apartado;   
+  }
+  
+  .bg-libre {
+    background-color: $libre;   
+  }
+  
+  .bg-bloqueado {
+    background-color: $bloqueado;   
+  }
+  
+  .bg-contrato {
+    background-color: $contrato;   
+  }
+  
+  .bg-escriturado {
+    background-color: $escriturado;   
+  }
+  
+
 .badge-apartado {
     color:white;
     background-color: $apartado; 

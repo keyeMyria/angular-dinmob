@@ -86,6 +86,14 @@ export class ObrasService {
       .pipe(catchError(this.handleError("delObra")));
   }
 
+  
+  //ok
+  getEstadisticasVentas(id_obra) {
+    return this.http.get(this.url + "get_estadisticas_ventas/" + id_obra, {})
+      .pipe(catchError(this.handleError("getEstadisticasVentas")));
+  }
+
+
 
   private handleError<T>(operation = 'operation') {
     return (error: HttpErrorResponse) => {

@@ -28,7 +28,7 @@ import { InstitucionCreditoService } from 'app/services/institucion-credito.serv
 import { TipoOperacionService } from 'app/services/tipo-operacion.service';
 import { TipoPagoService } from 'app/services/tipo-pago.service';
 import { InsumoService } from 'app/services/insumo.service';
-
+import { VentasPagosService } from 'app/services/ventas-pagos.service';
 
 //helpers
 import { ClienteHelperService } from 'app/utils/cliente-helper.service';
@@ -165,6 +165,7 @@ import { TableroAvancesComponent } from './components/tablero-avances/tablero-av
 import { TableroVentasComponent } from './components/tablero-ventas/tablero-ventas.component';
 import { TableroAlmacenComponent } from './components/tablero-almacen/tablero-almacen.component';
 import { VentasPagosComponent } from './components/ventas/ventas-pagos/ventas-pagos.component';
+
 
 
 
@@ -357,6 +358,7 @@ import { VentasPagosComponent } from './components/ventas/ventas-pagos/ventas-pa
     InsumoService,
     EntradasService,
     SalidasService,
+    VentasPagosService,
 
     ObrasUsuarioResolverService,
     UsuariosAlmacenistasResolverService,

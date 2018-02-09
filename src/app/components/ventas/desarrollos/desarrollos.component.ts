@@ -32,8 +32,7 @@ export class DesarrollosComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
     this.route.data
-      .subscribe((data: { obras: any[] }) => {
-        //console.log("resultado resolve ", data);
+      .subscribe((data: { obras: any }) => {
         this.obras = data.obras;
       });
 
@@ -46,9 +45,10 @@ export class DesarrollosComponent implements OnInit {
           return of({});
         }
       }).subscribe(obra => {
-        //console.log("obra", obra);
         this.obra = obra;
         this.loading = false;
+      },(error)=>{
+        this.loading=false;
       });
 
 
