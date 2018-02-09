@@ -5,6 +5,7 @@ import { Lote } from 'app/model/lote';
 import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
 import { SelectionModel } from '@angular/cdk/collections';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
+import { MatSnackBar } from '@angular/material';
 
 
 @Component({
@@ -35,6 +36,7 @@ export class VentasLoteComponent implements OnInit {
     private route: ActivatedRoute,
     private loteSrv: LotesService,
     private fb: FormBuilder,
+    public snackBar: MatSnackBar
   ) {
 
     this.form = this.fb.group({
@@ -65,6 +67,27 @@ export class VentasLoteComponent implements OnInit {
 
         this.form.patchValue(this.lote);
       });
+  }
+
+  guardar() {
+    this.loading = true;
+    this.loteSrv.updateLote(this.lote.id_lote, this.form.value)
+      .subscribe(lote => {
+        this.loading = false;
+        this.lote = lote;
+        this.form.patchValue(this.lote);
+        this.snackBar.open("Lote Actualizado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+      }, (error) => {
+        this.loading = false;
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+
+      })
   }
 
   seleccionarCliente(cliente) {
@@ -119,8 +142,5 @@ export class VentasLoteComponent implements OnInit {
   }
 
 
-  onFechaChange() {
-
-  }
 
 }

@@ -39,10 +39,16 @@ export class ClientesService {
     return this.url + "upload_document";
   }
 
-  //ok
+  //ok checar si es necesario
   getAlertasObra(id_obra) {
     return this.http.get(this.url + "alertas_obra/" + id_obra)
       .pipe(catchError(this.handleError("getAlertasObra")));
+  }
+
+  //ok
+  getAlertas() {
+    return this.http.get(this.url + "alertas/")
+      .pipe(catchError(this.handleError("getAlertas")));
   }
 
   //ok

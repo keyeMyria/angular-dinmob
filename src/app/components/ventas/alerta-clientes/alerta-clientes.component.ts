@@ -34,7 +34,8 @@ export class AlertaClientesComponent implements OnInit {
       .switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
-          return this.clienteSrv.getAlertasObra(params.get("obra"));
+          // params.get("obra")
+          return this.clienteSrv.getAlertas();
         } else {
           return of([]);
         }
