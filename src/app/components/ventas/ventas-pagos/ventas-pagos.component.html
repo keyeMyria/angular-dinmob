@@ -54,11 +54,11 @@
 
               <tbody>
                 <tr *ngFor="let pago of pagos">
-                  <td></td>
-                  <td>{{pago.manzana}}</td>
-                  <td>{{pago.lote}}</td>
+                  <td>{{pago.cliente}}</td>
+                  <td class="ws-nowrap">{{pago.manzana}}</td>
+                  <td class="ws-nowrap">{{pago.lote}}</td>
                   <td>{{pago.monto|currency}}</td>
-                  <td>{{pago.fecha_pago| date:'mediumDate':'':'es'}}</td>
+                  <td class="ws-nowrap">{{pago.fecha_pago| date:'mediumDate':'':'es'}}</td>
                   <td>{{pago.validado}}</td>
                 </tr>
 

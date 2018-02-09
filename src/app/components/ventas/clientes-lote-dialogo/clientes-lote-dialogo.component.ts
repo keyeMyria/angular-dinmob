@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Cliente } from 'app/model/cliente';
 import { SelectionModel } from '@angular/cdk/collections';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-clientes-lote-dialogo',
@@ -9,7 +10,7 @@ import { SelectionModel } from '@angular/cdk/collections';
   styleUrls: ['./clientes-lote-dialogo.component.scss']
 })
 export class ClientesLoteDialogoComponent implements OnInit {
- 
+
   cliente_selected: any = { pagos: [] };
 
   //selector de clientes
@@ -17,7 +18,8 @@ export class ClientesLoteDialogoComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef: MatDialogRef<ClientesLoteDialogoComponent>
+    public dialogRef: MatDialogRef<ClientesLoteDialogoComponent>,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -63,6 +65,16 @@ export class ClientesLoteDialogoComponent implements OnInit {
 
   }
 
+  reporteCliente(cliente) {
+
+    let url = "http://localhost:8080/dinmob/api/index.php/reportes/cliente_lote/" + cliente.id_cliente + "/" + cliente.id_lote;
+
+    let link = document.createElement("a");
+    link.href = url;
+    link.target = "_blank";
+    link.click();
+
+  }
 
 
 }
