@@ -31,16 +31,8 @@
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu3="matMenu">
-              <button mat-menu-item (click)="cancelarAsociacion(cliente, $event)">
-                <mat-icon>cancel</mat-icon>
-                <span>Cancelar</span>
-              </button>
-              <button mat-menu-item (click)="delPagos(cliente)">
-                <mat-icon>delete</mat-icon>
-                <span>Eliminar</span>
-              </button>
-              <button mat-menu-item (click)="reporteAsociacion(cliente, $event)">
-                <mat-icon>report</mat-icon>
+              <button mat-menu-item (click)="reporteAsociacion(cliente)">
+                <mat-icon>picture_as_pdf</mat-icon>
                 <span>Reporte</span>
               </button>
             </mat-menu>
@@ -54,7 +46,7 @@
   <div class="row">
 
     <div class="col-12 col-sm-4 py-3">
-      <div class="text-center border-right">
+      <div class="text-center">
         <h4 class="text-primary">
           {{(cliente_selected.valor_operacion|| 0) |unmaskNumber |currency }}
         </h4>
@@ -63,7 +55,7 @@
     </div>
 
     <div class="col-12 col-sm-4 py-3">
-      <div class="text-center border-right">
+      <div class="text-center">
         <h4 class="text-success">
           {{totalPagosRealizados() | currency}}
         </h4>
