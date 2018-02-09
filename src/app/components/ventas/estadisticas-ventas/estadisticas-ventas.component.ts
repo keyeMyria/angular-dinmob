@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ObrasService } from 'app/services/obras.service';
 import { of } from "rxjs/observable/of";
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-estadisticas-ventas',
@@ -18,6 +19,7 @@ export class EstadisticasVentasComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private obraSrv: ObrasService,
+    public snackBar: MatSnackBar,
   ) { }
 
   ngOnInit() {
@@ -40,6 +42,10 @@ export class EstadisticasVentasComponent implements OnInit {
         this.loading = false;
       }, (error) => {
         this.loading = false;
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
       });
 
   }

@@ -12,6 +12,7 @@ import { EditarNombrePrototipoDialogoComponent } from 'app/components/admin/edit
 
 //import 'rxjs/add/observable/of';
 import { of } from 'rxjs/observable/of';
+import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
 
 
 
@@ -142,5 +143,37 @@ export class PrototiposComponent implements OnInit {
       }
     });
   }
+
+  delPrototipo(prototipo) {
+    let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
+      data: {
+        title: "Eliminar Prototipo",
+        content: `¿Desea eliminar el prototipo: ${prototipo.nombre}?`
+      },
+      width: '500px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result === true) {
+
+        this.snackBar.open("Prototipo Eliminado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      } else {
+
+        this.snackBar.open("La operación no ha podido ser completada. Inténtelo más tarde", "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+      }
+
+    });
+
+  }
+
+  
 
 }

@@ -59,7 +59,11 @@
                   <td class="ws-nowrap">{{pago.lote}}</td>
                   <td>{{pago.monto|currency}}</td>
                   <td class="ws-nowrap">{{pago.fecha_pago| date:'mediumDate':'':'es'}}</td>
-                  <td>{{pago.validado}}</td>
+                  <td>
+                    <span class="badge" [ngClass]="pago.validado=='1'?'badge-success':'badge-secondary'">
+                      {{pago.validado|numberToYesNo:'VAL'}}
+                    </span>
+                  </td>
                 </tr>
 
               </tbody>

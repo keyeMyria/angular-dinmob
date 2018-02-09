@@ -4,6 +4,7 @@ import { LotesService } from 'app/services/lotes.service';
 import { Lote } from 'app/model/lote';
 import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
 import { SelectionModel } from '@angular/cdk/collections';
+import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 
 
 @Component({
@@ -12,6 +13,12 @@ import { SelectionModel } from '@angular/cdk/collections';
   styleUrls: ['./ventas-lote.component.scss']
 })
 export class VentasLoteComponent implements OnInit {
+
+  numbermask = createNumberMask({
+    allowDecimal: true,
+    prefix: '',
+    decimalLimit: 2
+  });
 
   lote: any = {};
   clientes: any = [];
@@ -63,7 +70,7 @@ export class VentasLoteComponent implements OnInit {
   seleccionarCliente(cliente) {
 
     console.log("seleccionar cliente");
-    
+
 
     this.selection.toggle(cliente);
     if (this.selection.selected.length > 0) {

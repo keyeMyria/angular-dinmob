@@ -165,6 +165,7 @@ import { TableroAvancesComponent } from './components/tablero-avances/tablero-av
 import { TableroVentasComponent } from './components/tablero-ventas/tablero-ventas.component';
 import { TableroAlmacenComponent } from './components/tablero-almacen/tablero-almacen.component';
 import { VentasPagosComponent } from './components/ventas/ventas-pagos/ventas-pagos.component';
+import { ConfirmarDeshabilitarAlertaDialogoComponent } from './components/ventas/confirmar-deshabilitar-alerta-dialogo/confirmar-deshabilitar-alerta-dialogo.component';
 
 
 
@@ -262,6 +263,7 @@ import { VentasPagosComponent } from './components/ventas/ventas-pagos/ventas-pa
     TableroVentasComponent,
     TableroAlmacenComponent,
     VentasPagosComponent,
+    ConfirmarDeshabilitarAlertaDialogoComponent,
 
 
 
@@ -329,7 +331,8 @@ import { VentasPagosComponent } from './components/ventas/ventas-pagos/ventas-pa
     NuevoTrabajadorDialogoComponent,
     EditarTrabajadorDialogoComponent,
     EditarEntradaDialogoComponent,
-    VerSalidaDialogoComponent
+    VerSalidaDialogoComponent,
+    ConfirmarDeshabilitarAlertaDialogoComponent
 
 
 
