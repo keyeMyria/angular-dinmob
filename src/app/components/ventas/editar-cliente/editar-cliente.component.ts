@@ -361,7 +361,37 @@ export class EditarClienteComponent implements OnInit {
         });
       } else if (result == false) {
         this.snackBar.open("Ha ocurrido un error. Inténtelo más tarde", "", {
-          duration: 3000
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+      } else {
+        this.snackBar.open(result, "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+      }
+
+    });
+  }
+
+
+  cargarFicha(pago) {
+
+    let dialogRef = this.dialog.open(AgregarDocumentoDialogoComponent, {
+      data: {
+        pago: pago
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == true) {
+        this.snackBar.open("Documento Agregado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+      } else if (result == false) {
+        this.snackBar.open("Ha ocurrido un error. Inténtelo más tarde", "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
         });
       } else {
         this.snackBar.open(result, "", {
@@ -415,7 +445,7 @@ export class EditarClienteComponent implements OnInit {
           panelClass: ["bg-success", "text-white"]
         });
 
-      } else {
+      } else if (result && result.error) {
 
         this.snackBar.open(result.error, "", {
           duration: 3000,
@@ -443,7 +473,7 @@ export class EditarClienteComponent implements OnInit {
           panelClass: ["bg-success", "text-white"]
         });
 
-      } else if (result.error) {
+      } else if (result && result.error) {
 
         this.snackBar.open(result.error, "", {
           duration: 3000,
@@ -474,7 +504,7 @@ export class EditarClienteComponent implements OnInit {
           panelClass: ["bg-success", "text-white"]
         });
 
-      } else if (result.error) {
+      } else if (result && result.error) {
 
         this.snackBar.open(result.error, "", {
           duration: 3000,

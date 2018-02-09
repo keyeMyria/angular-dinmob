@@ -82,7 +82,7 @@ export class ObrasComponent implements OnInit {
           panelClass: ["bg-success", "text-white"]
         });
 
-      } else if (result.error) {
+      } else if (result && result.error) {
 
         this.snackBar.open(result.error, "", {
           duration: 3000,
@@ -177,7 +177,7 @@ export class ObrasComponent implements OnInit {
           panelClass: ["bg-success", "text-white"]
         });
 
-      } else if (result.error) {
+      } else if (result && result.error) {
 
         this.snackBar.open(result.error, "", {
           duration: 3000,

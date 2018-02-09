@@ -18,12 +18,12 @@ export class UsuariosComponent implements OnInit {
   usuarios: any;
   //usuariosOrdenados: Usuario[];
   roles: any;
-  
+
 
 
   constructor(
-    public dialog: MatDialog, 
-    private usuarioSrv: UsuarioService, 
+    public dialog: MatDialog,
+    private usuarioSrv: UsuarioService,
     public snackBar: MatSnackBar
   ) { }
 
@@ -147,7 +147,7 @@ export class UsuariosComponent implements OnInit {
           panelClass: ["bg-success", "text-white"]
         });
 
-      } else if (result.error) {
+      } else if (result && result.error) {
 
         this.snackBar.open(result.error, "", {
           duration: 3000,
@@ -182,7 +182,7 @@ export class UsuariosComponent implements OnInit {
           panelClass: ["bg-success", "text-white"]
         });
 
-      } else if (result.error) {
+      } else if (result && result.error) {
 
         this.snackBar.open(result.error, "", {
           duration: 3000,
@@ -196,25 +196,25 @@ export class UsuariosComponent implements OnInit {
 
   }
 
-/*   ordenarDatos(sort: Sort) {
-   
-    const data = this.usuarios.slice();
-    if (!sort.active || sort.direction == '') {
-      this.usuariosOrdenados = data;
-      return;
-    }
-
-    this.usuariosOrdenados = data.sort((a, b) => {
-      let isAsc = sort.direction == 'asc';
-      switch (sort.active) {
-        case 'nombre': return compare(a.nombre, b.nombre, isAsc);
-        case 'email': return compare(a.email, b.email, isAsc);
-        case 'rol': return compare(a.tipo_usuario, b.tipo_usuario, isAsc);
-        default: return 0;
+  /*   ordenarDatos(sort: Sort) {
+     
+      const data = this.usuarios.slice();
+      if (!sort.active || sort.direction == '') {
+        this.usuariosOrdenados = data;
+        return;
       }
-    });
-
-  } */
+  
+      this.usuariosOrdenados = data.sort((a, b) => {
+        let isAsc = sort.direction == 'asc';
+        switch (sort.active) {
+          case 'nombre': return compare(a.nombre, b.nombre, isAsc);
+          case 'email': return compare(a.email, b.email, isAsc);
+          case 'rol': return compare(a.tipo_usuario, b.tipo_usuario, isAsc);
+          default: return 0;
+        }
+      });
+  
+    } */
 
 }
 

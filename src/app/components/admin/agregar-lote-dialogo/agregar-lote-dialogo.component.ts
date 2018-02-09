@@ -92,7 +92,7 @@ export class AgregarLoteDialogoComponent implements OnInit {
 
         }, (error) => {
           this.loading=false;
-          this.dialogRef.close(error);
+          this.dialogRef.close({error:"Ha ocurrido un error de conexión. Inténtelo más tarde"});
         });
 
     } else {
@@ -104,7 +104,7 @@ export class AgregarLoteDialogoComponent implements OnInit {
           this.dialogRef.close(true);
         }, (error) => {
           this.loading=false;
-          this.dialogRef.close(error);
+          this.dialogRef.close({error:"Ha ocurrido un error de conexión. Inténtelo más tarde"});
         });
     }
 

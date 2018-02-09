@@ -62,19 +62,21 @@ export class NuevaCompraDialogoComponent implements OnInit {
   guardar() {
 
     console.log("nuevo pago", this.form.value);
-
+    this.loading = true;
     this.clienteSrv.asociarClienteLote(this.data.id_cliente, this.form.value.lote)
       .subscribe(compra => {
 
         console.log("compra", compra);
-
+        this.loading = false;
         this.data.compras.push(compra);
         this.dialogRef.close(true);
 
 
-      }, (error) => {
 
-        this.dialogRef.close(error);
+      }, (error) => {
+        this.loading = false;
+
+        this.dialogRef.close({ error: "Ha ocurrido un error de conexión. Inténtelo más tarde" });
       });
 
   }

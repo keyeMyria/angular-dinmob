@@ -171,7 +171,7 @@ export class EstructuraObraComponent implements OnInit {
           panelClass: ["bg-success", "text-white"]
         });
 
-      } else if (result.error) {
+      } else if (result && result.error) {
 
         this.snackBar.open(result.error, "", {
           duration: 3000,
@@ -208,7 +208,7 @@ export class EstructuraObraComponent implements OnInit {
           panelClass: ["bg-success", "text-white"]
         });
 
-      } else if (result.error) {
+      } else if (result && result.error) {
 
         this.snackBar.open(result.error, "", {
           duration: 3000,
@@ -239,7 +239,7 @@ export class EstructuraObraComponent implements OnInit {
           panelClass: ["bg-success", "text-white"]
         });
 
-      } else if (result.error) {
+      } else if (result && result.error) {
 
         this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
           duration: 3000,
@@ -270,7 +270,7 @@ export class EstructuraObraComponent implements OnInit {
           panelClass: ["bg-success", "text-white"]
         });
 
-      } else if (result === false) {
+      } else if (result && result.error) {
 
         this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
           duration: 3000,
