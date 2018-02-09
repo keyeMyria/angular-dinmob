@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { ClientesService } from 'app/services/clientes.service';
 import { of } from "rxjs/observable/of";
+import { ConfirmarDeshabilitarAlertaDialogoComponent } from 'app/components/ventas/confirmar-deshabilitar-alerta-dialogo/confirmar-deshabilitar-alerta-dialogo.component';
+import { MatSnackBar, MatDialog } from '@angular/material';
 
 
 @Component({
@@ -19,7 +21,9 @@ export class AlertaClientesComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private clienteSrv: ClientesService
+    private clienteSrv: ClientesService,
+    public snackBar: MatSnackBar,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit() {
@@ -47,7 +51,7 @@ export class AlertaClientesComponent implements OnInit {
 
   }
 
-  editarCliente(cliente) {
+  editarAlerta(cliente) {
     this.router.navigate(["/editar-cliente", cliente.id_cliente]);
   }
 
@@ -60,6 +64,37 @@ export class AlertaClientesComponent implements OnInit {
       this.router.navigate([".", {}]);
 
     }
+
+  }
+
+
+  deshabilitarAlerta(cliente) {
+    let dialogRef = this.dialog.open(ConfirmarDeshabilitarAlertaDialogoComponent, {
+      data: {
+        title: "Deshabilitar Alerta",
+        content: `¿Desea deshabilitar la la alerta del cliente: ${cliente.nombre}?`
+      },
+      width: '500px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result === true) {
+
+        this.snackBar.open("Alerta Deshabilitada", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      } else {
+
+        this.snackBar.open("La operación no ha podido ser completada. Inténtelo más tarde", "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+      }
+
+    });
 
   }
 
