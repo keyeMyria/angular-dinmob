@@ -23,6 +23,7 @@ export class EditarPrototipoComponent implements OnInit {
   loading: boolean = false;
   selectedOption: string;
   prototipo: any;
+  partidas: any;
   subpartida: any;
   insumo: any;
   insumos: any[];
@@ -41,10 +42,16 @@ export class EditarPrototipoComponent implements OnInit {
     this.loading = true;
     this.route.paramMap
       .switchMap((params: ParamMap) =>
-        this.prototipoSrv.getPrototipo(params.get('id')))
+        this.prototipoSrv.getAcordeonPartidas(params.get('id')))
       .subscribe(res => {
-        this.prototipo = res;
+        this.prototipo = res.prototipo;
+        this.partidas = res.partidas;
         this.loading = false;
+      }, (error) => {
+        this.loading = false;
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+          duration: 3000
+        });
       });
 
 

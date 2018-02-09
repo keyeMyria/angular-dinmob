@@ -24,7 +24,8 @@ export class UsuariosComponent implements OnInit {
   constructor(
     public dialog: MatDialog, 
     private usuarioSrv: UsuarioService, 
-    public snackBar: MatSnackBar) { }
+    public snackBar: MatSnackBar
+  ) { }
 
   ngOnInit() {
     this.loading = true;

@@ -6,10 +6,11 @@
 
   <div class="row">
     <div class="col-12">
+
       <div class="card">
-        <div class="card-header">
-          <div class="d-flex padding-header">
-            <div class="align-self-center">{{prototipo?.info.nombre}}</div>
+        <div class="card-header padding-card-header">
+          <div class="d-flex">
+            <div class="align-self-center">{{prototipo?.nombre}}</div>
             <div class="spacer"></div>
             <div>
               <button mat-icon-button [matMenuTriggerFor]="menu1">
@@ -29,13 +30,14 @@
           </div>
 
         </div>
-        <div class="card-body">
+
+        <div class="">
 
 
           <!-- partidas -->
           <mat-accordion [displayMode]="'default'">
 
-            <mat-expansion-panel [hideToggle]="true" *ngFor="let partida of prototipo?.partidas" #par>
+            <mat-expansion-panel [hideToggle]="true" *ngFor="let partida of partidas" #par>
               <mat-expansion-panel-header class="align-items-center" [ngClass]="{'bg-primary text-white':par.expanded}">
                 <span class="font-weight-bold align-self-center mr-1">{{partida.codigo}}</span>
                 <span class="align-self-center">{{partida.nombre}}</span>
@@ -198,13 +200,8 @@
           </mat-accordion>
 
 
-
-
-
-
-
-
         </div>
+
       </div>
     </div>
   </div>

@@ -1,12 +1,16 @@
 <h1 mat-dialog-title>Agregar Prototipo</h1>
 <div mat-dialog-content>
 
+  <div class="form-group">
+    <div>{{data.obra.nombre}}</div>
+  </div>
+
   <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
     <div class="form-group">
-      <label for="nombre" class="control-label">Nombre</label>
-      <input type="text" name="nombre" class="form-control" formControlName="nombre" 
+      <!-- <label for="nombre" class="form-label">Nombre</label> -->
+      <input type="text" placeholder="Nombre" name="nombre" class="form-control" formControlName="nombre" 
       [ngClass]="{'is-invalid': form.get('nombre').invalid  && (form.get('nombre').dirty || form.get('nombre').touched )}">
-      <div class="invalid-feedback">El nombre no puede estar vacío</div>
+      <div class="invalid-feedback">Proporcione un nombre de prototipo</div>
     </div>
   </form>
 

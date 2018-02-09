@@ -36,18 +36,18 @@ export class PrototiposComponent implements OnInit {
     public dialog: MatDialog,
     private route: ActivatedRoute,
     private router: Router,
-    private auth: AuthService,
+    private auth: AuthService
   ) { }
 
   ngOnInit() {
 
-    this.loading = true;
+
     this.route.data
-      .subscribe((data: { obras: any[] }) => {
-        //console.log("resultado resolve ", data);
+      .subscribe((data: { obras: any }) => {
         this.obras = data.obras;
       });
 
+    this.loading = true;
     this.route.paramMap
       .switchMap((params: ParamMap) => {
         if (params.has("obra")) {
@@ -57,10 +57,17 @@ export class PrototiposComponent implements OnInit {
           return of([]);
         }
       }).subscribe(prototipos => {
-        //console.log("prototipos", prototipos);
-        this.prototipos = prototipos;
-        this.loading = false;
 
+        this.loading = false;
+        this.prototipos = prototipos;
+
+
+      }, (error) => {
+        this.loading = false;
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
       });
   }
 
@@ -75,10 +82,17 @@ export class PrototiposComponent implements OnInit {
   }
 
   agregarPrototipo() {
+
+    let obra = this.obras.find(obra => obra.id_obra == this.obra_selected);
+
     let dialogRef = this.dialog.open(AgregarPrototipoDialogoComponent, {
-      data: {},
+      data: {
+        obra: obra,
+        prototipos: this.prototipos
+      },
       width: '500px'
     });
+
     dialogRef.afterClosed().subscribe(result => {
 
       if (result === true) {

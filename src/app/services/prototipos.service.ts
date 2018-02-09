@@ -18,9 +18,19 @@ export class PrototiposService {
   }
 
 
-  getPrototipos() {
-    return this.http.get(this.url)
-      .pipe(catchError(this.handleError("getPrototipos")));
+  /*   getPrototipos() {
+      return this.http.get(this.url)
+        .pipe(catchError(this.handleError("getPrototipos")));
+    } */
+
+  createPrototipo(prototipo) {
+    return this.http.post(this.url + "create_prototipo/", { prototipo: prototipo })
+      .pipe(catchError(this.handleError("createPrototipo")));
+  }
+
+  updatePrototipo(id, prototipo) {
+    return this.http.post(this.url + 'update_prototipo/' + id, { prototipo: prototipo })
+      .pipe(catchError(this.handleError("updatePrototipo")));
   }
 
   getPrototiposObra(id_obra) {
@@ -28,9 +38,9 @@ export class PrototiposService {
       .pipe(catchError(this.handleError("getPrototiposObra")));
   }
 
-  getPrototipo(id_prototipo) {
-    return this.http.get(this.url + 'get_prototipo/' + id_prototipo)
-      .pipe(catchError(this.handleError("getPrototipo")));
+  getAcordeonPartidas(id_prototipo) {
+    return this.http.get(this.url + 'get_acordeon_partidas/' + id_prototipo)
+      .pipe(catchError(this.handleError("getAcordeonPartidas")));
   }
 
   private handleError<T>(operation = 'operation') {
