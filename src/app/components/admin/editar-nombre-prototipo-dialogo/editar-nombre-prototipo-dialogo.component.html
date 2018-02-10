@@ -1,3 +1,8 @@
+<div *ngIf="loading">
+  <mat-spinner class="loading"></mat-spinner>
+</div>
+
+
 <h1 mat-dialog-title>Actualizar Nombre</h1>
 <div mat-dialog-content>
 
@@ -5,8 +10,7 @@
   <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
     <div class="form-group">
       <label for="nombre">Nombre</label>
-      <input type="text" class="form-control" name="nombre" id="nombre" formControlName="nombre" 
-      [ngClass]="{'is-invalid': form.get('nombre').invalid  && (form.get('nombre').dirty || form.get('nombre').touched )}">
+      <input type="text" class="form-control" name="nombre" id="nombre" formControlName="nombre" [ngClass]="{'is-invalid': form.get('nombre').invalid  && (form.get('nombre').dirty || form.get('nombre').touched )}">
       <div class="invalid-feedback">Proporcione un nombre</div>
     </div>
   </form>

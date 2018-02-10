@@ -119,7 +119,7 @@ export class PrototiposComponent implements OnInit {
   }
 
   cambiarNombre(prototipo) {
-    console.log("prototipo", prototipo);
+    //console.log("prototipo", prototipo);
     let dialogRef = this.dialog.open(EditarNombrePrototipoDialogoComponent, {
       data: {
         prototipo: prototipo,
@@ -157,23 +157,32 @@ export class PrototiposComponent implements OnInit {
 
       if (result === true) {
 
-        this.snackBar.open("Prototipo Eliminado", "", {
-          duration: 2000,
-          panelClass: ["bg-success", "text-white"]
-        });
+        this.loading = true;
+        this.prototipoSrv.delPrototipo(prototipo.id_prototipo)
+          .subscribe(res => {
 
-      } else {
+            this.loading = false;
+            let i = this.prototipos.indexOf(prototipo);
+            this.prototipos.splice(i, 1);
+            this.snackBar.open("Prototipo Eliminado", "", {
+              duration: 2000,
+              panelClass: ["bg-success", "text-white"]
+            });
 
-        this.snackBar.open("La operación no ha podido ser completada. Inténtelo más tarde", "", {
-          duration: 3000,
-          panelClass: ["bg-danger", "text-white"]
-        });
+          }, (error) => {
+            this.loading = false;
+            this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+              duration: 3000,
+              panelClass: ["bg-danger", "text-white"]
+            });
+          });
+
       }
 
     });
 
   }
 
-  
+
 
 }

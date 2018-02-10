@@ -18,10 +18,7 @@ export class PrototiposService {
   }
 
 
-  /*   getPrototipos() {
-      return this.http.get(this.url)
-        .pipe(catchError(this.handleError("getPrototipos")));
-    } */
+
 
   createPrototipo(prototipo) {
     return this.http.post(this.url + "create_prototipo/", { prototipo: prototipo })
@@ -41,6 +38,11 @@ export class PrototiposService {
   getAcordeonPartidas(id_prototipo) {
     return this.http.get(this.url + 'get_acordeon_partidas/' + id_prototipo)
       .pipe(catchError(this.handleError("getAcordeonPartidas")));
+  }
+
+  delPrototipo(id) {
+    return this.http.post(this.url + 'del_prototipo/' + id, { })
+      .pipe(catchError(this.handleError("delPrototipo")));
   }
 
   private handleError<T>(operation = 'operation') {

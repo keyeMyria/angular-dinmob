@@ -25,6 +25,12 @@ export class LotesService {
   }
 
   //ok
+  updateLoteConPrototipos(id_lote, lote) {
+    return this.http.post(this.url + 'update_lote_con_prototipos/' + id_lote, { lote: lote })
+      .pipe(catchError(this.handleError("updateLoteConPrototipos")));
+  }
+
+  //ok
   bulkUpdate(ids, props) {
     return this.http.post(this.url + 'bulk_update', { ids: ids, props: props })
       .pipe(catchError(this.handleError("bulkUpdate")));

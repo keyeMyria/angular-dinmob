@@ -23,7 +23,7 @@
             <div class="align-self-center">Prototipos</div>
             <div class="spacer"></div>
             <div>
-              <button mat-icon-button (click)="agregarPrototipo()" [disabled]="!obra_selected">
+              <button mat-icon-button (click)="agregarPrototipo()" [disabled]="!obra_selected" matTooltip="Nuevo Prototipo">
                 <mat-icon>add</mat-icon>
               </button>
             </div>
@@ -49,14 +49,14 @@
                       <mat-icon>more_vert</mat-icon>
                     </button>
                     <mat-menu #menu="matMenu">
-                      <button mat-menu-item (click)="editarPrototipo(prototipo)">
+                <!--       <button mat-menu-item (click)="editarPrototipo(prototipo)">
                         <mat-icon>create</mat-icon>
                         <span>Editar Prototipo</span>
                       </button>
                       <button mat-menu-item>
                         <mat-icon>file_download</mat-icon>
                         <span>Descargar archivo</span>
-                      </button>
+                      </button> -->
                       <button mat-menu-item (click)="cambiarNombre(prototipo)">
                         <mat-icon>create</mat-icon>
                         <span>Cambiar Nombre</span>

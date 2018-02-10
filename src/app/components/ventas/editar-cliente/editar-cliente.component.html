@@ -927,45 +927,48 @@
 
       <!-- propiedades del lote -->
       <div class="card text-white bg-secondary px-3 my-3">
-
-        <div class="form-group row mt-3">
-          <label class="col-form-label col-sm-3">Estado Lote</label>
-          <div class="col-sm-9">
-            <div class="input-group">
-              <select class="form-control">
+        <form [formGroup]="formLote">
+          <div class="form-group row mt-3">
+            <label class="col-form-label col-sm-3">Estado Lote</label>
+            <div class="col-sm-9">
+              <select class="form-control" name="id_estado_venta" formControlName="id_estado_venta">
                 <option *ngFor="let estado of estados" [value]="estado.id_estado_lote">{{estado.descripcion}}</option>
               </select>
-              <div class="input-group-append">
-                <button type="button" class="btn btn-light" (click)="actualizarEstadoLote(compra_selected)">Actualizar</button>
+            </div>
+          </div>
+
+
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3" for="fecha_estado">Fecha Estado</label>
+            <div class="col-sm-9">
+              <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd" type="text" formControlName="fecha_cambio_estado" id="fecha_estado"
+                  [matDatepicker]="dpFechaEstado">
+                <span class="input-group-append">
+                  <button class="btn btn-light" type="button" (click)="dpFechaEstado.open()">
+                    <i class="fa fa-calendar"></i>
+                  </button>
+                </span>
               </div>
+              <mat-datepicker touchUi="true" #dpFechaEstado></mat-datepicker>
             </div>
           </div>
-        </div>
 
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3" for="fecha_estado">Fecha Estado</label>
-          <div class="col-sm-9">
-            <div class="input-group">
-              <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_estado" id="fecha_estado" [matDatepicker]="dpFechaEstado">
-              <span class="input-group-append">
-                <button class="btn btn-light" type="button" (click)="dpFechaEstado.open()">
-                  <i class="fa fa-calendar"></i>
-                </button>
-              </span>
+          <div class="form-group row">
+            <label for="" class="col-form-label col-sm-3">Precio de Lista</label>
+            <div class="col-sm-9">
+              <input [textMask]="{mask: numbermask}" type="text" formControlName="valor_base" class="form-control">
             </div>
-            <mat-datepicker touchUi="true" #dpFechaEstado></mat-datepicker>
           </div>
-        </div>
 
-        <div class="form-group row">
-          <label for="" class="col-form-label col-sm-3">Precio de Lista</label>
-          <div class="col-sm-9">
-            <input [textMask]="{mask: numbermask}" type="text" class="form-control">
+          <div class="form-group text-center">
+            <button type="button" class="btn btn-light" [disabled]="formLote.invalid" (click)="guardarLote()">Actualizar</button>
           </div>
-        </div>
+        </form>
 
       </div>
 
+      <!-- propiedades de la compra -->
       <form [formGroup]="formInmueble" (ngSubmit)="guardarInmueble()">
         <fieldset [disabled]="selection.isEmpty()">
 

@@ -1,3 +1,8 @@
+<div *ngIf="loading">
+  <mat-spinner class="loading"></mat-spinner>
+</div>
+
+
 <h1 mat-dialog-title>Editar Lote</h1>
 <div mat-dialog-content>
 
@@ -7,8 +12,7 @@
 
     <div class="form-group">
       <label class="form-label" for="lote">Lote</label>
-      <input type="text" class="form-control" id="lote" formControlName="nombre"  
-      [ngClass]="{'is-invalid': form.controls['nombre'].invalid && (form.controls['nombre'].dirty || form.controls['nombre'].touched) }">
+      <input type="text" class="form-control" id="lote" formControlName="nombre" [ngClass]="{'is-invalid': form.controls['nombre'].invalid && (form.controls['nombre'].dirty || form.controls['nombre'].touched) }">
     </div>
 
     <div class="form-group">
@@ -18,12 +22,12 @@
 
     <div class="form-group">
       <label class="form-label" for="valor_base">Valor Base</label>
-      <input type="text" class="form-control" id="valor_base" formControlName="valor_base">
+      <input type="text" [textMask]="{mask: numbermask}" class="form-control" id="valor_base" formControlName="valor_base">
     </div>
 
     <div class="form-group">
       <label class="form-label" for="valor_ampliacion">Valor Ampliación</label>
-      <input type="text" class="form-control" id="valor_ampliacion" formControlName="valor_ampliacion">
+      <input type="text" [textMask]="{mask: numbermask}" class="form-control" id="valor_ampliacion" formControlName="valor_ampliacion">
     </div>
 
     <div class="form-group">
@@ -61,5 +65,5 @@
 <div mat-dialog-actions>
   <button type="button" mat-button [mat-dialog-close]="false">CANCELAR</button>
   <button type="submit" form="id_form" mat-button [disabled]="form.invalid" color="primary">GUARDAR</button>
-  <button type="button" mat-button (click)="debug()">debug</button>
+  <!-- <button type="button" mat-button (click)="debug()">debug</button> -->
 </div>

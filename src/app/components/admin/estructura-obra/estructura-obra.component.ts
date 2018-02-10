@@ -396,10 +396,11 @@ export class EstructuraObraComponent implements OnInit {
     });
 
     let valor = this.opValorBase.value.replace(/,/g, "");
+    this.loading = true;
     this.loteSrv.bulkUpdate(id_lotes, { valor_base: valor })
       .subscribe(res => {
-        console.log("respuesta", res);
-
+        //console.log("respuesta", res);
+        this.loading = false;
 
         if (res.count) {
           //todo ok
@@ -430,7 +431,7 @@ export class EstructuraObraComponent implements OnInit {
 
       },
       (error) => {
-
+        this.loading = false;
         this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde.", "", {
           duration: 3000,
           panelClass: ["bg-danger", "text-white"]
@@ -451,10 +452,11 @@ export class EstructuraObraComponent implements OnInit {
     });
 
     let valor = this.opValorAmpliacion.value.replace(/,/g, "");
+    this.loading = true;
     this.loteSrv.bulkUpdate(id_lotes, { valor_ampliacion: valor })
       .subscribe(res => {
-        console.log("respuesta", res);
-
+        //console.log("respuesta", res);
+        this.loading = false;
 
         if (res.count) {
           //todo ok
@@ -475,7 +477,7 @@ export class EstructuraObraComponent implements OnInit {
 
         } else {
           //error o count==0
-
+          this.loading = false;
           this.snackBar.open("Su solicitud no se ha podido completar.", "", {
             duration: 3000,
             panelClass: ["bg-danger", "text-white"]
@@ -507,10 +509,11 @@ export class EstructuraObraComponent implements OnInit {
     });
 
 
+    this.loading = true;
     this.loteSrv.bulkUpdate(id_lotes, { en_venta: this.opEnVenta.value })
       .subscribe(res => {
-        console.log("respuesta", res);
-
+        //console.log("respuesta", res);
+        this.loading = false;
         if (res.count) {
           //todo ok
 
@@ -527,8 +530,7 @@ export class EstructuraObraComponent implements OnInit {
             panelClass: ["bg-success", "text-white"]
           });
 
-        } else {
-          //error
+        } else {         
 
           this.snackBar.open("Su solicitud no se ha podido completar.", "", {
             duration: 3000,
@@ -540,7 +542,7 @@ export class EstructuraObraComponent implements OnInit {
 
       },
       (error) => {
-
+        this.loading = false;
         this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde.", "", {
           duration: 3000,
           panelClass: ["bg-danger", "text-white"]
@@ -567,11 +569,11 @@ export class EstructuraObraComponent implements OnInit {
     };
 
     //console.log(prototipo);
-
+    this.loading = true;
     this.loteSrv.bulkAddLotePrototipo(id_lotes, prototipo.id_prototipo)
       .subscribe(res => {
-        console.log("respuesta", res);
-
+        //console.log("respuesta", res);
+        this.loading = false;
 
         //todo ok
 
@@ -591,7 +593,7 @@ export class EstructuraObraComponent implements OnInit {
 
       },
       (error) => {
-
+        this.loading = false;
         this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde.", "", {
           duration: 3000,
           panelClass: ["bg-danger", "text-white"]

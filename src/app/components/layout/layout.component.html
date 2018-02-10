@@ -8,7 +8,7 @@
 
 
     <!-- <span>Dinmob</span> -->
-    <button mat-button (click)="gotoTablero()">Control Inmobiliario</button>
+    <button mat-button (click)="gotoTablero()">CIVSA</button>
 
     <span class="spacer"></span>
 
@@ -17,7 +17,7 @@
       <mat-icon>person</mat-icon>
     </button>
 
-<!--     <button mat-icon-button (click)="navRight.toggle()">
+    <!--     <button mat-icon-button (click)="navRight.toggle()">
       <mat-icon>more_vert</mat-icon>
     </button> -->
 
@@ -39,37 +39,24 @@
 
         <h3 class="sidenav-title">Administración</h3>
 
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/login']" routerLinkActive="active">Login</a>
-
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/clientes', obra_default]" routerLinkActive="active">Clientes</a>
 
         <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/usuarios']" routerLinkActive="active">Usuarios</a>
 
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/crear-usuario']" routerLinkActive="active">Crear Usuario</a>
-
         <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/obras']" routerLinkActive="active">Obras</a>
 
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/mapas-ventas']" routerLinkActive="active">Mapas Ventas</a>
-
         <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/prototipos', obra_default]" routerLinkActive="active">Prototipos</a>
-
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/desarrollos', obra_default]" routerLinkActive="active">Desarrollos</a>
-
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/nuevo-cliente']" routerLinkActive="active">Nuevo cliente</a>
 
         <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/tablero']" routerLinkActive="active">Tablero</a>
 
         <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/estructura-obra', obra_default]" routerLinkActive="active">Estructura obra</a>
 
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/trabajadores']" routerLinkActive="active">Trabajadores</a>
-
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/asignar-trabajadores']" routerLinkActive="active">Asignar Trabajadores</a>
+        <!-- <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/asignar-trabajadores']" routerLinkActive="active">Asignar Trabajadores</a> -->
 
 
 
       </mat-nav-list>
 
-      <mat-nav-list class="mb-5" *ngIf="usuario.tipo_usuario=='Administrador'">
+      <!--       <mat-nav-list class="mb-5" *ngIf="usuario.tipo_usuario=='Administrador'">
 
         <h3 class="sidenav-title">Almacén</h3>
 
@@ -83,44 +70,30 @@
 
         <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/nueva-entrada']" routerLinkActive="active">Nueva Entrada</a>
 
-      </mat-nav-list>
+      </mat-nav-list> -->
 
 
       <mat-nav-list class="mb-5" *ngIf="usuario.tipo_usuario=='Administrador' || usuario.tipo_usuario=='Ventas'">
 
         <h3 class="sidenav-title">Ventas</h3>
 
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/login']" routerLinkActive="active">Login</a>
 
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/clientes']" routerLinkActive="active">Clientes</a>
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/clientes', obra_default]" routerLinkActive="active">Clientes</a>
 
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/desarrollos']" routerLinkActive="active">Desarrollos</a>
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/desarrollos', obra_default]" routerLinkActive="active">Desarrollos</a>
 
         <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/nuevo-cliente']" routerLinkActive="active">Nuevo cliente</a>
 
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/mapas-ventas']" routerLinkActive="active">Mapas Ventas</a>
-
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/cliente']" routerLinkActive="active">Cliente</a>
-
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/obras']" routerLinkActive="active">Obras</a>
-
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/tablero']" routerLinkActive="active">Tablero</a>
-
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/crear-acta-entrega']" routerLinkActive="active">Crear Acta de Entrega</a>
-
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/acta-entrega']" routerLinkActive="active">Acta de Entrega</a>
-
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/actas-entrega']" routerLinkActive="active">Actas de Entrega</a>
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/mapas-ventas', obra_default]" routerLinkActive="active">Mapas Ventas</a>
 
         <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/alerta-clientes']" routerLinkActive="active">Alerta Clientes</a>
 
         <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/clientes-sin-lote']" routerLinkActive="active">Clientes sin Lote</a>
 
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/ventas-lotes']" routerLinkActive="active">Ventas Lotes</a>
 
       </mat-nav-list>
 
-      <mat-nav-list class="mb-5" *ngIf="usuario.tipo_usuario=='Administrador' || usuario.tipo_usuario=='Almacén'">
+      <!--       <mat-nav-list class="mb-5" *ngIf="usuario.tipo_usuario=='Administrador' || usuario.tipo_usuario=='Almacén'">
 
         <h3 class="sidenav-title">Almacén</h3>
 
@@ -139,9 +112,9 @@
         <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/tablero']" routerLinkActive="active">Tablero</a>
 
 
-      </mat-nav-list>
+      </mat-nav-list> -->
 
-      <mat-nav-list class="mb-5" *ngIf="usuario.tipo_usuario=='Administrador' || usuario.tipo_usuario=='Residente'">
+      <!--       <mat-nav-list class="mb-5" *ngIf="usuario.tipo_usuario=='Administrador' || usuario.tipo_usuario=='Residente'">
 
         <h3 class="sidenav-title">Residente</h3>
 
@@ -149,12 +122,12 @@
 
         <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/mapas-avances']" routerLinkActive="active">Mapas avances</a>
 
-      </mat-nav-list>
+      </mat-nav-list> -->
 
 
     </mat-sidenav>
 
-<!--     <mat-sidenav #navRight class="sidenav-end" mode="over" align="end" opened="false">
+    <!--     <mat-sidenav #navRight class="sidenav-end" mode="over" align="end" opened="false">
       <mat-tab-group>
         <mat-tab label="Tab 1">
           <h3>Encabezado</h3>

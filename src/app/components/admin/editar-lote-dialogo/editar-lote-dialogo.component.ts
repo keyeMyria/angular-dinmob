@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
 import { LotesService } from 'app/services/lotes.service';
+import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 
 @Component({
   selector: 'app-editar-lote-dialogo',
@@ -11,6 +12,14 @@ import { LotesService } from 'app/services/lotes.service';
 export class EditarLoteDialogoComponent implements OnInit {
 
   form: FormGroup;
+  loading: boolean;
+
+  numbermask = createNumberMask({
+    allowDecimal: true,
+    prefix: '',
+    decimalLimit: 2
+  });
+
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -19,7 +28,6 @@ export class EditarLoteDialogoComponent implements OnInit {
     private fb: FormBuilder,
   ) {
 
-    console.log(this.data.lote);
 
     this.form = this.fb.group({
       nombre: [this.data.lote.nombre, Validators.required],
@@ -65,16 +73,25 @@ export class EditarLoteDialogoComponent implements OnInit {
     (<FormArray>this.form.controls["prototipos"]).removeAt(index);
   }
 
-  guardar() {
-    console.log("guardar");
-    this.dialogRef.close(true);
+  private clonar(objeto): any {
 
-    this.loteSrv.updateLote(this.data.lote.id_lote, this.form.value)
-      .subscribe(
-      lote => {
+    let strObject = JSON.stringify(objeto);
+    return JSON.parse(strObject);
+
+  }
+
+  guardar() {
+
+    let lote = this.clonar(this.form.value);
+    lote.valor_base = lote.valor_base.replace(/,/g, "");
+    lote.valor_ampliacion = lote.valor_ampliacion.replace(/,/g, "");
+
+    this.loteSrv.updateLoteConPrototipos(this.data.lote.id_lote, lote)
+      .subscribe(lote => {
 
         let i = this.data.lotes.indexOf(this.data.lote);
         this.data.lotes[i] = lote;
+        this.dialogRef.close(true);
 
       }, (error) => {
         this.dialogRef.close({ error: "Ha ocurrido un error. Vuelva a intentarlo más tarde." });

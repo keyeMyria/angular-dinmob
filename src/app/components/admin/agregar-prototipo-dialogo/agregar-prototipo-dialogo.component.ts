@@ -33,8 +33,8 @@ export class AgregarPrototipoDialogoComponent implements OnInit {
     this.loading = true;
     let prototipo = { id_obra: this.data.obra.id_obra, nombre: this.form.get('nombre').value };
 
-    console.log("agregar prototipo", this.form.value);
-    console.log("prototipo", prototipo);
+    //console.log("agregar prototipo", this.form.value);
+    //console.log("prototipo", prototipo);
     
 
     this.prototipoSrv.createPrototipo(prototipo)

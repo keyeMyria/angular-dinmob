@@ -17,6 +17,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { VentasPagosService } from 'app/services/ventas-pagos.service';
 import { UploadFileDialogoComponent } from 'app/components/ventas/upload-file-dialogo/upload-file-dialogo.component';
 import { ReporteService } from 'app/services/reporte.service';
+import { LotesService } from 'app/services/lotes.service';
 
 @Component({
   selector: 'app-editar-cliente',
@@ -69,6 +70,7 @@ export class EditarClienteComponent implements OnInit {
   formConyuge: FormGroup;
   formApoderado: FormGroup;
   formInmueble: FormGroup;
+  formLote: FormGroup;
 
   constructor(
     private clienteSrv: ClientesService,
@@ -78,7 +80,8 @@ export class EditarClienteComponent implements OnInit {
     public snackBar: MatSnackBar,
     private fb: FormBuilder,
     private pagoSrv: VentasPagosService,
-    private reporteSrv: ReporteService
+    private reporteSrv: ReporteService,
+    private loteSrv: LotesService
   ) {
     this.formAlerta = this.fb.group({
       mensaje_alerta: null,
@@ -213,6 +216,12 @@ export class EditarClienteComponent implements OnInit {
       comentarios_entrega_fisica: null,
     });
 
+    this.formLote = this.fb.group({
+      id_estado_venta: null,
+      valor_base: null,
+      fecha_cambio_estado: null,
+    });
+
   }
 
   ngOnInit() {
@@ -276,10 +285,12 @@ export class EditarClienteComponent implements OnInit {
     if (this.selection.selected.length > 0) {
       this.compra_selected = this.selection.selected[0];
       this.formInmueble.patchValue(this.compra_selected);
+      this.formLote.patchValue(this.compra_selected);
 
     } else {
       this.compra_selected = {};
       this.formInmueble.reset();
+      this.formLote.reset();
     }
 
   }
@@ -349,6 +360,7 @@ export class EditarClienteComponent implements OnInit {
         this.selection.select(this.compras[i]);
         this.compra_selected = this.selection.selected[0];
         this.formInmueble.patchValue(this.compra_selected);
+        this.formLote.patchValue(this.compra_selected);
 
 
         this.snackBar.open("Compra Actualizada", "", {
@@ -364,6 +376,44 @@ export class EditarClienteComponent implements OnInit {
       });
 
   }
+
+
+  //guarda el formulario
+  guardarLote() {
+    //console.log("guardar datos inmueble", this.tab_selected);
+    //console.log(this.formInmueble.value);
+
+    let lote = this.clonar(this.formLote.value);
+    if (lote.valor_base !== null) {
+      lote.valor_base = lote.valor_base.replace(/,/g, "");
+    }
+
+    this.loading = true;
+    this.loteSrv.updateLote(this.compra_selected.id_lote, lote)
+      .subscribe(lote => {
+        this.loading = false;
+
+
+        this.compra_selected.valor_base = lote.valor_base;
+        this.compra_selected.id_estado_venta = lote.id_estado_venta;
+        this.compra_selected.fecha_cambio_estado = lote.fecha_cambio_estado;
+        this.formLote.patchValue(lote);
+
+
+        this.snackBar.open("Lote Actualizado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+      }, (error) => {
+        this.loading = false;
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+      });
+
+  }
+
 
   //guarda el formulario
   guardarAlerta() {
