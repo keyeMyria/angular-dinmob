@@ -80,7 +80,7 @@ export class AlertaClientesComponent implements OnInit {
     let dialogRef = this.dialog.open(ConfirmarDeshabilitarAlertaDialogoComponent, {
       data: {
         title: "Deshabilitar Alerta",
-        content: `¿Desea deshabilitar la la alerta del cliente: ${cliente.nombre}?`
+        content: `¿Desea deshabilitar la alerta del cliente: ${cliente.nombre}?`
       },
       width: '500px',
     });
