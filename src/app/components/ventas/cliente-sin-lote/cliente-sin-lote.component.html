@@ -33,10 +33,10 @@
                   <td>{{cliente.nombre}}</td>
                   <td>{{cliente.rfc}}</td>
                   <td class="text-right">
-                    <button mat-button class="no-min" (click)="editarCliente(cliente)">
+                    <button mat-button class="no-min" (click)="editarCliente(cliente)" matTooltip="Ir al Cliente">
                       <i class="fa fa-pencil"></i>
                     </button>
-                    <button mat-button class="no-min" (click)="delCliente(cliente)">
+                    <button mat-button class="no-min" (click)="delCliente(cliente)" matTooltip="Eliminar Cliente">
                       <i class="fa fa-times"></i>
                     </button>
                   </td>

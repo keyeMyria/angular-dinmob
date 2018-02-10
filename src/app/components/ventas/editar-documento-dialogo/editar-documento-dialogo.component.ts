@@ -11,6 +11,7 @@ import { ClientesService } from 'app/services/clientes.service';
 })
 export class EditarDocumentoDialogoComponent implements OnInit {
   form: FormGroup;
+  loading: boolean;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -29,17 +30,19 @@ export class EditarDocumentoDialogoComponent implements OnInit {
   guardar() {
     console.log("guardar", this.form.value);
 
+    this.loading = true;
     this.clienteSrv.updateDocumento(this.data.doc.id_documento, this.form.value)
       .subscribe(documento => {
-        
-        let i= this.data.documentos.indexOf(this.data.doc);
-        this.data.documentos[i]=documento;
+
+        this.loading = false;
+        let i = this.data.documentos.indexOf(this.data.doc);
+        this.data.documentos[i] = documento;
 
         this.dialogRef.close(true);
 
       }, (error) => {
-
-        this.dialogRef.close(error);
+        this.loading = false;
+        this.dialogRef.close({ error: "Ha ocurrido un error de conexión. Inténtelo más tarde" });
       });
 
   }

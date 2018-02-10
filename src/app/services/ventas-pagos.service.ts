@@ -37,6 +37,18 @@ export class VentasPagosService {
       .pipe(catchError(this.handleError("updatePago")));
   }
 
+  //ok
+  delPago(id_pago) {
+    return this.http.post(this.url + 'del_pago/' + id_pago, {})
+      .pipe(catchError(this.handleError("delPago")));
+  }
+
+
+  //ok
+  getUploadComprobanteURL() {
+    return this.url + "upload_comprobante";
+  }
+
 
 
   private handleError<T>(operation = 'operation') {

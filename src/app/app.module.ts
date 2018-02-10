@@ -166,6 +166,8 @@ import { TableroVentasComponent } from './components/tablero-ventas/tablero-vent
 import { TableroAlmacenComponent } from './components/tablero-almacen/tablero-almacen.component';
 import { VentasPagosComponent } from './components/ventas/ventas-pagos/ventas-pagos.component';
 import { ConfirmarDeshabilitarAlertaDialogoComponent } from './components/ventas/confirmar-deshabilitar-alerta-dialogo/confirmar-deshabilitar-alerta-dialogo.component';
+import { UploadFileDialogoComponent } from './components/ventas/upload-file-dialogo/upload-file-dialogo.component';
+import { ReporteService } from 'app/services/reporte.service';
 
 
 
@@ -264,6 +266,7 @@ import { ConfirmarDeshabilitarAlertaDialogoComponent } from './components/ventas
     TableroAlmacenComponent,
     VentasPagosComponent,
     ConfirmarDeshabilitarAlertaDialogoComponent,
+    UploadFileDialogoComponent,
 
 
 
@@ -332,7 +335,8 @@ import { ConfirmarDeshabilitarAlertaDialogoComponent } from './components/ventas
     EditarTrabajadorDialogoComponent,
     EditarEntradaDialogoComponent,
     VerSalidaDialogoComponent,
-    ConfirmarDeshabilitarAlertaDialogoComponent
+    ConfirmarDeshabilitarAlertaDialogoComponent,
+    UploadFileDialogoComponent
 
 
 
@@ -362,6 +366,7 @@ import { ConfirmarDeshabilitarAlertaDialogoComponent } from './components/ventas
     EntradasService,
     SalidasService,
     VentasPagosService,
+    ReporteService,
 
     ObrasUsuarioResolverService,
     UsuariosAlmacenistasResolverService,

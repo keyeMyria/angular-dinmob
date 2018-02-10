@@ -1,3 +1,7 @@
+<div *ngIf="loading">
+  <mat-spinner class="loading"></mat-spinner>
+</div>
+
 <h1 mat-dialog-title>Editar Documento</h1>
 <div mat-dialog-content>
 
@@ -6,13 +10,10 @@
 
     <div class="form-group">
       <!-- <label for="nombre" class="form-label">Nombre</label> -->
-      <input class="form-control" placeholder="Nombre" type="text" name="nombre" id="nombre" formControlName="nombre" 
-      [ngClass]="{'is-invalid': form.get('nombre').invalid  && (form.get('nombre').dirty || form.get('nombre').touched )}">
+      <input class="form-control" placeholder="Nombre" type="text" name="nombre" id="nombre" formControlName="nombre" [ngClass]="{'is-invalid': form.get('nombre').invalid  && (form.get('nombre').dirty || form.get('nombre').touched )}">
       <div class="invalid-feedback">Proporcione un nombre</div>
     </div>
   </form>
-
-
 
 
 </div>

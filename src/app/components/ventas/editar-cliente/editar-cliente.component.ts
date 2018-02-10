@@ -14,6 +14,9 @@ import { EditarDocumentoDialogoComponent } from 'app/components/ventas/editar-do
 import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
 import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
 import { SelectionModel } from '@angular/cdk/collections';
+import { VentasPagosService } from 'app/services/ventas-pagos.service';
+import { UploadFileDialogoComponent } from 'app/components/ventas/upload-file-dialogo/upload-file-dialogo.component';
+import { ReporteService } from 'app/services/reporte.service';
 
 @Component({
   selector: 'app-editar-cliente',
@@ -74,6 +77,8 @@ export class EditarClienteComponent implements OnInit {
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
     private fb: FormBuilder,
+    private pagoSrv: VentasPagosService,
+    private reporteSrv: ReporteService
   ) {
     this.formAlerta = this.fb.group({
       mensaje_alerta: null,
@@ -341,7 +346,7 @@ export class EditarClienteComponent implements OnInit {
 
   }
 
-
+  //agregamos documentos al cliente o conyuge
   agregarDocumento(es_de_conyuge) {
 
     //console.log("agregar documento", es_de_conyuge);
@@ -359,13 +364,8 @@ export class EditarClienteComponent implements OnInit {
           duration: 2000,
           panelClass: ["bg-success", "text-white"]
         });
-      } else if (result == false) {
-        this.snackBar.open("Ha ocurrido un error. Inténtelo más tarde", "", {
-          duration: 3000,
-          panelClass: ["bg-danger", "text-white"]
-        });
-      } else {
-        this.snackBar.open(result, "", {
+      } else if (result && result.error) {
+        this.snackBar.open(result.error, "", {
           duration: 3000,
           panelClass: ["bg-danger", "text-white"]
         });
@@ -375,9 +375,10 @@ export class EditarClienteComponent implements OnInit {
   }
 
 
+  //permite subir una comprobante del pago
   cargarFicha(pago) {
 
-    let dialogRef = this.dialog.open(AgregarDocumentoDialogoComponent, {
+    let dialogRef = this.dialog.open(UploadFileDialogoComponent, {
       data: {
         pago: pago
       }
@@ -388,13 +389,8 @@ export class EditarClienteComponent implements OnInit {
           duration: 2000,
           panelClass: ["bg-success", "text-white"]
         });
-      } else if (result == false) {
-        this.snackBar.open("Ha ocurrido un error. Inténtelo más tarde", "", {
-          duration: 3000,
-          panelClass: ["bg-danger", "text-white"]
-        });
-      } else {
-        this.snackBar.open(result, "", {
+      } else if (result && result.error) {
+        this.snackBar.open(result.error, "", {
           duration: 3000,
           panelClass: ["bg-danger", "text-white"]
         });
@@ -419,7 +415,8 @@ export class EditarClienteComponent implements OnInit {
         });
 
       }, (error) => {
-        this.snackBar.open("Ha ocurrido un error. Inténtelo más tarde", "", {
+        this.loading = false;
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
           duration: 3000,
           panelClass: ["bg-danger", "text-white"]
         });
@@ -456,12 +453,14 @@ export class EditarClienteComponent implements OnInit {
     });
   }
 
-  nuevoPago() {
+  //agrega un pago a la compra asociada
+  nuevoPago(compra) {
     let dialogRef = this.dialog.open(NuevoPagoDialogoComponent, {
       width: '400px',
       data: {
         tipos: this.tipos_pago,
-        formas: this.formas_pago
+        formas: this.formas_pago,
+        compra: compra
       },
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -485,12 +484,14 @@ export class EditarClienteComponent implements OnInit {
 
   }
 
-  editarPago(pago) {
+  //edita las propiedades del pago 
+  editarPago(pago, compra) {
 
     let dialogRef = this.dialog.open(EditarPagoDialogoComponent, {
       width: '400px',
       data: {
         pago: pago,
+        compra: compra,
         tipos: this.tipos_pago,
         formas: this.formas_pago
       },
@@ -517,6 +518,7 @@ export class EditarClienteComponent implements OnInit {
 
   }
 
+  //edita el nombre del documento
   editarDocumento(doc, documentos) {
 
     let dialogRef = this.dialog.open(EditarDocumentoDialogoComponent, {
@@ -536,11 +538,9 @@ export class EditarClienteComponent implements OnInit {
           panelClass: ["bg-success", "text-white"]
         });
 
-      } else if (result == false) {
+      } else if (result && result.error) {
 
-      } else {
-
-        this.snackBar.open(result, "", {
+        this.snackBar.open(result.error, "", {
           duration: 3000,
           panelClass: ["bg-danger", "text-white"]
         });
@@ -550,6 +550,7 @@ export class EditarClienteComponent implements OnInit {
     });
   }
 
+  
   delDocumento(doc, documentos) {
 
     let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
@@ -628,39 +629,9 @@ export class EditarClienteComponent implements OnInit {
 
   }
 
-  delPagos(compra) {
 
-    let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
-      data: {
-        title: "Eliminar Pago",
-        content: `¿Desea eliminar el pagos del ${compra.lote}?`
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-
-
-      if (result === true) {
-
-        this.snackBar.open("Pago Eliminado", "", {
-          duration: 2000,
-          panelClass: ["bg-success", "text-white"]
-        });
-
-      } else if (result.error) {
-
-        this.snackBar.open(result.error, "", {
-          duration: 3000,
-          panelClass: ["bg-danger", "text-white"]
-        });
-
-      }
-
-    });
-
-  }
-
-  delPago(pago) {
+  //elimina un pago de la compra asociada
+  delPago(pago, compra) {
 
     let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
       data: {
@@ -673,17 +644,36 @@ export class EditarClienteComponent implements OnInit {
 
       if (result === true) {
 
-        this.snackBar.open("Pago Eliminado", "", {
-          duration: 2000,
-          panelClass: ["bg-success", "text-white"]
-        });
+        this.loading = true;
+        this.pagoSrv.delPago(pago.id_pago)
+          .subscribe(res => {
 
-      } else if (result.error) {
+            this.loading = false;
 
-        this.snackBar.open(result.error, "", {
-          duration: 3000,
-          panelClass: ["bg-danger", "text-white"]
-        });
+            if (res.count == 1) {
+              let i = compra.pagos.indexOf(pago);
+              compra.pagos.splice(i, 1);
+
+              this.snackBar.open("Pago Eliminado", "", {
+                duration: 2000,
+                panelClass: ["bg-success", "text-white"]
+              });
+            } else {
+              this.snackBar.open("Ha ocurrido un error", "", {
+                duration: 2000,
+                panelClass: ["bg-danger", "text-white"]
+              });
+            }
+
+          }, (error) => {
+            this.loading = false;
+            this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+              duration: 3000,
+              panelClass: ["bg-danger", "text-white"]
+            });
+          });
+
+
 
       }
 
@@ -691,10 +681,12 @@ export class EditarClienteComponent implements OnInit {
 
   }
 
+  //navega hacia ventas lote
   irLote(compra) {
     this.router.navigate(["/ventas/lote", compra.id_lote]);
   }
 
+  //sumatoria de pagos
   totalPagosRealizados() {
     let total = 0;
 
@@ -707,6 +699,7 @@ export class EditarClienteComponent implements OnInit {
     return total;
   }
 
+  //sumatoria de pagos
   saldoPendiente() {
 
     let pendiente = 0;
@@ -721,49 +714,54 @@ export class EditarClienteComponent implements OnInit {
 
   }
 
-  createFormCompra() {
-
-    let formCompra: FormGroup;
-
-    formCompra = this.fb.group({
-
-      proyecto: "",
-      desarrollador: "",
-      valor_operacion: "",
-      ubicacion: "",
-      cp: "",
-      id_tipo_operacion: "",
-      id_institucion_credito: "",
-      banco_credito: "",
-      otra_credito: "",
-      asesor_inmobiliario: "",
-      id_asesor: "",
-      notas_escrituracion: "",
-      notas_cancelacion: "",
-      comentarios_entrega_fisica: "",
-      fecha_firma_contrato: "",
-      fehca_entrega: "",
-      fecha_entrega_fisica: ""
-
-    });
-
-
-
-
-  }
 
   toggleActivacionCompra(compra) {
     console.log("toggleActivacion", compra);
 
   }
 
+  //elimina la compra indicada
+  //????es necesario eliminarla del selection si está seleccionada??
   delCompra(compra) {
-    console.log("delCompra", compra);
+    //console.log("delCompra", compra);
+    this.loading = true;
+    this.clienteSrv.delCompra(compra.id_cliente, compra.id_lote)
+      .subscribe(res => {
+        this.loading = false;
+        if (res.count == 1) {
+          let i = this.compras.indexOf(compra);
+          this.compras.splice(i, 1);
+
+          this.snackBar.open("Compra Eliminada", "", {
+            duration: 2000,
+            panelClass: ["bg-success", "text-white"]
+          });
+        } else {
+          this.snackBar.open("Ha ocurrido un error", "", {
+            duration: 2000,
+            panelClass: ["bg-danger", "text-white"]
+          });
+        }
+
+      }, (error) => {
+        this.loading = false;
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+      });
 
   }
 
+  //reporte
   reporteCompra(compra) {
     console.log("reporte compra", compra);
+    let url = this.reporteSrv.getUrlReporteCompra(compra.id_cliente, compra.id_lote);
+
+    let link = document.createElement("a");
+    link.href = url;
+    link.target = "_blank";
+    link.click();
 
   }
 

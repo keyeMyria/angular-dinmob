@@ -69,9 +69,22 @@ export class VentasLoteComponent implements OnInit {
       });
   }
 
+  private clonar(objeto): any {
+
+    let strObject = JSON.stringify(objeto);
+    return JSON.parse(strObject);
+
+  }
+
   guardar() {
     this.loading = true;
-    this.loteSrv.updateLote(this.lote.id_lote, this.form.value)
+
+    let lote = this.clonar(this.form.value);
+    lote.valor_base = lote.valor_base.replace(/,/g, "");
+    lote.valor_ampliacion = lote.valor_ampliacion.replace(/,/g, "");
+
+
+    this.loteSrv.updateLote(this.lote.id_lote, lote)
       .subscribe(lote => {
         this.loading = false;
         this.lote = lote;
@@ -87,7 +100,7 @@ export class VentasLoteComponent implements OnInit {
           panelClass: ["bg-danger", "text-white"]
         });
 
-      })
+      });
   }
 
   seleccionarCliente(cliente) {
@@ -137,7 +150,8 @@ export class VentasLoteComponent implements OnInit {
     return saldo;
   }
 
-  gotoCliente(cliente) {
+  gotoCliente(cliente,event) {
+    event.stopPropagation();
     this.router.navigate(["/editar-cliente", cliente.id_cliente]);
   }
 

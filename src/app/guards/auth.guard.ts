@@ -22,11 +22,11 @@ export class AuthGuard implements CanActivate {
   checkLogin(url: string): boolean {
 
     if (this.authSrv.IsLoggedIn()) {
-      console.log("is logged in, guard passed!!");
+      //console.log("is logged in, guard passed!!");
       return true;
     }
 
-    console.log("is not logged in, redirect to login");
+    //console.log("is not logged in, redirect to login");
     //store the url for redirecting
     this.authSrv.redirectUrl = url;
 

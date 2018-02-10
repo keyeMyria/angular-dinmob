@@ -27,6 +27,7 @@ export class VentasPagosComponent implements OnInit {
         this.obras = data.obras;
       });
 
+    this.loading = true;
     this.route.paramMap
       .switchMap((params: ParamMap) => {
         if (params.has("obra")) {

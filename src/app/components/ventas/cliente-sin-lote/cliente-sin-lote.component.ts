@@ -24,11 +24,18 @@ export class ClienteSinLoteComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    
     this.loading = true;
     this.clienteSrv.getClientesSinLote()
       .subscribe(clientes => {
         this.clientes = clientes;
         this.loading = false;
+      }, (error) => {
+        this.loading = false;
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
       });
   }
 
@@ -60,20 +67,23 @@ export class ClienteSinLoteComponent implements OnInit {
               let i = this.clientes.indexOf(cliente);
               this.clientes.splice(i, 1);
 
-              this.snackBar.open("Cliente Eliminada", "", {
-                duration: 2000
+              this.snackBar.open("Cliente Eliminado", "", {
+                duration: 2000,
+                panelClass: ["bg-success", "text-white"]
               });
 
             } else {
               this.snackBar.open("Ha ocurrido un error", "", {
-                duration: 2000
+                duration: 3000,
+                panelClass: ["bg-danger", "text-white"]
               });
             }
 
           }, (error) => {
             this.loading = false;
             this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
-              duration: 2000
+              duration: 3000,
+              panelClass: ["bg-danger", "text-white"]
             });
           });
 

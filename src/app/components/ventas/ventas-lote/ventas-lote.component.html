@@ -114,7 +114,7 @@
               <td>{{cliente.fecha_activo| date:'mediumDate':'':'es'}}</td>
               <td>{{cliente.fecha_cancelacion| date:'mediumDate':'':'es'}}</td>
               <td class="text-right">
-                <button mat-button class="no-min" (click)="gotoCliente(cliente)">
+                <button mat-button class="no-min" (click)="gotoCliente(cliente, $event)" matTooltip="Ir al Cliente">
                   <i class="fa fa-user"></i>
                 </button>
               </td>

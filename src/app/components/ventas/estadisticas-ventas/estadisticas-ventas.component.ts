@@ -11,7 +11,7 @@ import { MatSnackBar } from '@angular/material';
 })
 export class EstadisticasVentasComponent implements OnInit {
   obras: any = [];
-  estadisticas: any = {};
+  estadisticas: any ;
   obra_selected: string = "";
   loading: boolean;
 

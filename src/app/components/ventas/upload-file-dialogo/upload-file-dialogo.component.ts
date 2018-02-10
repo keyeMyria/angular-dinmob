@@ -2,30 +2,28 @@ import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { FileUploader, FileItem, FileLikeObject } from 'ng2-file-upload';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { AuthService } from 'app/services/auth.service';
-import { ClientesService } from 'app/services/clientes.service';
+import { VentasPagosService } from 'app/services/ventas-pagos.service';
 
 @Component({
-  selector: 'app-agregar-documento-dialogo',
-  templateUrl: './agregar-documento-dialogo.component.html',
-  styleUrls: ['./agregar-documento-dialogo.component.scss']
+  selector: 'app-upload-file-dialogo',
+  templateUrl: './upload-file-dialogo.component.html',
+  styleUrls: ['./upload-file-dialogo.component.scss']
 })
-export class AgregarDocumentoDialogoComponent {
+export class UploadFileDialogoComponent {
   @ViewChild("inputFile") inputFile: any;
   uploader: FileUploader;
-
-  nombre: string;
   result: any;
 
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef: MatDialogRef<AgregarDocumentoDialogoComponent>,
-    private clienteSrv: ClientesService,
+    public dialogRef: MatDialogRef<UploadFileDialogoComponent>,
+    private pagoSrv: VentasPagosService,
     private auth: AuthService,
   ) {
 
     this.uploader = new FileUploader({
-      url: this.clienteSrv.getUploadDocumentClienteURL(),
+      url: this.pagoSrv.getUploadComprobanteURL(),
       authToken: "Bearer " + this.auth.getToken(),
       queueLimit: 1,
       removeAfterUpload: true
@@ -41,9 +39,10 @@ export class AgregarDocumentoDialogoComponent {
     this.uploader.onBuildItemForm = (item: any, form: any) => {
       //se añaden parametros
       this.uploader.options.additionalParameter = {
-        nombre: this.nombre,
-        id_cliente: this.data.cliente.id_cliente,
-        conyuge: this.data.conyuge
+        id_pago: this.data.pago.id_pago,
+        id_cliente: this.data.pago.id_cliente,
+        id_lote: this.data.pago.id_lote
+
       };
 
     };
@@ -70,7 +69,7 @@ export class AgregarDocumentoDialogoComponent {
 
       } else {
         //this.result = false;
-        this.result={error:"Ha ocurrido un error de conexión. Inténtelo más tarde"}
+        this.result = { error: "Ha ocurrido un error de conexión. Inténtelo más tarde" }
       }
     };
 
@@ -81,7 +80,7 @@ export class AgregarDocumentoDialogoComponent {
       //console.log("success headers", headers);
 
       if (status == 200) {
-        this.data.documentos.push(JSON.parse(response).doc);
+        this.data.pago.url = JSON.parse(response).url;
         this.result = true;
       }
 
@@ -112,7 +111,4 @@ export class AgregarDocumentoDialogoComponent {
     console.log(this.inputFile.nativeElement.files, this.inputFile.nativeElement.value);
     console.log(this.uploader);
   }
-
-
-
 }

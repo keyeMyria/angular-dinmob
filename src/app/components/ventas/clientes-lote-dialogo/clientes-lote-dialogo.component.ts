@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Cliente } from 'app/model/cliente';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Router } from '@angular/router';
+import { ReporteService } from 'app/services/reporte.service';
 
 @Component({
   selector: 'app-clientes-lote-dialogo',
@@ -19,7 +20,8 @@ export class ClientesLoteDialogoComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<ClientesLoteDialogoComponent>,
-    private router: Router
+    private router: Router,
+    private reporteSrv: ReporteService
   ) { }
 
   ngOnInit() {
@@ -67,8 +69,7 @@ export class ClientesLoteDialogoComponent implements OnInit {
 
   reporteCliente(cliente) {
 
-    let url = "http://localhost:8080/dinmob/api/index.php/reportes/cliente_lote/" + cliente.id_cliente + "/" + cliente.id_lote;
-
+    let url = this.reporteSrv.getUrlReporteCompra(cliente.id_cliente, cliente.id_lote);
     let link = document.createElement("a");
     link.href = url;
     link.target = "_blank";
