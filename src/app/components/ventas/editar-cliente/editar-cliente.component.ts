@@ -292,41 +292,76 @@ export class EditarClienteComponent implements OnInit {
 
   //guarda el formulario
   guardarGenerales() {
-    console.log("guardar datos generales", this.tab_selected);
-    console.log(this.formGenerales.value);
+    //console.log("guardar datos generales", this.tab_selected);
+    //console.log(this.formGenerales.value);
     this.updateCliente(this.formGenerales.value);
-
-
   }
 
   //guarda el formulario
   guardarLaborales() {
-    console.log("guardar datos laborales", this.tab_selected);
-    console.log(this.formLaborales.value);
+    //console.log("guardar datos laborales", this.tab_selected);
+    //console.log(this.formLaborales.value);
     this.updateCliente(this.formLaborales.value);
 
   }
 
   //guarda el formulario
   guardarApoderado() {
-    console.log("guardar datos apoderado", this.tab_selected);
-    console.log(this.formApoderado.value);
+    //console.log("guardar datos apoderado", this.tab_selected);
+    //console.log(this.formApoderado.value);
     this.updateCliente(this.formApoderado.value);
 
   }
 
   //guarda el formulario
   guardarConyuge() {
-    console.log("guardar datos conyuge", this.tab_selected);
-    console.log(this.formConyuge.value);
+    //console.log("guardar datos conyuge", this.tab_selected);
+    //console.log(this.formConyuge.value);
     this.updateCliente(this.formConyuge.value);
+
+  }
+
+  //clona un objeto
+  private clonar(objeto): any {
+
+    let strObject = JSON.stringify(objeto);
+    return JSON.parse(strObject);
 
   }
 
   //guarda el formulario
   guardarInmueble() {
-    console.log("guardar datos inmueble", this.tab_selected);
-    console.log(this.formInmueble.value);
+    //console.log("guardar datos inmueble", this.tab_selected);
+    //console.log(this.formInmueble.value);
+
+    let compra = this.clonar(this.formInmueble.value);
+    if (compra.valor_operacion !== null) {
+      compra.valor_operacion = compra.valor_operacion.replace(/,/g, "");
+    }
+
+    this.loading = true;
+    this.clienteSrv.updateCompra(this.compra_selected.id_cliente, this.compra_selected.id_lote, compra)
+      .subscribe(compra => {
+        this.loading = false;
+        let i = this.compras.indexOf(this.compra_selected);
+        this.compras[i] = compra;
+
+        this.selection.select(this.compras[i]);
+        this.compra_selected = this.selection.selected[0];
+        this.formInmueble.patchValue(this.compra_selected);
+
+
+        this.snackBar.open("Compra Actualizada", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+      }, (error) => {
+        this.loading = false;
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+      });
 
   }
 
@@ -550,7 +585,7 @@ export class EditarClienteComponent implements OnInit {
     });
   }
 
-  
+  //elimina el documento
   delDocumento(doc, documentos) {
 
     let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
@@ -563,10 +598,11 @@ export class EditarClienteComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
 
       if (result == true) {
-
+        this.loading = true;
         this.clienteSrv.delDocumento(doc.id_documento)
           .subscribe(res => {
-            if (res.count == "1") {
+            this.loading = false;
+            if (res.count == 1) {
 
               let i = documentos.indexOf(doc);
               documentos.splice(i, 1);
@@ -585,43 +621,12 @@ export class EditarClienteComponent implements OnInit {
 
             }
           }, (error) => {
+            this.loading = false;
             this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
               duration: 3000,
               panelClass: ["bg-danger", "text-white"]
             });
           })
-
-      }
-
-    });
-
-  }
-
-  delLote(compra) {
-
-    let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
-      data: {
-        title: "Eliminar Lote",
-        content: `¿Desea eliminar el ${compra.lote}?`
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-
-
-      if (result === true) {
-
-        this.snackBar.open("Lote Eliminado", "", {
-          duration: 2000,
-          panelClass: ["bg-success", "text-white"]
-        });
-
-      } else if (result.error) {
-
-        this.snackBar.open(result.error, "", {
-          duration: 3000,
-          panelClass: ["bg-danger", "text-white"]
-        });
 
       }
 
@@ -714,9 +719,31 @@ export class EditarClienteComponent implements OnInit {
 
   }
 
-
+  //activa o desactiva la compra
   toggleActivacionCompra(compra) {
     console.log("toggleActivacion", compra);
+    let activo = 0;
+    if (compra.activo == "0") {
+      activo = 1;
+    }
+
+    this.loading = true;
+    this.clienteSrv.setActivacionCompra(compra.id_compra, activo)
+      .subscribe(res => {
+        this.loading = false;
+        compra.activo = res.activo;
+        this.snackBar.open("Compra Actualizada", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      }, (error) => {
+        this.loading = false;
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+          duration: 2000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+      });
 
   }
 

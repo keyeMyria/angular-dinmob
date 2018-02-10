@@ -15,7 +15,7 @@
   <mat-icon>save</mat-icon>
 </button>
 
-<button mat-fab *ngIf="tab_selected=='Inmueble'" (click)="guardarInmueble()" style="position:fixed; top:120px; right:20px; z-index: 10">
+<button mat-fab *ngIf="tab_selected=='Inmueble'" (click)="guardarInmueble()" [disabled]="selection.isEmpty()" style="position:fixed; top:120px; right:20px; z-index: 10">
   <mat-icon>save</mat-icon>
 </button>
 
@@ -875,7 +875,7 @@
               <th>Activación</th>
               <th>Cancelación</th>
               <th class="text-right" style="width:66px">
-                <button mat-icon-button (click)="nuevaCompra()">
+                <button mat-icon-button (click)="nuevaCompra()" matTooltip="Nueva Compra">
                   <mat-icon>add</mat-icon>
                 </button>
               </th>
@@ -899,8 +899,8 @@
                 <mat-menu #menu3="matMenu">
                   <button mat-menu-item (click)="toggleActivacionCompra(compra)">
                     <mat-icon>cancel</mat-icon>
-                    <span>Cancelar</span>
-                    <!-- <span *ngIf="form.get('activo').value=='0'">Activar</span> -->
+                    <span *ngIf="compra.activo=='1'">Cancelar</span>
+                    <span *ngIf="compra.activo=='0'">Activar</span>
                   </button>
                   <button mat-menu-item (click)="delCompra(compra)">
                     <mat-icon>delete</mat-icon>
@@ -966,7 +966,7 @@
 
       </div>
 
-      <form [formGroup]="formInmueble" (ngSubmit)="actualizarCompra(compra_selected)">
+      <form [formGroup]="formInmueble" (ngSubmit)="guardarInmueble()">
         <fieldset [disabled]="selection.isEmpty()">
 
           <div class="form-group row">
@@ -1042,8 +1042,8 @@
             <label class="col-form-label col-sm-3" for="fecha_firma_contrato">Fecha Firma Contrato</label>
             <div class="col-sm-9">
               <div class="input-group">
-                <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_firma_contrato" id="fecha_firma_contrato" [matDatepicker]="dpFechaFirmaContrato"
-                  (ngModelChange)="onFechaChange()">
+                <input class="form-control" placeholder="yyyy-mm-dd" type="text" formControlName="fecha_firma_contrato" id="fecha_firma_contrato"
+                  [matDatepicker]="dpFechaFirmaContrato">
                 <span class="input-group-append">
                   <button class="btn btn-secondary" type="button" (click)="dpFechaFirmaContrato.open()">
                     <i class="fa fa-calendar"></i>
@@ -1058,8 +1058,7 @@
             <label class="col-form-label col-sm-3" for="fecha_entrega">Fecha Entrega Contrato</label>
             <div class="col-sm-9">
               <div class="input-group">
-                <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_entrega" id="fecha_entrega" [matDatepicker]="dpFechaEntrega"
-                  (ngModelChange)="onFechaChange()">
+                <input class="form-control" placeholder="yyyy-mm-dd" type="text" formControlName="fecha_entrega" id="fecha_entrega" [matDatepicker]="dpFechaEntrega">
                 <span class="input-group-append">
                   <button class="btn btn-secondary" type="button" (click)="dpFechaEntrega.open()">
                     <i class="fa fa-calendar"></i>
@@ -1095,8 +1094,8 @@
             </div>
           </div>
 
-          <!-- *ngIf="formInmueble.get('activo').value === '0'" -->
-          <div class="form-group row">
+          <!--  -->
+          <div class="form-group row" *ngIf="compra_selected.activo === '0'">
             <label class="col-form-label col-sm-3">Motivo Cancelación</label>
             <div class="col-sm-9">
               <textarea class="form-control" rows="4" name="notas_cancelacion" formControlName="notas_cancelacion"></textarea>
@@ -1107,8 +1106,8 @@
             <label class="col-form-label col-sm-3" for="fecha_entrega_fisica">Fecha Entrega Física</label>
             <div class="col-sm-9">
               <div class="input-group">
-                <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_entrega_fisica" id="fecha_entrega_fisica" [matDatepicker]="dpFechaEntregaFisica"
-                  (ngModelChange)="onFechaChange()">
+                <input class="form-control" placeholder="yyyy-mm-dd" type="text" formControlName="fecha_entrega_fisica" id="fecha_entrega_fisica"
+                  [matDatepicker]="dpFechaEntregaFisica">
                 <span class="input-group-append">
                   <button class="btn btn-secondary" type="button" (click)="dpFechaEntregaFisica.open()">
                     <i class="fa fa-calendar"></i>
@@ -1170,7 +1169,7 @@
               <td>{{compra.activo|numberToYesNo:'AC'}}</td>
               <td class="ws-nowrap">{{compra.fecha_activo| date:'mediumDate':'':'es'}}</td>
               <td class="ws-nowrap">{{compra.fecha_cancelacion| date:'mediumDate':'':'es'}}</td>
-<!--               <td class="text-right">
+              <!--               <td class="text-right">
                 <button mat-icon-button [matMenuTriggerFor]="menu3" (click)="$event.stopPropagation()">
                   <mat-icon>more_vert</mat-icon>
                 </button>
@@ -1243,7 +1242,7 @@
                 <i class="fa fa-file-o"></i>
               </th>
               <th class="text-right" style="width:66px">
-                <button mat-icon-button (click)="nuevoPago(compra_selected)" [disabled]="selection.isEmpty()">
+                <button mat-icon-button (click)="nuevoPago(compra_selected)" [disabled]="selection.isEmpty()" matTooltip="Nuevo Pago">
                   <mat-icon>add</mat-icon>
                 </button>
               </th>
@@ -1266,8 +1265,8 @@
                 <a target="_blank" [href]="pago.url" *ngIf="pago.url">
                   <i class="fa fa-file-o"></i>
                 </a>
-              </td>              
-              <td class="text-right">              
+              </td>
+              <td class="text-right">
                 <button mat-icon-button [matMenuTriggerFor]="menu4">
                   <mat-icon>more_vert</mat-icon>
                 </button>

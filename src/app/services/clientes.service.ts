@@ -84,9 +84,16 @@ export class ClientesService {
 
   //ok
   updateCompra(id_cliente, id_lote, compra) {
-    return this.http.post(this.url + 'update_compra/' + id_cliente, { id_lote: id_lote, compra: compra })
+    return this.http.post(this.url + 'update_compra/' + id_cliente + "/" + id_lote, { compra: compra })
       .pipe(catchError(this.handleError("updateCompra")));
   }
+
+  //ok
+  setActivacionCompra(id_compra, activo) {
+    return this.http.post(this.url + 'set_activacion_compra/' + id_compra, { activo: activo })
+      .pipe(catchError(this.handleError("setActivacionCompra")));
+  }
+
 
   //ok
   delCompra(id_cliente, id_lote) {

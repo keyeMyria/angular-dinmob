@@ -61,7 +61,7 @@ export class VentasLoteComponent implements OnInit {
 
     this.loteSrv.getDetallesLoteVentas(id)
       .subscribe(res => {
-        console.log("Lote OK", res);
+        //console.log("Lote OK", res);
         this.lote = res.lote;
         this.clientes = res.clientes;
 
@@ -105,7 +105,7 @@ export class VentasLoteComponent implements OnInit {
 
   seleccionarCliente(cliente) {
 
-    console.log("seleccionar cliente");
+    //console.log("seleccionar cliente");
 
 
     this.selection.toggle(cliente);
