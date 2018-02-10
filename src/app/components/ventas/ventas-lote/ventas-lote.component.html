@@ -168,9 +168,8 @@
               <th>Nota</th>
               <th>Validado</th>
               <th>
-                <i class="fa fa-picture"></i>
-              </th>
-              <th class="text-right" style="width:66px"></th>
+                <i class="fa fa-file-o"></i>
+              </th>              
             </tr>
           </thead>
           <tbody>
@@ -187,16 +186,10 @@
                 </span>
               </td>
               <td>
-                <a target="_blank"></a>
-              </td>
-
-              <td class="text-right">
-
-                <button mat-icon-button>
-                  <mat-icon>more_vert</mat-icon>
-                </button>
-
-              </td>
+                  <a target="_blank" [href]="pago.url" *ngIf="pago.url">
+                      <i class="fa fa-file-o"></i>
+                    </a>
+              </td>         
             </tr>
           </tbody>
         </table>

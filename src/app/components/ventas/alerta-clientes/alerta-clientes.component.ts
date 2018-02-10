@@ -30,23 +30,31 @@ export class AlertaClientesComponent implements OnInit {
     this.loading = true;
     this.route.data
       .subscribe((data: { obras: any[] }) => {
-        //console.log("resultado resolve ", data);
         this.obras = data.obras;
       });
 
-    this.route.paramMap
-      .switchMap((params: ParamMap) => {
-        if (params.has("obra")) {
-          this.obra_selected = params.get("obra");
-          // params.get("obra")
-          return this.clienteSrv.getAlertas();
-        } else {
-          return of([]);
-        }
-      }).subscribe(clientes => {
+
+    this.clienteSrv.getAlertas()
+      .subscribe(clientes => {
         this.clientes = clientes;
         this.loading = false;
+      }, (error) => {
+        this.loading = false;
       });
+
+    /*     this.route.paramMap
+          .switchMap((params: ParamMap) => {
+            if (params.has("obra")) {
+              this.obra_selected = params.get("obra");
+    
+              return this.clienteSrv.getAlertas();
+            } else {
+              return of([]);
+            }
+          }).subscribe(clientes => {
+            this.clientes = clientes;
+            this.loading = false;
+          }); */
 
 
   }
@@ -55,7 +63,7 @@ export class AlertaClientesComponent implements OnInit {
     this.router.navigate(["/editar-cliente", cliente.id_cliente]);
   }
 
-
+/* 
   cargarObra(id_obra) {
 
     if (id_obra) {
@@ -65,7 +73,7 @@ export class AlertaClientesComponent implements OnInit {
 
     }
 
-  }
+  } */
 
 
   deshabilitarAlerta(cliente) {
@@ -80,18 +88,25 @@ export class AlertaClientesComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
 
       if (result === true) {
+        this.loading = true;
+        this.clienteSrv.deshabilitarAlerta(cliente.id_cliente)
+          .subscribe(res => {
+            this.loading = false;
+            let i = this.clientes.indexOf(cliente);
+            this.clientes.splice(i, 1);
+            this.snackBar.open("Alerta Deshabilitada", "", {
+              duration: 2000,
+              panelClass: ["bg-success", "text-white"]
+            });
+          }, (error) => {
+            this.loading = false;
+            this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+              duration: 3000,
+              panelClass: ["bg-danger", "text-white"]
+            });
+          });
 
-        this.snackBar.open("Alerta Deshabilitada", "", {
-          duration: 2000,
-          panelClass: ["bg-success", "text-white"]
-        });
 
-      } else {
-
-        this.snackBar.open("La operación no ha podido ser completada. Inténtelo más tarde", "", {
-          duration: 3000,
-          panelClass: ["bg-danger", "text-white"]
-        });
       }
 
     });

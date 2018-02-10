@@ -51,6 +51,11 @@ export class ClientesService {
       .pipe(catchError(this.handleError("getAlertas")));
   }
 
+  deshabilitarAlerta(id_cliente) {
+    return this.http.get(this.url + "deshabilitar_alerta/" + id_cliente)
+      .pipe(catchError(this.handleError("deshabilitarAlerta")));
+  }
+
   //ok
   getClienteConComprasYDocumentos(id_cliente) {
     return this.http.get(this.url + 'get_cliente_documentos_compras/' + id_cliente)

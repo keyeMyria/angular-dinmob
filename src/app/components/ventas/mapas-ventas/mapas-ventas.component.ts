@@ -21,8 +21,8 @@ declare var $: any;
 })
 export class MapasVentasComponent implements OnInit, OnDestroy {
   self = this;
-  loading:boolean;
-  verLeyenda:boolean=true;
+  loading: boolean;
+  verLeyenda: boolean = true;
 
   map: any;
   lote_selected: any = null;
@@ -44,12 +44,11 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.route.data
-      .subscribe((data: { obras: any[] }) => {
-        // console.log("resultado resolve ", data);
+      .subscribe((data: { obras: any }) => {
         this.obras = data.obras;
       });
 
-    
+
 
     this.route.paramMap
       .switchMap((params: ParamMap) => {
@@ -57,7 +56,7 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
           this.obra_selected = params.get("obra");
 
           let obra = this.getObra(this.obra_selected);
-          this.loading=true;
+          this.loading = true;
 
           //unimos la consulta de los valores y el mapa
           return Observable.forkJoin(
@@ -82,10 +81,10 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
 
         this.crearMapa(values);
 
-        this.loading=false;
-        
-      }, (error)=>{
-        this.loading=false;
+        this.loading = false;
+
+      }, (error) => {
+        this.loading = false;
       });
 
   }
@@ -110,11 +109,12 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
 
   verClientes() {
 
+    this.loading = true;
     this.loteSrv.getDetallesLoteVentas(this.lote_selected.id_lote)
       .subscribe(res => {
 
         //console.log("res", res);
-
+        this.loading = false;
 
         let dialogRef = this.dialog.open(ClientesLoteDialogoComponent, {
           data: {
@@ -125,6 +125,8 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
         });
 
 
+      }, (error) => {
+        this.loading = false;
       });
 
 
@@ -139,7 +141,7 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
 
   toggleVerLeyenda(event) {
     //console.log("ver leyenda", event.checked);
-    this.verLeyenda=event.checked;
+    this.verLeyenda = event.checked;
     $(".jvectormap-legend-cnt.jvectormap-legend-cnt-v").toggleClass("d-none");
     //let items= $(".jvectormap-legend-cnt.jvectormap-legend-cnt-v");
     //console.log(items);
@@ -150,8 +152,8 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
 
   crearMapa(values) {
 
-    this.verLeyenda=true;   
-    
+    this.verLeyenda = true;
+
 
     //borramos el mapa si ya hemos creado alguno
     if (this.map) {
