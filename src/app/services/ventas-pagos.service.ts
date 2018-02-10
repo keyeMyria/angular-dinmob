@@ -38,6 +38,13 @@ export class VentasPagosService {
   }
 
   //ok
+  setValidacion(id_pago, validado) {
+    return this.http.post(this.url + 'set_validacion_pago/' + id_pago, { validado: validado })
+      .pipe(catchError(this.handleError("setValidacion")));
+  }
+
+
+  //ok
   delPago(id_pago) {
     return this.http.post(this.url + 'del_pago/' + id_pago, {})
       .pipe(catchError(this.handleError("delPago")));

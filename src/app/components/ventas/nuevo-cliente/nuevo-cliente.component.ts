@@ -181,15 +181,22 @@ export class NuevoClienteComponent {
 
     //console.log("inmueble", this.formInmueble.value);
 
+    this.loading = true;
+    let id_obra = this.formInmueble.get('obra').value;
 
     this.clienteSrv.createCliente(this.form.value, this.formInmueble.get('lote').value)
       .subscribe(res => {
+        this.loading = false;
+        //console.log("Cliente Creado", res);
+        if (res.compra) {
+          this.router.navigate(["clientes", { obra: id_obra }]);
 
-        console.log("Cliente Creado", res);
-
-        this.router.navigate(["clientes"]);
+        } else {
+          this.router.navigate(["clientes-sin-lote"]);
+        }
 
       }, (error) => {
+        this.loading = false;
         this.router.navigate(["clientes-sin-lote"]);
       });
 

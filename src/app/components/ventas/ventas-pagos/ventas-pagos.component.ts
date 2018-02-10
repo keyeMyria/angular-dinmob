@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { VentasPagosService } from 'app/services/ventas-pagos.service';
 import { of } from "rxjs/observable/of";
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-ventas-pagos',
@@ -17,7 +18,8 @@ export class VentasPagosComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private pagoSrv: VentasPagosService
+    private pagoSrv: VentasPagosService,
+    public snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -43,6 +45,32 @@ export class VentasPagosComponent implements OnInit {
         this.loading = false;
       });
 
+  }
+
+  setValidacionPago(pago) {
+
+    let validado = 0;
+    if (pago.validado == "0") {
+      validado = 1;
+    }
+
+    this.loading = true;
+    this.pagoSrv.setValidacion(pago.id_pago, validado)
+      .subscribe(res => {
+        this.loading = false;
+        pago.validado = res.validado;
+        this.snackBar.open("Pago Actualizado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      }, (error) => {
+        this.loading = false;
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+      });
   }
 
   cargarObra(id_obra) {

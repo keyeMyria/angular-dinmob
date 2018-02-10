@@ -23,7 +23,7 @@
 
         <div>
 
-   <!--        <div class="input-group col-3 mt-2">
+          <!--        <div class="input-group col-3 mt-2">
             <div class="input-group-prepend">
               <span class="input-group-text">Del</span>
             </div>
@@ -49,6 +49,10 @@
                   <th>Monto</th>
                   <th>F.Pago</th>
                   <th>Validado</th>
+                  <th>
+                    <i class="fa fa-file-o"></i>
+                  </th>
+                  <th></th>
                 </tr>
               </thead>
 
@@ -63,6 +67,16 @@
                     <span class="badge" [ngClass]="pago.validado=='1'?'badge-success':'badge-secondary'">
                       {{pago.validado|numberToYesNo:'VAL'}}
                     </span>
+                  </td>
+                  <td>
+                    <a target="_blank" [href]="pago.url" *ngIf="pago.url">
+                      <i class="fa fa-file-o"></i>
+                    </a>
+                  </td>
+                  <td class="text-right">
+                    <button mat-button class="no-min" (click)="setValidacionPago(pago)">
+                      <i class="fa" [ngClass]="{'fa-check':pago.validado=='0','fa-ban':pago.validado=='1'}"></i>
+                    </button>
                   </td>
                 </tr>
 
