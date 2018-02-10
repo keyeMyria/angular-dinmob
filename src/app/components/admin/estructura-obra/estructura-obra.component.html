@@ -22,7 +22,7 @@
                 <div class="card-header padding-card-header">
                     <div class="d-flex align-items-center justify-content-between">
                         <span>Manzanas</span>
-                        <button mat-icon-button (click)="addManzanas()">
+                        <button mat-icon-button (click)="addManzanas()" [disabled]="!obra.manzanas">
                             <mat-icon>add</mat-icon>
                         </button>
                     </div>

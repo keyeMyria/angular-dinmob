@@ -104,9 +104,12 @@ export class EstructuraObraComponent implements OnInit {
         //inicializamos la seleccion de lotes
         this.manzana_selected = null;
         this.selection = [];
-        for (let i = 0; i < this.obra.manzanas.length; i++) {
-          this.selection.push(new SelectionModel<any>(true, []));
+        if (this.obra.manzanas) {
+          for (let i = 0; i < this.obra.manzanas.length; i++) {
+            this.selection.push(new SelectionModel<any>(true, []));
+          }
         }
+
         this.loading = false;
 
 
@@ -530,7 +533,7 @@ export class EstructuraObraComponent implements OnInit {
             panelClass: ["bg-success", "text-white"]
           });
 
-        } else {         
+        } else {
 
           this.snackBar.open("Su solicitud no se ha podido completar.", "", {
             duration: 3000,

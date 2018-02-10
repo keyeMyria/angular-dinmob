@@ -79,7 +79,11 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
           values[lote.code] = lote.estado_venta;
         });
 
-        this.crearMapa(values);
+        if (this.jsonMap.mapa) {
+          this.crearMapa(values);
+        }
+
+
 
         this.loading = false;
 

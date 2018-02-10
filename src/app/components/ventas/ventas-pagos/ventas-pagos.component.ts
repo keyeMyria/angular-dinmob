@@ -36,7 +36,7 @@ export class VentasPagosComponent implements OnInit {
           this.obra_selected = params.get("obra");
           return this.pagoSrv.getPagosObra(params.get("obra"));
         } else {
-          return of({});
+          return of([]);
         }
       }).subscribe(pagos => {
         this.pagos = pagos;
