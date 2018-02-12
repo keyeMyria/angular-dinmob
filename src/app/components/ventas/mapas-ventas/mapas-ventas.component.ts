@@ -30,6 +30,9 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
   lotes: any = [];
   obras: any[] = [];
   jsonMap: any = {};
+  scalePrototipos: any = {};
+  valuesPrototipos: any = {};
+  valuesLotes: any = {};
 
   constructor(
     private router: Router,
@@ -70,17 +73,38 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
 
       }).subscribe(res => {
 
-        this.lotes = res[0];
+        this.lotes = res[0].lotes;
+        this.scalePrototipos = res[0].scalePrototipos;
         this.jsonMap = res[1];
 
-        let values = {};
+        console.log("escala", this.scalePrototipos);
 
+
+
+
+        //creamos los valores para la escala de estados
+        this.valuesLotes = {};
         this.lotes.forEach(lote => {
-          values[lote.code] = lote.estado_venta;
+          this.valuesLotes[lote.code] = lote.estado_venta;
         });
 
+        //creamos los valores para la escala de prototipos
+        this.valuesPrototipos = {};
+        this.lotes.forEach(lote => {
+
+          if (lote.prototipos && lote.prototipos.length > 0) {
+            this.valuesPrototipos[lote.code] = lote.prototipos[0].nombre;
+          }
+
+        });
+
+        console.log("valores escala prototipos", this.valuesPrototipos);
+
+
+
+
         if (this.jsonMap.mapa) {
-          this.crearMapa(values);
+          this.crearMapa(this.valuesLotes, this.scalePrototipos);
         }
 
 
@@ -153,8 +177,26 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
 
   }
 
+  escalaPrototipos() {
+    console.log("asignacion de la escala de prototipos");
+    // region 0 lotes
+    // region 1 prototipos
+    // region 2 texto
+    this.map.series.regions[1].setValues(this.valuesPrototipos);
 
-  crearMapa(values) {
+  }
+
+  escalaEstados() {
+    console.log("asignacion de la escala de estados");
+    // region 0 lotes
+    // region 1 prototipos
+    // region 2 texto
+    this.map.series.regions[0].setValues(this.valuesLotes);
+
+  }
+
+
+  crearMapa(values, scalePrototipos) {
 
     this.verLeyenda = true;
 
@@ -213,6 +255,17 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
             legend: {
               vertical: true,
               title: 'Estado',
+              labelRender: function (scale) {
+                return scale;
+              }
+            }
+          },
+          {
+            values: {},
+            scale: scalePrototipos,
+            legend: {
+              vertical: true,
+              title: 'Prototipos',
               labelRender: function (scale) {
                 return scale;
               }

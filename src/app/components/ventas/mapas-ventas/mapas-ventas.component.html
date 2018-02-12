@@ -80,8 +80,10 @@
           <mat-slide-toggle [checked]="verLeyenda" (change)="toggleVerLeyenda($event)">Leyenda</mat-slide-toggle>
         </div>
         <button mat-raised-button color="primary" class="btn-block" (click)="verClientes()" [disabled]="!lote_selected">Clientes</button>
+        <button mat-raised-button color="primary" class="btn-block" (click)="escalaPrototipos()">Prototipos</button>
+        <button mat-raised-button color="primary" class="btn-block" (click)="escalaEstados()">Lotes</button>
 
-        
+
 
       </mat-card>
 
