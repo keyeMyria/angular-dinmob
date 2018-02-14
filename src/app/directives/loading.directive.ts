@@ -16,10 +16,13 @@ export class LoadingDirective implements OnInit, OnDestroy {
     private render: Renderer2
   ) {
 
+    //inicializamos a true
+    this.elementRef.nativeElement.hidden=true;
+
     this.subscription = loadingSrv.event$
       .subscribe(visible => {
         this.elementRef.nativeElement.hidden = !visible;
-        //console.log("subscription", visible, this.elementRef);
+        console.log("subscription visible:", visible);
         if (visible) {
         
           //this.render.removeClass(this.elementRef.nativeElement, "bg-success");
