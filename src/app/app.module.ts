@@ -168,6 +168,7 @@ import { VentasPagosComponent } from './components/ventas/ventas-pagos/ventas-pa
 import { ConfirmarDeshabilitarAlertaDialogoComponent } from './components/ventas/confirmar-deshabilitar-alerta-dialogo/confirmar-deshabilitar-alerta-dialogo.component';
 import { UploadFileDialogoComponent } from './components/ventas/upload-file-dialogo/upload-file-dialogo.component';
 import { ReporteService } from 'app/services/reporte.service';
+import { MapasVentasConfigDialogoComponent } from './components/ventas/mapas-ventas-config-dialogo/mapas-ventas-config-dialogo.component';
 
 
 
@@ -267,6 +268,7 @@ import { ReporteService } from 'app/services/reporte.service';
     VentasPagosComponent,
     ConfirmarDeshabilitarAlertaDialogoComponent,
     UploadFileDialogoComponent,
+    MapasVentasConfigDialogoComponent,
 
 
 
@@ -336,7 +338,8 @@ import { ReporteService } from 'app/services/reporte.service';
     EditarEntradaDialogoComponent,
     VerSalidaDialogoComponent,
     ConfirmarDeshabilitarAlertaDialogoComponent,
-    UploadFileDialogoComponent
+    UploadFileDialogoComponent,
+    MapasVentasConfigDialogoComponent
 
 
 

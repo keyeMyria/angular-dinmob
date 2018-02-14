@@ -8,6 +8,7 @@ import { of } from "rxjs/observable/of";
 import { Observable } from 'rxjs/Observable';
 import { CurrencyPipe } from '@angular/common';
 import { LotesService } from 'app/services/lotes.service';
+import { MapasVentasConfigDialogoComponent } from 'app/components/ventas/mapas-ventas-config-dialogo/mapas-ventas-config-dialogo.component';
 
 
 declare var jQuery: any;
@@ -94,7 +95,9 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
 
           if (lote.prototipos && lote.prototipos.length > 0) {
             this.valuesPrototipos[lote.code] = lote.prototipos[0].nombre;
-          }
+          } /* else {
+            this.valuesPrototipos[lote.code] = null;
+          } */
 
         });
 
@@ -174,6 +177,20 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
     //let items= $(".jvectormap-legend-cnt.jvectormap-legend-cnt-v");
     //console.log(items);
 
+
+  }
+
+  configMapa() {
+    console.log("configMapa");
+    let dialogRef = this.dialog.open(MapasVentasConfigDialogoComponent, {
+      data: {
+        map:this.map,
+        lotes:this.valuesLotes,
+        prototipos:this.valuesPrototipos
+        
+      },
+      width: "400px"
+    });
 
   }
 

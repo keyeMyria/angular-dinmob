@@ -2,6 +2,9 @@
   <!-- <mat-icon aria-label="fab-button">person</mat-icon> -->
   <small>{{lote_selected?.code}}</small>
 </button>
+<button mat-fab style="position:fixed; bottom:85px; right:20px; z-index:100" (click)="configMapa()">
+  <mat-icon aria-label="fab-button">settings</mat-icon>
+</button>
 
 <div *ngIf="loading">
   <mat-spinner class="loading"></mat-spinner>
