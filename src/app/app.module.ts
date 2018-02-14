@@ -12,6 +12,7 @@ import "hammerjs";
 
 
 //servicios
+import { LoadingService } from 'app/services/loading.service';
 import { ConfigService } from 'app/services/config.service';
 import { ClientesService } from "app/services/clientes.service";
 import { ObrasService } from "app/services/obras.service";
@@ -29,6 +30,8 @@ import { TipoOperacionService } from 'app/services/tipo-operacion.service';
 import { TipoPagoService } from 'app/services/tipo-pago.service';
 import { InsumoService } from 'app/services/insumo.service';
 import { VentasPagosService } from 'app/services/ventas-pagos.service';
+
+
 
 //helpers
 import { ClienteHelperService } from 'app/utils/cliente-helper.service';
@@ -52,7 +55,7 @@ import { ClienteComponent } from './components/ventas/cliente/cliente.component'
 import { ObrasComponent } from './components/admin/obras/obras.component';
 
 //directives
-import { MyCollapseDirective } from './directives/my-collapse.directive';
+import { LoadingDirective } from './directives/loading.directive';
 import { LoginComponent } from './components/login/login.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { TableroComponent } from './components/tablero/tablero.component';
@@ -169,6 +172,9 @@ import { ConfirmarDeshabilitarAlertaDialogoComponent } from './components/ventas
 import { UploadFileDialogoComponent } from './components/ventas/upload-file-dialogo/upload-file-dialogo.component';
 import { ReporteService } from 'app/services/reporte.service';
 import { MapasVentasConfigDialogoComponent } from './components/ventas/mapas-ventas-config-dialogo/mapas-ventas-config-dialogo.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LoadingInterceptorService } from 'app/interceptors/loading-interceptor.service';
+
 
 
 
@@ -191,7 +197,6 @@ import { MapasVentasConfigDialogoComponent } from './components/ventas/mapas-ven
     NuevoClienteComponent,
     ClienteComponent,
     ObrasComponent,
-    MyCollapseDirective,
     LoginComponent,
     LayoutComponent,
     TableroComponent,
@@ -269,6 +274,7 @@ import { MapasVentasConfigDialogoComponent } from './components/ventas/mapas-ven
     ConfirmarDeshabilitarAlertaDialogoComponent,
     UploadFileDialogoComponent,
     MapasVentasConfigDialogoComponent,
+    LoadingDirective,
 
 
 
@@ -346,7 +352,11 @@ import { MapasVentasConfigDialogoComponent } from './components/ventas/mapas-ven
   ],
 
   providers: [
-
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptorService,
+      multi: true
+    },
 
     AuthGuard,
     ConfigService,
@@ -370,6 +380,7 @@ import { MapasVentasConfigDialogoComponent } from './components/ventas/mapas-ven
     SalidasService,
     VentasPagosService,
     ReporteService,
+    LoadingService,
 
     ObrasUsuarioResolverService,
     UsuariosAlmacenistasResolverService,

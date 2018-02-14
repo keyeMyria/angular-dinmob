@@ -8,6 +8,7 @@ import { UsuarioService } from 'app/services/usuario.service';
 
 
 
+
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
@@ -27,7 +28,8 @@ export class LayoutComponent implements OnInit {
     private auth: AuthService,
     private usuarioSrv: UsuarioService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+   
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
