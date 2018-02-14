@@ -1,15 +1,17 @@
-<div class="container mt-3 mb-5">
+<div class="container">
   <div class="row">
     <div class="col-12">
 
+      <div>
+        <mat-form-field class="w-100">
+          <mat-select placeholder="Obra" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)">
+            <mat-option *ngFor="let obra of obras" [value]="obra.id_obra">{{ obra.nombre }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
       <div class="card">
         <div class="card-body">
-
-          <mat-form-field class="w-100">
-            <mat-select placeholder="Seleccione Partida">
-              <mat-option>seleccione</mat-option>
-            </mat-select>
-          </mat-form-field>
 
           <div class="table-responsive">
             <table class="table table-hover table-striped table-align-middle">
@@ -47,26 +49,26 @@
         </div>
         <div class="card-body">
           <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
+
             <div class="form-group row">
               <label for="partida" class="col-sm-3 col-form-label">Partida</label>
               <div class="col-sm-9">
-                <input [textMask]="{mask: numberMask}" class="form-control" type="text" id="partida" name="partida" formControlName="partida"
-                  disabled>
+                <input class="form-control" type="text" id="partida" name="partida" formControlName="partida" disabled>
               </div>
             </div>
 
             <div class="form-group row">
               <label for="entrega" class="col-sm-3 col-form-label">Entrega</label>
               <div class="col-sm-9">
-                <input [textMask]="{mask: numberMask}" class="form-control" type="text" id="entrega" name="entrega" formControlName="entrega"
-                  disabled>
+                <input class="form-control" type="text" id="entrega" name="entrega" formControlName="entrega" disabled>
               </div>
             </div>
 
             <div class="form-group row">
               <label for="recibe" class="col-sm-3 col-form-label">Recibe</label>
               <div class="col-sm-9">
-                <select class="form-control" id="recibe" name="recibe" formControlName="recibe" [ngClass]="{'is-invalid': form.get('recibe').invalid  && (form.get('recibe').dirty || form.get('recibe').touched) }">
+                <select class="form-control" id="recibe" name="recibe" [ngClass]="{'is-invalid': form.get('recibe').invalid  && (form.get('recibe').dirty || form.get('recibe').touched) }"
+                  formControlName="recibe">
                   <option value="">Seleccionar...</option>
                   <option [value]=""></option>
                 </select>
@@ -77,7 +79,8 @@
             <div class="form-group row">
               <label for="autoriza" class="col-sm-3 col-form-label">Autoriza</label>
               <div class="col-sm-9">
-                <select class="form-control" id="autoriza" name="autoriza" formControlName="autoriza" [ngClass]="{'is-invalid': form.get('autoriza').invalid  && (form.get('autoriza').dirty || form.get('autoriza').touched) }">
+                <select class="form-control" id="autoriza" name="autoriza" [ngClass]="{'is-invalid': form.get('autoriza').invalid  && (form.get('autoriza').dirty || form.get('autoriza').touched) }"
+                  formControlName="autoriza">
                   <option value="">Seleccionar...</option>
                   <option [value]=""></option>
                 </select>
@@ -95,7 +98,7 @@
             <div class="form-group row">
               <label for="notas" class="col-sm-3 col-form-label">Notas</label>
               <div class="col-sm-9">
-                <textarea class="form-control" type="text" id="notas" name="notas" formControlName="notas" row="3"></textarea>
+                <textarea class="form-control" type="text" id="notas" name="notas" row="3" formControlName="notas"></textarea>
               </div>
             </div>
 

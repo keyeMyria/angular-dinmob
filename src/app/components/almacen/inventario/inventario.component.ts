@@ -34,11 +34,12 @@ export class InventarioComponent implements OnInit {
         //console.log("resultado resolve ", data);
         this.obras = data.obras;
       });
-    this.loading = true;
+
     this.route.paramMap
       .switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
+          this.loading = true;
           return this.insumoSrv.getMaterialesObra(params.get("obra"));
         } else {
           return of([]);
@@ -97,7 +98,7 @@ export class InventarioComponent implements OnInit {
           panelClass: ["bg-success", "text-white"]
         });
 
-      } else if (result.error) {
+      } else if (result && result.error) {
 
         this.snackBar.open(result.error, "Ha ocurrido un error", {
           duration: 3000,
@@ -124,7 +125,7 @@ export class InventarioComponent implements OnInit {
           panelClass: ["bg-success", "text-white"]
         });
 
-      } else if (result.error) {
+      } else if (result && result.error) {
 
         this.snackBar.open(result.error, "", {
           duration: 3000,

@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 
 @Component({
   selector: 'app-editar-material-dialogo',
@@ -9,6 +10,11 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 })
 export class EditarMaterialDialogoComponent implements OnInit {
   form: FormGroup;
+  numberMask = createNumberMask({
+    allowDecimal: true,
+    prefix: '',
+    decimalLimit: 2
+  });
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,

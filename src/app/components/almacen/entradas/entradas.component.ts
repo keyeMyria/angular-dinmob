@@ -31,11 +31,12 @@ export class EntradasComponent implements OnInit {
       .subscribe((data: { obras: any[] }) => {
         this.obras = data.obras;
       });
-    this.loading = true;
+    
     this.route.paramMap
       .switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
+          this.loading = true;
           return this.entradaSrv.getEntradasObra(params.get("obra"));
         } else {
           return of([]);
@@ -71,7 +72,7 @@ export class EntradasComponent implements OnInit {
           panelClass: ["bg-success", "text-white"]
         });
 
-      } else {
+      } else if (result && result.error) {
         this.snackBar.open("La operación no ha podido ser completada. Inténtelo más tarde", "", {
           duration: 3000,
           panelClass: ["bg-danger", "text-white"]

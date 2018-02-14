@@ -42,13 +42,13 @@ export class VerSalidaDialogoComponent implements OnInit {
 
   ngOnInit() {
   
-    this.salidasSrv.getSalida(this.data.salida.id_salida)
+/*     this.salidasSrv.getSalida(this.data.salida.id_salida)
       .subscribe(res => {
         console.log("salida OK", res);
         this.datos = res.datos;
         this.insumos = res.insumos;
         //this.form.patchValue(this.salida.datos);
-      });
+      }); */
   }
 
 }

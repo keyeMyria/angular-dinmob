@@ -35,7 +35,7 @@
                   <th>Tipo</th>
                   <th>Folio</th>
                   <th>Vale</th>
-                  <th>Fecha</th>
+                  <th style="width: 100px">Fecha</th>
                   <th>Manzana</th>
                   <th>Lote</th>
                   <th>Partida</th>
@@ -53,7 +53,7 @@
                   <td>{{salida.tipo}}</td>
                   <td>{{salida.folio}}</td>
                   <td>{{salida.num_vale}}</td>
-                  <td>{{salida.fecha}}</td>
+                  <td>{{salida.fecha| date:'mediumDate':'':'es'}}</td>
                   <td>{{salida.manzana}}</td>
                   <td>{{salida.nombre_lote}}</td>
                   <td>{{salida.nombre_partida_padre}}-{{salida.nombre_partida}}</td>

@@ -199,7 +199,12 @@ export const ROUTES: Routes = [
                     obras: ObrasUsuarioResolverService
                 }
             },
-            { path: 'nueva-salida', component: NuevaSalidaComponent },
+            {
+                path: 'nueva-salida', component: NuevaSalidaComponent,
+                resolve: {
+                    obras: ObrasUsuarioResolverService
+                }
+            },
             {
                 path: 'nueva-entrada', component: NuevaEntradaComponent,
                 resolve: {

@@ -21,7 +21,7 @@
 
     <div class="form-group">
       <label for="existencias" class="col-form-label">Existencias</label>
-      <input class="form-control" type="text" id="existencias" name="existencias" formControlName="existencias" [ngClass]="{'is-invalid': form.get('existencias').invalid  && (form.get('existencias').dirty || form.get('existencias').touched) }">
+      <input [textMask]="{mask: numberMask}" class="form-control" type="text" id="existencias" name="existencias" formControlName="existencias" [ngClass]="{'is-invalid': form.get('existencias').invalid  && (form.get('existencias').dirty || form.get('existencias').touched) }">
       <div class="invalid-feedback">Proporcione una existencias</div>
     </div>
 
