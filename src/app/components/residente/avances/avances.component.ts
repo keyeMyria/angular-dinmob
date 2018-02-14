@@ -26,7 +26,6 @@ export class AvancesComponent implements OnInit {
   obra: any;
   obra_selected: string = "";
   obras: any = [];
-  loading: boolean
 
 
 
@@ -49,7 +48,6 @@ export class AvancesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loading = true;
     this.route.data
       .subscribe((data: { obras: any[] }) => {
         //console.log("resusltado resolve ", data);
@@ -66,7 +64,6 @@ export class AvancesComponent implements OnInit {
       }).subscribe(obra => {
         console.log("obra", obra);
         this.obra = obra;
-        this.loading = false;
       });
 
 

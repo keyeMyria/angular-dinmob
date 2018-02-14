@@ -1,9 +1,4 @@
 <div class="container mt-2 mb-5">
-
-  <div *ngIf="loading">
-    <mat-spinner class="loading"></mat-spinner>
-  </div>
-
   <div class="row">
     <div class="col-12">
 
@@ -49,10 +44,8 @@
             <tbody>
               <tr *ngFor="let material of materiales">
                 <td>
-                  <i *ngIf="(material.extra === '1')"
-                  class="fa fa-check"></i>
-                  <i *ngIf="(material.extra === '0')"
-                  class="fa fa-window-minimize"></i>                
+                  <i *ngIf="(material.extra === '1')" class="fa fa-check"></i>
+                  <i *ngIf="(material.extra === '0')" class="fa fa-window-minimize"></i>
                 </td>
                 <td>{{material.codigo}}</td>
                 <td>{{material.insumo}}</td>

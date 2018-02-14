@@ -12,7 +12,7 @@ import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 export class EditarLoteDialogoComponent implements OnInit {
 
   form: FormGroup;
-  loading: boolean;
+
 
   numbermask = createNumberMask({
     allowDecimal: true,

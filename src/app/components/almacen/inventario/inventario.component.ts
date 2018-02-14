@@ -14,7 +14,6 @@ import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar
   styleUrls: ['./inventario.component.scss']
 })
 export class InventarioComponent implements OnInit {
-  loading: boolean;
   obras: any[] = [];
   obra_selected: string = "";
   materiales: any[] = [];
@@ -39,7 +38,6 @@ export class InventarioComponent implements OnInit {
       .switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
-          this.loading = true;
           return this.insumoSrv.getMaterialesObra(params.get("obra"));
         } else {
           return of([]);
@@ -47,7 +45,6 @@ export class InventarioComponent implements OnInit {
       }).subscribe(materiales => {
         //console.log("prototipos", prototipos);
         this.materiales = materiales;
-        this.loading = false;
 
       });
 

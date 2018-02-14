@@ -12,7 +12,7 @@ import { LotesService } from 'app/services/lotes.service';
 export class AgregarLoteDialogoComponent implements OnInit {
 
   formLote: FormGroup;
-  loading:boolean;
+
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -78,8 +78,7 @@ export class AgregarLoteDialogoComponent implements OnInit {
 
   createLotes() {
 
-    //console.log("createLotes");
-   this.loading=true;
+
 
     if (this.formLote.value.tipo == "nombre") {
 
@@ -87,11 +86,9 @@ export class AgregarLoteDialogoComponent implements OnInit {
         .subscribe(lote => {
 
           this.data.manzana.lotes.push(lote);
-          this.loading=false;
           this.dialogRef.close(true);
 
         }, (error) => {
-          this.loading=false;
           this.dialogRef.close({error:"Ha ocurrido un error de conexión. Inténtelo más tarde"});
         });
 
@@ -100,10 +97,8 @@ export class AgregarLoteDialogoComponent implements OnInit {
       this.loteSrv.addLoteByNumero(this.formLote.value.prefijo, this.formLote.value.ini, this.formLote.value.fin, this.data.manzana.id_manzana)
         .subscribe(lotes => {
           this.data.manzana.lotes.push(...lotes);
-          this.loading=false;
           this.dialogRef.close(true);
         }, (error) => {
-          this.loading=false;
           this.dialogRef.close({error:"Ha ocurrido un error de conexión. Inténtelo más tarde"});
         });
     }

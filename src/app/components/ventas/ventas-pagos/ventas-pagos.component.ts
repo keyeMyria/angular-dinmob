@@ -12,7 +12,6 @@ import { MatSnackBar } from '@angular/material';
 export class VentasPagosComponent implements OnInit {
   obras: any = [];
   obra_selected: string = "";
-  loading: boolean;
   pagos: any = [];
 
   constructor(
@@ -29,7 +28,6 @@ export class VentasPagosComponent implements OnInit {
         this.obras = data.obras;
       });
 
-    this.loading = true;
     this.route.paramMap
       .switchMap((params: ParamMap) => {
         if (params.has("obra")) {
@@ -40,9 +38,7 @@ export class VentasPagosComponent implements OnInit {
         }
       }).subscribe(pagos => {
         this.pagos = pagos;
-        this.loading = false;
       }, (error) => {
-        this.loading = false;
       });
 
   }
@@ -54,10 +50,8 @@ export class VentasPagosComponent implements OnInit {
       validado = 1;
     }
 
-    this.loading = true;
     this.pagoSrv.setValidacion(pago.id_pago, validado)
       .subscribe(res => {
-        this.loading = false;
         pago.validado = res.validado;
         this.snackBar.open("Pago Actualizado", "", {
           duration: 2000,
@@ -65,7 +59,6 @@ export class VentasPagosComponent implements OnInit {
         });
 
       }, (error) => {
-        this.loading = false;
         this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
           duration: 3000,
           panelClass: ["bg-danger", "text-white"]

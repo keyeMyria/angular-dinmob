@@ -19,7 +19,6 @@ export class PerfilComponent implements OnInit {
   formPassword: FormGroup;
   obras: Obra[];
   usuario: any;
-  loading: boolean;
 
 
   constructor(
@@ -92,11 +91,8 @@ export class PerfilComponent implements OnInit {
 
 
   updateUsuario() {
-
-    this.loading = true;
     this.usuarioSrv.updateUsuario(this.usuario.id_usuario, this.formDatos.value)
       .subscribe(usuario => {
-        this.loading = false;
         this.usuario = usuario;
         this.formDatos.patchValue(this.usuario);
 
@@ -106,7 +102,6 @@ export class PerfilComponent implements OnInit {
         });
 
       }, (error) => {
-        this.loading = false;
         this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
           duration: 3000,
           panelClass: ["bg-danger", "text-white"]
@@ -116,10 +111,8 @@ export class PerfilComponent implements OnInit {
   }
 
   updatePassword() {
-    this.loading = true;
     this.usuarioSrv.updatePassword(this.usuario.id_usuario, this.formPassword.get("password").value)
       .subscribe(usuario => {
-        this.loading = false;
         
         this.formPassword.reset();
 
@@ -129,7 +122,6 @@ export class PerfilComponent implements OnInit {
         });
 
       }, (error) => {
-        this.loading = false;
         this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
           duration: 3000,
           panelClass: ["bg-danger", "text-white"]

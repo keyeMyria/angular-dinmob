@@ -13,7 +13,6 @@ import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar
 })
 export class EntradasComponent implements OnInit {
   obras: any = [];
-  loading: boolean;
   obra_selected: string = "";
   entradas: any[] = [];
 
@@ -31,19 +30,17 @@ export class EntradasComponent implements OnInit {
       .subscribe((data: { obras: any[] }) => {
         this.obras = data.obras;
       });
-    
+
     this.route.paramMap
       .switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
-          this.loading = true;
           return this.entradaSrv.getEntradasObra(params.get("obra"));
         } else {
           return of([]);
         }
       }).subscribe(entradas => {
         this.entradas = entradas;
-        this.loading = false;
 
       });
   }

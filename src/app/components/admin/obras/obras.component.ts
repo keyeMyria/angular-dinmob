@@ -15,7 +15,6 @@ import { EditarObraDialogoComponent } from 'app/components/admin/editar-obra-dia
 })
 export class ObrasComponent implements OnInit {
 
-  loading: boolean;
   obras: any = [];
   residentes: any = [];
   almacenistas: any = [];
@@ -30,7 +29,6 @@ export class ObrasComponent implements OnInit {
 
 
   ngOnInit() {
-    this.loading = true;
 
     this.route.data
       .subscribe((data: { obras: any, residentes: any, almacenistas: any, control_almacen: any }) => {
@@ -46,11 +44,9 @@ export class ObrasComponent implements OnInit {
       .subscribe(res => {
 
         this.obras = res;
-        this.loading = false;
 
       }, (error) => {
 
-        this.loading = false;
         this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
           duration: 3000
         });
@@ -110,12 +106,10 @@ export class ObrasComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
 
       if (result === true) {
-        this.loading = true;
 
         this.obrasSrv.delObra(obra.id_obra)
           .subscribe(res => {
 
-            this.loading = false;
             if (res.count === 1) {
 
               let i = this.obras.indexOf(obra);
@@ -135,7 +129,6 @@ export class ObrasComponent implements OnInit {
             }
 
           }, (error) => {
-            this.loading = false;
             this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
               duration: 3000,
               panelClass: ["bg-danger", "text-white"]

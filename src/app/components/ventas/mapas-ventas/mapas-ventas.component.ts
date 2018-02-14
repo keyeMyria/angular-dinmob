@@ -22,7 +22,6 @@ declare var $: any;
 })
 export class MapasVentasComponent implements OnInit, OnDestroy {
   self = this;
-  loading: boolean;
   verLeyenda: boolean = true;
 
   map: any;
@@ -60,7 +59,6 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
           this.obra_selected = params.get("obra");
 
           let obra = this.getObra(this.obra_selected);
-          this.loading = true;
 
           //unimos la consulta de los valores y el mapa
           return Observable.forkJoin(
@@ -110,12 +108,8 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
           this.crearMapa(this.valuesLotes, this.scalePrototipos);
         }
 
-
-
-        this.loading = false;
-
       }, (error) => {
-        this.loading = false;
+
       });
 
   }
@@ -139,13 +133,8 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
   }
 
   verClientes() {
-
-    this.loading = true;
     this.loteSrv.getDetallesLoteVentas(this.lote_selected.id_lote)
       .subscribe(res => {
-
-        //console.log("res", res);
-        this.loading = false;
 
         let dialogRef = this.dialog.open(ClientesLoteDialogoComponent, {
           data: {
@@ -157,7 +146,6 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
 
 
       }, (error) => {
-        this.loading = false;
       });
 
 
@@ -184,10 +172,10 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
     console.log("configMapa");
     let dialogRef = this.dialog.open(MapasVentasConfigDialogoComponent, {
       data: {
-        map:this.map,
-        lotes:this.valuesLotes,
-        prototipos:this.valuesPrototipos
-        
+        map: this.map,
+        lotes: this.valuesLotes,
+        prototipos: this.valuesPrototipos
+
       },
       width: "400px"
     });

@@ -10,7 +10,6 @@ import { EditarTrabajadorDialogoComponent } from 'app/components/admin/editar-tr
   styleUrls: ['./trabajadores.component.scss']
 })
 export class TrabajadoresComponent implements OnInit {
-  loading: boolean;
   obras: any = [];
 
   constructor(
@@ -21,13 +20,10 @@ export class TrabajadoresComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
-    this.loading = true;
     this.route.data
       .subscribe((data: { obras: any[] }) => {
         this.obras = data.obras;
       });
-    this.loading = false;
 
   }
 

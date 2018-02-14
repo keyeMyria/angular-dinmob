@@ -13,7 +13,6 @@ import { templateJitUrl } from '@angular/compiler';
 })
 export class EditarNombrePrototipoDialogoComponent implements OnInit {
   form: FormGroup;
-  loading: boolean;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -33,15 +32,12 @@ export class EditarNombrePrototipoDialogoComponent implements OnInit {
   }
 
   guardar() {
-    //console.log("guardar", this.form.value);
-    this.loading = true;
+
     this.prototipoSrv.updatePrototipo(this.data.prototipo.id_prototipo, this.form.value)
       .subscribe(prototipo => {
-        this.loading = false;
         this.data.prototipo.nombre = prototipo.nombre;
         this.dialogRef.close(true);
       }, (error) => {
-        this.loading = false;
         this.dialogRef.close({ error: "Ha ocurrido un error de conexión. Inténtelo más tarde" });
       })
 

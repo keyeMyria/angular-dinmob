@@ -12,7 +12,6 @@ import { VentasPagosService } from 'app/services/ventas-pagos.service';
 })
 export class EditarPagoDialogoComponent implements OnInit {
   form: FormGroup;
-  loading: boolean;
 
   numberMask = createNumberMask({
     allowDecimal: true,
@@ -54,8 +53,6 @@ export class EditarPagoDialogoComponent implements OnInit {
   }
 
   guardar() {
-    //console.log("nuevo pago", this.form.value);
-    this.loading = true;
 
     let frmPago = this.clonar(this.form.value);
     frmPago.monto = frmPago.monto.replace(/,/g, "");
@@ -65,13 +62,11 @@ export class EditarPagoDialogoComponent implements OnInit {
     //console.log("nuevo pago", frmPago);
     this.pagoSrv.updatePago(this.data.pago.id_pago, frmPago)
       .subscribe(pago => {
-        this.loading = false;
         let i = this.data.compra.pagos.indexOf(this.data.pago);
         this.data.compra.pagos[i] = pago;
         this.dialogRef.close(true);
 
       }, (error) => {
-        this.loading = false;
         this.dialogRef.close({ error: "Ha ocurrido un error de conexión. Inténtelo más tarde" });
 
       });

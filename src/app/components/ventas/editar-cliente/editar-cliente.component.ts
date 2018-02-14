@@ -25,9 +25,6 @@ import { LotesService } from 'app/services/lotes.service';
   styleUrls: ['./editar-cliente.component.scss']
 })
 export class EditarClienteComponent implements OnInit {
-
-  loading: boolean;
-
   numbermask = createNumberMask({
     allowDecimal: true,
     prefix: '',
@@ -240,7 +237,6 @@ export class EditarClienteComponent implements OnInit {
 
     let id = this.route.snapshot.paramMap.get('id');
 
-    this.loading = true;
     this.clienteSrv.getClienteConComprasYDocumentos(id)
       .subscribe(response => {
         this.cliente = response.cliente;
@@ -249,10 +245,8 @@ export class EditarClienteComponent implements OnInit {
         this.documentos_conyuge = response.documentos_conyuge;
 
         this.setFormsValue(this.cliente);
-        this.loading = false;
 
       }, (error) => {
-        this.loading = false;
         this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
           duration: 3000
         });
@@ -350,10 +344,8 @@ export class EditarClienteComponent implements OnInit {
       compra.valor_operacion = compra.valor_operacion.replace(/,/g, "");
     }
 
-    this.loading = true;
     this.clienteSrv.updateCompra(this.compra_selected.id_cliente, this.compra_selected.id_lote, compra)
       .subscribe(compra => {
-        this.loading = false;
         let i = this.compras.indexOf(this.compra_selected);
         this.compras[i] = compra;
 
@@ -368,7 +360,6 @@ export class EditarClienteComponent implements OnInit {
           panelClass: ["bg-success", "text-white"]
         });
       }, (error) => {
-        this.loading = false;
         this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
           duration: 3000,
           panelClass: ["bg-danger", "text-white"]
@@ -388,10 +379,8 @@ export class EditarClienteComponent implements OnInit {
       lote.valor_base = lote.valor_base.replace(/,/g, "");
     }
 
-    this.loading = true;
     this.loteSrv.updateLote(this.compra_selected.id_lote, lote)
-      .subscribe(lote => {
-        this.loading = false;
+      .subscribe(lote => {;
 
 
         this.compra_selected.valor_base = lote.valor_base;
@@ -405,7 +394,6 @@ export class EditarClienteComponent implements OnInit {
           panelClass: ["bg-success", "text-white"]
         });
       }, (error) => {
-        this.loading = false;
         this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
           duration: 3000,
           panelClass: ["bg-danger", "text-white"]
@@ -486,21 +474,18 @@ export class EditarClienteComponent implements OnInit {
 
   //actualiza el cliente
   updateCliente(cliente) {
-    this.loading = true;
     this.clienteSrv.updateCliente(this.cliente.id_cliente, cliente)
       .subscribe(res => {
 
         this.cliente = res;
         //asignamos todos los formularios
         this.setFormsValue(this.cliente);
-        this.loading = false;
         this.snackBar.open("Cliente Actualizado", "", {
           duration: 2000,
           panelClass: ["bg-success", "text-white"]
         });
 
       }, (error) => {
-        this.loading = false;
         this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
           duration: 3000,
           panelClass: ["bg-danger", "text-white"]
@@ -648,10 +633,8 @@ export class EditarClienteComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
 
       if (result == true) {
-        this.loading = true;
         this.clienteSrv.delDocumento(doc.id_documento)
           .subscribe(res => {
-            this.loading = false;
             if (res.count == 1) {
 
               let i = documentos.indexOf(doc);
@@ -671,7 +654,6 @@ export class EditarClienteComponent implements OnInit {
 
             }
           }, (error) => {
-            this.loading = false;
             this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
               duration: 3000,
               panelClass: ["bg-danger", "text-white"]
@@ -699,11 +681,8 @@ export class EditarClienteComponent implements OnInit {
 
       if (result === true) {
 
-        this.loading = true;
         this.pagoSrv.delPago(pago.id_pago)
           .subscribe(res => {
-
-            this.loading = false;
 
             if (res.count == 1) {
               let i = compra.pagos.indexOf(pago);
@@ -721,7 +700,6 @@ export class EditarClienteComponent implements OnInit {
             }
 
           }, (error) => {
-            this.loading = false;
             this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
               duration: 3000,
               panelClass: ["bg-danger", "text-white"]
@@ -777,10 +755,8 @@ export class EditarClienteComponent implements OnInit {
       activo = 1;
     }
 
-    this.loading = true;
     this.clienteSrv.setActivacionCompra(compra.id_compra, activo)
       .subscribe(res => {
-        this.loading = false;
         compra.activo = res.activo;
         this.snackBar.open("Compra Actualizada", "", {
           duration: 2000,
@@ -788,7 +764,6 @@ export class EditarClienteComponent implements OnInit {
         });
 
       }, (error) => {
-        this.loading = false;
         this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
           duration: 2000,
           panelClass: ["bg-danger", "text-white"]
@@ -801,10 +776,8 @@ export class EditarClienteComponent implements OnInit {
   //????es necesario eliminarla del selection si está seleccionada??
   delCompra(compra) {
     //console.log("delCompra", compra);
-    this.loading = true;
     this.clienteSrv.delCompra(compra.id_cliente, compra.id_lote)
       .subscribe(res => {
-        this.loading = false;
         if (res.count == 1) {
           let i = this.compras.indexOf(compra);
           this.compras.splice(i, 1);
@@ -821,7 +794,6 @@ export class EditarClienteComponent implements OnInit {
         }
 
       }, (error) => {
-        this.loading = false;
         this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
           duration: 3000,
           panelClass: ["bg-danger", "text-white"]

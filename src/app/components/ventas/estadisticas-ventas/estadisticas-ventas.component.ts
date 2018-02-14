@@ -13,7 +13,6 @@ export class EstadisticasVentasComponent implements OnInit {
   obras: any = [];
   estadisticas: any ={};
   obra_selected: string = "";
-  loading: boolean;
 
   constructor(
     private router: Router,
@@ -28,7 +27,6 @@ export class EstadisticasVentasComponent implements OnInit {
         this.obras = data.obras;
       });
 
-    this.loading = true;
     this.route.paramMap
       .switchMap((params: ParamMap) => {
         if (params.has("obra")) {
@@ -39,9 +37,7 @@ export class EstadisticasVentasComponent implements OnInit {
         }
       }).subscribe(res => {
         this.estadisticas = res;
-        this.loading = false;
       }, (error) => {
-        this.loading = false;
         this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
           duration: 3000,
           panelClass: ["bg-danger", "text-white"]

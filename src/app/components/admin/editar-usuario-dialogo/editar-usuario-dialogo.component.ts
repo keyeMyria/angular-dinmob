@@ -11,7 +11,6 @@ import { UsuarioService } from 'app/services/usuario.service';
 })
 export class EditarUsuarioDialogoComponent implements OnInit {
   form: FormGroup;
-  loading: boolean = false;
 
 
   constructor(
@@ -41,7 +40,6 @@ export class EditarUsuarioDialogoComponent implements OnInit {
 
         let i = this.data.usuarios.indexOf(this.data.usuario);
         this.data.usuarios[i] = usuario;
-        this.loading = false;
         this.dialogRef.close(true);
 
       },

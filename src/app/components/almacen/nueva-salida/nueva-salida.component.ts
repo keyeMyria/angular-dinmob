@@ -10,7 +10,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class NuevaSalidaComponent implements OnInit {
   form: FormGroup;
   obras: any = [];
-  loading: boolean;
   obra_selected: string = "";
 
   constructor(

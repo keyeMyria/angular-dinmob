@@ -22,7 +22,6 @@ import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar
   styleUrls: ['./prototipos.component.scss']
 })
 export class PrototiposComponent implements OnInit {
-  loading: boolean;
   obras: any = [];
   obra: any = {
     datos: {}
@@ -48,7 +47,7 @@ export class PrototiposComponent implements OnInit {
         this.obras = data.obras;
       });
 
-    this.loading = true;
+
     this.route.paramMap
       .switchMap((params: ParamMap) => {
         if (params.has("obra")) {
@@ -59,12 +58,11 @@ export class PrototiposComponent implements OnInit {
         }
       }).subscribe(prototipos => {
 
-        this.loading = false;
+
         this.prototipos = prototipos;
 
 
       }, (error) => {
-        this.loading = false;
         this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
           duration: 3000,
           panelClass: ["bg-danger", "text-white"]
@@ -157,11 +155,9 @@ export class PrototiposComponent implements OnInit {
 
       if (result === true) {
 
-        this.loading = true;
         this.prototipoSrv.delPrototipo(prototipo.id_prototipo)
           .subscribe(res => {
 
-            this.loading = false;
             let i = this.prototipos.indexOf(prototipo);
             this.prototipos.splice(i, 1);
             this.snackBar.open("Prototipo Eliminado", "", {
@@ -170,7 +166,6 @@ export class PrototiposComponent implements OnInit {
             });
 
           }, (error) => {
-            this.loading = false;
             this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
               duration: 3000,
               panelClass: ["bg-danger", "text-white"]

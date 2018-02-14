@@ -12,7 +12,6 @@ import { MatSnackBar, MatDialog } from '@angular/material';
 export class ClienteSinLoteComponent implements OnInit {
 
   clientes: any[] = [];
-  loading: boolean;
 
 
   constructor(
@@ -24,14 +23,10 @@ export class ClienteSinLoteComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
-    this.loading = true;
     this.clienteSrv.getClientesSinLote()
       .subscribe(clientes => {
         this.clientes = clientes;
-        this.loading = false;
       }, (error) => {
-        this.loading = false;
         this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
           duration: 3000,
           panelClass: ["bg-danger", "text-white"]
@@ -56,12 +51,10 @@ export class ClienteSinLoteComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
 
       if (result === true) {
-        this.loading = true;
 
         this.clienteSrv.delCliente(cliente.id_cliente)
           .subscribe(res => {
 
-            this.loading = false;
             if (res.count === 1) {
 
               let i = this.clientes.indexOf(cliente);
@@ -80,7 +73,6 @@ export class ClienteSinLoteComponent implements OnInit {
             }
 
           }, (error) => {
-            this.loading = false;
             this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
               duration: 3000,
               panelClass: ["bg-danger", "text-white"]

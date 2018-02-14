@@ -19,10 +19,6 @@ import { VerCedulaFiscalDialogoComponent } from 'app/components/ventas/ver-cedul
 })
 
 export class ClientesComponent implements OnInit {
-
-
-
-  loading: boolean;
   //clientes$: Observable<Cliente[]>;
   clientes: Cliente[] = [];
   obras: any = [];
@@ -43,14 +39,12 @@ export class ClientesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loading = true;
     this.route.data
       .subscribe((data: { obras: any[] }) => {
         //console.log("resultado resolve ", data);
         this.obras = data.obras;
       });
 
-    //this.loading = true;
     this.route.paramMap
       .switchMap((params: ParamMap) => {
         if (params.has("obra")) {
@@ -62,7 +56,6 @@ export class ClientesComponent implements OnInit {
 
       }).subscribe(clientes => {
         this.clientes = clientes;
-        this.loading = false;
       });
       
 
@@ -142,14 +135,12 @@ export class ClientesComponent implements OnInit {
          dialogRef.afterClosed().subscribe(result => {
      
            if (result === true) {
-             this.loading = true;
      
              this.clienteSrv.updateCliente(cliente.id_cliente, copia)
                .subscribe(res => {
      
                  let i = this.clientes.indexOf(cliente);
                  this.clientes[i] = res;
-                 this.loading = false;
                  this.snackBar.open("Cliente Actualizado", "Cerrar", {
                    duration: 2000
                  });
@@ -177,7 +168,6 @@ export class ClientesComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
 
       if (result === true) {
-        this.loading = true;
 
         this.clienteSrv.delCliente(cliente.id_cliente)
           .subscribe(res => {
@@ -187,7 +177,6 @@ export class ClientesComponent implements OnInit {
               //this.clientes.splice(i, 1);
 
 
-              this.loading = false;
               this.snackBar.open("Cliente Eliminado", "", {
                 duration: 2000,
                 panelClass: ["bg-success", "text-white"]

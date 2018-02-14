@@ -14,7 +14,6 @@ import { log } from 'util';
   styleUrls: ['./usuarios.component.scss']
 })
 export class UsuariosComponent implements OnInit {
-  loading: boolean;
   usuarios: any;
   //usuariosOrdenados: Usuario[];
   roles: any;
@@ -28,7 +27,6 @@ export class UsuariosComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loading = true;
 
     this.usuarioSrv.getRoles()
       .subscribe(res => this.roles = res);
@@ -36,8 +34,6 @@ export class UsuariosComponent implements OnInit {
     this.usuarioSrv.getUsuarios()
       .subscribe(res => {
         this.usuarios = res;
-        //this.usuariosOrdenados = this.usuarios.slice();
-        this.loading = false;
       });
   }
 
@@ -87,11 +83,9 @@ export class UsuariosComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
 
       if (result === true) {
-        this.loading = true;
 
         this.usuarioSrv.delUsuario(usuario.id_usuario)
           .subscribe((res: any) => {
-            this.loading = false;
             if (res.count === 1) {
 
               let i = this.usuarios.indexOf(usuario);
@@ -106,7 +100,6 @@ export class UsuariosComponent implements OnInit {
               });
 
             } else {
-              this.loading = false;
               this.snackBar.open("Ha ocurrido un error", "", {
                 duration: 3000,
                 panelClass: ["bg-danger", "text-white"]
@@ -114,7 +107,6 @@ export class UsuariosComponent implements OnInit {
             }
 
           }, (error) => {
-            this.loading = false;
             this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
               duration: 3000,
               panelClass: ["bg-danger", "text-white"]

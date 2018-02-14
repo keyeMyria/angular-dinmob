@@ -20,7 +20,6 @@ import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar
   styleUrls: ['./editar-prototipo.component.scss']
 })
 export class EditarPrototipoComponent implements OnInit {
-  loading: boolean = false;
   selectedOption: string;
   prototipo: any;
   partidas: any;
@@ -39,16 +38,13 @@ export class EditarPrototipoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loading = true;
     this.route.paramMap
       .switchMap((params: ParamMap) =>
         this.prototipoSrv.getAcordeonPartidas(params.get('id')))
       .subscribe(res => {
         this.prototipo = res.prototipo;
         this.partidas = res.partidas;
-        this.loading = false;
       }, (error) => {
-        this.loading = false;
         this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
           duration: 3000
         });

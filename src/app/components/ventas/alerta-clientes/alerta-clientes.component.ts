@@ -15,7 +15,6 @@ export class AlertaClientesComponent implements OnInit {
   clientes: any[] = [];
   obras: any = [];
   obra_selected: string = "";
-  loading: boolean;
 
 
   constructor(
@@ -27,7 +26,6 @@ export class AlertaClientesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loading = true;
     this.route.data
       .subscribe((data: { obras: any[] }) => {
         this.obras = data.obras;
@@ -37,9 +35,7 @@ export class AlertaClientesComponent implements OnInit {
     this.clienteSrv.getAlertas()
       .subscribe(clientes => {
         this.clientes = clientes;
-        this.loading = false;
       }, (error) => {
-        this.loading = false;
       });
 
     /*     this.route.paramMap
@@ -53,7 +49,6 @@ export class AlertaClientesComponent implements OnInit {
             }
           }).subscribe(clientes => {
             this.clientes = clientes;
-            this.loading = false;
           }); */
 
 
@@ -88,10 +83,8 @@ export class AlertaClientesComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
 
       if (result === true) {
-        this.loading = true;
         this.clienteSrv.deshabilitarAlerta(cliente.id_cliente)
           .subscribe(res => {
-            this.loading = false;
             let i = this.clientes.indexOf(cliente);
             this.clientes.splice(i, 1);
             this.snackBar.open("Alerta Deshabilitada", "", {
@@ -99,7 +92,6 @@ export class AlertaClientesComponent implements OnInit {
               panelClass: ["bg-success", "text-white"]
             });
           }, (error) => {
-            this.loading = false;
             this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
               duration: 3000,
               panelClass: ["bg-danger", "text-white"]

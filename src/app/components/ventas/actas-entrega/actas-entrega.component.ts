@@ -10,16 +10,13 @@ import { Router } from '@angular/router';
 export class ActasEntregaComponent implements OnInit {
 
   actas: any;
-  loading: boolean = false;
 
   constructor(private actaSrv: ActaEntregaService, private router: Router,) { }
 
   ngOnInit() {
-    this.loading = true; 
     this.actaSrv.getActas()
       .subscribe(res => {
         this.actas = res;
-        this.loading = false;
       });
   }
 

@@ -10,7 +10,7 @@ import { PrototiposService } from 'app/services/prototipos.service';
 })
 export class AgregarPrototipoDialogoComponent implements OnInit {
   form: FormGroup;
-  loading: boolean;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<AgregarPrototipoDialogoComponent>,
@@ -30,7 +30,7 @@ export class AgregarPrototipoDialogoComponent implements OnInit {
   guardar() {
     console.log("agregar prototipo", this.form.value);
 
-    this.loading = true;
+ 
     let prototipo = { id_obra: this.data.obra.id_obra, nombre: this.form.get('nombre').value };
 
     //console.log("agregar prototipo", this.form.value);
@@ -39,12 +39,10 @@ export class AgregarPrototipoDialogoComponent implements OnInit {
 
     this.prototipoSrv.createPrototipo(prototipo)
       .subscribe(prototipo => {
-        this.loading = false;
         this.data.prototipos.push(prototipo);
         this.dialogRef.close(true);
 
       }, (error) => {
-        this.loading = false;
         this.dialogRef.close({ error: "Ha ocurrido un error de conexión. Inténtelo más tarde" });
       })
 

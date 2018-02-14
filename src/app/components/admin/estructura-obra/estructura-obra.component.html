@@ -1,9 +1,5 @@
 <section class="container mt-2 mb-5">
 
-    <div *ngIf="loading">
-        <mat-spinner class="loading"></mat-spinner>
-    </div>
-
     <div class="row">
         <div class="col-12 col-md-8">
 
@@ -72,7 +68,7 @@
                             <table class="table table-sm table-align-middle table-striped">
                                 <thead>
                                     <tr>
-                                        <th style="">                                            
+                                        <th style="">
                                             <mat-checkbox class="pl-3" color="accent" (change)="$event ? masterToggle(i) : null" [checked]="selection[i].hasValue() && isAllSelected(i)"
                                                 [indeterminate]="selection[i].hasValue() && !isAllSelected(i)">
                                             </mat-checkbox>
@@ -90,7 +86,8 @@
                                 <tbody>
                                     <tr *ngFor="let lote of manzana.lotes" (click)="selection[i].toggle(lote)" class="pointer" [ngClass]="{'table-primary':selection[i].isSelected(lote)}">
                                         <td>
-                                            <mat-checkbox class="pl-3" color="accent" (click)="$event.stopPropagation()" (change)="$event ? selection[i].toggle(lote) : null" [checked]="selection[i].isSelected(lote)">
+                                            <mat-checkbox class="pl-3" color="accent" (click)="$event.stopPropagation()" (change)="$event ? selection[i].toggle(lote) : null"
+                                                [checked]="selection[i].isSelected(lote)">
                                             </mat-checkbox>
                                         </td>
                                         <td class="ws-nowrap">{{ lote.nombre}}</td>
@@ -130,7 +127,7 @@
 
             <!-- Operaciones -->
             <mat-expansion-panel class="mt-2" expanded="true">
-                
+
                 <mat-expansion-panel-header class="bg-primary text-white">
                     Operaciones
                 </mat-expansion-panel-header>

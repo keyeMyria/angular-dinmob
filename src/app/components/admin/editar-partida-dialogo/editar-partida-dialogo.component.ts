@@ -10,7 +10,7 @@ import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@ang
 })
 export class EditarPartidaDialogoComponent implements OnInit {
   form: FormGroup;
-  loading: boolean = false;
+
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,

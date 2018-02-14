@@ -10,7 +10,7 @@ import { UsuarioService } from 'app/services/usuario.service';
 })
 export class CambiarPasswordDialogoComponent implements OnInit {
   form: FormGroup;
-  loading: boolean;
+
 
 
 
@@ -55,12 +55,8 @@ export class CambiarPasswordDialogoComponent implements OnInit {
 
 
   guardar() {
-
-    //console.log("usuario", this.form.value);
-    this.loading = true;
     this.usuarioSrv.updatePassword(this.data.usuario.id_usuario, this.form.get('password').value)
       .subscribe((res: any) => {
-        this.loading = false;
         if (res.count === 1) {
           this.dialogRef.close(true);
         } else {
@@ -69,7 +65,6 @@ export class CambiarPasswordDialogoComponent implements OnInit {
 
       },
       (error) => {
-        this.loading = false;
         this.dialogRef.close({ error: "Ha ocurrido un error de conexión. Vuelva a intentarlo más tarde." });
       });
   }

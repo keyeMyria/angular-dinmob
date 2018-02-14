@@ -1,9 +1,4 @@
 <div class="container mt-3 mb-5">
-
-  <div *ngIf="loading">
-    <mat-spinner class="loading"></mat-spinner>
-  </div>
-  
   <div>
     <mat-form-field class="w-100">
       <mat-select placeholder="Obra" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)">
@@ -22,7 +17,7 @@
         </h3>
         <p>Libres</p>
         <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">pie_chart</i>
-   <!--      <mat-card-footer>
+        <!--      <mat-card-footer>
           <button mat-button class="btn-block">
             <span>Mas Información</span>
             <mat-icon>chevron_right</mat-icon>
@@ -38,7 +33,7 @@
         </h3>
         <p>Apartados</p>
         <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">pie_chart</i>
-<!--         <mat-card-footer>
+        <!--         <mat-card-footer>
           <button mat-button class="btn-block">
             <span>Mas Información</span>
             <mat-icon>chevron_right</mat-icon>
@@ -54,7 +49,7 @@
         </h3>
         <p>Bloqueados</p>
         <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">pie_chart</i>
- <!--        <mat-card-footer>
+        <!--        <mat-card-footer>
           <button mat-button class="btn-block">
             <span>Mas Información</span>
             <mat-icon>chevron_right</mat-icon>
@@ -70,7 +65,7 @@
         </h3>
         <p>Contrato</p>
         <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">pie_chart</i>
-<!--         <mat-card-footer>
+        <!--         <mat-card-footer>
           <button mat-button class="btn-block">
             <span>Mas Información</span>
             <mat-icon>chevron_right</mat-icon>
@@ -86,7 +81,7 @@
         </h3>
         <p>Escriturados</p>
         <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">pie_chart</i>
- <!--        <mat-card-footer>
+        <!--        <mat-card-footer>
           <button mat-button class="btn-block">
             <span>Mas Información</span>
             <mat-icon>chevron_right</mat-icon>
@@ -100,7 +95,7 @@
         <h3>{{(estadisticas?.valor_base || 0) |currency }}</h3>
         <p>TOTAL</p>
         <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
-<!--         <mat-card-footer>
+        <!--         <mat-card-footer>
           <button mat-button class="btn-block">
             <span>Mas Información</span>
             <mat-icon>chevron_right</mat-icon>
@@ -114,7 +109,7 @@
         <h3>{{(estadisticas?.pagos || 0) |currency }}</h3>
         <p>PAGADO</p>
         <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
-<!--         <mat-card-footer>
+        <!--         <mat-card-footer>
           <button mat-button class="btn-block">
             <span>Mas Información</span>
             <mat-icon>chevron_right</mat-icon>
@@ -128,7 +123,7 @@
         <h3>{{(estadisticas?.pendiente|| 0) |currency }}</h3>
         <p>PENDIENTE</p>
         <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
-<!--         <mat-card-footer>
+        <!--         <mat-card-footer>
           <button mat-button class="btn-block">
             <span>Mas Información</span>
             <mat-icon>chevron_right</mat-icon>

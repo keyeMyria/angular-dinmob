@@ -25,7 +25,6 @@ export class VentasLoteComponent implements OnInit {
   clientes: any = [];
   cliente_selected: any = { pagos: [] };
   estados: any[] = [];
-  loading: boolean;
   form: FormGroup;
 
   //selector de clientes
@@ -77,8 +76,6 @@ export class VentasLoteComponent implements OnInit {
   }
 
   guardar() {
-    this.loading = true;
-
     let lote = this.clonar(this.form.value);
     lote.valor_base = lote.valor_base.replace(/,/g, "");
     lote.valor_ampliacion = lote.valor_ampliacion.replace(/,/g, "");
@@ -86,7 +83,6 @@ export class VentasLoteComponent implements OnInit {
 
     this.loteSrv.updateLote(this.lote.id_lote, lote)
       .subscribe(lote => {
-        this.loading = false;
         this.lote = lote;
         this.form.patchValue(this.lote);
         this.snackBar.open("Lote Actualizado", "", {
@@ -94,7 +90,6 @@ export class VentasLoteComponent implements OnInit {
           panelClass: ["bg-success", "text-white"]
         });
       }, (error) => {
-        this.loading = false;
         this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
           duration: 3000,
           panelClass: ["bg-danger", "text-white"]

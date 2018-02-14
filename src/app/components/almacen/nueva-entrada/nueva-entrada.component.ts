@@ -9,7 +9,6 @@ import { of } from "rxjs/observable/of";
   styleUrls: ['./nueva-entrada.component.scss']
 })
 export class NuevaEntradaComponent implements OnInit {
-  loading: boolean;
   obras: any = [];
   obra_selected: string = "";
   entradas: any[] = [];
@@ -25,7 +24,6 @@ export class NuevaEntradaComponent implements OnInit {
       .subscribe((data: { obras: any[] }) => {
         this.obras = data.obras;
       });
-    this.loading = true;
     this.route.paramMap
       .switchMap((params: ParamMap) => {
         if (params.has("obra")) {
@@ -36,11 +34,8 @@ export class NuevaEntradaComponent implements OnInit {
         }
       }).subscribe(entradas => {
         this.entradas = entradas;
-        this.loading = false;
 
       });
-
-    //this.loading = true;
   }
 
   cargarObra(id_obra) {

@@ -18,7 +18,6 @@ export class DesarrollosComponent implements OnInit {
   obras: any = [];
   obra: any = {};
   obra_selected: string = "";
-  loading: boolean;
 
   constructor(
     private obraSrv: ObrasService,
@@ -30,7 +29,6 @@ export class DesarrollosComponent implements OnInit {
 
 
   ngOnInit() {
-    this.loading = true;
     this.route.data
       .subscribe((data: { obras: any }) => {
         this.obras = data.obras;
@@ -46,9 +44,7 @@ export class DesarrollosComponent implements OnInit {
         }
       }).subscribe(obra => {
         this.obra = obra;
-        this.loading = false;
       },(error)=>{
-        this.loading=false;
       });
 
 

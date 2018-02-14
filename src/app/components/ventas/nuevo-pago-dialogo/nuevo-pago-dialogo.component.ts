@@ -17,7 +17,6 @@ export class NuevoPagoDialogoComponent implements OnInit {
     decimalLimit: 2
   });
   form: FormGroup;
-  loading: boolean;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -49,9 +48,6 @@ export class NuevoPagoDialogoComponent implements OnInit {
   }
 
   guardar() {
-    //console.log("nuevo pago", this.form.value);
-    this.loading = true;
-
     let frmPago = this.clonar(this.form.value);
     frmPago.monto = frmPago.monto.replace(/,/g, "");
     frmPago.id_cliente = this.data.compra.id_cliente;
@@ -60,12 +56,10 @@ export class NuevoPagoDialogoComponent implements OnInit {
     //console.log("nuevo pago", frmPago);
     this.pagoSrv.createPago(frmPago)
       .subscribe(pago => {
-        this.loading = false;
         this.data.compra.pagos.push(pago);
         this.dialogRef.close(true);
 
       }, (error) => {
-        this.loading = false;
         this.dialogRef.close({ error: "Ha ocurrido un error de conexión. Inténtelo más tarde" });
 
       });

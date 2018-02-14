@@ -1,7 +1,3 @@
-<div *ngIf="loading">
-  <mat-spinner class="loading"></mat-spinner>
-</div>
-
 <h1 mat-dialog-title>Nuevo Pago</h1>
 <div mat-dialog-content>
   <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
