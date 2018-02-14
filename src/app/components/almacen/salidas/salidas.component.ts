@@ -58,13 +58,9 @@ export class SalidasComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
 
-      if (result === true) {
-
-   
+      if (result === true) {   
 
       } else if (result && result.error) {
-
-
       }
 
     });
