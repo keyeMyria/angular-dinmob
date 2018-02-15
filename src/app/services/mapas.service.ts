@@ -23,20 +23,17 @@ export class MapasService {
       .pipe(catchError(this.handleError("getMapaObra")));
   }
 
-  getLotesObra(id_obra) {
-    return this.http.get(this.url + 'get_lotes_obra/' + id_obra)
-      .pipe(catchError(this.handleError("getLotesObra")));
+  getVentasLotesObra(id_obra) {
+    return this.http.get(this.url + 'get_ventas_lotes_obra/' + id_obra)
+      .pipe(catchError(this.handleError("getVentasLotesObra")));
   }
 
-  getValorAvanceLotesObra(id_obra) {
-    return this.http.get(this.url + 'get_valor_avance_lotes_obra/' + id_obra)
-      .pipe(catchError(this.handleError("getValorAvanceLotesObra")));
+  getAvancesLotesObra(id_obra) {
+    return this.http.get(this.url + 'get_avances_lotes_obra/' + id_obra)
+      .pipe(catchError(this.handleError("getAvancesLotesObra")));
   }
 
-  getValues(id_obra) {
-    return this.http.get(this.url + 'estado_lotes/' + id_obra)
-      .pipe(catchError(this.handleError("getValues")));
-  }
+
 
   private handleError<T>(operation = 'operation') {
     return (error: HttpErrorResponse) => {

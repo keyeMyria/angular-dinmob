@@ -21,14 +21,13 @@ declare var $: any;
   providers: [CurrencyPipe]
 })
 export class MapasVentasComponent implements OnInit, OnDestroy {
-  self = this;
   verLeyenda: boolean = true;
 
   map: any;
   lote_selected: any = null;
   obra_selected: any = "";
   lotes: any = [];
-  obras: any[] = [];
+  obras: any = [];
   jsonMap: any = {};
   scalePrototipos: any = {};
   valuesPrototipos: any = {};
@@ -62,7 +61,7 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
 
           //unimos la consulta de los valores y el mapa
           return Observable.forkJoin(
-            this.mapaSrv.getLotesObra(obra.id_obra),
+            this.mapaSrv.getVentasLotesObra(obra.id_obra),
             this.mapaSrv.getMapaObra(obra.mapa)
           )
 
