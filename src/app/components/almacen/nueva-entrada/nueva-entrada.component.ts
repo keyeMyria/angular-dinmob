@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { EntradasService } from 'app/services/entradas.service';
+import { InsumoService } from 'app/services/insumo.service';
 import { of } from "rxjs/observable/of";
 
 @Component({
@@ -11,12 +11,12 @@ import { of } from "rxjs/observable/of";
 export class NuevaEntradaComponent implements OnInit {
   obras: any = [];
   obra_selected: string = "";
-  entradas: any[] = [];
+  insumos: any[] = [];
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private entradaSrv: EntradasService,
+    private insumoSrv: InsumoService,
   ) { }
 
   ngOnInit() {
@@ -28,12 +28,13 @@ export class NuevaEntradaComponent implements OnInit {
       .switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
-          return this.entradaSrv.getEntrada(params.get("obra"));
+          return this.insumoSrv.getMaterialesObra(params.get("obra"));
         } else {
           return of([]);
         }
-      }).subscribe(entradas => {
-        this.entradas = entradas;
+      }).subscribe(insumos => {
+        console.log("insumos", insumos);
+        this.insumos = insumos;
 
       });
   }
