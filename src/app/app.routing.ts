@@ -132,7 +132,12 @@ export const ROUTES: Routes = [
                     obras: ObrasUsuarioResolverService
                 }
             },
-            { path: 'mapas-avances', component: MapasAvancesComponent },
+            {
+                path: 'mapas-avances', component: MapasAvancesComponent,
+                resolve: {
+                    obras: MapasUsuarioResolverService
+                }
+            },
             {
                 path: 'mapas-ventas', component: MapasVentasComponent,
                 resolve: {

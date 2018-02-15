@@ -2,16 +2,12 @@
   <!-- <mat-icon aria-label="fab-button">person</mat-icon> -->
   <small>{{lote_selected?.code}}</small>
 </button>
+
 <button mat-fab style="position:fixed; bottom:85px; right:20px; z-index:100" (click)="configMapa()">
   <mat-icon aria-label="fab-button">settings</mat-icon>
 </button>
 
 <div class="content p-2">
-  <!-- <div class="map-header container pt-2"> -->
-  <!--     <select class="form-control" name="" id="">
-      <option value="">Seleccionar...</option>
-      <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>
-    </select> -->
 
   <mat-form-field class="w-100">
     <!-- (change)="getMapa()" -->
@@ -30,14 +26,13 @@
   <!-- background-color: yellow; -->
   <div class="map no-gutters" style="position:relative">
 
-    <!-- <div class="row"> -->
-
+    <!-- mapa -->
     <!-- style="background-color: green" -->
     <div id="map" class="col-12 col-lg-9">
 
     </div>
 
-
+    <!-- datos -->
     <!-- style="background-color: red" -->
     <div class="d-none d-lg-block col-lg-3">
 
@@ -86,8 +81,6 @@
       </mat-card>
 
     </div>
-
-    <!-- </div> -->
 
   </div>
 
