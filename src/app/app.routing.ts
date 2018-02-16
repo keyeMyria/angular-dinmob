@@ -222,7 +222,12 @@ export const ROUTES: Routes = [
                     obras: ObrasUsuarioResolverService
                 }
             },
-            { path: 'asignar-trabajadores', component: AsignarTrabajadoresComponent },
+            {
+                path: 'asignar-trabajadores', component: AsignarTrabajadoresComponent,
+                resolve: {
+                    obras: ObrasUsuarioResolverService
+                }
+            },
             {
                 path: 'editar-entrada/:id', component: EditarEntradaComponent,
                 resolve: {
