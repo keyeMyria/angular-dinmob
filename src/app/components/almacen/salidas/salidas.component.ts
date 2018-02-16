@@ -47,7 +47,7 @@ export class SalidasComponent implements OnInit {
   }
 
   nuevaSalida() {
-    this.router.navigate(["/nueva-salida"]);
+    this.router.navigate(["/nueva-salida", { obra: this.obra_selected }]);
   }
 
   verSalida(salida) {

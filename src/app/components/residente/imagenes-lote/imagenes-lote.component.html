@@ -1,5 +1,5 @@
 <button mat-fab style="position:fixed; top:75px; right:20px; z-index:100" (click)="drawer.opened= !drawer.opened">
-  <mat-icon aria-label="toggle side drawer">home</mat-icon>
+  <mat-icon aria-label="toggle side drawer">format_align_left</mat-icon>
 </button>
 
 <mat-drawer-container class="drawer-container">
@@ -48,24 +48,41 @@
           <p class="card-text">2018-01-16 13:11:24</p>
         </div>
         <div class="button-row mx-2 mb-2">
-
-
-          <!--          <button type="button" class="btn btn-danger">
-            <i class="fa fa-trash-o" aria-hidden="true"></i>
-          </button>
-
-          <button type="button" class="btn btn-secondary">
-            <i class="fa fa-arrows" aria-hidden="true"></i>
-          </button> -->
-
           <button mat-button color="warn">
             <i class="fa fa-trash-o" aria-hidden="true"></i>
           </button>
           <button mat-button>
             <i class="fa fa-arrows" aria-hidden="true"></i>
           </button>
+          <button mat-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+              <mat-icon>replay</mat-icon>
+              <span>90° a la izquierda</span>
+            </button>
+            <button mat-menu-item>
+              <mat-icon>refresh</mat-icon>
+              <span>90° a la derecha</span>
+            </button>
+          </mat-menu>
+        </div>
+      </div>
 
-
+      <div class="card">
+        <img class="card-img-top" src="https://www.promobeth.com/s/cc_images/cache_5401324.jpg?t=1517268903" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">PISOS Y RECUBRIMIENTOS - 2° NIVEL</h5>
+          <p class="card-text">2018-01-16 13:11:24</p>
+        </div>
+        <div class="button-row mx-2 mb-2">
+          <button mat-button color="warn">
+            <i class="fa fa-trash-o" aria-hidden="true"></i>
+          </button>
+          <button mat-button>
+            <i class="fa fa-arrows" aria-hidden="true"></i>
+          </button>
           <button mat-button [matMenuTriggerFor]="menu">
             <mat-icon>more_vert</mat-icon>
           </button>

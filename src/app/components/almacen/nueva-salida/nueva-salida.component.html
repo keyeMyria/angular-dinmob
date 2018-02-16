@@ -1,118 +1,192 @@
-<div class="container">
-  <div class="row">
-    <div class="col-12">
+<button mat-fab style="position:fixed; top:75px; right:20px; z-index:100" (click)="drawer.opened= !drawer.opened">
+  <mat-icon aria-label="toggle side drawer">format_align_left</mat-icon>
+</button>
 
-      <div>
-        <mat-form-field class="w-100">
-          <mat-select placeholder="Obra" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)">
-            <mat-option *ngFor="let obra of obras" [value]="obra.id_obra">{{ obra.nombre }}</mat-option>
-          </mat-select>
-        </mat-form-field>
+<mat-drawer-container class="drawer-container">
+
+  <mat-drawer class="estructura" #drawer [mode]="mobileQuery.matches ? 'over':'side'" [opened]="!mobileQuery.matches" style="width:300px">
+    <mat-card class="estructura">
+      <div class="mb-2">
+        <select class="form-control" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)">
+          <option value="">Seleccionar...</option>
+          <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>
+        </select>
       </div>
+      <!--    <div class="d-flex">
+              <span><i class="fa fa-share"></i></span>
+              <span>{{obra?.obra?.nombre || ""}}</span>
+              <div class="spacer"></div>
+              <span class="badge badge-pill badge-warning align-self-center mr-2">{{obra?.manzanas?.length || "0"}}</span>
+          </div> -->
+    </mat-card>
+    <div class="mb-3">
+      <mat-accordion>
+        <mat-expansion-panel class="manzanas" *ngFor="let manzana of obra?.manzanas" [hideToggle]="false">
+          <mat-expansion-panel-header>
+            <span>{{manzana.nombre}}</span>
+            <div class="spacer"></div>
+            <span class="badge badge-pill badge-primary align-self-center mr-2">{{manzana.lotes?.length || "0"}}</span>
 
-      <div class="card">
-        <div class="card-body">
+          </mat-expansion-panel-header>
 
-          <div class="table-responsive">
-            <table class="table table-hover table-striped table-align-middle">
-              <thead>
-                <tr>
-                  <th>Material</th>
-                  <th>Unidad</th>
-                  <th>Programado</th>
-                  <th>Consumido</th>
-                  <th>Existencias</th>
-                  <th>Salidas</th>
-                  <th>Excedente</th>
-                </tr>
-              </thead>
+          <ul class="list-group">
+            <!--  <li class="list-group-item">({{lote.prototipos?.length || "0"}}) {{lote.nombre}}</li> -->
+            <button type="button" class="list-group-item list-group-item-action" *ngFor="let lote of manzana.lotes" (click)="getAvancesLote(lote)">({{lote.prototipos?.length || "0"}}) {{lote.nombre}}</button>
+          </ul>
 
-              <tbody>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <div class="card mt-3">
-        <div class="card-header">
-          Datos del Vale
-        </div>
-        <div class="card-body">
-          <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
-
-            <div class="form-group row">
-              <label for="partida" class="col-sm-3 col-form-label">Partida</label>
-              <div class="col-sm-9">
-                <input class="form-control" type="text" id="partida" name="partida" formControlName="partida" disabled>
-              </div>
-            </div>
-
-            <div class="form-group row">
-              <label for="entrega" class="col-sm-3 col-form-label">Entrega</label>
-              <div class="col-sm-9">
-                <input class="form-control" type="text" id="entrega" name="entrega" formControlName="entrega" disabled>
-              </div>
-            </div>
-
-            <div class="form-group row">
-              <label for="recibe" class="col-sm-3 col-form-label">Recibe</label>
-              <div class="col-sm-9">
-                <select class="form-control" id="recibe" name="recibe" [ngClass]="{'is-invalid': form.get('recibe').invalid  && (form.get('recibe').dirty || form.get('recibe').touched) }"
-                  formControlName="recibe">
-                  <option value="">Seleccionar...</option>
-                  <option [value]=""></option>
-                </select>
-                <div class="invalid-feedback">Seleccione un trabajador</div>
-              </div>
-            </div>
-
-            <div class="form-group row">
-              <label for="autoriza" class="col-sm-3 col-form-label">Autoriza</label>
-              <div class="col-sm-9">
-                <select class="form-control" id="autoriza" name="autoriza" [ngClass]="{'is-invalid': form.get('autoriza').invalid  && (form.get('autoriza').dirty || form.get('autoriza').touched) }"
-                  formControlName="autoriza">
-                  <option value="">Seleccionar...</option>
-                  <option [value]=""></option>
-                </select>
-                <div class="invalid-feedback">Seleccione un residente</div>
-              </div>
-            </div>
-
-            <div class="form-group row">
-              <label for="num_vale" class="col-sm-3 col-form-label">Num. Vale</label>
-              <div class="col-sm-9">
-                <input class="form-control" type="text" id="num_vale" name="num_vale" formControlName="num_vale">
-              </div>
-            </div>
-
-            <div class="form-group row">
-              <label for="notas" class="col-sm-3 col-form-label">Notas</label>
-              <div class="col-sm-9">
-                <textarea class="form-control" type="text" id="notas" name="notas" row="3" formControlName="notas"></textarea>
-              </div>
-            </div>
-
-
-          </form>
-          <div class="form-group">
-            <div class="text-center">
-              <button mat-raised-button type="submit" form="id_form" [disabled]="form.invalid" color="primary" (click)="guardar()">GUARDAR</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
+        </mat-expansion-panel>
+      </mat-accordion>
     </div>
-  </div>
-</div>
+  </mat-drawer>
+
+  <mat-drawer-content>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+
+
+
+          <div class="card">
+            <div class="card-body">
+
+
+              <div class="col-sm-12 mb-2">
+                <select class="form-control" id="id_tipo_usuario" name="id_tipo_usuario">
+                  <option value="">Seleccionar...</option>
+                  <option [value]="">...</option>
+                </select>
+              </div>
+             
+              <form class="mt-2 mx-3">
+                <div class="form-row align-items-center">
+                  <div class="col-auto">
+                    <div class="input-group mb-2">
+                      <input type="text" class="form-control" placeholder="Buscar">
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button">
+                          <i class="fa fa-times" aria-hidden="true"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-auto">
+                    <div class="form-check mb-2">
+                      <input class="form-check-input" type="checkbox" id="">
+                      <label class="form-check-label" for="">
+                        Ver sólo materiales con entrada
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </form>
+
+
+              <div class="table-responsive">
+                <table class="table table-hover table-striped table-align-middle">
+                  <thead>
+                    <tr>
+                      <th>Material</th>
+                      <th>Unidad</th>
+                      <th>Programado</th>
+                      <th>Consumido</th>
+                      <th>Existencias</th>
+                      <th>Salidas</th>
+                      <th>Excedente</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="card mt-3">
+            <div class="card-header">
+              Datos del Vale
+            </div>
+            <div class="card-body">
+              <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
+
+                <div class="form-group row">
+                  <label for="partida" class="col-sm-3 col-form-label">Partida</label>
+                  <div class="col-sm-9">
+                    <input class="form-control" type="text" id="partida" name="partida" formControlName="partida" disabled>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="entrega" class="col-sm-3 col-form-label">Entrega</label>
+                  <div class="col-sm-9">
+                    <input class="form-control" type="text" id="entrega" name="entrega" formControlName="entrega" disabled>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="recibe" class="col-sm-3 col-form-label">Recibe</label>
+                  <div class="col-sm-9">
+                    <select class="form-control" id="recibe" name="recibe" [ngClass]="{'is-invalid': form.get('recibe').invalid  && (form.get('recibe').dirty || form.get('recibe').touched) }"
+                      formControlName="recibe">
+                      <option value="">Seleccionar...</option>
+                      <option [value]=""></option>
+                    </select>
+                    <div class="invalid-feedback">Seleccione un trabajador</div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="autoriza" class="col-sm-3 col-form-label">Autoriza</label>
+                  <div class="col-sm-9">
+                    <select class="form-control" id="autoriza" name="autoriza" [ngClass]="{'is-invalid': form.get('autoriza').invalid  && (form.get('autoriza').dirty || form.get('autoriza').touched) }"
+                      formControlName="autoriza">
+                      <option value="">Seleccionar...</option>
+                      <option [value]=""></option>
+                    </select>
+                    <div class="invalid-feedback">Seleccione un residente</div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="num_vale" class="col-sm-3 col-form-label">Num. Vale</label>
+                  <div class="col-sm-9">
+                    <input class="form-control" type="text" id="num_vale" name="num_vale" formControlName="num_vale">
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="notas" class="col-sm-3 col-form-label">Notas</label>
+                  <div class="col-sm-9">
+                    <textarea class="form-control" type="text" id="notas" name="notas" row="3" formControlName="notas"></textarea>
+                  </div>
+                </div>
+
+
+              </form>
+              <div class="form-group">
+                <div class="text-center">
+                  <button mat-raised-button type="submit" form="id_form" [disabled]="form.invalid" color="primary" (click)="guardar()">GUARDAR</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+  </mat-drawer-content>
+
+</mat-drawer-container>
