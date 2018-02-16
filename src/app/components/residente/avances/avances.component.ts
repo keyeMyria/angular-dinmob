@@ -8,6 +8,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { FotoPartidaDialogoComponent } from 'app/components/residente/foto-partida-dialogo/foto-partida-dialogo.component';
+import { SelectionModel } from '@angular/cdk/collections';
 
 
 @Component({
@@ -27,6 +28,8 @@ export class AvancesComponent implements OnInit {
   obra: any;
   obra_selected: string = "";
   obras: any = [];
+
+  selection: SelectionModel<any>;
 
 
 
@@ -143,6 +146,8 @@ export class AvancesComponent implements OnInit {
       .subscribe(response => {
         this.lote = response.lote;
         this.acordeon = response.acordeon;
+        this.selection = new SelectionModel<any>(true, []);
+
       });
 
     if (this.mobileQuery.matches) {

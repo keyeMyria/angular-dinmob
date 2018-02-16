@@ -113,6 +113,7 @@
                         <li class="breadcrumb-item text-primary">{{lote?.nombre}}</li>
                     </ol>
                     <div class="avances">
+
                         <mat-accordion>
 
                             <mat-expansion-panel *ngFor="let partida of acordeon" [hideToggle]="true">
@@ -127,19 +128,25 @@
                                 </mat-expansion-panel-header>
                                 <div *ngIf="partida.subpartidas.length>0">
                                     <ul class="list-group">
-                                        <li class="list-group-item" *ngFor="let subpartida of partida?.subpartidas">
-                                            <div class="d-flex">
-                                                <mat-checkbox>{{subpartida.nombre}}
-                                                    <div style="font-size: 15px;">
+                                        <!--  class="pointer"  -->
+                                        <li class="list-group-item" *ngFor="let subpartida of partida?.subpartidas" (click)="selection.toggle(subpartida)" [ngClass]="{'bg-active':selection.isSelected(subpartida)}">
+                                            <div class="d-flex align-items-center">
+                                                <mat-checkbox class="px-3" (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(subpartida) : null" [checked]="selection.isSelected(subpartida)">
+                                                </mat-checkbox>
+
+                                                <div class="d-flex flex-column">
+                                                    <div style="font-size:0.91rem">{{subpartida.nombre}}</div>
+                                                    <div style="font-size: 0.91rem;">
                                                         <span class="badge" [ngClass]="{'badge-secondary':!subpartida.fecha_fin, 'badge-primary':subpartida.fecha_fin}">
                                                             <i class="fa fa-legal"></i>{{subpartida.fecha_fin|| "No terminada"}}</span>
                                                         <span class="badge" [ngClass]="{'badge-secondary':!subpartida.fecha_liberacion, 'badge-success':subpartida.fecha_liberacion}">
                                                             <i class="fa fa-usd"></i>{{subpartida.fecha_liberacion|| "No liberada"}}</span>
                                                     </div>
-                                                </mat-checkbox>
+                                                </div>
+
                                                 <div class="spacer"></div>
                                                 <div>
-                                                    <button mat-icon-button (click)="addFoto(subpartida)">
+                                                    <button mat-icon-button (click)="$event.stopPropagation();addFoto(subpartida)">
                                                         <mat-icon>camera_alt</mat-icon>
                                                     </button>
                                                 </div>
@@ -149,19 +156,22 @@
                                 </div>
                                 <div *ngIf="partida.subpartidas.length===0">
                                     <ul class="list-group">
-                                        <li class="list-group-item">
-                                            <div class="d-flex">
-                                                <mat-checkbox>
-                                                    <div style="font-size: 15px;">
+                                        <li class="list-group-item" (click)="selection.toggle(partida)" [ngClass]="{'bg-active':selection.isSelected(partida)}">
+                                            <div class="d-flex align-items-center">
+
+                                                <mat-checkbox class="px-3" (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(partida) : null" [checked]="selection.isSelected(partida)">
+                                                </mat-checkbox>
+                                                <div class="d-flex flex-column">
+                                                    <div style="font-size:0.91rem">
                                                         <span class="badge badge-secondary" [ngClass]="{'badge-secondary':!partida.fecha_fin, 'badge-primary':partida.fecha_fin}">
                                                             <i class="fa fa-legal"></i>{{partida.fecha_fin || "No terminada"}}</span>
                                                         <span class="badge badge-secondary" [ngClass]="{'badge-secundary':!partida.fecha_liberacion, 'badge-success':partida.fecha_liberacion}">
                                                             <i class="fa fa-usd"></i>{{partida.fecha_liberacion || "No liberada"}}</span>
                                                     </div>
-                                                </mat-checkbox>
+                                                </div>
                                                 <div class="spacer"></div>
                                                 <div>
-                                                    <button mat-icon-button (click)="addFoto(partida)">
+                                                    <button mat-icon-button (click)="$event.stopPropagation();addFoto(partida)">
                                                         <mat-icon>camera_alt</mat-icon>
                                                     </button>
                                                 </div>
@@ -174,6 +184,7 @@
 
 
                         </mat-accordion>
+
                     </div>
                 </div>
             </div>
