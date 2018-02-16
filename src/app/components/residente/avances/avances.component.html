@@ -1,5 +1,14 @@
-<button mat-fab style="position:fixed; top:100px; right:20px; z-index:100" (click)="drawer.opened= !drawer.opened">
+<button mat-fab style="position:fixed; top:70px; right:20px; z-index:100" (click)="drawer.opened= !drawer.opened">
     <mat-icon aria-label="toggle side drawer">home</mat-icon>
+</button>
+
+<button mat-fab style="position:fixed; top:70px; right:85px; z-index:100" (click)="drawer.opened= !drawer.opened">
+    <mat-icon aria-label="toggle side drawer">check</mat-icon>
+</button>
+
+
+<button mat-fab style="position:fixed; top:70px; right:150px; z-index:100" (click)="drawer.opened= !drawer.opened">
+    <mat-icon aria-label="toggle side drawer">attach_money</mat-icon>
 </button>
 
 
@@ -41,56 +50,25 @@
 
     <mat-drawer-content>
 
-        <mat-toolbar>
+   <!--      <mat-toolbar style="position:absolute; top:0; left:0; right:0; ">
 
             <button mat-button>Terminar</button>
             <button mat-button>Liberar</button>
             <button mat-icon-button>
                 <mat-icon>delete</mat-icon>
             </button>
-        </mat-toolbar>
+        </mat-toolbar> -->
         <!-- 100vh = alto del dispositivo -56 de la main-toolbar, -56 de la toolbar cuando está en modo mobile -3rem= mb-5 -->
-        <div class="container-fluid mb-5" style=" min-height: calc(100vh - 56px - 56px - 3rem);">
+        <div class="container-fluid pt-2 pb-5" style=" min-height: calc(100vh - 56px - 56px);">
 
 
 
 
             <div class="row">
 
-                <!--              <div class="col-4">
-                    <mat-card>
-                        <div class="mb-2">
-                            <select class="form-control" [(ngModel)]="obra_selected">                                
-                                <option value="">Seleccionar...</option>
-                                <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>
-                            </select>
-                        </div>
-                        <div class="d-flex">                           
-                            <span>{{obra?.obra?.nombre || ""}}</span>
-                            <div class="spacer"></div>
-                            <span class="badge badge-pill badge-warning align-self-center mr-2">{{obra?.manzanas?.length || "0"}}</span>
-                        </div>
-                    </mat-card>
-
-                    <mat-accordion>
-                        <mat-expansion-panel *ngFor="let manzana of obra?.manzanas" [hideToggle]="false">
-                            <mat-expansion-panel-header>
-                                <span>{{manzana.nombre}}</span>
-                                <div class="spacer"></div>
-                                <span class="badge badge-pill badge-primary align-self-center mr-2">{{manzana.lotes?.length || "0"}}</span>
-
-                            </mat-expansion-panel-header>
-                            <ul class="list-group" *ngFor="let lote of manzana.lotes">
-                                <li class="list-group-item">({{lote.prototipos?.length || "0"}}) {{lote.nombre}}</li>
-                            </ul>
-                        </mat-expansion-panel>
-                    </mat-accordion>
-
-                </div> -->
-
                 <div class="col">
 
-                    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+                    <!--                    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav mr-auto">
                                 <li class="nav-item active">
@@ -116,7 +94,7 @@
                             </ul>
                         </div>
                     </nav>
-
+ -->
                     <ol class="breadcrumb colorBread">
                         <li class="breadcrumb-item text-primary">
                             {{lote?.obra}}
