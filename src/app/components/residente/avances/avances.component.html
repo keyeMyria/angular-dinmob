@@ -1,14 +1,22 @@
-<button mat-fab style="position:fixed; top:70px; right:20px; z-index:100" (click)="drawer.opened= !drawer.opened">
+<button mat-fab style="position:fixed; bottom:20px; right:20px; z-index:100" (click)="drawer.opened= !drawer.opened">
     <mat-icon aria-label="toggle side drawer">home</mat-icon>
 </button>
 
-<button mat-fab style="position:fixed; top:70px; right:85px; z-index:100" (click)="drawer.opened= !drawer.opened">
+<button mat-fab style="position:fixed; bottom:20px; right:85px; z-index:100" (click)="drawer.opened= !drawer.opened">
     <mat-icon aria-label="toggle side drawer">check</mat-icon>
 </button>
 
 
-<button mat-fab style="position:fixed; top:70px; right:150px; z-index:100" (click)="drawer.opened= !drawer.opened">
+<button mat-fab style="position:fixed; bottom:20px; right:150px; z-index:100" (click)="drawer.opened= !drawer.opened">
     <mat-icon aria-label="toggle side drawer">attach_money</mat-icon>
+</button>
+
+<button mat-fab style="position:fixed; bottom:20px; right:215px; z-index:100" (click)="drawer.opened= !drawer.opened">
+    <mat-icon aria-label="toggle side drawer">money_off</mat-icon>
+</button>
+
+<button mat-fab style="position:fixed; bottom:20px; right:280px; z-index:100" (click)="drawer.opened= !drawer.opened">
+    <mat-icon aria-label="toggle side drawer">not_interested</mat-icon>
 </button>
 
 
@@ -50,7 +58,7 @@
 
     <mat-drawer-content>
 
-   <!--      <mat-toolbar style="position:absolute; top:0; left:0; right:0; ">
+        <!--      <mat-toolbar style="position:absolute; top:0; left:0; right:0; ">
 
             <button mat-button>Terminar</button>
             <button mat-button>Liberar</button>
