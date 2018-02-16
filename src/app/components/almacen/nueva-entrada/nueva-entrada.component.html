@@ -10,40 +10,81 @@
       </div>
 
       <div class="card">
-        <div class="card-header padding-card-header">
-          <div class="d-flex">
-            <div class="align-self-center">Materiales</div>
-
-          </div>
+        <div class="card-header">
+          <!-- <div class="align-self-center">Materiales</div> -->
+          Materiales
         </div>
-        <div>
-          <div class="table-responsive">
-            <table class="table table-hover table-striped">
-              <thead>
-                <tr>
-                  <th>Código</th>
-                  <th>Insumo</th>
-                  <th>Unidad</th>
-                  <th>Existencias</th>
-                  <th>Entrada</th>
 
-                </tr>
-              </thead>
+        <form class="mt-2">
+          <div class="form-row align-items-center">
+            <div class="col-auto">
+              <div class="input-group mb-2">
+                <input type="text" class="form-control" placeholder="Buscar">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="button">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
 
-              <tbody>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>
-                    <input type="text" class="form-control">
-                  </td>
-                </tr>
-
-              </tbody>
-            </table>
+            <div class="col-auto">
+              <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" id="">
+                <label class="form-check-label" for="">
+                  Ver sólo materiales con entrada
+                </label>
+              </div>
+            </div>
           </div>
+        </form>
+
+        <div class="table-responsive">
+          <table class="table table-hover table-striped">
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Insumo</th>
+                <th>Unidad</th>
+                <th>Existencias</th>
+                <th>Entrada</th>
+
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let insumo of insumos">
+                <td>{{insumo.codigo}}</td>
+                <td>{{insumo.insumo}}</td>
+                <td>{{insumo.unidad}}</td>
+                <td>{{insumo.existencias}}</td>
+                <td>
+                  <input type="text" class="form-control">
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+
+        </div>
+
+        <div class="card-footer">
+
+          <form class="form-inline">
+
+            <label class="mx-3" for="folio">Folio</label>
+            <input type="text" class="form-control" id="folio">
+
+            <label class="mx-3" for="proveedor">Proveedor</label>
+            <select id="proveedor" class="form-control">
+              <option selected>Choose...</option>
+              <option>...</option>
+            </select>
+
+            <button type="submit" class="btn btn-primary mx-2">Guardar</button>
+
+          </form>
+
         </div>
       </div>
 

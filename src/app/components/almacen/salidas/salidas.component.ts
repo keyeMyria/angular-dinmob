@@ -21,7 +21,8 @@ export class SalidasComponent implements OnInit {
     private route: ActivatedRoute,
     public dialog: MatDialog,
     private salidaSrv: SalidasService,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    private salidasSrv: SalidasService,
   ) { }
 
   ngOnInit() {
@@ -50,20 +51,28 @@ export class SalidasComponent implements OnInit {
   }
 
   verSalida(salida) {
-    let dialogRef = this.dialog.open(VerSalidaDialogoComponent, {
-      data: {
-        salida: salida
-      },
-      width: '800px'
-    });
-    dialogRef.afterClosed().subscribe(result => {
 
-      if (result === true) {   
+    this.salidasSrv.getSalida(salida.id_salida)
+      .subscribe(res => {
+        //console.log("salida OK", res);
+        let dialogRef = this.dialog.open(VerSalidaDialogoComponent, {
+          data: {
+            datos: res.datos,
+            insumos: res.insumos
+          },
+          width: '800px'
+        });
+        dialogRef.afterClosed().subscribe(result => {
 
-      } else if (result && result.error) {
-      }
+          if (result === true) {
 
-    });
+          } else if (result && result.error) {
+          }
+
+        });
+      });
+
+
   }
 
   delSalida(salida) {
