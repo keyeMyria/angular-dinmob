@@ -14,7 +14,7 @@ export class ObrasService {
 
   constructor(
     private http: HttpClient,
-    private config: ConfigService,    
+    private config: ConfigService,
   ) {
     this.url = this.config.api_url + "obras/";
   }
@@ -37,6 +37,12 @@ export class ObrasService {
   getAcordeonManzanas(id_obra) {
     return this.http.get(this.url + 'get_manzanas_lotes/' + id_obra)
       .pipe(catchError(this.handleError("getAcordeonManzanas")));
+  }
+
+  //ok
+  getAcordeonManzanasNumFotos(id_obra) {
+    return this.http.get(this.url + 'get_acordeon_manzanas_num_fotos/' + id_obra)
+      .pipe(catchError(this.handleError("getAcordeonManzanasNumFotos")));
   }
 
 
@@ -86,7 +92,7 @@ export class ObrasService {
       .pipe(catchError(this.handleError("delObra")));
   }
 
-  
+
   //ok
   getEstadisticasVentas(id_obra) {
     return this.http.get(this.url + "get_estadisticas_ventas/" + id_obra, {})

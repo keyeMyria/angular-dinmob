@@ -175,3 +175,28 @@ table.table-align-middle  {
 .bg-active{
     background-color: #b8daff;
 }
+
+
+.drawer-container{
+    height: 100%;
+}
+
+/*********funciona cuando  pantalla > 600px **********/
+//height: 100%;
+//position: relative;
+/**************************************************/
+.drawer-content {
+    //64px del toolbar
+    min-height: calc(100vh - 64px);
+}
+
+/********** aplicar cuando pantalla < 600 px *****/
+//height toolbar = pantalla < 600px? 56px: 64px
+//height: calc(100vh - 56px);
+/***************************/
+@media only screen and (max-width: 600px) {
+    .drawer-content{
+        //56px del toolbar
+        min-height: calc(100vh - 56px);
+    }
+}
