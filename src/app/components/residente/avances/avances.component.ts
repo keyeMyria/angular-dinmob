@@ -23,6 +23,7 @@ export class AvancesComponent implements OnInit {
 
 
   lote: any;
+  acordeon: any;
   obra: any;
   obra_selected: string = "";
   obras: any = [];
@@ -140,7 +141,8 @@ export class AvancesComponent implements OnInit {
 
     this.loteSrv.getAvances(lote.id_lote)
       .subscribe(response => {
-        this.lote = response;
+        this.lote = response.lote;
+        this.acordeon = response.acordeon;
       });
 
     if (this.mobileQuery.matches) {
@@ -150,10 +152,17 @@ export class AvancesComponent implements OnInit {
 
   }
 
-  addFoto() {
+  addFoto(partida) {
+
+    console.log("partida", partida);
+
+
     let dialogRef = this.dialog.open(FotoPartidaDialogoComponent, {
       width: '500px',
-      data: {}
+      data: {
+        id_lote: this.lote.id_lote,
+        id_partida: partida.id_partida
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -164,7 +173,7 @@ export class AvancesComponent implements OnInit {
           panelClass: ["bg-success", "text-white"]
         });
 
-      } else if (result.error) {
+      } else if (result && result.error) {
 
         this.snackBar.open(result.error, "", {
           duration: 3000,

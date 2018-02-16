@@ -119,17 +119,17 @@
 
                     <ol class="breadcrumb colorBread">
                         <li class="breadcrumb-item text-primary">
-                            {{lote?.lote.obra}}
+                            {{lote?.obra}}
                         </li>
                         <li class="breadcrumb-item text-primary">
-                            {{lote?.lote.manzana}}
+                            {{lote?.manzana}}
                         </li>
-                        <li class="breadcrumb-item text-primary">{{lote?.lote.nombre}}</li>
+                        <li class="breadcrumb-item text-primary">{{lote?.nombre}}</li>
                     </ol>
                     <div class="avances">
                         <mat-accordion>
 
-                            <mat-expansion-panel *ngFor="let partida of lote?.acordeon" [hideToggle]="true">
+                            <mat-expansion-panel *ngFor="let partida of acordeon" [hideToggle]="true">
                                 <mat-expansion-panel-header [ngClass]="{'bg-info text-white': partidaFinalizada(partida)}">
                                     <span>{{partida.nombre}}</span>
                                     <div class="spacer"></div>
@@ -153,7 +153,7 @@
                                                 </mat-checkbox>
                                                 <div class="spacer"></div>
                                                 <div>
-                                                    <button mat-icon-button (click)="addFoto()">
+                                                    <button mat-icon-button (click)="addFoto(subpartida)">
                                                         <mat-icon>camera_alt</mat-icon>
                                                     </button>
                                                 </div>
@@ -175,7 +175,7 @@
                                                 </mat-checkbox>
                                                 <div class="spacer"></div>
                                                 <div>
-                                                    <button mat-icon-button (click)="addFoto()">
+                                                    <button mat-icon-button (click)="addFoto(partida)">
                                                         <mat-icon>camera_alt</mat-icon>
                                                     </button>
                                                 </div>
