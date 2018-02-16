@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { ObrasService } from "app/services/obras.service";
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import { EditarManzanaDialogoComponent } from 'app/components/admin/editar-manzana-dialogo/editar-manzana-dialogo.component';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatDialog, MatSnackBar, MatDrawer } from '@angular/material';
 import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import "rxjs/add/observable/of";
@@ -19,13 +19,19 @@ import { EditarLoteDialogoComponent } from 'app/components/admin/editar-lote-dia
 import { SelectionModel } from '@angular/cdk/collections';
 import { log } from 'util';
 import { PrototiposService } from 'app/services/prototipos.service';
+import { MediaMatcher } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-estructura-obra',
   templateUrl: './estructura-obra.component.html',
   styleUrls: ['./estructura-obra.component.scss']
 })
-export class EstructuraObraComponent implements OnInit {
+export class EstructuraObraComponent implements OnInit, OnDestroy {
+
+  @ViewChild(MatDrawer) drawer: MatDrawer;
+
+  mobileQuery: MediaQueryList;
+  private _mobileQueryListener: () => void;
 
 
   numbermask = createNumberMask({
@@ -60,6 +66,8 @@ export class EstructuraObraComponent implements OnInit {
   selection: SelectionModel<any>[];
 
   constructor(
+    private changeDetectorRef: ChangeDetectorRef,
+    private media: MediaMatcher,
     private router: Router,
     private route: ActivatedRoute,
     private obraSrv: ObrasService,
@@ -69,7 +77,11 @@ export class EstructuraObraComponent implements OnInit {
     private loteSrv: LotesService,
     private manzanaSrv: ManzanasService,
     private snackBar: MatSnackBar
-  ) { }
+  ) {
+    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
+  }
 
 
   /* obtenemos las obras del usurio del resolve y consultamos la obra requerida como routeParam */
@@ -426,13 +438,13 @@ export class EstructuraObraComponent implements OnInit {
 
 
       },
-      (error) => {
-        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde.", "", {
-          duration: 3000,
-          panelClass: ["bg-danger", "text-white"]
-        });
+        (error) => {
+          this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde.", "", {
+            duration: 3000,
+            panelClass: ["bg-danger", "text-white"]
+          });
 
-      });
+        });
 
 
   }
@@ -478,14 +490,14 @@ export class EstructuraObraComponent implements OnInit {
 
 
       },
-      (error) => {
+        (error) => {
 
-        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde.", "", {
-          duration: 3000,
-          panelClass: ["bg-danger", "text-white"]
+          this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde.", "", {
+            duration: 3000,
+            panelClass: ["bg-danger", "text-white"]
+          });
+
         });
-
-      });
 
 
   }
@@ -529,13 +541,13 @@ export class EstructuraObraComponent implements OnInit {
 
 
       },
-      (error) => {
-        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde.", "", {
-          duration: 3000,
-          panelClass: ["bg-danger", "text-white"]
-        });
+        (error) => {
+          this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde.", "", {
+            duration: 3000,
+            panelClass: ["bg-danger", "text-white"]
+          });
 
-      });
+        });
 
 
   }
@@ -577,13 +589,13 @@ export class EstructuraObraComponent implements OnInit {
 
 
       },
-      (error) => {
-        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde.", "", {
-          duration: 3000,
-          panelClass: ["bg-danger", "text-white"]
-        });
+        (error) => {
+          this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde.", "", {
+            duration: 3000,
+            panelClass: ["bg-danger", "text-white"]
+          });
 
-      });
+        });
 
 
   }
@@ -600,6 +612,11 @@ export class EstructuraObraComponent implements OnInit {
     this.isAllSelected(i) ?
       this.selection[i].clear() :
       this.obra.manzanas[i].lotes.forEach(lote => this.selection[i].select(lote));
+  }
+
+  ngOnDestroy(): void {
+    this.mobileQuery.removeListener(this._mobileQueryListener)
+
   }
 
 
