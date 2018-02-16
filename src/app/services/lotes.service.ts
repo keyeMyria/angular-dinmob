@@ -54,6 +54,12 @@ export class LotesService {
       .pipe(catchError(this.handleError("getAvances")));
   }
 
+  //ok
+  getFotosAvances(id_lote) {
+    return this.http.get(this.url + "get_fotos/" + id_lote)
+      .pipe(catchError(this.handleError("getFotosAvances")));
+  }
+
 
   //ok
   addLoteByNombre(nombre, id_manzana) {

@@ -4,6 +4,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { ObrasService } from 'app/services/obras.service';
 import { Observable } from 'rxjs/Observable';
+import { LotesService } from '../../../services/lotes.service';
 
 @Component({
   selector: 'app-imagenes-lote',
@@ -21,6 +22,8 @@ export class ImagenesLoteComponent implements OnInit {
   obras: any = [];
   obra_selected: string = "";
   obra: any;
+  lote: any;
+  fotos: any = [];
 
   constructor(
     private media: MediaMatcher,
@@ -28,6 +31,7 @@ export class ImagenesLoteComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private obraSrv: ObrasService,
+    private loteSrv: LotesService
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -43,7 +47,7 @@ export class ImagenesLoteComponent implements OnInit {
       .switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
-          return this.obraSrv.getAcordeonManzanas(params.get("obra"));
+          return this.obraSrv.getAcordeonManzanasNumFotos(params.get("obra"));
         } else {
           return Observable.of({ datos: {} });
         }
@@ -51,6 +55,19 @@ export class ImagenesLoteComponent implements OnInit {
         console.log("obra", obra);
         this.obra = obra;
       });
+  }
+
+  getImagenesLote(lote) {
+    console.log("lote", lote);
+    this.lote = lote;
+
+    this.loteSrv.getFotosAvances(lote.id_lote)
+      .subscribe(fotos => {
+        this.fotos = fotos;
+      }, (error) => {
+
+      });
+
   }
 
   cargarObra(id_obra) {
