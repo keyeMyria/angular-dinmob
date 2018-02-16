@@ -73,6 +73,11 @@ export class LotesService {
       .pipe(catchError(this.handleError("delLote")));
   }
 
+  //ok
+  getUploadFotoURL() {
+    return this.url + "upload_foto";
+  }
+
   private handleError<T>(operation = 'operation') {
     return (error: HttpErrorResponse) => {
 

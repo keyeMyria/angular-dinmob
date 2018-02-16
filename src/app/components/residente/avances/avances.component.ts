@@ -8,6 +8,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { FotoPartidaDialogoComponent } from 'app/components/residente/foto-partida-dialogo/foto-partida-dialogo.component';
+import { SelectionModel } from '@angular/cdk/collections';
 
 
 @Component({
@@ -23,9 +24,12 @@ export class AvancesComponent implements OnInit {
 
 
   lote: any;
+  acordeon: any;
   obra: any;
   obra_selected: string = "";
   obras: any = [];
+
+  selection: SelectionModel<any>;
 
 
 
@@ -140,7 +144,10 @@ export class AvancesComponent implements OnInit {
 
     this.loteSrv.getAvances(lote.id_lote)
       .subscribe(response => {
-        this.lote = response;
+        this.lote = response.lote;
+        this.acordeon = response.acordeon;
+        this.selection = new SelectionModel<any>(true, []);
+
       });
 
     if (this.mobileQuery.matches) {
@@ -150,10 +157,17 @@ export class AvancesComponent implements OnInit {
 
   }
 
-  addFoto() {
+  addFoto(partida) {
+
+    console.log("partida", partida);
+
+
     let dialogRef = this.dialog.open(FotoPartidaDialogoComponent, {
       width: '500px',
-      data: {}
+      data: {
+        id_lote: this.lote.id_lote,
+        id_partida: partida.id_partida
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -164,7 +178,7 @@ export class AvancesComponent implements OnInit {
           panelClass: ["bg-success", "text-white"]
         });
 
-      } else if (result.error) {
+      } else if (result && result.error) {
 
         this.snackBar.open(result.error, "", {
           duration: 3000,
