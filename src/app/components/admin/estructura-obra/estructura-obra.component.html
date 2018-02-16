@@ -8,7 +8,8 @@
     <mat-drawer class="estructura" #drawer [mode]="mobileQuery.matches ? 'over':'side'" [opened]="!mobileQuery.matches" style="width:300px">
 
         <div class="p-3">
-            <h3>Operaciones</h3>
+            <h4>Operaciones</h4>
+            <hr>
 
             <div class="form-group">
                 <h5>{{manzana_selected===null? 'Seleccione una manzana': obra.manzanas[manzana_selected].nombre}}</h5>
