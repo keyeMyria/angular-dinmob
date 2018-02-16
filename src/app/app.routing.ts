@@ -59,6 +59,7 @@ import { TableroVentasComponent } from 'app/components/tablero-ventas/tablero-ve
 import { TableroAlmacenComponent } from 'app/components/tablero-almacen/tablero-almacen.component';
 import { UsuarioLoggedResolverService } from 'app/resolvers/usuario-logged-resolver.service';
 import { VentasPagosComponent } from 'app/components/ventas/ventas-pagos/ventas-pagos.component';
+import { ImagenesLoteComponent } from './components/residente/imagenes-lote/imagenes-lote.component';
 
 
 
@@ -260,6 +261,13 @@ export const ROUTES: Routes = [
             },
             {
                 path: 'ventas-pagos', component: VentasPagosComponent,
+                resolve: {
+                    obras: ObrasUsuarioResolverService
+                }
+            },
+
+            {
+                path: 'imagenes-lote', component: ImagenesLoteComponent,
                 resolve: {
                     obras: ObrasUsuarioResolverService
                 }

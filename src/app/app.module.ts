@@ -174,6 +174,7 @@ import { ReporteService } from 'app/services/reporte.service';
 import { MapasVentasConfigDialogoComponent } from './components/ventas/mapas-ventas-config-dialogo/mapas-ventas-config-dialogo.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoadingInterceptorService } from 'app/interceptors/loading-interceptor.service';
+import { ImagenesLoteComponent } from './components/residente/imagenes-lote/imagenes-lote.component';
 
 
 
@@ -275,6 +276,7 @@ import { LoadingInterceptorService } from 'app/interceptors/loading-interceptor.
     UploadFileDialogoComponent,
     MapasVentasConfigDialogoComponent,
     LoadingDirective,
+    ImagenesLoteComponent,
 
 
 
