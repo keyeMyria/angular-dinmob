@@ -200,3 +200,14 @@ table.table-align-middle  {
         min-height: calc(100vh - 56px);
     }
 }
+
+
+//fab button en mapa avances
+.img-btn.mat-fab .mat-button-wrapper {
+    line-height: 12px;
+}
+
+//dialogo imagenes en mapa avances
+.imagenes.mat-dialog-content {
+    padding: 0 5px;
+}

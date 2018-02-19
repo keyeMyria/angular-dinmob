@@ -1,9 +1,28 @@
-<h1 mat-dialog-title>Imagenes Lotes</h1>
-<div mat-dialog-content>
+<h1 mat-dialog-title>{{data.lote.manzana}} {{data.lote.nombre}}</h1>
+<div mat-dialog-content class="imagenes">
 
+  <div class="card mb-2" *ngFor="let foto of data.fotos">
+    <img class="card-img-top" [src]="foto.url" [alt]="foto.partida">
+    <div class="card-body">
+      <h5 class="card-title">{{foto.partida_padre}} {{foto.partida}}</h5>
+      <p class="card-text">{{foto.fecha}}</p>
+      <p class="card-text">{{foto.descripcion}}</p>
+      <div>
 
+        <button mat-button class="no-min">
+          <mat-icon>replay</mat-icon>
+        </button>
+
+        <button mat-button class="no-min">
+          <mat-icon>refresh</mat-icon>
+        </button>
+
+      </div>
+    </div>
+
+  </div>
 
 </div>
 <div mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="false" class="btn btn-secondary btn-lg btn-block">CERRAR</button>
+  <button mat-button [mat-dialog-close]="false" class="btn-block">CERRAR</button>
 </div>

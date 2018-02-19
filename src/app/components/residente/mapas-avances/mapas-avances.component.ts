@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { of } from "rxjs/observable/of";
 import { PercentPipe } from '@angular/common';
 import { ImagenesLotesDialogoComponent } from '../../ventas/imagenes-lotes-dialogo/imagenes-lotes-dialogo.component';
+import { LotesService } from '../../../services/lotes.service';
 
 declare var jQuery: any;
 declare var $: any;
@@ -32,6 +33,7 @@ export class MapasAvancesComponent implements OnInit {
     private router: Router,
     private percentPipe: PercentPipe,
     public dialog: MatDialog,
+    private loteSrv: LotesService
   ) { }
 
   ngOnInit() {
@@ -173,7 +175,7 @@ export class MapasAvancesComponent implements OnInit {
 
           tooltip += " <br> " + lote.num_partidas_fin + " de " + num_partidas + " partidas";
 
-          tooltip += " <br> " + this.percentPipe.transform(lote.valor ? lote.valor : 0,"1.2-2");
+          tooltip += " <br> " + this.percentPipe.transform(lote.valor ? lote.valor : 0, "1.2-2");
 
           if (lote.responsable) {
             tooltip += "<br> " + lote.responsable;
@@ -227,19 +229,35 @@ export class MapasAvancesComponent implements OnInit {
     }
   }
 
-  verImagenes(){
+  verImagenes() {
 
-    let dialogRef = this.dialog.open(ImagenesLotesDialogoComponent, {
-      data: {
-      },
-      width: '500px',
-    });
 
-    dialogRef.afterClosed().subscribe(result => {
+    this.loteSrv.getFotosAvances(this.lote_selected.id_lote)
+      .subscribe(fotos => {
 
- 
+        console.log("fotos", fotos);
 
-    });
+
+        let dialogRef = this.dialog.open(ImagenesLotesDialogoComponent, {
+          data: {
+            fotos: fotos,
+            lote: this.lote_selected
+          },
+          width: '500px',
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+
+
+
+        });
+
+      }, (error) => {
+
+      });
+
+
+
   }
 
 
