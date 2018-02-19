@@ -1,9 +1,8 @@
-<button mat-fab [disabled]="!lote_selected" style="position:fixed; bottom:20px; right:20px; z-index:100" (click)="verClientes()">
-  <!-- <mat-icon aria-label="fab-button">person</mat-icon> -->
+<button mat-fab class="img-btn" [disabled]="!lote_selected" style="position:fixed; bottom:20px; right:20px; z-index:100" (click)="verImagenes()">
+  <!-- <mat-icon aria-label="fab-button">photo_camera</mat-icon> -->
+  <!-- <i class="fa fa-camera"></i> -->
+  <div>{{lote_selected?.num_fotos||0}}</div>
   <small>{{lote_selected?.code}}</small>
-</button>
-<button mat-fab style="position:fixed; bottom:85px; right:20px; z-index:100" (click)="configMapa()">
-  <mat-icon aria-label="fab-button">settings</mat-icon>
 </button>
 
 <div class="content p-2">
@@ -51,7 +50,8 @@
         </div>
 
 
-        <button mat-raised-button color="primary" class="btn-block" (click)="verImagenes()" [disabled]="!lote_selected">Imágenes</button>
+        <button mat-raised-button color="primary" class="btn-block" (click)="verImagenes()" [disabled]="!lote_selected">
+          <!-- <mat-icon aria-label="fab-button">photo_camera</mat-icon> --> Imágenes {{lote_selected?.num_fotos||0}}</button>
         <button mat-raised-button color="primary" class="btn-block" (click)="verAvances()">Avances</button>
 
 

@@ -49,7 +49,7 @@
     </div>
 
     <div formArrayName="residentes">
-      <div class="form-group" *ngFor="let residente of form.controls['residentes'].controls; let i= index">
+      <div class="form-group" *ngFor="let residente of residentes.controls; let i= index">
         <div class="input-group">
           <select class="form-control" [formControlName]="i" [ngClass]="{'is-invalid':form.get('residentes').controls[i].invalid}">
             <option value="">Elegir usuario...</option>
@@ -73,7 +73,7 @@
     </div>
 
     <div formArrayName="almacenistas">
-      <div class="form-group" *ngFor="let almacenista of form.controls['almacenistas'].controls; let i= index">
+      <div class="form-group" *ngFor="let almacenista of almacenistas.controls; let i= index">
         <div class="input-group">
           <select class="form-control" [formControlName]="i" [ngClass]="{'is-invalid':form.get('almacenistas').controls[i].invalid}">
             <option value="">Elegir usuario...</option>
@@ -97,7 +97,7 @@
     </div>
 
     <div formArrayName="control_almacen">
-      <div class="form-group" *ngFor="let encargado of form.controls['control_almacen'].controls;let i=index">
+      <div class="form-group" *ngFor="let encargado of control_almacen.controls;let i=index">
         <div class="input-group">
           <select class="form-control" [formControlName]="i" [ngClass]="{'is-invalid':form.get('control_almacen').controls[i].invalid}">
             <option value="">Elegir usuario...</option>
