@@ -30,6 +30,10 @@ export class ActasEntregaComponent implements OnInit {
     this.router.navigate(["/acta-entrega",acta.id_acta_entrega]);
   }
 
+  agregarActa(){
+    
+  }
+
 
 
 }

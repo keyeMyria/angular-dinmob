@@ -171,7 +171,7 @@ export class MapasAvancesComponent implements OnInit {
 
           tooltip += " <br> " + lote.num_partidas_fin + " de " + num_partidas + " partidas";
 
-          tooltip += " <br> " + this.percentPipe.transform(lote.valor ? lote.valor : 0);
+          tooltip += " <br> " + this.percentPipe.transform(lote.valor ? lote.valor : 0,"1.2-2");
 
           if (lote.responsable) {
             tooltip += "<br> " + lote.responsable;
