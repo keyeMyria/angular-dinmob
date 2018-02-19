@@ -6,6 +6,7 @@ import { MatDialog, MatSnackBar } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { of } from "rxjs/observable/of";
 import { PercentPipe } from '@angular/common';
+import { ImagenesLotesDialogoComponent } from '../../ventas/imagenes-lotes-dialogo/imagenes-lotes-dialogo.component';
 
 declare var jQuery: any;
 declare var $: any;
@@ -29,7 +30,8 @@ export class MapasAvancesComponent implements OnInit {
     private route: ActivatedRoute,
     private mapaSrv: MapasService,
     private router: Router,
-    private percentPipe: PercentPipe
+    private percentPipe: PercentPipe,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit() {
@@ -223,6 +225,21 @@ export class MapasAvancesComponent implements OnInit {
     if (this.map) {
       this.map.remove();
     }
+  }
+
+  verImagenes(){
+
+    let dialogRef = this.dialog.open(ImagenesLotesDialogoComponent, {
+      data: {
+      },
+      width: '500px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+ 
+
+    });
   }
 
 
