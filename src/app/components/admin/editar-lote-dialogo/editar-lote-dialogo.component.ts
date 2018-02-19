@@ -65,6 +65,10 @@ export class EditarLoteDialogoComponent implements OnInit {
   ngOnInit() {
   }
 
+  get prototipos(): FormArray {
+    return this.form.get("prototipos") as FormArray;
+  }
+
   addPrototipo() {
     (<FormArray>this.form.controls["prototipos"]).push(new FormControl("", Validators.required));
   }
