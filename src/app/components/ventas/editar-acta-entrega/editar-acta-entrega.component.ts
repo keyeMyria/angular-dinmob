@@ -13,6 +13,9 @@ export class EditarActaEntregaComponent implements OnInit {
   acta: any = {};
   areas: string[];
   equipamiento: string[];
+  area: string;
+  equipo: string;
+
 
   constructor(
     private actaSrv: ActaEntregaService,
@@ -29,6 +32,22 @@ export class EditarActaEntregaComponent implements OnInit {
         this.areas = res.areas;
         this.equipamiento = res.equipamiento;
       });
+
+  }
+
+  addArea() {
+
+  }
+
+  addEquipo() {
+
+  }
+
+  delArea(area) {
+
+  }
+
+  delEquipo(equipo) {
 
   }
 

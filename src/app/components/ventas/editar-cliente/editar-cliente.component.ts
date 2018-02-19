@@ -52,6 +52,7 @@ export class EditarClienteComponent implements OnInit {
   tipos_operacion: any[] = [];
   tipos_pago: any[] = [];
   estados: any[] = [];
+  asesores: any = [];
 
   //selector de compras
   selection = new SelectionModel<any>(false);
@@ -380,7 +381,8 @@ export class EditarClienteComponent implements OnInit {
     }
 
     this.loteSrv.updateLote(this.compra_selected.id_lote, lote)
-      .subscribe(lote => {;
+      .subscribe(lote => {
+        ;
 
 
         this.compra_selected.valor_base = lote.valor_base;

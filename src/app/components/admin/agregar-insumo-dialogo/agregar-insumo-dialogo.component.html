@@ -7,7 +7,7 @@
 
     <div class="form-group">
       <label for="add_insumo_selected" class="control-label">Nombre</label>
-      <select class="form-control" (change)="changeInsumo(ctrl.add_insumo_selected)" id="add_insumo_selected" name="add_insumo_selected"
+      <select class="form-control" id="add_insumo_selected" name="add_insumo_selected"
         formControlName="add_insumo_selected" [ngClass]="{'is-invalid': form.get('add_insumo_selected').invalid  && (form.get('add_insumo_selected').dirty || form.get('add_insumo_selected').touched )}">
         <option [value]="insumo.codigo" *ngFor="let insumo of data.insumos">{{a.text}}</option>
       </select>

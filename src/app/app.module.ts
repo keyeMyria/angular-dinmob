@@ -69,13 +69,13 @@ import { EstructuraObraComponent } from './components/admin/estructura-obra/estr
 import { PrototiposComponent } from './components/admin/prototipos/prototipos.component';
 import { EditarPrototipoComponent } from './components/admin/editar-prototipo/editar-prototipo.component';
 import { UsuariosComponent } from './components/admin/usuarios/usuarios.component';
-import { CrearUsuarioComponent } from './components/admin/crear-usuario/crear-usuario.component';
+//import { CrearUsuarioComponent } from './components/admin/crear-usuario/crear-usuario.component';
 
 
 import { CambiarPasswordDialogoComponent } from './components/admin/cambiar-password-dialogo/cambiar-password-dialogo.component';
 import { ConfirmarBorradoDialogoComponent } from './components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
 import { EditarUsuarioDialogoComponent } from './components/admin/editar-usuario-dialogo/editar-usuario-dialogo.component';
-import { EditarClienteDialogoComponent } from './components/ventas/editar-cliente-dialogo/editar-cliente-dialogo.component';
+//import { EditarClienteDialogoComponent } from './components/ventas/editar-cliente-dialogo/editar-cliente-dialogo.component';
 
 
 import { EditarClienteComponent } from './components/ventas/editar-cliente/editar-cliente.component';
@@ -186,7 +186,9 @@ import { ImagenesLotesDialogoComponent } from './components/ventas/imagenes-lote
 
 
 
-
+export function getToken() {
+  return localStorage.getItem('token');
+}
 
 
 
@@ -211,11 +213,11 @@ import { ImagenesLotesDialogoComponent } from './components/ventas/imagenes-lote
     PrototiposComponent,
     EditarPrototipoComponent,
     UsuariosComponent,
-    CrearUsuarioComponent,
+    //CrearUsuarioComponent,
     CambiarPasswordDialogoComponent,
     ConfirmarBorradoDialogoComponent,
     EditarUsuarioDialogoComponent,
-    EditarClienteDialogoComponent,
+    //EditarClienteDialogoComponent,
     EditarClienteComponent,
     AgregarObraDialogoComponent,
     AgregarDocumentoDialogoComponent,
@@ -294,10 +296,7 @@ import { ImagenesLotesDialogoComponent } from './components/ventas/imagenes-lote
     HttpClientModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: () => {
-          //console.log("tokenGetter", localStorage.getItem('token'));
-          return localStorage.getItem('token');
-        },
+        tokenGetter: getToken,
         whitelistedDomains: ['localhost:8080']
       }
     }),

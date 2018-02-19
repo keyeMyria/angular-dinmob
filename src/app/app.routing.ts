@@ -18,7 +18,7 @@ import { PerfilComponent } from "app/components/perfil/perfil.component";
 import { AvancesComponent } from "app/components/residente/avances/avances.component";
 import { MapasAvancesComponent } from "app/components/residente/mapas-avances/mapas-avances.component";
 import { UsuariosComponent } from "app/components/admin/usuarios/usuarios.component";
-import { CrearUsuarioComponent } from "app/components/admin/crear-usuario/crear-usuario.component";
+//import { CrearUsuarioComponent } from "app/components/admin/crear-usuario/crear-usuario.component";
 import { EditarClienteComponent } from "app/components/ventas/editar-cliente/editar-cliente.component";
 import { MapasVentasComponent } from "app/components/ventas/mapas-ventas/mapas-ventas.component";
 import { AuthGuard } from "app/guards/auth.guard";
@@ -146,7 +146,7 @@ export const ROUTES: Routes = [
                 }
             },
             { path: 'usuarios', component: UsuariosComponent },
-            { path: 'crear-usuario', component: CrearUsuarioComponent },
+            //{ path: 'crear-usuario', component: CrearUsuarioComponent },
             {
                 path: 'editar-cliente/:id', component: EditarClienteComponent,
                 resolve: {

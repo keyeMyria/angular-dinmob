@@ -36,32 +36,23 @@
         </div>
 
         <div class="form-group">
-          <label for="valor_base" class="text-muted">Valor Base</label>
-          <div class="texto">{{lote_selected?.valor_base|currency}}</div>
+          <label for="valor_base" class="text-muted">Partidas Terminadas</label>
+          <div class="texto" *ngIf="lote_selected?.num_partidas">{{lote_selected?.num_partidas_fin}} de {{lote_selected?.num_partidas||0}}</div>
         </div>
 
         <div class="form-group">
-          <label for="valor_ampliacion" class="text-muted">Valor Ampliación</label>
-          <div class="texto">{{lote_selected?.valor_ampliacion|currency}}</div>
+          <label for="valor_ampliacion" class="text-muted">Porcentaje</label>
+          <div class="texto">{{lote_selected?.valor|percent:'1.2-2'}}</div>
         </div>
 
         <div class="form-group">
-          <label for="fecha" class="text-muted">Fecha Cambio de Estado</label>
-          <div class="texto">{{lote_selected?.fecha_cambio_estado | date:'mediumDate':'':'es'}}</div>
+          <label for="fecha" class="text-muted">Responsable Abañilería</label>
+          <div class="texto" *ngIf="lote_selected">{{ (lote_selected?.responsable||'No Asignado')}}</div>
         </div>
 
-        <div class="form-group">
-          <label for="estado" class="text-muted">Estado Venta</label>
-          <div class="texto">{{lote_selected?.estado_venta}}</div>
-        </div>
 
-        <div class="form-group">
-          <mat-slide-toggle [checked]="verLeyenda" (change)="toggleVerLeyenda($event)">Leyenda</mat-slide-toggle>
-        </div>
-        <button mat-raised-button color="primary" class="btn-block" (click)="verClientes()" [disabled]="!lote_selected">Clientes</button>
-        <button mat-raised-button color="primary" class="btn-block" (click)="escalaPrototipos()">Prototipos</button>
-        <button mat-raised-button color="primary" class="btn-block" (click)="escalaEstados()">Lotes</button>
-
+        <button mat-raised-button color="primary" class="btn-block" (click)="verImagenes()" [disabled]="!lote_selected">Imágenes</button>
+        <button mat-raised-button color="primary" class="btn-block" (click)="verAvances()">Avances</button>
 
 
       </mat-card>

@@ -22,22 +22,22 @@ export class LoadingDirective implements OnInit, OnDestroy {
     this.subscription = loadingSrv.event$
       .subscribe(visible => {
         this.elementRef.nativeElement.hidden = !visible;
-        console.log("subscription visible:", visible);
-        if (visible) {
+        //console.log("subscription visible:", visible);
+       /*  if (visible) {
         
-          //this.render.removeClass(this.elementRef.nativeElement, "bg-success");
-          //this.render.addClass(this.elementRef.nativeElement, "bg-danger");
+          this.render.removeClass(this.elementRef.nativeElement, "bg-success");
+          this.render.addClass(this.elementRef.nativeElement, "bg-danger");
         } else {
-          //this.render.removeClass(this.elementRef.nativeElement, "bg-danger");
-          //this.render.addClass(this.elementRef.nativeElement, "bg-success");
+          this.render.removeClass(this.elementRef.nativeElement, "bg-danger");
+          this.render.addClass(this.elementRef.nativeElement, "bg-success");
 
         }
 
       }
-      /*     , (error) => {
+          , (error) => {
             this.elementRef.nativeElement.visible = false;
           } */
-      );
+      });
 
   }
 
