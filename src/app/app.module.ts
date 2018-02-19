@@ -176,6 +176,12 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoadingInterceptorService } from 'app/interceptors/loading-interceptor.service';
 import { ImagenesLoteComponent } from './components/residente/imagenes-lote/imagenes-lote.component';
 import { ImagenesLotesDialogoComponent } from './components/ventas/imagenes-lotes-dialogo/imagenes-lotes-dialogo.component';
+import { ProveedoresComponent } from './components/admin/proveedores/proveedores.component';
+import { PagosTrabajadoresComponent } from './components/admin/pagos-trabajadores/pagos-trabajadores.component';
+import { GastosSobrasComponent } from './components/admin/gastos-sobras/gastos-sobras.component';
+import { EditarProveedorDialogoComponent } from './components/admin/editar-proveedor-dialogo/editar-proveedor-dialogo.component';
+import { NuevoProveedorDialogoComponent } from './components/admin/nuevo-proveedor-dialogo/nuevo-proveedor-dialogo.component';
+import { NuevoGastoDialogoComponent } from './components/admin/nuevo-gasto-dialogo/nuevo-gasto-dialogo.component';
 
 
 
@@ -282,6 +288,12 @@ export function getToken() {
     LoadingDirective,
     ImagenesLoteComponent,
     ImagenesLotesDialogoComponent,
+    ProveedoresComponent,
+    PagosTrabajadoresComponent,
+    GastosSobrasComponent,
+    EditarProveedorDialogoComponent,
+    NuevoProveedorDialogoComponent,
+    NuevoGastoDialogoComponent,
 
 
 
@@ -351,7 +363,10 @@ export function getToken() {
     ConfirmarDeshabilitarAlertaDialogoComponent,
     UploadFileDialogoComponent,
     MapasVentasConfigDialogoComponent,
-    ImagenesLotesDialogoComponent
+    ImagenesLotesDialogoComponent,
+    EditarProveedorDialogoComponent,
+    NuevoProveedorDialogoComponent
+
 
 
 

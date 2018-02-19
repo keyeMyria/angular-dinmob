@@ -60,6 +60,9 @@ import { TableroAlmacenComponent } from 'app/components/tablero-almacen/tablero-
 import { UsuarioLoggedResolverService } from 'app/resolvers/usuario-logged-resolver.service';
 import { VentasPagosComponent } from 'app/components/ventas/ventas-pagos/ventas-pagos.component';
 import { ImagenesLoteComponent } from './components/residente/imagenes-lote/imagenes-lote.component';
+import { ProveedoresComponent } from './components/admin/proveedores/proveedores.component';
+import { PagosTrabajadoresComponent } from './components/admin/pagos-trabajadores/pagos-trabajadores.component';
+import { GastosSobrasComponent } from './components/admin/gastos-sobras/gastos-sobras.component';
 
 
 
@@ -272,6 +275,16 @@ export const ROUTES: Routes = [
                     obras: ObrasUsuarioResolverService
                 }
             },
+
+            {
+                path: 'proveedores', component: ProveedoresComponent,
+                resolve: {
+                    obras: ObrasUsuarioResolverService
+                }
+            },
+            { path: 'pagos-trabajadores', component: PagosTrabajadoresComponent },
+            { path: 'gastos-sobras', component: GastosSobrasComponent },
+            
 
 
 
