@@ -260,5 +260,9 @@ export class MapasAvancesComponent implements OnInit {
 
   }
 
+  verAvances() {
+
+  }
+
 
 }

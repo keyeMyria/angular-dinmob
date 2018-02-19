@@ -65,6 +65,17 @@ export class EditarObraDialogoComponent implements OnInit {
   }
 
 
+  get residentes(): FormArray{
+    return this.form.get('residentes') as FormArray;
+  }
+  get almacenistas(): FormArray{
+    return this.form.get('almacenistas') as FormArray;
+  }
+  get control_almacen(): FormArray{
+    return this.form.get('control_almacen') as FormArray;
+  }
+
+
   addResidente() {
     (<FormArray>this.form.controls["residentes"]).push(new FormControl("", Validators.required));
   }
