@@ -175,6 +175,8 @@ import { MapasVentasConfigDialogoComponent } from './components/ventas/mapas-ven
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoadingInterceptorService } from 'app/interceptors/loading-interceptor.service';
 import { ImagenesLoteComponent } from './components/residente/imagenes-lote/imagenes-lote.component';
+import { ImagenesLotesDialogoComponent } from './components/ventas/imagenes-lotes-dialogo/imagenes-lotes-dialogo.component';
+
 
 
 
@@ -277,6 +279,8 @@ import { ImagenesLoteComponent } from './components/residente/imagenes-lote/imag
     MapasVentasConfigDialogoComponent,
     LoadingDirective,
     ImagenesLoteComponent,
+    ImagenesLotesDialogoComponent,
+
 
 
 
@@ -347,7 +351,8 @@ import { ImagenesLoteComponent } from './components/residente/imagenes-lote/imag
     VerSalidaDialogoComponent,
     ConfirmarDeshabilitarAlertaDialogoComponent,
     UploadFileDialogoComponent,
-    MapasVentasConfigDialogoComponent
+    MapasVentasConfigDialogoComponent,
+    ImagenesLotesDialogoComponent
 
 
 
