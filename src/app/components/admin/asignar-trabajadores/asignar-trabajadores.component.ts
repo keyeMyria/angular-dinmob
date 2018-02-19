@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { MatDrawer } from '@angular/material';
+import { MatDrawer, MatDialog } from '@angular/material';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { ObrasService } from 'app/services/obras.service';
-
+import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component";
 
 @Component({
   selector: 'app-asignar-trabajadores',
@@ -28,6 +28,7 @@ export class AsignarTrabajadoresComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private obraSrv: ObrasService,
+    public dialog: MatDialog,
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -66,6 +67,29 @@ export class AsignarTrabajadoresComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener)
+
+  }
+
+  delTrabajador() {
+
+    let newpassword: string;
+
+    let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
+      data: {
+        title: "Desea continuar",
+        content: `¿Está seguro de borrar la asignacion del trabajador: ?`
+      },
+      width: "500px"
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result === true) {
+
+
+      }
+
+    });
 
   }
 

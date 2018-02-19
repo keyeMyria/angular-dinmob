@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { NuevoTrabajadorDialogoComponent } from 'app/components/admin/nuevo-trabajador-dialogo/nuevo-trabajador-dialogo.component';
 import { EditarTrabajadorDialogoComponent } from 'app/components/admin/editar-trabajador-dialogo/editar-trabajador-dialogo.component';
+import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component";
 
 @Component({
   selector: 'app-trabajadores',
@@ -82,6 +83,27 @@ export class TrabajadoresComponent implements OnInit {
 
   asignarTrabajadores() {
     this.router.navigate(["/asignar-trabajadores"]);
+  }
+
+  delTrabajador() {  
+
+    let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
+      data: {
+        title: "Eliminar usuario",
+        content: `¿Desea eliminar el trabajador?`
+      },
+      width: "500px"
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result === true) {
+
+
+      }
+
+    });
+
   }
 
 
