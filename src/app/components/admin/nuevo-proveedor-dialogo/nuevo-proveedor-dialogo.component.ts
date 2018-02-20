@@ -3,12 +3,12 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
-  selector: 'app-nuevo-proveedor-dialogo',  form: FormGroup;
+  selector: 'app-nuevo-proveedor-dialogo',  
   templateUrl: './nuevo-proveedor-dialogo.component.html',
   styleUrls: ['./nuevo-proveedor-dialogo.component.scss']
 })
 export class NuevoProveedorDialogoComponent implements OnInit {
-
+  form: FormGroup;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
