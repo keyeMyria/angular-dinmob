@@ -35,15 +35,15 @@
               </thead>
 
               <tbody>
-                <tr>
-                  <td>Hola</td>
-                  <td></td>
-                  <td></td>
+                <tr *ngFor="let trabajador of trabajadores">
+                  <td>{{trabajador.nombre}}</td>
+                  <td>{{trabajador.retencion}}</td>
+                  <td>{{trabajador.especialidad}}</td>
                   <td class="text-right">
-                    <button mat-button class="no-min" (click)="editarTrabajador()">
+                    <button mat-button class="no-min" (click)="editarTrabajador(trabajador)">
                       <i class="fa fa-pencil"></i>
                     </button>
-                    <button mat-button class="no-min" (click)="delTrabajador()">
+                    <button mat-button class="no-min" (click)="delTrabajador(trabajador)">
                       <i class="fa fa-times"></i>
                     </button>
                   </td>

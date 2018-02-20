@@ -182,6 +182,7 @@ import { GastosSobrasComponent } from './components/admin/gastos-sobras/gastos-s
 import { EditarProveedorDialogoComponent } from './components/admin/editar-proveedor-dialogo/editar-proveedor-dialogo.component';
 import { NuevoProveedorDialogoComponent } from './components/admin/nuevo-proveedor-dialogo/nuevo-proveedor-dialogo.component';
 import { NuevoGastoDialogoComponent } from './components/admin/nuevo-gasto-dialogo/nuevo-gasto-dialogo.component';
+import { TrabajadorService } from './services/trabajador.service';
 
 
 
@@ -414,7 +415,8 @@ export function getToken() {
     InstitucionesCreditoResolverService,
     TiposPagoResolverService,
     TiposOperacionResolverService,
-    UsuarioLoggedResolverService
+    UsuarioLoggedResolverService,
+    TrabajadorService
   ],
   bootstrap: [AppComponent]
 })
