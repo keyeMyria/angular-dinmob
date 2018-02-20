@@ -14,15 +14,15 @@ export class FotoPartidaDialogoComponent {
   @ViewChild("inputFile") inputFile: any;
   uploader: FileUploader;
 
-  descripcion: string="";
+  descripcion: string = "";
   result: any;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<FotoPartidaDialogoComponent>,
-    private loteSrv:LotesService,
-    private auth: AuthService   
-  
+    private loteSrv: LotesService,
+    private auth: AuthService
+
   ) {
 
     this.uploader = new FileUploader({
@@ -71,7 +71,7 @@ export class FotoPartidaDialogoComponent {
 
       } else {
         //this.result = false;
-        this.result={error:"Ha ocurrido un error de conexión. Inténtelo más tarde"}
+        this.result = { error: "Ha ocurrido un error de conexión. Inténtelo más tarde" }
       }
     };
 
@@ -83,6 +83,7 @@ export class FotoPartidaDialogoComponent {
 
       if (status == 200) {
         //this.data.documentos.push(JSON.parse(response).doc);
+        this.data.partida.num_fotos = Number(this.data.partida.num_fotos) + 1;
         this.result = true;
       }
 

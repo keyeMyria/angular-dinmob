@@ -84,6 +84,31 @@ export class LotesService {
     return this.url + "upload_foto";
   }
 
+  //ok
+  addAvancePartida(ids_partidas, id_lote) {
+    return this.http.post(this.url + 'add_avance_partida', { ids_partidas: ids_partidas, id_lote: id_lote })
+      .pipe(catchError(this.handleError("addAvancePartida")));
+  }
+
+  //ok
+  addLiberacionPartida(ids_partidas, id_lote) {
+    return this.http.post(this.url + 'add_liberacion_partida', { ids_partidas: ids_partidas, id_lote: id_lote })
+      .pipe(catchError(this.handleError("addLiberacionPartida")));
+  }
+
+  //ok
+  delAvancePartida(ids_partidas, id_lote) {
+    return this.http.post(this.url + 'del_avance_partida', { ids_partidas: ids_partidas, id_lote: id_lote })
+      .pipe(catchError(this.handleError("delAvancePartida")));
+  }
+
+  //ok
+  delLiberacionPartida(ids_partidas, id_lote) {
+    return this.http.post(this.url + 'del_liberacion_partida', { ids_partidas: ids_partidas, id_lote: id_lote })
+      .pipe(catchError(this.handleError("delLiberacionPartida")));
+  }
+
+
   private handleError<T>(operation = 'operation') {
     return (error: HttpErrorResponse) => {
 

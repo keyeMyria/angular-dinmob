@@ -66,7 +66,7 @@ export class AvancesComponent implements OnInit {
           return Observable.of({ datos: {} });
         }
       }).subscribe(obra => {
-        console.log("obra", obra);
+        //console.log("obra", obra);
         this.obra = obra;
       });
 
@@ -80,6 +80,122 @@ export class AvancesComponent implements OnInit {
     } else {
       this.router.navigate([".", {}]);
     }
+
+  }
+
+  addAvance() {
+    //console.log("selection", this.selection.selected);
+
+    let ids = [];
+
+    this.selection.selected.forEach(partida => {
+      ids.push(partida.id_partida);
+    });
+
+    this.loteSrv.addAvancePartida(ids, this.lote.id_lote)
+      .subscribe(partidas => {
+        console.log("partidas", partidas);
+
+        this.selection.selected.forEach(partida => {
+
+          if (partidas[partida.id_partida]) {
+            partida.fecha_fin = partidas[partida.id_partida];
+          }
+
+        });
+
+        this.selection.clear();
+
+
+      }, (error) => {
+
+      });
+  }
+
+  addLiberacion() {
+    //console.log("selection", this.selection.selected);
+
+    let ids = [];
+
+    this.selection.selected.forEach(partida => {
+      ids.push(partida.id_partida);
+    });
+
+    this.loteSrv.addLiberacionPartida(ids, this.lote.id_lote)
+      .subscribe(partidas => {
+        console.log("partidas", partidas);
+
+        this.selection.selected.forEach(partida => {
+
+          if (partidas[partida.id_partida]) {
+            partida.fecha_liberacion = partidas[partida.id_partida];
+          }
+
+        });
+
+        this.selection.clear();
+
+
+      }, (error) => {
+
+      });
+
+  }
+
+  delAvance() {
+    //console.log("selection", this.selection.selected);
+
+    let ids = [];
+
+    this.selection.selected.forEach(partida => {
+      ids.push(partida.id_partida);
+    });
+
+    this.loteSrv.delAvancePartida(ids, this.lote.id_lote)
+      .subscribe(res => {
+        console.log("partidas", res.count);
+
+        this.selection.selected.forEach(partida => {
+
+          partida.fecha_fin = null;
+          partida.fecha_liberacion = null;
+
+        });
+
+        this.selection.clear();
+
+
+      }, (error) => {
+
+      });
+
+  }
+
+  delLiberacion() {
+    //console.log("selection", this.selection.selected);
+
+    let ids = [];
+
+    this.selection.selected.forEach(partida => {
+      ids.push(partida.id_partida);
+    });
+
+    this.loteSrv.delLiberacionPartida(ids, this.lote.id_lote)
+      .subscribe(res => {
+        console.log("partidas", res.count);
+
+        this.selection.selected.forEach(partida => {
+
+          partida.fecha_liberacion = null;
+
+        });
+
+        this.selection.clear();
+
+
+      }, (error) => {
+
+      });
 
   }
 
@@ -140,7 +256,7 @@ export class AvancesComponent implements OnInit {
   }
 
   getAvancesLote(lote) {
-    console.log("getAvancesLote", lote);
+    //console.log("getAvancesLote", lote);
 
     this.loteSrv.getAvances(lote.id_lote)
       .subscribe(response => {
@@ -159,14 +275,15 @@ export class AvancesComponent implements OnInit {
 
   addFoto(partida) {
 
-    console.log("partida", partida);
+    //console.log("partida", partida);
 
 
     let dialogRef = this.dialog.open(FotoPartidaDialogoComponent, {
       width: '500px',
       data: {
         id_lote: this.lote.id_lote,
-        id_partida: partida.id_partida
+        id_partida: partida.id_partida,
+        partida: partida
       }
     });
 

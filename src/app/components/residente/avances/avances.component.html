@@ -2,20 +2,20 @@
     <mat-icon aria-label="toggle side drawer">format_align_left</mat-icon>
 </button>
 
-<button mat-fab style="position:fixed; bottom:20px; right:85px; z-index:100" (click)="drawer.opened= !drawer.opened">
+<button mat-fab style="position:fixed; bottom:20px; right:85px; z-index:100" (click)="addAvance()" [disabled]="!lote || selection.isEmpty()" matTooltip="Avance">
     <mat-icon aria-label="toggle side drawer">check</mat-icon>
 </button>
 
 
-<button mat-fab style="position:fixed; bottom:20px; right:150px; z-index:100" (click)="drawer.opened= !drawer.opened">
+<button mat-fab style="position:fixed; bottom:20px; right:150px; z-index:100" (click)="addLiberacion()" [disabled]="!lote || selection.isEmpty()" matTooltip="Liberación">
     <mat-icon aria-label="toggle side drawer">attach_money</mat-icon>
 </button>
 
-<button mat-fab style="position:fixed; bottom:20px; right:215px; z-index:100" (click)="drawer.opened= !drawer.opened">
+<button mat-fab style="position:fixed; bottom:20px; right:215px; z-index:100" (click)="delLiberacion()" [disabled]="!lote || selection.isEmpty()" matTooltip="Eliminar Liberación">
     <mat-icon aria-label="toggle side drawer">money_off</mat-icon>
 </button>
 
-<button mat-fab style="position:fixed; bottom:20px; right:280px; z-index:100" (click)="drawer.opened= !drawer.opened">
+<button mat-fab style="position:fixed; bottom:20px; right:280px; z-index:100" (click)="delAvance()" [disabled]="!lote || selection.isEmpty()" matTooltip="Eliminar Avance">
     <mat-icon aria-label="toggle side drawer">not_interested</mat-icon>
 </button>
 
@@ -112,7 +112,7 @@
                         </li>
                         <li class="breadcrumb-item text-primary">{{lote?.nombre}}</li>
                     </ol>
-                    
+
                     <div class="avances">
 
                         <mat-accordion>
@@ -146,6 +146,7 @@
                                                 </div>
 
                                                 <div class="spacer"></div>
+                                                <span>{{subpartida.num_fotos}}</span>
                                                 <div>
                                                     <button mat-icon-button (click)="$event.stopPropagation();addFoto(subpartida)">
                                                         <mat-icon>camera_alt</mat-icon>
@@ -171,6 +172,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="spacer"></div>
+                                                <span>{{partida.num_fotos}}</span>
                                                 <div>
                                                     <button mat-icon-button (click)="$event.stopPropagation();addFoto(partida)">
                                                         <mat-icon>camera_alt</mat-icon>
