@@ -365,7 +365,8 @@ export function getToken() {
     MapasVentasConfigDialogoComponent,
     ImagenesLotesDialogoComponent,
     EditarProveedorDialogoComponent,
-    NuevoProveedorDialogoComponent
+    NuevoProveedorDialogoComponent,
+    NuevoGastoDialogoComponent
 
 
 
