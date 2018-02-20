@@ -1,3 +1,60 @@
-<p>
-  nuevo-gasto-dialogo works!
-</p>
+<h1 mat-dialog-title>Nuevo Gasto</h1>
+<div mat-dialog-content>
+
+  <form [formGroup]="form" (ngSubmit)="guardar()">
+
+
+    <div class="form-group row">
+      <label for="tipo_gasto" class="col-form-label col-sm-3">Tipo Gasto</label>
+      <div class="col-sm-9">
+        <select class="form-control" id="tipo_gasto" name="tipo_gasto" formControlName="tipo_gasto" [ngClass]="{'is-invalid': form.get('tipo_gasto').invalid  && (form.get('tipo_gasto').dirty || form.get('tipo_gasto').touched) }">
+          <option value="">Seleccionar...</option>
+          <option value="">...</option>
+        </select>
+        <div class="invalid-feedback">Seleccione un tipo de gasto</div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="monto" class="col-sm-3 col-form-label">Monto</label>
+      <div class="col-sm-9">
+        <input [textMask]="{mask: numberMask}" class="form-control" type="text" name="monto" id="monto" formControlName="monto" [ngClass]="{'is-invalid': form.get('monto').invalid  && (form.get('monto').dirty || form.get('monto').touched )}">
+        <div class="invalid-feedback">Proporcione un monto</div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="fecha_gasto" class="col-sm-3 col-form-label">Fecha</label>
+      <div class="input-group col-sm-9">
+        <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="fecha_gasto" placement="bottom-left" [matDatepicker]="dpFechaProgramada"
+          formControlName="fecha_gasto" [ngClass]="{'is-invalid':form.get('fecha_gasto').invalid && (form.get('fecha_gasto').dirty || form.get('fecha_gasto').touched) }">
+        <span class="input-group-append">
+          <button class="btn btn-secondary" type="button" (click)="dpFechaProgramada.open()">
+            <i class="fa fa-calendar"></i>
+          </button>
+        </span>
+
+        <div *ngIf="form.get('fecha_gasto').invalid && (form.get('fecha_gasto').dirty || form.get('fecha_gasto').touched)" class="visible invalid-feedback">
+          Seleccione una fecha
+        </div>
+        <mat-datepicker touchUi="true" #dpFechaProgramada></mat-datepicker>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="nota" class="col-form-label col-sm-3">Nota</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="nota" name="nota" formControlName="nota">
+      </div>
+    </div>
+
+
+
+
+  </form>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="false">CANCELAR</button>
+  <button mat-button type="submit" form="id_form" [disabled]="form.invalid" color="primary">GUARDAR</button>
+</div>

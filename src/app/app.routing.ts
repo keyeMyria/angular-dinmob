@@ -282,9 +282,19 @@ export const ROUTES: Routes = [
                     obras: ObrasUsuarioResolverService
                 }
             },
-            { path: 'pagos-trabajadores', component: PagosTrabajadoresComponent },
-            { path: 'gastos-sobras', component: GastosSobrasComponent },
-            
+            {
+                path: 'pagos-trabajadores', component: PagosTrabajadoresComponent,
+                resolve: {
+                    obras: ObrasUsuarioResolverService
+                }
+            },
+            {
+                path: 'gastos-sobras', component: GastosSobrasComponent,
+                resolve: {
+                    obras: ObrasUsuarioResolverService
+                }
+            },
+
 
 
 
