@@ -1,6 +1,9 @@
 <h1 mat-dialog-title>Agregar Imagen</h1>
 <div mat-dialog-content>
 
+  <h6>
+    <span *ngIf="data.partida.nombre_partida">{{data.partida.nombre_partida + "/"}}</span> {{data.partida.nombre}}</h6>
+
   <form>
 
     <div class="form-group">
