@@ -21,7 +21,11 @@ declare var $: any;
   providers: [CurrencyPipe]
 })
 export class MapasVentasComponent implements OnInit, OnDestroy {
-  verLeyenda: boolean = true;
+
+  //creamos estas propiedades como objetos para que cuando las
+  //pasemos al diálogo se actualicen
+  verLeyenda: any = { toggle: true };
+  verPrototipos: any = { disabled: false };
 
   map: any;
   lote_selected: any = null;
@@ -98,7 +102,7 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
 
         });
 
-        console.log("valores escala prototipos", this.valuesPrototipos);
+        //console.log("valores escala prototipos", this.valuesPrototipos);
 
 
 
@@ -159,7 +163,7 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
 
   toggleVerLeyenda(event) {
     //console.log("ver leyenda", event.checked);
-    this.verLeyenda = event.checked;
+    this.verLeyenda.toggle = event.checked;
     $(".jvectormap-legend-cnt.jvectormap-legend-cnt-v").toggleClass("d-none");
     //let items= $(".jvectormap-legend-cnt.jvectormap-legend-cnt-v");
     //console.log(items);
@@ -168,12 +172,14 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
   }
 
   configMapa() {
-    console.log("configMapa");
+    //console.log("configMapa");
     let dialogRef = this.dialog.open(MapasVentasConfigDialogoComponent, {
       data: {
         map: this.map,
         lotes: this.valuesLotes,
-        prototipos: this.valuesPrototipos
+        prototipos: this.valuesPrototipos,
+        verLeyenda: this.verLeyenda,
+        verPrototipos: this.verPrototipos
 
       },
       width: "400px"
@@ -182,27 +188,29 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
   }
 
   escalaPrototipos() {
-    console.log("asignacion de la escala de prototipos");
+    //console.log("asignacion de la escala de prototipos");
     // region 0 lotes
     // region 1 prototipos
     // region 2 texto
     this.map.series.regions[1].setValues(this.valuesPrototipos);
+    this.verPrototipos.disabled = true;
 
   }
 
   escalaEstados() {
-    console.log("asignacion de la escala de estados");
+    //console.log("asignacion de la escala de estados");
     // region 0 lotes
     // region 1 prototipos
     // region 2 texto
     this.map.series.regions[0].setValues(this.valuesLotes);
+    this.verPrototipos.disabled = false;
 
   }
 
 
   crearMapa(values, scalePrototipos) {
 
-    this.verLeyenda = true;
+    this.verLeyenda.toggle = true;
 
 
     //borramos el mapa si ya hemos creado alguno
