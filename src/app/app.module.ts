@@ -124,6 +124,7 @@ import { InstitucionesCreditoResolverService } from 'app/resolvers/instituciones
 import { TiposPagoResolverService } from 'app/resolvers/tipos-pago-resolver.service';
 import { TiposOperacionResolverService } from 'app/resolvers/tipos-operacion-resolver.service';
 import { UsuarioLoggedResolverService } from 'app/resolvers/usuario-logged-resolver.service';
+import { EspecialidadesTrabajadorResolverService } from './resolvers/especialidades-trabajador-resolver.service';
 
 
 //components
@@ -183,6 +184,7 @@ import { EditarProveedorDialogoComponent } from './components/admin/editar-prove
 import { NuevoProveedorDialogoComponent } from './components/admin/nuevo-proveedor-dialogo/nuevo-proveedor-dialogo.component';
 import { NuevoGastoDialogoComponent } from './components/admin/nuevo-gasto-dialogo/nuevo-gasto-dialogo.component';
 import { TrabajadorService } from './services/trabajador.service';
+
 
 
 
@@ -404,6 +406,7 @@ export function getToken() {
     VentasPagosService,
     ReporteService,
     LoadingService,
+    TrabajadorService,
 
     ObrasUsuarioResolverService,
     UsuariosAlmacenistasResolverService,
@@ -417,7 +420,8 @@ export function getToken() {
     TiposPagoResolverService,
     TiposOperacionResolverService,
     UsuarioLoggedResolverService,
-    TrabajadorService
+    EspecialidadesTrabajadorResolverService
+
   ],
   bootstrap: [AppComponent]
 })

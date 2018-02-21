@@ -63,6 +63,7 @@ import { ImagenesLoteComponent } from './components/residente/imagenes-lote/imag
 import { ProveedoresComponent } from './components/admin/proveedores/proveedores.component';
 import { PagosTrabajadoresComponent } from './components/admin/pagos-trabajadores/pagos-trabajadores.component';
 import { GastosSobrasComponent } from './components/admin/gastos-sobras/gastos-sobras.component';
+import { EspecialidadesTrabajadorResolverService } from './resolvers/especialidades-trabajador-resolver.service';
 
 
 
@@ -223,7 +224,8 @@ export const ROUTES: Routes = [
             {
                 path: 'trabajadores', component: TrabajadoresComponent,
                 resolve: {
-                    obras: ObrasUsuarioResolverService
+                    obras: ObrasUsuarioResolverService,
+                    especialidades: EspecialidadesTrabajadorResolverService
                 }
             },
             {

@@ -28,7 +28,7 @@ export class TrabajadorService {
   }
 
   //ok
-  getEspecialidades(id_obra) {
+  getEspecialidades() {
     return this.http.get(this.url + "get_especialidades")
       .pipe(catchError(this.handleError("getEspecialidades")));
   }

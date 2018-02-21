@@ -5,29 +5,30 @@ import { Observable } from 'rxjs/Observable';
 
 
 @Injectable()
-export class EspecialidadesTrabajadorResolverService {
+export class EspecialidadesTrabajadorResolverService implements Resolve<any[]> {
+
 
   constructor(
     private trabajadorSrv: TrabajadorService,
     private router: Router
   ) { }
 
-/*   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any[]> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any[]> {
 
 
-    return this.trabajadorSrv.getEspecialidades().take(1).map((estados: any[]) => {
+    return this.trabajadorSrv.getEspecialidades().take(1).map((especialidades: any[]) => {
 
       //console.log("resolver estados", estados);
 
 
-      if (estados) {
-        return estados;
+      if (especialidades) {
+        return especialidades;
       } else { // id not found
         this.router.navigate(['/tablero']);
         return null;
       }
     });
 
-  } */
+  }
 
 }
