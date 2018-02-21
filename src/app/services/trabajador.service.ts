@@ -27,6 +27,12 @@ export class TrabajadorService {
       .pipe(catchError(this.handleError("getTrabajadoresObra")));
   }
 
+  //ok
+  getEspecialidades(id_obra) {
+    return this.http.get(this.url + "get_especialidades")
+      .pipe(catchError(this.handleError("getEspecialidades")));
+  }
+
 
 
 
