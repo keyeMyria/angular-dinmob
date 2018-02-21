@@ -2,10 +2,10 @@
 <div mat-dialog-content>
 
   <div class="form-group">
-    <mat-slide-toggle [checked]="verLeyenda" (change)="toggleVerLeyenda($event)">Leyenda</mat-slide-toggle>
+    <mat-slide-toggle [checked]="data.verLeyenda.toggle" (change)="toggleVerLeyenda($event)">Leyenda</mat-slide-toggle>
   </div>
-  <button mat-raised-button color="primary" class="btn-block" (click)="escalaPrototipos()">Prototipos</button>
-  <button mat-raised-button color="primary" class="btn-block" (click)="escalaEstados()">Lotes</button>
+  <button mat-raised-button color="primary" [disabled]="data.verPrototipos.disabled" class="btn-block" (click)="escalaPrototipos()">Prototipos</button>
+  <button mat-raised-button color="primary" [disabled]="!data.verPrototipos.disabled" class="btn-block" (click)="escalaEstados()">Lotes</button>
 
 </div>
 <div mat-dialog-actions>
