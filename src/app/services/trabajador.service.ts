@@ -33,6 +33,25 @@ export class TrabajadorService {
       .pipe(catchError(this.handleError("getEspecialidades")));
   }
 
+  //ok
+  createTrabajador(trabajador) {
+    return this.http.post(this.url + 'create_trabajador', { trabajador: trabajador })
+      .pipe(catchError(this.handleError("createTrabajador")));
+  }
+
+  //ok
+  updateTrabajador(id, trabajador) {
+    return this.http.post(this.url + 'update_trabajador/' + id, { trabajador: trabajador })
+      .pipe(catchError(this.handleError("updateTrabajador")));
+  }
+
+
+  //ok
+  delTrabajador(id) {
+    return this.http.post(this.url + 'del_trabajador/' + id, {})
+      .pipe(catchError(this.handleError("delTrabajador")));
+  }
+
 
 
 
