@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { TrabajadorService } from '../../../services/trabajador.service';
 
 @Component({
   selector: 'app-nuevo-trabajador-dialogo',
@@ -13,7 +14,8 @@ export class NuevoTrabajadorDialogoComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<NuevoTrabajadorDialogoComponent>,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private trabajadorSrv: TrabajadorService
   ) {
     this.form = this.fb.group({
 
@@ -29,7 +31,17 @@ export class NuevoTrabajadorDialogoComponent implements OnInit {
   }
 
   guardar() {
-    console.log("ok", this.form.value);
+    /* console.log("ok", this.form.value); */
+    this.trabajadorSrv.createTrabajador(this.form.value)
+      .subscribe(trabajador => {
+        this.data.trabajadores.push(trabajador);
+        this.dialogRef.close(true);
+
+      },
+        (error) => {
+          this.dialogRef.close({ error: "Ha ocurrido un error de conexión. Inténtelo más tarde" });
+        });
+
   }
 
 }

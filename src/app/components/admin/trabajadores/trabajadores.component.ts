@@ -70,7 +70,8 @@ export class TrabajadoresComponent implements OnInit {
     let dialogRef = this.dialog.open(NuevoTrabajadorDialogoComponent, {
       data: {
         obra: obra,
-        especialidades: this.especialidades
+        especialidades: this.especialidades,
+        trabajadores: this.trabajadores
       },
       width: "500px"
     });
@@ -98,7 +99,8 @@ export class TrabajadoresComponent implements OnInit {
     let dialogRef = this.dialog.open(EditarTrabajadorDialogoComponent, {
       data: {
         trabajador: trabajador,
-        especialidades: this.especialidades
+        especialidades: this.especialidades,
+
       },
       width: "500px"
     });
