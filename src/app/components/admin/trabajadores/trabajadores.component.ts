@@ -14,7 +14,7 @@ import { of } from "rxjs/observable/of";
   styleUrls: ['./trabajadores.component.scss']
 })
 export class TrabajadoresComponent implements OnInit {
-  obras: any = [];
+  obras: any[] = [];
   trabajadores: any = [];
   obra_selected: string = "";
   especialidades: any = [];
@@ -63,9 +63,8 @@ export class TrabajadoresComponent implements OnInit {
 
   nuevoTrabajador() {
 
-    let obra = this.obras.find(
-      obra => obra.id_obra = this.obra_selected
-    );
+    let obra = this.obras.find(obra => obra.id_obra == this.obra_selected);
+    console.log("obra seleccionada", this.obra_selected, obra);
 
     let dialogRef = this.dialog.open(NuevoTrabajadorDialogoComponent, {
       data: {
@@ -100,6 +99,7 @@ export class TrabajadoresComponent implements OnInit {
       data: {
         trabajador: trabajador,
         especialidades: this.especialidades,
+        trabajadores: this.trabajadores
 
       },
       width: "500px"
@@ -141,17 +141,33 @@ export class TrabajadoresComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
 
-        this.snackBar.open("Trabajador Eliminado", "", {
-          duration: 2000,
-          panelClass: ["bg-success", "text-white"]
-        });
+        this.trabajadorSrv.delTrabajador(trabajador.id_trabajador)
+          .subscribe((res: any) => {
+            if (res.count === 1) {
 
-      } else if (result && result.error) {
+              let i = this.trabajadores.indexOf(trabajador);
+              this.trabajadores.splice(i, 1);
 
-        this.snackBar.open(result.error, "Ha ocurrido un error", {
-          duration: 3000,
-          panelClass: ["bg-danger", "text-white"]
-        });
+
+              this.snackBar.open("Trabajador Eliminado", "", {
+                duration: 2000,
+                panelClass: ["bg-success", "text-white"]
+              });
+
+            } else {
+              this.snackBar.open("Ha ocurrido un error", "", {
+                duration: 3000,
+                panelClass: ["bg-danger", "text-white"]
+              });
+            }
+
+          }, (error) => {
+            this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+              duration: 3000,
+              panelClass: ["bg-danger", "text-white"]
+            });
+          });
+
 
       }
     });

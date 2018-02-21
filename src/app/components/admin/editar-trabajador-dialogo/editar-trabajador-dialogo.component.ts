@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
+import { TrabajadorService } from '../../../services/trabajador.service';
 
 @Component({
   selector: 'app-editar-trabajador-dialogo',
@@ -20,14 +21,15 @@ export class EditarTrabajadorDialogoComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<EditarTrabajadorDialogoComponent>,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private trabajadorSrv: TrabajadorService
   ) {
     this.form = this.fb.group({
 
       nombre: [data.trabajador.nombre, Validators.required],
-      especialidad: [data.trabajador.id_especialidad, Validators.required],
+      id_especialidad: [data.trabajador.id_especialidad, Validators.required],
       retencion: [data.trabajador.retencion, Validators.required],
-      obra: ["", Validators.required],
+
 
     });
   }
@@ -37,7 +39,20 @@ export class EditarTrabajadorDialogoComponent implements OnInit {
 
   guardar() {
     console.log("ok", this.form.value);
+
+    this.trabajadorSrv.updateTrabajador(this.data.trabajador.id_trabajador, this.form.value)
+      .subscribe(trabajador => {
+
+        let i = this.data.trabajadores.indexOf(this.data.trabajador);
+        this.data.trabajadores[i] = trabajador;
+        this.dialogRef.close(true);
+
+      },
+        (error) => {
+          this.dialogRef.close({ error: "Ha ocurrido un error. Vuelva a intentarlo más tarde." });
+        });
   }
+
 
 }
 

@@ -19,9 +19,9 @@
     </div>
 
     <div class="form-group row">
-      <label for="especialidad" class="col-sm-3 col-form-label">Especialidad</label>
+      <label for="id_especialidad" class="col-sm-3 col-form-label">Especialidad</label>
       <div class="col-sm-9">
-        <select class="form-control" id="especialidad" name="especialidad" formControlName="especialidad" [ngClass]="{'is-invalid': form.get('especialidad').invalid  && (form.get('especialidad').dirty || form.get('especialidad').touched) }">
+        <select class="form-control" id="id_especialidad" name="id_especialidad" formControlName="id_especialidad" [ngClass]="{'is-invalid': form.get('id_especialidad').invalid  && (form.get('id_especialidad').dirty || form.get('id_especialidad').touched) }">
           <option value="">Seleccionar...</option>
           <option [value]="especialidad.codigo" *ngFor="let especialidad of data.especialidades">{{especialidad.nombre}}</option>
         </select>
@@ -32,7 +32,7 @@
     <div class="form-group row">
       <label for="retencion" class="col-sm-3 col-form-label">Retención (%)</label>
       <div class="col-sm-9">
-        <input class="form-control" type="text" name="retencion" id="retencion" formControlName="retencion" [ngClass]="{'is-invalid': form.get('retencion').invalid  && (form.get('retencion').dirty || form.get('retencion').touched )}">
+        <input [textMask]="{mask: numberMask}" class="form-control" type="text" name="retencion" id="retencion" formControlName="retencion" [ngClass]="{'is-invalid': form.get('retencion').invalid  && (form.get('retencion').dirty || form.get('retencion').touched )}">
         <div class="invalid-feedback">Especifique un cantidad (%)</div>
       </div>
     </div>
