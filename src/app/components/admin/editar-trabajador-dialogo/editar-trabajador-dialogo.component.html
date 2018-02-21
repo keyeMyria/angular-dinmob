@@ -16,7 +16,7 @@
       <div class="col-sm-9">
         <select class="form-control" id="especialidad" name="especialidad" formControlName="especialidad" [ngClass]="{'is-invalid': form.get('especialidad').invalid  && (form.get('especialidad').dirty || form.get('especialidad').touched) }">
           <option value="">Seleccionar...</option>
-          <option [value]=""></option>
+          <option [value]="especialidad.codigo" *ngFor="let especialidad of data.especialidades">{{especialidad.nombre}}</option>
         </select>
         <div class="invalid-feedback">Seleccione una especialidad</div>
       </div>
@@ -29,7 +29,7 @@
           [ngClass]="{'is-invalid': form.get('retencion').invalid  && (form.get('retencion').dirty || form.get('retencion').touched )}">
       </div>
     </div>
-<!-- 
+    <!-- 
     <div class="form-group row">
       <label for="obra" class="col-sm-3 col-form-label">Obra</label>
       <div class="col-sm-9">
