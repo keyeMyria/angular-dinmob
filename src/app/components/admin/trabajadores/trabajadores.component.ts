@@ -17,6 +17,7 @@ export class TrabajadoresComponent implements OnInit {
   obras: any = [];
   trabajadores: any = [];
   obra_selected: string = "";
+  especialidades: any = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -28,8 +29,9 @@ export class TrabajadoresComponent implements OnInit {
 
   ngOnInit() {
     this.route.data
-      .subscribe((data: { obras: any[] }) => {
+      .subscribe((data: { obras: any[], especialidades: any }) => {
         this.obras = data.obras;
+        this.especialidades = data.especialidades;
       });
 
     this.route.paramMap
@@ -62,8 +64,9 @@ export class TrabajadoresComponent implements OnInit {
   nuevoTrabajador() {
     let dialogRef = this.dialog.open(NuevoTrabajadorDialogoComponent, {
       data: {
+
       },
-      width: "600px"
+      width: "500px"
     });
     dialogRef.afterClosed().subscribe(result => {
 
@@ -74,7 +77,7 @@ export class TrabajadoresComponent implements OnInit {
           panelClass: ["bg-success", "text-white"]
         });
 
-      } else if (result.error) {
+      } else if (result && result.error) {
 
         this.snackBar.open(result.error, "", {
           duration: 3000,
@@ -85,11 +88,12 @@ export class TrabajadoresComponent implements OnInit {
     });
   }
 
-  editarTrabajador() {
+  editarTrabajador(trabajador) {
     let dialogRef = this.dialog.open(EditarTrabajadorDialogoComponent, {
       data: {
+        trabajador: trabajador
       },
-      width: "600px"
+      width: "500px"
     });
     dialogRef.afterClosed().subscribe(result => {
 
@@ -100,7 +104,7 @@ export class TrabajadoresComponent implements OnInit {
           panelClass: ["bg-success", "text-white"]
         });
 
-      } else if (result.error) {
+      } else if (result && result.error) {
 
         this.snackBar.open(result.error, "", {
           duration: 3000,
@@ -115,23 +119,32 @@ export class TrabajadoresComponent implements OnInit {
     this.router.navigate(["/asignar-trabajadores"]);
   }
 
-  delTrabajador() {
+  delTrabajador(trabajador) {
 
     let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
       data: {
-        title: "Eliminar usuario",
-        content: `¿Desea eliminar el trabajador?`
+        title: "Eliminar Trabajador",
+        content: `¿Desea eliminar el trabajador: ${trabajador.nombre} ?`
       },
       width: "500px"
     });
 
     dialogRef.afterClosed().subscribe(result => {
-
       if (result === true) {
 
+        this.snackBar.open("Trabajador Eliminado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      } else if (result && result.error) {
+
+        this.snackBar.open(result.error, "Ha ocurrido un error", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
 
       }
-
     });
 
   }
