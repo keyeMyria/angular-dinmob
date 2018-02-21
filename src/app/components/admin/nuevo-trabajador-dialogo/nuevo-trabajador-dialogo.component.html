@@ -3,13 +3,10 @@
 
   <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
 
-    <div class="mb-2">
-      <label for="nombre" class="col-sm-3 col-form-label">Obras</label>
+    <div class="form-group row">
+      <label for="obra" class="col-sm-3 col-form-label">Obra</label>
       <div class="col-sm-9">
-        <select class="form-control" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)" readonly>
-          <option value="">Seleccionar...</option>
-          <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>
-        </select>
+        <input class="form-control" type="text" name="obra" id="obra" [value]="data.obra.nombre" readonly>
       </div>
     </div>
 
@@ -26,7 +23,7 @@
       <div class="col-sm-9">
         <select class="form-control" id="especialidad" name="especialidad" formControlName="especialidad" [ngClass]="{'is-invalid': form.get('especialidad').invalid  && (form.get('especialidad').dirty || form.get('especialidad').touched) }">
           <option value="">Seleccionar...</option>
-          <option [value]=""></option>
+          <option [value]="especialidad.codigo" *ngFor="let especialidad of data.especialidades">{{especialidad.nombre}}</option>
         </select>
         <div class="invalid-feedback">Seleccione una especialidad</div>
       </div>

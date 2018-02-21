@@ -62,9 +62,15 @@ export class TrabajadoresComponent implements OnInit {
 
 
   nuevoTrabajador() {
+
+    let obra = this.obras.find(
+      obra => obra.id_obra = this.obra_selected
+    );
+
     let dialogRef = this.dialog.open(NuevoTrabajadorDialogoComponent, {
       data: {
-
+        obra: obra,
+        especialidades: this.especialidades
       },
       width: "500px"
     });
@@ -91,7 +97,8 @@ export class TrabajadoresComponent implements OnInit {
   editarTrabajador(trabajador) {
     let dialogRef = this.dialog.open(EditarTrabajadorDialogoComponent, {
       data: {
-        trabajador: trabajador
+        trabajador: trabajador,
+        especialidades: this.especialidades
       },
       width: "500px"
     });

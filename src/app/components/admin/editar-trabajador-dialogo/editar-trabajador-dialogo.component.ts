@@ -25,7 +25,7 @@ export class EditarTrabajadorDialogoComponent implements OnInit {
     this.form = this.fb.group({
 
       nombre: [data.trabajador.nombre, Validators.required],
-      especialidad: ["", Validators.required],
+      especialidad: [data.trabajador.id_especialidad, Validators.required],
       retencion: [data.trabajador.retencion, Validators.required],
       obra: ["", Validators.required],
 

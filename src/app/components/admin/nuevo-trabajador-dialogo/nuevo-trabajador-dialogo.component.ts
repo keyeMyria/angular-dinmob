@@ -20,7 +20,7 @@ export class NuevoTrabajadorDialogoComponent implements OnInit {
       nombre: ["", Validators.required],
       especialidad: ["", Validators.required],
       retencion: ["", Validators.required],
-      obra: ["", Validators.required],
+      obra: [data.obra.id_obra, Validators.required],
 
     });
   }
