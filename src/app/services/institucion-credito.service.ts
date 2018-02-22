@@ -18,10 +18,28 @@ export class InstitucionCreditoService {
     this.url = this.config.api_url + "ventas_instituciones_credito/";
   }
 
+  //ok
   getInstituciones() {
     return this.http.get(this.url)
       .pipe(catchError(this.handleError("getInstituciones")));
+  }
 
+  //ok
+  createInstitucion(inst) {
+    return this.http.post(this.url + "create_institucion", { institucion: inst })
+      .pipe(catchError(this.handleError("createInstitucion")));
+  }
+
+  //ok
+  updateInstitucion(id, inst) {
+    return this.http.post(this.url + "update_institucion/" + id, { institucion: inst })
+      .pipe(catchError(this.handleError("updateInstitucion")));
+  }
+
+  //ok
+  delInstitucion(id) {
+    return this.http.post(this.url + "del_institucion/" + id, {})
+      .pipe(catchError(this.handleError("delInstitucion")));
   }
 
   private handleError<T>(operation = 'operation') {
