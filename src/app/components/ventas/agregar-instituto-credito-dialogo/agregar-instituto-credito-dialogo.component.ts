@@ -19,7 +19,7 @@ export class AgregarInstitutoCreditoDialogoComponent implements OnInit {
   ) {
     this.form = this.fb.group({
       nombre: ["", Validators.required],
-      //color: ["", Validators.required]
+      color: ["", Validators.required]
     });
   }
 
