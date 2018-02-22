@@ -184,6 +184,9 @@ import { EditarProveedorDialogoComponent } from './components/admin/editar-prove
 import { NuevoProveedorDialogoComponent } from './components/admin/nuevo-proveedor-dialogo/nuevo-proveedor-dialogo.component';
 import { NuevoGastoDialogoComponent } from './components/admin/nuevo-gasto-dialogo/nuevo-gasto-dialogo.component';
 import { TrabajadorService } from './services/trabajador.service';
+import { AgregarInstitutoCreditoDialogoComponent } from './components/ventas/agregar-instituto-credito-dialogo/agregar-instituto-credito-dialogo.component';
+import { EditarInstitutoCreditoDialogoComponent } from './components/ventas/editar-instituto-credito-dialogo/editar-instituto-credito-dialogo.component';
+import { InstitucionesCreditoComponent } from './components/ventas/instituciones-credito/instituciones-credito.component';
 
 
 
@@ -297,6 +300,9 @@ export function getToken() {
     EditarProveedorDialogoComponent,
     NuevoProveedorDialogoComponent,
     NuevoGastoDialogoComponent,
+    AgregarInstitutoCreditoDialogoComponent,
+    EditarInstitutoCreditoDialogoComponent,
+    InstitucionesCreditoComponent,
 
 
 
@@ -369,7 +375,9 @@ export function getToken() {
     ImagenesLotesDialogoComponent,
     EditarProveedorDialogoComponent,
     NuevoProveedorDialogoComponent,
-    NuevoGastoDialogoComponent
+    NuevoGastoDialogoComponent,
+    AgregarInstitutoCreditoDialogoComponent,
+    EditarInstitutoCreditoDialogoComponent
 
 
 
