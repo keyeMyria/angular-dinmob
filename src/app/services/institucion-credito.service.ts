@@ -20,7 +20,7 @@ export class InstitucionCreditoService {
 
   //ok
   getInstituciones() {
-    return this.http.get(this.url)
+    return this.http.get(this.url + "get_instituciones")
       .pipe(catchError(this.handleError("getInstituciones")));
   }
 
