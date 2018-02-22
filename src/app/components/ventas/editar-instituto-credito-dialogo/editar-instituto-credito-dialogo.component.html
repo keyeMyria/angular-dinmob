@@ -5,7 +5,7 @@
   <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
     <div class="form-group">
       <!-- <label for="instituto">Nombre</label> -->
-      <input type="text" class="form-control" name="instituto" id="instituto" formControlName="instituto" [ngClass]="{'is-invalid': form.get('instituto').invalid  && (form.get('instituto').dirty || form.get('instituto').touched )}">
+      <input type="text" class="form-control" name="nombre" id="nombre" formControlName="nombre" [ngClass]="{'is-invalid': form.get('nombre').invalid  && (form.get('nombre').dirty || form.get('nombre').touched )}">
       <div class="invalid-feedback">Proporcione un instituto</div>
     </div>
   </form>
