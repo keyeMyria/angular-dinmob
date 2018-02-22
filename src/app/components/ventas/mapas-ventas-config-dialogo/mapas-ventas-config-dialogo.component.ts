@@ -40,12 +40,30 @@ export class MapasVentasConfigDialogoComponent implements OnInit {
 
   }
 
-  escalaEstados() {
+  escalaEstadosVenta() {
     //console.log("asignacion de la escala de estados");
     // region 0 lotes
     // region 1 prototipos
     // region 2 texto
-    this.data.map.series.regions[0].setValues(this.data.lotes);
+    this.data.map.series.regions[0].setValues(this.data.estadosVenta);
+    this.data.verPrototipos.disabled = false;
+  }
+
+  escalaLoteTipo() {
+    //console.log("asignacion de la escala de estados");
+    // region 0 lotes
+    // region 1 prototipos
+    // region 2 texto
+    this.data.map.series.regions[0].setValues(this.data.loteTipo);
+    this.data.verPrototipos.disabled = false;
+  }
+
+  escalaFormaPago() {
+    //console.log("asignacion de la escala de estados");
+    // region 0 lotes
+    // region 1 prototipos
+    // region 2 texto
+    this.data.map.series.regions[0].setValues(this.data.formaPago);
     this.data.verPrototipos.disabled = false;
   }
 

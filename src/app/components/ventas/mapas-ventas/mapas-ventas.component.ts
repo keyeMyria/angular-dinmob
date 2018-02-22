@@ -22,6 +22,7 @@ declare var $: any;
 })
 export class MapasVentasComponent implements OnInit, OnDestroy {
 
+
   //creamos estas propiedades como objetos para que cuando las
   //pasemos al diálogo se actualicen
   verLeyenda: any = { toggle: true };
@@ -35,7 +36,10 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
   jsonMap: any = {};
   scalePrototipos: any = {};
   valuesPrototipos: any = {};
-  valuesLotes: any = {};
+  valuesEstadosVenta: any = {};
+
+  valuesFormaPago: any={};
+  valuesLoteTipo: any={};
 
   constructor(
     private router: Router,
@@ -85,9 +89,9 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
 
 
         //creamos los valores para la escala de estados
-        this.valuesLotes = {};
+        this.valuesEstadosVenta = {};
         this.lotes.forEach(lote => {
-          this.valuesLotes[lote.code] = lote.estado_venta;
+          this.valuesEstadosVenta[lote.code] = lote.estado_venta;
         });
 
         //creamos los valores para la escala de prototipos
@@ -108,7 +112,7 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
 
 
         if (this.jsonMap.mapa) {
-          this.crearMapa(this.valuesLotes, this.scalePrototipos);
+          this.crearMapa(this.valuesEstadosVenta, this.scalePrototipos);
         }
 
       }, (error) => {
@@ -176,8 +180,10 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
     let dialogRef = this.dialog.open(MapasVentasConfigDialogoComponent, {
       data: {
         map: this.map,
-        lotes: this.valuesLotes,
+        estadosVenta: this.valuesEstadosVenta,
         prototipos: this.valuesPrototipos,
+        loteTipo:this.valuesLoteTipo,
+        formaPago:this.valuesFormaPago,
         verLeyenda: this.verLeyenda,
         verPrototipos: this.verPrototipos
 
@@ -202,7 +208,7 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
     // region 0 lotes
     // region 1 prototipos
     // region 2 texto
-    this.map.series.regions[0].setValues(this.valuesLotes);
+    this.map.series.regions[0].setValues(this.valuesEstadosVenta);
     this.verPrototipos.disabled = false;
 
   }
