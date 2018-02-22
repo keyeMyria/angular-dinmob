@@ -1,0 +1,53 @@
+<div class="container mt-2 mb-5">
+
+
+  <div class="row">
+    <div class="col-12">
+
+      <div class="card">
+        <div class="card-header padding-card-header">
+          <div class="d-flex">
+            <div class="align-self-center">Instituciones Credito</div>
+            <div class="spacer"></div>
+            <div>
+              <button mat-icon-button (click)="agregarInstituto()">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div>
+
+          <div class="table-responsive">
+            <table class="table table-striped table-align-middle">
+              <thead>
+                <tr>
+                  <th>Tipo</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Infonavit</td>
+                  <td class="text-right ws-nowrap">
+
+                    <button mat-button class="no-min" (click)="editarInstitucion()">
+                      <i class="fa fa-pencil"></i>
+                    </button>
+                    <button mat-button class="no-min" (click)="delInstituto()">
+                      <i class="fa fa-times"></i>
+                    </button>
+
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

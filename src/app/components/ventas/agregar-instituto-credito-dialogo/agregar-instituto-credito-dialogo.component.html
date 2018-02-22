@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Agregar Instituto</h1>
+<div mat-dialog-content>
+
+
+  <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
+    <div class="form-group">
+      <!-- <label for="institucion" class="form-label">Institución</label> -->
+      <input type="text" placeholder="Institucion" name="institucion" class="form-control" formControlName="institucion" [ngClass]="{'is-invalid': form.get('institucion').invalid  && (form.get('institucion').dirty || form.get('institucion').touched )}">
+      <div class="invalid-feedback">Proporcione el nombre del instituto</div>
+    </div>
+  </form>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button type="button" [mat-dialog-close]="false">CANCELAR</button>
+  <button mat-button type="submit" form="id_form" [disabled]="form.invalid" color="primary">AGREGAR</button>
+</div>

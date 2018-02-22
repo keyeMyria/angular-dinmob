@@ -64,6 +64,7 @@ import { ProveedoresComponent } from './components/admin/proveedores/proveedores
 import { PagosTrabajadoresComponent } from './components/admin/pagos-trabajadores/pagos-trabajadores.component';
 import { GastosSobrasComponent } from './components/admin/gastos-sobras/gastos-sobras.component';
 import { EspecialidadesTrabajadorResolverService } from './resolvers/especialidades-trabajador-resolver.service';
+import { InstitucionesCreditoComponent } from './components/ventas/instituciones-credito/instituciones-credito.component';
 
 
 
@@ -296,6 +297,9 @@ export const ROUTES: Routes = [
                     obras: ObrasUsuarioResolverService
                 }
             },
+            { path: 'instituciones-credito', component: InstitucionesCreditoComponent },
+
+           
 
 
 
