@@ -3,6 +3,7 @@ import { AgregarInstitutoCreditoDialogoComponent } from '../agregar-instituto-cr
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { EditarInstitutoCreditoDialogoComponent } from '../editar-instituto-credito-dialogo/editar-instituto-credito-dialogo.component';
 import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component";
+import { InstitucionCreditoService } from '../../../services/institucion-credito.service';
 
 @Component({
   selector: 'app-instituciones-credito',
@@ -10,19 +11,26 @@ import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar
   styleUrls: ['./instituciones-credito.component.scss']
 })
 export class InstitucionesCreditoComponent implements OnInit {
+  instituciones: any = [];
 
   constructor(
     public dialog: MatDialog,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    private institucionSrv: InstitucionCreditoService
   ) { }
 
   ngOnInit() {
+    this.institucionSrv.getInstituciones()
+      .subscribe(res => {
+        this.instituciones = res;
+      });
   }
 
   agregarInstituto() {
 
     let dialogRef = this.dialog.open(AgregarInstitutoCreditoDialogoComponent, {
       data: {
+        instituciones: this.instituciones
       },
       width: '500px',
     });
@@ -50,10 +58,11 @@ export class InstitucionesCreditoComponent implements OnInit {
 
   }
 
-  editarInstitucion() {
+  editarInstitucion(institucion) {
 
     let dialogRef = this.dialog.open(EditarInstitutoCreditoDialogoComponent, {
       data: {
+        institucion: institucion
       },
       width: "500px"
     });
@@ -78,18 +87,37 @@ export class InstitucionesCreditoComponent implements OnInit {
     });
   }
 
-  delInstituto() {
-
+  delInstituto(institucion) {
     let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
       data: {
-        title: "Eliminar Instituto",
-        content: `¿Desea eliminar el instituto: ?`
+        title: "Eliminar Institución",
+        content: `¿Desea eliminar la institución: ${institucion.nombre}?`
       },
-      width: "500px"
+      width: '500px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
 
+      if (result === true) {
+
+        this.institucionSrv.delInstitucion(institucion.id_institucion_credito)
+          .subscribe(res => {
+
+            let i = this.instituciones.indexOf(institucion);
+            this.instituciones.splice(i, 1);
+            this.snackBar.open("Prototipo Eliminado", "", {
+              duration: 2000,
+              panelClass: ["bg-success", "text-white"]
+            });
+
+          }, (error) => {
+            this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+              duration: 3000,
+              panelClass: ["bg-danger", "text-white"]
+            });
+          });
+
+      }
 
     });
   }

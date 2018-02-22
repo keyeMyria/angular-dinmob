@@ -28,17 +28,17 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Infonavit</td>
+                <tr *ngFor="let institucion of instituciones">
+                  <td>{{institucion.nombre}}</td>
                   <th>
                     <input class="input-color" [style.background]="color" />
                   </th>
                   <td class="text-right ws-nowrap">
 
-                    <button mat-button class="no-min" (click)="editarInstitucion()">
+                    <button mat-button class="no-min" (click)="editarInstitucion(institucion)">
                       <i class="fa fa-pencil"></i>
                     </button>
-                    <button mat-button class="no-min" (click)="delInstituto()">
+                    <button mat-button class="no-min" (click)="delInstituto(institucion)">
                       <i class="fa fa-times"></i>
                     </button>
 

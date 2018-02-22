@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { InstitucionCreditoService } from '../../../services/institucion-credito.service';
 
 @Component({
   selector: 'app-agregar-instituto-credito-dialogo',
@@ -14,9 +15,11 @@ export class AgregarInstitutoCreditoDialogoComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<AgregarInstitutoCreditoDialogoComponent>,
     private fb: FormBuilder,
+    private institucionSrv: InstitucionCreditoService
   ) {
     this.form = this.fb.group({
-      institucion: ["", Validators.required]
+      nombre: ["", Validators.required],
+      //color: ["", Validators.required]
     });
   }
 
@@ -26,8 +29,17 @@ export class AgregarInstitutoCreditoDialogoComponent implements OnInit {
   guardar() {
     console.log("Institución", this.form.value);
 
+    this.institucionSrv.createInstitucion(this.form.value)
+      .subscribe(institucion => {
+        this.data.instituciones.push(institucion);
+        this.dialogRef.close(true);
 
-
+      },
+        (error) => {
+          this.dialogRef.close({ error: "Ha ocurrido un error de conexión. Inténtelo más tarde" });
+        });
   }
+
+
 
 }
