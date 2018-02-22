@@ -9,10 +9,13 @@ import { Observable } from 'rxjs/Observable';
 import { CurrencyPipe } from '@angular/common';
 import { LotesService } from 'app/services/lotes.service';
 import { MapasVentasConfigDialogoComponent } from 'app/components/ventas/mapas-ventas-config-dialogo/mapas-ventas-config-dialogo.component';
+import { TIPO_MAPA } from '../../../constantes/tipo_mapa';
 
 
 declare var jQuery: any;
 declare var $: any;
+
+
 
 @Component({
   selector: 'app-mapas-ventas',
@@ -23,10 +26,11 @@ declare var $: any;
 export class MapasVentasComponent implements OnInit, OnDestroy {
 
 
+
   //creamos estas propiedades como objetos para que cuando las
   //pasemos al diálogo se actualicen
   verLeyenda: any = { toggle: true };
-  verPrototipos: any = { disabled: false };
+  tipoMapa: any = { tipo: TIPO_MAPA.EstadoVenta };
 
   map: any;
   lote_selected: any = null;
@@ -35,11 +39,13 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
   obras: any = [];
   jsonMap: any = {};
   scalePrototipos: any = {};
+  scaleLoteTipo: any = {};
+  scaleFormaPago: any = {};
   valuesPrototipos: any = {};
   valuesEstadosVenta: any = {};
 
-  valuesFormaPago: any={};
-  valuesLoteTipo: any={};
+  valuesFormaPago: any = {};
+  valuesLoteTipo: any = {};
 
   constructor(
     private router: Router,
@@ -81,9 +87,11 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
 
         this.lotes = res[0].lotes;
         this.scalePrototipos = res[0].scalePrototipos;
+        this.scaleLoteTipo = res[0].scaleLotesTipo;
+        this.scaleFormaPago = res[0].scaleFormasPago;
         this.jsonMap = res[1];
 
-        console.log("escala", this.scalePrototipos);
+        console.log("escala", this.scalePrototipos, this.scaleLoteTipo, this.scaleFormaPago);
 
 
 
@@ -100,11 +108,29 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
 
           if (lote.prototipos && lote.prototipos.length > 0) {
             this.valuesPrototipos[lote.code] = lote.prototipos[0].nombre;
-          } /* else {
-            this.valuesPrototipos[lote.code] = null;
-          } */
+          } else {
+            this.valuesPrototipos[lote.code] = "Ninguno";
+          }
 
         });
+
+        //creamos los valores para la escala de lote tipo
+        this.valuesLoteTipo = {};
+        this.lotes.forEach(lote => {
+          this.valuesLoteTipo[lote.code] = lote.tipo;
+        });
+
+        //creamos los valores para la escala de forma pago
+        this.valuesFormaPago = {};
+        this.lotes.forEach(lote => {
+          if (lote.forma_pago) {
+
+            this.valuesFormaPago[lote.code] = lote.forma_pago;
+          } else {
+            this.valuesFormaPago[lote.code] = "Ninguna"
+          }
+        });
+
 
         //console.log("valores escala prototipos", this.valuesPrototipos);
 
@@ -112,7 +138,7 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
 
 
         if (this.jsonMap.mapa) {
-          this.crearMapa(this.valuesEstadosVenta, this.scalePrototipos);
+          this.crearMapa(this.valuesEstadosVenta, this.scalePrototipos, this.scaleFormaPago, this.scaleLoteTipo);
         }
 
       }, (error) => {
@@ -182,10 +208,10 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
         map: this.map,
         estadosVenta: this.valuesEstadosVenta,
         prototipos: this.valuesPrototipos,
-        loteTipo:this.valuesLoteTipo,
-        formaPago:this.valuesFormaPago,
+        loteTipo: this.valuesLoteTipo,
+        formaPago: this.valuesFormaPago,
         verLeyenda: this.verLeyenda,
-        verPrototipos: this.verPrototipos
+        tipoMapa: this.tipoMapa
 
       },
       width: "400px"
@@ -199,7 +225,7 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
     // region 1 prototipos
     // region 2 texto
     this.map.series.regions[1].setValues(this.valuesPrototipos);
-    this.verPrototipos.disabled = true;
+    this.tipoMapa.disabled = true;
 
   }
 
@@ -209,12 +235,12 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
     // region 1 prototipos
     // region 2 texto
     this.map.series.regions[0].setValues(this.valuesEstadosVenta);
-    this.verPrototipos.disabled = false;
+    this.tipoMapa.disabled = false;
 
   }
 
 
-  crearMapa(values, scalePrototipos) {
+  crearMapa(values, scalePrototipos, scaleFormaPago, scaleLoteTipo) {
 
     this.verLeyenda.toggle = true;
 
@@ -284,6 +310,28 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
             legend: {
               vertical: true,
               title: 'Prototipos',
+              labelRender: function (scale) {
+                return scale;
+              }
+            }
+          },
+          {
+            values: {},
+            scale: scaleLoteTipo,
+            legend: {
+              vertical: true,
+              title: 'Tipo Lote',
+              labelRender: function (scale) {
+                return scale;
+              }
+            }
+          },
+          {
+            values: {},
+            scale: scaleFormaPago,
+            legend: {
+              vertical: true,
+              title: 'Forma Pago',
               labelRender: function (scale) {
                 return scale;
               }
