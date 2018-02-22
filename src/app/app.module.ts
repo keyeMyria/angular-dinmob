@@ -7,6 +7,7 @@ import { RoutingModule } from "app/app.routing";
 import { TextMaskModule } from "angular2-text-mask";
 import { FileUploadModule } from 'ng2-file-upload/file-upload/file-upload.module';
 import { JwtModule } from '@auth0/angular-jwt';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 import "hammerjs";
 
@@ -329,7 +330,8 @@ export function getToken() {
     //AuthModule,
     AngularMaterialModule,
     TextMaskModule,
-    RoutingModule
+    RoutingModule,
+    ColorPickerModule
 
   ],
 

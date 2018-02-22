@@ -16,7 +16,7 @@ export class EditarInstitutoCreditoDialogoComponent implements OnInit {
     private fb: FormBuilder
   ) {
     this.form = this.fb.group({
-      instituto: ["", Validators.required]
+      nombre: ["", Validators.required]
     });
   }
 
