@@ -4,11 +4,11 @@
   <div class="form-group">
     <mat-slide-toggle [checked]="data.verLeyenda.toggle" (change)="toggleVerLeyenda($event)">Leyenda</mat-slide-toggle>
   </div>
-  <button mat-raised-button color="primary" [disabled]="data.tipoMapa.tipo==TIPO_MAPA.EstadoVenta" class="btn-block" (click)="escalaEstadosVenta()">Estado Venta</button>
-  <button mat-raised-button color="primary" [disabled]="false" class="btn-block" (click)="escalaPrototipos()">Prototipos</button>
-  <button mat-raised-button color="primary" [disabled]="false" class="btn-block" (click)="escalaLoteTipo()">Lote Tipo</button>
-  <button mat-raised-button color="primary" [disabled]="false" class="btn-block" (click)="escalaFormaPago()">Forma Pago</button>
-  
+  <button mat-raised-button color="primary" [disabled]="data.tipoMapa.tipo==Tipo.EstadoVenta" class="btn-block" (click)="escalaEstadosVenta()">Estado Venta</button>
+  <button mat-raised-button color="primary" [disabled]="data.tipoMapa.tipo==Tipo.Prototipos" class="btn-block" (click)="escalaPrototipos()">Prototipos</button>
+  <button mat-raised-button color="primary" [disabled]="data.tipoMapa.tipo==Tipo.TipoLote" class="btn-block" (click)="escalaLoteTipo()">Lote Tipo</button>
+  <button mat-raised-button color="primary" [disabled]="data.tipoMapa.tipo==Tipo.FormaPago" class="btn-block" (click)="escalaFormaPago()">Forma Pago</button>
+
 
 </div>
 <div mat-dialog-actions>

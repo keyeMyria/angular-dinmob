@@ -93,7 +93,7 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
 
         console.log("escala", this.scalePrototipos, this.scaleLoteTipo, this.scaleFormaPago);
 
-
+        this.tipoMapa.tipo = TIPO_MAPA.EstadoVenta;
 
 
         //creamos los valores para la escala de estados
@@ -395,6 +395,12 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
 
 
     });
+
+    let items = $(".jvectormap-legend-cnt.jvectormap-legend-cnt-v .jvectormap-legend");
+    //$(items[0]).removeClass("d-none");
+    $(items[1]).addClass("d-none");
+    $(items[2]).addClass("d-none");
+    $(items[3]).addClass("d-none");
 
     this.map = $("#map").vectorMap('get', 'mapObject');
 
