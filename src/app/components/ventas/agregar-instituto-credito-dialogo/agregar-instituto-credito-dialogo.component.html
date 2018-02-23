@@ -2,25 +2,24 @@
 <div mat-dialog-content>
 
 
-  <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
+  <form #form="ngForm" (ngSubmit)="guardar()" id="id_form">
 
     <div class="form-group row">
       <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
       <div class="col-sm-10">
-        <input type="text" name="nombre" class="form-control" formControlName="nombre" 
-        [ngClass]="{'is-invalid': form.get('nombre').invalid  && (form.get('nombre').dirty || form.get('nombre').touched )}">
+        <input type="text" name="nombre" class="form-control" #nombre="ngModel" [(ngModel)]="insti.nombre" required [ngClass]="{'is-invalid': nombre.invalid  && (nombre.dirty || nombre.touched )}">
         <div class="invalid-feedback">Proporcione el nombre del instituto</div>
       </div>
     </div>
 
-<!--     <div class="form-group row">
+    <div class="form-group row">
       <label for="color" class="col-sm-2 col-form-label">Color</label>
       <div class="col-sm-10">
-        <input class="form-control" name="color" [(colorPicker)]="color" [style.background]="color" formControlName="color" 
-        [ngClass]="{'is-invalid': form.get('color').invalid  && (form.get('color').dirty || form.get('color').touched )}"/>
-        <div class="invalid-feedback">Proporcione un color</div>
+        <span [(colorPicker)]="insti.color" [style.background]="insti.color" [cpPosition]="'bottom'" [cpSaveClickOutside]="false"
+          [cpDialogDisplay]="'inline'" [cpToggle]="true"></span>
+
       </div>
-    </div> -->
+    </div>
 
   </form>
 
@@ -28,5 +27,5 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button type="button" [mat-dialog-close]="false">CANCELAR</button>
-  <button mat-button type="submit" form="id_form" [disabled]="form.invalid" color="primary">AGREGAR</button>
+  <button mat-button type="submit" form="id_form" [disabled]="form.invalid" color="primary">GUARDAR</button>
 </div>

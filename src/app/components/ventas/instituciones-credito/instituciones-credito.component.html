@@ -31,7 +31,9 @@
                 <tr *ngFor="let institucion of instituciones">
                   <td>{{institucion.nombre}}</td>
                   <th>
-                    <input class="input-color form-control" [style.background]="institucion.color" />
+                    <input class="input-color form-control" [(colorPicker)]="institucion.color" [style.background]="institucion.color" [cpOKButton]="true"
+                      [cpOKButtonClass]="'btn btn-outline-dark btn-block'" [cpOKButtonText]="'GUARDAR'" [cpSaveClickOutside]="false"
+                      (colorPickerSelect)="updateColorInstitucion(institucion,$event)" />
                   </th>
                   <td class="text-right ws-nowrap">
 

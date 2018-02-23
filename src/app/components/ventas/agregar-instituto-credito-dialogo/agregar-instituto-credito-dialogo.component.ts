@@ -9,7 +9,12 @@ import { InstitucionCreditoService } from '../../../services/institucion-credito
   styleUrls: ['./agregar-instituto-credito-dialogo.component.scss']
 })
 export class AgregarInstitutoCreditoDialogoComponent implements OnInit {
-  form: FormGroup;
+  //form: FormGroup;
+  // color = "#000;"
+  insti = {
+    nombre: "",
+    color: "#ffffff"
+  }
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -17,19 +22,19 @@ export class AgregarInstitutoCreditoDialogoComponent implements OnInit {
     private fb: FormBuilder,
     private institucionSrv: InstitucionCreditoService
   ) {
-    this.form = this.fb.group({
-      nombre: ["", Validators.required],
-      color: ["", Validators.required]
-    });
+    /*     this.form = this.fb.group({
+          nombre: ["", Validators.required],
+          color: ["", Validators.required]
+        }); */
   }
 
   ngOnInit() {
   }
 
   guardar() {
-    console.log("Institución", this.form.value);
+    console.log("Institución", this.insti);
 
-    this.institucionSrv.createInstitucion(this.form.value)
+    this.institucionSrv.createInstitucion(this.insti)
       .subscribe(institucion => {
         this.data.instituciones.push(institucion);
         this.dialogRef.close(true);
@@ -40,6 +45,22 @@ export class AgregarInstitutoCreditoDialogoComponent implements OnInit {
         });
   }
 
+/*   colorChange(event) {
+    console.log("colorChange", event);
+
+  }
+  colorSelect(event) {
+    console.log("colorSelect", event);
+
+  }
+  colorToggleChange(event) {
+    console.log("colorToggleChange", event);
+
+  }
+  colorInputChange(event) {
+    console.log("colorInputChage", event);
+
+  } */
 
 
 }
