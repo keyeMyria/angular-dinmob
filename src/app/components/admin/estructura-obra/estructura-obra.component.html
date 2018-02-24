@@ -69,6 +69,43 @@
                 </div>
             </div>
 
+            <!--  asignar tipo -->
+            <div class="form-group">
+                <label class="form-label">Tipo</label>
+                <div class="input-group">
+                    <select class="form-control" [formControl]="opTipo">
+                        <option value="">Seleccionar</option>
+                        <option value="0">Regular</option>
+                        <option value="1">Irregular</option>
+                    </select>
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" (click)="updateTipo()" [disabled]=" manzana_selected==null || !selection[manzana_selected].selected.length  || opTipo.errors ">Asignar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- asignar metros excedente -->
+            <div class="form-group">
+                <label class="form-label">Metros Excedente</label>
+                <div class="input-group">
+                    <input [textMask]="{mask: numbermask}" type="text" class="form-control" [formControl]="opMetrosExcedente">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" (click)="updateMetrosExcedente()" [disabled]=" manzana_selected==null || !selection[manzana_selected].selected.length  || opMetrosExcedente.errors">Asignar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- asignar valor ampliacion -->
+            <div class="form-group">
+                <label class="form-label">Precio Excedente</label>
+                <div class="input-group">
+                    <input [textMask]="{mask: numbermask}" type="text" class="form-control" [formControl]="opPrecioExcedente">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" (click)="updatePrecioExcedente()" [disabled]=" manzana_selected==null || !selection[manzana_selected].selected.length  || opPrecioExcedente.errors">Asignar</button>
+                    </div>
+                </div>
+            </div>
+
 
         </div>
 
@@ -159,6 +196,9 @@
                                                 <th>Base</th>
                                                 <th>Ampliación</th>
                                                 <th>EnVenta</th>
+                                                <th>Tipo</th>
+                                                <th>Excedente(m)</th>
+                                                <th>Excedente($)</th>
                                                 <th style="width: 90px"> </th>
 
                                             </tr>
@@ -181,6 +221,9 @@
                                                 <td>{{lote.valor_base|currency}}</td>
                                                 <td>{{lote.valor_ampliacion|currency}}</td>
                                                 <td>{{lote.en_venta| numberToYesNo}}</td>
+                                                <td>{{lote.tipo}}</td>
+                                                <td>{{lote.metros_excedente| number}}</td>
+                                                <td>{{lote.precio_excedente| currency}}</td>
                                                 <td class="text-right ws-nowrap">
 
                                                     <button mat-button class="no-min" (click)="editarLote(manzana,lote, $event)">

@@ -59,6 +59,9 @@ export class EstructuraObraComponent implements OnInit, OnDestroy {
   opEnVenta = new FormControl("", Validators.required);
   opValorBase = new FormControl("", Validators.required);
   opValorAmpliacion = new FormControl("", Validators.required);
+  opTipo = new FormControl("", Validators.required);
+  opMetrosExcedente = new FormControl("", Validators.required);
+  opPrecioExcedente = new FormControl("", Validators.required);
 
 
 
