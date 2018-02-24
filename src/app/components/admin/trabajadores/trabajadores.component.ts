@@ -133,7 +133,7 @@ export class TrabajadoresComponent implements OnInit {
     let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
       data: {
         title: "Eliminar Trabajador",
-        content: `¿Desea eliminar el trabajador: ${trabajador.nombre} ?`
+        content: `¿Desea eliminar a ${trabajador.nombre} ?`
       },
       width: "500px"
     });
