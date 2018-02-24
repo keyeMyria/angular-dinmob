@@ -128,8 +128,15 @@ export class InstitucionesCreditoComponent implements OnInit {
       .subscribe(insti => {
         let i = this.instituciones.indexOf(institucion);
         this.instituciones[i] = insti;
+        this.snackBar.open("Color Actualizado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
       }, (error) => {
-        //mostrar snackbar con error
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
       });
 
   }
