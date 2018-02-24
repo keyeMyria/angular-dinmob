@@ -453,6 +453,112 @@ export class EstructuraObraComponent implements OnInit, OnDestroy {
   }
 
   /* actualizamos la propiedad valor_ampliacion a los lotes seleccionados */
+  updateMetrosExcedente() {
+
+    let id_lotes = [];
+
+    this.selection[this.manzana_selected].selected.forEach(lote => {
+      id_lotes.push(lote.id_lote);
+    });
+
+    let valor = this.opMetrosExcedente.value.replace(/,/g, "");
+    this.loteSrv.bulkUpdate(id_lotes, { metros_excedente: valor })
+      .subscribe(res => {
+
+        if (res.count) {
+          //todo ok
+
+          //actualizamos la vista
+          this.selection[this.manzana_selected].selected.forEach(lote => {
+            lote.metros_excedente = valor;
+          });
+
+          //eliminamos la seleccion
+          this.selection[this.manzana_selected].clear();
+
+
+          this.snackBar.open("Actualización completada", "", {
+            duration: 2000,
+            panelClass: ["bg-success", "text-white"]
+          });
+
+        } else {
+          //error o count==0          
+          this.snackBar.open("Su solicitud no se ha podido completar.", "", {
+            duration: 3000,
+            panelClass: ["bg-danger", "text-white"]
+          });
+
+        }
+
+
+      },
+        (error) => {
+
+          this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde.", "", {
+            duration: 3000,
+            panelClass: ["bg-danger", "text-white"]
+          });
+
+        });
+
+
+  }
+
+  /* actualizamos la propiedad valor_ampliacion a los lotes seleccionados */
+  updatePrecioExcedente() {
+
+    let id_lotes = [];
+
+    this.selection[this.manzana_selected].selected.forEach(lote => {
+      id_lotes.push(lote.id_lote);
+    });
+
+    let valor = this.opPrecioExcedente.value.replace(/,/g, "");
+    this.loteSrv.bulkUpdate(id_lotes, { precio_excedente: valor })
+      .subscribe(res => {
+
+        if (res.count) {
+          //todo ok
+
+          //actualizamos la vista
+          this.selection[this.manzana_selected].selected.forEach(lote => {
+            lote.precio_excedente = valor;
+          });
+
+          //eliminamos la seleccion
+          this.selection[this.manzana_selected].clear();
+
+
+          this.snackBar.open("Actualización completada", "", {
+            duration: 2000,
+            panelClass: ["bg-success", "text-white"]
+          });
+
+        } else {
+          //error o count==0          
+          this.snackBar.open("Su solicitud no se ha podido completar.", "", {
+            duration: 3000,
+            panelClass: ["bg-danger", "text-white"]
+          });
+
+        }
+
+
+      },
+        (error) => {
+
+          this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde.", "", {
+            duration: 3000,
+            panelClass: ["bg-danger", "text-white"]
+          });
+
+        });
+
+
+  }
+
+  /* actualizamos la propiedad valor_ampliacion a los lotes seleccionados */
   updateValorAmpliacion() {
 
     let id_lotes = [];
@@ -523,6 +629,56 @@ export class EstructuraObraComponent implements OnInit, OnDestroy {
           //actualizamos la vista
           this.selection[this.manzana_selected].selected.forEach(lote => {
             lote.en_venta = this.opEnVenta.value;
+          });
+
+          //eliminamos la seleccion
+          this.selection[this.manzana_selected].clear();
+
+          this.snackBar.open("Actualización completada", "", {
+            duration: 2000,
+            panelClass: ["bg-success", "text-white"]
+          });
+
+        } else {
+
+          this.snackBar.open("Su solicitud no se ha podido completar.", "", {
+            duration: 3000,
+            panelClass: ["bg-danger", "text-white"]
+          });
+
+        }
+
+
+      },
+        (error) => {
+          this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde.", "", {
+            duration: 3000,
+            panelClass: ["bg-danger", "text-white"]
+          });
+
+        });
+
+
+  }
+
+  /* actualizamos la propiedad irregular a los lotes seleccionados */
+  updateTipo() {
+
+    let id_lotes = [];
+
+    this.selection[this.manzana_selected].selected.forEach(lote => {
+      id_lotes.push(lote.id_lote);
+    });
+
+
+    this.loteSrv.bulkUpdate(id_lotes, { irregular: this.opTipo.value })
+      .subscribe(res => {
+        if (res.count) {
+          //todo ok
+
+          //actualizamos la vista
+          this.selection[this.manzana_selected].selected.forEach(lote => {
+            lote.tipo = this.opTipo.value == "1" ? "I" : "R";
           });
 
           //eliminamos la seleccion

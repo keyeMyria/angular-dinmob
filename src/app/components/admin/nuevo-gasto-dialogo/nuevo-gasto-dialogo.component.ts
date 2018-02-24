@@ -35,4 +35,9 @@ export class NuevoGastoDialogoComponent implements OnInit {
   ngOnInit() {
   }
 
+
+  guardar() {
+
+  }
+
 }

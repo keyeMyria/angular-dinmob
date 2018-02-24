@@ -58,4 +58,8 @@ export class PagosTrabajadoresComponent implements OnInit {
 
   }
 
+  createPago(){
+    
+  }
+
 }
