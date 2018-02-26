@@ -188,6 +188,14 @@ import { TrabajadorService } from './services/trabajador.service';
 import { AgregarInstitutoCreditoDialogoComponent } from './components/ventas/agregar-instituto-credito-dialogo/agregar-instituto-credito-dialogo.component';
 import { EditarInstitutoCreditoDialogoComponent } from './components/ventas/editar-instituto-credito-dialogo/editar-instituto-credito-dialogo.component';
 import { InstitucionesCreditoComponent } from './components/ventas/instituciones-credito/instituciones-credito.component';
+import { HistorialApartadosComponent } from './components/comisiones/historial-apartados/historial-apartados.component';
+import { ComisionesComponent } from './components/comisiones/comisiones/comisiones.component';
+import { VendedoresComponent } from './components/ventas/vendedores/vendedores.component';
+import { CrearVendedorDialogoComponent } from './components/ventas/crear-vendedor-dialogo/crear-vendedor-dialogo.component';
+import { EditarVendedorDialogoComponent } from './components/ventas/editar-vendedor-dialogo/editar-vendedor-dialogo.component';
+import { TableroComisionesComponent } from './components/tablero-comisiones/tablero-comisiones.component';
+import { NuevoPagoComisionDialogoComponent } from './components/comisiones/nuevo-pago-comision-dialogo/nuevo-pago-comision-dialogo.component';
+import { EditarPagoComisionDialogoComponent } from './components/comisiones/editar-pago-comision-dialogo/editar-pago-comision-dialogo.component';
 
 
 
@@ -304,6 +312,14 @@ export function getToken() {
     AgregarInstitutoCreditoDialogoComponent,
     EditarInstitutoCreditoDialogoComponent,
     InstitucionesCreditoComponent,
+    HistorialApartadosComponent,
+    ComisionesComponent,
+    VendedoresComponent,
+    CrearVendedorDialogoComponent,
+    EditarVendedorDialogoComponent,
+    TableroComisionesComponent,
+    NuevoPagoComisionDialogoComponent,
+    EditarPagoComisionDialogoComponent,
 
 
 
@@ -379,7 +395,9 @@ export function getToken() {
     NuevoProveedorDialogoComponent,
     NuevoGastoDialogoComponent,
     AgregarInstitutoCreditoDialogoComponent,
-    EditarInstitutoCreditoDialogoComponent
+    EditarInstitutoCreditoDialogoComponent,
+    CrearVendedorDialogoComponent,
+    EditarVendedorDialogoComponent
 
 
 

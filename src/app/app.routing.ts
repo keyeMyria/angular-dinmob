@@ -65,6 +65,12 @@ import { PagosTrabajadoresComponent } from './components/admin/pagos-trabajadore
 import { GastosSobrasComponent } from './components/admin/gastos-sobras/gastos-sobras.component';
 import { EspecialidadesTrabajadorResolverService } from './resolvers/especialidades-trabajador-resolver.service';
 import { InstitucionesCreditoComponent } from './components/ventas/instituciones-credito/instituciones-credito.component';
+import { HistorialApartadosComponent } from './components/comisiones/historial-apartados/historial-apartados.component';
+import { ComisionesComponent } from './components/comisiones/comisiones/comisiones.component';
+import { VendedoresComponent } from './components/ventas/vendedores/vendedores.component';
+import { CrearVendedorDialogoComponent } from './components/ventas/crear-vendedor-dialogo/crear-vendedor-dialogo.component';
+import { EditarVendedorDialogoComponent } from './components/ventas/editar-vendedor-dialogo/editar-vendedor-dialogo.component';
+import { TableroComisionesComponent } from './components/tablero-comisiones/tablero-comisiones.component';
 
 
 
@@ -266,6 +272,12 @@ export const ROUTES: Routes = [
                 },
             },
             {
+                path: 'tablero-comisiones', component: TableroComisionesComponent,
+                resolve: {
+                    usuario: UsuarioLoggedResolverService
+                },
+            },
+            {
                 path: 'ventas-pagos', component: VentasPagosComponent,
                 resolve: {
                     obras: ObrasUsuarioResolverService
@@ -297,9 +309,28 @@ export const ROUTES: Routes = [
                     obras: ObrasUsuarioResolverService
                 }
             },
-            { path: 'instituciones-credito', component: InstitucionesCreditoComponent },
+            {
+                path: 'historial-apartados', component: HistorialApartadosComponent,
+                resolve: {
+                    obras: ObrasUsuarioResolverService
+                }
+            },
+            {
+                path: 'comisiones', component: ComisionesComponent,
+                resolve: {
+                    obras: ObrasUsuarioResolverService
+                }
+            },
+            { 
+                path: 'vendedores', component: VendedoresComponent,
+                resolve: {
+                    obras: ObrasUsuarioResolverService
+                }
+             },
+            { path: 'crear-vendedor-dialogos', component: CrearVendedorDialogoComponent },
+            { path: 'editar-vendedor-dialogos', component: EditarVendedorDialogoComponent }
 
-           
+
 
 
 

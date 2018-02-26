@@ -1,0 +1,78 @@
+<div class="container mt-2 mb-5">
+  <div class="row">
+    <div class="col-12">
+
+      <div>
+        <mat-form-field class="w-100">
+          <mat-select placeholder="Obra" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)">
+            <mat-option *ngFor="let obra of obras" [value]="obra.id_obra">{{ obra.nombre }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          Comisiones
+        </div>
+        <div>
+          <div class="table-responsive">
+            <table class="table my-table-sm table-align-middle">
+              <thead>
+                <tr>
+                  <th style="width:40px"></th>
+                  <th>Manzana</th>
+                  <th>Lote</th>
+                  <th>Valor Operación</th>
+                  <th>Vendedor</th>
+                  <th>Gerente</th>
+                  <th>Expediente</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <ng-container *ngFor="let comision of comisiones">
+                  <tr>
+                    <td style="cursor:pointer" (click)="verComisiones(comision);comision.more= !comision.more">
+                      <i class="fa" [ngClass]="{'fa-plus':!comision.more, 'fa-minus':comision.more}"></i>
+                    </td>
+                    <td>{{comision.manzana}}</td>
+                    <td>{{comision.lote}}</td>
+                    <td>{{comision.valor_operacion}}</td>
+                    <td>{{comision.vendedor}}</td>
+                    <td>{{comision.gerente}}</td>
+                    <td>{{comision.expediente}}</td>
+                  </tr>
+                  <tr [hidden]="!comision.more">
+                    <td colspan="7" class="p-0">
+                      <table class="table table-striped mb-0">
+                        <thead>
+                          <tr>
+                            <th>Monto</th>
+                            <th>Fecha</th>
+                            <th>Destinatario</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let pago of comision.pagos">
+                            <td>{{pago.monto}}</td>
+                            <td>{{pago.fecha}}</td>
+                            <td>{{pago.destinatario}}</td>
+                          </tr>
+                          <!--    <tr *ngIf="seccion.colonias && seccion.colonias.length==0">
+                          <td style="padding-left: 55px">Ninguna colonia encontrada</td>
+                        </tr> -->
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                </ng-container>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
