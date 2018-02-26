@@ -42,13 +42,9 @@
         <div class="col-12">
 
           <ol class="breadcrumb colorBread">
-            <li class="breadcrumb-item text-primary">
-
-            </li>
-            <li class="breadcrumb-item text-primary">
-
-            </li>
-            <li class="breadcrumb-item text-primary"></li>
+            <li class="breadcrumb-item text-primary">{{lote.obra}}</li>
+            <li class="breadcrumb-item text-primary">{{lote.manzana}}</li>
+            <li class="breadcrumb-item text-primary">{{lote.nombre}}</li>
           </ol>
 
 
@@ -58,18 +54,16 @@
             </div>
 
             <form class="form-inline mt-2">
-              <div class="input-group mx-2">
-                <select class="custom-select" id="inputGroupSelect04">
+              <div class="input-group px-2">
+                <select class="custom-select">
                   <option selected>Seleccionar Trabajador</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                  <option *ngFor="let t of trabajadores" [value]="t.id_trabajador">{{t.nombre}} ({{t.especialidad}})</option>
                 </select>
                 <div class="input-group-append">
-                  <button class="btn btn-primary" type="button">Asignar</button>
+                  <button class="btn btn-primary" type="button" (click)="asignarTrabajador()">Asignar</button>
                 </div>
               </div>
-              <div class="input-group mx-2">
+              <div class="input-group pl-3">
                 <select class="custom-select" id="inputGroupSelect04">
                   <option selected>Seleccionar Lote</option>
                   <option value="1">One</option>
@@ -97,18 +91,18 @@
                   </thead>
 
                   <tbody>
-                    <tr *ngFor="let lote of especialidades">
+                    <tr *ngFor="let e of especialidades" class="pointer" (click)="seleccionarEspecialidad(e)" [ngClass]="{'table-primary':selection.isSelected(e)}">
                       <td>
-                        <mat-checkbox></mat-checkbox>
+                        <mat-checkbox class="pl-2" (click)="$event.stopPropagation()" (change)="$event ? seleccionarEspecialidad(e) : null" [checked]="selection.isSelected(e)"></mat-checkbox>
                       </td>
-                      <td>{{lote.familia}}</td>
-                      <td>{{lote.especialidad}}</td>
+                      <td>{{e.familia}}</td>
+                      <td>{{e.especialidad}}</td>
                       <td>
-                        <strong>{{lote.trabajador}}</strong>
-                        <small>{{lote.especialidad_trabajador}}</small>
+                        <strong>{{e.trabajador}}</strong>
+                        <small>{{e.especialidad_trabajador}}</small>
                       </td>
                       <td>
-                        <button mat-button class=" no-min" (click)="delTrabajador()">
+                        <button mat-button class=" no-min" matTooltip="Eliminar" [disabled]="!e.id_trabajador" (click)="$event.stopPropagation();delEspecialidadLote(e)">
                           <i class="fa fa-ban"></i>
                         </button>
                       </td>
