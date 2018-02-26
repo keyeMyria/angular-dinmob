@@ -6,7 +6,7 @@
 
 <mat-drawer-container class="drawer-container">
 
-  <mat-drawer class="estructura" #drawer [mode]="mobileQuery.matches ? 'over':'side'" [opened]="!mobileQuery.matches" style="width:300px">
+  <mat-drawer class="estructura" #drawer [mode]="mobileQuery.matches ? 'over':'side'" [opened]="!mobileQuery.matches" style="width:250px">
     <mat-card class="estructura">
       <div class="mb-2">
         <select class="form-control" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)">
@@ -14,12 +14,6 @@
           <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>
         </select>
       </div>
-      <!--    <div class="d-flex">
-                  <span><i class="fa fa-share"></i></span>
-                  <span>{{obra?.obra?.nombre || ""}}</span>
-                  <div class="spacer"></div>
-                  <span class="badge badge-pill badge-warning align-self-center mr-2">{{obra?.manzanas?.length || "0"}}</span>
-              </div> -->
     </mat-card>
     <div class="mb-3">
       <mat-accordion>
@@ -32,8 +26,7 @@
           </mat-expansion-panel-header>
 
           <ul class="list-group">
-            <!--  <li class="list-group-item">({{lote.prototipos?.length || "0"}}) {{lote.nombre}}</li> -->
-            <button type="button" class="list-group-item list-group-item-action" *ngFor="let lote of manzana.lotes" (click)="getAvancesLote(lote)">({{lote.prototipos?.length || "0"}}) {{lote.nombre}}</button>
+            <button type="button" class="list-group-item list-group-item-action" *ngFor="let lote of manzana.lotes" (click)="getEspecialidadesLote(lote)">({{lote.prototipos?.length || "0"}}) {{lote.nombre}}</button>
           </ul>
 
         </mat-expansion-panel>
@@ -104,16 +97,19 @@
                   </thead>
 
                   <tbody>
-                    <tr>
+                    <tr *ngFor="let lote of especialidades">
                       <td>
                         <mat-checkbox></mat-checkbox>
                       </td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                      <td>{{lote.familia}}</td>
+                      <td>{{lote.especialidad}}</td>
+                      <td>
+                        <strong>{{lote.trabajador}}</strong>
+                        <small>{{lote.especialidad_trabajador}}</small>
+                      </td>
                       <td>
                         <button mat-button class=" no-min" (click)="delTrabajador()">
-                          <i class="fa fa-ban "></i>
+                          <i class="fa fa-ban"></i>
                         </button>
                       </td>
                     </tr>

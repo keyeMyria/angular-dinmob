@@ -33,7 +33,7 @@
       <label for="retencion" class="col-sm-4 col-form-label">Retención (%)</label>
       <div class="col-sm-8">
         <input [textMask]="{mask: numberMask}" class="form-control" type="text" name="retencion" id="retencion" formControlName="retencion" [ngClass]="{'is-invalid': form.get('retencion').invalid  && (form.get('retencion').dirty || form.get('retencion').touched )}">
-        <div class="invalid-feedback">Especifique un cantidad (%)</div>
+        <div class="invalid-feedback">Especifique una cantidad (%)</div>
       </div>
     </div>
 

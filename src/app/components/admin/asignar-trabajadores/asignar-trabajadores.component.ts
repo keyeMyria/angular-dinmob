@@ -5,6 +5,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { ObrasService } from 'app/services/obras.service';
 import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component";
+import { LotesService } from '../../../services/lotes.service';
 
 @Component({
   selector: 'app-asignar-trabajadores',
@@ -22,12 +23,16 @@ export class AsignarTrabajadoresComponent implements OnInit {
   obra_selected: string = "";
   obra: any;
 
+  especialidades: any[] = [];
+  lote: any = {};
+
   constructor(
     private media: MediaMatcher,
     private changeDetectorRef: ChangeDetectorRef,
     private route: ActivatedRoute,
     private router: Router,
     private obraSrv: ObrasService,
+    private loteSrv: LotesService,
     public dialog: MatDialog,
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
@@ -90,6 +95,17 @@ export class AsignarTrabajadoresComponent implements OnInit {
       }
 
     });
+
+  }
+
+  getEspecialidadesLote(lote) {
+
+    this.loteSrv.getEspecialidades(lote.id_lote)
+      .subscribe(especialidades => {
+        this.especialidades = especialidades;
+      }, (error) => {
+        //snackbar error
+      });
 
   }
 

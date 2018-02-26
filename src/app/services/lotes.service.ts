@@ -55,6 +55,12 @@ export class LotesService {
   }
 
   //ok
+  getEspecialidades(id_lote) {
+    return this.http.get(this.url + "get_especialidades/" + id_lote)
+      .pipe(catchError(this.handleError("getEspecialidades")));
+  }
+
+  //ok
   getFotosAvances(id_lote) {
     return this.http.get(this.url + "get_fotos/" + id_lote)
       .pipe(catchError(this.handleError("getFotosAvances")));
