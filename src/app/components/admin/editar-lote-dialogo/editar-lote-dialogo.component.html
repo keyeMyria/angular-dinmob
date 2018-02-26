@@ -26,6 +26,25 @@
     </div>
 
     <div class="form-group">
+      <label class="form-label" for="metros_excedente">Metros Excedente</label>
+      <input type="text" [textMask]="{mask: numbermask}" class="form-control" id="metros_excedente" formControlName="metros_excedente">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="precio_excedente">Precio m2 Excedente</label>
+      <input type="text" [textMask]="{mask: numbermask}" class="form-control" id="precio_excedente" formControlName="precio_excedente">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Tipo</label>
+      <select class="form-control" formControlName="irregular">
+        <option value="0">Regular</option>
+        <option value="1">Irregular</option>
+      </select>
+    </div>
+
+
+    <div class="form-group">
       <mat-slide-toggle formControlName="en_venta">En Venta</mat-slide-toggle>
     </div>
 
@@ -49,6 +68,7 @@
         </div>
       </div>
     </div>
+
     <div class="form-group" *ngIf="form.get('prototipos').errors?.repetidos">
       <div class="form-text text-danger">Tiene algún prototipo repetido</div>
     </div>

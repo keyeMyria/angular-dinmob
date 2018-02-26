@@ -678,7 +678,7 @@ export class EstructuraObraComponent implements OnInit, OnDestroy {
 
           //actualizamos la vista
           this.selection[this.manzana_selected].selected.forEach(lote => {
-            lote.tipo = this.opTipo.value == "1" ? "I" : "R";
+            lote.irregular = this.opTipo.value;
           });
 
           //eliminamos la seleccion

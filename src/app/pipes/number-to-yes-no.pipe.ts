@@ -7,7 +7,7 @@ export class NumberToYesNoPipe implements PipeTransform {
 
   transform(value: any, tipo?: string): any {
     if (tipo) {
-      
+
       if (tipo === 'AC') {
         if (value === '1') {
           return 'Activo';
@@ -41,6 +41,13 @@ export class NumberToYesNoPipe implements PipeTransform {
           return 'Verdadero';
         }
         return 'Falso';
+      }
+
+      if (tipo === 'RI') {
+        if (value === '1') {
+          return 'I';//irregular
+        }
+        return 'R';//regular
       }
 
     }
