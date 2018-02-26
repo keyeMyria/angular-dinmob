@@ -397,7 +397,9 @@ export function getToken() {
     AgregarInstitutoCreditoDialogoComponent,
     EditarInstitutoCreditoDialogoComponent,
     CrearVendedorDialogoComponent,
-    EditarVendedorDialogoComponent
+    EditarVendedorDialogoComponent,
+    NuevoPagoComisionDialogoComponent,
+    EditarPagoComisionDialogoComponent,
 
 
 
