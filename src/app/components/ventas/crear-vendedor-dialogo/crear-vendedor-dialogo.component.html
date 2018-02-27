@@ -1,3 +1,37 @@
-<p>
-  crear-vendedor-dialogo works!
-</p>
+<h1 mat-dialog-title>Crear Vendedor</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
+
+    <div class="form-group row">
+      <label for="nombre" class="col-sm-3 form-label">Nombre</label>
+      <div class="col-sm-9">
+        <input class="form-control" type="text" id="nombre" name="nombre" formControlName="nombre" [ngClass]="{'is-invalid': form.get('nombre').invalid  && (form.get('nombre').dirty || form.get('nombre').touched )}">
+        <div class="invalid-feedback">Proporcione el nombre del vendedor</div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="email" class="col-sm-3 form-label">Email</label>
+      <div class="col-sm-9">
+        <input class="form-control" type="text" id="email" name="email" formControlName="email" [ngClass]="{'is-invalid': form.get('email').invalid  && (form.get('email').dirty || form.get('email').touched )}">
+        <div class="invalid-feedback">Proporcione email del vendedor</div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="telefono" class="col-sm-3 form-label">Teléfono</label>
+      <div class="col-sm-9">
+        <input [textMask]="{mask: maskPhone}" class="form-control" type="text" id="telefono" name="telefono" formControlName="telefono"
+          [ngClass]="{'is-invalid': form.get('telefono').invalid  && (form.get('telefono').dirty || form.get('telefono').touched )}">
+        <div class="invalid-feedback">Proporcione número del vendedor</div>
+      </div>
+    </div>
+
+  </form>
+
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button type="button" [mat-dialog-close]="false">CERRAR</button>
+  <button mat-button type="submit" form="id_form" [disabled]="form.invalid" color="primary">GUARDAR</button>
+</div>

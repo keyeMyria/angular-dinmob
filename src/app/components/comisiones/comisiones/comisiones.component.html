@@ -50,6 +50,11 @@
                             <th>Monto</th>
                             <th>Fecha</th>
                             <th>Destinatario</th>
+                            <th class="text-right ws-nowrap">
+                              <button mat-button class="no-min" (click)="nuevoPago()">
+                                <i class="fa fa-plus"></i>
+                              </button>
+                            </th>
                           </tr>
                         </thead>
                         <tbody>
@@ -57,6 +62,16 @@
                             <td>{{pago.monto}}</td>
                             <td>{{pago.fecha}}</td>
                             <td>{{pago.destinatario}}</td>
+                            <td class="text-right ws-nowrap">
+
+                              <button mat-button class="no-min" (click)="editarPago(pago)">
+                                <i class="fa fa-pencil"></i>
+                              </button>
+                              <button mat-button class="no-min" (click)="delPago(pago)">
+                                <i class="fa fa-times"></i>
+                              </button>
+
+                            </td>
                           </tr>
                           <!--    <tr *ngIf="seccion.colonias && seccion.colonias.length==0">
                           <td style="padding-left: 55px">Ninguna colonia encontrada</td>
