@@ -113,9 +113,15 @@ export class ClientesService {
   }
 
   //ok
-  asociarClienteLote(id_cliente, id_lote) {
-    return this.http.post(this.url + 'asociar_cliente_lote/' + id_cliente, { id_lote: id_lote })
-      .pipe(catchError(this.handleError("asociarClienteLote")));
+  addCompra(id_cliente, id_lote) {
+    return this.http.post(this.url + 'add_compra/' + id_cliente, { id_lote: id_lote })
+      .pipe(catchError(this.handleError("addCompra")));
+  }
+
+  //ok
+  validarCompra(id_cliente, id_lote) {
+    return this.http.get(this.url + 'validar_compra/' + id_cliente + "/" + id_lote)
+      .pipe(catchError(this.handleError("validarCompra")));
   }
 
 

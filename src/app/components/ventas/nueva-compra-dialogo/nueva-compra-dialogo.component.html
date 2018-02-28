@@ -31,4 +31,5 @@
 <div mat-dialog-actions>
   <button mat-button type="button" [mat-dialog-close]="false">CERRAR</button>
   <button mat-button type="submit" form="id_form" [disabled]="form.invalid" color="primary">GUARDAR</button>
+  <button mat-button type="button" form="id_form" (click)="debug()">debug</button>
 </div>

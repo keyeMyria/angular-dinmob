@@ -3,6 +3,7 @@ import { ObrasService } from "app/services/obras.service";
 import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { ClientesService } from 'app/services/clientes.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-nueva-compra-dialogo',
@@ -28,7 +29,7 @@ export class NuevaCompraDialogoComponent implements OnInit {
   ) {
     this.form = this.fb.group({
       obra: ["", Validators.required],
-      lote: ["", Validators.required]
+      lote: ["", Validators.required, this.checkAsignadoYCancelado.bind(this)]
     });
   }
 
@@ -58,12 +59,27 @@ export class NuevaCompraDialogoComponent implements OnInit {
 
   }
 
+  checkAsignadoYCancelado(control: FormControl) {
+
+    return this.clienteSrv.validarCompra(this.data.id_cliente, control.value)
+
+      .map(res => {
+        if (!res.disponible) {
+          return { nodisponible: true };
+        }
+
+        return null;
+
+      });
+
+  }
+
 
   guardar() {
 
-    console.log("nuevo pago", this.form.value);
+    //console.log("nuevo compra", this.form.value);
     this.loading = true;
-    this.clienteSrv.asociarClienteLote(this.data.id_cliente, this.form.value.lote)
+    this.clienteSrv.addCompra(this.data.id_cliente, this.form.value.lote)
       .subscribe(compra => {
 
         console.log("compra", compra);
@@ -78,6 +94,13 @@ export class NuevaCompraDialogoComponent implements OnInit {
 
         this.dialogRef.close({ error: "Ha ocurrido un error de conexión. Inténtelo más tarde" });
       });
+
+  }
+
+  debug() {
+    console.log("formgroup", this.form);
+    console.log("value", this.form.value);
+    console.log("status", this.form.status);
 
   }
 
