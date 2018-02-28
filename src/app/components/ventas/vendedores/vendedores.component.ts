@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { CrearVendedorDialogoComponent } from '../crear-vendedor-dialogo/crear-vendedor-dialogo.component';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { EditarVendedorDialogoComponent } from '../editar-vendedor-dialogo/editar-vendedor-dialogo.component';
 import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component";
+import { VendedorService } from '../../../services/vendedor.service';
+import { of } from "rxjs/observable/of";
 
 @Component({
   selector: 'app-vendedores',
@@ -13,18 +15,14 @@ import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar
 export class VendedoresComponent implements OnInit {
   obras: any = [];
   obra_selected: string = "";
-  vendedores = [
-    { nombre: "Emilio", email: "emilio@hotmail.com", telefono: "9612160320" },
-    { nombre: "Emilio", email: "emilio@hotmail.com", telefono: "9612160320" },
-    { nombre: "Emilio", email: "emilio@hotmail.com", telefono: "9612160320" },
-    { nombre: "Emilio", email: "emilio@hotmail.com", telefono: "9612160320" }
-  ]
+  vendedores: any = [];
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private dialog: MatDialog,
     public snackBar: MatSnackBar,
+    private vendedorSrv: VendedorService
   ) { }
 
   ngOnInit() {
@@ -32,6 +30,19 @@ export class VendedoresComponent implements OnInit {
       .subscribe((data: { obras: any[] }) => {
         //console.log("resultado resolve ", data);
         this.obras = data.obras;
+      });
+
+    this.route.paramMap
+      .switchMap((params: ParamMap) => {
+        if (params.has("obra")) {
+          this.obra_selected = params.get("obra");
+          return this.vendedorSrv.getVendedores();
+        } else {
+          return of([]);
+        }
+      }).subscribe(vendedores => {
+        this.vendedores = vendedores;
+      }, (error) => {
       });
   }
 
@@ -48,7 +59,7 @@ export class VendedoresComponent implements OnInit {
   agregarVendedor() {
     let dialogRef = this.dialog.open(CrearVendedorDialogoComponent, {
       data: {
-
+        vendedores: this.vendedores
       },
       width: "500px"
     });
@@ -75,7 +86,8 @@ export class VendedoresComponent implements OnInit {
   editarVendedor(vendedor) {
     let dialogRef = this.dialog.open(EditarVendedorDialogoComponent, {
       data: {
-        vendedor: vendedor
+        vendedor: vendedor,
+        vendedores: this.vendedores
       },
       width: "500px"
     });
@@ -111,7 +123,32 @@ export class VendedoresComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
 
+        this.vendedorSrv.delVendedor(vendedor.id_vendedor)
+          .subscribe((res: any) => {
+            if (res.count === 1) {
 
+              let i = this.vendedores.indexOf(vendedor);
+              this.vendedores.splice(i, 1);
+
+
+              this.snackBar.open("Vendedor Eliminado", "", {
+                duration: 2000,
+                panelClass: ["bg-success", "text-white"]
+              });
+
+            } else {
+              this.snackBar.open("Ha ocurrido un error", "", {
+                duration: 3000,
+                panelClass: ["bg-danger", "text-white"]
+              });
+            }
+
+          }, (error) => {
+            this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+              duration: 3000,
+              panelClass: ["bg-danger", "text-white"]
+            });
+          });
 
 
       }

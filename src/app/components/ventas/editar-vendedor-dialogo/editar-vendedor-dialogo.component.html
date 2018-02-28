@@ -19,11 +19,10 @@
     </div>
 
     <div class="form-group row">
-      <label for="telefono" class="col-sm-3 form-label">Teléfono</label>
+      <label for="cel" class="col-sm-3 form-label">Teléfono</label>
       <div class="col-sm-9">
-        <input [textMask]="{mask: maskPhone}" class="form-control" type="text" id="telefono" name="telefono" formControlName="telefono"
-          [ngClass]="{'is-invalid': form.get('telefono').invalid  && (form.get('telefono').dirty || form.get('telefono').touched )}">
-        <div class="invalid-feedback">Proporcione número del vendedor</div>
+        <input [textMask]="{mask: maskPhone}" class="form-control" type="text" id="cel" name="cel" formControlName="cel" [ngClass]="{'is-invalid': form.get('cel').invalid  && (form.get('cel').dirty || form.get('cel').touched )}">
+        <div class="invalid-feedback">Proporcione un número de celular</div>
       </div>
     </div>
 

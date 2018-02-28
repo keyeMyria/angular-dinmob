@@ -196,6 +196,7 @@ import { EditarVendedorDialogoComponent } from './components/ventas/editar-vende
 import { TableroComisionesComponent } from './components/tablero-comisiones/tablero-comisiones.component';
 import { NuevoPagoComisionDialogoComponent } from './components/comisiones/nuevo-pago-comision-dialogo/nuevo-pago-comision-dialogo.component';
 import { EditarPagoComisionDialogoComponent } from './components/comisiones/editar-pago-comision-dialogo/editar-pago-comision-dialogo.component';
+import { VendedorService } from './services/vendedor.service';
 
 
 
@@ -437,6 +438,7 @@ export function getToken() {
     ReporteService,
     LoadingService,
     TrabajadorService,
+    VendedorService,
 
     ObrasUsuarioResolverService,
     UsuariosAlmacenistasResolverService,

@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { VendedorService } from '../../../services/vendedor.service';
 
 @Component({
   selector: 'app-crear-vendedor-dialogo',
@@ -15,11 +16,12 @@ export class CrearVendedorDialogoComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<CrearVendedorDialogoComponent>,
     private fb: FormBuilder,
+    private vendedorSrv: VendedorService
   ) {
     this.form = this.fb.group({
       nombre: ["", Validators.required],
-      email: ["", Validators.required],
-      telefono: ["", Validators.required],
+      email: [""],
+      cel: ["", Validators.required],
     });
   }
 
@@ -28,6 +30,15 @@ export class CrearVendedorDialogoComponent implements OnInit {
 
   guardar() {
     console.log("datos", this.form.value);
+    this.vendedorSrv.createVendedor(this.form.value)
+      .subscribe(vendedor => {
+        this.data.vendedores.push(vendedor);
+        this.dialogRef.close(true);
+
+      },
+        (error) => {
+          this.dialogRef.close({ error: "Ha ocurrido un error de conexión. Inténtelo más tarde" });
+        });
   }
 
 }
