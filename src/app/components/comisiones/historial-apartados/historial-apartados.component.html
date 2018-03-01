@@ -10,10 +10,43 @@
         </mat-form-field>
       </div>
 
+
+
       <div class="card">
         <div class="card-header">
           Historial Apartados
         </div>
+
+        <div class="form-inline mb-2 mt-2">
+
+          <div class="input-group mx-2">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Del</span>
+            </div>
+            <input class="form-control" placeholder="yyyy-mm-dd" type="text" [matDatepicker]="dpFechaDel">
+            <div class="input-group-append">
+              <button class="btn btn-secondary" type="button" (click)="dpFechaDel.open()">
+                <i class="fa fa-calendar"></i>
+              </button>
+            </div>
+            <mat-datepicker touchUi="true" #dpFechaDel></mat-datepicker>
+          </div>
+
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Al</span>
+            </div>
+            <input class="form-control" placeholder="yyyy-mm-dd" type="text" [matDatepicker]="dpFechaAl">
+            <div class="input-group-append">
+              <button class="btn btn-secondary" type="button" (click)="dpFechaAl.open()">
+                <i class="fa fa-calendar"></i>
+              </button>
+            </div>
+            <mat-datepicker touchUi="true" #dpFechaAl></mat-datepicker>
+          </div>
+
+        </div>
+
         <div>
           <div class="table-responsive">
             <table class="table table-striped table-align-middle">
