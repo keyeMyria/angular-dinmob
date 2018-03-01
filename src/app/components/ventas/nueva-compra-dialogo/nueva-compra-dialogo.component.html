@@ -13,7 +13,8 @@
     </div>
 
     <div class="form-group">
-      <label class="form-label" for="lote">Lote <i *ngIf="loading" class="fa fa-spinner fa-spin fa-fw"></i></label>
+      <!-- <i *ngIf="loading" class="fa fa-spinner fa-spin fa-fw"></i> -->
+      <label class="form-label" for="lote">Lote</label>
       <select class="form-control" name="lote" formControlName="lote" [ngClass]="{'is-invalid': form.get('lote').invalid  && (form.get('lote').dirty || form.get('lote').touched )}">
         <option value="">Seleccionar...</option>
         <ng-container *ngFor="let manzana of manzanas">
@@ -26,7 +27,7 @@
       <div class="invalid-feedback" *ngIf="form.get('lote').errors?.nodisponible">La compra de este lote está CANCELADA. Vuelva a activarla o seleccione otro lote</div>
     </div>
 
-    <div *ngIf="form.status=='PENDING'"><i *ngIf="loading" class="fa fa-spinner fa-spin fa-fw"></i> Validando...</div>
+    <!-- <div *ngIf="form.status=='PENDING'"><i *ngIf="loading" class="fa fa-spinner fa-spin fa-fw"></i> Validando...</div> -->
 
   </form>
 
