@@ -28,16 +28,16 @@
               <thead>
                 <tr>
                   <th>Nombre</th>
+                  <th>Celular</th>
                   <th>Email</th>
-                  <th>Teléfono</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let vendedor of vendedores">
                   <td>{{vendedor.nombre}}</td>
-                  <td>{{vendedor.email}}</td>
                   <td>{{vendedor.cel}}</td>
+                  <td>{{vendedor.email}}</td>
                   <td class="text-right ws-nowrap">
 
                     <button mat-button class="no-min" (click)="editarVendedor(vendedor)">
