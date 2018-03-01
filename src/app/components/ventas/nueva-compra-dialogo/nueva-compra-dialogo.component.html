@@ -22,8 +22,11 @@
 
       </select>
       <small class="fomr-text text-muted">Sólo se muestran los lotes en estado LIBRE</small>
-      <div class="invalid-feedback">Seleccione un lote</div>
+      <div class="invalid-feedback" *ngIf="form.get('lote').errors?.required">Seleccione un lote</div>
+      <div class="invalid-feedback" *ngIf="form.get('lote').errors?.nodisponible">La compra de este lote está CANCELADA. Vuelva a activarla o seleccione otro lote</div>
     </div>
+
+    <div *ngIf="form.status=='PENDING'"><i *ngIf="loading" class="fa fa-spinner fa-spin fa-fw"></i> Validando...</div>
 
   </form>
 
