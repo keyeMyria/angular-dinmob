@@ -212,6 +212,7 @@ export class EditarClienteComponent implements OnInit {
       notas_cancelacion: null,
       fecha_entrega_fisica: null,
       comentarios_entrega_fisica: null,
+      expediente_completo: null
     });
 
     this.formLote = this.fb.group({
@@ -280,6 +281,7 @@ export class EditarClienteComponent implements OnInit {
     if (this.selection.selected.length > 0) {
       this.compra_selected = this.selection.selected[0];
       this.formInmueble.patchValue(this.compra_selected);
+      /* this.formInmueble.get("expediente completo").setValue(this.compra_selected.expediente_completo== "1" ? true : false); */
       this.formLote.patchValue(this.compra_selected);
 
     } else {
