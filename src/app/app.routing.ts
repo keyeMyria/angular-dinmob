@@ -321,14 +321,15 @@ export const ROUTES: Routes = [
                     obras: ObrasUsuarioResolverService
                 }
             },
-            { 
+            {
                 path: 'vendedores', component: VendedoresComponent,
                 resolve: {
                     obras: ObrasUsuarioResolverService
                 }
-             },
+            },
             { path: 'crear-vendedor-dialogos', component: CrearVendedorDialogoComponent },
-            { path: 'editar-vendedor-dialogos', component: EditarVendedorDialogoComponent }
+            { path: 'editar-vendedor-dialogos', component: EditarVendedorDialogoComponent },
+            { path: 'instituciones-credito', component: InstitucionesCreditoComponent }
 
 
 
