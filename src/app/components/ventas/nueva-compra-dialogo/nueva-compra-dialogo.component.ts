@@ -41,14 +41,14 @@ export class NuevaCompraDialogoComponent implements OnInit {
     console.log("cargar obra", id_obra);
 
     if (id_obra) {
-      this.loading = true;
+      //this.loading = true;
       this.obraSrv.getLotesEnVentaLibres(id_obra)
         .subscribe(obra => {
-          console.log("getLotes", obra.manzanas);
+          //console.log("getLotes", obra.manzanas);
           this.manzanas = obra.manzanas;
-          this.loading = false;
+          //this.loading = false;
         }, (error) => {
-          this.loading = false;
+          //this.loading = false;
         });
 
     } else {
