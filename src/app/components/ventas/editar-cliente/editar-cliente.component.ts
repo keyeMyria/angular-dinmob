@@ -351,7 +351,7 @@ export class EditarClienteComponent implements OnInit {
       compra.valor_operacion = compra.valor_operacion.replace(/,/g, "");
     }
 
-    this.clienteSrv.updateCompra(this.compra_selected.id_cliente, this.compra_selected.id_lote, compra)
+    this.clienteSrv.updateCompra(this.compra_selected.id_compra, compra)
       .subscribe(compra => {
         let i = this.compras.indexOf(this.compra_selected);
         this.compras[i] = compra;

@@ -88,8 +88,8 @@ export class ClientesService {
   }
 
   //ok
-  updateCompra(id_cliente, id_lote, compra) {
-    return this.http.post(this.url + 'update_compra/' + id_cliente + "/" + id_lote, { compra: compra })
+  updateCompra(id_compra, compra) {
+    return this.http.post(this.url + 'update_compra/' + id_compra, { compra: compra })
       .pipe(catchError(this.handleError("updateCompra")));
   }
 

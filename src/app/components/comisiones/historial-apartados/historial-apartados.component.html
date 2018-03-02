@@ -56,22 +56,22 @@
                 <tr>
                   <th>Manzana</th>
                   <th>Lote</th>
-                  <th>Fecha Pago</th>
-                  <th>Asesor</th>
                   <th>Fecha</th>
+                  <th>Apartado</th>
+                  <th>Vendedor</th>
                   <th>Valor Operación</th>
                   <th>Cliente</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                <tr *ngFor="let apartado of apartados">
+                  <td class="ws-nowrap">{{apartado.manzana}}</td>
+                  <td class="ws-nowrap">{{apartado.lote}}</td>
+                  <td class="ws-nowrap">{{apartado.fecha_pago| date:'mediumDate':'':'es'}}</td>
+                  <td>{{apartado.monto|currency}}</td>
+                  <td>{{apartado.vendedor}}</td>
+                  <td>{{apartado.valor_operacion|currency}}</td>
+                  <td>{{apartado.cliente}}</td>
                 </tr>
               </tbody>
             </table>
