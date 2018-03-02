@@ -16,7 +16,7 @@
         </div>
         <div>
           <div class="table-responsive">
-            <table class="table my-table-sm table-align-middle">
+            <table class="table table-align-middle">
               <thead>
                 <tr>
                   <th style="width:40px"></th>
@@ -31,20 +31,20 @@
 
               <tbody>
                 <ng-container *ngFor="let comision of comisiones">
-                  <tr>
+                  <tr [ngClass]="{'table-primary':comision.more}">
                     <td style="cursor:pointer" (click)="verComisiones(comision);comision.more= !comision.more">
                       <i class="fa" [ngClass]="{'fa-plus':!comision.more, 'fa-minus':comision.more}"></i>
                     </td>
                     <td>{{comision.manzana}}</td>
                     <td>{{comision.lote}}</td>
-                    <td>{{comision.valor_operacion}}</td>
+                    <td>{{comision.valor_operacion|currency}}</td>
                     <td>{{comision.vendedor}}</td>
                     <td>{{comision.gerente}}</td>
                     <td>{{comision.expediente}}</td>
                   </tr>
                   <tr [hidden]="!comision.more">
                     <td colspan="7" class="p-0">
-                      <table class="table table-striped mb-0">
+                      <table class="table table-striped table-sm table-align-middle mb-0">
                         <thead>
                           <tr>
                             <th>Monto</th>
@@ -58,6 +58,11 @@
                           </tr>
                         </thead>
                         <tbody>
+
+                          <tr *ngIf="!comision.pagos.length">
+                            <td colspan="4" class="text-center">Ningún pago realizado</td>
+                          </tr>
+
                           <tr *ngFor="let pago of comision.pagos">
                             <td>{{pago.monto}}</td>
                             <td>{{pago.fecha}}</td>

@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { NuevoPagoComisionDialogoComponent } from '../nuevo-pago-comision-dialogo/nuevo-pago-comision-dialogo.component';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { EditarPagoComisionDialogoComponent } from '../editar-pago-comision-dialogo/editar-pago-comision-dialogo.component';
 import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component";
+import { ComisionService } from '../../../services/comision.service';
+import { of } from "rxjs/observable/of";
+
 
 @Component({
   selector: 'app-comisiones',
@@ -13,7 +16,9 @@ import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar
 export class ComisionesComponent implements OnInit {
   obras: any = [];
   obra_selected: string = "";
-  comisiones = [
+  comisiones: any = [];
+  /*
+   [
     {
       manzana: "1Mzn", lote: "Lote 1", valor_operacion: "1000", vendedor: "1000", gerente: "2000", expediente: "5000",
       pagos: [
@@ -52,6 +57,7 @@ export class ComisionesComponent implements OnInit {
     },
     { manzana: "1Mzn", lote: "Lote 1", valor_operacion: "1000", vendedor: "1000", gerente: "2000", expediente: "5000" }
   ];
+  */
 
 
 
@@ -60,13 +66,26 @@ export class ComisionesComponent implements OnInit {
     private route: ActivatedRoute,
     private dialog: MatDialog,
     public snackBar: MatSnackBar,
+    private comisionSrv: ComisionService
   ) { }
 
   ngOnInit() {
     this.route.data
       .subscribe((data: { obras: any[] }) => {
-        //console.log("resultado resolve ", data);
         this.obras = data.obras;
+      });
+
+    this.route.paramMap
+      .switchMap((params: ParamMap) => {
+        if (params.has("obra")) {
+          this.obra_selected = params.get("obra");
+          return this.comisionSrv.getComisionesObra(params.get("obra"));
+        } else {
+          return of([]);
+        }
+      }).subscribe(comisiones => {
+        this.comisiones = comisiones;
+      }, (error) => {
       });
 
 
@@ -90,7 +109,7 @@ export class ComisionesComponent implements OnInit {
 
     let dialogRef = this.dialog.open(NuevoPagoComisionDialogoComponent, {
       data: {
-        
+
       },
       width: "500px"
     });
