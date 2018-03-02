@@ -31,12 +31,12 @@
 
               <tbody>
                 <ng-container *ngFor="let comision of comisiones">
-                  <tr [ngClass]="{'table-primary':comision.more}">
-                    <td style="cursor:pointer" (click)="verComisiones(comision);comision.more= !comision.more">
+                  <tr [ngClass]="{'table-primary':comision.more}" (click)="verComisiones(comision);comision.more= !comision.more"> 
+                    <td style="cursor:pointer" >
                       <i class="fa" [ngClass]="{'fa-plus':!comision.more, 'fa-minus':comision.more}"></i>
                     </td>
-                    <td>{{comision.manzana}}</td>
-                    <td>{{comision.lote}}</td>
+                    <td class="ws-nowrap">{{comision.manzana}}</td>
+                    <td class="ws-nowrap">{{comision.lote}}</td>
                     <td>{{comision.valor_operacion|currency}}</td>
                     <td>{{comision.vendedor}}</td>
                     <td>{{comision.gerente}}</td>
