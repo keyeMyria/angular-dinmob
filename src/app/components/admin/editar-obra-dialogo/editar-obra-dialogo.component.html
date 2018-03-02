@@ -29,6 +29,21 @@
     </div>
 
     <div class="form-group">
+      <label class="col-form-label">Comisión Vendedor (%)</label>
+      <input [textMask]="{mask: numberMask}" type="text" class="form-control" formControlName="comision_vendedor">
+    </div>
+
+    <div class="form-group">
+      <label class="col-form-label">Comision Generente (%)</label>
+      <input [textMask]="{mask: numberMask}" type="text" class="form-control" formControlName="comision_gerente">
+    </div>
+
+    <div class="form-group">
+      <label class="col-form-label">Comisión Expediente (%)</label>
+      <input [textMask]="{mask: numberMask}" type="text" class="form-control" formControlName="comision_expediente">
+    </div>
+
+    <div class="form-group">
 
       <mat-slide-toggle formControlName="en_venta">
         En Venta

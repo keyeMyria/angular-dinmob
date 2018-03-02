@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { LoginComponent } from 'app/components/login/login.component';
 import { LotesService } from 'app/services/lotes.service';
+import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 
 @Component({
   selector: 'app-agregar-lote-dialogo',
@@ -12,6 +13,12 @@ import { LotesService } from 'app/services/lotes.service';
 export class AgregarLoteDialogoComponent implements OnInit {
 
   formLote: FormGroup;
+  numberMask = createNumberMask({
+    allowDecimal: true,
+    prefix: '',
+    decimalLimit: 2,
+  });
+
 
 
   constructor(
@@ -25,7 +32,10 @@ export class AgregarLoteDialogoComponent implements OnInit {
       nombre: ["", [Validators.required, Validators.maxLength(30)]],
       ini: ["", Validators.required],
       fin: "",
-      prefijo: ["Lote", [Validators.required, Validators.maxLength(30)]]
+      prefijo: ["Lote", [Validators.required, Validators.maxLength(30)]],
+      comision_vendedor: "1.25",
+      comision_gerente: "0.25",
+      comision_expediente: "0.25"
     });
 
     this.formLote.get("fin").setValidators([Validators.required, this.checkLoteFin.bind(this.formLote)]);
@@ -89,17 +99,17 @@ export class AgregarLoteDialogoComponent implements OnInit {
           this.dialogRef.close(true);
 
         }, (error) => {
-          this.dialogRef.close({error:"Ha ocurrido un error de conexión. Inténtelo más tarde"});
+          this.dialogRef.close({ error: "Ha ocurrido un error de conexión. Inténtelo más tarde" });
         });
 
     } else {
-     
+
       this.loteSrv.addLoteByNumero(this.formLote.value.prefijo, this.formLote.value.ini, this.formLote.value.fin, this.data.manzana.id_manzana)
         .subscribe(lotes => {
           this.data.manzana.lotes.push(...lotes);
           this.dialogRef.close(true);
         }, (error) => {
-          this.dialogRef.close({error:"Ha ocurrido un error de conexión. Inténtelo más tarde"});
+          this.dialogRef.close({ error: "Ha ocurrido un error de conexión. Inténtelo más tarde" });
         });
     }
 

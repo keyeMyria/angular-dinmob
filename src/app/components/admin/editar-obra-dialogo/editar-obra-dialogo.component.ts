@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
 import { ObrasService } from 'app/services/obras.service';
-
+import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import * as moment from 'moment';
 
 
@@ -14,6 +14,12 @@ import * as moment from 'moment';
 export class EditarObraDialogoComponent implements OnInit {
 
   form: FormGroup;
+  numberMask = createNumberMask({
+    allowDecimal: true,
+    prefix: '',
+    decimalLimit: 2,
+  });
+
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -30,6 +36,9 @@ export class EditarObraDialogoComponent implements OnInit {
       residentes: this.fb.array([], this.checkUsuariosRepetidos),
       control_almacen: this.fb.array([], this.checkUsuariosRepetidos),
       almacenistas: this.fb.array([], this.checkUsuariosRepetidos),
+      comision_vendedor: [data.obra.comision_vendedor],
+      comision_gerente: [data.obra.comision_gerente],
+      comision_expediente: [data.obra.comision_expediente]
     });
 
     this.data.obra.residentes.forEach(usuario => {
@@ -65,13 +74,13 @@ export class EditarObraDialogoComponent implements OnInit {
   }
 
 
-  get residentes(): FormArray{
+  get residentes(): FormArray {
     return this.form.get('residentes') as FormArray;
   }
-  get almacenistas(): FormArray{
+  get almacenistas(): FormArray {
     return this.form.get('almacenistas') as FormArray;
   }
-  get control_almacen(): FormArray{
+  get control_almacen(): FormArray {
     return this.form.get('control_almacen') as FormArray;
   }
 
