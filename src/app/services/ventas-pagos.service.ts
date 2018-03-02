@@ -25,6 +25,12 @@ export class VentasPagosService {
   }
 
   //ok
+  getApartadosObra(id_obra) {
+    return this.http.get(this.url + 'get_apartados_obra/' + id_obra)
+      .pipe(catchError(this.handleError("getApartadosObra")));
+  }
+
+  //ok
   createPago(pago) {
     return this.http.post(this.url + 'create_pago/', { pago: pago })
       .pipe(catchError(this.handleError("createPago")));

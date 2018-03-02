@@ -50,8 +50,10 @@ export class NuevoPagoDialogoComponent implements OnInit {
   guardar() {
     let frmPago = this.clonar(this.form.value);
     frmPago.monto = frmPago.monto.replace(/,/g, "");
-    frmPago.id_cliente = this.data.compra.id_cliente;
-    frmPago.id_lote = this.data.compra.id_lote;
+    //frmPago.id_cliente = this.data.compra.id_cliente;
+    //frmPago.id_lote = this.data.compra.id_lote;
+    frmPago.id_compra = this.data.compra.id_compra;
+
 
     //console.log("nuevo pago", frmPago);
     this.pagoSrv.createPago(frmPago)
