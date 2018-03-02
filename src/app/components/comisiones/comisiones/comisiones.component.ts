@@ -17,6 +17,7 @@ export class ComisionesComponent implements OnInit {
   obras: any = [];
   obra_selected: string = "";
   comisiones: any = [];
+  vendedores: any = [];
   /*
    [
     {
@@ -71,8 +72,10 @@ export class ComisionesComponent implements OnInit {
 
   ngOnInit() {
     this.route.data
-      .subscribe((data: { obras: any[] }) => {
+      .subscribe((data: { obras: any[], vendedores: any[] }) => {
         this.obras = data.obras;
+        this.vendedores = data.vendedores;
+
       });
 
     this.route.paramMap
@@ -105,11 +108,12 @@ export class ComisionesComponent implements OnInit {
   verComisiones(comision) {
   }
 
-  nuevoPago(comsion) {
+  nuevoPago(comision) {
 
     let dialogRef = this.dialog.open(NuevoPagoComisionDialogoComponent, {
       data: {
-
+        vendedores: this.vendedores,
+        comision: comision
       },
       width: "500px"
     });
@@ -136,7 +140,8 @@ export class ComisionesComponent implements OnInit {
   editarPago(pago) {
     let dialogRef = this.dialog.open(EditarPagoComisionDialogoComponent, {
       data: {
-        pago: pago
+        pago: pago,
+        vendedores: this.vendedores,
       },
       width: "500px"
     });
@@ -173,7 +178,32 @@ export class ComisionesComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
 
+        this.comisionSrv.delPago(pago.id_pago)
+          .subscribe((res: any) => {
+            if (res.count === 1) {
 
+              let i = this.comisiones.pago.indexOf(pago);
+              this.comisiones.pago.splice(i, 1);
+
+
+              this.snackBar.open("Pago Eliminado", "", {
+                duration: 2000,
+                panelClass: ["bg-success", "text-white"]
+              });
+
+            } else {
+              this.snackBar.open("Ha ocurrido un error", "", {
+                duration: 3000,
+                panelClass: ["bg-danger", "text-white"]
+              });
+            }
+
+          }, (error) => {
+            this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+              duration: 3000,
+              panelClass: ["bg-danger", "text-white"]
+            });
+          });
 
 
       }
