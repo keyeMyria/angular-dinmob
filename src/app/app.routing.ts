@@ -314,7 +314,8 @@ export const ROUTES: Routes = [
             {
                 path: 'historial-apartados', component: HistorialApartadosComponent,
                 resolve: {
-                    obras: ObrasUsuarioResolverService
+                    obras: ObrasUsuarioResolverService,
+                    vendedores: VendedoresResolverService
                 }
             },
             {

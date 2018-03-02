@@ -137,9 +137,10 @@ export class ComisionesComponent implements OnInit {
     });
   }
 
-  editarPago(pago) {
+  editarPago(pago, comision) {
     let dialogRef = this.dialog.open(EditarPagoComisionDialogoComponent, {
       data: {
+        comision: comision,
         pago: pago,
         vendedores: this.vendedores,
       },
@@ -165,7 +166,7 @@ export class ComisionesComponent implements OnInit {
     });
   }
 
-  delPago(pago) {
+  delPago(pago, comision) {
 
     let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
       data: {
@@ -180,10 +181,10 @@ export class ComisionesComponent implements OnInit {
 
         this.comisionSrv.delPago(pago.id_pago)
           .subscribe((res: any) => {
-            if (res.count === 1) {
+            if (res.count == 1) {
 
-              let i = this.comisiones.pago.indexOf(pago);
-              this.comisiones.pago.splice(i, 1);
+              let i = comision.pagos.indexOf(pago);
+              comision.pagos.splice(i, 1);
 
 
               this.snackBar.open("Pago Eliminado", "", {

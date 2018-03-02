@@ -41,7 +41,7 @@ export class EditarPagoComisionDialogoComponent implements OnInit {
     this.comisionSrv.updatePago(this.data.pago.id_pago, this.form.value)
       .subscribe(pago => {
 
-        let i = this.data.comision.pagos.indexOf(this.data.trabajador);
+        let i = this.data.comision.pagos.indexOf(this.data.pago);
         this.data.comision.pagos[i] = pago;
         this.dialogRef.close(true);
 

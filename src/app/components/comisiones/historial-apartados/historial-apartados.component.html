@@ -46,6 +46,13 @@
           </div>
           <mat-datepicker touchUi="true" #dpFechaAl></mat-datepicker>
 
+          <div class="form-group ml-2">
+            <select class="form-control">
+              <option value="">Todos</option>
+              <option [value]="id_vendedor" *ngFor="let vendedor of vendedores">{{vendedor.nombre}}</option>
+            </select>
+          </div>
+
 
         </div>
 

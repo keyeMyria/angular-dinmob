@@ -13,6 +13,7 @@ export class HistorialApartadosComponent implements OnInit {
   obras: any = [];
   obra_selected: string = "";
   apartados: any = [];
+  vendedores: any = [];
 
   constructor(
     private router: Router,
@@ -23,8 +24,9 @@ export class HistorialApartadosComponent implements OnInit {
 
   ngOnInit() {
     this.route.data
-      .subscribe((data: { obras: any[] }) => {
+      .subscribe((data: { obras: any[], vendedores: any[] }) => {
         this.obras = data.obras;
+        this.vendedores = data.vendedores;
       });
 
     this.route.paramMap
