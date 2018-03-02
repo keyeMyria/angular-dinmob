@@ -320,7 +320,8 @@ export const ROUTES: Routes = [
             {
                 path: 'comisiones', component: ComisionesComponent,
                 resolve: {
-                    obras: ObrasUsuarioResolverService
+                    obras: ObrasUsuarioResolverService,
+                    vendedores: VendedoresResolverService
                 }
             },
             {
