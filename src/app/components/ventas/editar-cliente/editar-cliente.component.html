@@ -872,6 +872,7 @@
               <th>Estado</th>
               <th>Activación</th>
               <th>Cancelación</th>
+              <!-- -->
               <th class="text-right" style="width:66px">
                 <button mat-icon-button (click)="nuevaCompra()" matTooltip="Nueva Compra">
                   <mat-icon>add</mat-icon>
@@ -881,6 +882,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let compra of compras" class="pointer" (click)="selectCompra(compra)" [ngClass]="{'table-primary':selection.isSelected(compra)}">
+              <!-- style="overflow: visible" -->
               <td>
                 <mat-checkbox class="pl-2" (click)="$event.stopPropagation()" (change)="$event ? selectCompra(compra) : null" [checked]="selection.isSelected(compra)"></mat-checkbox>
               </td>
@@ -921,7 +923,6 @@
         </table>
       </div>
 
-      <!-- <button class="btn btn-outline-dark" (click)="showSelection()">show selection</button> -->
 
       <!-- propiedades del lote -->
       <div class="card text-white bg-secondary px-3 my-3">
@@ -967,13 +968,15 @@
       </div>
 
       <!-- propiedades de la compra -->
-      <form [formGroup]="formInmueble" (ngSubmit)="guardarInmueble()">
+      <form [formGroup]="formInmueble" class="pt-3" (ngSubmit)="guardarInmueble()">
         <fieldset [disabled]="selection.isEmpty()">
 
           <div class="form-group row">
             <div class="col-sm-9 offset-sm-3">
               <mat-checkbox formControlName="expediente_completo">Expediente Completo</mat-checkbox>
+              <small class="d-block text-muted">Indica si la venta se incorpora al módulo de Comisiones</small>
             </div>
+
           </div>
 
           <div class="form-group row">
@@ -1080,6 +1083,17 @@
             <label class="col-form-label col-sm-3">Asesor Inmobiliario</label>
             <div class="col-sm-9">
               <input type="text" class="form-control" name="asesor_inmobiliario" formControlName="asesor_inmobiliario">
+            </div>
+          </div>
+
+
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">Vendedor</label>
+            <div class="col-sm-9">
+              <select class="form-control" name="id_vendedor" formControlName="id_vendedor">
+                <option [value]="">Seleccionar...</option>
+                <option *ngFor="let v of vendedores" [value]="v.id_vendedor">{{v.nombre}}</option>
+              </select>
             </div>
           </div>
 

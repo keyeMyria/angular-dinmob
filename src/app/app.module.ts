@@ -197,6 +197,8 @@ import { TableroComisionesComponent } from './components/tablero-comisiones/tabl
 import { NuevoPagoComisionDialogoComponent } from './components/comisiones/nuevo-pago-comision-dialogo/nuevo-pago-comision-dialogo.component';
 import { EditarPagoComisionDialogoComponent } from './components/comisiones/editar-pago-comision-dialogo/editar-pago-comision-dialogo.component';
 import { VendedorService } from './services/vendedor.service';
+import { VendedoresResolverService } from './resolvers/vendedores-resolver.service';
+import { ComisionService } from './services/comision.service';
 
 
 
@@ -439,6 +441,7 @@ export function getToken() {
     LoadingService,
     TrabajadorService,
     VendedorService,
+    ComisionService,
 
     ObrasUsuarioResolverService,
     UsuariosAlmacenistasResolverService,
@@ -452,7 +455,8 @@ export function getToken() {
     TiposPagoResolverService,
     TiposOperacionResolverService,
     UsuarioLoggedResolverService,
-    EspecialidadesTrabajadorResolverService
+    EspecialidadesTrabajadorResolverService,
+    VendedoresResolverService
 
   ],
   bootstrap: [AppComponent]

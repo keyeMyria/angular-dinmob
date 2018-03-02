@@ -53,6 +53,7 @@ export class EditarClienteComponent implements OnInit {
   tipos_pago: any[] = [];
   estados: any[] = [];
   asesores: any = [];
+  vendedores: any = [];
 
   //selector de compras
   selection = new SelectionModel<any>(false);
@@ -208,6 +209,7 @@ export class EditarClienteComponent implements OnInit {
       fecha_entrega: null,
       asesor_inmobiliario: null,
       id_asesor: null,
+      id_vendedor:null,
       notas_escrituracion: null,
       notas_cancelacion: null,
       fecha_entrega_fisica: null,
@@ -226,7 +228,7 @@ export class EditarClienteComponent implements OnInit {
   ngOnInit() {
 
     this.route.data
-      .subscribe((data: { obras: any[], formas_pago: any[], instituciones_credito: any[], tipos_operacion: any[], tipos_pago: any[], estados: any[] }) => {
+      .subscribe((data: { obras: any[], formas_pago: any[], instituciones_credito: any[], tipos_operacion: any[], tipos_pago: any[], estados: any[], vendedores:any}) => {
         //console.log("resultado resolve ", data);
         this.obras = data.obras;
         this.formas_pago = data.formas_pago;
@@ -234,6 +236,7 @@ export class EditarClienteComponent implements OnInit {
         this.tipos_operacion = data.tipos_operacion;
         this.tipos_pago = data.tipos_pago;
         this.estados = data.estados;
+        this.vendedores=data.vendedores;
       });
 
 
@@ -274,14 +277,15 @@ export class EditarClienteComponent implements OnInit {
   //selecciona la compra seleccionada
   selectCompra(compra) {
 
-    //this.selection.isEmpty();
-    //this.selection.hasValue();
 
     this.selection.toggle(compra);
     if (this.selection.selected.length > 0) {
       this.compra_selected = this.selection.selected[0];
+
       this.formInmueble.patchValue(this.compra_selected);
-      /* this.formInmueble.get("expediente completo").setValue(this.compra_selected.expediente_completo== "1" ? true : false); */
+      this.formInmueble.get("expediente_completo").setValue(this.compra_selected.expediente_completo == "1" ? true : false);
+      console.log("expediente_completo", this.compra_selected.expediente_completo, this.formInmueble.get("expediente_completo"));
+
       this.formLote.patchValue(this.compra_selected);
 
     } else {
@@ -355,6 +359,7 @@ export class EditarClienteComponent implements OnInit {
         this.selection.select(this.compras[i]);
         this.compra_selected = this.selection.selected[0];
         this.formInmueble.patchValue(this.compra_selected);
+        this.formInmueble.get("expediente_completo").setValue(this.compra_selected.expediente_completo == "1" ? true : false);
         this.formLote.patchValue(this.compra_selected);
 
 

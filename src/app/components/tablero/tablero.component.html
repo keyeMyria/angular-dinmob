@@ -3,7 +3,7 @@
 
     <div class="col-12 col-md-6 col-lg-6 p-2">
       <a class="no-decoration" routerLink="/tablero-admin">
-        <mat-card class="d-flex align-items-center card-pointer">
+        <mat-card class="d-flex align-items-center ">
           <mat-card-title class="mb-0">Administración</mat-card-title>
           <span class="spacer"></span>
           <i class="material-icons icono-tablero">folder_shared</i>
@@ -13,10 +13,20 @@
 
     <div class="col-12 col-md-6 col-lg-6 p-2">
       <a class="no-decoration" routerLink="/tablero-ventas">
-        <mat-card class="d-flex align-items-center card-pointer">
+        <mat-card class="d-flex align-items-center ">
           <mat-card-title class="mb-0">Ventas</mat-card-title>
           <span class="spacer"></span>
           <i class="material-icons icono-tablero">assignment_returned</i>
+        </mat-card>
+      </a>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-6 p-2">
+      <a class="no-decoration" routerLink="/tablero-comisiones">
+        <mat-card class="d-flex align-items-center">
+          <mat-card-title class="mb-0">Comisiones</mat-card-title>
+          <span class="spacer"></span>
+          <i class="material-icons icono-tablero">compare_arrows</i>
         </mat-card>
       </a>
     </div>
@@ -41,15 +51,7 @@
       </a>
     </div>
 
-    <div class="col-12 col-md-6 col-lg-6 p-2">
-      <a class="no-decoration" routerLink="/tablero-comisiones">
-        <mat-card class="d-flex align-items-center text-muted">
-          <mat-card-title class="mb-0">Comisiones</mat-card-title>
-          <span class="spacer"></span>
-          <i class="material-icons icono-tablero text-muted">compare_arrows</i>
-        </mat-card>
-      </a>
-    </div>
+
 
 
 
@@ -61,7 +63,7 @@
 
     <!-- 
     <div class="col-12 col-md-6 col-lg-4 p-2">
-      <mat-card class="d-flex align-items-center card-pointer" (click)="gotoClientes()">
+      <mat-card class="d-flex align-items-center " (click)="gotoClientes()">
         <mat-card-title class="mb-0">Clientes</mat-card-title>
         <span class="spacer"></span>
         <i class="material-icons icono-tablero">contacts</i>
@@ -69,7 +71,7 @@
     </div>
 
     <div class="col-12 col-md-6 col-lg-4 p-2">
-      <mat-card class="d-flex align-items-center card-pointer" (click)="gotoTrabajadores()">
+      <mat-card class="d-flex align-items-center " (click)="gotoTrabajadores()">
         <mat-card-title class="mb-0">Trabajadores</mat-card-title>
         <span class="spacer"></span>
         <i class="material-icons icono-tablero">supervisor_account</i>
@@ -77,7 +79,7 @@
     </div>
 
     <div class="col-12 col-md-6 col-lg-4 p-2">
-      <mat-card class="d-flex align-items-center card-pointer" (click)="gotoUsuarios()">
+      <mat-card class="d-flex align-items-center " (click)="gotoUsuarios()">
         <mat-card-title class="mb-0">Usuarios</mat-card-title>
         <span class="spacer"></span>
         <i class="material-icons icono-tablero">group_add</i>
@@ -85,7 +87,7 @@
     </div>
 
     <div class="col-12 col-md-6 col-lg-4 p-2">
-      <mat-card class="d-flex align-items-center card-pointer" (click)="gotoObras()">
+      <mat-card class="d-flex align-items-center " (click)="gotoObras()">
         <mat-card-title class="mb-0">Obras</mat-card-title>
         <span class="spacer"></span>
         <i class="material-icons icono-tablero">list</i>
@@ -93,7 +95,7 @@
     </div>
 
     <div class="col-12 col-md-6 col-lg-4 p-2">
-      <mat-card class="d-flex align-items-center card-pointer" (click)="gotoPrototipo()">
+      <mat-card class="d-flex align-items-center " (click)="gotoPrototipo()">
         <mat-card-title class="mb-0">Prototipos</mat-card-title>
         <span class="spacer"></span>
         <i class="material-icons icono-tablero">donut_large</i>
@@ -101,7 +103,7 @@
     </div>
 
     <div class="col-12 col-md-6 col-lg-4 p-2">
-      <mat-card class="d-flex align-items-center card-pointer" (click)="gotoDesarrollos()">
+      <mat-card class="d-flex align-items-center " (click)="gotoDesarrollos()">
         <mat-card-title class="mb-0">Desarrollos</mat-card-title>
         <span class="spacer"></span>
         <i class="material-icons icono-tablero">assignment_turned_in</i>
@@ -109,7 +111,7 @@
     </div>
 
     <div class="col-12 col-md-6 col-lg-4 p-2">
-      <mat-card class="d-flex align-items-center card-pointer" (click)="gotoEstructura()">
+      <mat-card class="d-flex align-items-center " (click)="gotoEstructura()">
         <mat-card-title class="mb-0">Estructura Obra</mat-card-title>
         <span class="spacer"></span>
         <i class="material-icons icono-tablero">business</i>
@@ -117,7 +119,7 @@
     </div>
 
     <div class="col-12 col-md-6 col-lg-4 p-2">
-      <mat-card class="d-flex align-items-center card-pointer" (click)="gotoAlertaClientes()">
+      <mat-card class="d-flex align-items-center " (click)="gotoAlertaClientes()">
         <mat-card-title class="mb-0">Alerta Clientes</mat-card-title>
         <span class="spacer"></span>
         <i class="material-icons icono-tablero">notifications</i>
@@ -125,7 +127,7 @@
     </div>
 
     <div class="col-12 col-md-6 col-lg-4 p-2">
-      <mat-card class="d-flex align-items-center card-pointer" (click)="gotoClienteSinLote()">
+      <mat-card class="d-flex align-items-center " (click)="gotoClienteSinLote()">
         <mat-card-title class="mb-0">Clientes Sin Lote</mat-card-title>
         <span class="spacer"></span>
         <i class="material-icons icono-tablero">person_outline</i>
@@ -133,7 +135,7 @@
     </div>
 
     <div class="col-12 col-md-6 col-lg-4 p-2">
-      <mat-card class="d-flex align-items-center card-pointer" (click)="gotoMapas()">
+      <mat-card class="d-flex align-items-center " (click)="gotoMapas()">
         <mat-card-title class="mb-0">Mapas Ventas</mat-card-title>
         <span class="spacer"></span>
         <i class="material-icons icono-tablero">map</i>
@@ -141,7 +143,7 @@
     </div>
 
     <div class="col-12 col-md-6 col-lg-4 p-2">
-      <mat-card class="d-flex align-items-center card-pointer" (click)="gotoEstadisticas()">
+      <mat-card class="d-flex align-items-center " (click)="gotoEstadisticas()">
         <mat-card-title class="mb-0">Estadisticas Ventas</mat-card-title>
         <span class="spacer"></span>
         <i class="material-icons icono-tablero">assessment</i>
@@ -149,7 +151,7 @@
     </div>
 
     <div class="col-12 col-md-6 col-lg-4 p-2">
-      <mat-card class="d-flex align-items-center card-pointer" (click)="gotoAvances()">
+      <mat-card class="d-flex align-items-center " (click)="gotoAvances()">
         <mat-card-title class="mb-0">Avances</mat-card-title>
         <span class="spacer"></span>
         <i class="material-icons icono-tablero">show_chart</i>
@@ -158,7 +160,7 @@
 
 
     <div class="col-12 col-md-6 col-lg-4 p-2">
-      <mat-card class="d-flex align-items-center card-pointer" (click)="gotoMapasAvances()">
+      <mat-card class="d-flex align-items-center " (click)="gotoMapasAvances()">
         <mat-card-title class="mb-0">Mapas Avances</mat-card-title>
         <span class="spacer"></span>
         <i class="material-icons icono-tablero">map</i>
@@ -166,7 +168,7 @@
     </div>
 
     <div class="col-12 col-md-6 col-lg-4 p-2">
-      <mat-card class="d-flex align-items-center card-pointer" (click)="gotoSalidas()">
+      <mat-card class="d-flex align-items-center " (click)="gotoSalidas()">
         <mat-card-title class="mb-0">Salidas</mat-card-title>
         <span class="spacer"></span>
         <i class="material-icons icono-tablero">unarchive</i>
@@ -174,7 +176,7 @@
     </div>
 
     <div class="col-12 col-md-6 col-lg-4 p-2">
-      <mat-card class="d-flex align-items-center card-pointer" (click)="gotoEntradas()">
+      <mat-card class="d-flex align-items-center " (click)="gotoEntradas()">
         <mat-card-title class="mb-0">Entradas</mat-card-title>
         <span class="spacer"></span>
         <i class="material-icons icono-tablero">archive</i>
@@ -182,7 +184,7 @@
     </div>
 
     <div class="col-12 col-md-6 col-lg-4 p-2">
-      <mat-card class="d-flex align-items-center card-pointer" (click)="gotoInventario()">
+      <mat-card class="d-flex align-items-center " (click)="gotoInventario()">
         <mat-card-title class="mb-0">Inventario</mat-card-title>
         <span class="spacer"></span>
         <i class="material-icons icono-tablero">line_weight</i>

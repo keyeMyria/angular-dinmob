@@ -71,6 +71,7 @@ import { VendedoresComponent } from './components/ventas/vendedores/vendedores.c
 import { CrearVendedorDialogoComponent } from './components/ventas/crear-vendedor-dialogo/crear-vendedor-dialogo.component';
 import { EditarVendedorDialogoComponent } from './components/ventas/editar-vendedor-dialogo/editar-vendedor-dialogo.component';
 import { TableroComisionesComponent } from './components/tablero-comisiones/tablero-comisiones.component';
+import { VendedoresResolverService } from './resolvers/vendedores-resolver.service';
 
 
 
@@ -166,7 +167,8 @@ export const ROUTES: Routes = [
                     instituciones_credito: InstitucionesCreditoResolverService,
                     tipos_operacion: TiposOperacionResolverService,
                     tipos_pago: TiposPagoResolverService,
-                    estados: EstadosVentaLoteResolverService
+                    estados: EstadosVentaLoteResolverService,
+                    vendedores: VendedoresResolverService
                 }
             },
             { path: 'acta-entrega/:id', component: ActaEntregaComponent },
