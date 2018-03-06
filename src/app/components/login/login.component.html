@@ -1,5 +1,9 @@
-<div *ngIf="loading">
+<!-- <div >
   <mat-spinner class="loading"></mat-spinner>
+</div>
+ -->
+<div class="loading" *ngIf="loading">
+  <i class="fa fa-spinner fa-spin fa-4x" style="position:fixed; top:calc(50% - 0.5em); left:calc(50% - 0.5em); color:#3f51b5;"></i>
 </div>
 
 <div class="login-container">
