@@ -43,20 +43,13 @@
                   <td></td>
                   <td></td>
                   <td></td>
-                  <td class="text-right">
-                    <button mat-icon-button [matMenuTriggerFor]="menu">
-                      <mat-icon>more_vert</mat-icon>
+                  <td class="text-right ws-nowrap">
+                    <button mat-button class="no-min" (click)="editarGasto()">
+                      <i class="fa fa-pencil"></i>
                     </button>
-                    <mat-menu #menu="matMenu">
-                      <button mat-menu-item>
-                        <mat-icon>create</mat-icon>
-                        <span>Editar Gastos</span>
-                      </button>
-                      <button mat-menu-item>
-                        <mat-icon>delete</mat-icon>
-                        <span>Eliminar</span>
-                      </button>
-                    </mat-menu>
+                    <button mat-button class="no-min" (click)="delGasto()">
+                      <i class="fa fa-times"></i>
+                    </button>
                   </td>
                 </tr>
 

@@ -16,7 +16,7 @@ export class EditarProveedorDialogoComponent implements OnInit {
     private fb: FormBuilder,
   ) {
     this.form = this.fb.group({
-      nombre: [""],
+      nombre: ["", Validators.required],
       contacto: [""],
       email: [""],
       telefono: [""],

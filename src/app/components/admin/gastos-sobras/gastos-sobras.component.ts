@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NuevoGastoDialogoComponent } from '../nuevo-gasto-dialogo/nuevo-gasto-dialogo.component';
 import { MatDialog, MatSnackBar } from '@angular/material';
+import { EditarGastosSobrasDialogoComponent } from '../../editar-gastos-sobras-dialogo/editar-gastos-sobras-dialogo.component';
+import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component";
 
 @Component({
   selector: 'app-gastos-sobras',
@@ -63,5 +65,42 @@ export class GastosSobrasComponent implements OnInit {
     });
 
   }
+
+  editarGasto() {
+
+    let dialogRef = this.dialog.open(EditarGastosSobrasDialogoComponent, {
+      data: {
+      },
+      width: '500px'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result === true) {
+
+      } else if (result && result.error) {
+      }
+
+    });
+  }
+
+  delGasto() {
+
+    let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
+      data: {
+        title: "Eliminar Proveedor",
+        content: `¿Desea eliminar el proveedor:?`
+      },
+      width: "500px"
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result === true) {
+      }
+
+    });
+
+  }
+
 
 }

@@ -199,6 +199,7 @@ import { EditarPagoComisionDialogoComponent } from './components/comisiones/edit
 import { VendedorService } from './services/vendedor.service';
 import { VendedoresResolverService } from './resolvers/vendedores-resolver.service';
 import { ComisionService } from './services/comision.service';
+import { EditarGastosSobrasDialogoComponent } from './components/editar-gastos-sobras-dialogo/editar-gastos-sobras-dialogo.component';
 
 
 
@@ -323,6 +324,7 @@ export function getToken() {
     TableroComisionesComponent,
     NuevoPagoComisionDialogoComponent,
     EditarPagoComisionDialogoComponent,
+    EditarGastosSobrasDialogoComponent,
 
 
 
@@ -403,6 +405,7 @@ export function getToken() {
     EditarVendedorDialogoComponent,
     NuevoPagoComisionDialogoComponent,
     EditarPagoComisionDialogoComponent,
+    EditarGastosSobrasDialogoComponent
 
 
 

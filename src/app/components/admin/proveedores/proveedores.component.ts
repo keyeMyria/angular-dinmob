@@ -12,8 +12,7 @@ import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar
   styleUrls: ['./proveedores.component.scss']
 })
 export class ProveedoresComponent implements OnInit {
-  obras: any = [];
-  obra_selected: string = "";
+
 
   constructor(
     private router: Router,
@@ -22,22 +21,9 @@ export class ProveedoresComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.data
-      .subscribe((data: { obras: any[] }) => {
-        this.obras = data.obras;
-      });
-  }
-
-  cargarObra(id_obra) {
-
-    if (id_obra) {
-      this.router.navigate([".", { obra: id_obra }]);
-    } else {
-      this.router.navigate([".", {}]);
-
-    }
 
   }
+
 
   nuevoProveedor() {
 
@@ -61,7 +47,7 @@ export class ProveedoresComponent implements OnInit {
     let dialogRef = this.dialog.open(EditarProveedorDialogoComponent, {
       data: {
       },
-      width: '800px'
+      width: '500px'
     });
     dialogRef.afterClosed().subscribe(result => {
 
