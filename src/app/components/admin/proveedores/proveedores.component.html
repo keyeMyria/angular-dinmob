@@ -23,24 +23,22 @@
                   <th>RFC</th>
                   <th>Email</th>
                   <th>Teléfono</th>
-                  <th>Contacto</th>
                   <th></th>
 
                 </tr>
               </thead>
 
               <tbody>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                <tr *ngFor="let proveedor of proveedores">
+                  <td>{{proveedor.nombre}}</td>
+                  <td>{{proveedor.rfc}}</td>
+                  <td>{{proveedor.email}}</td>
+                  <td>{{proveedor.telefono}}</td>
                   <td class="text-right ws-nowrap">
-                    <button mat-button class="no-min" (click)="editarProveedor()">
+                    <button mat-button class="no-min" (click)="editarProveedor(proveedor)">
                       <i class="fa fa-pencil"></i>
                     </button>
-                    <button mat-button class="no-min" (click)="delProveedor()">
+                    <button mat-button class="no-min" (click)="delProveedor(proveedor)">
                       <i class="fa fa-times"></i>
                     </button>
                   </td>

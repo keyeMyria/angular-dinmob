@@ -1,7 +1,7 @@
 <h1 mat-dialog-title>Editar Proveedor</h1>
 <div mat-dialog-content>
 
-  <form [formGroup]="form" (ngSubmit)="guardar()">
+  <form [formGroup]="form" (ngSubmit)="guardar()"  id="id_form">
 
 
     <div class="form-group row">
@@ -30,7 +30,7 @@
     <div class="form-group row">
       <label for="telefono" class="col-form-label col-sm-3">Teléfono</label>
       <div class="col-sm-9">
-        <input type="text" class="form-control" id="telefono" name="telefono" formControlName="telefono">
+        <input [textMask]="{mask: maskPhone}" type="text" class="form-control" id="telefono" name="telefono" formControlName="telefono">
       </div>
     </div>
 
@@ -42,9 +42,9 @@
     </div>
 
     <div class="form-group row">
-      <label for="" class="col-form-label col-sm-3">Domicilio</label>
+      <label for="direccion" class="col-form-label col-sm-3">Domicilio</label>
       <div class="col-sm-9">
-        <input type="text" class="form-control" id="domicilio" name="domicilio" formControlName="domicilio">
+        <input type="text" class="form-control" id="direccion" name="direccion" formControlName="direccion">
       </div>
     </div>
 

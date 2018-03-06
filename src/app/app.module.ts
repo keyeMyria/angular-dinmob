@@ -144,6 +144,7 @@ import { registerLocaleData } from '@angular/common';
 registerLocaleData(localeEs, 'es');
 
 //components
+import { EditarGastoDialogoComponent } from './components/admin/editar-gasto-dialogo/editar-gasto-dialogo.component';
 import { VerCedulaFiscalDialogoComponent } from './components/ventas/ver-cedula-fiscal-dialogo/ver-cedula-fiscal-dialogo.component';
 import { AlertaClientesComponent } from './components/ventas/alerta-clientes/alerta-clientes.component';
 import { ClienteSinLoteComponent } from './components/ventas/cliente-sin-lote/cliente-sin-lote.component';
@@ -199,6 +200,8 @@ import { TableroComisionesComponent } from './components/tablero-comisiones/tabl
 import { NuevoPagoComisionDialogoComponent } from './components/comisiones/nuevo-pago-comision-dialogo/nuevo-pago-comision-dialogo.component';
 import { EditarPagoComisionDialogoComponent } from './components/comisiones/editar-pago-comision-dialogo/editar-pago-comision-dialogo.component';
 import { VendedoresResolverService } from './resolvers/vendedores-resolver.service';
+import { TiposGastosResolverService } from './resolvers/tipos-gastos-resolver.service';
+
 
 
 
@@ -323,7 +326,8 @@ export function getToken() {
     TableroComisionesComponent,
     NuevoPagoComisionDialogoComponent,
     EditarPagoComisionDialogoComponent,
-    //EditarGastosSobrasDialogoComponent,
+    EditarGastoDialogoComponent,
+
 
 
 
@@ -404,7 +408,8 @@ export function getToken() {
     EditarVendedorDialogoComponent,
     NuevoPagoComisionDialogoComponent,
     EditarPagoComisionDialogoComponent,
-    //EditarGastosSobrasDialogoComponent
+    EditarGastoDialogoComponent
+
 
 
 
@@ -461,6 +466,7 @@ export function getToken() {
     UsuarioLoggedResolverService,
     EspecialidadesTrabajadorResolverService,
     VendedoresResolverService,
+    TiposGastosResolverService
 
 
   ],

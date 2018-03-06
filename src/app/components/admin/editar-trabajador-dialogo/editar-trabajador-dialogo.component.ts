@@ -15,7 +15,6 @@ export class EditarTrabajadorDialogoComponent implements OnInit {
     prefix: '',
     decimalLimit: 2,
   });
-
   form: FormGroup;
 
   constructor(

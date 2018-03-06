@@ -72,6 +72,7 @@ import { CrearVendedorDialogoComponent } from './components/ventas/crear-vendedo
 import { EditarVendedorDialogoComponent } from './components/ventas/editar-vendedor-dialogo/editar-vendedor-dialogo.component';
 import { TableroComisionesComponent } from './components/tablero-comisiones/tablero-comisiones.component';
 import { VendedoresResolverService } from './resolvers/vendedores-resolver.service';
+import { TiposGastosResolverService } from './resolvers/tipos-gastos-resolver.service';
 
 
 
@@ -308,7 +309,8 @@ export const ROUTES: Routes = [
             {
                 path: 'gastos-sobras', component: GastosSobrasComponent,
                 resolve: {
-                    obras: ObrasUsuarioResolverService
+                    obras: ObrasUsuarioResolverService,
+                    tipos: TiposGastosResolverService
                 }
             },
             {

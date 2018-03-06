@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
+import { ProveedorService } from '../../../services/proveedor.service';
 
 @Component({
   selector: 'app-nuevo-proveedor-dialogo',
@@ -9,11 +10,14 @@ import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@ang
 })
 export class NuevoProveedorDialogoComponent implements OnInit {
   form: FormGroup;
+  public maskPhone = ['(', /\d/, /\d/, /\d/, ')', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
+
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<NuevoProveedorDialogoComponent>,
     private fb: FormBuilder,
+    private proveedorSrv: ProveedorService
   ) {
     this.form = this.fb.group({
       nombre: ["", Validators.required],
@@ -21,7 +25,7 @@ export class NuevoProveedorDialogoComponent implements OnInit {
       email: [""],
       telefono: [""],
       rfc: [""],
-      domicilio: [""],
+      direccion: [""],
       nota: [""]
     })
   }
@@ -30,7 +34,17 @@ export class NuevoProveedorDialogoComponent implements OnInit {
   }
 
   guardar() {
-    console.log("ok")
+    console.log("ok", this.form.value);
+    this.proveedorSrv.createProveedor(this.form.value)
+      .subscribe(proveedor => {
+        this.data.proveedores.push(proveedor);
+        this.dialogRef.close(true);
+
+      },
+        (error) => {
+          this.dialogRef.close({ error: "Ha ocurrido un error de conexión. Inténtelo más tarde" });
+        });
+
   }
 
 }

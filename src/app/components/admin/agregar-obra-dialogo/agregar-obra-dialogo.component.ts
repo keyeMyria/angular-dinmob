@@ -28,7 +28,7 @@ export class AgregarObraDialogoComponent implements OnInit {
     this.form = this.fb.group({
 
       nombre: ["", Validators.required],
-      fecha_ini: [moment(), Validators.required],
+      fecha_ini: [moment(""), Validators.required],
       en_venta: false,
       residentes: this.fb.array([], this.checkUsuariosRepetidos),
       control_almacen: this.fb.array([], this.checkUsuariosRepetidos),

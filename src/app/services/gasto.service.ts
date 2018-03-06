@@ -44,6 +44,11 @@ export class GastoService {
       .pipe(catchError(this.handleError("delGasto")));
   }
 
+  getTipos() {
+    return this.http.get(this.url + "get_tipos/")
+      .pipe(catchError(this.handleError("getTipos")));
+  }
+
   private handleError<T>(operation = 'operation') {
     return (error: HttpErrorResponse) => {
 

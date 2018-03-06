@@ -1,15 +1,21 @@
 <h1 mat-dialog-title>Nuevo Gasto</h1>
 <div mat-dialog-content>
 
-  <form [formGroup]="form" (ngSubmit)="guardar()">
-
+  <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
 
     <div class="form-group row">
-      <label for="tipo_gasto" class="col-form-label col-sm-3">Tipo Gasto</label>
+      <label for="obra" class="col-sm-3 col-form-label">Obra</label>
       <div class="col-sm-9">
-        <select class="form-control" id="tipo_gasto" name="tipo_gasto" formControlName="tipo_gasto" [ngClass]="{'is-invalid': form.get('tipo_gasto').invalid  && (form.get('tipo_gasto').dirty || form.get('tipo_gasto').touched) }">
+        <input class="form-control" type="text" name="obra" id="obra" [value]="data.obra.nombre" readonly>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="id_tipo_gasto" class="col-form-label col-sm-3">Tipo Gasto</label>
+      <div class="col-sm-9">
+        <select class="form-control" id="id_tipo_gasto" name="id_tipo_gasto" formControlName="id_tipo_gasto" [ngClass]="{'is-invalid': form.get('id_tipo_gasto').invalid  && (form.get('id_tipo_gasto').dirty || form.get('id_tipo_gasto').touched) }">
           <option value="">Seleccionar...</option>
-          <option value="">...</option>
+          <option [value]="tipo.id_tipo_gasto" *ngFor="let tipo of data.tipos">{{tipo.descripcion}}</option>
         </select>
         <div class="invalid-feedback">Seleccione un tipo de gasto</div>
       </div>
@@ -24,18 +30,18 @@
     </div>
 
     <div class="form-group row">
-      <label for="fecha_gasto" class="col-sm-3 col-form-label">Fecha</label>
+      <label for="fecha" class="col-sm-3 col-form-label">Fecha</label>
       <div class="input-group col-sm-9">
-        <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="fecha_gasto" placement="bottom-left" [matDatepicker]="dpFechaProgramada"
-          formControlName="fecha_gasto" [ngClass]="{'is-invalid':form.get('fecha_gasto').invalid && (form.get('fecha_gasto').dirty || form.get('fecha_gasto').touched) }">
+        <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="fecha" placement="bottom-left" [matDatepicker]="dpFechaProgramada"
+          formControlName="fecha" [ngClass]="{'is-invalid':form.get('fecha').invalid && (form.get('fecha').dirty || form.get('fecha').touched) }">
         <span class="input-group-append">
           <button class="btn btn-secondary" type="button" (click)="dpFechaProgramada.open()">
             <i class="fa fa-calendar"></i>
           </button>
         </span>
-      </div>
-      <div *ngIf="form.get('fecha_gasto').invalid && (form.get('fecha_gasto').dirty || form.get('fecha_gasto').touched)" class="visible invalid-feedback">
-        Seleccione una fecha
+        <div *ngIf="form.get('fecha').invalid && (form.get('fecha').dirty || form.get('fecha').touched)" class="visible invalid-feedback">
+          Seleccione una fecha
+        </div>
       </div>
       <mat-datepicker touchUi="true" #dpFechaProgramada></mat-datepicker>
     </div>
