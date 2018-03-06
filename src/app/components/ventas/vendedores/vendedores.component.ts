@@ -115,7 +115,7 @@ export class VendedoresComponent implements OnInit {
     let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
       data: {
         title: "Eliminar Vendedor",
-        content: `¿Desea eliminar: ${vendedor.nombre} ?`
+        content: `¿Desea eliminar a: ${vendedor.nombre} ?`
       },
       width: "500px"
     });
