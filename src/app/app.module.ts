@@ -31,8 +31,10 @@ import { TipoOperacionService } from 'app/services/tipo-operacion.service';
 import { TipoPagoService } from 'app/services/tipo-pago.service';
 import { InsumoService } from 'app/services/insumo.service';
 import { VentasPagosService } from 'app/services/ventas-pagos.service';
-
-
+import { ComisionService } from './services/comision.service';
+import { GastoService } from './services/gasto.service';
+import { ProveedorService } from './services/proveedor.service';
+import { VendedorService } from './services/vendedor.service';
 
 //helpers
 import { ClienteHelperService } from 'app/utils/cliente-helper.service';
@@ -196,9 +198,8 @@ import { EditarVendedorDialogoComponent } from './components/ventas/editar-vende
 import { TableroComisionesComponent } from './components/tablero-comisiones/tablero-comisiones.component';
 import { NuevoPagoComisionDialogoComponent } from './components/comisiones/nuevo-pago-comision-dialogo/nuevo-pago-comision-dialogo.component';
 import { EditarPagoComisionDialogoComponent } from './components/comisiones/editar-pago-comision-dialogo/editar-pago-comision-dialogo.component';
-import { VendedorService } from './services/vendedor.service';
 import { VendedoresResolverService } from './resolvers/vendedores-resolver.service';
-import { ComisionService } from './services/comision.service';
+
 
 
 
@@ -442,6 +443,8 @@ export function getToken() {
     TrabajadorService,
     VendedorService,
     ComisionService,
+    GastoService,
+    ProveedorService,
 
     ObrasUsuarioResolverService,
     UsuariosAlmacenistasResolverService,
@@ -456,7 +459,8 @@ export function getToken() {
     TiposOperacionResolverService,
     UsuarioLoggedResolverService,
     EspecialidadesTrabajadorResolverService,
-    VendedoresResolverService
+    VendedoresResolverService,
+
 
   ],
   bootstrap: [AppComponent]
