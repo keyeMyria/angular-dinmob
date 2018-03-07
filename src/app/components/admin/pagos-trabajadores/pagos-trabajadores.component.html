@@ -36,10 +36,10 @@
                       </div>
 
                       <div class="form-group">
-                        <label for="trabajador" class="form-label">Trabajador</label>
-                        <select class="form-control" id="trabajador" name="trabajador" formControlName="trabajador" [ngClass]="{'is-invalid': form.get('trabajador').invalid  && (form.get('trabajador').dirty || form.get('trabajador').touched )}">
+                        <label for="id_trabajador" class="form-label">Trabajador</label>
+                        <select class="form-control" id="id_trabajador" name="id_trabajador" formControlName="id_trabajador" [ngClass]="{'is-invalid': form.get('id_trabajador').invalid  && (form.get('id_trabajador').dirty || form.get('id_trabajador').touched )}">
                           <option value="">Seleccionar...</option>
-                          <option [value]="">...</option>
+                          <option [value]="trabajador.id_trabajador" *ngFor="let trabajador of trabajadores">{{trabajador.nombre}}</option>
                         </select>
                         <div class="invalid-feedback">Seleccione trabajador</div>
                       </div>
@@ -98,12 +98,13 @@
                     <h5 class="card-title">Nuevo Pago</h5>
 
                     <form [formGroup]="form" (ngSubmit)="createPago()">
+
+
                       <div class="form-group">
-                        <label for="trabajador_nuevo_pago" class="form-label">Trabajador</label>
-                        <select class="form-control" id="trabajador_nuevo_pago" name="trabajador_nuevo_pago" formControlName="trabajador_nuevo_pago"
-                          [ngClass]="{'is-invalid': form.get('trabajador_nuevo_pago').invalid  && (form.get('trabajador_nuevo_pago').dirty || form.get('trabajador_nuevo_pago').touched )}">
+                        <label for="id_trabajador" class="form-label">Trabajador</label>
+                        <select class="form-control" id="id_trabajador" name="id_trabajador" formControlName="id_trabajador" [ngClass]="{'is-invalid': form.get('id_trabajador').invalid  && (form.get('id_trabajador').dirty || form.get('id_trabajador').touched )}">
                           <option value="">Seleccionar...</option>
-                          <option [value]="">...</option>
+                          <option [value]="trabajador.id_trabajador" *ngFor="let trabajador of trabajadores">{{trabajador.nombre}}</option>
                         </select>
                         <div class="invalid-feedback">Seleccione trabajador</div>
                       </div>

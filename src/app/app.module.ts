@@ -128,6 +128,8 @@ import { TiposPagoResolverService } from 'app/resolvers/tipos-pago-resolver.serv
 import { TiposOperacionResolverService } from 'app/resolvers/tipos-operacion-resolver.service';
 import { UsuarioLoggedResolverService } from 'app/resolvers/usuario-logged-resolver.service';
 import { EspecialidadesTrabajadorResolverService } from './resolvers/especialidades-trabajador-resolver.service';
+import { VendedoresResolverService } from './resolvers/vendedores-resolver.service';
+import { TiposGastosResolverService } from './resolvers/tipos-gastos-resolver.service';
 
 
 //components
@@ -199,8 +201,7 @@ import { EditarVendedorDialogoComponent } from './components/ventas/editar-vende
 import { TableroComisionesComponent } from './components/tablero-comisiones/tablero-comisiones.component';
 import { NuevoPagoComisionDialogoComponent } from './components/comisiones/nuevo-pago-comision-dialogo/nuevo-pago-comision-dialogo.component';
 import { EditarPagoComisionDialogoComponent } from './components/comisiones/editar-pago-comision-dialogo/editar-pago-comision-dialogo.component';
-import { VendedoresResolverService } from './resolvers/vendedores-resolver.service';
-import { TiposGastosResolverService } from './resolvers/tipos-gastos-resolver.service';
+
 
 
 
@@ -466,7 +467,7 @@ export function getToken() {
     UsuarioLoggedResolverService,
     EspecialidadesTrabajadorResolverService,
     VendedoresResolverService,
-    TiposGastosResolverService
+    TiposGastosResolverService,
 
 
   ],

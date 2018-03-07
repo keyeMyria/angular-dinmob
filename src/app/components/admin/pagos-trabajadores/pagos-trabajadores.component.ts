@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
 import * as moment from 'moment';
+import { TrabajadorService } from '../../../services/trabajador.service';
+import { of } from "rxjs/observable/of";
 
 @Component({
   selector: 'app-pagos-trabajadores',
@@ -18,25 +20,26 @@ export class PagosTrabajadoresComponent implements OnInit {
 
   obras: any = [];
   obra_selected: string = "";
-  form: FormGroup;
+  formNuevo: FormGroup;
+  trabajadores: any = [];
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private fb: FormBuilder,
+    private trabajadorSrv: TrabajadorService
   ) {
-    this.form = this.fb.group({
+    this.formNuevo = this.fb.group({
+     /*  obra: ["", Validators.required],      
+      fecha_inicio: [moment(""), Validators.required],
+      fecha_fin: [moment(""), Validators.required],
+      inicio_obra: [""], */
 
-      obra: ["", Validators.required],
-      trabajador: ["", Validators.required],
-      fecha_inicio: [moment(), Validators.required],
-      fecha_fin: [moment(), Validators.required],
-      inicio_obra: [""],
+      id_trabajador: ["", Validators.required],
       trabajador_nuevo_pago: ["", Validators.required],
-      pago: ["", Validators.required],
-      fecha_pago: [moment(), Validators.required],
+      pago: ["", Validators.required],              
+      fecha_pago: [moment(""), Validators.required],      
       nota: [""],
-
     });
   }
 
@@ -44,6 +47,19 @@ export class PagosTrabajadoresComponent implements OnInit {
     this.route.data
       .subscribe((data: { obras: any[] }) => {
         this.obras = data.obras;
+      });
+
+    this.route.paramMap
+      .switchMap((params: ParamMap) => {
+        if (params.has("obra")) {
+          this.obra_selected = params.get("obra");
+          return this.trabajadorSrv.getTrabajadoresObra(params.get("obra"));
+        } else {
+          return of([]);
+        }
+      }).subscribe(trabajadores => {
+        this.trabajadores = trabajadores;
+      }, (error) => {
       });
   }
 
@@ -58,8 +74,8 @@ export class PagosTrabajadoresComponent implements OnInit {
 
   }
 
-  createPago(){
-    
+  createPago() {
+
   }
 
 }
