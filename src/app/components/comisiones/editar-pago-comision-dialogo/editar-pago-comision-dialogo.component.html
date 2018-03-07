@@ -4,20 +4,45 @@
   <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
 
     <div class="form-group row">
+      <label for="id_destinatario" class="col-sm-3 col-form-label">Destinatario</label>
+      <div class="col-sm-9">
+        <select [(ngModel)]="comision" class="form-control" id="id_destinatario" name="id_destinatario" formControlName="id_destinatario"
+          [ngClass]="{'is-invalid': form.get('id_destinatario').invalid  && (form.get('id_destinatario').dirty || form.get('id_destinatario').touched) }">
+          <option value="">Seleccionar...</option>
+          <option value="0.015">Vendedor</option>
+          <option value="0.0025">Gerente</option>
+          <option value="0.0025">Expediente</option>
+        </select>
+        <div class="invalid-feedback">Seleccione un destinatario</div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="porcentaje" class="col-sm-3 col-form-label">Porcentaje</label>
+      <div class="input-group col-sm-9">
+        <input type="text" class="form-control" name="porcentaje" id="porcentaje" formControlName="porcentaje" [ngClass]="{'is-invalid': form.get('porcentaje').invalid  && (form.get('porcentaje').dirty || form.get('porcentaje').touched) }">
+        <div class="input-group-append">
+          <span class="input-group-text" id="basic-addon2">%</span>
+        </div>
+        <div class="invalid-feedback">Proporcione un porcentaje</div>
+      </div>
+    </div>
+
+    <div class="form-group row">
       <label for="monto" class="col-sm-3 col-form-label">Monto</label>
       <div class="col-sm-9">
-        <input [textMask]="{mask: numberMask}" class="form-control" type="text" name="monto" id="monto" formControlName="monto" [ngClass]="{'is-invalid': form.get('monto').invalid  && (form.get('monto').dirty || form.get('monto').touched )}">
-        <div class="invalid-feedback">Proporcione un monto</div>
+        <input type="text" class="form-control" name="monto" id="monto" formControlName="monto" [value]="data.comision.valor_operacion * comision * (form.get('porcentaje').value/100) | currency"
+          readonly>
       </div>
     </div>
 
     <div class="form-group row">
       <label for="fecha" class="col-sm-3 col-form-label">Fecha</label>
       <div class="input-group col-sm-9">
-        <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="fecha" placement="bottom-left" [matDatepicker]="dpFecha"
+        <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="fecha" placement="bottom-left" [matDatepicker]="dpFechaProgramada"
           formControlName="fecha" [ngClass]="{'is-invalid':form.get('fecha').invalid && (form.get('fecha').dirty || form.get('fecha').touched) }">
         <span class="input-group-append">
-          <button class="btn btn-secondary" type="button" (click)="dpFecha.open()">
+          <button class="btn btn-secondary" type="button" (click)="dpFechaProgramada.open()">
             <i class="fa fa-calendar"></i>
           </button>
         </span>
@@ -25,18 +50,7 @@
           Seleccione una fecha
         </div>
       </div>
-      <mat-datepicker touchUi="true" #dpFecha></mat-datepicker>
-    </div>
-
-    <div class="form-group row">
-      <label for="id_destinatario" class="col-sm-3 col-form-label">Destinatario</label>
-      <div class="col-sm-9">
-        <select class="form-control" id="id_destinatario" name="id_destinatario" formControlName="id_destinatario" [ngClass]="{'is-invalid': form.get('id_destinatario').invalid  && (form.get('id_destinatario').dirty || form.get('id_destinatario').touched) }">
-          <option value="">Seleccionar...</option>
-          <option [value]="vendedor.codigo" *ngFor="let vendedor of data.vendedores">{{vendedor.nombre}}</option>
-        </select>
-        <div class="invalid-feedback">Seleccione un destinatario</div>
-      </div>
+      <mat-datepicker touchUi="true" #dpFechaProgramada></mat-datepicker>
     </div>
 
     <div class="form-group row">
@@ -52,4 +66,6 @@
 <div mat-dialog-actions>
   <button mat-button type="button" [mat-dialog-close]="false">CERRAR</button>
   <button mat-button type="submit" form="id_form" [disabled]="form.invalid" color="primary">GUARDAR</button>
+
+  <!-- <button type="button" mat-button (click)="debug()">debug</button> -->
 </div>

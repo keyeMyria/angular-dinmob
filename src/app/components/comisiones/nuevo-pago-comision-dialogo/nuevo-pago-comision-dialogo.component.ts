@@ -25,10 +25,11 @@ export class NuevoPagoComisionDialogoComponent implements OnInit {
     private comisionSrv: ComisionService
   ) {
     this.form = this.fb.group({
-      monto: ["", Validators.required],
+      monto: [""],
       fecha: [moment("", "YYYY-MM-DD"), Validators.required],
       id_destinatario: ["", Validators.required],
       nota: "",
+      porcentaje:["", Validators.required]
     });
   }
 

@@ -29,6 +29,7 @@ export class EditarPagoComisionDialogoComponent implements OnInit {
       fecha: [moment(data.pago.fecha), Validators.required],
       id_destinatario: [data.pago.id_destinatario, Validators.required],
       nota: [data.pago.nota],
+      porcentaje: [data.pago.porcentaje, Validators.required]
     });
   }
 

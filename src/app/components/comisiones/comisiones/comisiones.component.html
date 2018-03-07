@@ -38,15 +38,19 @@
                     <td class="ws-nowrap">{{comision.manzana}}</td>
                     <td class="ws-nowrap">{{comision.lote}}</td>
                     <td>{{comision.valor_operacion|currency}}</td>
-                    <td>{{comision.vendedor}}</td>
-                    <td>{{comision.gerente}}</td>
-                    <td>{{comision.expediente}}</td>
+                    <td [matTooltip]="comision.vendedor">{{(comision.valor_operacion * 0.015)|currency}}</td>
+                    <td>{{(comision.valor_operacion * 0.0025)|currency}}</td>
+                    <td>{{(comision.valor_operacion * 0.0025)|currency}}</td>
                   </tr>
                   <tr [hidden]="!comision.more">
                     <td colspan="7" class="p-0">
                       <table class="table table-striped table-sm table-align-middle mb-0">
                         <thead class="thead-light">
+                          <!--  <tr>
+                            <td colspan="6">{{comision.vendedor}}</td>
+                          </tr> -->
                           <tr>
+                            <th>Porcentaje</th>
                             <th>Monto</th>
                             <th>Fecha</th>
                             <th>Destinatario</th>
@@ -61,11 +65,12 @@
                         <tbody>
 
                           <tr *ngIf="!comision.pagos.length">
-                            <td colspan="5" class="text-center">Ningún pago realizado</td>
+                            <td colspan="6" class="text-center">Ningún pago realizado</td>
                           </tr>
 
                           <tr *ngFor="let pago of comision.pagos">
-                            <td>{{pago.monto | currency}}</td>
+                            <td>{{pago.porcentaje /100 | percent:'1.2'}}</td>
+                            <td></td>
                             <td>{{pago.fecha | date:'mediumDate':'':'es'}}</td>
                             <td>{{pago.destinatario}}</td>
                             <td>{{pago.nota}}</td>
