@@ -38,9 +38,64 @@
 
       <mat-card>
 
-        <div class="form-group">
+        <div class="form-group row">
+          <label for="nombre" class="col-sm-4 text-muted">Lote</label>
+          <div class="col-sm-8">
+            <div class="texto">{{lote_selected?.manzana}} {{lote_selected?.nombre}}</div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="prototipos" class="col-sm-4 text-muted">Prototipos</label>
+          <div class="col-sm-8">
+            <div class="texto">{{lote_selected?.prototipos|prototiposToString}}</div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="valor_base" class="col-sm-4 text-muted">Valor Base</label>
+          <div class="col-sm-8">
+            <div class="texto">{{lote_selected?.valor_base|currency}}</div>
+          </div>
+        </div>
+
+        <div class="form-group row" *ngIf="lote_selected && lote_selected.precio_excedente!='0.00' && lote_selected.metros_excedente!='0.00'">
+          <label for="excedente" class="col-sm-4 text-muted">Excedente</label>
+          <div class="col-sm-8">
+            <!--     <div class="texto">{{lote_selected?.precio_excedente * lote_selected?.metros_excedente | currency }} ({{lote_selected?.metros_excedente
+              | number }} m
+              <sup>2</sup> x {{lote_selected?.precio_excedente | currency}})</div>
+          </div> -->
+            <div class="texto">{{lote_selected?.precio_excedente * lote_selected?.metros_excedente | currency }}
+              <i class="fa fa-question-circle text-muted" aria-hidden="true" matTooltip="{{(lote_selected?.metros_excedente | number )+ 'm&#178; x ' + (lote_selected?.precio_excedente | currency)}}"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="estado" class="col-sm-4 text-muted">Estado Venta</label>
+          <div class="col-sm-8">
+            <div class="texto">{{lote_selected?.estado_venta}}</div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="tipo" class="col-sm-4 text-muted">Tipo</label>
+          <div class="col-sm-8">
+            <div class="texto">{{lote_selected?.tipo}}</div>
+          </div>
+        </div>
+
+        <div class="form-group row" *ngIf="lote_selected?.forma_pago">
+          <label for="forma" class="col-sm-4 text-muted">Forma Pago</label>
+          <div class="col-sm-8">
+            <div class="texto">{{lote_selected?.forma_pago}}</div>
+          </div>
+        </div>
+
+        <!--         <div class="form-group">
           <label for="nombre" class="text-muted">Lote</label>
-          <!-- <input type="text" class="form-control-plaintext d-block" readonly id="nombre" [value]=" (lote_selected?.nombre_manzana + ' ' + lote_selected?.nombre)||''"> -->
+           <input type="text" class="form-control-plaintext d-block" readonly id="nombre" [value]=" (lote_selected?.nombre_manzana + ' ' + lote_selected?.nombre)||''"> 
           <div class="texto">{{lote_selected?.manzana}} {{lote_selected?.nombre}}</div>
         </div>
 
@@ -52,6 +107,13 @@
         <div class="form-group">
           <label for="valor_base" class="text-muted">Valor Base</label>
           <div class="texto">{{lote_selected?.valor_base|currency}}</div>
+        </div>
+
+        <div class="form-group" *ngIf="lote_selected?.precio_excedente && lote_selected?.metros_excedente">
+          <label for="excedente" class="text-muted">Excedente</label>
+          <div class="texto">{{lote_selected?.precio_excedente * lote_selected?.metros_excedente | currency }} ({{lote_selected?.metros_excedente
+            | number }}m
+            <sup>2</sup> x {{lote_selected?.precio_excedente | currency}})</div>
         </div>
 
         <div class="form-group">
@@ -70,10 +132,46 @@
         </div>
 
         <div class="form-group">
+          <label for="tipo" class="text-muted">Tipo</label>
+          <div class="texto">{{lote_selected?.tipo}}</div>
+        </div>
+
+        <div class="form-group" *ngIf="lote_selected?.forma_pago">
+          <label for="forma" class="text-muted">Forma Pago</label>
+          <div class="texto">{{lote_selected?.forma_pago}}</div>
+        </div> -->
+
+
+
+
+
+        <!--         <div class="form-row">
+          <div class="col-md-4 mb-3">
+            <div class="text-center">
+              <label class="text-muted">M2</label>
+              <div class="texto">{{lote_selected?.valor_ampliacion|currency}}</div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="text-center">
+              <label class="text-muted">Precio por M2</label>
+              <div class="texto">{{lote_selected?.valor_ampliacion|currency}}</div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="text-center">
+              <label class="text-muted">Total</label>
+              <div class="texto">{{lote_selected?.valor_ampliacion|currency}}</div>
+            </div>
+          </div>
+
+        </div> -->
+
+        <div class="form-group">
           <mat-slide-toggle [checked]="verLeyenda.toggle" (change)="toggleVerLeyenda($event)">Leyenda</mat-slide-toggle>
         </div>
         <button mat-raised-button color="primary" class="btn-block" (click)="verClientes()" [disabled]="!lote_selected">Clientes</button>
-      <!--   <button mat-raised-button color="primary" class="btn-block" (click)="escalaPrototipos()">Prototipos</button>
+        <!--   <button mat-raised-button color="primary" class="btn-block" (click)="escalaPrototipos()">Prototipos</button>
         <button mat-raised-button color="primary" class="btn-block" (click)="escalaEstados()">Lotes</button> -->
 
 

@@ -365,6 +365,10 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
 
           tooltip += " <br> " + this.currecyPipe.transform(lote.valor_base);
 
+          if (lote.metros_excedente != "0.00" && lote.precio_excedente != "0.00") {
+            tooltip += " <br> Ex: " + this.currecyPipe.transform(lote.metros_excedente * lote.precio_excedente);
+          }
+
           if (lote.fecha_entrega) {
             tooltip += " <br> Entrega: " + lote.fecha_entrega;
           }
@@ -374,6 +378,16 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
               tooltip += " <br> " + lote.prototipos[i].nombre;
             }
           }
+
+          if (lote.tipo) {
+            tooltip += " <br>" + lote.tipo;
+          }
+
+          if (lote.forma_pago != null) {
+            tooltip += " <br> " + lote.forma_pago;
+          }
+
+
 
           tip.html(tooltip);
 
