@@ -34,11 +34,14 @@ export class EditarLoteDialogoComponent implements OnInit {
       code: this.data.lote.code,
       valor_base: this.data.lote.valor_base,
       valor_ampliacion: this.data.lote.valor_ampliacion,
-      metros_excedente:this.data.lote.metros_excedente,
-      precio_excedente:this.data.lote.precio_excedente,
+      metros_excedente: this.data.lote.metros_excedente,
+      precio_excedente: this.data.lote.precio_excedente,
       irregular: this.data.lote.irregular,
       en_venta: this.data.lote.en_venta == "1" ? true : false,
-      prototipos: this.fb.array([], this.checkRepetidos)
+      prototipos: this.fb.array([], this.checkRepetidos),
+      comision_vendedor: this.data.lote.comision_vendedor,
+      comision_gerente: this.data.lote.comision_gerente,
+      comision_expediente: this.data.lote.comision_expediente
     });
 
     this.data.lote.prototipos.forEach(prototipo => {

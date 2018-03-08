@@ -62,6 +62,9 @@ export class EstructuraObraComponent implements OnInit, OnDestroy {
   opTipo = new FormControl("", Validators.required);
   opMetrosExcedente = new FormControl("", Validators.required);
   opPrecioExcedente = new FormControl("", Validators.required);
+  opComisionVendedor = new FormControl("", Validators.required);
+  opComisionGerente = new FormControl("", Validators.required);
+  opComisionExpediente = new FormControl("", Validators.required);
 
 
 
@@ -710,6 +713,153 @@ export class EstructuraObraComponent implements OnInit, OnDestroy {
 
 
   }
+
+
+  updateComisionVendedor() {
+
+    let id_lotes = [];
+
+    this.selection[this.manzana_selected].selected.forEach(lote => {
+      id_lotes.push(lote.id_lote);
+    });
+
+
+    this.loteSrv.bulkUpdate(id_lotes, { comision_vendedor: this.opComisionVendedor.value })
+      .subscribe(res => {
+        if (res.count) {
+          //todo ok
+
+          //actualizamos la vista
+          this.selection[this.manzana_selected].selected.forEach(lote => {
+            lote.comision_vendedor = this.opComisionVendedor.value;
+          });
+
+          //eliminamos la seleccion
+          this.selection[this.manzana_selected].clear();
+
+          this.snackBar.open("Actualización completada", "", {
+            duration: 2000,
+            panelClass: ["bg-success", "text-white"]
+          });
+
+        } else {
+
+          this.snackBar.open("Su solicitud no se ha podido completar.", "", {
+            duration: 3000,
+            panelClass: ["bg-danger", "text-white"]
+          });
+
+        }
+
+
+      },
+        (error) => {
+          this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde.", "", {
+            duration: 3000,
+            panelClass: ["bg-danger", "text-white"]
+          });
+
+        });
+
+  }
+
+  updateComisionGerente() {
+
+    let id_lotes = [];
+
+    this.selection[this.manzana_selected].selected.forEach(lote => {
+      id_lotes.push(lote.id_lote);
+    });
+
+
+    this.loteSrv.bulkUpdate(id_lotes, { comision_gerente: this.opComisionGerente.value })
+      .subscribe(res => {
+        if (res.count) {
+          //todo ok
+
+          //actualizamos la vista
+          this.selection[this.manzana_selected].selected.forEach(lote => {
+            lote.comision_gerente = this.opComisionGerente.value;
+          });
+
+          //eliminamos la seleccion
+          this.selection[this.manzana_selected].clear();
+
+          this.snackBar.open("Actualización completada", "", {
+            duration: 2000,
+            panelClass: ["bg-success", "text-white"]
+          });
+
+        } else {
+
+          this.snackBar.open("Su solicitud no se ha podido completar.", "", {
+            duration: 3000,
+            panelClass: ["bg-danger", "text-white"]
+          });
+
+        }
+
+
+      },
+        (error) => {
+          this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde.", "", {
+            duration: 3000,
+            panelClass: ["bg-danger", "text-white"]
+          });
+
+        });
+
+  }
+
+  updateComisionExpediente() {
+
+    let id_lotes = [];
+
+    this.selection[this.manzana_selected].selected.forEach(lote => {
+      id_lotes.push(lote.id_lote);
+    });
+
+
+    this.loteSrv.bulkUpdate(id_lotes, { comision_expediente: this.opComisionExpediente.value })
+      .subscribe(res => {
+        if (res.count) {
+          //todo ok
+
+          //actualizamos la vista
+          this.selection[this.manzana_selected].selected.forEach(lote => {
+            lote.comision_expediente = this.opComisionExpediente.value;
+          });
+
+          //eliminamos la seleccion
+          this.selection[this.manzana_selected].clear();
+
+          this.snackBar.open("Actualización completada", "", {
+            duration: 2000,
+            panelClass: ["bg-success", "text-white"]
+          });
+
+        } else {
+
+          this.snackBar.open("Su solicitud no se ha podido completar.", "", {
+            duration: 3000,
+            panelClass: ["bg-danger", "text-white"]
+          });
+
+        }
+
+
+      },
+        (error) => {
+          this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde.", "", {
+            duration: 3000,
+            panelClass: ["bg-danger", "text-white"]
+          });
+
+        });
+
+  }
+
+
 
   /* agregamos el prototipo a los lotes seleccionados */
   addLotePrototipo() {
