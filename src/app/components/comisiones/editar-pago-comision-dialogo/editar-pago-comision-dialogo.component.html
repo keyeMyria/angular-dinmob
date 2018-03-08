@@ -4,14 +4,14 @@
   <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
 
     <div class="form-group row">
-      <label for="id_destinatario" class="col-sm-3 col-form-label">Destinatario</label>
+      <label for="destinatario" class="col-sm-3 col-form-label">Destinatario</label>
       <div class="col-sm-9">
-        <select [(ngModel)]="comision" class="form-control" id="id_destinatario" name="id_destinatario" formControlName="id_destinatario"
-          [ngClass]="{'is-invalid': form.get('id_destinatario').invalid  && (form.get('id_destinatario').dirty || form.get('id_destinatario').touched) }">
+        <select class="form-control" id="destinatario" name="destinatario" formControlName="destinatario"
+          [ngClass]="{'is-invalid': form.get('destinatario').invalid  && (form.get('destinatario').dirty || form.get('destinatario').touched) }">
           <option value="">Seleccionar...</option>
-          <option value="0.015">Vendedor</option>
-          <option value="0.0025">Gerente</option>
-          <option value="0.0025">Expediente</option>
+          <option value="Vendedor">Vendedor</option>
+          <option value="Gerente">Gerente</option>
+          <option value="Expediente">Expediente</option>
         </select>
         <div class="invalid-feedback">Seleccione un destinatario</div>
       </div>
@@ -31,7 +31,7 @@
     <div class="form-group row">
       <label for="monto" class="col-sm-3 col-form-label">Monto</label>
       <div class="col-sm-9">
-        <input type="text" class="form-control" name="monto" id="monto" formControlName="monto" [value]="data.comision.valor_operacion * comision * (form.get('porcentaje').value/100) | currency"
+        <input type="text" class="form-control" name="monto" id="monto" [value]="data.comision.valor_operacion * comision * (form.get('porcentaje').value/100) | currency"
           readonly>
       </div>
     </div>

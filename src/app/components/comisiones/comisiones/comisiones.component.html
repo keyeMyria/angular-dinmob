@@ -38,9 +38,9 @@
                     <td class="ws-nowrap">{{comision.manzana}}</td>
                     <td class="ws-nowrap">{{comision.lote}}</td>
                     <td>{{comision.valor_operacion|currency}}</td>
-                    <td [matTooltip]="comision.vendedor">{{(comision.valor_operacion * 0.015)|currency}}</td>
-                    <td>{{(comision.valor_operacion * 0.0025)|currency}}</td>
-                    <td>{{(comision.valor_operacion * 0.0025)|currency}}</td>
+                    <td [matTooltip]="comision.vendedor">{{(comision.valor_operacion * (comision.comision_vendedor/100))|currency}}</td>
+                    <td>{{(comision.valor_operacion * (comision.comision_gerente/100))|currency}}</td>
+                    <td>{{(comision.valor_operacion * (comision.comision_expediente/100))|currency}}</td>
                   </tr>
                   <tr [hidden]="!comision.more">
                     <td colspan="7" class="p-0">
@@ -70,7 +70,7 @@
 
                           <tr *ngFor="let pago of comision.pagos">
                             <td>{{pago.porcentaje /100 | percent:'1.2'}}</td>
-                            <td></td>
+                            <td>{{ montoComision(comision, pago)|currency }}</td>
                             <td>{{pago.fecha | date:'mediumDate':'':'es'}}</td>
                             <td>{{pago.destinatario}}</td>
                             <td>{{pago.nota}}</td>

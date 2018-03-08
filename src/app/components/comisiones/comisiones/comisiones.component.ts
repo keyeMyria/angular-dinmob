@@ -105,6 +105,20 @@ export class ComisionesComponent implements OnInit {
 
   }
 
+  montoComision(comision, pago) {
+    let tipoComision = 0;
+    if (pago.destinatario == "Vendedor") {
+      tipoComision = comision.comision_vendedor / 100;
+    } else if (pago.destinatario == "Gerente") {
+      tipoComision = comision.comision_gerente / 100;
+    } else if (pago.destinatario == "Expediente") {
+      tipoComision = comision.comision_expediente / 100;
+    } else { }
+
+    return (pago.porcentaje / 100) * comision.valor_operacion * tipoComision;
+
+  }
+
   verComisiones(comision) {
   }
 

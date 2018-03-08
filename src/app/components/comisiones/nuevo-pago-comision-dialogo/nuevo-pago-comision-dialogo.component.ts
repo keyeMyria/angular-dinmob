@@ -25,9 +25,9 @@ export class NuevoPagoComisionDialogoComponent implements OnInit {
     private comisionSrv: ComisionService
   ) {
     this.form = this.fb.group({
-      monto: [""],
+      //monto: [""],
       fecha: [moment("", "YYYY-MM-DD"), Validators.required],
-      id_destinatario: ["", Validators.required],
+      destinatario: ["", Validators.required],
       nota: "",
       porcentaje:["", Validators.required]
     });
@@ -48,7 +48,7 @@ export class NuevoPagoComisionDialogoComponent implements OnInit {
     console.log("datos", this.form.value);
 
     let frmPago = this.clonar(this.form.value);
-    frmPago.monto = frmPago.monto.replace(/,/g, "");
+    //frmPago.monto = frmPago.monto.replace(/,/g, "");
     frmPago.id_compra = this.data.comision.id_compra;
     this.comisionSrv.createPago(frmPago)
       .subscribe(pago => {
