@@ -43,6 +43,22 @@
       </select>
     </div>
 
+    <div class="form-group">
+      <label class="form-label" for="precio_excedente">Comisión Vendedor (%)</label>
+      <input type="text" [textMask]="{mask: numbermask}" class="form-control" id="precio_excedente" formControlName="comision_vendedor">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="precio_excedente">Comisión Generente (%)</label>
+      <input type="text" [textMask]="{mask: numbermask}" class="form-control" id="precio_excedente" formControlName="comision_gerente">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="precio_excedente">Comisión Expediente (%)</label>
+      <input type="text" [textMask]="{mask: numbermask}" class="form-control" id="precio_excedente" formControlName="comision_expediente">
+    </div>
+
+
 
     <div class="form-group">
       <mat-slide-toggle formControlName="en_venta">En Venta</mat-slide-toggle>

@@ -106,6 +106,37 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                <label class="form-label">Comisión Vendedor (%)</label>
+                <div class="input-group">
+                    <input [textMask]="{mask: numbermask}" type="text" class="form-control" [formControl]="opComisionVendedor">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" (click)="updateComisionVendedor()" [disabled]=" manzana_selected==null || !selection[manzana_selected].selected.length  || opComisionVendedor.errors">Asignar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Comisión Generente (%)</label>
+                <div class="input-group">
+                    <input [textMask]="{mask: numbermask}" type="text" class="form-control" [formControl]="opComisionGerente">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" (click)="updateComisionGerente()" [disabled]=" manzana_selected==null || !selection[manzana_selected].selected.length  || opComisionGerente.errors">Asignar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Comisión Expediente (%)</label>
+                <div class="input-group">
+                    <input [textMask]="{mask: numbermask}" type="text" class="form-control" [formControl]="opComisionExpediente">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" (click)="updateComisionExpediente()" [disabled]=" manzana_selected==null || !selection[manzana_selected].selected.length  || opComisionExpediente.errors">Asignar</button>
+                    </div>
+                </div>
+            </div>
+
+
 
         </div>
 
@@ -199,6 +230,9 @@
                                                 <th>Tipo</th>
                                                 <th>Excedente(m)</th>
                                                 <th>Excedente($)</th>
+                                                <th>%V</th>
+                                                <th>%G</th>
+                                                <th>%E</th>
                                                 <th style="width: 90px"> </th>
 
                                             </tr>
@@ -224,6 +258,9 @@
                                                 <td>{{lote.irregular| numberToYesNo:'RI'}}</td>
                                                 <td>{{lote.metros_excedente| number}}</td>
                                                 <td>{{lote.precio_excedente| currency}}</td>
+                                                <td>{{lote.comision_vendedor}}</td>
+                                                <td>{{lote.comision_gerente}}</td>
+                                                <td>{{lote.comision_expediente}}</td>
                                                 <td class="text-right ws-nowrap">
 
                                                     <button mat-button class="no-min" (click)="editarLote(manzana,lote, $event)">
