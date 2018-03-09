@@ -169,7 +169,7 @@ export const ROUTES: Routes = [
                     tipos_operacion: TiposOperacionResolverService,
                     tipos_pago: TiposPagoResolverService,
                     estados: EstadosVentaLoteResolverService,
-                    vendedores: VendedoresResolverService
+                    //vendedores: VendedoresResolverService
                 }
             },
             { path: 'acta-entrega/:id', component: ActaEntregaComponent },
@@ -317,14 +317,12 @@ export const ROUTES: Routes = [
                 path: 'historial-apartados', component: HistorialApartadosComponent,
                 resolve: {
                     obras: ObrasUsuarioResolverService,
-                    vendedores: VendedoresResolverService
                 }
             },
             {
                 path: 'comisiones', component: ComisionesComponent,
                 resolve: {
                     obras: ObrasUsuarioResolverService,
-                    vendedores: VendedoresResolverService
                 }
             },
             {

@@ -224,11 +224,11 @@ export class EditarClienteComponent implements OnInit {
     });
 
   }
-
-  ngOnInit() {
-
+ 
+  ngOnInit() { 
+    /* vendedores:any */
     this.route.data
-      .subscribe((data: { obras: any[], formas_pago: any[], instituciones_credito: any[], tipos_operacion: any[], tipos_pago: any[], estados: any[], vendedores:any}) => {
+      .subscribe((data: { obras: any[], formas_pago: any[], instituciones_credito: any[], tipos_operacion: any[], tipos_pago: any[], estados: any[]}) => {
         //console.log("resultado resolve ", data);
         this.obras = data.obras;
         this.formas_pago = data.formas_pago;
@@ -236,7 +236,7 @@ export class EditarClienteComponent implements OnInit {
         this.tipos_operacion = data.tipos_operacion;
         this.tipos_pago = data.tipos_pago;
         this.estados = data.estados;
-        this.vendedores=data.vendedores;
+        //this.vendedores=data.vendedores;
       });
 
 

@@ -15,6 +15,103 @@
           Comisiones
         </div>
         <div>
+
+          <mat-accordion [displayMode]="'default'" multi="true">
+            <mat-expansion-panel [hideToggle]="true" *ngFor="let comision of comisiones" #panel>
+              <mat-expansion-panel-header [ngClass]="{'bg-primary text-white':panel.expanded}">
+                <span class="align-self-center">{{comision.manzana}} - {{comision.lote}}</span>
+                <div class="spacer"></div>
+                <div class="collapse-header-btns">
+                  <span class="badge badge-pill badge-secondary">V</span>
+                  <span class="badge badge-pill badge-secondary">G</span>
+                  <span class="badge badge-pill badge-secondary">E</span>
+                </div>
+              </mat-expansion-panel-header>
+
+              <div class="row">
+                <div class="col-12 col-sm-3 py-3">
+                  <div class="text-center">
+                    <h5 class="text-dark">
+                      {{comision.valor_operacion|currency}}
+                    </h5>
+                    <span>VALOR OPERACIÓN</span>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-3 py-3" [matTooltip]="comision.vendedor">
+                  <div class="text-center">
+                    <h5 class="text-dark">
+                      {{(comision.valor_operacion * (comision.comision_vendedor/100))|currency}}
+                    </h5>
+                    <span>VENDEDOR</span>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-3 py-3">
+                  <div class="text-center">
+                    <h5 class="text-dark">
+                      {{(comision.valor_operacion * (comision.comision_gerente/100))|currency}}
+                    </h5>
+                    <span>GERENTE</span>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-3 py-3">
+                  <div class="text-center">
+                    <h5 class="text-dark">
+                      {{(comision.valor_operacion * (comision.comision_expediente/100))|currency}}
+                    </h5>
+                    <span>EXPEDIENTE</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="table-responsive">
+                <table class="table table-striped table-sm table-align-middle mb-0">
+                  <thead>
+                    <tr>
+                      <th>Porcentaje</th>
+                      <th>Monto</th>
+                      <th>Fecha</th>
+                      <th>Destinatario</th>
+                      <th>Nota</th>
+                      <th class="text-right ws-nowrap">
+                        <button mat-button class="no-min" (click)="nuevoPago(comision)">
+                          <i class="fa fa-plus"></i>
+                        </button>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    <tr *ngIf="!comision.pagos.length">
+                      <td colspan="7" class="text-center">Ningún pago realizado</td>
+                    </tr>
+
+                    <tr *ngFor="let pago of comision.pagos">
+                      <td>{{pago.porcentaje /100 | percent:'1.2'}}</td>
+                      <td>{{ montoComision(comision, pago)|currency }}</td>
+                      <td class="ws-nowrap">{{pago.fecha | date:'mediumDate':'':'es'}}</td>
+                      <td>{{pago.destinatario}}</td>
+                      <td>{{pago.nota}}</td>
+                      <td class="text-right ws-nowrap">
+
+                        <button mat-button class="no-min" (click)="editarPago(pago, comision)">
+                          <i class="fa fa-pencil"></i>
+                        </button>
+                        <button mat-button class="no-min" (click)="delPago(pago, comision)">
+                          <i class="fa fa-times"></i>
+                        </button>
+
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+
+            </mat-expansion-panel>
+
+          </mat-accordion>
+
+          <!-- 
           <div class="table-responsive">
             <table class="table table-align-middle">
               <thead>
@@ -46,9 +143,9 @@
                     <td colspan="7" class="p-0">
                       <table class="table table-striped table-sm table-align-middle mb-0">
                         <thead class="thead-light">
-                          <!--  <tr>
+                          <tr>
                             <td colspan="6">{{comision.vendedor}}</td>
-                          </tr> -->
+                          </tr>
                           <tr>
                             <th>Porcentaje</th>
                             <th>Monto</th>
@@ -85,9 +182,9 @@
 
                             </td>
                           </tr>
-                          <!--    <tr *ngIf="seccion.colonias && seccion.colonias.length==0">
-                          <td style="padding-left: 55px">Ninguna colonia encontrada</td>
-                        </tr> -->
+                          <tr *ngIf="seccion.colonias && seccion.colonias.length==0">
+                            <td style="padding-left: 55px">Ninguna colonia encontrada</td>
+                          </tr>
                         </tbody>
                       </table>
                     </td>
@@ -96,7 +193,8 @@
 
               </tbody>
             </table>
-          </div>
+          </div> -->
+
         </div>
       </div>
 

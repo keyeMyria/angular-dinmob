@@ -22,6 +22,7 @@ export class CrearVendedorDialogoComponent implements OnInit {
       nombre: ["", Validators.required],
       email: [""],
       cel: ["", Validators.required],
+      id_obra: [data.obra.id_obra, Validators.required],
     });
   }
 

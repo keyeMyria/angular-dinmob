@@ -21,9 +21,9 @@ export class VendedorService {
   }
 
   //ok
-  getVendedores() {
-    return this.http.get(this.url + "get_vendedores")
-      .pipe(catchError(this.handleError("getVendedores")));
+  getVendedoresObra(id_obra) {
+    return this.http.get(this.url + "get_vendedores_obra/" + id_obra)
+      .pipe(catchError(this.handleError("getVendedoresObra")));
   }
 
   //ok

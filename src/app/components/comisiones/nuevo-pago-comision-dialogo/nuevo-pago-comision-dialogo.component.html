@@ -6,7 +6,7 @@
     <div class="form-group row">
       <label for="id_destinatario" class="col-sm-3 col-form-label">Destinatario</label>
       <div class="col-sm-9">
-        <select [(ngModel)]="comision" class="form-control" id="destinatario" name="destinatario" formControlName="destinatario"
+        <select class="form-control" id="destinatario" name="destinatario" formControlName="destinatario"
           [ngClass]="{'is-invalid': form.get('destinatario').invalid  && (form.get('destinatario').dirty || form.get('destinatario').touched) }">
           <option value="">Seleccionar...</option>
           <option value="Vendedor">Vendedor</option>

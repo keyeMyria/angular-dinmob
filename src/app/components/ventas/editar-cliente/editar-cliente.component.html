@@ -1092,7 +1092,7 @@
             <div class="col-sm-9">
               <select class="form-control" name="id_vendedor" formControlName="id_vendedor">
                 <option [value]="">Seleccionar...</option>
-                <option *ngFor="let v of vendedores" [value]="v.id_vendedor">{{v.nombre}}</option>
+                <option *ngFor="let v of compra_selected.vendedores" [value]="v.id_vendedor">{{v.nombre}}</option>
               </select>
             </div>
           </div>

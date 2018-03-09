@@ -17,49 +17,6 @@ export class ComisionesComponent implements OnInit {
   obras: any = [];
   obra_selected: string = "";
   comisiones: any = [];
-  vendedores: any = [];
-  /*
-   [
-    {
-      manzana: "1Mzn", lote: "Lote 1", valor_operacion: "1000", vendedor: "1000", gerente: "2000", expediente: "5000",
-      pagos: [
-        { monto: "1500", fecha: "12-feb-2018", destinatario: "Emilio" },
-        { monto: "1500", fecha: "12-feb-2018", destinatario: "Emilio" },
-        { monto: "1500", fecha: "12-feb-2018", destinatario: "Emilio" },
-        { monto: "1500", fecha: "12-feb-2018", destinatario: "Emilio" }
-      ]
-    },
-    {
-      manzana: "1Mzn", lote: "Lote 1", valor_operacion: "1000", vendedor: "1000", gerente: "2000", expediente: "5000",
-      pagos: [
-        { monto: "1500", fecha: "12-feb-2018", destinatario: "Emilio" },
-        { monto: "1500", fecha: "12-feb-2018", destinatario: "Emilio" },
-        { monto: "1500", fecha: "12-feb-2018", destinatario: "Emilio" },
-        { monto: "1500", fecha: "12-feb-2018", destinatario: "Emilio" }
-      ]
-    },
-    {
-      manzana: "1Mzn", lote: "Lote 1", valor_operacion: "1000", vendedor: "1000", gerente: "2000", expediente: "5000",
-      pagos: [
-        { monto: "1500", fecha: "12-feb-2018", destinatario: "Emilio" },
-        { monto: "1500", fecha: "12-feb-2018", destinatario: "Emilio" },
-        { monto: "1500", fecha: "12-feb-2018", destinatario: "Emilio" },
-        { monto: "1500", fecha: "12-feb-2018", destinatario: "Emilio" }
-      ]
-    },
-    {
-      manzana: "1Mzn", lote: "Lote 1", valor_operacion: "1000", vendedor: "1000", gerente: "2000", expediente: "5000",
-      pagos: [
-        { monto: "1500", fecha: "12-feb-2018", destinatario: "Emilio" },
-        { monto: "1500", fecha: "12-feb-2018", destinatario: "Emilio" },
-        { monto: "1500", fecha: "12-feb-2018", destinatario: "Emilio" },
-        { monto: "1500", fecha: "12-feb-2018", destinatario: "Emilio" }
-      ]
-    },
-    { manzana: "1Mzn", lote: "Lote 1", valor_operacion: "1000", vendedor: "1000", gerente: "2000", expediente: "5000" }
-  ];
-  */
-
 
 
   constructor(
@@ -74,7 +31,6 @@ export class ComisionesComponent implements OnInit {
     this.route.data
       .subscribe((data: { obras: any[], vendedores: any[] }) => {
         this.obras = data.obras;
-        this.vendedores = data.vendedores;
 
       });
 
@@ -126,7 +82,6 @@ export class ComisionesComponent implements OnInit {
 
     let dialogRef = this.dialog.open(NuevoPagoComisionDialogoComponent, {
       data: {
-        vendedores: this.vendedores,
         comision: comision
       },
       width: "500px"
@@ -155,8 +110,7 @@ export class ComisionesComponent implements OnInit {
     let dialogRef = this.dialog.open(EditarPagoComisionDialogoComponent, {
       data: {
         comision: comision,
-        pago: pago,
-        vendedores: this.vendedores,
+        pago: pago
       },
       width: "500px"
     });

@@ -26,7 +26,7 @@ export class NuevoPagoComisionDialogoComponent implements OnInit {
   ) {
     this.form = this.fb.group({
       //monto: [""],
-      fecha: [moment("", "YYYY-MM-DD"), Validators.required],
+      fecha: [moment(), Validators.required],
       destinatario: ["", Validators.required],
       nota: "",
       porcentaje:["", Validators.required]

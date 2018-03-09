@@ -36,7 +36,7 @@ export class VendedoresComponent implements OnInit {
       .switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
-          return this.vendedorSrv.getVendedores();
+          return this.vendedorSrv.getVendedoresObra(params.get("obra"));
         } else {
           return of([]);
         }
@@ -57,8 +57,13 @@ export class VendedoresComponent implements OnInit {
   }
 
   agregarVendedor() {
+    
+    let obra = this.obras.find(obra => obra.id_obra == this.obra_selected);
+    console.log("obra seleccionada", this.obra_selected, obra);
+
     let dialogRef = this.dialog.open(CrearVendedorDialogoComponent, {
       data: {
+        obra: obra,
         vendedores: this.vendedores
       },
       width: "500px"
