@@ -179,6 +179,22 @@ export class ComisionesComponent implements OnInit {
     });
   }
 
+  pagoComisionCompleto(comision, destinatario) {
+    let completo = false;
+    let total = 0;
+    comision.pagos.forEach(pago => {
+      //console.log("", pago);
+      if (pago.destinatario == destinatario) {
+        total += +pago.porcentaje;
+      }
+    });
+    if (total >= 100) {
+      completo = true;
+    }
+    //console.log("", destinatario, total, completo);
+    return completo;
+  }
+
 }
 
 
