@@ -71,7 +71,7 @@
 
               <div class="form-group">
                 <div>
-                  <button mat-raised-button type="submit" color="primary" form="id_formHistorial" [disabled]="form.invalid">Avances</button>
+                  <button mat-raised-button class="btn btn-primary btn-lg btn-block" type="submit" color="primary" form="id_formHistorial" [disabled]="form.invalid">Avances</button>
                 </div>
               </div>
             </div>
@@ -96,7 +96,7 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="pago" class="form-label">Pago</label>
+                  <label for="pago" class="form-label">Monto</label>
                   <input [textMask]="{mask: numbermask}" class="form-control" type="text" id="pago" name="pago" formControlName="pago" [ngClass]="{'is-invalid': formNuevo.get('pago').invalid  && (formNuevo.get('pago').dirty || formNuevo.get('pago').touched )}">
                   <div class="invalid-feedback">Proporcione un monto válido</div>
                 </div>
@@ -128,7 +128,7 @@
 
               <div class="form-group">
                 <div>
-                  <button mat-raised-button color="primary" type="submit" form="id_formNuevo" [disabled]="formNuevo.invalid">Guardar</button>
+                  <button mat-raised-button class="btn btn-primary btn-lg btn-block" color="primary" type="submit" form="id_formNuevo" [disabled]="formNuevo.invalid">Guardar</button>
                 </div>
               </div>
             </div>
@@ -138,7 +138,7 @@
         <div class="col">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Avances Periodos</h5>
+              <h5 class="card-title">Avances Período</h5>
 
               <div class="table-responsive">
                 <table class="table table-hover table-striped">
