@@ -21,7 +21,31 @@ export class PagosTrabajadoresComponent implements OnInit {
   obras: any = [];
   obra_selected: string = "";
   formNuevo: FormGroup;
+  form: FormGroup;
   trabajadores: any = [];
+  historiales = [
+    { fecha: "12-04-2018", pago: "4000", tipo: "Efectivo", nota: "ninguna" },
+    { fecha: "12-04-2018", pago: "4000", tipo: "Efectivo", nota: "ninguna" },
+    { fecha: "12-04-2018", pago: "4000", tipo: "Efectivo", nota: "ninguna" },
+    { fecha: "12-04-2018", pago: "4000", tipo: "Efectivo", nota: "ninguna" },
+  ];
+  avances = [
+    { manzana: "MZN 1", lote: "Lote 1", partida: "Partida 1", subpartida: "Subpartida 1", fecha: "12.04-2018", importe: "5000", retencion: "2000", liberacion: "3000", neto: "5000" },
+    { manzana: "MZN 1", lote: "Lote 1", partida: "Partida 1", subpartida: "Subpartida 1", fecha: "12.04-2018", importe: "5000", retencion: "2000", liberacion: "3000", neto: "5000" },
+    { manzana: "MZN 1", lote: "Lote 1", partida: "Partida 1", subpartida: "Subpartida 1", fecha: "12.04-2018", importe: "5000", retencion: "2000", liberacion: "3000", neto: "5000" },
+    { manzana: "MZN 1", lote: "Lote 1", partida: "Partida 1", subpartida: "Subpartida 1", fecha: "12.04-2018", importe: "5000", retencion: "2000", liberacion: "3000", neto: "5000" },
+    { manzana: "MZN 1", lote: "Lote 1", partida: "Partida 1", subpartida: "Subpartida 1", fecha: "12.04-2018", importe: "5000", retencion: "2000", liberacion: "3000", neto: "5000" },
+    { manzana: "MZN 1", lote: "Lote 1", partida: "Partida 1", subpartida: "Subpartida 1", fecha: "12.04-2018", importe: "5000", retencion: "2000", liberacion: "3000", neto: "5000" }
+  ];
+
+  pagos = [
+    { generado_neto: "5000", pagado: "1500", pendiente: "3500" }
+  ];
+
+  pagos_avances = [
+    { generado: "5000", retenciones: "1500", liberaciones: "3500", generado_neto_avances: "5000" }
+  ]
+
 
   constructor(
     private router: Router,
@@ -30,16 +54,24 @@ export class PagosTrabajadoresComponent implements OnInit {
     private trabajadorSrv: TrabajadorService
   ) {
     this.formNuevo = this.fb.group({
-     /*  obra: ["", Validators.required],      
-      fecha_inicio: [moment(""), Validators.required],
-      fecha_fin: [moment(""), Validators.required],
-      inicio_obra: [""], */
 
-      id_trabajador: ["", Validators.required],
-      trabajador_nuevo_pago: ["", Validators.required],
-      pago: ["", Validators.required],              
-      fecha_pago: [moment(""), Validators.required],      
-      nota: [""],
+
+      id_trabajador: [null, Validators.required],
+      pago: [null, Validators.required],
+      fecha_pago: [moment(null), Validators.required],
+      nota: [null],
+    });
+
+    this.form = this.fb.group({
+      obra: [null, Validators.required],
+      trabajador_historial: [null, Validators.required],
+      inicio_obra: null,
+      fecha_inicio: [null, Validators.required],
+      fecha_fin: [null, Validators.required]
+
+
+
+
     });
   }
 
@@ -75,7 +107,11 @@ export class PagosTrabajadoresComponent implements OnInit {
   }
 
   createPago() {
+    console.log("Crear Pago", this.formNuevo.value)
+  }
 
+  getAvancesHistorial() {
+    console.log("ok", this.form.value)
   }
 
 }

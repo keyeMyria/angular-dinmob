@@ -1,385 +1,361 @@
-<div class="container">
-  <div class="row">
-    <div class="col-12">
+<mat-tab-group>
 
 
-      <!--       <div>
-        <mat-form-field class="w-100">
-          <mat-select placeholder="Obra" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)">
-            <mat-option *ngFor="let obra of obras" [value]="obra.id_obra">{{ obra.nombre }}</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div> -->
+  <mat-tab label="Pagos">
+    <div class="container pt-3">
 
-      <mat-tab-group>
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Seleccione Trabajador</h5>
 
+              <form [formGroup]="form" (ngSubmit)="getAvancesHistorial()" id="id_formHistorial">
 
-        <mat-tab label="Pagos">
-          <div class="container pt-3">
+                <div class="mb-2">
+                  <label for="obra" class="form-label">Obra</label>
+                  <select class="form-control" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)" formControlName="obra" [ngClass]="{'is-invalid': form.get('obra').invalid  && (form.get('obra').dirty || form.get('obra').touched )}">
+                    <option value="">Seleccionar...</option>
+                    <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>
+                  </select>
+                  <div class="invalid-feedback">Seleccione una obra</div>
+                </div>
 
-            <div class="row">
+                <div class="form-group">
+                  <label for="trabajador_historial" class="form-label">Trabajador</label>
+                  <select class="form-control" id="trabajador_historial" name="trabajador_historial" formControlName="trabajador_historial"
+                    [ngClass]="{'is-invalid': form.get('trabajador_historial').invalid  && (form.get('trabajador_historial').dirty || form.get('trabajador_historial').touched )}">
+                    <option value="">Seleccionar...</option>
+                    <option [value]="trabajador.id_trabajador" *ngFor="let trabajador of trabajadores">{{trabajador.nombre}}</option>
+                  </select>
+                  <div class="invalid-feedback">Seleccione trabajador</div>
+                </div>
 
-              <div class="col">
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title">Seleccione Trabajador</h5>
+                <mat-checkbox formControlName="inicio_obra">Inicio Obra</mat-checkbox>
 
-                    <form [formGroup]="form" (ngSubmit)="createPago()">
-
-                      <div class="mb-2">
-                        <label for="trabajador" class="form-label">Obra</label>
-                        <select class="form-control" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)" formControlName="obra" [ngClass]="{'is-invalid': form.get('obra').invalid  && (form.get('obra').dirty || form.get('obra').touched )}">
-                          <option value="">Seleccionar...</option>
-                          <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>
-                        </select>
-                        <div class="invalid-feedback">Seleccione una obra</div>
-                      </div>
-
-                      <div class="form-group">
-                        <label for="id_trabajador" class="form-label">Trabajador</label>
-                        <select class="form-control" id="id_trabajador" name="id_trabajador" formControlName="id_trabajador" [ngClass]="{'is-invalid': form.get('id_trabajador').invalid  && (form.get('id_trabajador').dirty || form.get('id_trabajador').touched )}">
-                          <option value="">Seleccionar...</option>
-                          <option [value]="trabajador.id_trabajador" *ngFor="let trabajador of trabajadores">{{trabajador.nombre}}</option>
-                        </select>
-                        <div class="invalid-feedback">Seleccione trabajador</div>
-                      </div>
-
-                      <mat-checkbox formControlName="inicio_obra">Inicio Obra</mat-checkbox>
-
-                      <div class="form-group">
-                        <label for="fecha_inicio" class="form-label">Fecha Inicio</label>
-                        <div class="input-group">
-                          <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="fecha_inicio" placement="bottom-left" [matDatepicker]="dpFechaInicio"
-                            formControlName="fecha_inicio" [ngClass]="{'is-invalid':form.get('fecha_inicio').invalid && (form.get('fecha_inicio').dirty || form.get('fecha_inicio').touched )}">
-                          <span class="input-group-append">
-                            <button class="btn btn-secondary" type="button" (click)="dpFechaInicio.open()">
-                              <i class="fa fa-calendar"></i>
-                            </button>
-                          </span>
-                        </div>
-                        <div *ngIf="form.get('fecha_inicio').invalid && (form.get('fecha_inicio').dirty || form.get('fecha_inicio').touched )" class="visible invalid-feedback">
-                          Seleccione una fecha
-                        </div>
-                        <mat-datepicker touchUi="true" #dpFechaInicio></mat-datepicker>
-                      </div>
-
-                      <div class="form-group">
-                        <label for="fecha_fin" class="form-label">Fecha Fin</label>
-                        <div class="input-group">
-                          <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="fecha_fin" placement="bottom-left" [matDatepicker]="dpFechaFin"
-                            formControlName="fecha_fin" [ngClass]="{'is-invalid':form.get('fecha_fin').invalid && (form.get('fecha_fin').dirty || form.get('fecha_fin').touched )}">
-                          <span class="input-group-append">
-                            <button class="btn btn-secondary" type="button" (click)="dpFechaFin.open()">
-                              <i class="fa fa-calendar"></i>
-                            </button>
-                          </span>
-                        </div>
-                        <div *ngIf="form.get('fecha_fin').invalid && (form.get('fecha_fin').dirty || form.get('fecha_fin').touched )" class="visible invalid-feedback">
-                          Seleccione una fecha
-                        </div>
-                        <mat-datepicker touchUi="true" #dpFechaFin></mat-datepicker>
-                      </div>
-
-                    </form>
-
-                    <div class="form-group">
-                      <div>
-                        <button mat-raised-button type="submit" color="primary">Avances</button>
-                        <button mat-raised-button type="submit" color="primary">Historial</button>
-                      </div>
-                    </div>
+                <div class="form-group">
+                  <label for="fecha_inicio" class="form-label">Fecha Inicio</label>
+                  <div class="input-group">
+                    <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="fecha_inicio" placement="bottom-left" [matDatepicker]="dpFechaInicio"
+                      formControlName="fecha_inicio" [ngClass]="{'is-invalid':form.get('fecha_inicio').invalid && (form.get('fecha_inicio').dirty || form.get('fecha_inicio').touched )}">
+                    <span class="input-group-append">
+                      <button class="btn btn-secondary" type="button" (click)="dpFechaInicio.open()">
+                        <i class="fa fa-calendar"></i>
+                      </button>
+                    </span>
                   </div>
+                  <div *ngIf="form.get('fecha_inicio').invalid && (form.get('fecha_inicio').dirty || form.get('fecha_inicio').touched )" class="visible invalid-feedback">
+                    Seleccione una fecha
+                  </div>
+                  <mat-datepicker touchUi="true" #dpFechaInicio></mat-datepicker>
+                </div>
+
+                <div class="form-group">
+                  <label for="fecha_fin" class="form-label">Fecha Fin</label>
+                  <div class="input-group">
+                    <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="fecha_fin" placement="bottom-left" [matDatepicker]="dpFechaFin"
+                      formControlName="fecha_fin" [ngClass]="{'is-invalid':form.get('fecha_fin').invalid && (form.get('fecha_fin').dirty || form.get('fecha_fin').touched )}">
+                    <span class="input-group-append">
+                      <button class="btn btn-secondary" type="button" (click)="dpFechaFin.open()">
+                        <i class="fa fa-calendar"></i>
+                      </button>
+                    </span>
+                  </div>
+                  <div *ngIf="form.get('fecha_fin').invalid && (form.get('fecha_fin').dirty || form.get('fecha_fin').touched )" class="visible invalid-feedback">
+                    Seleccione una fecha
+                  </div>
+                  <mat-datepicker touchUi="true" #dpFechaFin></mat-datepicker>
+                </div>
+
+              </form>
+
+              <div class="form-group">
+                <div>
+                  <button mat-raised-button type="submit" color="primary" form="id_formHistorial" [disabled]="form.invalid">Avances</button>
                 </div>
               </div>
-
-              <div class="col">
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title">Nuevo Pago</h5>
-
-                    <form [formGroup]="form" (ngSubmit)="createPago()">
-
-
-                      <div class="form-group">
-                        <label for="id_trabajador" class="form-label">Trabajador</label>
-                        <select class="form-control" id="id_trabajador" name="id_trabajador" formControlName="id_trabajador" [ngClass]="{'is-invalid': form.get('id_trabajador').invalid  && (form.get('id_trabajador').dirty || form.get('id_trabajador').touched )}">
-                          <option value="">Seleccionar...</option>
-                          <option [value]="trabajador.id_trabajador" *ngFor="let trabajador of trabajadores">{{trabajador.nombre}}</option>
-                        </select>
-                        <div class="invalid-feedback">Seleccione trabajador</div>
-                      </div>
-
-                      <div class="form-group">
-                        <label for="pago" class="form-label">Pago</label>
-                        <input [textMask]="{mask: numbermask}" class="form-control" type="text" id="pago" name="pago" formControlName="pago" [ngClass]="{'is-invalid': form.get('pago').invalid  && (form.get('pago').dirty || form.get('pago').touched )}">
-                        <div class="invalid-feedback">Proporcione un monto válido</div>
-                      </div>
-
-                      <div class="form-group">
-                        <label for="fecha_pago" class="form-label">Fecha Pago</label>
-                        <div class="input-group">
-                          <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="fecha_pago" placement="bottom-left" [matDatepicker]="dpFechaPago"
-                            formControlName="fecha_pago" [ngClass]="{'is-invalid':form.get('fecha_pago').invalid && (form.get('fecha_pago').dirty || form.get('fecha_pago').touched )}">
-                          <span class="input-group-append">
-                            <button class="btn btn-secondary" type="button" (click)="dpFechaPago.open()">
-                              <i class="fa fa-calendar"></i>
-                            </button>
-                          </span>
-                        </div>
-                        <div *ngIf="form.get('fecha_pago').invalid && (form.get('fecha_pago').dirty || form.get('fecha_pago').touched )" class="visible invalid-feedback">
-                          Seleccione una fecha
-                        </div>
-                        <mat-datepicker touchUi="true" #dpFechaPago></mat-datepicker>
-                      </div>
-
-                      <div class="form-group">
-                        <label for="nota" class="col-form-label">Nota</label>
-                        <input type="text" class="form-control" id="nota" name="nota" formControlName="nota">
-                      </div>
-
-                    </form>
-
-                    <div class="form-group">
-                      <div>
-                        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Guardar</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col">
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title">Avances Periodos</h5>
-
-                    <div class="table-responsive">
-                      <table class="table table-hover table-striped">
-                        <thead>
-                          <tr>
-                            <th>Trabajador</th>
-                            <th></th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>Generador</td>
-                            <td class="text-right">
-                              <span class="badge badge-primary badge-pill">14</span>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>Liberaciones</td>
-                            <td class="text-right">
-                              <span class="badge badge-primary badge-warning badge-pill">14</span>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>Retenciones</td>
-                            <td class="text-right">
-                              <span class="badge badge-primary badge-danger badge-pill">14</span>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>Generado Neto</td>
-                            <td class="text-right">
-                              <span class="badge badge-success badge-pill">14</span>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-                <div class="card mt-2">
-                  <div class="card-body">
-                    <h5 class="card-title">Histórico</h5>
-
-                    <div class="table-responsive">
-                      <table class="table table-hover table-striped">
-                        <thead>
-                          <tr>
-                            <th>Trabajador</th>
-                            <th></th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>Generado Neto</td>
-                            <td class="text-right">
-                              <span class="badge badge-success badge-pill">14</span>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>Pagado</td>
-                            <td class="text-right">
-                              <span class="badge badge-primary badge-warning badge-pill">14</span>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>Pendiente</td>
-                            <td class="text-right">
-                              <span class="badge badge-primary badge-danger badge-pill">14</span>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
             </div>
           </div>
+        </div>
 
-        </mat-tab>
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Nuevo Pago</h5>
+
+              <form [formGroup]="formNuevo" (ngSubmit)="createPago()" id="id_formNuevo">
 
 
+                <div class="form-group">
+                  <label for="id_trabajador" class="form-label">Trabajador</label>
+                  <select class="form-control" id="id_trabajador" name="id_trabajador" formControlName="id_trabajador" [ngClass]="{'is-invalid': formNuevo.get('id_trabajador').invalid  && (formNuevo.get('id_trabajador').dirty || formNuevo.get('id_trabajador').touched )}">
+                    <option value="">Seleccionar...</option>
+                    <option [value]="trabajador.id_trabajador" *ngFor="let trabajador of trabajadores">{{trabajador.nombre}}</option>
+                  </select>
+                  <div class="invalid-feedback">Seleccione trabajador</div>
+                </div>
 
-        <mat-tab label="Avances">
+                <div class="form-group">
+                  <label for="pago" class="form-label">Pago</label>
+                  <input [textMask]="{mask: numbermask}" class="form-control" type="text" id="pago" name="pago" formControlName="pago" [ngClass]="{'is-invalid': formNuevo.get('pago').invalid  && (formNuevo.get('pago').dirty || formNuevo.get('pago').touched )}">
+                  <div class="invalid-feedback">Proporcione un monto válido</div>
+                </div>
 
-          <div class="container pt-3">
+                <div class="form-group">
+                  <label for="fecha_pago" class="form-label">Fecha Pago</label>
+                  <div class="input-group">
+                    <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="fecha_pago" placement="bottom-left" [matDatepicker]="dpFechaPago"
+                      formControlName="fecha_pago" [ngClass]="{'is-invalid':formNuevo.get('fecha_pago').invalid && (formNuevo.get('fecha_pago').dirty || formNuevo.get('fecha_pago').touched )}">
+                    <span class="input-group-append">
+                      <button class="btn btn-secondary" type="button" (click)="dpFechaPago.open()">
+                        <i class="fa fa-calendar"></i>
+                      </button>
+                    </span>
+                  </div>
+                  <div *ngIf="formNuevo.get('fecha_pago').invalid && (formNuevo.get('fecha_pago').dirty || formNuevo.get('fecha_pago').touched )"
+                    class="visible invalid-feedback">
+                    Seleccione una fecha
+                  </div>
+                  <mat-datepicker touchUi="true" #dpFechaPago></mat-datepicker>
+                </div>
 
-            <div class="table-responsive">
-              <table class="table table-hover table-striped">
-                <thead>
-                  <tr>
-                    <th>Manzana</th>
-                    <th>Lote</th>
-                    <th>Partida</th>
-                    <th>Subpartida</th>
-                    <th>Fecha</th>
-                    <th>Importe</th>
-                    <th>Retención</th>
-                    <th>Liberación</th>
-                    <th>Neto</th>
-                  </tr>
-                </thead>
+                <div class="form-group">
+                  <label for="nota" class="col-form-label">Nota</label>
+                  <input type="text" class="form-control" id="nota" name="nota" formControlName="nota">
+                </div>
 
-                <tbody>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
+              </form>
 
-                </tbody>
-              </table>
-
-            </div>
-            <div class="row">
-
-              <div class="col-12 col-sm-3 py-1">
-                <div class="text-center">
-                  <h5 class="text-success">
-                    $0
-                  </h5>
-                  <span>GENERADO</span>
+              <div class="form-group">
+                <div>
+                  <button mat-raised-button color="primary" type="submit" form="id_formNuevo" [disabled]="formNuevo.invalid">Guardar</button>
                 </div>
               </div>
-
-              <div class="col-12 col-sm-3 py-1">
-                <div class="text-center">
-                  <h5 class="text-danger">
-                    $0
-                  </h5>
-                  <span>-RETENCIONES</span>
-                </div>
-              </div>
-
-              <div class="col-12 col-sm-3 py-1">
-                <div class="text-center">
-                  <h5 class="text-primary">
-                    $0
-                  </h5>
-                  <span>+LIBERACIONES</span>
-                </div>
-              </div>
-
-              <div class="col-12 col-sm-3 py-1">
-                <div class="text-center">
-                  <h5 class="text-success">
-                    $0
-                  </h5>
-                  <span>=SALDO PENDIENTE</span>
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-
-
-        </mat-tab>
-
-        <mat-tab label="Historal">
-
-          <div class="container pt-3">
-            <div class="table-responsive">
-              <table class="table table-hover table-striped">
-                <thead>
-                  <tr>
-                    <th>Fecha</th>
-                    <th>Pago</th>
-                    <th>Tipo</th>
-                    <th>Notas</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-
-                </tbody>
-              </table>
-            </div>
-            <div class="row">
-
-              <div class="col-12 col-sm-4 py-1">
-                <div class="text-center">
-                  <h5 class="text-success">
-                    $0
-                  </h5>
-                  <span>GENERADO NETO</span>
-                </div>
-              </div>
-
-              <div class="col-12 col-sm-4 py-1">
-                <div class="text-center">
-                  <h5 class="text-primary">
-                    $0
-                  </h5>
-                  <span>-PAGADO</span>
-                </div>
-              </div>
-
-              <div class="col-12 col-sm-4 py-1">
-                <div class="text-center">
-                  <h5 class="text-danger">
-                    $0
-                  </h5>
-                  <span>=PENDIENTE</span>
-                </div>
-              </div>
-
             </div>
           </div>
+        </div>
 
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Avances Periodos</h5>
 
-        </mat-tab>
+              <div class="table-responsive">
+                <table class="table table-hover table-striped">
+                  <thead>
+                    <tr>
+                      <th>Trabajador</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Generado</td>
+                      <td class="text-right">
+                        <span class="badge badge-primary badge-pill">14</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Liberaciones</td>
+                      <td class="text-right">
+                        <span class="badge badge-primary badge-warning badge-pill">14</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Retenciones</td>
+                      <td class="text-right">
+                        <span class="badge badge-primary badge-danger badge-pill">14</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Generado Neto</td>
+                      <td class="text-right">
+                        <span class="badge badge-success badge-pill">14</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="card mt-2">
+            <div class="card-body">
+              <h5 class="card-title">Histórico</h5>
 
-      </mat-tab-group>
+              <div class="table-responsive">
+                <table class="table table-hover table-striped">
+                  <thead>
+                    <tr>
+                      <th>Trabajador</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Generado Neto</td>
+                      <td class="text-right">
+                        <span class="badge badge-success badge-pill">14</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Pagado</td>
+                      <td class="text-right">
+                        <span class="badge badge-primary badge-warning badge-pill">14</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Pendiente</td>
+                      <td class="text-right">
+                        <span class="badge badge-primary badge-danger badge-pill">14</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </mat-tab>
+
+  <mat-tab label="Avances">
+
+    <div class="container pt-3">
+
+      <div class="row" *ngFor="let pago of pagos_avances">
+        <div class="col-12 col-sm-3 py-1">
+          <div class="text-center">
+            <h5 class="text-success">
+              {{pago.generado | currency}}
+            </h5>
+            <span>GENERADO</span>
+          </div>
+        </div>
+        <div class="col-12 col-sm-3 py-1">
+          <div class="text-center">
+            <h5 class="text-danger">
+              {{pago.retenciones | currency}}
+            </h5>
+            <span>-RETENCIONES</span>
+          </div>
+        </div>
+        <div class="col-12 col-sm-3 py-1">
+          <div class="text-center">
+            <h5 class="text-primary">
+              {{pago.liberaciones | currency}}
+            </h5>
+            <span>+LIBERACIONES</span>
+          </div>
+        </div>
+        <div class="col-12 col-sm-3 py-1">
+          <div class="text-center">
+            <h5 class="text-success">
+              {{pago.generado_neto_avances | currency}}
+            </h5>
+            <span>=GENERADO NETO</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-hover table-striped">
+          <thead>
+            <tr>
+              <th>Manzana</th>
+              <th>Lote</th>
+              <th>Partida</th>
+              <th>Subpartida</th>
+              <th>Fecha</th>
+              <th>Importe</th>
+              <th>Retención</th>
+              <th>Liberación</th>
+              <th>Neto</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let avance of avances">
+              <td>{{avance.manzana}}</td>
+              <td>{{avance.lote}}</td>
+              <td>{{avance.partida}}</td>
+              <td>{{avance.subpartida}}</td>
+              <td>{{avance.fecha}}</td>
+              <td>{{avance.importe | currency}}</td>
+              <td>{{avance.retencion | currency}}</td>
+              <td>{{avance.liberacion | currency}}</td>
+              <td>{{avance.neto | currency}}</td>
+            </tr>
+
+          </tbody>
+        </table>
+
+      </div>
+
 
     </div>
-  </div>
-</div>
+
+
+  </mat-tab>
+
+  <mat-tab label="Historal">
+
+    <div class="container pt-3">
+
+      <div class="row" *ngFor="let pago of pagos">
+        <div class="col-12 col-sm-4 py-1">
+          <div class="text-center">
+            <h5 class="text-success">
+              {{pago.generado_neto | currency}}
+            </h5>
+            <span>GENERADO NETO</span>
+          </div>
+        </div>
+        <div class="col-12 col-sm-4 py-1">
+          <div class="text-center">
+            <h5 class="text-primary">
+              {{pago.pagado | currency}}
+            </h5>
+            <span>-PAGADO</span>
+          </div>
+        </div>
+        <div class="col-12 col-sm-4 py-1">
+          <div class="text-center">
+            <h5 class="text-danger">
+              {{pago.pendiente| currency}}
+            </h5>
+            <span>=PENDIENTE</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-hover table-striped">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Pago</th>
+              <th>Tipo</th>
+              <th>Notas</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let historial of historiales">
+              <td>{{historial.fecha}}</td>
+              <td>{{historial.pago|currency}}</td>
+              <td>{{historial.tipo}}</td>
+              <td>{{historial.nota}}</td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+  </mat-tab>
+
+</mat-tab-group>
