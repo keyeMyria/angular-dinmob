@@ -18,7 +18,7 @@ export class VendedoresResolverService implements Resolve<any[]>{
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any[]> {
 
 
-    return this.vendedorSrv.getVendedores().take(1).map((vendedores: any[]) => {
+    return this.vendedorSrv.getVendedoresObra(route.params.get('obra')).take(1).map((vendedores: any[]) => {
 
       //console.log("resolver vendedores", vendedores);
 
