@@ -9,9 +9,7 @@
         <select class="form-control" id="destinatario" name="destinatario" formControlName="destinatario"
           [ngClass]="{'is-invalid': form.get('destinatario').invalid  && (form.get('destinatario').dirty || form.get('destinatario').touched) }">
           <option value="">Seleccionar...</option>
-          <option value="Vendedor">Vendedor</option>
-          <option value="Gerente">Gerente</option>
-          <option value="Expediente">Expediente</option>
+          <option [value]="item.destinatario" *ngFor="let item of data.destinatarios">{{item.destinatario}}</option>          
         </select>
         <div class="invalid-feedback">Seleccione un destinatario</div>
       </div>
@@ -31,7 +29,7 @@
     <div class="form-group row">
       <label for="monto" class="col-sm-3 col-form-label">Monto</label>
       <div class="col-sm-9">
-        <input type="text" class="form-control" name="monto" id="monto" [value]="data.comision.valor_operacion * comision * (form.get('porcentaje').value/100) | currency"
+        <input type="text" class="form-control" name="monto" id="monto" [value]="calcMonto() | currency"
           readonly>
       </div>
     </div>
