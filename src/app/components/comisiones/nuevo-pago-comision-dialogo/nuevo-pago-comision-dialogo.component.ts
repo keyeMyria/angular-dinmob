@@ -29,7 +29,7 @@ export class NuevoPagoComisionDialogoComponent implements OnInit {
       fecha: [moment(), Validators.required],
       destinatario: ["", Validators.required],
       nota: "",
-      porcentaje:["", Validators.required]
+      porcentaje: ["", Validators.required]
     });
   }
 
@@ -41,7 +41,19 @@ export class NuevoPagoComisionDialogoComponent implements OnInit {
   }
 
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  calcMonto() {
+    let monto = 0;
+    if (this.form.get("destinatario").value) {
+      let destinatario = this.data.destinatarios.find(d => d.destinatario == this.form.get("destinatario").value);
+      //console.log("dest", destinatario);
+
+
+      monto = this.data.comision.valor_operacion * (destinatario.comision/100) * (this.form.get('porcentaje').value / 100)
+    }
+    return monto;
+
   }
 
   guardar() {

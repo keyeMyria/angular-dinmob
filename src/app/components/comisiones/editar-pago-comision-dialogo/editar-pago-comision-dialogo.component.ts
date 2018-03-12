@@ -36,8 +36,21 @@ export class EditarPagoComisionDialogoComponent implements OnInit {
   ngOnInit() {
   }
 
+  calcMonto() {
+    let monto = 0;
+    if (this.form.get("destinatario").value) {
+      let destinatario = this.data.destinatarios.find(d => d.destinatario == this.form.get("destinatario").value);
+      //console.log("dest", destinatario);
+
+
+      monto = this.data.comision.valor_operacion * (destinatario.comision/100) * (this.form.get('porcentaje').value / 100)
+    }
+    return monto;
+
+  }
+
   guardar() {
-    console.log("ok", this.form.value);
+    /* console.log("ok", this.form.value); */
 
     this.comisionSrv.updatePago(this.data.pago.id_pago, this.form.value)
       .subscribe(pago => {

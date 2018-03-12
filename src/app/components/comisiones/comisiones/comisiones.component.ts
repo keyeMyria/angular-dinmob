@@ -80,9 +80,19 @@ export class ComisionesComponent implements OnInit {
 
   nuevoPago(comision) {
 
+    let destinatarios = [];
+
+    destinatarios.push({ destinatario: "Vendedor", comision: comision.comision_vendedor });
+    destinatarios.push({ destinatario: "Gerente", comision: comision.comision_gerente });
+    destinatarios.push({ destinatario: "Expediente", comision: comision.comision_expediente });
+
+    //console.log("destinatarios", destinatarios);
+
+
     let dialogRef = this.dialog.open(NuevoPagoComisionDialogoComponent, {
       data: {
-        comision: comision
+        comision: comision,
+        destinatarios: destinatarios
       },
       width: "500px"
     });
@@ -107,10 +117,18 @@ export class ComisionesComponent implements OnInit {
   }
 
   editarPago(pago, comision) {
+    let destinatarios = [];
+
+    destinatarios.push({ destinatario: "Vendedor", comision: comision.comision_vendedor });
+    destinatarios.push({ destinatario: "Gerente", comision: comision.comision_gerente });
+    destinatarios.push({ destinatario: "Expediente", comision: comision.comision_expediente });
+
+
     let dialogRef = this.dialog.open(EditarPagoComisionDialogoComponent, {
       data: {
         comision: comision,
-        pago: pago
+        pago: pago,
+        destinatarios: destinatarios
       },
       width: "500px"
     });
