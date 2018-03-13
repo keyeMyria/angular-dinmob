@@ -17,39 +17,42 @@
           Historial Apartados
         </div>
 
+       <!--  filtros -->
         <div class="form-inline mt-1">
 
+          <!-- fecha ini -->
           <div class="input-group mx-2 mb-1">
             <div class="input-group-prepend">
               <span class="input-group-text">Del</span>
             </div>
-            <input class="form-control" placeholder="yyyy-mm-dd" type="text" [matDatepicker]="dpFechaDel">
+            <input class="form-control" placeholder="yyyy-mm-dd" type="text" #del [matDatepicker]="dpFechaDel" (dateChange)="filtro(del, al, vendedor_selected)" >
             <div class="input-group-append">
               <button class="btn btn-secondary" type="button" (click)="dpFechaDel.open()">
                 <i class="fa fa-calendar"></i>
               </button>
             </div>
           </div>
-          <mat-datepicker touchUi="true" #dpFechaDel></mat-datepicker>
+          <mat-datepicker touchUi="true" #dpFechaDel  ></mat-datepicker>
 
-
+          <!-- fecha fin -->
           <div class="input-group mx-2 mb-1">
             <div class="input-group-prepend">
               <span class="input-group-text">Al</span>
             </div>
-            <input class="form-control" placeholder="yyyy-mm-dd" type="text" [matDatepicker]="dpFechaAl">
+            <input class="form-control" placeholder="yyyy-mm-dd" type="text" #al [matDatepicker]="dpFechaAl" (dateChange)="filtro(del, al, vendedor_selected)" >
             <div class="input-group-append">
               <button class="btn btn-secondary" type="button" (click)="dpFechaAl.open()">
                 <i class="fa fa-calendar"></i>
               </button>
             </div>
           </div>
-          <mat-datepicker touchUi="true" #dpFechaAl></mat-datepicker>
+          <mat-datepicker touchUi="true" #dpFechaAl ></mat-datepicker>
 
+          <!-- vendedor -->
           <div class="form-group mx-2 mb-1">
-            <select class="form-control">
+            <select class="form-control" [(ngModel)]="vendedor_selected" (change)="filtro(del, al, vendedor_selected)">
               <option value="">Todos</option>
-              <option [value]="id_vendedor" *ngFor="let vendedor of vendedores">{{vendedor.nombre}}</option>
+              <option [value]="vendedor.id_vendedor" *ngFor="let vendedor of vendedores">{{vendedor.nombre}}</option>
             </select>
           </div>
 
@@ -71,7 +74,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let apartado of apartados">
+                <tr *ngFor="let apartado of apartadosFiltrados">
                   <td class="ws-nowrap">{{apartado.manzana}}</td>
                   <td class="ws-nowrap">{{apartado.lote}}</td>
                   <td class="ws-nowrap">{{apartado.fecha_pago| date:'mediumDate':'':'es'}}</td>

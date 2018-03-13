@@ -5,6 +5,7 @@ import { VentasPagosService } from 'app/services/ventas-pagos.service';
 import { of } from "rxjs/observable/of";
 import { VendedorService } from '../../../services/vendedor.service';
 import { Observable } from 'rxjs/Observable';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-historial-apartados',
@@ -16,6 +17,10 @@ export class HistorialApartadosComponent implements OnInit {
   obra_selected: string = "";
   apartados: any = [];
   vendedores: any = [];
+  apartadosFiltrados: any[] = [];
+
+  vendedor_selected: string = "";
+  tabla_filtrada: boolean = false;
 
   constructor(
     private router: Router,
@@ -44,7 +49,9 @@ export class HistorialApartadosComponent implements OnInit {
         }
       }).subscribe(res => {
         this.apartados = res[0];
+        this.apartadosFiltrados = this.apartados.slice();
         this.vendedores = res[1];
+        this.vendedor_selected = "";
       }, (error) => {
       });
   }
@@ -57,6 +64,48 @@ export class HistorialApartadosComponent implements OnInit {
       this.router.navigate([".", {}]);
 
     }
+
+  }
+
+  filtro(del, al, id_vendedor) {
+
+    //console.log("vacio", del.value == "", del.value);
+
+    let fecha_ini = del.value == "" ? "" : moment(del.value, "ll", "es").format("YYYY-MM-DD");
+    let fecha_fin = al.value == "" ? "" : moment(al.value, "ll", "es").format("YYYY-MM-DD");
+
+    let filtro = false;
+    console.log("filtro", id_vendedor, fecha_ini, fecha_fin);
+
+    if (fecha_ini != "") {
+      this.apartadosFiltrados = this.apartados.filter(item => item.fecha_pago >= fecha_ini);
+      filtro = true;
+    }
+    if (fecha_fin != "") {
+      filtro = true;
+      if (filtro) {
+        this.apartadosFiltrados = this.apartadosFiltrados.filter(item => item.fecha_pago <= fecha_fin);
+      } else {
+        this.apartadosFiltrados = this.apartados.filter(item => item.fecha_pago <= fecha_fin);
+      }
+    }
+    if (id_vendedor != "") {
+      if (filtro) {
+        this.apartadosFiltrados = this.apartadosFiltrados.filter(item => item.id_vendedor == id_vendedor);
+
+      } else {
+        this.apartadosFiltrados = this.apartados.filter(item => item.id_vendedor == id_vendedor);
+      }
+
+    } else {
+      if (this.tabla_filtrada && !filtro) {
+        this.apartadosFiltrados = this.apartados.filter(item => item.id_vendedor);
+      } else {
+        this.apartadosFiltrados = this.apartadosFiltrados.filter(item => item.id_vendedor);
+      }
+
+    }
+    this.tabla_filtrada = true;
 
   }
 
