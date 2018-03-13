@@ -114,6 +114,18 @@ export class LotesService {
       .pipe(catchError(this.handleError("delLiberacionPartida")));
   }
 
+    //ok
+    addEspecialidadLote(ids_familias, id_lote, id_trabajador) {
+      return this.http.post(this.url + 'add_especialidad_lote', { ids_familias: ids_familias, id_lote: id_lote, id_trabajador: id_trabajador })
+        .pipe(catchError(this.handleError("addEspecialidadLote")));
+    }
+
+    //ok
+    delEspecialidadLote(id_familia, id_lote, id_trabajador) {
+      return this.http.post(this.url + 'del_especialidad_lote', { id_familia: id_familia, id_lote: id_lote, id_trabajador: id_trabajador })
+        .pipe(catchError(this.handleError("delEspecialidadLote")));
+    }
+
 
   private handleError<T>(operation = 'operation') {
     return (error: HttpErrorResponse) => {
