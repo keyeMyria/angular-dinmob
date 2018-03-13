@@ -15,7 +15,83 @@
         </div>
 
         <div>
-          <div class="table-responsive">
+
+          <mat-accordion [displayMode]="'default'" multi="true">
+            <mat-expansion-panel [hideToggle]="true" *ngFor="let proveedor of proveedores" #panel>
+              <mat-expansion-panel-header [ngClass]="{'bg-primary text-white':panel.expanded}">
+                <span class="align-self-center">{{proveedor.nombre}}</span>
+                <div class="spacer"></div>
+                <div class="collapse-header-btns">
+                  <button mat-button class="no-min" (click)="editarProveedor(proveedor)">
+                    <i class="fa fa-pencil"></i>
+                  </button>
+                  <button mat-button class="no-min" (click)="delProveedor(proveedor)">
+                    <i class="fa fa-times"></i>
+                  </button>
+                </div>
+              </mat-expansion-panel-header>
+
+
+
+              <form class="mt-2">
+
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <strong>Contacto:</strong>
+                    {{proveedor.contacto}}
+                  </div>
+                  <div class="form-group col-md-6">
+                    <strong>RFC:</strong>
+                    {{proveedor.rfc}}
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <strong>Teléfono:</strong>
+                    {{proveedor.telefono}}
+                  </div>
+                  <div class="form-group col-md-6">
+                    <strong>Email:</strong>
+                    {{proveedor.email}}
+                  </div>
+
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <strong>Dirección:</strong>
+                    {{proveedor.direccion}}
+                  </div>
+                  <div class="form-group col-md-6">
+                    <strong>Nota:</strong>
+                    {{proveedor.nota}}
+                  </div>
+                </div>
+
+              </form>
+
+
+
+            </mat-expansion-panel>
+          </mat-accordion>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <!--           <div class="table-responsive">
             <table class="table table-hover table-striped">
               <thead>
                 <tr>
@@ -45,7 +121,7 @@
                 </tr>
               </tbody>
             </table>
-          </div>
+          </div> -->
         </div>
       </div>
 
