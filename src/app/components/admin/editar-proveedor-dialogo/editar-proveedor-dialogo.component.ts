@@ -34,7 +34,7 @@ export class EditarProveedorDialogoComponent implements OnInit {
   }
 
   guardar() {
-    console.log("ok", this.form.value);
+    //console.log("ok", this.form.value);    
 
     this.proveedorSrv.updateProveedor(this.data.proveedor.id_proveedor, this.form.value)
       .subscribe(proveedor => {
@@ -42,6 +42,7 @@ export class EditarProveedorDialogoComponent implements OnInit {
         let i = this.data.proveedores.indexOf(this.data.proveedor);
         this.data.proveedores[i] = proveedor;
         this.dialogRef.close(true);
+        
 
       },
         (error) => {

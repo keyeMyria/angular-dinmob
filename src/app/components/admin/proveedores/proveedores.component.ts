@@ -17,6 +17,7 @@ export class ProveedoresComponent implements OnInit {
   obras: any = [];
   obra_selected: string = "";
   proveedores: any = [];
+  trackByIndex = (index, item) => item.id_proveedor;
 
   constructor(
     private router: Router,
@@ -83,12 +84,17 @@ export class ProveedoresComponent implements OnInit {
       width: '500px'
     });
     dialogRef.afterClosed().subscribe(result => {
+
+
+
       if (result === true) {
 
         this.snackBar.open("Trabajador Actulizado", "", {
           duration: 2000,
           panelClass: ["bg-success", "text-white"]
         });
+
+
 
       } else if (result && result.error) {
 
