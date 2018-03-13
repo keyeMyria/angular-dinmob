@@ -27,7 +27,7 @@ export class NuevoGastoDialogoComponent implements OnInit {
     this.form = this.fb.group({
 
       id_tipo_gasto: ["", Validators.required],
-      fecha: [moment(""), Validators.required],
+      fecha: [moment(), Validators.required],
       monto: ["", Validators.required],
       nota: [""],
       id_obra: [data.obra.id_obra, Validators.required],

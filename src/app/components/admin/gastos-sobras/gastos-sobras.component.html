@@ -37,9 +37,9 @@
 
               <tbody>
                 <tr *ngFor="let gasto of gastos">
-                  <td>{{gasto.id_tipo_gasto}}</td>
+                  <td>{{gasto.tipo_gasto}}</td>
                   <td>{{gasto.monto|currency}}</td>
-                  <td>{{gasto.fecha}}</td>
+                  <td>{{gasto.fecha | date:'mediumDate':'':'es'}}</td>
                   <td>{{gasto.nota}}</td>
                   <td class="text-right ws-nowrap">
                     <button mat-button class="no-min" (click)="editarGasto(gasto)">
