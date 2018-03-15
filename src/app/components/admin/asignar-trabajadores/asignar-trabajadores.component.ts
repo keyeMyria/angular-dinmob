@@ -24,10 +24,11 @@ export class AsignarTrabajadoresComponent implements OnInit {
   obras: any = [];
   obra_selected: string = "";
   obra: any;
-
+  trabajador_selected: string = "";
   especialidades: any[] = [];
   trabajadores: any[] = [];
   lote: any = {};
+  lotes_iguales: any[] = []; 
 
   //selector de especialidades
   selection = new SelectionModel<any>(true);
@@ -68,6 +69,7 @@ export class AsignarTrabajadoresComponent implements OnInit {
         this.obra = res[0];
         this.trabajadores = res[1];
         this.selection.clear();
+     
       }, (error) => {
         //snackbar error
       });
@@ -124,7 +126,21 @@ export class AsignarTrabajadoresComponent implements OnInit {
         let obra = this.obras.find(obra => obra.id_obra == this.obra_selected);
         lote.obra = obra.nombre;
         this.lote = lote;
+     
+        this.lotes_iguales = [];
 
+        if(this.lote.prototipos){
+          let prototipo = this.lote.prototipos[0].id_prototipo;
+          this.obra.manzanas.forEach(manzana => {
+            manzana.lotes.forEach(lote => {
+              if(lote.prototipos){
+                if(lote.prototipos[0].id_prototipo == prototipo){
+                  this.lotes_iguales.push(lote);
+                }
+              }
+            });
+          });
+        }
 
       }, (error) => {
         //snackbar error
@@ -138,13 +154,34 @@ export class AsignarTrabajadoresComponent implements OnInit {
 
   delEspecialidadLote(e) {
     console.log("delEspecialidadLote", e);
-
+    this.loteSrv.delEspecialidadLote(e.id_familia, e.id_lote, e.id_trabajador)
+    .subscribe(respuesta =>{
+      console.log(respuesta);
+      e.trabajador = "";
+      e.id_trabajador = "";
+      e.especialidad_trabajador = "";
+    });
   }
 
   asignarTrabajador() {
-    console.log("selección", this.selection.selected);
+    let ids = [];
+    this.selection.selected.forEach(familia => {
+      ids.push(familia.id_familia);
+    });
+    console.log("Asignar trabajador", this.lote, this.trabajador_selected, ids, this.selection.selected);
+    this.loteSrv.addEspecialidadLote(ids, this.lote.id_lote, this.trabajador_selected)
+    .subscribe(respuesta => {
+
+      let trabajador = this.trabajadores.find(t => t.id_trabajador == this.trabajador_selected);
+
+      this.selection.selected.forEach(familia => {
+        familia.trabajador = trabajador.nombre;
+        familia.id_trabajador = trabajador.id_trabajador;
+        familia.especialidad_trabajador = trabajador.especialidad;
+      });
+      this.selection.clear();
+    });
 
   }
-
 
 }
