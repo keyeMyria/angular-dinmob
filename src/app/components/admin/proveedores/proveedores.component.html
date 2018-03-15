@@ -20,20 +20,10 @@
             <mat-expansion-panel [hideToggle]="true" *ngFor="let proveedor of proveedores; trackBy: trackByIndex" #panel>
               <mat-expansion-panel-header [ngClass]="{'bg-primary text-white':panel.expanded}">
                 <span class="align-self-center">{{proveedor.nombre}}</span>
-                <div class="spacer"></div>
-                <div class="collapse-header-btns">
-                  <button mat-button class="no-min" (click)="$event.stopPropagation();editarProveedor(proveedor)">
-                    <i class="fa fa-pencil"></i>
-                  </button>
-                  <button mat-button class="no-min" (click)="delProveedor(proveedor)">
-                    <i class="fa fa-times"></i>
-                  </button>
-                </div>
               </mat-expansion-panel-header>
 
 
               <form class="mt-2">
-
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <strong>Contacto:</strong>
@@ -54,7 +44,6 @@
                     <strong>Email:</strong>
                     {{proveedor.email}}
                   </div>
-
                 </div>
 
                 <div class="form-row">
@@ -67,22 +56,20 @@
                     {{proveedor.nota}}
                   </div>
                 </div>
-
               </form>
-
-
-              <!--           <button type="button" class="btn btn-outline-primary btn-sm" (click)="$event.stopPropagation();editarProveedor(proveedor)">Editar</button>
+              <!--              <button type="button" class="btn btn-outline-primary btn-sm" (click)="$event.stopPropagation();editarProveedor(proveedor)">Editar</button>
               <button type="button" class="btn btn-outline-danger btn-sm" (click)="delProveedor(proveedor)">Eliminar</button> -->
-
-              <!-- 
               <div class="d-flex">
                 <div class="spacer"></div>
                 <div>
-                  <button type="button" class="btn btn-outline-primary btn-sm" (click)="editarProveedor(proveedor)">Editar</button>
-                  <button type="button" class="btn btn-outline-danger btn-sm" (click)="delProveedor(proveedor)">Eliminar</button>
+                  <button mat-button class="no-min" (click)="$event.stopPropagation();editarProveedor(proveedor)">
+                    <i class="fa fa-pencil"></i>
+                  </button>
+                  <button mat-button class="no-min" (click)="delProveedor(proveedor)">
+                    <i class="fa fa-times"></i>
+                  </button>
                 </div>
-              </div> -->
-
+              </div>
             </mat-expansion-panel>
           </mat-accordion>
 
