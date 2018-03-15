@@ -57,15 +57,15 @@ export class NuevoPagoComisionDialogoComponent implements OnInit {
   }
 
   guardar() {
-    console.log("datos", this.form.value);
+    //console.log("datos", this.form.value);
 
     let frmPago = this.clonar(this.form.value);
     //frmPago.monto = frmPago.monto.replace(/,/g, "");
     frmPago.id_compra = this.data.comision.id_compra;
     this.comisionSrv.createPago(frmPago)
       .subscribe(pago => {
-        console.log("COMISION", this.data.comision);
-        this.data.comision.pagos.push(pago);
+        //console.log("COMISION", this.data.comision);
+        this.data.comision.pagos.unshift(pago);
         this.dialogRef.close(true);
 
       },

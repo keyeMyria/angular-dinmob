@@ -284,7 +284,7 @@ export class EditarClienteComponent implements OnInit {
 
       this.formInmueble.patchValue(this.compra_selected);
       this.formInmueble.get("expediente_completo").setValue(this.compra_selected.expediente_completo == "1" ? true : false);
-      console.log("expediente_completo", this.compra_selected.expediente_completo, this.formInmueble.get("expediente_completo"));
+      //console.log("expediente_completo", this.compra_selected.expediente_completo, this.formInmueble.get("expediente_completo"));
 
       this.formLote.patchValue(this.compra_selected);
 
