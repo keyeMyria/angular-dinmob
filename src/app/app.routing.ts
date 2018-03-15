@@ -73,6 +73,7 @@ import { EditarVendedorDialogoComponent } from './components/ventas/editar-vende
 import { TableroComisionesComponent } from './components/tablero-comisiones/tablero-comisiones.component';
 import { VendedoresResolverService } from './resolvers/vendedores-resolver.service';
 import { TiposGastosResolverService } from './resolvers/tipos-gastos-resolver.service';
+import { ImportarPrototipoComponent } from './components/admin/importar-prototipo/importar-prototipo.component';
 
 
 
@@ -333,8 +334,13 @@ export const ROUTES: Routes = [
             },
             { path: 'crear-vendedor-dialogos', component: CrearVendedorDialogoComponent },
             { path: 'editar-vendedor-dialogos', component: EditarVendedorDialogoComponent },
-            { path: 'instituciones-credito', component: InstitucionesCreditoComponent }
-
+            { path: 'instituciones-credito', component: InstitucionesCreditoComponent },
+            {
+                path: 'importar-prototipo', component: ImportarPrototipoComponent,
+                resolve: {
+                    obras: ObrasUsuarioResolverService
+                }
+            }
 
 
 

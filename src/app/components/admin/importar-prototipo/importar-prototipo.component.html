@@ -1,0 +1,71 @@
+<div class="container mt-2 mb-5">
+  <div class="row">
+    <div class="col-12">
+
+      <div class="card">
+        <div class="card-header padding-card-header">
+          <div class="d-flex">
+            <div class="align-self-center">Trabajadores</div>
+            <div class="spacer"></div>
+            <div>
+              <button mat-button (click)="gotoFormato()">
+                Formato ? 
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="form-group">
+              <div class="custom-file">
+                <input type="file" #inputFile ng2FileSelect [uploader]="uploader" class="custom-file-input" id="customFileLang" lang="es">
+                <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
+              </div>
+              <small class="form-text text-muted">Extensiones de Excel válidas (xls, xlsx)</small>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer">
+          <button type="button" class="btn btn-secondary">Reset</button>
+          <button type="button" class="btn btn-primary">Procesar</button>
+        </div>
+      </div>
+
+      <div class="card mt-2">
+        <div class="card-header">
+          Crear Prototipo
+        </div>
+        <div class="card-body">
+          <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
+
+            <div class="form-group">
+              <label for="nombre_prototipo">Nombre del Prototipo</label>
+              <input type="email" class="form-control" id="nombre_prototipo" formControlName="nombre_prototipo" [ngClass]="{'is-invalid': form.get('nombre_prototipo').invalid  && (form.get('nombre_prototipo').dirty || form.get('nombre_prototipo').touched )}">
+              <div class="invalid-feedback">Proporcione nombre del prototipo</div>
+            </div>
+
+
+            <div class="form-group">
+              <label for="obra" class="form-label">Obra</label>
+              <select class="form-control" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)" formControlName="obra" [ngClass]="{'is-invalid': form.get('obra').invalid  && (form.get('obra').dirty || form.get('obra').touched )}">
+                <option value="">Seleccionar...</option>
+                <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>
+              </select>
+              <div class="invalid-feedback">Seleccione una obra</div>
+            </div>
+
+          </form>
+        </div>
+        <div class="card-footer">
+          <button type="submit" class="btn btn-primary" form="id_form" [disabled]="form.invalid">Crear Prototipo</button>
+        </div>
+      </div>
+
+
+
+
+
+
+    </div>
+  </div>
+</div>

@@ -201,6 +201,8 @@ import { EditarVendedorDialogoComponent } from './components/ventas/editar-vende
 import { TableroComisionesComponent } from './components/tablero-comisiones/tablero-comisiones.component';
 import { NuevoPagoComisionDialogoComponent } from './components/comisiones/nuevo-pago-comision-dialogo/nuevo-pago-comision-dialogo.component';
 import { EditarPagoComisionDialogoComponent } from './components/comisiones/editar-pago-comision-dialogo/editar-pago-comision-dialogo.component';
+import { ImportarPrototipoComponent } from './components/admin/importar-prototipo/importar-prototipo.component';
+import { FormatoDialogoComponent } from './components/admin/formato-dialogo/formato-dialogo.component';
 
 
 
@@ -328,6 +330,8 @@ export function getToken() {
     NuevoPagoComisionDialogoComponent,
     EditarPagoComisionDialogoComponent,
     EditarGastoDialogoComponent,
+    ImportarPrototipoComponent,
+    FormatoDialogoComponent,
 
 
 
@@ -409,7 +413,9 @@ export function getToken() {
     EditarVendedorDialogoComponent,
     NuevoPagoComisionDialogoComponent,
     EditarPagoComisionDialogoComponent,
-    EditarGastoDialogoComponent
+    EditarGastoDialogoComponent,
+    FormatoDialogoComponent
+
 
 
 

@@ -1,0 +1,89 @@
+<h1 mat-dialog-title>Formato</h1>
+<div mat-dialog-content>
+
+  <h5>Partidas</h5>
+
+  <ul>
+    <li> Una partida puede tener insumos o subpartidas, no ambos.</li>
+    <li>Las columnas utilizadas son:
+      <ul>
+        <li>Código - tiene una longitud de 3 caracteres</li>
+        <li>Código - comienza con la letra A</li>
+        <li>Descripción - debe tener valor</li>
+        <li>Unidad - debe estar vacía</li>
+        <li>Cantidad - debe estar vacía</li>
+        <li>Precio - debe estar vacía</li>
+      </ul>
+    </li>
+
+
+  </ul>
+  <h5>Subpartidas</h5>
+  <ul>
+    <li>Una subpartida sólo puede tener insumos.</li>
+    <li>Las columnas utilizadas son:
+      <ul>
+        <li>Código - tiene una longitud de 5 caracteres</li>
+        <li>Código - comienza con el código de la partida</li>
+        <li>Descripción - debe tener valor</li>
+        <li>Unidad - debe estar vacía</li>
+        <li>Cantidad - debe estar vacía</li>
+        <li>Precio - debe estar vacía</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h5>Insumos</h5>
+
+  <ul>
+    <li>Los insumos se añaden a la obra</li>
+    <li>Se comprueba la existencia previa del insumo, buscando por su código.</li>
+    <li>Las columnas utilizadas son:
+      <ul>
+        <li>Código - debe tener valor</li>
+        <li>Descripción - debe tener valor</li>
+        <li>Unidad - debe tener valor</li>
+        <li>Cantidad - debe ser un número</li>
+        <li>Precio - debe ser un número</li>
+      </ul>
+    </li>
+    <li>La familia del insumo está especificada por los dos primeros caracteres de su código
+      <ul>
+        <li>MA - Materiales</li>
+        <li>MO - Mano de Obra</li>
+        <li>CF - Equipos y Herramientas</li>
+        <li>BA - Básicos</li>
+        <li>SU - Subcontratos</li>
+        <li>Si no coincide con los anteriores - Otros</li>
+      </ul>
+    </li>
+    <li>En el caso de Mano de Obra y Subcontratos, la especialidad está especificada por el tercer caracter del código
+      <ul>
+        <li>A - Albañilería</li>
+        <li>B - Pisos</li>
+        <li>C - Carpintería</li>
+        <li>E - Electricista</li>
+        <li>F - Fontanería</li>
+        <li>G - Gas</li>
+        <li>H - Herrería</li>
+        <li>I - Impermeabilizantes</li>
+        <li>J - Jardinería</li>
+        <li>K - Climas</li>
+        <li>L - Limpieza</li>
+        <li>M - Mármol</li>
+        <li>P - Pinturas</li>
+        <li>R - Piedras</li>
+        <li>T - Techumbres</li>
+        <li>V - Aluminio</li>
+        <li>Y - Yesos</li>
+      </ul>
+    </li>
+  </ul>
+
+
+
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button type="button" class="btn-block" [mat-dialog-close]="false">CERRAR</button>
+</div>
