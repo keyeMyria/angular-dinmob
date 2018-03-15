@@ -59,7 +59,7 @@
                 <td>{{insumo.unidad}}</td>
                 <td>{{insumo.existencias}}</td>
                 <td>
-                  <input type="text" class="form-control">
+                  <input type="text" [(ngModel)]="insumo.entrada" class="form-control">
                 </td>
               </tr>
 
@@ -70,20 +70,20 @@
 
         <div class="card-footer">
 
-          <form class="form-inline">
+          <div class="form-inline">
 
             <label class="mx-3" for="folio">Folio</label>
-            <input type="text" class="form-control" id="folio">
+            <input type="text" class="form-control" id="folio" [(ngModel)]="folio">
 
             <label class="mx-3" for="proveedor">Proveedor</label>
-            <select id="proveedor" class="form-control">
-              <option selected>Choose...</option>
-              <option>...</option>
+            <select id="proveedor" class="form-control" [(ngModel)]="id_proveedor">
+              <option value="" >Choose...</option>
+              <option value="1">Value 1</option>
             </select>
 
-            <button type="submit" class="btn btn-primary mx-2">Guardar</button>
+            <button type="submit" class="btn btn-primary mx-2" (click)="crearEntrada()">Guardar</button>
 
-          </form>
+          </div>
 
         </div>
       </div>

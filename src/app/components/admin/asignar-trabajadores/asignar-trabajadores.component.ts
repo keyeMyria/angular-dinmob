@@ -29,6 +29,7 @@ export class AsignarTrabajadoresComponent implements OnInit {
   trabajadores: any[] = [];
   lote: any = {};
   lotes_iguales: any[] = [];
+  lote_origen: string = "";
 
   //selector de especialidades
   selection = new SelectionModel<any>(true);
@@ -139,7 +140,8 @@ export class AsignarTrabajadoresComponent implements OnInit {
 
               if (lote.prototipos.length) {
 
-                if (lote.prototipos[0].id_prototipo == prototipo) {
+                //agregamos el lote si tiene el mismo prototipo y no es ese mismo lote
+                if (lote.prototipos[0].id_prototipo == prototipo && lote.id_lote != this.lote.id_lote) {
                   this.lotes_iguales.push(lote);
                 }
 
@@ -147,6 +149,9 @@ export class AsignarTrabajadoresComponent implements OnInit {
             });
           });
         }
+
+
+
 
       }, (error) => {
         //snackbar error
@@ -198,6 +203,16 @@ export class AsignarTrabajadoresComponent implements OnInit {
         this.selection.clear();
       });
 
+  }
+
+  copiarEspecialidades() {
+    console.log("copiar especialidades");
+    
+    this.loteSrv.copiarEspecialidadesLote(this.lote_origen, this.lote.id_lote)
+    .subscribe(especialidades=>{
+      this.selection.clear();
+      this.especialidades = especialidades;
+    });
   }
 
 }

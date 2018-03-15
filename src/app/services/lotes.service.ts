@@ -114,17 +114,23 @@ export class LotesService {
       .pipe(catchError(this.handleError("delLiberacionPartida")));
   }
 
-    //ok
-    addEspecialidadLote(ids_familias, id_lote, id_trabajador) {
-      return this.http.post(this.url + 'add_especialidad_lote', { ids_familias: ids_familias, id_lote: id_lote, id_trabajador: id_trabajador })
-        .pipe(catchError(this.handleError("addEspecialidadLote")));
-    }
+  //ok
+  addEspecialidadLote(ids_familias, id_lote, id_trabajador) {
+    return this.http.post(this.url + 'add_especialidad_lote', { ids_familias: ids_familias, id_lote: id_lote, id_trabajador: id_trabajador })
+      .pipe(catchError(this.handleError("addEspecialidadLote")));
+  }
 
-    //ok
-    delEspecialidadLote(id_familia, id_lote, id_trabajador) {
-      return this.http.post(this.url + 'del_especialidad_lote', { id_familia: id_familia, id_lote: id_lote, id_trabajador: id_trabajador })
-        .pipe(catchError(this.handleError("delEspecialidadLote")));
-    }
+  //ok
+  delEspecialidadLote(id_familia, id_lote, id_trabajador) {
+    return this.http.post(this.url + 'del_especialidad_lote', { id_familia: id_familia, id_lote: id_lote, id_trabajador: id_trabajador })
+      .pipe(catchError(this.handleError("delEspecialidadLote")));
+  }
+
+  //ok
+  copiarEspecialidadesLote(id_lote_origen, id_lote_destino) {
+    return this.http.post(this.url + 'copy_especialidades', { origen: id_lote_origen, destino: id_lote_destino })
+      .pipe(catchError(this.handleError("copiarEspecialidadesLote")));
+  }
 
 
   private handleError<T>(operation = 'operation') {

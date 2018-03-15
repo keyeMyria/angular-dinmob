@@ -31,6 +31,12 @@ export class EntradasService {
       .pipe(catchError(this.handleError("getEntrada")));
   }
 
+  //ok
+  createEntrada(id_obra, insumos, id_proveedor, folio) {
+    return this.http.post(this.url + 'create_entrada', { folio: folio, id_obra: id_obra, id_proveedor: id_proveedor, insumos: insumos })
+      .pipe(catchError(this.handleError("createEntrada")));
+  }
+
   private handleError<T>(operation = 'operation') {
     return (error: HttpErrorResponse) => {
 
