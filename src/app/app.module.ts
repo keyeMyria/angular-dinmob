@@ -205,6 +205,7 @@ import { EditarPagoComisionDialogoComponent } from './components/comisiones/edit
 import { ImportarPrototipoComponent } from './components/admin/importar-prototipo/importar-prototipo.component';
 import { FormatoDialogoComponent } from './components/admin/formato-dialogo/formato-dialogo.component';
 import { ProveedoresResolverService } from './resolvers/proveedores-resolver.service';
+import { EstadisticasAdminComponent } from './components/admin/estadisticas-admin/estadisticas-admin.component';
 
 
 
@@ -334,6 +335,7 @@ export function getToken() {
     EditarGastoDialogoComponent,
     ImportarPrototipoComponent,
     FormatoDialogoComponent,
+    EstadisticasAdminComponent,
 
 
 

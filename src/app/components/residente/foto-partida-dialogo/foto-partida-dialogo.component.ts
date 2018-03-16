@@ -106,4 +106,30 @@ export class FotoPartidaDialogoComponent {
 
   }
 
+  getScaledCanvas(image, maxDimension) {
+    //console.log("dentro de getScaledCanvas", image.width, image.height, maxDimension);
+
+
+    var thumbCanvas = document.createElement('canvas');
+    if (image.width > maxDimension ||
+      image.height > maxDimension) {
+      if (image.width > image.height) {
+        thumbCanvas.width = maxDimension;
+        thumbCanvas.height = maxDimension * image.height / image.width;
+      } else {
+        thumbCanvas.width = maxDimension * image.width / image.height;
+        thumbCanvas.height = maxDimension;
+      }
+    } else {
+      thumbCanvas.width = image.width;
+      thumbCanvas.height = image.height;
+    }
+    thumbCanvas.getContext('2d').drawImage(image, 0, 0, image.width, image.height,
+      0, 0, thumbCanvas.width, thumbCanvas.height);
+    return thumbCanvas;
+  };
+
+
+
+
 }
