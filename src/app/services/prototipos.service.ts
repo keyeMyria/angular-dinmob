@@ -19,7 +19,7 @@ export class PrototiposService {
 
 
 
-
+  //ok
   createPrototipo(prototipo) {
     return this.http.post(this.url + "create_prototipo/", { prototipo: prototipo })
       .pipe(catchError(this.handleError("createPrototipo")));
@@ -30,20 +30,29 @@ export class PrototiposService {
       .pipe(catchError(this.handleError("updatePrototipo")));
   }
 
+  //ok
   getPrototiposObra(id_obra) {
     return this.http.get(this.url + "get_prototipos_obra/" + id_obra)
       .pipe(catchError(this.handleError("getPrototiposObra")));
   }
 
+  //ok
   getAcordeonPartidas(id_prototipo) {
     return this.http.get(this.url + 'get_acordeon_partidas/' + id_prototipo)
       .pipe(catchError(this.handleError("getAcordeonPartidas")));
   }
 
+  //ok
   delPrototipo(id) {
-    return this.http.post(this.url + 'del_prototipo/' + id, { })
+    return this.http.post(this.url + 'del_prototipo/' + id, {})
       .pipe(catchError(this.handleError("delPrototipo")));
   }
+
+  //ok
+  getUploadPrototipoURL() {
+    return this.config.api_url + "upload/upload_excel_prototipo";
+  }
+
 
   private handleError<T>(operation = 'operation') {
     return (error: HttpErrorResponse) => {
