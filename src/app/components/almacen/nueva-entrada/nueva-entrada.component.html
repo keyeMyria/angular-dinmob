@@ -59,7 +59,7 @@
                 <td>{{insumo.unidad}}</td>
                 <td>{{insumo.existencias}}</td>
                 <td>
-                  <input type="text" [(ngModel)]="insumo.entrada" class="form-control">
+                  <input type="number" [(ngModel)]="insumo.entrada" class="form-control">
                 </td>
               </tr>
 
@@ -70,26 +70,46 @@
 
         <div class="card-footer">
 
-          <div class="form-inline">
 
-            <label class="mx-3 form-label" for="folio">Folio</label>
-            <input type="text" class="form-control" id="folio" [(ngModel)]="folio">
 
-            <label class="mx-3 form-label" for="proveedor">Proveedor</label>
+          <!--           <div class="form-inline">
+            <label class="form-label" for="proveedor">Proveedor</label>
             <select id="proveedor" class="form-control" [(ngModel)]="id_proveedor">
               <option value="">Seleccionar...</option>
               <option [value]="p.id_proveedor" *ngFor="let p of proveedores">{{p.nombre}}</option>
             </select>
+            <label class="form-label" for="Folio">Folio</label>
+            <input type="text" class="form-control" id="folio" [(ngModel)]="folio">
+            <button type="submit" class="btn btn-primary" (click)="crearEntrada()">Guardar</button>
+          </div> -->
+          <form>
+            <div class="form-row">
 
-            <button type="submit" class="btn btn-primary mx-2" (click)="crearEntrada()">Guardar</button>
+              <div class="form-group col-md-8">
+                <label class="form-label" for="id_proveedor">Proveedor</label>
+                <select id="proveedor" class="form-control" name="id_proveedor" [(ngModel)]="id_proveedor" required #proveedor="ngModel"
+                  [ngClass]="{'is-invalid': proveedor.invalid && (proveedor.dirty || proveedor.touched)}">
+                  <option value="">Seleccionar...</option>
+                  <option [value]="p.id_proveedor" *ngFor="let p of proveedores">{{p.nombre}}</option>
+                </select>
+                <div class="invalid-feedback">Proporcione un nombre</div>
+              </div>
 
-          </div>
 
+              <div class="form-group col-md-4">
+                <label class="form-label" for="folio">Folio</label>
+                <input type="text" class="form-control" id="folio" name="folio" [(ngModel)]="folio" required #folioValidation="ngModel" [ngClass]="{'is-invalid': folioValidation.invalid && (folioValidation.dirty || folioValidation.touched)}">
+                <div class="invalid-feedback">Proporcione un folio</div>
+              </div>
+
+            </div>
+
+            <button mat-button type="submit" class="btn-block" color="primary" (click)="crearEntrada()">Guardar</button>
+
+          </form>
         </div>
+
       </div>
-
-
     </div>
   </div>
-
 </div>
