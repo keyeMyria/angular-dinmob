@@ -28,7 +28,8 @@ export class AsignarTrabajadoresComponent implements OnInit {
   especialidades: any[] = [];
   trabajadores: any[] = [];
   lote: any = {};
-  lotes_iguales: any[] = []; 
+  lotes_iguales: any[] = [];
+  lote_origen: string = "";
 
   //selector de especialidades
   selection = new SelectionModel<any>(true);
@@ -69,7 +70,7 @@ export class AsignarTrabajadoresComponent implements OnInit {
         this.obra = res[0];
         this.trabajadores = res[1];
         this.selection.clear();
-     
+
       }, (error) => {
         //snackbar error
       });
@@ -116,7 +117,7 @@ export class AsignarTrabajadoresComponent implements OnInit {
 
   getEspecialidadesLote(lote) {
 
-    console.log("lote", lote);
+    //console.log("lote", lote);
 
 
     this.loteSrv.getEspecialidades(lote.id_lote)
@@ -126,21 +127,31 @@ export class AsignarTrabajadoresComponent implements OnInit {
         let obra = this.obras.find(obra => obra.id_obra == this.obra_selected);
         lote.obra = obra.nombre;
         this.lote = lote;
-     
+
+        //buscamos los lotes de los cuales podemos copiar sus asignaciones
         this.lotes_iguales = [];
 
-        if(this.lote.prototipos){
+        if (this.lote.prototipos.length) {
           let prototipo = this.lote.prototipos[0].id_prototipo;
+
           this.obra.manzanas.forEach(manzana => {
+
             manzana.lotes.forEach(lote => {
-              if(lote.prototipos){
-                if(lote.prototipos[0].id_prototipo == prototipo){
+
+              if (lote.prototipos.length) {
+
+                //agregamos el lote si tiene el mismo prototipo y no es ese mismo lote
+                if (lote.prototipos[0].id_prototipo == prototipo && lote.id_lote != this.lote.id_lote) {
                   this.lotes_iguales.push(lote);
                 }
+
               }
             });
           });
         }
+
+
+
 
       }, (error) => {
         //snackbar error
@@ -155,12 +166,12 @@ export class AsignarTrabajadoresComponent implements OnInit {
   delEspecialidadLote(e) {
     console.log("delEspecialidadLote", e);
     this.loteSrv.delEspecialidadLote(e.id_familia, e.id_lote, e.id_trabajador)
-    .subscribe(respuesta =>{
-      console.log(respuesta);
-      e.trabajador = "";
-      e.id_trabajador = "";
-      e.especialidad_trabajador = "";
-    });
+      .subscribe(respuesta => {
+        console.log(respuesta);
+        e.trabajador = "";
+        e.id_trabajador = "";
+        e.especialidad_trabajador = "";
+      });
   }
 
   asignarTrabajador() {
@@ -168,20 +179,40 @@ export class AsignarTrabajadoresComponent implements OnInit {
     this.selection.selected.forEach(familia => {
       ids.push(familia.id_familia);
     });
-    console.log("Asignar trabajador", this.lote, this.trabajador_selected, ids, this.selection.selected);
+    //console.log("lote", this.lote);
+    //console.log("trabajador", this.trabajador_selected);
+    //console.log("seleccion", this.selection.selected);
+
     this.loteSrv.addEspecialidadLote(ids, this.lote.id_lote, this.trabajador_selected)
-    .subscribe(respuesta => {
+      .subscribe(respuesta => {
 
-      let trabajador = this.trabajadores.find(t => t.id_trabajador == this.trabajador_selected);
+        let trabajador = this.trabajadores.find(t => t.id_trabajador == this.trabajador_selected);
 
-      this.selection.selected.forEach(familia => {
-        familia.trabajador = trabajador.nombre;
-        familia.id_trabajador = trabajador.id_trabajador;
-        familia.especialidad_trabajador = trabajador.especialidad;
+        this.selection.selected.forEach(asignacion => {
+          asignacion.trabajador = trabajador.nombre;
+          asignacion.id_trabajador = trabajador.id_trabajador;
+          asignacion.especialidad_trabajador = trabajador.especialidad;
+
+          //cuando leemos inicialmente los datos, si no se ha realizado la asignacion entonces,
+          // el id_lote es nulo
+          if (!asignacion.id_lote) {
+            asignacion.id_lote = this.lote.id_lote;
+          }
+
+        });
+        this.selection.clear();
       });
-      this.selection.clear();
-    });
 
+  }
+
+  copiarEspecialidades() {
+    console.log("copiar especialidades");
+    
+    this.loteSrv.copiarEspecialidadesLote(this.lote_origen, this.lote.id_lote)
+    .subscribe(especialidades=>{
+      this.selection.clear();
+      this.especialidades = especialidades;
+    });
   }
 
 }

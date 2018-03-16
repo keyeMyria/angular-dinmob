@@ -762,7 +762,7 @@
 
       <form [formGroup]="formInmueble">
 
-         <div class="form-group row">
+        <div class="form-group row">
           <label class="col-form-label col-sm-2" for="obra">Obra</label>
           <div class="col-sm-10">
             <select class="form-control" name="obra" #obra (change)="cargarObra(obra.value)" formControlName="obra" [ngClass]="{'is-invalid': formInmueble.get('obra').invalid  && (formInmueble.get('obra').dirty || formInmueble.get('obra').touched )}">
@@ -775,9 +775,7 @@
 
         <div class="form-group row">
 
-          <label class="col-form-label col-sm-2" for="lote">Lote
-            <i *ngIf="loading" class="fa fa-spinner fa-spin fa-fw"></i>
-          </label>
+          <label class="col-form-label col-sm-2" for="lote">Lote</label>
 
           <div class="col-sm-10">
 

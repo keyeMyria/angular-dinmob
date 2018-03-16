@@ -105,7 +105,7 @@ export class InstitucionesCreditoComponent implements OnInit {
 
             let i = this.instituciones.indexOf(institucion);
             this.instituciones.splice(i, 1);
-            this.snackBar.open("Prototipo Eliminado", "", {
+            this.snackBar.open("Institución Eliminada", "", {
               duration: 2000,
               panelClass: ["bg-success", "text-white"]
             });

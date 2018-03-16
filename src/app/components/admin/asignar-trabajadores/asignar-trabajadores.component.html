@@ -53,23 +53,23 @@
               Asignar Trabajador
             </div>
 
-            <div class="form-inline mt-2">
-              <div class="input-group px-2">
+            <div class="form-inline">
+              <div class="input-group mt-2 ml-2 mx-2">
                 <select class="custom-select" [(ngModel)]="trabajador_selected">
-                  <option value="" >Seleccionar Trabajador</option>
+                  <option value="">Seleccionar Trabajador</option>
                   <option *ngFor="let t of trabajadores" [value]="t.id_trabajador">{{t.nombre}} ({{t.especialidad}})</option>
                 </select>
                 <div class="input-group-append">
-                  <button class="btn btn-primary" type="button" (click)="asignarTrabajador()">Asignar</button>
+                  <button class="btn btn-primary" type="button" (click)="asignarTrabajador()" [disabled]="trabajador_selected=='' || !lote.id_lote || selection.isEmpty()">Asignar</button>
                 </div>
               </div>
-              <div class="input-group pl-3">
-                <select class="custom-select" id="inputGroupSelect04">
+              <div class="input-group mt-2 mx-2">
+                <select class="custom-select" [(ngModel)]="lote_origen">
                   <option value="">Seleccionar Lote</option>
                   <option *ngFor="let l of lotes_iguales" [value]="l.id_lote">{{l.manzana}} {{l.nombre}}</option>
                 </select>
                 <div class="input-group-append">
-                  <button class="btn btn-primary" type="button">Copiar</button>
+                  <button class="btn btn-primary" type="button" (click)="copiarEspecialidades()" [disabled]="lote_origen==''">Copiar</button>
                 </div>
               </div>
             </div>

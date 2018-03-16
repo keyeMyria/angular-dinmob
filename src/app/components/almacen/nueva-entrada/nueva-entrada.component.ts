@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { InsumoService } from 'app/services/insumo.service';
 import { of } from "rxjs/observable/of";
+import { EntradasService } from '../../../services/entradas.service';
 
 @Component({
   selector: 'app-nueva-entrada',
@@ -12,11 +13,14 @@ export class NuevaEntradaComponent implements OnInit {
   obras: any = [];
   obra_selected: string = "";
   insumos: any[] = [];
+  id_proveedor: string = "";
+  folio: string = "";
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private insumoSrv: InsumoService,
+    private entradaSrv: EntradasService
   ) { }
 
   ngOnInit() {
@@ -33,7 +37,7 @@ export class NuevaEntradaComponent implements OnInit {
           return of([]);
         }
       }).subscribe(insumos => {
-        console.log("insumos", insumos);
+
         this.insumos = insumos;
 
       });
@@ -47,6 +51,29 @@ export class NuevaEntradaComponent implements OnInit {
       this.router.navigate([".", {}]);
 
     }
+
+  }
+
+  crearEntrada() {
+
+    let insumos = [];
+    this.insumos.forEach(insumo => {
+      if (insumo.entrada) {
+        insumos.push({ id_insumo: insumo.id_insumo, cantidad: insumo.entrada });
+      }
+    });
+
+    console.log(this.folio, this.id_proveedor, this.obra_selected, insumos);
+
+    this.entradaSrv.createEntrada(this.obra_selected, insumos, this.id_proveedor, this.folio)
+      .subscribe(insumos => {
+        //console.log("respuesta", insumos);
+        //volver a leer los insumos
+        this.insumos = insumos;
+
+      });
+
+
 
   }
 
