@@ -1,0 +1,171 @@
+<div class="container mt-3 mb-5">
+  <div>
+    <mat-form-field class="w-100">
+      <mat-select placeholder="Obra" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)">
+        <mat-option *ngFor="let obra of obras" [value]="obra.id_obra">{{ obra.nombre }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-md-6 col-lg-3 p-2">
+      <mat-card class="">
+        <h3>{{(estadisticas?.pendiente|| 0) |currency }}</h3>
+        <p>VENTAS TOTAL</p>
+        <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
+      </mat-card>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-3 p-2">
+      <mat-card class="">
+        <h3>{{(estadisticas?.pendiente|| 0) |currency }}</h3>
+        <p>VENTAS PAGADO</p>
+        <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
+      </mat-card>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-3 p-2">
+      <mat-card class="">
+        <h3>{{(estadisticas?.pendiente|| 0) |currency }}</h3>
+        <p>VENTAS PENDIENTE</p>
+        <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
+      </mat-card>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-3 p-2">
+      <mat-card class="">
+        <h3>{{(estadisticas?.pendiente|| 0) |currency }}</h3>
+        <p>MANZANAS</p>
+        <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
+      </mat-card>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-3 p-2">
+      <mat-card class="">
+        <h3>{{(estadisticas?.pendiente|| 0) |currency }}</h3>
+        <p>LOTES</p>
+        <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
+      </mat-card>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-3 p-2">
+      <mat-card class="">
+        <h3>{{(estadisticas?.pendiente|| 0) |currency }}</h3>
+        <p>PROTOTIPOS</p>
+        <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
+      </mat-card>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-3 p-2">
+      <mat-card class="">
+        <h3>{{(estadisticas?.pendiente|| 0) |currency }}</h3>
+        <p>OBRA</p>
+        <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
+      </mat-card>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-3 p-2">
+      <mat-card class="">
+        <h3>{{(estadisticas?.pendiente|| 0) |currency }}</h3>
+        <p>INVENTARIO</p>
+        <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
+      </mat-card>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-3 p-2">
+      <mat-card class="">
+        <h3>{{(estadisticas?.pendiente|| 0) |currency }}</h3>
+        <p>PENDIENTE OBRA</p>
+        <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
+      </mat-card>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-3 p-2">
+      <mat-card class="">
+        <h3>{{(estadisticas?.pendiente|| 0) |currency }}</h3>
+        <p>GASTOS OBRA</p>
+        <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
+      </mat-card>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-3 p-2">
+      <mat-card class="">
+        <h3>{{(estadisticas?.pendiente|| 0) |currency }}</h3>
+        <p>AVANCE OBRA</p>
+        <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
+      </mat-card>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-3 p-2">
+      <mat-card class="">
+        <h3>{{(estadisticas?.pendiente|| 0) |currency }}</h3>
+        <p>AVANCE MA</p>
+        <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
+      </mat-card>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-3 p-2">
+      <mat-card class="">
+        <h3>{{(estadisticas?.pendiente|| 0) |currency }}</h3>
+        <p>AVANCE MO</p>
+        <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
+      </mat-card>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-3 p-2">
+      <mat-card class="">
+        <h3>{{(estadisticas?.pendiente|| 0) |currency }}</h3>
+        <p>AVANCE MO + MA</p>
+        <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
+      </mat-card>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-3 p-2">
+      <mat-card class="">
+        <h3>{{(estadisticas?.pendiente|| 0) |currency }}</h3>
+        <p>SALIDAS</p>
+        <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
+      </mat-card>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-3 p-2">
+      <mat-card class="">
+        <h3>{{(estadisticas?.pendiente|| 0) |currency }}</h3>
+        <p>SALIDAS ALERTA</p>
+        <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
+      </mat-card>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-3 p-2">
+      <mat-card class="">
+        <h3>{{(estadisticas?.pendiente|| 0) |currency }}</h3>
+        <p>ENTRADAS</p>
+        <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
+      </mat-card>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-3 p-2">
+      <mat-card class="">
+        <h3>{{(estadisticas?.pendiente|| 0) |currency }}</h3>
+        <p>ÚLTIMO AVANCE</p>
+        <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
+      </mat-card>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-3 p-2">
+      <mat-card class="">
+        <h3>{{(estadisticas?.pendiente|| 0) |currency }}</h3>
+        <p>ÚLTIMO PAGO</p>
+        <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
+      </mat-card>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-3 p-2">
+      <mat-card class="">
+        <h3>{{(estadisticas?.pendiente|| 0) |currency }}</h3>
+        <p>PAGADO MO</p>
+        <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
+      </mat-card>
+    </div>
+  </div>
+</div>

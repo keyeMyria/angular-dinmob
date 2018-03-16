@@ -103,10 +103,17 @@
                         </div>
                     </nav>
  -->
-                    <ol class="breadcrumb colorBread">
+                    <ol class="breadcrumb colorBread d-none d-md-flex">
                         <li class="breadcrumb-item text-primary">
                             {{lote?.obra}}
                         </li>
+                        <li class="breadcrumb-item text-primary">
+                            {{lote?.manzana}}
+                        </li>
+                        <li class="breadcrumb-item text-primary">{{lote?.nombre}}</li>
+                    </ol>
+
+                    <ol class="breadcrumb colorBread d-flex d-md-none">
                         <li class="breadcrumb-item text-primary">
                             {{lote?.manzana}}
                         </li>
@@ -122,8 +129,8 @@
                                     <span>{{partida.nombre}}</span>
                                     <div class="spacer"></div>
                                     <div class="collapse-header-btns">
-                                        <small class="pull-right">{{numSubpartidasFinalizadas(partida)}}
-                                            <span class="hidden-xs">de {{partida.subpartidas.length || "1"}}</span>
+                                        <small class="">{{numSubpartidasFinalizadas(partida)}}
+                                            <span class="hidden-xs d-none d-md-inline-block">de {{partida.subpartidas.length || "1"}}</span>
                                         </small>
                                     </div>
                                 </mat-expansion-panel-header>

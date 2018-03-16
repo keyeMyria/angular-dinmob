@@ -75,6 +75,7 @@ import { VendedoresResolverService } from './resolvers/vendedores-resolver.servi
 import { TiposGastosResolverService } from './resolvers/tipos-gastos-resolver.service';
 import { ImportarPrototipoComponent } from './components/admin/importar-prototipo/importar-prototipo.component';
 import { ProveedoresResolverService } from './resolvers/proveedores-resolver.service';
+import { EstadisticasAdminComponent } from './components/admin/estadisticas-admin/estadisticas-admin.component';
 
 
 
@@ -96,6 +97,12 @@ export const ROUTES: Routes = [
             { path: '', redirectTo: 'tablero', pathMatch: 'full' },
             {
                 path: 'clientes', component: ClientesComponent,
+                resolve: {
+                    obras: ObrasUsuarioResolverService
+                }
+            },
+            {
+                path: 'estadisticas', component: EstadisticasAdminComponent,
                 resolve: {
                     obras: ObrasUsuarioResolverService
                 }
