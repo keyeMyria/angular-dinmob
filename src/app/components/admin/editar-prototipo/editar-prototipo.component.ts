@@ -64,6 +64,23 @@ export class EditarPrototipoComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
 
+      if (result === true) {
+
+        this.snackBar.open("Nombre Actualizado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      } else if (result && result.error) {
+
+        this.snackBar.open(result.error, "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+
+      }
+
+
     });
   }
 
@@ -96,10 +113,21 @@ export class EditarPrototipoComponent implements OnInit {
 
     });
     dialogRef.afterClosed().subscribe(result => {
+
       if (result === true) {
-        this.snackBar.open("Partida Actualizada", "Cerrar", {
-          duration: 2000
+
+        this.snackBar.open("Partida Actualizada", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
         });
+
+      } else if (result && result.error) {
+
+        this.snackBar.open(result.error, "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+
       }
     });
   }
@@ -132,7 +160,21 @@ export class EditarPrototipoComponent implements OnInit {
       width: '500px',
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.selectedOption = result;
+      if (result === true) {
+
+        this.snackBar.open("Subpartida actualizada", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      } else if (result && result.error) {
+
+        this.snackBar.open(result.error, "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+
+      }
     });
   }
 
@@ -167,7 +209,21 @@ export class EditarPrototipoComponent implements OnInit {
       width: '500px',
     });
     dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
 
+        this.snackBar.open("Insumo actualizado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      } else if (result && result.error) {
+
+        this.snackBar.open(result.error, "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+
+      }
     });
   }
 

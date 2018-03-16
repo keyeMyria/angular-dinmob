@@ -53,6 +53,11 @@ export class PrototiposService {
     return this.config.api_url + "upload/upload_excel_prototipo";
   }
 
+  updatePartida(id, partida) {
+    return this.http.post(this.url + 'update_partida/' + id, { partida: partida })
+      .pipe(catchError(this.handleError("updatePartida")));
+  }
+
 
   private handleError<T>(operation = 'operation') {
     return (error: HttpErrorResponse) => {

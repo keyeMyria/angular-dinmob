@@ -22,6 +22,15 @@ export class InsumoService {
       .pipe(catchError(this.handleError("getMaterialesObra")));
   }
 
+  updateInsumo(id, insumo) {
+    return this.http.post(this.url + 'update_insumo/' + id, { insumo: insumo })
+      .pipe(catchError(this.handleError("updateInsumo")));
+  }
+
+  updateInsumoPartida(id, insumo) {
+    return this.http.post(this.url + 'update_insumo_partida/' + id, { insumo: insumo })
+      .pipe(catchError(this.handleError("updateInsumoPartida")));
+  }
 
   private handleError<T>(operation = 'operation') {
     return (error: HttpErrorResponse) => {
