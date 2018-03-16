@@ -27,6 +27,13 @@ export class ProveedorService {
   }
 
   //ok
+  getNombresProveedores() {
+    return this.http.get(this.url + "get_nombres_proveedores")
+      .pipe(catchError(this.handleError("getProveedores")));
+  }
+
+
+  //ok
   createProveedor(proveedor) {
     return this.http.post(this.url + "create_proveedor", { proveedor: proveedor })
       .pipe(catchError(this.handleError("createProveedor")));

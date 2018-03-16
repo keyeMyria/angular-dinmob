@@ -74,6 +74,7 @@ import { TableroComisionesComponent } from './components/tablero-comisiones/tabl
 import { VendedoresResolverService } from './resolvers/vendedores-resolver.service';
 import { TiposGastosResolverService } from './resolvers/tipos-gastos-resolver.service';
 import { ImportarPrototipoComponent } from './components/admin/importar-prototipo/importar-prototipo.component';
+import { ProveedoresResolverService } from './resolvers/proveedores-resolver.service';
 
 
 
@@ -229,7 +230,8 @@ export const ROUTES: Routes = [
             {
                 path: 'nueva-entrada', component: NuevaEntradaComponent,
                 resolve: {
-                    obras: ObrasUsuarioResolverService
+                    obras: ObrasUsuarioResolverService,
+                    proveedores: ProveedoresResolverService
                 }
             },
             {

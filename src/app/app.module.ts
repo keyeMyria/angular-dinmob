@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RoutingModule } from "app/app.routing";
 import { TextMaskModule } from "angular2-text-mask";
@@ -107,7 +108,7 @@ import { ActasEntregaComponent } from './components/ventas/actas-entrega/actas-e
 import { EditarActaEntregaComponent } from './components/ventas/editar-acta-entrega/editar-acta-entrega.component';
 import { GenerarActaEntregaComponent } from './components/ventas/generar-acta-entrega/generar-acta-entrega.component';
 import { EditarManzanaDialogoComponent } from './components/admin/editar-manzana-dialogo/editar-manzana-dialogo.component'
-import { HttpClientModule } from '@angular/common/http';
+
 import { AgregarManzanaDialogoComponent } from './components/admin/agregar-manzana-dialogo/agregar-manzana-dialogo.component';
 import { AgregarLoteDialogoComponent } from './components/admin/agregar-lote-dialogo/agregar-lote-dialogo.component';
 import { FotoPartidaDialogoComponent } from './components/residente/foto-partida-dialogo/foto-partida-dialogo.component';
@@ -203,6 +204,7 @@ import { NuevoPagoComisionDialogoComponent } from './components/comisiones/nuevo
 import { EditarPagoComisionDialogoComponent } from './components/comisiones/editar-pago-comision-dialogo/editar-pago-comision-dialogo.component';
 import { ImportarPrototipoComponent } from './components/admin/importar-prototipo/importar-prototipo.component';
 import { FormatoDialogoComponent } from './components/admin/formato-dialogo/formato-dialogo.component';
+import { ProveedoresResolverService } from './resolvers/proveedores-resolver.service';
 
 
 
@@ -474,6 +476,7 @@ export function getToken() {
     EspecialidadesTrabajadorResolverService,
     VendedoresResolverService,
     TiposGastosResolverService,
+    ProveedoresResolverService
 
 
   ],

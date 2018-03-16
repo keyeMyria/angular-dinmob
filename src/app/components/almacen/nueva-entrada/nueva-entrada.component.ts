@@ -11,6 +11,7 @@ import { EntradasService } from '../../../services/entradas.service';
 })
 export class NuevaEntradaComponent implements OnInit {
   obras: any = [];
+  proveedores: any = [];
   obra_selected: string = "";
   insumos: any[] = [];
   id_proveedor: string = "";
@@ -25,8 +26,9 @@ export class NuevaEntradaComponent implements OnInit {
 
   ngOnInit() {
     this.route.data
-      .subscribe((data: { obras: any[] }) => {
+      .subscribe((data: { obras: any[], proveedores: any }) => {
         this.obras = data.obras;
+        this.proveedores = data.proveedores;
       });
     this.route.paramMap
       .switchMap((params: ParamMap) => {

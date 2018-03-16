@@ -72,13 +72,13 @@
 
           <div class="form-inline">
 
-            <label class="mx-3" for="folio">Folio</label>
+            <label class="mx-3 form-label" for="folio">Folio</label>
             <input type="text" class="form-control" id="folio" [(ngModel)]="folio">
 
-            <label class="mx-3" for="proveedor">Proveedor</label>
+            <label class="mx-3 form-label" for="proveedor">Proveedor</label>
             <select id="proveedor" class="form-control" [(ngModel)]="id_proveedor">
-              <option value="" >Choose...</option>
-              <option value="1">Value 1</option>
+              <option value="">Seleccionar...</option>
+              <option [value]="p.id_proveedor" *ngFor="let p of proveedores">{{p.nombre}}</option>
             </select>
 
             <button type="submit" class="btn btn-primary mx-2" (click)="crearEntrada()">Guardar</button>
