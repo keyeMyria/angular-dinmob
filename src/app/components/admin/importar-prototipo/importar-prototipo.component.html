@@ -31,13 +31,13 @@
           </form>
         </div>
         <div class="card-footer">
-          <button type="button" class="btn btn-secondary">Reset</button>
+          <button type="button" class="btn btn-secondary" (click)="reset()">Reset</button>
           <button type="button" class="btn btn-primary" (click)="uploader.uploadAll()">Procesar</button>
         </div>
       </div>
 
       <!-- Filas ignoradas -->
-      <div class="card mt-2">
+      <div class="card mt-2" *ngIf="ignored.length>0">
         <div class="card-header">
           Filas Ignoradas
         </div>
@@ -51,15 +51,17 @@
                   <th>B</th>
                   <th>C</th>
                   <th>D</th>
+                  <th>E</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                <tr *ngFor="let ignorado of ignored">
+                  <td>{{ignorado.num_fila}}</td>
+                  <td>{{ignorado.A}}</td>
+                  <td>{{ignorado.B}}</td>
+                  <td>{{ignorado.C}}</td>
+                  <td>{{ignorado.D}}</td>
+                  <td>{{ignorado.E}}</td>
                 </tr>
               </tbody>
             </table>
@@ -67,9 +69,9 @@
         </div>
       </div>
 
-      <div class="card">
-        <div class="card-header padding-card-header">
-          <!-- {{prototipo?.nombre}} -->
+      <div class="card mt-2" *ngIf="partidas.length>0">
+        <div class="card-header">
+          Prototipo
         </div>
 
         <!-- partidas -->
@@ -81,17 +83,15 @@
                 {{partida.codigo}}
               </span>
               <span class="align-self-center">
-                {{partida.nombre}}
+                {{partida.descripcion}}
               </span>
               <div class="spacer"></div>
               <div class="collapse-header-btns">
-                <span class="badge badge-pill badge-primary">2
-                  <!--  *ngIf="partida.subpartidas.length>0" -->
-                  <!-- {{partida.subpartidas.length}} -->
+                <span class="badge badge-pill badge-primary" *ngIf="partida.subpartidas.length>0">
+                  {{partida.subpartidas.length}}
                 </span>
-                <span class="badge badge-pill badge-primary">2
-                  <!-- *ngIf="partida.insumos.length>0" -->
-                  <!-- {{partida.insumos.length}} -->
+                <span class="badge badge-pill badge-dark" *ngIf="partida.insumos.length>0">
+                  {{partida.insumos.length}}
                 </span>
               </div>
             </mat-expansion-panel-header>
@@ -107,46 +107,43 @@
                     {{subpartida.codigo}}
                   </span>
                   <span class="align-self-center">
-                    {{subpartida.nombre}}
+                    {{subpartida.descripcion}}
                   </span>
+                  <div class="spacer"></div>
+                  <div class="collapse-header-btns">
+                    <span class="badge badge-pill badge-primary">{{subpartida.insumos.length}}</span>
+                  </div>
                 </mat-expansion-panel-header>
 
                 <!-- insumos -->
-                <div class="table-responsive">
-                  <!-- *ngIf="partida.insumos.length" -->
+                <div class="table-responsive" *ngIf="subpartida.insumos.length">
+
                   <table class="table table-striped table-align-middle">
                     <thead>
                       <tr>
-                        <th class="hidden-xs">Id</th>
                         <th class="hidden-xs">Código</th>
                         <th>Insumo</th>
                         <th>Unidad</th>
                         <th class="text-right">Cantidad</th>
                         <th class="text-right">Precio</th>
-
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <!-- *ngFor="let insumo of subpartida.insumos" -->
-                        <!--  -->
+                      <tr *ngFor="let insumo of subpartida.insumos">
                         <td class="hidden-xs">
-                          <!-- {{insumo.id_insumo}} -->
-                        </td>
-                        <td class="hidden-xs">
-                          <!-- {{insumo.codigo}} -->
+                          {{insumo.codigo}}
                         </td>
                         <td>
-                          <!-- {{insumo.insumo}} -->
+                          {{insumo.descripcion}}
                         </td>
                         <td>
-                          <!-- {{insumo.unidad}} -->
+                          {{insumo.unidad}}
                         </td>
                         <td class="text-right">
-                          <!-- {{insumo.cantidad}} -->
+                          {{insumo.cantidad}}
                         </td>
                         <td class="text-right">
-                          <!-- {{insumo.precio|currency}} -->
+                          {{insumo.precio|currency}}
                         </td>
                       </tr>
                     </tbody>
@@ -157,14 +154,13 @@
             </mat-accordion>
 
             <!-- insumos -->
-            <div class="table-responsive">
-              <!-- *ngIf="partida.insumos.length>0"-->
+            <div class="table-responsive" *ngIf="partida.insumos.length>0">
+
 
 
               <table class="table table-striped table-align-middle">
                 <thead>
                   <tr>
-                    <th class="hidden-xs">Id</th>
                     <th class="hidden-xs">Código</th>
                     <th>Insumo</th>
                     <th>Unidad</th>
@@ -175,22 +171,19 @@
                 <tbody>
                   <tr *ngFor="let insumo of partida.insumos">
                     <td class="hidden-xs">
-                      <!-- {{insumo.id_insumo}} -->
-                    </td>
-                    <td class="hidden-xs">
-                      <!-- {{insumo.codigo}} -->
+                      {{insumo.codigo}}
                     </td>
                     <td>
-                      <!-- {{insumo.insumo}} -->
+                      {{insumo.descripcion}}
                     </td>
                     <td>
-                      <!-- {{insumo.unidad}} -->
+                      {{insumo.unidad}}
                     </td>
                     <td class="text-right">
-                      <!-- {{insumo.cantidad}} -->
+                      {{insumo.cantidad}}
                     </td>
                     <td class="text-right">
-                      <!-- {{insumo.precio|currency}} -->
+                      {{insumo.precio|currency}}
                     </td>
 
                   </tr>
