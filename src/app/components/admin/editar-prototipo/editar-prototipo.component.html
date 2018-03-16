@@ -39,7 +39,7 @@
                 <div class="spacer"></div>
                 <div class="collapse-header-btns">
                   <span class="badge badge-pill badge-primary" *ngIf="partida.subpartidas.length>0">{{partida.subpartidas.length}}</span>
-                  <span class="badge badge-pill badge-primary" *ngIf="partida.insumos.length>0">{{partida.insumos.length}}</span>
+                  <span class="badge badge-pill badge-dark" *ngIf="partida.insumos.length>0">{{partida.insumos.length}}</span>
                   <button mat-icon-button [matMenuTriggerFor]="menu2" (click)="$event.stopPropagation()">
                     <mat-icon>more_vert</mat-icon>
                   </button>

@@ -18,6 +18,7 @@ export class ImportarPrototipoComponent implements OnInit {
   form: FormGroup;
 
   partidas: any = [];
+  ignored: any = [];
 
   @ViewChild("inputFile") inputFile: any;
   uploader: FileUploader;
@@ -85,11 +86,12 @@ export class ImportarPrototipoComponent implements OnInit {
       //console.log("success status", status);
       //console.log("success headers", headers);
 
-      let respuesta= JSON.parse(response);
+      let respuesta = JSON.parse(response);
 
       if (status == 200) {
-        this.partidas= respuesta.partidas;
-        
+        this.partidas = respuesta.partidas;
+        this.ignored = respuesta.ignored;
+
       }
 
     };
@@ -126,6 +128,11 @@ export class ImportarPrototipoComponent implements OnInit {
       this.router.navigate([".", {}]);
     }
 
+  }
+
+  reset() {
+    this.partidas = [];
+    this.ignored = [];
   }
 
   guardar() {
