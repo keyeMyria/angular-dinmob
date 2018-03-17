@@ -814,7 +814,7 @@ export class EditarClienteComponent implements OnInit {
   //reporte
   reporteCompra(compra) {
     console.log("reporte compra", compra);
-    let url = this.reporteSrv.getUrlReporteCompra(compra.id_cliente, compra.id_lote);
+    let url = this.reporteSrv.getUrlReporteCompra(compra.id_cliente, compra.id_lote, compra.id_compra);
 
     let link = document.createElement("a");
     link.href = url;

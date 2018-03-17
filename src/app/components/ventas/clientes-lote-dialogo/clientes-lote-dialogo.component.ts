@@ -69,7 +69,7 @@ export class ClientesLoteDialogoComponent implements OnInit {
 
   reporteCliente(cliente) {
 
-    let url = this.reporteSrv.getUrlReporteCompra(cliente.id_cliente, cliente.id_lote);
+    let url = this.reporteSrv.getUrlReporteCompra(cliente.id_cliente, cliente.id_lote, cliente.id_compra);
     let link = document.createElement("a");
     link.href = url;
     link.target = "_blank";

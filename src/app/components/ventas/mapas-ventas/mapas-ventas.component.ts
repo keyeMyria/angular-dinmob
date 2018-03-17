@@ -91,7 +91,7 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
         this.scaleFormaPago = res[0].scaleFormasPago;
         this.jsonMap = res[1];
 
-        console.log("escala", this.scalePrototipos, this.scaleLoteTipo, this.scaleFormaPago);
+        //console.log("escala", this.scalePrototipos, this.scaleLoteTipo, this.scaleFormaPago);
 
         this.tipoMapa.tipo = TIPO_MAPA.EstadoVenta;
 

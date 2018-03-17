@@ -13,8 +13,8 @@ export class ReporteService {
     this.url = this.config.api_url + "reportes/";
   }
 
-  getUrlReporteCompra(id_cliente, id_lote) {
-    return `${this.url}cliente_lote/${id_cliente}/${id_lote}`;
+  getUrlReporteCompra(id_cliente, id_lote, id_compra) {
+    return `${this.url}cliente_lote/${id_cliente}/${id_lote}/${id_compra}`;
   }
 
 }
