@@ -26,6 +26,18 @@ export class EntradasService {
   }
 
   //ok
+  getCountEntradasObra(id_obra): Observable<any> {
+    return this.http.get(this.url + 'count_obra/' + id_obra)
+      .pipe(catchError(this.handleError("getCountEntradasObra")));
+  }
+
+  //ok
+  getPageEntradasObra(id_obra, page_size, page): Observable<any> {
+    return this.http.post(this.url + 'page_obra/' + id_obra, { page_size: page_size, page: page })
+      .pipe(catchError(this.handleError("getPageEntradasObra")));
+  }
+
+  //ok
   getEntrada(id_entrada) {
     return this.http.get(this.url + 'get_entrada/' + id_entrada)
       .pipe(catchError(this.handleError("getEntrada")));

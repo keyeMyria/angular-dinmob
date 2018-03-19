@@ -132,6 +132,12 @@ export class LotesService {
       .pipe(catchError(this.handleError("copiarEspecialidadesLote")));
   }
 
+  //ok
+  getPartidasLote(id_lote) {
+    return this.http.get(this.url + 'get_partidas/' + id_lote)
+      .pipe(catchError(this.handleError("getPartidasLote")));
+  }
+
 
   private handleError<T>(operation = 'operation') {
     return (error: HttpErrorResponse) => {

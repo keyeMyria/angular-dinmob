@@ -23,6 +23,18 @@ export class SalidasService {
       .pipe(catchError(this.handleError("getSalidasObra")));
   }
 
+   //ok
+   getCountSalidasObra(id_obra): Observable<any> {
+    return this.http.get(this.url + 'count_obra/' + id_obra)
+      .pipe(catchError(this.handleError("getCountSalidasObra")));
+  }
+
+  //ok
+  getPageSalidasObra(id_obra, page_size, page): Observable<any> {
+    return this.http.post(this.url + 'page_obra/' + id_obra, { page_size: page_size, page: page })
+      .pipe(catchError(this.handleError("getPageSalidasObra")));
+  }
+
   //ok
   getSalida(id_salida) {
     return this.http.get(this.url + 'get_salida/' + id_salida)

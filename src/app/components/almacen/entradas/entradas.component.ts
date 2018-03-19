@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { EditarEntradaDialogoComponent } from 'app/components/almacen/editar-entrada-dialogo/editar-entrada-dialogo.component';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatDialog, MatSnackBar, PageEvent } from '@angular/material';
 import { EntradasService } from 'app/services/entradas.service';
 import { of } from "rxjs/observable/of";
 import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-entradas',
@@ -15,6 +16,14 @@ export class EntradasComponent implements OnInit {
   obras: any = [];
   obra_selected: string = "";
   entradas: any[] = [];
+
+  // MatPaginator Inputs
+  length: number; // = 100;
+  pageSize = 10;
+  pageSizeOptions = [5, 10, 25, 100];
+
+  // MatPaginator Output
+  //pageEvent: PageEvent;
 
 
   constructor(
@@ -31,16 +40,33 @@ export class EntradasComponent implements OnInit {
         this.obras = data.obras;
       });
 
+    /*     this.route.paramMap
+          .switchMap((params: ParamMap) => {
+            if (params.has("obra")) {
+              this.obra_selected = params.get("obra");
+              return this.entradaSrv.getEntradasObra(params.get("obra"));
+            } else {
+              return of([]);
+            }
+          }).subscribe(entradas => {
+            this.entradas = entradas;
+    
+          }); */
+
     this.route.paramMap
       .switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
-          return this.entradaSrv.getEntradasObra(params.get("obra"));
+          return Observable.forkJoin(
+            this.entradaSrv.getCountEntradasObra(params.get("obra")),
+            this.entradaSrv.getPageEntradasObra(params.get("obra"), this.pageSize, 0)
+          );
         } else {
-          return of([]);
+          return of([0, []]);
         }
-      }).subscribe(entradas => {
-        this.entradas = entradas;
+      }).subscribe(res => {
+        this.length = res[0].count;
+        this.entradas = res[1];
 
       });
   }
@@ -88,6 +114,17 @@ export class EntradasComponent implements OnInit {
       this.router.navigate([".", {}]);
 
     }
+
+  }
+
+  onPageChange(event: PageEvent) {
+    console.log("pageChange", event);
+
+    this.entradaSrv.getPageEntradasObra(this.obra_selected, event.pageSize, event.pageIndex)
+      .subscribe(entradas => {
+        this.entradas = entradas;
+
+      });
 
   }
 

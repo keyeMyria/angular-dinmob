@@ -6,6 +6,8 @@ import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ObrasService } from 'app/services/obras.service';
 import { Observable } from 'rxjs/Observable';
+import { LotesService } from 'app/services/lotes.service';
+import { InsumoService } from 'app/services/insumo.service';
 
 @Component({
   selector: 'app-nueva-salida',
@@ -30,7 +32,10 @@ export class NuevaSalidaComponent implements OnInit {
   obras: any = [];
   obra_selected: string = "";
   obra: any;
-
+  partidas: any[] = [];
+  partida_selected: string = "";
+  lote_selected: any = {};
+  insumos: any[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -39,6 +44,8 @@ export class NuevaSalidaComponent implements OnInit {
     private media: MediaMatcher,
     private changeDetectorRef: ChangeDetectorRef,
     private obraSrv: ObrasService,
+    private loteSrv: LotesService,
+    private insumoSrv: InsumoService
   ) {
     this.form = this.fb.group({
       partida: [""],
@@ -90,6 +97,25 @@ export class NuevaSalidaComponent implements OnInit {
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener)
 
+  }
+
+  getPartidasLote(lote){
+    this.loteSrv.getPartidasLote(lote.id_lote)
+    .subscribe(partidas => {
+      this.partidas = partidas;
+      this.lote_selected = lote;
+    });
+  }
+
+  getInsumosPartida(id_partida){
+    if(id_partida != ""){
+      this.insumoSrv.getPartidaSalida(id_partida, this.obra_selected, this.lote_selected.id_lote)
+      .subscribe(insumos => {
+        this.insumos = insumos;
+      });
+    }else{
+      this.insumos = [];
+    }
   }
 
 }
