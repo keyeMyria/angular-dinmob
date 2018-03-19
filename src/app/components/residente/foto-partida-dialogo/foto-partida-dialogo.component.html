@@ -8,10 +8,15 @@
 
     <div class="form-group">
       <div class="custom-file">
-        <input type="file" #inputFile ng2FileSelect [uploader]="uploader" class="custom-file-input" id="customFileLang" lang="es">
+        <!-- <input type="file" #inputFile ng2FileSelect [uploader]="uploader" class="custom-file-input" id="customFileLang" lang="es"> -->
+        <input type="file" accept="image/*;capture=camera" #inputFile class="custom-file-input" id="customFileLang" lang="es" (change)="changeImage($event, inputFile.files)">
         <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
       </div>
       <small class="form-text text-muted">Extensiones permitidas: png, jpg, jpeg</small>
+    </div>
+
+    <div class="form-group">
+      <div class="">{{currentFile?.name}}</div>
     </div>
 
 
@@ -46,6 +51,7 @@
 <div mat-dialog-actions>
 
   <button mat-button type="button" [mat-dialog-close]="false">CERRAR</button>
-  <button mat-button type="button" (click)="uploader.uploadAll()" color="primary" [disabled]="!uploader.getNotUploadedItems().length">GUARDAR</button>
+  <!-- <button mat-button type="button" (click)="uploader.uploadAll()" color="primary" [disabled]="!uploader.getNotUploadedItems().length">GUARDAR</button> -->
+  <button mat-button type="button" (click)="uploadImage()" color="primary" [disabled]="!currentFile">GUARDAR</button>
 
 </div>
