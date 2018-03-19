@@ -104,13 +104,15 @@ export class FotoPartidaDialogoComponent {
       //si falla porque ya tenemos un archivo, entonces lo reemplazamos
       if (filter.name == "queueLimit") {
         this.uploader.clearQueue();
-        this.uploader.addToQueue(this.inputFile.nativeElement.files);
+        //this.uploader.addToQueue(this.inputFile.nativeElement.files);
+        this.uploader.addToQueue([this.currentFile]);
       }
 
     };
 
   }
 
+  //cambia el tamaño de la imagen y la comprime
   getScaledCanvas(image, maxDimension) {
 
     var thumbCanvas = document.createElement('canvas');
@@ -175,12 +177,7 @@ export class FotoPartidaDialogoComponent {
 
   changeImage(event: Event, fileList: FileList) {
     //console.log("changeImage");
-
     this.currentFile = fileList[0];
-
-    //console.log("currentFile", this.currentFile);
-
-
   }
 
   uploadImage() {
@@ -189,15 +186,11 @@ export class FotoPartidaDialogoComponent {
     this.generateImage()
       .then((blob:any) => {
         blob.name = this.currentFile.name;
-        console.log("blob", blob);
+        //console.log("blob", blob);
         this.uploader.addToQueue([blob]);
 
         this.uploader.uploadAll();
-
-
-
-
-
+        
       });
 
   }
