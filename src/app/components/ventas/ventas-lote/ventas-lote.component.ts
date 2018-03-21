@@ -115,37 +115,62 @@ export class VentasLoteComponent implements OnInit {
   }
 
   totalPagosRealizados() {
-    //console.log("pagos realizados");
-    let total = 0;
-    this.cliente_selected.pagos.forEach(pago => {
-      if (pago.fecha_pago) {
-        let monto = parseFloat(pago.monto);
-        if (isNaN(monto)) {
-          monto = 0;
-        }
-        total += monto;
 
-      }
-    });
-    return Math.round(total * 100) / 100;
+    /*   let total = 0;
+      this.cliente_selected.pagos.forEach(pago => {
+        if (pago.fecha_pago) {
+          let monto = parseFloat(pago.monto);
+          if (isNaN(monto)) {
+            monto = 0;
+          }
+          total += monto;
+  
+        }
+      });
+      return Math.round(total * 100) / 100; */
+
+    let total = 0;
+
+    if (this.cliente_selected.pagos) {
+      this.cliente_selected.pagos.forEach(pago => {
+
+        //personalización CIVSA, para otras empresas sumar todo independiente del tipo 
+        if (pago.tipo_pago != "Apartado" && pago.tipo_pago != "Avalúo") {
+          total += +pago.monto;
+
+        }
+
+      });
+    }
+    return total;
   }
 
   saldoPendiente() {
-    //console.log("saldo pendiente");
-    let saldo = 0;
+
+    /*     let saldo = 0;
+    
+        if (this.cliente_selected.valor_operacion) {
+          let valor = parseFloat(this.cliente_selected.valor_operacion);
+          if (isNaN(valor)) {
+            valor = 0;
+          }
+          saldo = valor - this.totalPagosRealizados();
+        }
+    
+        return saldo; */
+
+
+    let pendiente = 0;
 
     if (this.cliente_selected.valor_operacion) {
-      let valor = parseFloat(this.cliente_selected.valor_operacion);
-      if (isNaN(valor)) {
-        valor = 0;
-      }
-      saldo = valor - this.totalPagosRealizados();
-    }
 
-    return saldo;
+      pendiente = +this.cliente_selected.valor_operacion - this.totalPagosRealizados();
+
+    }
+    return pendiente;
   }
 
-  gotoCliente(cliente,event) {
+  gotoCliente(cliente, event) {
     event.stopPropagation();
     this.router.navigate(["/editar-cliente", cliente.id_cliente]);
   }

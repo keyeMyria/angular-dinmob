@@ -27,6 +27,7 @@ import {
   DateAdapter,
   MAT_DATE_FORMATS,
   MatSortModule,
+  MatPaginatorModule,
 
   //NativeDateAdapter,
 } from "@angular/material";
@@ -69,7 +70,8 @@ export const MY_FORMATS = {
     MatDatepickerModule,
     MatNativeDateModule,
     MatTooltipModule,
-    MatSortModule
+    MatSortModule,
+    MatPaginatorModule
 
   ],
   exports: [
@@ -95,7 +97,8 @@ export const MY_FORMATS = {
     MatDatepickerModule,
     MatNativeDateModule,
     MatTooltipModule,
-    MatSortModule
+    MatSortModule,
+    MatPaginatorModule
 
   ],
 

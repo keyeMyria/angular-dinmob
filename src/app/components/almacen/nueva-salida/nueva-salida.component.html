@@ -31,7 +31,7 @@
 
           <ul class="list-group">
             <!--  <li class="list-group-item">({{lote.prototipos?.length || "0"}}) {{lote.nombre}}</li> -->
-            <button type="button" class="list-group-item list-group-item-action" *ngFor="let lote of manzana.lotes" (click)="getAvancesLote(lote)">({{lote.prototipos?.length || "0"}}) {{lote.nombre}}</button>
+            <button type="button" class="list-group-item list-group-item-action" *ngFor="let lote of manzana.lotes" (click)="getPartidasLote(lote)">({{lote.prototipos?.length || "0"}}) {{lote.nombre}}</button>
           </ul>
 
         </mat-expansion-panel>
@@ -47,13 +47,10 @@
 
           <ol class="breadcrumb colorBread">
             <li class="breadcrumb-item text-primary">
-
+              {{lote_selected.manzana}}
             </li>
             <li class="breadcrumb-item text-primary">
-
-            </li>
-            <li class="breadcrumb-item text-primary">
-
+              {{lote_selected.nombre}}
             </li>
           </ol>
 
@@ -62,9 +59,10 @@
 
               <form>
                 <div class="mb-2">
-                  <select class="form-control" id="id_tipo_usuario" name="id_tipo_usuario">
+                  <select class="form-control" id="partidas" name="partidas" 
+                 [(ngModel)]="partida_selected" (change)="getInsumosPartida(partida_selected)">
                     <option value="">Seleccionar...</option>
-                    <option [value]="">...</option>
+                    <option *ngFor="let partida of partidas" [value]="partida.id_partida">{{partida.nombre}}</option>
                   </select>
                 </div>
 
@@ -102,18 +100,18 @@
                       <th>Programado</th>
                       <th>Consumido</th>
                       <th>Existencias</th>
-                      <th>Salidas</th>
+                      <th>Salida</th>
                       <th>Excedente</th>
                     </tr>
                   </thead>
 
                   <tbody>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                    <tr *ngFor="let insumo of insumos">
+                      <td>{{insumo.insumo}}</td>
+                      <td>{{insumo.unidad}}</td>
+                      <td>{{insumo.cantidad}}</td>
+                      <td>{{insumo.consumido}}</td>
+                      <td>{{insumo.existencias}}</td>
                       <td></td>
                       <td></td>
                     </tr>

@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { ObrasService } from 'app/services/obras.service';
+import { of } from "rxjs/observable/of";
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-estadisticas-admin',
@@ -7,11 +11,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EstadisticasAdminComponent implements OnInit {
   obras: any = [];
-  estadisticas: any ={};
+  estadisticas: any = {};
   obra_selected: string = "";
-  constructor() { }
+
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private obraSrv: ObrasService,
+    public snackBar: MatSnackBar,
+  ) { }
 
   ngOnInit() {
+  }
+
+
+  cargarObra(id_obra) {
+
+    if (id_obra) {
+      this.router.navigate([".", { obra: id_obra }]);
+    } else {
+      this.router.navigate([".", {}]);
+    }
+
   }
 
 }

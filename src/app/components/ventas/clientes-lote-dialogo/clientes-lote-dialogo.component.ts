@@ -47,7 +47,12 @@ export class ClientesLoteDialogoComponent implements OnInit {
 
     if (this.cliente_selected.pagos) {
       this.cliente_selected.pagos.forEach(pago => {
-        total += +pago.monto;
+
+        //personalización CIVSA, para otras empresas sumar todo independiente del tipo 
+        if (pago.tipo_pago != "Apartado" && pago.tipo_pago != "Avalúo") {
+          total += +pago.monto;
+
+        }
 
       });
     }
@@ -69,7 +74,7 @@ export class ClientesLoteDialogoComponent implements OnInit {
 
   reporteCliente(cliente) {
 
-    let url = this.reporteSrv.getUrlReporteCompra(cliente.id_cliente, cliente.id_lote);
+    let url = this.reporteSrv.getUrlReporteCompra(cliente.id_cliente, cliente.id_lote, cliente.id_compra);
     let link = document.createElement("a");
     link.href = url;
     link.target = "_blank";

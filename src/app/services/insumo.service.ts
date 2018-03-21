@@ -22,6 +22,11 @@ export class InsumoService {
       .pipe(catchError(this.handleError("getMaterialesObra")));
   }
 
+  getPartidaSalida(id_partida, id_obra, id_lote):Observable<any> {
+    return this.http.post(this.url + 'get_partida_salida/'+id_partida, { id_obra: id_obra, id_lote: id_lote })
+      .pipe(catchError(this.handleError("getPartidaSalida")));
+  }
+
   updateInsumo(id, insumo) {
     return this.http.post(this.url + 'update_insumo/' + id, { insumo: insumo })
       .pipe(catchError(this.handleError("updateInsumo")));

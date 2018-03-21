@@ -17,6 +17,8 @@ export class FotoPartidaDialogoComponent {
   descripcion: string = "";
   result: any;
 
+  currentFile: File;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<FotoPartidaDialogoComponent>,
@@ -25,12 +27,15 @@ export class FotoPartidaDialogoComponent {
 
   ) {
 
+
     this.uploader = new FileUploader({
       url: this.loteSrv.getUploadFotoURL(),
       authToken: "Bearer " + this.auth.getToken(),
       queueLimit: 1,
       removeAfterUpload: true
     });
+
+
 
     this.uploader.onCompleteAll = () => {
       //console.log(this.inputFile.nativeElement.files);
@@ -99,16 +104,16 @@ export class FotoPartidaDialogoComponent {
       //si falla porque ya tenemos un archivo, entonces lo reemplazamos
       if (filter.name == "queueLimit") {
         this.uploader.clearQueue();
-        this.uploader.addToQueue(this.inputFile.nativeElement.files);
+        //this.uploader.addToQueue(this.inputFile.nativeElement.files);
+        this.uploader.addToQueue([this.currentFile]);
       }
 
     };
 
   }
 
+  //cambia el tamaño de la imagen y la comprime
   getScaledCanvas(image, maxDimension) {
-    //console.log("dentro de getScaledCanvas", image.width, image.height, maxDimension);
-
 
     var thumbCanvas = document.createElement('canvas');
     if (image.width > maxDimension ||
@@ -127,7 +132,68 @@ export class FotoPartidaDialogoComponent {
     thumbCanvas.getContext('2d').drawImage(image, 0, 0, image.width, image.height,
       0, 0, thumbCanvas.width, thumbCanvas.height);
     return thumbCanvas;
-  };
+  }
+
+
+  // devuelve una promesa con el Blob de 
+  // la imagen aplicando un cambio de tamaño y calidad
+  generateImage():Promise<Blob> {
+
+    //console.log("generateImage");
+
+    return new Promise((resolve, reject) => {
+
+      const createBlob = (url) => {
+
+        let image = new Image();
+
+        image.onload = () => {
+
+          let maxFullDimension = 1024;
+          let fullCanvas = this.getScaledCanvas(image, maxFullDimension);
+          fullCanvas.toBlob(resolve, 'image/jpeg', 0.8);
+
+        };
+
+        image.src = url;
+
+      };
+
+
+      let reader = new FileReader();
+      reader.onload = function () {
+        //e.target.result;                          
+        return createBlob(reader.result);
+      };      
+
+      reader.readAsDataURL(this.currentFile);
+
+    });
+
+
+
+  }
+
+
+  changeImage(event: Event, fileList: FileList) {
+    //console.log("changeImage");
+    this.currentFile = fileList[0];
+  }
+
+  uploadImage() {
+    //console.log("uploadImage");
+
+    this.generateImage()
+      .then((blob:any) => {
+        blob.name = this.currentFile.name;
+        //console.log("blob", blob);
+        this.uploader.addToQueue([blob]);
+
+        this.uploader.uploadAll();
+        
+      });
+
+  }
 
 
 

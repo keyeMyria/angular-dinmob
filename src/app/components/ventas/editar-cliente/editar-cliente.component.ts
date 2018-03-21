@@ -209,7 +209,7 @@ export class EditarClienteComponent implements OnInit {
       fecha_entrega: null,
       asesor_inmobiliario: null,
       id_asesor: null,
-      id_vendedor:null,
+      id_vendedor: null,
       notas_escrituracion: null,
       notas_cancelacion: null,
       fecha_entrega_fisica: null,
@@ -224,11 +224,11 @@ export class EditarClienteComponent implements OnInit {
     });
 
   }
- 
-  ngOnInit() { 
+
+  ngOnInit() {
     /* vendedores:any */
     this.route.data
-      .subscribe((data: { obras: any[], formas_pago: any[], instituciones_credito: any[], tipos_operacion: any[], tipos_pago: any[], estados: any[]}) => {
+      .subscribe((data: { obras: any[], formas_pago: any[], instituciones_credito: any[], tipos_operacion: any[], tipos_pago: any[], estados: any[] }) => {
         //console.log("resultado resolve ", data);
         this.obras = data.obras;
         this.formas_pago = data.formas_pago;
@@ -734,7 +734,12 @@ export class EditarClienteComponent implements OnInit {
 
     if (this.compra_selected.pagos) {
       this.compra_selected.pagos.forEach(pago => {
-        total += +pago.monto;
+
+        //personalización CIVSA, para otras empresas sumar todo independiente del tipo 
+        if (pago.tipo_pago != "Apartado" && pago.tipo_pago != "Avalúo") {
+          total += +pago.monto;
+
+        }
 
       });
     }
@@ -814,7 +819,7 @@ export class EditarClienteComponent implements OnInit {
   //reporte
   reporteCompra(compra) {
     console.log("reporte compra", compra);
-    let url = this.reporteSrv.getUrlReporteCompra(compra.id_cliente, compra.id_lote);
+    let url = this.reporteSrv.getUrlReporteCompra(compra.id_cliente, compra.id_lote, compra.id_compra);
 
     let link = document.createElement("a");
     link.href = url;
