@@ -1,3 +1,6 @@
+<button mat-fab class="img-btn" [disabled]="!lote_selected" style="position:fixed; bottom:20px; right:90px; z-index:100" (click)="verAvances(lote_selected)">
+    <i class="material-icons">show_chart</i>
+</button>
 <button mat-fab class="img-btn" [disabled]="!lote_selected" style="position:fixed; bottom:20px; right:20px; z-index:100" (click)="verImagenes()">
   <!-- <mat-icon aria-label="fab-button">photo_camera</mat-icon> -->
   <!-- <i class="fa fa-camera"></i> -->
@@ -52,7 +55,7 @@
 
         <button mat-raised-button color="primary" class="btn-block" (click)="verImagenes()" [disabled]="!lote_selected">
           <!-- <mat-icon aria-label="fab-button">photo_camera</mat-icon> --> Imágenes {{lote_selected?.num_fotos||0}}</button>
-        <button mat-raised-button color="primary" class="btn-block" (click)="verAvances()">Avances</button>
+        <button mat-raised-button color="primary" class="btn-block" (click)="verAvances(lote_selected)" [disabled]="!lote_selected">Avances</button>
 
 
       </mat-card>

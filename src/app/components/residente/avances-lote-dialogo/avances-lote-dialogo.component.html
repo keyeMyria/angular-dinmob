@@ -1,0 +1,73 @@
+<h1 mat-dialog-title>
+  <div>Partidas</div>
+  <div><small>{{data.lote.manzana + ' ' + data.lote.nombre}}</small></div>
+</h1>
+<div mat-dialog-content>
+
+  <div class="avances">
+
+      <mat-accordion>
+
+          <mat-expansion-panel *ngFor="let partida of data.acordeon" [hideToggle]="true">
+              <mat-expansion-panel-header [ngClass]="{'bg-info text-white': partidaFinalizada(partida)}">
+                  <span>{{partida.nombre}}</span>
+                  <div class="spacer"></div>
+                  <div class="collapse-header-btns">
+                      <small class="">{{numSubpartidasFinalizadas(partida)}}
+                          <span class="hidden-xs d-none d-md-inline-block">de {{partida.subpartidas.length || "1"}}</span>
+                      </small>
+                  </div>
+              </mat-expansion-panel-header>
+              <div *ngIf="partida.subpartidas.length>0">
+                  <ul class="list-group">
+                      <!--  class="pointer"  -->
+                      <li class="list-group-item" *ngFor="let subpartida of partida?.subpartidas">
+                          <div class="d-flex align-items-center">
+                    
+
+                              <div class="d-flex flex-column">
+                                  <div style="font-size:0.91rem">{{subpartida.nombre}}</div>
+                                  <div style="font-size: 0.91rem;">
+                                      <span class="badge" [ngClass]="{'badge-secondary':!subpartida.fecha_fin, 'badge-primary':subpartida.fecha_fin}">
+                                          <i class="fa fa-legal"></i>{{subpartida.fecha_fin|| "No terminada"}}</span>
+                                      <span class="badge" [ngClass]="{'badge-secondary':!subpartida.fecha_liberacion, 'badge-success':subpartida.fecha_liberacion}">
+                                          <i class="fa fa-usd"></i>{{subpartida.fecha_liberacion|| "No liberada"}}</span>
+                                  </div>
+                              </div>
+
+                            
+                        
+                          </div>
+                      </li>
+                  </ul>
+              </div>
+              <div *ngIf="partida.subpartidas.length===0">
+                  <ul class="list-group">
+                      <li class="list-group-item">
+                          <div class="d-flex align-items-center">
+
+                              <div class="d-flex flex-column">
+                                  <div style="font-size:0.91rem">
+                                      <span class="badge badge-secondary" [ngClass]="{'badge-secondary':!partida.fecha_fin, 'badge-primary':partida.fecha_fin}">
+                                          <i class="fa fa-legal"></i>{{partida.fecha_fin || "No terminada"}}</span>
+                                      <span class="badge badge-secondary" [ngClass]="{'badge-secundary':!partida.fecha_liberacion, 'badge-success':partida.fecha_liberacion}">
+                                          <i class="fa fa-usd"></i>{{partida.fecha_liberacion || "No liberada"}}</span>
+                                  </div>
+                              </div>
+
+                          </div>
+                      </li>
+                  </ul>
+              </div>
+          </mat-expansion-panel>
+
+
+
+      </mat-accordion>
+
+  </div>
+
+</div>
+<div mat-dialog-actions>
+  <button class="btn-block" mat-button [mat-dialog-close]="false">CERRAR</button>
+</div>

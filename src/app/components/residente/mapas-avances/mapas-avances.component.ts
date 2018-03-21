@@ -8,6 +8,7 @@ import { of } from "rxjs/observable/of";
 import { PercentPipe } from '@angular/common';
 import { ImagenesLotesDialogoComponent } from '../../ventas/imagenes-lotes-dialogo/imagenes-lotes-dialogo.component';
 import { LotesService } from '../../../services/lotes.service';
+import { AvancesLoteDialogoComponent } from '../avances-lote-dialogo/avances-lote-dialogo.component';
 
 declare var jQuery: any;
 declare var $: any;
@@ -235,7 +236,7 @@ export class MapasAvancesComponent implements OnInit {
     this.loteSrv.getFotosAvances(this.lote_selected.id_lote)
       .subscribe(fotos => {
 
-        console.log("fotos", fotos);
+        //console.log("fotos", fotos);
 
 
         let dialogRef = this.dialog.open(ImagenesLotesDialogoComponent, {
@@ -260,7 +261,29 @@ export class MapasAvancesComponent implements OnInit {
 
   }
 
-  verAvances() {
+
+  verAvances(lote) {
+
+    this.loteSrv.getAvances(lote.id_lote)
+      .subscribe(res => {
+
+        let dialogRef = this.dialog.open(AvancesLoteDialogoComponent, {
+          data: {
+            lote: res.lote,
+            acordeon: res.acordeon
+          },
+          width: '500px',
+        });
+    
+        dialogRef.afterClosed().subscribe(result => {
+    
+        });
+
+      }, (error) =>{
+
+      });
+
+    
 
   }
 
