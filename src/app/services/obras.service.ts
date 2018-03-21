@@ -100,6 +100,12 @@ export class ObrasService {
   }
 
   //ok
+  getEstadisticas(id_obra) {
+    return this.http.get(this.url + "get_estadisticas/" + id_obra, {})
+      .pipe(catchError(this.handleError("getEstadisticas")));
+  }
+
+  //ok
   getLoteResidentesTrabajadores(id_obra) {
     return this.http.get(this.url + "get_manzanas_lotes_trabajadores_residentes/" + id_obra, {})
       .pipe(catchError(this.handleError("getLoteResidentesTrabjadores")));
