@@ -76,6 +76,7 @@ import { TiposGastosResolverService } from './resolvers/tipos-gastos-resolver.se
 import { ImportarPrototipoComponent } from './components/admin/importar-prototipo/importar-prototipo.component';
 import { ProveedoresResolverService } from './resolvers/proveedores-resolver.service';
 import { EstadisticasAdminComponent } from './components/admin/estadisticas-admin/estadisticas-admin.component';
+import { TrabajadoresResolverService } from './resolvers/trabajadores-resolver.service';
 
 
 
@@ -231,7 +232,9 @@ export const ROUTES: Routes = [
             {
                 path: 'nueva-salida', component: NuevaSalidaComponent,
                 resolve: {
-                    obras: ObrasUsuarioResolverService
+                    obras: ObrasUsuarioResolverService,
+                    usuario: UsuarioLoggedResolverService
+
                 }
             },
             {

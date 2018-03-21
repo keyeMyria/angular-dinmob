@@ -21,7 +21,7 @@
     </mat-card>
     <div class="mb-3">
       <mat-accordion>
-        <mat-expansion-panel class="manzanas" *ngFor="let manzana of obra?.manzanas" [hideToggle]="false">
+        <mat-expansion-panel class="manzanas" *ngFor="let manzana of manzanas" [hideToggle]="false">
           <mat-expansion-panel-header>
             <span>{{manzana.nombre}}</span>
             <div class="spacer"></div>
@@ -59,8 +59,7 @@
 
               <form>
                 <div class="mb-2">
-                  <select class="form-control" id="partidas" name="partidas" 
-                 [(ngModel)]="partida_selected" (change)="getInsumosPartida(partida_selected)">
+                  <select class="form-control" id="partidas" name="partidas" [(ngModel)]="partida_selected" (change)="getInsumosPartida(partida_selected)">
                     <option value="">Seleccionar...</option>
                     <option *ngFor="let partida of partidas" [value]="partida.id_partida">{{partida.nombre}}</option>
                   </select>
@@ -131,14 +130,14 @@
                 <div class="form-group row">
                   <label for="partida" class="col-sm-3 col-form-label">Partida</label>
                   <div class="col-sm-9">
-                    <input class="form-control" type="text" id="partida" name="partida" formControlName="partida" disabled>
+                    <input class="form-control" type="text" id="partida" name="partida" formControlName="partida" disabled [value]="nombre_partida">
                   </div>
                 </div>
 
                 <div class="form-group row">
                   <label for="entrega" class="col-sm-3 col-form-label">Entrega</label>
                   <div class="col-sm-9">
-                    <input class="form-control" type="text" id="entrega" name="entrega" formControlName="entrega" disabled>
+                    <input class="form-control" type="text" id="entrega" name="entrega" formControlName="entrega" disabled [value]="usuario.nombre">
                   </div>
                 </div>
 
@@ -148,7 +147,7 @@
                     <select class="form-control" id="recibe" name="recibe" [ngClass]="{'is-invalid': form.get('recibe').invalid  && (form.get('recibe').dirty || form.get('recibe').touched) }"
                       formControlName="recibe">
                       <option value="">Seleccionar...</option>
-                      <option [value]=""></option>
+                      <option *ngFor="let trabajador of trabajadores" [value]="trabajador.id_trabajador">{{trabajador.nombre}}</option>
                     </select>
                     <div class="invalid-feedback">Seleccione un trabajador</div>
                   </div>
@@ -160,7 +159,7 @@
                     <select class="form-control" id="autoriza" name="autoriza" [ngClass]="{'is-invalid': form.get('autoriza').invalid  && (form.get('autoriza').dirty || form.get('autoriza').touched) }"
                       formControlName="autoriza">
                       <option value="">Seleccionar...</option>
-                      <option [value]=""></option>
+                      <option *ngFor="let residente of residentes" [value]="residente.id_usuario">{{residente.nombre}}</option>
                     </select>
                     <div class="invalid-feedback">Seleccione un residente</div>
                   </div>

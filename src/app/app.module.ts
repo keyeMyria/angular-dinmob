@@ -131,6 +131,8 @@ import { UsuarioLoggedResolverService } from 'app/resolvers/usuario-logged-resol
 import { EspecialidadesTrabajadorResolverService } from './resolvers/especialidades-trabajador-resolver.service';
 import { VendedoresResolverService } from './resolvers/vendedores-resolver.service';
 import { TiposGastosResolverService } from './resolvers/tipos-gastos-resolver.service';
+import { TrabajadoresResolverService } from './resolvers/trabajadores-resolver.service';
+import { ResidentesObraResolverService } from './resolvers/residentes-obra-resolver.service';
 
 
 //components
@@ -206,6 +208,8 @@ import { ImportarPrototipoComponent } from './components/admin/importar-prototip
 import { FormatoDialogoComponent } from './components/admin/formato-dialogo/formato-dialogo.component';
 import { ProveedoresResolverService } from './resolvers/proveedores-resolver.service';
 import { EstadisticasAdminComponent } from './components/admin/estadisticas-admin/estadisticas-admin.component';
+import { AvancesLoteDialogoComponent } from './components/residente/avances-lote-dialogo/avances-lote-dialogo.component';
+
 
 
 
@@ -336,6 +340,7 @@ export function getToken() {
     ImportarPrototipoComponent,
     FormatoDialogoComponent,
     EstadisticasAdminComponent,
+    AvancesLoteDialogoComponent,
 
 
 
@@ -418,7 +423,8 @@ export function getToken() {
     NuevoPagoComisionDialogoComponent,
     EditarPagoComisionDialogoComponent,
     EditarGastoDialogoComponent,
-    FormatoDialogoComponent
+    FormatoDialogoComponent,
+    AvancesLoteDialogoComponent
 
 
 
@@ -478,7 +484,9 @@ export function getToken() {
     EspecialidadesTrabajadorResolverService,
     VendedoresResolverService,
     TiposGastosResolverService,
-    ProveedoresResolverService
+    ProveedoresResolverService,
+    TrabajadoresResolverService,
+    ResidentesObraResolverService
 
 
   ],

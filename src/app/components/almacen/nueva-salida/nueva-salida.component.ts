@@ -36,6 +36,11 @@ export class NuevaSalidaComponent implements OnInit {
   partida_selected: string = "";
   lote_selected: any = {};
   insumos: any[] = [];
+  residentes: any = [];
+  trabajadores: any = [];
+  manzanas: any = [];
+  usuario: any = {};
+  nombre_partida: string = "";
 
   constructor(
     private fb: FormBuilder,
@@ -58,24 +63,40 @@ export class NuevaSalidaComponent implements OnInit {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
+
+
+
   }
 
   ngOnInit() {
     this.route.data
-      .subscribe((data: { obras: any[] }) => {
+      .subscribe((data: { obras: any[], usuario: any }) => {
         this.obras = data.obras;
+        this.usuario = data.usuario
+
       });
-      this.route.paramMap
+    this.route.paramMap
       .switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
-          return this.obraSrv.getAcordeonManzanas(params.get("obra"));
+          return this.obraSrv.getLoteResidentesTrabajadores(params.get("obra"));
+
         } else {
           return Observable.of({ datos: {} });
         }
       }).subscribe(obra => {
         console.log("obra", obra);
-        this.obra = obra;
+        
+        this.partida_selected = "";
+        this.partidas = [];
+        this.insumos = [];
+        this.nombre_partida = "";
+        this.obra = obra.obra;
+        this.form.reset();
+
+        this.trabajadores = obra.trabajadores;
+        this.residentes = obra.residentes;
+        this.manzanas = obra.manzanas;
       });
   }
 
@@ -99,22 +120,24 @@ export class NuevaSalidaComponent implements OnInit {
 
   }
 
-  getPartidasLote(lote){
+  getPartidasLote(lote) {
     this.loteSrv.getPartidasLote(lote.id_lote)
-    .subscribe(partidas => {
-      this.partidas = partidas;
-      this.lote_selected = lote;
-    });
+      .subscribe(partidas => {
+        this.partidas = partidas;
+        this.lote_selected = lote;
+      });
   }
 
-  getInsumosPartida(id_partida){
-    if(id_partida != ""){
+  getInsumosPartida(id_partida) {
+    if (id_partida != "") {
       this.insumoSrv.getPartidaSalida(id_partida, this.obra_selected, this.lote_selected.id_lote)
-      .subscribe(insumos => {
-        this.insumos = insumos;
-      });
-    }else{
+        .subscribe(insumos => {
+          this.insumos = insumos;
+          this.nombre_partida = this.partidas.find(partida => partida.id_partida == id_partida).nombre;
+        });
+    } else {
       this.insumos = [];
+      this.nombre_partida = "";
     }
   }
 
