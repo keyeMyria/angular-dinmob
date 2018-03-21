@@ -2,7 +2,7 @@
 <div mat-dialog-content>
   <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
 
-<!--     <div class="form-group">
+    <!--     <div class="form-group">
       <label for="obra" class="col-form-label">Obra</label>
       <input class="form-control" type="text" id="obra" name="obra" formControlName="obra" disabled>
     </div> -->
@@ -27,8 +27,8 @@
 
     <div class="form-group">
       <label for="existencias" class="col-form-label">Existencias</label>
-      <input class="form-control" type="text" id="existencias" name="existencias" formControlName="existencias" disabled>
-
+      <input [textMask]="{mask: numberMask}" class="form-control" type="text" id="existencias" name="existencias" formControlName="existencias"
+        [ngClass]="{'is-invalid': form.get('existencias').invalid  && (form.get('existencias').dirty || form.get('existencias').touched) }">
     </div>
 
 

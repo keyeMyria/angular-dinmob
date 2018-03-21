@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 
 @Component({
   selector: 'app-nuevo-material-dialogo',
@@ -8,7 +9,12 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
   styleUrls: ['./nuevo-material-dialogo.component.scss']
 })
 export class NuevoMaterialDialogoComponent implements OnInit {
-  form: FormGroup
+  form: FormGroup;
+  numberMask = createNumberMask({
+    allowDecimal: true,
+    prefix: '',
+    decimalLimit: 2
+  });
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -21,7 +27,7 @@ export class NuevoMaterialDialogoComponent implements OnInit {
       codigo: ["", Validators.required],
       nombre: ["", Validators.required],
       unidad: ["", Validators.required],
-      existencias: ["", Validators.required]
+      existencias: ["0.0", Validators.required]
     });
   }
 
