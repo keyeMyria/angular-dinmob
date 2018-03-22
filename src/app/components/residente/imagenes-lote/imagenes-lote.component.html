@@ -62,7 +62,7 @@
             <p class="card-text">{{foto.fecha}}</p>
             <p class="card-text">{{foto.descripcion}}</p>
             <div>
-              <button mat-button class="no-min" color="warn">
+              <button mat-button class="no-min" color="warn" (click)="delFoto(foto)">
                 <mat-icon>delete</mat-icon>
               </button>
 
@@ -70,11 +70,11 @@
                 <mat-icon>zoom_out_map</mat-icon>
               </button>
 
-              <button mat-button class="no-min">
+              <button mat-button class="no-min" (click)="girarFoto(foto, 90)">
                 <mat-icon>replay</mat-icon>
               </button>
 
-              <button mat-button class="no-min">
+              <button mat-button class="no-min" (click)="girarFoto(foto, 270)">
                 <mat-icon>refresh</mat-icon>
               </button>
 

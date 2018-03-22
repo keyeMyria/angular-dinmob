@@ -70,6 +70,27 @@ export class ImagenesLoteComponent implements OnInit {
 
   }
 
+  girarFoto(imagen, grados) {
+    this.loteSrv.girarFoto(imagen.id_imagen, grados)
+      .subscribe(res => {
+        imagen.url = res.url;
+      }, (error) => {
+
+      });
+
+  }
+
+  delFoto(foto){
+    this.loteSrv.delFoto(foto.id_imagen)
+    .subscribe(res => {
+      if(res.count == 1) {
+        let i = this.fotos.indexOf(foto);
+        this.fotos.splice(i, 1);
+        this.lote.num_fotos -= 1; 
+      }
+    });
+  }
+
   cargarObra(id_obra) {
 
     if (id_obra) {

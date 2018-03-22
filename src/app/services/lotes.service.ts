@@ -66,7 +66,6 @@ export class LotesService {
       .pipe(catchError(this.handleError("getFotosAvances")));
   }
 
-
   //ok
   addLoteByNombre(nombre, id_manzana) {
     return this.http.post(this.url + 'add_by_nombre', { nombre: nombre, id_manzana: id_manzana })
@@ -136,6 +135,18 @@ export class LotesService {
   getPartidasLote(id_lote) {
     return this.http.get(this.url + 'get_partidas/' + id_lote)
       .pipe(catchError(this.handleError("getPartidasLote")));
+  }
+
+  //ok
+  girarFoto(id_imagen, grados) {
+    return this.http.post(this.url + 'girar_foto/' + id_imagen, {grados: grados})
+      .pipe(catchError(this.handleError("girarFoto")));
+  }
+
+  //ok
+  delFoto(id_imagen) {
+    return this.http.post(this.url + 'del_foto/' + id_imagen, {})
+      .pipe(catchError(this.handleError("delFoto")));
   }
 
 
