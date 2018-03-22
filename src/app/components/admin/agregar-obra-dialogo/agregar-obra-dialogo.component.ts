@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
+import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 
 import { ObrasService } from "app/services/obras.service";
 
@@ -15,6 +16,11 @@ import * as moment from 'moment';
 })
 export class AgregarObraDialogoComponent implements OnInit {
   form: FormGroup;
+  numberMask = createNumberMask({
+    allowDecimal: true,
+    prefix: '',
+    decimalLimit: 2,
+  });
 
 
   constructor(
@@ -33,6 +39,9 @@ export class AgregarObraDialogoComponent implements OnInit {
       residentes: this.fb.array([], this.checkUsuariosRepetidos),
       control_almacen: this.fb.array([], this.checkUsuariosRepetidos),
       almacenistas: this.fb.array([], this.checkUsuariosRepetidos),
+      comision_vendedor: [""],
+      comision_gerente: [""],
+      comision_expediente: [""]
     });
 
   }
@@ -54,13 +63,13 @@ export class AgregarObraDialogoComponent implements OnInit {
     }
 
   }
-  get residentes(): FormArray{
+  get residentes(): FormArray {
     return this.form.get('residentes') as FormArray;
   }
-  get almacenistas(): FormArray{
+  get almacenistas(): FormArray {
     return this.form.get('almacenistas') as FormArray;
   }
-  get control_almacen(): FormArray{
+  get control_almacen(): FormArray {
     return this.form.get('control_almacen') as FormArray;
   }
 
@@ -98,9 +107,9 @@ export class AgregarObraDialogoComponent implements OnInit {
 
   crear() {
 
-    
+
     this.obrasSrv.createObra(this.form.value)
-      .subscribe(obra => {      
+      .subscribe(obra => {
 
         this.data.obras.push(obra);
 
