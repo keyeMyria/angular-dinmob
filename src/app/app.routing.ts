@@ -77,6 +77,7 @@ import { ImportarPrototipoComponent } from './components/admin/importar-prototip
 import { ProveedoresResolverService } from './resolvers/proveedores-resolver.service';
 import { EstadisticasAdminComponent } from './components/admin/estadisticas-admin/estadisticas-admin.component';
 import { TrabajadoresResolverService } from './resolvers/trabajadores-resolver.service';
+import { ReportesComponent } from './components/admin/reportes/reportes.component';
 
 
 
@@ -349,6 +350,12 @@ export const ROUTES: Routes = [
             { path: 'instituciones-credito', component: InstitucionesCreditoComponent },
             {
                 path: 'importar-prototipo', component: ImportarPrototipoComponent,
+                resolve: {
+                    obras: ObrasUsuarioResolverService
+                }
+            },
+            {
+                path: 'reportes', component: ReportesComponent,
                 resolve: {
                     obras: ObrasUsuarioResolverService
                 }
