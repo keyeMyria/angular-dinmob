@@ -34,9 +34,11 @@ export class ReportesComponent implements OnInit {
   }
 
   reporteVentas() {
+    console.log("Ventas")
   }
 
   reportePagos() {
+    console.log("Pagos")
   }
 
 }
