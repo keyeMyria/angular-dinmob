@@ -209,6 +209,7 @@ import { FormatoDialogoComponent } from './components/admin/formato-dialogo/form
 import { ProveedoresResolverService } from './resolvers/proveedores-resolver.service';
 import { EstadisticasAdminComponent } from './components/admin/estadisticas-admin/estadisticas-admin.component';
 import { AvancesLoteDialogoComponent } from './components/residente/avances-lote-dialogo/avances-lote-dialogo.component';
+import { ReportesComponent } from './components/admin/reportes/reportes.component';
 
 
 
@@ -341,6 +342,7 @@ export function getToken() {
     FormatoDialogoComponent,
     EstadisticasAdminComponent,
     AvancesLoteDialogoComponent,
+    ReportesComponent,
 
 
 
