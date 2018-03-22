@@ -19,7 +19,8 @@ export class ReportesComponent implements OnInit {
   ngOnInit() {
     this.route.data
       .subscribe((data: { obras: any[], especialidades: any }) => {
-        this.obras = data.obras
+        this.obras = data.obras;
+        this.obra_selected = this.route.snapshot.params["obra"];
       });
   }
 
