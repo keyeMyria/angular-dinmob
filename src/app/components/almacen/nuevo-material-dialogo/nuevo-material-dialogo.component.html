@@ -1,15 +1,16 @@
 <h1 mat-dialog-title>Nuevo Material</h1>
 <div mat-dialog-content>
   <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
-
-    <!--     <div class="form-group">
+    <!-- 
+    <div class="form-group">
       <label for="obra" class="col-form-label">Obra</label>
       <input class="form-control" type="text" id="obra" name="obra" formControlName="obra" disabled>
     </div> -->
 
     <div class="form-group">
       <label for="codigo" class="col-form-label">Código</label>
-      <input class="form-control" type="text" id="codigo" name="codigo" formControlName="codigo" [ngClass]="{'is-invalid': form.get('codigo').invalid  && (form.get('codigo').dirty || form.get('codigo').touched) }">
+      <input [textMask]="{mask: maskCodigo, guide:false}" class="form-control" type="text" id="codigo" name="codigo"
+        formControlName="codigo" [ngClass]="{'is-invalid': form.get('codigo').invalid  && (form.get('codigo').dirty || form.get('codigo').touched) }">
       <div class="invalid-feedback">Proporcione un codigo</div>
     </div>
 

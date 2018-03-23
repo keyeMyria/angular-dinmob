@@ -72,7 +72,8 @@ export class EntradasComponent implements OnInit {
   }
 
   nuevaEntrada() {
-    this.router.navigate(["/nueva-entrada"]);
+    console.log("obra seleccionada", this.obra_selected);
+    this.router.navigate(["/nueva-entrada", { obra: this.obra_selected }]);
   }
 
   editarEntrada(entrada) {

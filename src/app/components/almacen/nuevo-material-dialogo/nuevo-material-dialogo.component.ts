@@ -16,6 +16,8 @@ export class NuevoMaterialDialogoComponent implements OnInit {
     decimalLimit: 2
   });
 
+  public maskCodigo = ['M', 'A', /\d/, /\d/, /\d/, /\d/];
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<NuevoMaterialDialogoComponent>,
@@ -23,7 +25,7 @@ export class NuevoMaterialDialogoComponent implements OnInit {
   ) {
 
     this.form = this.fb.group({
-      obra: ["", Validators.required],
+     /*  obra: ["", Validators.required], */
       codigo: ["", Validators.required],
       nombre: ["", Validators.required],
       unidad: ["", Validators.required],

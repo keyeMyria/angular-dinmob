@@ -24,7 +24,7 @@
         </div>
         <div>
           <div class="table-responsive">
-            <table class="table table-hover table-striped">
+            <table class="table table-align-middle table-hover table-striped">
               <thead>
                 <tr>
                   <th>Fecha</th>
@@ -38,7 +38,7 @@
 
               <tbody>
                 <tr *ngFor="let entrada of entradas">
-                  <td>{{entrada.fecha| date:'mediumDate':'':'es'}}</td>
+                  <td class="ws-nowrap">{{entrada.fecha| date:'mediumDate':'':'es'}}</td>
                   <td>{{entrada.folio}}</td>
                   <td>{{entrada.proveedor}}</td>
                   <td>{{entrada.total}}</td>
