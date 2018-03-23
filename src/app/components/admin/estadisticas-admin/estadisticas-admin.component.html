@@ -114,7 +114,7 @@
 
     <div class="col-12 col-md-6 col-lg-3 p-2">
       <mat-card class="">
-        <h3>{{(0 + estadisticas?.total_avances_mo + estadisticas?.total_avances_ma || 0) |currency }}</h3>
+        <h3>{{ (estadisticas?.total_avances_mo*1 + estadisticas?.total_avances_ma*1) || 0 |currency }}</h3>
         <p>AVANCE MO + MA</p>
         <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
       </mat-card>
