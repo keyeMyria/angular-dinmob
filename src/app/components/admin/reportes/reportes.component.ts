@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
+import { ReporteService } from 'app/services/reporte.service';
 
 @Component({
   selector: 'app-reportes',
@@ -14,6 +15,7 @@ export class ReportesComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private reporteSrv: ReporteService
   ) { }
 
   ngOnInit() {
@@ -35,11 +37,19 @@ export class ReportesComponent implements OnInit {
   }
 
   reporteVentas() {
-    console.log("Ventas")
+    let url = this.reporteSrv.getUrlReporteVentas(this.obra_selected);
+    let link = document.createElement("a");
+    link.href = url;
+    link.target = "_blank";
+    link.click();
   }
 
   reportePagos() {
-    console.log("Pagos")
+    let url = this.reporteSrv.getUrlReportePagos(this.obra_selected);
+    let link = document.createElement("a");
+    link.href = url;
+    link.target = "_blank";
+    link.click();
   }
 
 }

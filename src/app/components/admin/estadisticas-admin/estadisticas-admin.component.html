@@ -8,7 +8,7 @@
   </div>
 
   <div class="row">
-    <div class="col-12 col-md-6 col-lg-3 p-2">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-2">
       <mat-card class="">
         <h3>{{(estadisticas?.total_ventas|| 0) |currency }}</h3>
         <p>VENTAS TOTAL</p>
@@ -16,7 +16,7 @@
       </mat-card>
     </div>
 
-    <div class="col-12 col-md-6 col-lg-3 p-2">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-2">
       <mat-card class="">
         <h3>{{(estadisticas?.pagado_ventas|| 0) |currency }}</h3>
         <p>VENTAS PAGADO</p>
@@ -24,7 +24,7 @@
       </mat-card>
     </div>
 
-    <div class="col-12 col-md-6 col-lg-3 p-2">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-2">
       <mat-card class="">
         <h3>{{(estadisticas?.total_ventas - estadisticas?.pagado_ventas || 0) |currency }}</h3>
         <p>VENTAS PENDIENTE</p>
@@ -32,7 +32,7 @@
       </mat-card>
     </div>
 
-    <div class="col-12 col-md-6 col-lg-3 p-2">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-2">
       <mat-card class="">
         <h3>{{(estadisticas?.count_manzanas|| 0) | number }}</h3>
         <p>MANZANAS</p>
@@ -40,15 +40,15 @@
       </mat-card>
     </div>
 
-    <div class="col-12 col-md-6 col-lg-3 p-2">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-2">
       <mat-card class="">
-        <h3>{{(estadisticas?.count_lotes.Total || 0 )}}</h3>
+        <h3>{{(estadisticas?.count_lotes?.Total || 0 ) | number }}</h3>
         <p>LOTES</p>
         <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
       </mat-card>
     </div>
 
-    <div class="col-12 col-md-6 col-lg-3 p-2">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-2">
       <mat-card class="">
         <h3>{{(estadisticas?.count_prototipos|| 0) |currency }}</h3>
         <p>PROTOTIPOS</p>
@@ -56,7 +56,7 @@
       </mat-card>
     </div>
 
-    <div class="col-12 col-md-6 col-lg-3 p-2">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-2">
       <mat-card class="">
         <h3>{{(estadisticas?.total_obra|| 0) |currency }}</h3>
         <p>OBRA</p>
@@ -64,7 +64,7 @@
       </mat-card>
     </div>
 
-    <div class="col-12 col-md-6 col-lg-3 p-2">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-2">
       <mat-card class="">
         <h3>{{(estadisticas?.total_inventario|| 0) |currency }}</h3>
         <p>INVENTARIO</p>
@@ -72,7 +72,7 @@
       </mat-card>
     </div>
 
-    <div class="col-12 col-md-6 col-lg-3 p-2">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-2">
       <mat-card class="">
         <h3>{{(estadisticas?.total_obra - (estadisticas.total_avances_ma*1 + estadisticas.total_avances_mo*1)|| 0) |currency}}</h3>
         <p>PENDIENTE OBRA</p>
@@ -80,7 +80,7 @@
       </mat-card>
     </div>
 
-    <div class="col-12 col-md-6 col-lg-3 p-2">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-2">
       <mat-card class="">
         <h3>{{(estadisticas?.total_gastos || 0) |currency }}</h3>
         <p>GASTOS OBRA</p>
@@ -88,7 +88,7 @@
       </mat-card>
     </div>
 
-    <div class="col-12 col-md-6 col-lg-3 p-2">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-2">
       <mat-card class="">
         <h3>{{(((estadisticas?.total_avances_ma*1 + estadisticas?.total_avances_mo*1)/estadisticas?.total_obra)|| 0) | percent:'1.2-2'}}
         </h3>
@@ -97,7 +97,7 @@
       </mat-card>
     </div>
 
-    <div class="col-12 col-md-6 col-lg-3 p-2">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-2">
       <mat-card class="">
         <h3>{{(estadisticas?.total_avances_ma|| 0) |currency }}</h3>
         <p>AVANCE MA</p>
@@ -105,7 +105,7 @@
       </mat-card>
     </div>
 
-    <div class="col-12 col-md-6 col-lg-3 p-2">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-2">
       <mat-card class="">
         <h3>{{(estadisticas?.total_avances_mo|| 0) |currency }}</h3>
         <p>AVANCE MO</p>
@@ -113,7 +113,7 @@
       </mat-card>
     </div>
 
-    <div class="col-12 col-md-6 col-lg-3 p-2">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-2">
       <mat-card class="">
         <h3>{{ (estadisticas?.total_avances_mo*1 + estadisticas?.total_avances_ma*1) || 0 |currency }}</h3>
         <p>AVANCE MO + MA</p>
@@ -121,7 +121,7 @@
       </mat-card>
     </div>
 
-    <div class="col-12 col-md-6 col-lg-3 p-2">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-2">
       <mat-card class="">
         <h3>{{(estadisticas?.count_salidas|| 0) |currency }}</h3>
         <p>SALIDAS</p>
@@ -129,7 +129,7 @@
       </mat-card>
     </div>
 
-    <div class="col-12 col-md-6 col-lg-3 p-2">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-2">
       <mat-card class="">
         <h3>{{(estadisticas?.count_alertas|| 0) |currency }}</h3>
         <p>SALIDAS ALERTA</p>
@@ -137,7 +137,7 @@
       </mat-card>
     </div>
 
-    <div class="col-12 col-md-6 col-lg-3 p-2">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-2">
       <mat-card class="">
         <h3>{{(estadisticas?.count_entradas|| 0) |currency }}</h3>
         <p>ENTRADAS</p>
@@ -145,23 +145,25 @@
       </mat-card>
     </div>
 
-    <div class="col-12 col-md-6 col-lg-3 p-2">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-2">
       <mat-card class="">
-        <h3>{{estadisticas?.ultimo_avance | date:'mediumDate':'':'es'}}</h3>
+        <h3 *ngIf="estadisticas.ultimo_avance">{{estadisticas.ultimo_avance | date:'mediumDate':'':'es'}}</h3>
+        <h3 *ngIf="!estadisticas.ultimo_avance">-</h3>
         <p>ÚLTIMO AVANCE</p>
         <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
       </mat-card>
     </div>
 
-    <div class="col-12 col-md-6 col-lg-3 p-2">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-2">
       <mat-card class="">
-        <h3>{{estadisticas?.ultimo_pago | date:'mediumDate':'':'es'}}</h3>
+        <h3 *ngIf="estadisticas.ultimo_pago">{{estadisticas.ultimo_pago | date:'mediumDate':'':'es'}}</h3>
+        <h3 *ngIf="!estadisticas.ultimo_pago">-</h3>
         <p>ÚLTIMO PAGO</p>
         <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
       </mat-card>
     </div>
 
-    <div class="col-12 col-md-6 col-lg-3 p-2">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-2">
       <mat-card class="">
         <h3>{{(estadisticas?.total_pagos|| 0) |currency }}</h3>
         <p>PAGADO MO</p>

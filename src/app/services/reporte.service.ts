@@ -17,6 +17,14 @@ export class ReporteService {
     return `${this.url}cliente_lote/${id_cliente}/${id_lote}/${id_compra}`;
   }
 
+  getUrlReporteVentas(id_obra){
+    return `${this.url}lotes_en_venta/${id_obra}`;
+  }
+
+  getUrlReportePagos(id_obra){
+    return `${this.url}pagos/${id_obra}`;
+  }
+
 }
 
 
