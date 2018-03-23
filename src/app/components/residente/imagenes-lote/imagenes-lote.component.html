@@ -56,7 +56,9 @@
       <div class="card-columns">
 
         <div class="card" *ngFor="let foto of fotos">
-          <img class="card-img-top" [src]="foto.url" [alt]="foto.partida">
+          <a [href]="foto.url" target="_blank">
+            <img class="card-img-top" [src]="foto.url" [alt]="foto.partida">
+          </a>
           <div class="card-body">
             <h5 class="card-title">{{foto.partida_padre}} {{foto.partida}}</h5>
             <p class="card-text">{{foto.fecha}}</p>
@@ -66,9 +68,9 @@
                 <mat-icon>delete</mat-icon>
               </button>
 
-              <button mat-button class="no-min">
+              <!--       <button mat-button class="no-min">
                 <mat-icon>zoom_out_map</mat-icon>
-              </button>
+              </button> -->
 
               <button mat-button class="no-min" (click)="girarFoto(foto, 90)">
                 <mat-icon>replay</mat-icon>
