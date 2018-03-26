@@ -30,6 +30,7 @@ export class VerSalidaDialogoComponent implements OnInit {
       autoriza: [data.datos.autoriza],
       entrega: [data.datos.entraga],
       nombre_trabajador: [data.datos.nombre_trabajador],
+      notas: [data.datos.notas],
 
 
 

@@ -69,9 +69,9 @@
                 <div class="form-row align-items-center">
                   <div class="col-auto">
                     <div class="input-group mb-2">
-                      <input type="text" class="form-control" placeholder="Buscar">
+                      <input type="text" class="form-control" #filtro (keyup)="aplicarFiltro($event.target.value)" placeholder="Buscar">
                       <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button">
+                        <button class="btn btn-outline-secondary" type="button" (click)="borrarFiltro(filtro)">
                           <i class="fa fa-times" aria-hidden="true"></i>
                         </button>
                       </div>
@@ -87,7 +87,7 @@
                     </div>
                   </div> -->
                   <div class="col-auto">
-                    <mat-checkbox>Ver sólo materiales con entrada</mat-checkbox>
+                    <mat-checkbox (change)="insumosConSalida($event)">Ver sólo materiales con entrada</mat-checkbox>
                   </div>
 
                 </div>
@@ -109,14 +109,14 @@
                   </thead>
 
                   <tbody>
-                    <tr *ngFor="let insumo of insumos">
+                    <tr *ngFor="let insumo of insumos_filtrados">
                       <td>{{insumo.insumo}}</td>
                       <td>{{insumo.unidad}}</td>
                       <td>{{insumo.cantidad}}</td>
                       <td>{{insumo.consumido}}</td>
                       <td>{{insumo.existencias}}</td>
                       <td>
-                        <input type="number" class="form-control">
+                        <input type="number" class="form-control" [(ngModel)]="insumo.salida">
                       </td>
                       <td></td>
                     </tr>
@@ -189,7 +189,7 @@
               </form>
               <div class="form-group">
                 <div class="text-center">
-                  <button mat-raised-button type="submit" form="id_form" [disabled]="form.invalid" color="primary" (click)="guardar()">GUARDAR</button>
+                  <button mat-raised-button type="submit" class="btn-block" form="id_form" [disabled]="form.invalid" color="primary" (click)="guardar()">GUARDAR</button>
                 </div>
               </div>
             </div>

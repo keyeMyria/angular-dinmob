@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { InsumoService } from 'app/services/insumo.service';
 import { of } from "rxjs/observable/of";
 import { EntradasService } from '../../../services/entradas.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-nueva-entrada',
@@ -16,12 +17,14 @@ export class NuevaEntradaComponent implements OnInit {
   insumos: any[] = [];
   id_proveedor: string = "";
   folio: string = "";
+  insumos_filtrados: any[] = [];
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private insumoSrv: InsumoService,
-    private entradaSrv: EntradasService
+    private entradaSrv: EntradasService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -41,6 +44,8 @@ export class NuevaEntradaComponent implements OnInit {
       }).subscribe(insumos => {
 
         this.insumos = insumos;
+        this.insumos_filtrados = this.insumos.slice();
+
 
       });
   }
@@ -73,10 +78,48 @@ export class NuevaEntradaComponent implements OnInit {
         //volver a leer los insumos
         this.insumos = insumos;
 
+        this.snackBar.open("Entrada Creada", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      }, (error) => {
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+
       });
+  }
+
+  aplicarFiltro(termino) {
+
+    let min_termino = termino.toLowerCase();
+    this.insumos_filtrados = this.insumos.filter(insumo => {
+      let nombre = insumo.insumo.toLowerCase();
+      return nombre.includes(min_termino);
+    });
+  }
+
+  borrarFiltro(input_filtro) {
+    console.log("filtro", input_filtro.value);
+    input_filtro.value = "";
+    this.insumos_filtrados = this.insumos.slice();
+  }
+
+  insumosConEntrada($event) {
+
+    console.log("change", $event.checked);
+
+    if ($event.checked == true) {
+      this.insumos_filtrados = this.insumos.filter( insumos => insumos.entrada > 0 );
+    } else {
+      this.insumos_filtrados = this.insumos.slice();
+    }
 
 
 
   }
+
 
 }

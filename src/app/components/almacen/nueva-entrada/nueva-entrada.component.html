@@ -19,9 +19,9 @@
           <div class="form-row align-items-center">
             <div class="col-auto">
               <div class="input-group mb-2">
-                <input type="text" class="form-control" placeholder="Buscar">
+                <input (keyup)="aplicarFiltro($event.target.value)" #filtro type="text" class="form-control" placeholder="Buscar">
                 <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" type="button">
+                  <button class="btn btn-outline-secondary" type="button" (click)="borrarFiltro(filtro)">
                     <i class="fa fa-times" aria-hidden="true"></i>
                   </button>
                 </div>
@@ -37,7 +37,7 @@
               </div>
             </div> -->
             <div class="col-auto">
-              <mat-checkbox>Ver sólo materiales con entrada</mat-checkbox>
+              <mat-checkbox (change)="insumosConEntrada($event)">Ver sólo materiales con entrada</mat-checkbox>
             </div>
           </div>
         </form>
@@ -56,7 +56,7 @@
             </thead>
 
             <tbody>
-              <tr *ngFor="let insumo of insumos">
+              <tr *ngFor="let insumo of insumos_filtrados">
                 <td>{{insumo.codigo}}</td>
                 <td>{{insumo.insumo}}</td>
                 <td>{{insumo.unidad}}</td>

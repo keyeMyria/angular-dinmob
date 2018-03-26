@@ -41,6 +41,7 @@ export class NuevaSalidaComponent implements OnInit {
   manzanas: any = [];
   usuario: any = {};
   nombre_partida: string = "";
+  insumos_filtrados: any[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -86,7 +87,7 @@ export class NuevaSalidaComponent implements OnInit {
         }
       }).subscribe(obra => {
         console.log("obra", obra);
-        
+
         this.partida_selected = "";
         this.partidas = [];
         this.insumos = [];
@@ -133,6 +134,7 @@ export class NuevaSalidaComponent implements OnInit {
       this.insumoSrv.getPartidaSalida(id_partida, this.obra_selected, this.lote_selected.id_lote)
         .subscribe(insumos => {
           this.insumos = insumos;
+          this.insumos_filtrados = this.insumos.slice();
           this.nombre_partida = this.partidas.find(partida => partida.id_partida == id_partida).nombre;
         });
     } else {
@@ -140,5 +142,34 @@ export class NuevaSalidaComponent implements OnInit {
       this.nombre_partida = "";
     }
   }
+
+  aplicarFiltro(termino) {
+    let min_termino = termino.toLowerCase();
+    this.insumos_filtrados = this.insumos.filter(insumo => {
+      let nombre = insumo.insumo.toLowerCase();
+      return nombre.includes(min_termino);
+    });
+  }
+
+  borrarFiltro(input_filtro) {
+    console.log("filtro", input_filtro.value);
+    input_filtro.value = "";
+    this.insumos_filtrados = this.insumos.slice();
+  }
+
+  insumosConSalida($event) {
+
+    console.log("change", $event.checked);
+
+    if ($event.checked == true) {
+      this.insumos_filtrados = this.insumos.filter(insumos => insumos.salida > 0);
+    } else {
+      this.insumos_filtrados = this.insumos.slice();
+    }
+
+
+
+  }
+
 
 }
