@@ -17,6 +17,8 @@ export class SalidasComponent implements OnInit {
   obra_selected: string = "";
   salidas: any[] = [];
 
+  salidas_filtradas: any[] = [];
+
   // MatPaginator Inputs
   length: number; // = 100;
   pageSize = 10;
@@ -38,19 +40,19 @@ export class SalidasComponent implements OnInit {
         this.obras = data.obras;
       });
 
-   /*  this.route.paramMap
-      .switchMap((params: ParamMap) => {
-        if (params.has("obra")) {
-          this.obra_selected = params.get("obra");
-          return this.salidaSrv.getSalidasObra(params.get("obra"));
-        } else {
-          return of([]);
-        }
-      }).subscribe(salidas => {
-        this.salidas = salidas;
-
-      }); */
-      this.route.paramMap
+    /*  this.route.paramMap
+       .switchMap((params: ParamMap) => {
+         if (params.has("obra")) {
+           this.obra_selected = params.get("obra");
+           return this.salidaSrv.getSalidasObra(params.get("obra"));
+         } else {
+           return of([]);
+         }
+       }).subscribe(salidas => {
+         this.salidas = salidas;
+ 
+       }); */
+    this.route.paramMap
       .switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
@@ -64,6 +66,7 @@ export class SalidasComponent implements OnInit {
       }).subscribe(res => {
         this.length = res[0].count;
         this.salidas = res[1];
+        this.salidas_filtradas = this.salidas.slice();
 
       });
 
@@ -146,9 +149,18 @@ export class SalidasComponent implements OnInit {
     this.salidaSrv.getPageSalidasObra(this.obra_selected, event.pageSize, event.pageIndex)
       .subscribe(salidas => {
         this.salidas = salidas;
-
+        this.salidas_filtradas = this.salidas.slice();
       });
 
+  }
+
+  filtro($event) {
+    console.log("change", $event.value);
+    if ($event.value != "T") {
+      this.salidas_filtradas = this.salidas.filter(salida => salida.id_tipo_salida == $event.value);
+    } else {
+      this.salidas_filtradas = this.salidas.slice();
+    }
   }
 
 }
