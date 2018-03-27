@@ -272,7 +272,7 @@ export class MapasAvancesComponent implements OnInit {
             lote: res.lote,
             acordeon: res.acordeon
           },
-          width: '500px',
+          width: '800px',
         });
     
         dialogRef.afterClosed().subscribe(result => {
