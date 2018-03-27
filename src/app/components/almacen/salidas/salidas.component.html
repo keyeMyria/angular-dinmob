@@ -43,7 +43,7 @@
             <input class="form-check-input" type="radio" name="inlineRadioOptions" id="" value="option5">
             <label class="form-check-label" for="">Arranque</label>
           </div> -->
-          <mat-radio-group (change)="filtro($event)" >
+          <mat-radio-group [(ngModel)]="filtro_selected" name="filtros" (change)="filtro($event)" >
             <mat-radio-button class="ml-2" value="T">Todas</mat-radio-button>
             <mat-radio-button class="ml-2" value="P">Paquetes</mat-radio-button>
             <mat-radio-button class="ml-2" value="U">Urbanización</mat-radio-button>

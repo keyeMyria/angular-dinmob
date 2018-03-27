@@ -24,14 +24,14 @@ export class SalidasService {
   }
 
    //ok
-   getCountSalidasObra(id_obra): Observable<any> {
-    return this.http.get(this.url + 'count_obra/' + id_obra)
+   getCountSalidasObra(id_obra, tipo_salida): Observable<any> {
+    return this.http.post(this.url + 'count_obra/' + id_obra, {tipo_salida: tipo_salida})
       .pipe(catchError(this.handleError("getCountSalidasObra")));
   }
 
   //ok
-  getPageSalidasObra(id_obra, page_size, page): Observable<any> {
-    return this.http.post(this.url + 'page_obra/' + id_obra, { page_size: page_size, page: page })
+  getPageSalidasObra(id_obra, page_size, page, tipo_salida): Observable<any> {
+    return this.http.post(this.url + 'page_obra/' + id_obra, { page_size: page_size, page: page, tipo_salida: tipo_salida })
       .pipe(catchError(this.handleError("getPageSalidasObra")));
   }
 

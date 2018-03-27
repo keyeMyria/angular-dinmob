@@ -772,6 +772,8 @@ export class EditarClienteComponent implements OnInit {
     this.clienteSrv.setActivacionCompra(compra.id_compra, activo)
       .subscribe(res => {
         compra.activo = res.activo;
+        compra.fecha_cancelacion = res.fecha_cancelacion;
+        compra.fecha_activo = res.fecha_activo;
         this.snackBar.open("Compra Actualizada", "", {
           duration: 2000,
           panelClass: ["bg-success", "text-white"]
@@ -818,7 +820,7 @@ export class EditarClienteComponent implements OnInit {
 
   //reporte
   reporteCompra(compra) {
-    console.log("reporte compra", compra);
+    //console.log("reporte compra", compra);
     let url = this.reporteSrv.getUrlReporteCompra(compra.id_cliente, compra.id_lote, compra.id_compra);
 
     let link = document.createElement("a");

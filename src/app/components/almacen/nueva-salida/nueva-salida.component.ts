@@ -157,12 +157,13 @@ export class NuevaSalidaComponent implements OnInit {
     this.insumos_filtrados = this.insumos.slice();
   }
 
-  insumosConSalida($event) {
+  insumosConSalida($event, filtro) {
 
     console.log("change", $event.checked);
 
     if ($event.checked == true) {
       this.insumos_filtrados = this.insumos.filter(insumos => insumos.salida > 0);
+      filtro.value = "";
     } else {
       this.insumos_filtrados = this.insumos.slice();
     }

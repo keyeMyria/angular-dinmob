@@ -16,6 +16,7 @@ export class SalidasComponent implements OnInit {
   obras: any = [];
   obra_selected: string = "";
   salidas: any[] = [];
+  filtro_selected: string = "T";
 
   salidas_filtradas: any[] = [];
 
@@ -57,8 +58,8 @@ export class SalidasComponent implements OnInit {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
           return Observable.forkJoin(
-            this.salidaSrv.getCountSalidasObra(params.get("obra")),
-            this.salidaSrv.getPageSalidasObra(params.get("obra"), this.pageSize, 0)
+            this.salidaSrv.getCountSalidasObra(params.get("obra"), this.filtro_selected),
+            this.salidaSrv.getPageSalidasObra(params.get("obra"), this.pageSize, 0, this.filtro_selected)
           );
         } else {
           return of([0, []]);
@@ -145,8 +146,8 @@ export class SalidasComponent implements OnInit {
 
   onPageChange(event: PageEvent) {
     console.log("pageChange", event);
-
-    this.salidaSrv.getPageSalidasObra(this.obra_selected, event.pageSize, event.pageIndex)
+    
+    this.salidaSrv.getPageSalidasObra(this.obra_selected, event.pageSize, event.pageIndex, this.filtro_selected)
       .subscribe(salidas => {
         this.salidas = salidas;
         this.salidas_filtradas = this.salidas.slice();
@@ -156,11 +157,21 @@ export class SalidasComponent implements OnInit {
 
   filtro($event) {
     console.log("change", $event.value);
-    if ($event.value != "T") {
+
+    return Observable.forkJoin(
+      this.salidaSrv.getCountSalidasObra(this.obra_selected, this.filtro_selected),
+      this.salidaSrv.getPageSalidasObra(this.obra_selected, this.pageSize, 0, this.filtro_selected)
+    ).subscribe(res => {
+      this.length = res[0].count;
+      this.salidas = res[1];
+      this.salidas_filtradas = this.salidas.slice();
+    });
+
+    /* if ($event.value != "T") {
       this.salidas_filtradas = this.salidas.filter(salida => salida.id_tipo_salida == $event.value);
     } else {
       this.salidas_filtradas = this.salidas.slice();
-    }
+    } */
   }
 
 }

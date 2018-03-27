@@ -69,9 +69,9 @@
                 <div class="form-row align-items-center">
                   <div class="col-auto">
                     <div class="input-group mb-2">
-                      <input type="text" class="form-control" #filtro (keyup)="aplicarFiltro($event.target.value)" placeholder="Buscar">
+                      <input type="text" class="form-control" #filtro (keyup)="aplicarFiltro($event.target.value)" placeholder="Buscar" [disabled]="filtroSalida.checked">
                       <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button" (click)="borrarFiltro(filtro)">
+                        <button class="btn btn-outline-secondary" type="button" (click)="borrarFiltro(filtro)" [disabled]="filtroSalida.checked">
                           <i class="fa fa-times" aria-hidden="true"></i>
                         </button>
                       </div>
@@ -87,7 +87,7 @@
                     </div>
                   </div> -->
                   <div class="col-auto">
-                    <mat-checkbox (change)="insumosConSalida($event)">Ver sólo materiales con entrada</mat-checkbox>
+                    <mat-checkbox (change)="insumosConSalida($event, filtro)" #filtroSalida>Ver sólo materiales con entrada</mat-checkbox>
                   </div>
 
                 </div>
