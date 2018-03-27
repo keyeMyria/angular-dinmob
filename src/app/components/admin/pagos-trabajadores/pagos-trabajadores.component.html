@@ -260,7 +260,7 @@
         </div>
       </div>
 
-      <div class="table-responsive">
+      <div class="table-responsive mt-2">
         <table class="table table-hover table-striped">
           <thead>
             <tr>
@@ -282,7 +282,7 @@
               <td>{{avance.lote}}</td>
               <td>{{avance.partida}}</td>
               <td>{{avance.subpartida}}</td>
-              <td>{{avance.fecha}}</td>
+              <td>{{avance.fecha| date:'mediumDate':'':'es'}}</td>
               <td>{{avance.importe | currency}}</td>
               <td>{{avance.retencion | currency}}</td>
               <td>{{avance.liberacion | currency}}</td>
@@ -331,7 +331,7 @@
         </div>
       </div>
 
-      <div class="table-responsive">
+      <div class="table-responsive mt-2">
         <table class="table table-hover table-striped">
           <thead>
             <tr>
@@ -344,7 +344,7 @@
 
           <tbody>
             <tr *ngFor="let historial of historiales">
-              <td>{{historial.fecha}}</td>
+              <td>{{historial.fecha| date:'mediumDate':'':'es'}}</td>
               <td>{{historial.pago|currency}}</td>
               <td>{{historial.tipo}}</td>
               <td>{{historial.nota}}</td>
