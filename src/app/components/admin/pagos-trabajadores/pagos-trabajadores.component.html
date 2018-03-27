@@ -31,13 +31,13 @@
                   <div class="invalid-feedback">Seleccione trabajador</div>
                 </div>
 
-                <mat-checkbox formControlName="inicio_obra">Inicio Obra</mat-checkbox>
+                <mat-checkbox formControlName="inicio_obra" #inicioCheck>Inicio Obra</mat-checkbox>
 
                 <div class="form-group">
                   <label for="fecha_inicio" class="form-label">Fecha Inicio</label>
                   <div class="input-group">
                     <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="fecha_inicio" placement="bottom-left" [matDatepicker]="dpFechaInicio"
-                      formControlName="fecha_inicio" [ngClass]="{'is-invalid':form.get('fecha_inicio').invalid && (form.get('fecha_inicio').dirty || form.get('fecha_inicio').touched )}">
+                      formControlName="fecha_inicio" [disabled]="inicioCheck.checked" [ngClass]="{'is-invalid':form.get('fecha_inicio').invalid && (form.get('fecha_inicio').dirty || form.get('fecha_inicio').touched )}">
                     <span class="input-group-append">
                       <button class="btn btn-secondary" type="button" (click)="dpFechaInicio.open()">
                         <i class="fa fa-calendar"></i>
@@ -152,25 +152,25 @@
                     <tr>
                       <td>Generado</td>
                       <td class="text-right">
-                        <span class="badge badge-primary badge-pill">14</span>
+                        <span class="badge badge-primary badge-pill">{{(totales.importe || 0) | currency}}</span>
                       </td>
                     </tr>
                     <tr>
                       <td>Liberaciones</td>
                       <td class="text-right">
-                        <span class="badge badge-primary badge-warning badge-pill">14</span>
+                        <span class="badge badge-primary badge-warning badge-pill">{{(totales.liberacion || 0) | currency}}</span>
                       </td>
                     </tr>
                     <tr>
                       <td>Retenciones</td>
                       <td class="text-right">
-                        <span class="badge badge-primary badge-danger badge-pill">14</span>
+                        <span class="badge badge-primary badge-danger badge-pill">{{(totales.retencion || 0) | currency}}</span>
                       </td>
                     </tr>
                     <tr>
                       <td>Generado Neto</td>
                       <td class="text-right">
-                        <span class="badge badge-success badge-pill">14</span>
+                        <span class="badge badge-success badge-pill">{{(totales.pago || 0) | currency}}</span>
                       </td>
                     </tr>
                   </tbody>
@@ -194,19 +194,19 @@
                     <tr>
                       <td>Generado Neto</td>
                       <td class="text-right">
-                        <span class="badge badge-success badge-pill">14</span>
+                        <span class="badge badge-success badge-pill">{{(totales.importe || 0) | currency}}</span>
                       </td>
                     </tr>
                     <tr>
                       <td>Pagado</td>
                       <td class="text-right">
-                        <span class="badge badge-primary badge-warning badge-pill">14</span>
+                        <span class="badge badge-primary badge-warning badge-pill">{{(totales.liberacion || 0) | currency}}</span>
                       </td>
                     </tr>
                     <tr>
                       <td>Pendiente</td>
                       <td class="text-right">
-                        <span class="badge badge-primary badge-danger badge-pill">14</span>
+                        <span class="badge badge-primary badge-danger badge-pill">{{(totales.importe - totales.liberacion || 0) | currency}}</span>
                       </td>
                     </tr>
                   </tbody>
@@ -278,15 +278,15 @@
 
           <tbody>
             <tr *ngFor="let avance of avances">
-              <td>{{avance.manzana}}</td>
-              <td>{{avance.lote}}</td>
-              <td>{{avance.partida}}</td>
-              <td>{{avance.subpartida}}</td>
-              <td>{{avance.fecha| date:'mediumDate':'':'es'}}</td>
+              <td>{{avance.nombre_manzana}}</td>
+              <td>{{avance.nombre_lote}}</td>
+              <td>{{avance.partida_padre}}</td>
+              <td>{{avance.nombre_partida}}</td>
+              <td>{{avance.fecha_fin| date:'mediumDate':'':'es'}}</td>
               <td>{{avance.importe | currency}}</td>
               <td>{{avance.retencion | currency}}</td>
               <td>{{avance.liberacion | currency}}</td>
-              <td>{{avance.neto | currency}}</td>
+              <td>{{avance.pago | currency}}</td>
             </tr>
 
           </tbody>
@@ -344,10 +344,10 @@
 
           <tbody>
             <tr *ngFor="let historial of historiales">
-              <td>{{historial.fecha| date:'mediumDate':'':'es'}}</td>
-              <td>{{historial.pago|currency}}</td>
+              <td>{{historial.fecha_pago| date:'mediumDate':'':'es'}}</td>
+              <td>{{historial.pagado|currency}}</td>
               <td>{{historial.tipo}}</td>
-              <td>{{historial.nota}}</td>
+              <td>{{historial.notas}}</td>
             </tr>
 
           </tbody>

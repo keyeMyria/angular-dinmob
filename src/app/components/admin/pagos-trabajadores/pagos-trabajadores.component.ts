@@ -22,21 +22,10 @@ export class PagosTrabajadoresComponent implements OnInit {
   obra_selected: string = "";
   formNuevo: FormGroup;
   form: FormGroup;
+  totales: any = {};
   trabajadores: any = [];
-  historiales = [
-    { fecha: "12-04-2018", pago: "4000", tipo: "Efectivo", nota: "ninguna" },
-    { fecha: "12-04-2018", pago: "4000", tipo: "Efectivo", nota: "ninguna" },
-    { fecha: "12-04-2018", pago: "4000", tipo: "Efectivo", nota: "ninguna" },
-    { fecha: "12-04-2018", pago: "4000", tipo: "Efectivo", nota: "ninguna" },
-  ];
-  avances = [
-    { manzana: "MZN 1", lote: "Lote 1", partida: "Partida 1", subpartida: "Subpartida 1", fecha: "12.04-2018", importe: "5000", retencion: "2000", liberacion: "3000", neto: "5000" },
-    { manzana: "MZN 1", lote: "Lote 1", partida: "Partida 1", subpartida: "Subpartida 1", fecha: "12.04-2018", importe: "5000", retencion: "2000", liberacion: "3000", neto: "5000" },
-    { manzana: "MZN 1", lote: "Lote 1", partida: "Partida 1", subpartida: "Subpartida 1", fecha: "12.04-2018", importe: "5000", retencion: "2000", liberacion: "3000", neto: "5000" },
-    { manzana: "MZN 1", lote: "Lote 1", partida: "Partida 1", subpartida: "Subpartida 1", fecha: "12.04-2018", importe: "5000", retencion: "2000", liberacion: "3000", neto: "5000" },
-    { manzana: "MZN 1", lote: "Lote 1", partida: "Partida 1", subpartida: "Subpartida 1", fecha: "12.04-2018", importe: "5000", retencion: "2000", liberacion: "3000", neto: "5000" },
-    { manzana: "MZN 1", lote: "Lote 1", partida: "Partida 1", subpartida: "Subpartida 1", fecha: "12.04-2018", importe: "5000", retencion: "2000", liberacion: "3000", neto: "5000" }
-  ];
+  historiales = [];
+  avances = [];
 
   pagos = [
     { generado_neto: "5000", pagado: "1500", pendiente: "3500" }
@@ -66,11 +55,8 @@ export class PagosTrabajadoresComponent implements OnInit {
       obra: [null, Validators.required],
       trabajador_historial: [null, Validators.required],
       inicio_obra: null,
-      fecha_inicio: [null, Validators.required],
+      fecha_inicio: [null],
       fecha_fin: [null, Validators.required]
-
-
-
 
     });
   }
@@ -111,7 +97,13 @@ export class PagosTrabajadoresComponent implements OnInit {
   }
 
   getAvancesHistorial() {
-    console.log("ok", this.form.value)
+    this.trabajadorSrv.avances(this.form.value.trabajador_historial, this.form.value.fecha_inicio, this.form.value.fecha_fin)
+    .subscribe(res => {
+      this.avances = res.avances;
+      this.totales = res.total_avances;
+      this.historiales = res.historial;
+    });
+    
   }
 
 }

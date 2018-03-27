@@ -52,6 +52,17 @@ export class TrabajadorService {
       .pipe(catchError(this.handleError("delTrabajador")));
   }
 
+  //ok
+  avances(id_trabajador, fecha_inicio, fecha_fin) {
+    return this.http.post(this.url + 'avances/', {id_trabajador: id_trabajador, fecha_ini: fecha_inicio, fecha_fin: fecha_fin})
+      .pipe(catchError(this.handleError("avances")));
+  }
+
+  //ok
+  getTotalAvances(id_trabajador, fecha_inicio, fecha_fin){
+    return this.http.post(this.url + 'get_total_avances/', {id_trabajador: id_trabajador, fecha_ini: fecha_inicio, fecha_fin: fecha_fin})
+      .pipe(catchError(this.handleError("getTotalAvances")));
+  }
 
 
 
