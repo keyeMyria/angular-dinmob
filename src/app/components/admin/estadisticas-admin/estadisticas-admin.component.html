@@ -50,7 +50,7 @@
 
     <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-2">
       <mat-card class="">
-        <h3>{{(estadisticas?.count_prototipos|| 0) |currency }}</h3>
+        <h3>{{(estadisticas?.count_prototipos|| 0) |number }}</h3>
         <p>PROTOTIPOS</p>
         <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
       </mat-card>
@@ -123,7 +123,7 @@
 
     <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-2">
       <mat-card class="">
-        <h3>{{(estadisticas?.count_salidas|| 0) |currency }}</h3>
+        <h3>{{(estadisticas?.count_salidas|| 0) |number }}</h3>
         <p>SALIDAS</p>
         <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
       </mat-card>
@@ -131,7 +131,7 @@
 
     <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-2">
       <mat-card class="">
-        <h3>{{(estadisticas?.count_alertas|| 0) |currency }}</h3>
+        <h3>{{(estadisticas?.count_alertas|| 0) |number }}</h3>
         <p>SALIDAS ALERTA</p>
         <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
       </mat-card>
@@ -139,7 +139,7 @@
 
     <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-2">
       <mat-card class="">
-        <h3>{{(estadisticas?.count_entradas|| 0) |currency }}</h3>
+        <h3>{{(estadisticas?.count_entradas|| 0) |number }}</h3>
         <p>ENTRADAS</p>
         <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
       </mat-card>

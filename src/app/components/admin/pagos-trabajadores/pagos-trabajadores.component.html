@@ -278,11 +278,11 @@
 
           <tbody>
             <tr *ngFor="let avance of avances">
-              <td>{{avance.nombre_manzana}}</td>
-              <td>{{avance.nombre_lote}}</td>
+              <td class="ws-nowrap">{{avance.nombre_manzana}}</td>
+              <td class="ws-nowrap">{{avance.nombre_lote}}</td>
               <td>{{avance.partida_padre}}</td>
               <td>{{avance.nombre_partida}}</td>
-              <td>{{avance.fecha_fin| date:'mediumDate':'':'es'}}</td>
+              <td class="ws-nowrap">{{avance.fecha_fin| date:'mediumDate':'':'es'}}</td>
               <td>{{avance.importe | currency}}</td>
               <td>{{avance.retencion | currency}}</td>
               <td>{{avance.liberacion | currency}}</td>
@@ -344,7 +344,7 @@
 
           <tbody>
             <tr *ngFor="let historial of historiales">
-              <td>{{historial.fecha_pago| date:'mediumDate':'':'es'}}</td>
+              <td class="ws-nowrap">{{historial.fecha_pago| date:'mediumDate':'':'es'}}</td>
               <td>{{historial.pagado|currency}}</td>
               <td>{{historial.tipo}}</td>
               <td>{{historial.notas}}</td>
