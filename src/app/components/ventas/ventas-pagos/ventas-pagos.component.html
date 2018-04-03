@@ -1,5 +1,5 @@
 <div class="container mt-2 mb-5">
-<div class="row">
+  <div class="row">
     <div class="col-12">
 
 
@@ -16,24 +16,59 @@
           Ventas Pagos
         </div>
 
-        <div>
+        <!--  filtros -->
+        <div class="form-inline mt-1">
 
-          <!--        <div class="input-group col-3 mt-2">
+          <!-- fecha ini -->
+          <div class="input-group mx-2 mb-1">
             <div class="input-group-prepend">
               <span class="input-group-text">Del</span>
             </div>
-            <input class="form-control" placeholder="yyyy-mm-dd" type="text" [matDatepicker]="dpFechaNacimientoPF">
+            <input class="form-control" placeholder="yyyy-mm-dd" type="text" #del [matDatepicker]="dpFechaDel" (dateChange)="filtro(del, al, tipo_pago_selected)">
             <div class="input-group-append">
-              <button class="btn btn-secondary" type="button" (click)="dpFechaNacimientoPF.open()">
+              <button class="btn btn-secondary" type="button" (click)="dpFechaDel.open()">
                 <i class="fa fa-calendar"></i>
               </button>
             </div>
-            <mat-datepicker touchUi="true" #dpFechaNacimientoPF></mat-datepicker>
-          </div> -->
+          </div>
+          <mat-datepicker touchUi="true" #dpFechaDel></mat-datepicker>
 
+          <!-- fecha fin -->
+          <div class="input-group mx-2 mb-1">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Al</span>
+            </div>
+            <input class="form-control" placeholder="yyyy-mm-dd" type="text" #al [matDatepicker]="dpFechaAl" (dateChange)="filtro(del, al, tipo_pago_selected)">
+            <div class="input-group-append">
+              <button class="btn btn-secondary" type="button" (click)="dpFechaAl.open()">
+                <i class="fa fa-calendar"></i>
+              </button>
+            </div>
+          </div>
+          <mat-datepicker touchUi="true" #dpFechaAl></mat-datepicker>
 
+          <!-- tipo pago -->
+          <div class="form-group mx-2 mb-1">
+            <select class="form-control" [(ngModel)]="tipo_pago_selected" (change)="filtro(del, al, tipo_pago_selected)">
+              <option value="">Todos</option>
+              <option [value]="tipo.id_tipo_pago" *ngFor="let tipo of tipos">{{tipo.descripcion}}</option>
+            </select>
+          </div>
 
+        </div>
 
+        <div class="row justify-content-center">
+          <div class="col-12 col-sm-3 py-3">
+            <div class="text-center">
+              <h5 class="text-dark">
+                {{sumaPagos()|currency}}
+              </h5>
+              <span>TOTAL</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
           <div class="table-responsive">
             <table class="table table-hover table-striped table-align-middle">
               <thead>
@@ -42,7 +77,9 @@
                   <th>Manzana</th>
                   <th>Lote</th>
                   <th>Monto</th>
-                  <th>F.Pago</th>
+                  <th>Fecha</th>
+                  <th>Forma</th>
+                  <th>Tipo</th>
                   <th>Validado</th>
                   <th>
                     <i class="fa fa-file-o"></i>
@@ -52,12 +89,14 @@
               </thead>
 
               <tbody>
-                <tr *ngFor="let pago of pagos">
+                <tr *ngFor="let pago of pagosFiltrados">
                   <td>{{pago.cliente}}</td>
                   <td class="ws-nowrap">{{pago.manzana}}</td>
                   <td class="ws-nowrap">{{pago.lote}}</td>
                   <td>{{pago.monto|currency}}</td>
                   <td class="ws-nowrap">{{pago.fecha_pago| date:'mediumDate':'':'es'}}</td>
+                  <td>{{pago.forma_pago}}</td>
+                  <td class="ws-nowrap">{{pago.tipo_pago}}</td>
                   <td>
                     <span class="badge" [ngClass]="pago.validado=='1'?'badge-success':'badge-secondary'">
                       {{pago.validado|numberToYesNo:'VAL'}}

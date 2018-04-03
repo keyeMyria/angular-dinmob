@@ -297,7 +297,8 @@ export const ROUTES: Routes = [
             {
                 path: 'ventas-pagos', component: VentasPagosComponent,
                 resolve: {
-                    obras: ObrasUsuarioResolverService
+                    obras: ObrasUsuarioResolverService,
+                    tipos: TiposPagoResolverService
                 }
             },
 
