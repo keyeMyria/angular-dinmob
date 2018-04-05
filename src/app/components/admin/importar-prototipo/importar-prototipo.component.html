@@ -8,7 +8,7 @@
             <div class="align-self-center">Archivo</div>
             <div class="spacer"></div>
             <div>
-              <button mat-button (click)="gotoFormato()">
+              <button mat-button (click)="verFormato()">
                 Formato ?
               </button>
             </div>
@@ -212,7 +212,8 @@
             <div class="form-group">
               <label for="nombre_prototipo">Nombre del Prototipo</label>
               <input type="email" class="form-control" id="nombre_prototipo" formControlName="nombre_prototipo" [ngClass]="{'is-invalid': form.get('nombre_prototipo').invalid  && (form.get('nombre_prototipo').dirty || form.get('nombre_prototipo').touched )}">
-              <div class="invalid-feedback">Proporcione nombre del prototipo</div>
+              <div *ngIf="form.get('nombre_prototipo').errors?.pattern" class="invalid-feedback">El nombre sólo puede contener letras y números, con una longitud máxima de 30 caracteres</div>
+              <div *ngIf="form.get('nombre_prototipo').errors?.required" class="invalid-feedback">Proporcione nombre del prototipo</div>
             </div>
 
 
@@ -227,8 +228,8 @@
 
           </form>
         </div>
-        <div class="card-footer">
-          <button type="submit" class="btn btn-primary" form="id_form" [disabled]="form.invalid">Crear Prototipo</button>
+        <div class="card-footer">       
+          <button type="submit" class="btn btn-primary" form="id_form" [disabled]="form.invalid || !filename">Crear Prototipo</button>
         </div>
       </div>
 

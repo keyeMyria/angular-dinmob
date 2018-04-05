@@ -2,10 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
 import { FormatoDialogoComponent } from '../formato-dialogo/formato-dialogo.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { FileUploader, FileItem, FileLikeObject } from 'ng2-file-upload';
 import { PrototiposService } from '../../../services/prototipos.service';
 import { AuthService } from 'app/services/auth.service';
+import { LoadingService } from '../../../services/loading.service';
 
 @Component({
   selector: 'app-importar-prototipo',
@@ -19,6 +20,7 @@ export class ImportarPrototipoComponent implements OnInit {
 
   partidas: any = [];
   ignored: any = [];
+  filename: string = "";
 
   @ViewChild("inputFile") inputFile: any;
   uploader: FileUploader;
@@ -29,12 +31,14 @@ export class ImportarPrototipoComponent implements OnInit {
     private fb: FormBuilder,
     private dialog: MatDialog,
     private prototipoSrv: PrototiposService,
-    private auth: AuthService
+    private auth: AuthService,
+    private loading: LoadingService,
+    public snackBar: MatSnackBar
   ) {
     this.form = this.fb.group({
 
-      nombre_prototipo: [null, Validators.required],
-      obra: [null, Validators.required],
+      nombre_prototipo: [null, [Validators.required, Validators.pattern(/^[A-Za-z0-9\s]{1,30}$/)]],
+      obra: ["", Validators.required],
     });
 
 
@@ -49,6 +53,7 @@ export class ImportarPrototipoComponent implements OnInit {
     this.uploader.onCompleteAll = () => {
       //console.log(this.inputFile.nativeElement.files);
       this.inputFile.nativeElement.value = "";
+      this.loading.stop();
       //console.log(this.inputFile.nativeElement.files);
 
     };
@@ -60,7 +65,7 @@ export class ImportarPrototipoComponent implements OnInit {
       //console.log("success response", response);
       //console.log("success status", status);
       //console.log("success headers", headers);
-
+      this.loading.stop();
 
       if (status == 400) {
 
@@ -91,6 +96,7 @@ export class ImportarPrototipoComponent implements OnInit {
       if (status == 200) {
         this.partidas = respuesta.partidas;
         this.ignored = respuesta.ignored;
+        this.filename = respuesta.filename;
 
       }
 
@@ -98,6 +104,10 @@ export class ImportarPrototipoComponent implements OnInit {
 
     this.uploader.onAfterAddingFile = (file: FileItem) => {
       // console.log("onAfterAddingFile", file);
+    };
+
+    this.uploader.onBeforeUploadItem = (file: FileItem) => {
+      this.loading.start();
     };
 
     this.uploader.onWhenAddingFileFailed = (item: FileLikeObject, filter: any, options: any) => {
@@ -112,6 +122,8 @@ export class ImportarPrototipoComponent implements OnInit {
     };
 
   }
+
+
 
   ngOnInit() {
     this.route.data
@@ -133,21 +145,42 @@ export class ImportarPrototipoComponent implements OnInit {
   reset() {
     this.partidas = [];
     this.ignored = [];
+    this.filename = "";
+    this.obra_selected = "";
+
+    this.form.reset({ nombre_prototipo: null, obra: "" });
   }
 
   guardar() {
-    console.log("ok", this.form.value)
+    console.log("guardar", this.form, this.form.value);
+    this.prototipoSrv.createPrototipoFromExcel(this.filename, this.form.get("obra").value, this.form.get("nombre_prototipo").value)
+      .subscribe(respuesta => {
+        //console.log("respuesta", respuesta);
+        this.reset();
+        this.snackBar.open("Usuario Actualizado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+      }, (error) => {
+        //console.log("error");
+        this.reset();
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+
+      });
+
   }
 
-  gotoFormato() {
+  verFormato() {
 
     let dialogRef = this.dialog.open(FormatoDialogoComponent, {
-      data: {
-      },
+      data: {},
       width: "500px"
     });
-    dialogRef.afterClosed().subscribe(result => {
-    });
+
+    //dialogRef.afterClosed().subscribe(result => { });
   }
 
 }

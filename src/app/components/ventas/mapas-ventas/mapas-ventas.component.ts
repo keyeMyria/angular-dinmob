@@ -10,6 +10,7 @@ import { CurrencyPipe } from '@angular/common';
 import { LotesService } from 'app/services/lotes.service';
 import { MapasVentasConfigDialogoComponent } from 'app/components/ventas/mapas-ventas-config-dialogo/mapas-ventas-config-dialogo.component';
 import { TIPO_MAPA } from '../../../constantes/tipo_mapa';
+import { LoadingService } from '../../../services/loading.service';
 
 
 declare var jQuery: any;
@@ -54,7 +55,8 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
-    private currecyPipe: CurrencyPipe
+    private currecyPipe: CurrencyPipe,
+    private loading: LoadingService
 
   ) { }
 
@@ -84,6 +86,8 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
         }
 
       }).subscribe(res => {
+
+        this.loading.start();
 
         this.lotes = res[0].lotes;
         this.scalePrototipos = res[0].scalePrototipos;
@@ -140,6 +144,8 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
         if (this.jsonMap.mapa) {
           this.crearMapa(this.valuesEstadosVenta, this.scalePrototipos, this.scaleFormaPago, this.scaleLoteTipo);
         }
+
+        this.loading.stop();
 
       }, (error) => {
 
