@@ -38,9 +38,13 @@ export class EditarProveedorDialogoComponent implements OnInit {
 
     this.proveedorSrv.updateProveedor(this.data.proveedor.id_proveedor, this.form.value)
       .subscribe(proveedor => {
-
+        // Edita la lista original de proveedores
         let i = this.data.proveedores.indexOf(this.data.proveedor);
         this.data.proveedores[i] = proveedor;
+        // Edita la lista de proveedores filtrados
+        let j = this.data.proveedores_filtrados.indexOf(this.data.proveedor);
+        this.data.proveedores_filtrados[j] = proveedor;
+
         this.dialogRef.close(true);
         
 

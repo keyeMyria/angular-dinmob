@@ -49,6 +49,12 @@ export class EntradasService {
       .pipe(catchError(this.handleError("createEntrada")));
   }
 
+  //ok
+  editarEntrada(id_entrada, entrada) {
+    return this.http.post(this.url + 'update_entrada/' + id_entrada, { entrada: entrada })
+      .pipe(catchError(this.handleError("editarEntrada")));
+  }
+
   private handleError<T>(operation = 'operation') {
     return (error: HttpErrorResponse) => {
 

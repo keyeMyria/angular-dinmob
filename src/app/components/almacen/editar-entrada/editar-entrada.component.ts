@@ -4,6 +4,7 @@ import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@ang
 import * as moment from 'moment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EntradasService } from 'app/services/entradas.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-editar-entrada',
@@ -12,28 +13,38 @@ import { EntradasService } from 'app/services/entradas.service';
 })
 export class EditarEntradaComponent implements OnInit {
   numberMask = createNumberMask({
-    allowDecimal: true
+    allowDecimal: true,
+    prefix: '',
+    decimalLimit: 2
   });
   form: FormGroup;
   entrada: any;
+  proveedores: any = [];
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private entradaSrv: EntradasService,
     private route: ActivatedRoute,
+    public snackBar: MatSnackBar
   ) {
     this.form = this.fb.group({
-      proveedor: ["", Validators.required],
+      id_proveedor: ["", Validators.required],
       fecha: [moment("", "YYYY-MM-DD"), Validators.required],
       folio: ["", Validators.required],
-      total: ["", Validators.required],   
-      al_contado: ["", Validators.required],  
-      es_factura: ["", Validators.required],  
+      total: ["", Validators.required],
+      al_contado: ["", Validators.required],
+      es_factura: ["", Validators.required],
     });
   }
 
   ngOnInit() {
+
+    this.route.data
+      .subscribe((data: { proveedores: any }) => {
+        this.proveedores = data.proveedores;
+      });
+
     let id = this.route.snapshot.paramMap.get('id');
     this.entradaSrv.getEntrada(id)
       .subscribe(entrada => {
@@ -45,6 +56,25 @@ export class EditarEntradaComponent implements OnInit {
 
   guardar() {
     console.log("datos", this.form.value);
+    this.form.value.total = this.form.value.total.replace(/,/g, "");
+    this.entradaSrv.editarEntrada(this.entrada.datos.id_entrada, this.form.value)
+      .subscribe(entrada => {
+        this.entrada = entrada;
+        this.form.patchValue(this.entrada.datos);
+
+        this.snackBar.open("Datos actualizados", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      }, (error) => {
+
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+
+      });
   }
 
 }

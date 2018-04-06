@@ -261,7 +261,7 @@ export const ROUTES: Routes = [
             {
                 path: 'editar-entrada/:id', component: EditarEntradaComponent,
                 resolve: {
-                    estados: EstadosVentaLoteResolverService
+                   proveedores: ProveedoresResolverService 
                 }
             },
             {

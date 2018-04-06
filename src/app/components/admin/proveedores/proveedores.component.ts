@@ -81,7 +81,8 @@ export class ProveedoresComponent implements OnInit {
     let dialogRef = this.dialog.open(EditarProveedorDialogoComponent, {
       data: {
         proveedor: proveedor,
-        proveedores: this.proveedores
+        proveedores: this.proveedores,
+        proveedores_filtrados: this.proveedores_filtrados
       },
       width: '500px'
     });
