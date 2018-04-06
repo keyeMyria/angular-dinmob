@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { MatDrawer } from '@angular/material';
+import { MatDrawer, MatDialog, MatSnackBar } from '@angular/material';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { ObrasService } from 'app/services/obras.service';
 import { Observable } from 'rxjs/Observable';
 import { LotesService } from '../../../services/lotes.service';
+import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
 
 @Component({
   selector: 'app-imagenes-lote',
@@ -31,7 +32,9 @@ export class ImagenesLoteComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private obraSrv: ObrasService,
-    private loteSrv: LotesService
+    private loteSrv: LotesService,
+    public dialog: MatDialog,
+    public snackBar: MatSnackBar
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -80,15 +83,54 @@ export class ImagenesLoteComponent implements OnInit {
 
   }
 
-  delFoto(foto){
-    this.loteSrv.delFoto(foto.id_imagen)
-    .subscribe(res => {
-      if(res.count == 1) {
-        let i = this.fotos.indexOf(foto);
-        this.fotos.splice(i, 1);
-        this.lote.num_fotos -= 1; 
-      }
+  delFoto(foto) {
+
+    let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
+      data: {
+        title: "Eliminar imagen",
+        content: `¿Desea eliminar la imagen de: ${foto.partida_padre} ${foto.partida}?`
+      },
+      width: "500px"
     });
+
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result === true) {
+
+
+        this.loteSrv.delFoto(foto.id_imagen)
+          .subscribe(res => {
+            if (res.count == 1) {
+              let i = this.fotos.indexOf(foto);
+              this.fotos.splice(i, 1);
+              this.lote.num_fotos -= 1;
+
+              this.snackBar.open("Imagen Eliminada", "", {
+                duration: 2000,
+                panelClass: ["bg-success", "text-white"]
+              });
+
+            } else {
+              this.snackBar.open("Ha ocurrido un error", "", {
+                duration: 3000,
+                panelClass: ["bg-danger", "text-white"]
+              });
+            }
+
+          }, (error) => {
+            this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+              duration: 3000,
+              panelClass: ["bg-danger", "text-white"]
+            });
+          });
+      }
+
+    });
+
+
+
+
   }
 
   cargarObra(id_obra) {

@@ -69,9 +69,7 @@ export class UsuariosComponent implements OnInit {
   }
 
   delUsuario(usuario: Usuario) {
-
-    let newpassword: string;
-
+    
     let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
       data: {
         title: "Eliminar usuario",
