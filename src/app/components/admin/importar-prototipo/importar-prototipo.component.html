@@ -31,8 +31,8 @@
           </form>
         </div>
         <div class="card-footer">
-          <button type="button" class="btn btn-secondary" (click)="reset()">Reset</button>
-          <button type="button" class="btn btn-primary" (click)="uploader.uploadAll()">Procesar</button>
+          <button type="button" mat-raised-button color="secondary" (click)="reset()">Reset</button>
+          <button type="button" mat-raised-button color="primary" (click)="uploader.uploadAll()">Procesar</button>
         </div>
       </div>
 
@@ -229,7 +229,7 @@
           </form>
         </div>
         <div class="card-footer">       
-          <button type="submit" class="btn btn-primary" form="id_form" [disabled]="form.invalid || !filename">Crear Prototipo</button>
+          <button type="submit" mat-raised-button color="primary" form="id_form" [disabled]="form.invalid || !filename">Crear Prototipo</button>
         </div>
       </div>
 

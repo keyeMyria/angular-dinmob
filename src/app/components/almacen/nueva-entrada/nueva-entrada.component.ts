@@ -1,9 +1,9 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { InsumoService } from 'app/services/insumo.service';
 import { of } from "rxjs/observable/of";
 import { EntradasService } from '../../../services/entradas.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatCheckbox } from '@angular/material';
 
 @Component({
   selector: 'app-nueva-entrada',
@@ -11,6 +11,8 @@ import { MatSnackBar } from '@angular/material';
   styleUrls: ['./nueva-entrada.component.scss']
 })
 export class NuevaEntradaComponent implements OnInit {
+  @ViewChild("filtroEntrada") checkFiltro:MatCheckbox;
+
   obras: any = [];
   proveedores: any = [];
   obra_selected: string = "";
@@ -77,7 +79,10 @@ export class NuevaEntradaComponent implements OnInit {
         //console.log("respuesta", insumos);
         //volver a leer los insumos
         this.insumos = insumos;
-
+        this.folio = "";
+        this.id_proveedor = "";
+        this.checkFiltro.checked = false;
+        this.insumos_filtrados = this.insumos.slice();
         this.snackBar.open("Entrada Creada", "", {
           duration: 2000,
           panelClass: ["bg-success", "text-white"]

@@ -51,9 +51,13 @@ export class EditarGastoDialogoComponent implements OnInit {
 
     this.gastoSrv.updateGasto(this.data.gasto.id_gasto, frmGasto)
       .subscribe(gasto => {
-
+        // Actualizamos la lista original de gastos
         let i = this.data.gastos.indexOf(this.data.gasto);
         this.data.gastos[i] = gasto;
+        // Actualizamos la lista de gastos filtrados
+        let j = this.data.gastosFiltrados.indexOf(this.data.gasto);
+        this.data.gastosFiltrados[j] = gasto;
+
         this.dialogRef.close(true);
 
       },

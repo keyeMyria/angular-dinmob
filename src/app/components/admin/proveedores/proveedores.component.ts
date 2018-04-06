@@ -17,6 +17,7 @@ export class ProveedoresComponent implements OnInit {
   obras: any = [];
   obra_selected: string = "";
   proveedores: any = [];
+  proveedores_filtrados: any = [];
   trackByIndex = (index, item) => item.id_proveedor;
 
   constructor(
@@ -39,6 +40,7 @@ export class ProveedoresComponent implements OnInit {
         }
       }).subscribe(proveedores => {
         this.proveedores = proveedores;
+        this.proveedores_filtrados = this.proveedores.slice();
       }, (error) => {
       });
 
@@ -106,6 +108,14 @@ export class ProveedoresComponent implements OnInit {
       }
 
     });
+  }
+
+  filtrar(event) {
+
+    this.proveedores_filtrados = this.proveedores.filter(proveedor => {
+      return proveedor.nombre.toLowerCase().includes(event.srcElement.value.toLowerCase());
+    });
+
   }
 
   delProveedor(proveedor) {

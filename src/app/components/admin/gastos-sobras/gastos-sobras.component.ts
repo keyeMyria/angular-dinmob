@@ -6,6 +6,7 @@ import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar
 import { EditarGastoDialogoComponent } from 'app/components/admin/editar-gasto-dialogo/editar-gasto-dialogo.component';
 import { GastoService } from '../../../services/gasto.service';
 import { of } from "rxjs/observable/of";
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-gastos-sobras',
@@ -17,6 +18,8 @@ export class GastosSobrasComponent implements OnInit {
   obra_selected: string = "";
   gastos: any = [];
   tipos: any = [];
+  gastosFiltrados: any = [];
+  tipo_gasto_selected: string = "";
 
   constructor(
     private router: Router,
@@ -43,6 +46,7 @@ export class GastosSobrasComponent implements OnInit {
         }
       }).subscribe(gastos => {
         this.gastos = gastos;
+        this.gastosFiltrados = this.gastos.slice();
       }, (error) => {
       });
 
@@ -98,6 +102,7 @@ export class GastosSobrasComponent implements OnInit {
       data: {
         gasto: gasto,
         gastos: this.gastos,
+        gastosFiltrados: this.gastosFiltrados,
         tipos: this.tipos
       },
       width: '500px'
@@ -120,6 +125,77 @@ export class GastosSobrasComponent implements OnInit {
       }
 
     });
+  }
+
+  filtro(del, al, id_tipo_gasto) {
+
+
+    let fecha_ini = del.value == "" ? "" : moment(del.value, "ll", "es").format("YYYY-MM-DD");
+    let fecha_fin = al.value == "" ? "" : moment(al.value, "ll", "es").format("YYYY-MM-DD");
+
+    let filtro = false;
+
+    //console.log("filtro", id_tipo, fecha_ini, fecha_fin);
+
+    if (fecha_ini != "") {
+
+      this.gastosFiltrados = this.gastos.filter(item => item.fecha >= fecha_ini);
+      filtro = true;
+
+    }
+
+    if (fecha_fin != "") {
+
+
+
+      if (filtro) {
+        this.gastosFiltrados = this.gastosFiltrados.filter(item => item.fecha <= fecha_fin);
+      } else {
+        this.gastosFiltrados = this.gastos.filter(item => item.fecha <= fecha_fin);
+      }
+
+      filtro = true;
+
+    }
+
+    if (id_tipo_gasto != "") {
+
+      if (filtro) {
+        this.gastosFiltrados = this.gastosFiltrados.filter(item => item.id_tipo_gasto == id_tipo_gasto);
+
+      } else {
+        this.gastosFiltrados = this.gastos.filter(item => item.id_tipo_gasto == id_tipo_gasto);
+      }
+
+    } else {
+      //todos los tipos
+
+
+      // this.tabla_filtrada && !filtro
+      if (!filtro) {
+        //console.log("todos, no filtro");
+
+        this.gastosFiltrados = this.gastos.filter(item => item.id_tipo_gasto);
+      } else {
+        //console.log("todos, filtro");
+        //ya se ha aplicado algún filtro de fechas
+        this.gastosFiltrados = this.gastosFiltrados.filter(item => item.id_tipo_gasto);
+      }
+
+    }
+
+
+
+  }
+
+  sumaGastos(){
+    let suma = 0;
+
+    this.gastosFiltrados.forEach(gasto => {
+      suma += +gasto.monto;
+    });
+
+    return suma;
   }
 
   delGasto(gasto) {

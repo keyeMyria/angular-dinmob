@@ -322,7 +322,7 @@ export const ROUTES: Routes = [
                 }
             },
             {
-                path: 'gastos-sobras', component: GastosSobrasComponent,
+                path: 'gastos-obras', component: GastosSobrasComponent,
                 resolve: {
                     obras: ObrasUsuarioResolverService,
                     tipos: TiposGastosResolverService
