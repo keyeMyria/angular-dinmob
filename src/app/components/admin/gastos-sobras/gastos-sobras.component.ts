@@ -13,7 +13,7 @@ import * as moment from 'moment';
   templateUrl: './gastos-sobras.component.html',
   styleUrls: ['./gastos-sobras.component.scss']
 })
-export class GastosSobrasComponent implements OnInit {
+export class GastosObrasComponent implements OnInit {
   obras: any = [];
   obra_selected: string = "";
   gastos: any = [];

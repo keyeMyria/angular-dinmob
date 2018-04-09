@@ -188,7 +188,7 @@ import { ImagenesLoteComponent } from './components/residente/imagenes-lote/imag
 import { ImagenesLotesDialogoComponent } from './components/ventas/imagenes-lotes-dialogo/imagenes-lotes-dialogo.component';
 import { ProveedoresComponent } from './components/admin/proveedores/proveedores.component';
 import { PagosTrabajadoresComponent } from './components/admin/pagos-trabajadores/pagos-trabajadores.component';
-import { GastosSobrasComponent } from './components/admin/gastos-sobras/gastos-sobras.component';
+import { GastosObrasComponent } from './components/admin/gastos-sobras/gastos-sobras.component';
 import { EditarProveedorDialogoComponent } from './components/admin/editar-proveedor-dialogo/editar-proveedor-dialogo.component';
 import { NuevoProveedorDialogoComponent } from './components/admin/nuevo-proveedor-dialogo/nuevo-proveedor-dialogo.component';
 import { NuevoGastoDialogoComponent } from './components/admin/nuevo-gasto-dialogo/nuevo-gasto-dialogo.component';
@@ -212,6 +212,9 @@ import { AvancesLoteDialogoComponent } from './components/residente/avances-lote
 import { ReportesComponent } from './components/admin/reportes/reportes.component';
 import { PagoTrabajadorService } from './services/pago-trabajador.service';
 import { TiposPagoTrabajadorResolverService } from './resolvers/tipos-pago-trabajador-resolver.service';
+import { PedidosComponent } from './components/almacen/pedidos/pedidos.component';
+import { NuevoPedidoComponent } from './components/almacen/nuevo-pedido/nuevo-pedido.component';
+import { EditarPedidoComponent } from './components/almacen/editar-pedido/editar-pedido.component';
 
 
 
@@ -324,7 +327,7 @@ export function getToken() {
     ImagenesLotesDialogoComponent,
     ProveedoresComponent,
     PagosTrabajadoresComponent,
-    GastosSobrasComponent,
+    GastosObrasComponent,
     EditarProveedorDialogoComponent,
     NuevoProveedorDialogoComponent,
     NuevoGastoDialogoComponent,
@@ -345,6 +348,9 @@ export function getToken() {
     EstadisticasAdminComponent,
     AvancesLoteDialogoComponent,
     ReportesComponent,
+    PedidosComponent,
+    NuevoPedidoComponent,
+    EditarPedidoComponent,
 
 
 

@@ -62,7 +62,7 @@ import { VentasPagosComponent } from 'app/components/ventas/ventas-pagos/ventas-
 import { ImagenesLoteComponent } from './components/residente/imagenes-lote/imagenes-lote.component';
 import { ProveedoresComponent } from './components/admin/proveedores/proveedores.component';
 import { PagosTrabajadoresComponent } from './components/admin/pagos-trabajadores/pagos-trabajadores.component';
-import { GastosSobrasComponent } from './components/admin/gastos-sobras/gastos-sobras.component';
+import { GastosObrasComponent } from './components/admin/gastos-sobras/gastos-sobras.component';
 import { EspecialidadesTrabajadorResolverService } from './resolvers/especialidades-trabajador-resolver.service';
 import { InstitucionesCreditoComponent } from './components/ventas/instituciones-credito/instituciones-credito.component';
 import { HistorialApartadosComponent } from './components/comisiones/historial-apartados/historial-apartados.component';
@@ -324,7 +324,7 @@ export const ROUTES: Routes = [
                 }
             },
             {
-                path: 'gastos-obras', component: GastosSobrasComponent,
+                path: 'gastos-obras', component: GastosObrasComponent,
                 resolve: {
                     obras: ObrasUsuarioResolverService,
                     tipos: TiposGastosResolverService
