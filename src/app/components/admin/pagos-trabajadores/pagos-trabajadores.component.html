@@ -71,7 +71,7 @@
 
               <div class="form-group">
                 <div>
-                  <button mat-raised-button class="btn btn-primary btn-lg btn-block" type="submit" color="primary" form="id_formHistorial" [disabled]="form.invalid">Avances</button>
+                  <button mat-raised-button class="btn-block" type="submit" color="primary" form="id_formHistorial" [disabled]="form.invalid">Avances</button>
                 </div>
               </div>
             </div>
@@ -97,7 +97,7 @@
 
                 <div class="form-group">
                   <label for="pago" class="form-label">Monto</label>
-                  <input [textMask]="{mask: numbermask}" class="form-control" type="text" id="pago" name="pago" formControlName="pago" [ngClass]="{'is-invalid': formNuevo.get('pago').invalid  && (formNuevo.get('pago').dirty || formNuevo.get('pago').touched )}">
+                  <input [textMask]="{mask: numbermask}" class="form-control" type="text" id="pago" name="pago" formControlName="pagado" [ngClass]="{'is-invalid': formNuevo.get('pagado').invalid  && (formNuevo.get('pagado').dirty || formNuevo.get('pagado').touched )}">
                   <div class="invalid-feedback">Proporcione un monto válido</div>
                 </div>
 
@@ -120,15 +120,24 @@
                 </div>
 
                 <div class="form-group">
+                  <label for="id_tipo_pago" class="form-label">Tipo pago</label>
+                  <select class="form-control" id="id_tipo_pago" name="id_tipo_pago" formControlName="id_tipo_pago" [ngClass]="{'is-invalid': formNuevo.get('id_tipo_pago').invalid  && (formNuevo.get('id_tipo_pago').dirty || formNuevo.get('id_tipo_pago').touched )}">
+                    <option value="">Seleccionar...</option>
+                    <option *ngFor="let tipo of tipos" [value]="tipo.id_tipo_pago">{{tipo.tipo}}</option>
+                  </select>
+                  <div class="invalid-feedback">Seleccione tipo</div>
+                </div>
+
+                <div class="form-group">
                   <label for="nota" class="col-form-label">Nota</label>
-                  <input type="text" class="form-control" id="nota" name="nota" formControlName="nota">
+                  <input type="text" class="form-control" id="nota" name="nota" formControlName="notas">
                 </div>
 
               </form>
 
               <div class="form-group">
                 <div>
-                  <button mat-raised-button class="btn btn-primary btn-lg btn-block" color="primary" type="submit" form="id_formNuevo" [disabled]="formNuevo.invalid">Guardar</button>
+                  <button mat-raised-button class="btn-block" color="primary" type="submit" form="id_formNuevo" [disabled]="formNuevo.invalid">Guardar</button>
                 </div>
               </div>
             </div>
@@ -152,25 +161,25 @@
                     <tr>
                       <td>Generado</td>
                       <td class="text-right">
-                        <span class="badge badge-primary badge-pill">{{(totales.importe || 0) | currency}}</span>
+                        <span class="badge badge-primary badge-pill">{{(total_avances.generado || 0) | currency}}</span>
                       </td>
                     </tr>
                     <tr>
                       <td>Liberaciones</td>
                       <td class="text-right">
-                        <span class="badge badge-primary badge-warning badge-pill">{{(totales.liberacion || 0) | currency}}</span>
+                        <span class="badge badge-primary badge-warning badge-pill">{{(total_avances.liberaciones || 0) | currency}}</span>
                       </td>
                     </tr>
                     <tr>
                       <td>Retenciones</td>
                       <td class="text-right">
-                        <span class="badge badge-primary badge-danger badge-pill">{{(totales.retencion || 0) | currency}}</span>
+                        <span class="badge badge-primary badge-danger badge-pill">{{(total_avances.retenciones || 0) | currency}}</span>
                       </td>
                     </tr>
                     <tr>
                       <td>Generado Neto</td>
                       <td class="text-right">
-                        <span class="badge badge-success badge-pill">{{(totales.pago || 0) | currency}}</span>
+                        <span class="badge badge-success badge-pill">{{(total_avances.generado_neto || 0) | currency}}</span>
                       </td>
                     </tr>
                   </tbody>
@@ -194,19 +203,19 @@
                     <tr>
                       <td>Generado Neto</td>
                       <td class="text-right">
-                        <span class="badge badge-success badge-pill">{{(totales.importe || 0) | currency}}</span>
+                        <span class="badge badge-success badge-pill">{{(total_historial.generado_neto || 0) | currency}}</span>
                       </td>
                     </tr>
                     <tr>
                       <td>Pagado</td>
                       <td class="text-right">
-                        <span class="badge badge-primary badge-warning badge-pill">{{(totales.liberacion || 0) | currency}}</span>
+                        <span class="badge badge-primary badge-warning badge-pill">{{(total_historial.pagado || 0) | currency}}</span>
                       </td>
                     </tr>
                     <tr>
                       <td>Pendiente</td>
                       <td class="text-right">
-                        <span class="badge badge-primary badge-danger badge-pill">{{(totales.importe - totales.liberacion || 0) | currency}}</span>
+                        <span class="badge badge-primary badge-danger badge-pill">{{(total_historial.pendiente || 0) | currency}}</span>
                       </td>
                     </tr>
                   </tbody>
@@ -229,7 +238,7 @@
         <div class="col-12 col-sm-3 py-1">
           <div class="text-center">
             <h5 class="text-success">
-              {{pago.generado | currency}}
+              {{(total_avances.generado || 0) | currency}}
             </h5>
             <span>GENERADO</span>
           </div>
@@ -237,7 +246,7 @@
         <div class="col-12 col-sm-3 py-1">
           <div class="text-center">
             <h5 class="text-danger">
-              {{pago.retenciones | currency}}
+              {{(total_avances.retenciones || 0) | currency}}
             </h5>
             <span>-RETENCIONES</span>
           </div>
@@ -245,7 +254,7 @@
         <div class="col-12 col-sm-3 py-1">
           <div class="text-center">
             <h5 class="text-primary">
-              {{pago.liberaciones | currency}}
+              {{(total_avances.liberaciones || 0) | currency}}
             </h5>
             <span>+LIBERACIONES</span>
           </div>
@@ -253,7 +262,7 @@
         <div class="col-12 col-sm-3 py-1">
           <div class="text-center">
             <h5 class="text-success">
-              {{pago.generado_neto_avances | currency}}
+              {{(total_avances.generado_neto || 0) | currency}}
             </h5>
             <span>=GENERADO NETO</span>
           </div>
@@ -308,7 +317,7 @@
         <div class="col-12 col-sm-4 py-1">
           <div class="text-center">
             <h5 class="text-success">
-              {{pago.generado_neto | currency}}
+              {{(total_historial.generado_neto || 0) | currency}}
             </h5>
             <span>GENERADO NETO</span>
           </div>
@@ -316,7 +325,7 @@
         <div class="col-12 col-sm-4 py-1">
           <div class="text-center">
             <h5 class="text-primary">
-              {{pago.pagado | currency}}
+              {{(total_historial.pagado || 0) | currency}}
             </h5>
             <span>-PAGADO</span>
           </div>
@@ -324,7 +333,7 @@
         <div class="col-12 col-sm-4 py-1">
           <div class="text-center">
             <h5 class="text-danger">
-              {{pago.pendiente| currency}}
+              {{(total_historial.pendiente || 0) | currency}}
             </h5>
             <span>=PENDIENTE</span>
           </div>

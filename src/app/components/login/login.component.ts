@@ -35,7 +35,7 @@ export class LoginComponent {
         //this.auth.setUsuario(JSON.stringify(res.usuario));
 
         // reset form properties
-        this.usuario = { email: "", password: "" };
+        //this.usuario = { email: "", password: "" };
         this.alert = "";
 
         //la pagina principal cambia de acuerdo al rol de usuario

@@ -53,4 +53,19 @@ navbar {
         //3rem del pb-5, .5rem del pt-2
         min-height: calc(100vh - 56px);
     }
+
+    .toolbar {
+        top:56px !important;
+    }
+}
+
+.toolbar {
+    position:fixed;
+    top:64px;
+    z-index: 10;
+
+}
+
+.toolbar-drawer {
+ //width: calc(100% - 250px);
 }

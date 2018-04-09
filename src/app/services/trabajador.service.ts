@@ -53,8 +53,8 @@ export class TrabajadorService {
   }
 
   //ok
-  avances(id_trabajador, fecha_inicio, fecha_fin) {
-    return this.http.post(this.url + 'avances/', {id_trabajador: id_trabajador, fecha_ini: fecha_inicio, fecha_fin: fecha_fin})
+  getAvances(id_trabajador, fecha_inicio, fecha_fin) {
+    return this.http.post(this.url + 'get_avances/', {id_trabajador: id_trabajador, fecha_ini: fecha_inicio, fecha_fin: fecha_fin})
       .pipe(catchError(this.handleError("avances")));
   }
 

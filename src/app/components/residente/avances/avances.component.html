@@ -1,28 +1,37 @@
-<button mat-fab style="position:fixed; bottom:20px; right:20px; z-index:100" (click)="drawer.opened= !drawer.opened">
+<button mat-fab style="position:fixed; top:65px; right:20px; z-index:100" (click)="drawer.opened= !drawer.opened">
     <mat-icon aria-label="toggle side drawer">format_align_left</mat-icon>
 </button>
 
-<button mat-fab style="position:fixed; bottom:20px; right:85px; z-index:100" (click)="addAvance()" [disabled]="!lote || selection.isEmpty()"
+<button mat-fab style="position:fixed; top:65px; right:85px; z-index:100" (click)="addAvance()" [disabled]="!lote || selection.isEmpty()"
     matTooltip="Avance">
     <mat-icon aria-label="toggle side drawer">check</mat-icon>
 </button>
 
 
-<button mat-fab style="position:fixed; bottom:20px; right:150px; z-index:100" (click)="addLiberacion()" [disabled]="!lote || selection.isEmpty()"
+<button mat-fab style="position:fixed; top:65px; right:150px; z-index:100" (click)="addLiberacion()" [disabled]="!lote || selection.isEmpty()"
     matTooltip="Liberación">
     <mat-icon aria-label="toggle side drawer">attach_money</mat-icon>
 </button>
 
-<button mat-fab style="position:fixed; bottom:20px; right:215px; z-index:100" (click)="delLiberacion()" [disabled]="!lote || selection.isEmpty()"
+<button mat-fab style="position:fixed; top:65px; right:215px; z-index:100" (click)="delLiberacion()" [disabled]="!lote || selection.isEmpty()"
     matTooltip="Eliminar Liberación">
     <mat-icon aria-label="toggle side drawer">money_off</mat-icon>
 </button>
 
-<button mat-fab style="position:fixed; bottom:20px; right:280px; z-index:100" (click)="delAvance()" [disabled]="!lote || selection.isEmpty()"
+<button mat-fab style="position:fixed; top:65px; right:280px; z-index:100" (click)="delAvance()" [disabled]="!lote || selection.isEmpty()"
     matTooltip="Eliminar Avance">
     <mat-icon aria-label="toggle side drawer">not_interested</mat-icon>
 </button>
 
+<!-- <mat-toolbar class="toolbar" color="primary">
+
+    <button mat-button>Terminar</button>
+    <button mat-button>Liberar</button>
+    <button mat-icon-button>
+        <mat-icon>delete</mat-icon>
+    </button>
+</mat-toolbar> 
+ -->
 
 <mat-drawer-container class="drawer-container">
     <mat-drawer class="estructura" #drawer [mode]="mobileQuery.matches ? 'over':'side'" [opened]="!mobileQuery.matches" style="width:250px">
@@ -62,12 +71,12 @@
 
     <mat-drawer-content>
 
-        <!--      <mat-toolbar style="position:absolute; top:0; left:0; right:0; ">
+<!--         <mat-toolbar class="toolbar d-flex justify-content-end" [ngClass]="{'toolbar-drawer':drawer.opened}" color="primary">
 
-            <button mat-button>Terminar</button>
-            <button mat-button>Liberar</button>
-            <button mat-icon-button>
-                <mat-icon>delete</mat-icon>
+            <button mat-button class="btn-toolbar">Terminar</button>
+            <button mat-button class="btn-toolbar">Liberar</button>
+            <button mat-button (click)="drawer.opened= !drawer.opened">
+                <mat-icon>menu</mat-icon>
             </button>
         </mat-toolbar> -->
         <!-- 100vh = alto del dispositivo -56 de la main-toolbar, -56 de la toolbar cuando está en modo mobile -3rem= mb-5 -->
@@ -76,7 +85,7 @@
                 <div class="col">
 
                     <!-- mostramos el nombre de la obra a partir del tamaño md -->
-                    <ol class="breadcrumb colorBread d-none d-md-flex">
+                    <ol class="breadcrumb colorBread d-none d-md-flex mt-5">
                         <li class="breadcrumb-item text-primary">
                             {{lote?.obra}}
                         </li>
@@ -87,7 +96,7 @@
                     </ol>
 
                     <!-- mostramos solo la manzana y el lote -->
-                    <ol class="breadcrumb colorBread d-flex d-md-none">
+                    <ol class="breadcrumb colorBread d-flex d-md-none mt-5">
                         <li class="breadcrumb-item text-primary">
                             {{lote?.manzana}}
                         </li>

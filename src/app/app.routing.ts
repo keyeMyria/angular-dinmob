@@ -78,6 +78,7 @@ import { ProveedoresResolverService } from './resolvers/proveedores-resolver.ser
 import { EstadisticasAdminComponent } from './components/admin/estadisticas-admin/estadisticas-admin.component';
 import { TrabajadoresResolverService } from './resolvers/trabajadores-resolver.service';
 import { ReportesComponent } from './components/admin/reportes/reportes.component';
+import { TiposPagoTrabajadorResolverService } from 'app/resolvers/tipos-pago-trabajador-resolver.service';
 
 
 
@@ -318,7 +319,8 @@ export const ROUTES: Routes = [
             {
                 path: 'pagos-trabajadores', component: PagosTrabajadoresComponent,
                 resolve: {
-                    obras: ObrasUsuarioResolverService
+                    obras: ObrasUsuarioResolverService,
+                    tipos: TiposPagoTrabajadorResolverService
                 }
             },
             {

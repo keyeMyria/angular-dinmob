@@ -210,6 +210,8 @@ import { ProveedoresResolverService } from './resolvers/proveedores-resolver.ser
 import { EstadisticasAdminComponent } from './components/admin/estadisticas-admin/estadisticas-admin.component';
 import { AvancesLoteDialogoComponent } from './components/residente/avances-lote-dialogo/avances-lote-dialogo.component';
 import { ReportesComponent } from './components/admin/reportes/reportes.component';
+import { PagoTrabajadorService } from './services/pago-trabajador.service';
+import { TiposPagoTrabajadorResolverService } from './resolvers/tipos-pago-trabajador-resolver.service';
 
 
 
@@ -470,6 +472,7 @@ export function getToken() {
     ComisionService,
     GastoService,
     ProveedorService,
+    PagoTrabajadorService,
 
     ObrasUsuarioResolverService,
     UsuariosAlmacenistasResolverService,
@@ -488,8 +491,8 @@ export function getToken() {
     TiposGastosResolverService,
     ProveedoresResolverService,
     TrabajadoresResolverService,
-    ResidentesObraResolverService
-
+    ResidentesObraResolverService,
+    TiposPagoTrabajadorResolverService
 
   ],
   bootstrap: [AppComponent]
