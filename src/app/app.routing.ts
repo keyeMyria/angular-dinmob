@@ -68,8 +68,6 @@ import { InstitucionesCreditoComponent } from './components/ventas/instituciones
 import { HistorialApartadosComponent } from './components/comisiones/historial-apartados/historial-apartados.component';
 import { ComisionesComponent } from './components/comisiones/comisiones/comisiones.component';
 import { VendedoresComponent } from './components/ventas/vendedores/vendedores.component';
-import { CrearVendedorDialogoComponent } from './components/ventas/crear-vendedor-dialogo/crear-vendedor-dialogo.component';
-import { EditarVendedorDialogoComponent } from './components/ventas/editar-vendedor-dialogo/editar-vendedor-dialogo.component';
 import { TableroComisionesComponent } from './components/tablero-comisiones/tablero-comisiones.component';
 import { VendedoresResolverService } from './resolvers/vendedores-resolver.service';
 import { TiposGastosResolverService } from './resolvers/tipos-gastos-resolver.service';
@@ -79,6 +77,8 @@ import { EstadisticasAdminComponent } from './components/admin/estadisticas-admi
 import { TrabajadoresResolverService } from './resolvers/trabajadores-resolver.service';
 import { ReportesComponent } from './components/admin/reportes/reportes.component';
 import { TiposPagoTrabajadorResolverService } from 'app/resolvers/tipos-pago-trabajador-resolver.service';
+import { NuevoPedidoComponent } from './components/almacen/nuevo-pedido/nuevo-pedido.component';
+import { PedidosComponent } from './components/almacen/pedidos/pedidos.component';
 
 
 
@@ -247,6 +247,18 @@ export const ROUTES: Routes = [
                 }
             },
             {
+                path: 'nuevo-pedido', component: NuevoPedidoComponent,
+                resolve: {
+                    obras: ObrasUsuarioResolverService                    
+                }
+            },
+            {
+                path: 'pedidos', component: PedidosComponent,
+                resolve: {
+                    obras: ObrasUsuarioResolverService                    
+                }
+            },
+            {
                 path: 'trabajadores', component: TrabajadoresComponent,
                 resolve: {
                     obras: ObrasUsuarioResolverService,
@@ -348,8 +360,7 @@ export const ROUTES: Routes = [
                     obras: ObrasUsuarioResolverService
                 }
             },
-            { path: 'crear-vendedor-dialogos', component: CrearVendedorDialogoComponent },
-            { path: 'editar-vendedor-dialogos', component: EditarVendedorDialogoComponent },
+           
             { path: 'instituciones-credito', component: InstitucionesCreditoComponent },
             {
                 path: 'importar-prototipo', component: ImportarPrototipoComponent,

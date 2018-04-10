@@ -1,3 +1,61 @@
-<p>
-  nuevo-pedido works!
-</p>
+<button mat-fab style="position:fixed; top:75px; right:20px; z-index:100" (click)="drawer.opened= !drawer.opened">
+  <mat-icon aria-label="toggle side drawer">format_align_left</mat-icon>
+</button>
+
+<mat-drawer-container class="drawer-container">
+  <mat-drawer class="estructura" #drawer [mode]="mobileQuery.matches ? 'over':'side'" [opened]="!mobileQuery.matches" style="width:250px">
+
+    <mat-card class="estructura">
+      <div class="mb-2">
+        <select class="form-control" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)">
+          <option value="">Seleccionar...</option>
+          <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>
+        </select>
+      </div>
+    </mat-card>
+
+    <div class="mb-3">
+
+      <mat-accordion>
+
+        <mat-expansion-panel class="manzanas" *ngFor="let manzana of obra?.manzanas" [hideToggle]="false">
+
+          <mat-expansion-panel-header>
+            <span>{{manzana.nombre}}</span>
+            <div class="spacer"></div>
+            <span class="badge badge-pill badge-primary align-self-center mr-2">{{manzana.lotes?.length || "0"}}</span>
+
+          </mat-expansion-panel-header>
+
+          <ul class="list-group">
+            <button type="button" class="list-group-item list-group-item-action" *ngFor="let lote of manzana.lotes" (click)="getImagenesLote(lote)">({{lote.prototipos.length || "0"}}) {{lote.nombre}}</button>
+          </ul>
+
+        </mat-expansion-panel>
+
+      </mat-accordion>
+
+    </div>
+
+  </mat-drawer>
+
+  <mat-drawer-content>
+
+    <div class="drawer-content">
+
+      <mat-tab-group>
+        <mat-tab label="Lotes">
+          <div class="container py-3"></div>
+        </mat-tab>
+        <mat-tab label="Pedido">
+          <div class="container py-3"></div>
+        </mat-tab>
+
+      </mat-tab-group>
+
+    </div>
+  </mat-drawer-content>
+
+
+
+</mat-drawer-container>
