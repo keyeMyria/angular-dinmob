@@ -4,6 +4,7 @@ import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { ObrasService } from 'app/services/obras.service';
+import { PedidoService } from '../../../services/pedido.service';
 
 @Component({
   selector: 'app-nuevo-pedido',
@@ -17,7 +18,8 @@ export class NuevoPedidoComponent implements OnInit {
 
   obras: any = [];
   obra_selected: string = "";
-  obra:any;
+  obra: any;
+  partidas: any = [];
 
   constructor(
     private media: MediaMatcher,
@@ -26,6 +28,7 @@ export class NuevoPedidoComponent implements OnInit {
     private router: Router,
     public snackBar: MatSnackBar,
     private obraSrv: ObrasService,
+    private pedidoSrv: PedidoService
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -38,7 +41,7 @@ export class NuevoPedidoComponent implements OnInit {
         this.obras = data.obras;
       });
 
-      this.route.paramMap
+    this.route.paramMap
       .switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
@@ -50,7 +53,7 @@ export class NuevoPedidoComponent implements OnInit {
         console.log("obra", obra);
         this.obra = obra;
       });
-      
+
   }
 
   cargarObra(id_obra) {
@@ -65,6 +68,22 @@ export class NuevoPedidoComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener)
+
+  }
+
+  getLote(lote) {
+
+    this.pedidoSrv.getLote(lote.id_lote)
+      .subscribe((response: any) => {
+
+        console.log(response);
+
+        this.partidas = response.partidas;
+
+
+      }, (error) => {
+
+      });
 
   }
 

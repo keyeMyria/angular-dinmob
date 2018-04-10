@@ -215,6 +215,7 @@ import { TiposPagoTrabajadorResolverService } from './resolvers/tipos-pago-traba
 import { PedidosComponent } from './components/almacen/pedidos/pedidos.component';
 import { NuevoPedidoComponent } from './components/almacen/nuevo-pedido/nuevo-pedido.component';
 import { EditarPedidoComponent } from './components/almacen/editar-pedido/editar-pedido.component';
+import { PedidoService } from './services/pedido.service';
 
 
 
@@ -479,6 +480,7 @@ export function getToken() {
     GastoService,
     ProveedorService,
     PagoTrabajadorService,
+    PedidoService,
 
     ObrasUsuarioResolverService,
     UsuariosAlmacenistasResolverService,
