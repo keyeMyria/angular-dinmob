@@ -46,15 +46,33 @@
       <mat-tab-group>
         <mat-tab label="Lotes">
           <div class="container py-3">
-
+              <div class="input-group">
+                  <select class="form-control" [(ngModel)]="lotePedido_selected" >
+                      <option value="">Seleccionar...</option>
+                      <option *ngFor="let lote of lotes_pedido" [ngValue]="lote">{{lote.manzana + ' - ' +lote.nombre}}</option>
+                  </select>
+                  <span class="input-group-btn">                            
+                      <button type="button" class="btn btn-secondary" (click)="delLotePedido()">
+                          <i class="fa fa-minus" aria-hidden="true"></i>
+                      </button>
+                  </span>
+              </div>
+              <ol class="breadcrumb colorBread mt-3">
+                  <li class="breadcrumb-item text-primary">{{lotePedido_selected?.manzana}}</li>
+                  <li class="breadcrumb-item text-primary">{{lotePedido_selected?.nombre}}</li>
+              </ol>
             <!-- partidas -->
             <mat-accordion [displayMode]="'default'">
 
-              <mat-expansion-panel [hideToggle]="true" *ngFor="let partida of partidas" #par>
+              <mat-expansion-panel [hideToggle]="true" *ngFor="let partida of lotePedido_selected.partidas" #par>
                 <mat-expansion-panel-header class="align-items-center" [ngClass]="{'bg-primary text-white':par.expanded}">
                   <span class="font-weight-bold align-self-center mr-1 d-none d-md-inline-block">{{partida.codigo}}</span>
                   <span class="align-self-center">{{partida.nombre}}</span>
                   <div class="spacer"></div>
+                  <div class="collapse-header-btns">
+                    <span class="badge badge-pill badge-dark" *ngIf="partida.subpartidas.length">{{countInsumosPedidoPartida(partida)}}</span>
+                    <span class="badge badge-pill badge-dark" *ngIf="partida.insumos.length">{{countInsumosPedido(partida.insumos)}}</span>
+                  </div>
                 </mat-expansion-panel-header>
 
 
@@ -67,6 +85,9 @@
                       <span class="font-weight-bold align-self-center mr-1 d-none d-md-inline-block">{{subpartida.codigo}}</span>
                       <span class="align-self-center">{{subpartida.nombre}}</span>
                       <div class="spacer"></div>
+                      <div class="collapse-header-btns">
+                        <span class="badge badge-pill badge-dark">{{countInsumosPedido(subpartida.insumos)}}</span>
+                      </div>
                     </mat-expansion-panel-header>
 
                     <!-- insumos -->
@@ -92,7 +113,7 @@
                             <td class="text-right">{{insumo.cantidad}}</td>
                             <td class="text-right">{{insumo.pedido}}</td>
                             <td>
-                              <input type="number" class="form-control">
+                              <input type="number" class="form-control" [(ngModel)]="insumo.requerido">
                             </td>
                           </tr>
                         </tbody>
@@ -125,7 +146,7 @@
                         <td class="text-right">{{insumo.cantidad}}</td>
                         <td class="text-right">{{insumo.pedido}}</td>
                         <td>
-                          <input type="text" class="form-control">
+                          <input type="number" class="form-control" [(ngModel)]="insumo.requerido">
                         </td>
                       </tr>
                     </tbody>

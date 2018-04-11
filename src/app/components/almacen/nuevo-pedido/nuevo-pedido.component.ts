@@ -19,7 +19,10 @@ export class NuevoPedidoComponent implements OnInit {
   obras: any = [];
   obra_selected: string = "";
   obra: any;
-  partidas: any = [];
+  // partidas: any = [];
+  lote_selected: any = {};
+  lotes_pedido: any = [];
+  lotePedido_selected: any = "";
 
   constructor(
     private media: MediaMatcher,
@@ -71,20 +74,62 @@ export class NuevoPedidoComponent implements OnInit {
 
   }
 
+  loteEstaEnPedido(id_lote) {
+    let encontrado = this.lotes_pedido.find(lote => lote.id_lote == id_lote);
+    if (encontrado === undefined) {
+      //console.log("encontrado undefined");
+      return false;
+    } else {
+      //console.log("encontrado", encontrado);
+      return true;
+    }
+
+  };
+
   getLote(lote) {
 
-    this.pedidoSrv.getLote(lote.id_lote)
-      .subscribe((response: any) => {
+    if (!this.loteEstaEnPedido(lote.id_lote)) {
+      this.pedidoSrv.getLote(lote.id_lote)
+        .subscribe((response: any) => {
+          lote.partidas = response.partidas;
+          lote.insumos_extras = response.insumos_extras;
+          this.lotes_pedido.push(lote);
+          this.lotePedido_selected = this.lotes_pedido[this.lotes_pedido.length - 1];
+          console.log(response);
 
-        console.log(response);
+        }, (error) => {
 
-        this.partidas = response.partidas;
+        });
+    }
 
+  }
 
-      }, (error) => {
+  countInsumosPedido(insumos) {
+    let count = 0;
 
-      });
+    for (let i = 0; i < insumos.length; i++) {
+      if (insumos[i].requerido > 0) {
+        count++;
+      }
+    }
+    return count;
 
+  }
+
+  countInsumosPedidoPartida = function (partida) {
+    let count = 0;
+
+    for (let i = 0; i < partida.subpartidas.length; i++) {
+      count += this.countInsumosPedido(partida.subpartidas[i].insumos);
+    }
+    return count;
+
+  }
+
+  delLotePedido() {
+    let i = this.lotes_pedido.indexOf(this.lotePedido_selected);
+    this.lotes_pedido.splice(i, 1);
+    this.lotePedido_selected = "";
   }
 
 }
