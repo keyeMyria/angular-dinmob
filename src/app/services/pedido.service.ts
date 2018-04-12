@@ -25,6 +25,11 @@ export class PedidoService {
       .pipe(catchError(this.handleError("getLote")));
   }
 
+  createPedido(pedido, insumos) {
+    return this.http.post(this.url + 'create_pedido', { pedido: pedido, insumos: insumos })
+      .pipe(catchError(this.handleError("createPedido")));
+  }
+
 
 
   private handleError<T>(operation = 'operation') {

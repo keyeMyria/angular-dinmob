@@ -23,6 +23,9 @@ export class NuevoPedidoComponent implements OnInit {
   lote_selected: any = {};
   lotes_pedido: any = [];
   lotePedido_selected: any = "";
+  insumos: any = [];
+  insumos_pedido: any = [];
+  pedido: any = {};
 
   constructor(
     private media: MediaMatcher,
@@ -39,6 +42,7 @@ export class NuevoPedidoComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.route.data
       .subscribe((data: { obras: any[] }) => {
         this.obras = data.obras;
@@ -55,6 +59,9 @@ export class NuevoPedidoComponent implements OnInit {
       }).subscribe(obra => {
         console.log("obra", obra);
         this.obra = obra;
+
+        this.lotes_pedido = [];
+        this.lotePedido_selected = "";
       });
 
   }
@@ -92,10 +99,9 @@ export class NuevoPedidoComponent implements OnInit {
       this.pedidoSrv.getLote(lote.id_lote)
         .subscribe((response: any) => {
           lote.partidas = response.partidas;
-          lote.insumos_extras = response.insumos_extras;
+          lote.insumos_extra = response.insumos_extra;
           this.lotes_pedido.push(lote);
           this.lotePedido_selected = this.lotes_pedido[this.lotes_pedido.length - 1];
-          console.log(response);
 
         }, (error) => {
 
@@ -116,7 +122,7 @@ export class NuevoPedidoComponent implements OnInit {
 
   }
 
-  countInsumosPedidoPartida = function (partida) {
+  countInsumosPedidoPartida(partida) {
     let count = 0;
 
     for (let i = 0; i < partida.subpartidas.length; i++) {
@@ -131,5 +137,164 @@ export class NuevoPedidoComponent implements OnInit {
     this.lotes_pedido.splice(i, 1);
     this.lotePedido_selected = "";
   }
+
+  arrayUnique(origen, array) {
+
+    for (var i = 0; i < array.length; i++) {
+
+      for (var j = 0; j < origen.length; j++) {
+
+        // si el insumo ya está entonces sumamos las cantidades
+        if (origen[j].id_insumo === array[i].id_insumo) {
+          origen[j].requerido = Number(origen[j].requerido) + Number(array[i].requerido);
+          break;
+        }
+
+      }
+
+      // si no encontramos el insumo entonces lo añadimos
+      if (j === origen.length) {
+        //console.log("nuevo insumo", array[i]);
+        let newInsumo = {
+          id_insumo_partida: array[i].id_insumo_partida,
+          id_insumo: array[i].id_insumo,
+          extra: array[i].extra,
+          insumo: array[i].insumo,
+          unidad: array[i].unidad,
+          requerido: array[i].requerido
+        };
+        origen.push(newInsumo);
+      }
+
+    }
+
+
+  }
+
+  getInsumosAcumulados() {
+
+    this.insumos = [];
+
+    //buscamos los insumos de las partidas
+    for (let i = 0; i < this.lotes_pedido.length; i++) {
+
+      //insumos de las partidas
+      for (let j = 0; j < this.lotes_pedido[i].partidas.length; j++) {
+
+        let insumosPartida = this.lotes_pedido[i].partidas[j].insumos.filter(insumo => insumo.requerido > 0);
+        this.arrayUnique(this.insumos, insumosPartida);
+
+        //insumos de las subpartidas
+        for (let k = 0; k < this.lotes_pedido[i].partidas[j].subpartidas.length; k++) {
+
+          let insumosSubpartida = this.lotes_pedido[i].partidas[j].subpartidas[k].insumos.filter(insumo => insumo.requerido > 0);
+          this.arrayUnique(this.insumos, insumosSubpartida);
+
+        }
+
+      }
+
+      //buscamos los insumos extras  
+      let insumosExtra = this.lotes_pedido[i].insumos_extra.filter(insumo => insumo.requerido > 0);
+      this.arrayUnique(this.insumos, insumosExtra);
+
+    }
+
+  }
+
+  getInsumosSinAcumular() {
+
+    this.insumos_pedido = [];
+
+
+    //buscamos los insumos de las partidas
+    for (var i = 0; i < this.lotes_pedido.length; i++) {
+
+      //insumos de las partidas
+      for (var j = 0; j < this.lotes_pedido[i].partidas.length; j++) {
+
+        //console.log("insumos partida");
+        this.concatInsumosPedido(this.insumos_pedido, this.lotes_pedido[i].partidas[j].insumos, this.lotes_pedido[i].id_lote);
+
+        //insumos de las subpartidas
+        for (var k = 0; k < this.lotes_pedido[i].partidas[j].subpartidas.length; k++) {
+          //console.log("insumos subpartida");
+          this.concatInsumosPedido(this.insumos_pedido, this.lotes_pedido[i].partidas[j].subpartidas[k].insumos, this.lotes_pedido[i].id_lote);
+
+        }
+      }
+
+      //buscamos los insumos extras
+      //console.log("insumos extra");
+      this.concatInsumosPedido(this.insumos_pedido, this.lotes_pedido[i].insumos_extra, this.lotes_pedido[i].id_lote);
+    }
+
+  }
+
+
+  concatInsumosPedido(pedido, insumos, id_lote) {
+    //console.log("concatInsumosPedido");
+    for (var i = 0; i < insumos.length; i++) {
+
+
+      if (insumos[i].requerido > 0) {
+
+        /*    var id_insumo_partida = insumos[i].id_insumo_partida;
+           if (insumos[i].extra === "1") {
+             id_insumo_partida = null;
+           } */
+
+
+        let newInsumo = {
+          id_lote: id_lote,
+          id_insumo_partida: insumos[i].extra === "1" ? null : insumos[i].id_insumo_partida,
+          id_insumo: insumos[i].id_insumo,
+          unidad: insumos[i].unidad,
+          cantidad: insumos[i].requerido,
+          extra: insumos[i].extra
+        };
+        pedido.push(newInsumo);
+
+      }
+
+    }
+
+  }
+
+
+
+
+  addPedido() {
+
+    this.pedido.id_obra = this.obra.obra.id_obra;
+
+    this.getInsumosSinAcumular();
+    console.log("insumos", this.insumos_pedido);
+
+    // si los el array de insumos está vacío mostrar un aviso
+
+    console.log("pedido", this.pedido);
+
+    this.pedidoSrv.createPedido(this.pedido, this.insumos_pedido)
+      .subscribe(respuesta => {
+
+        console.log("respuesta", respuesta);
+
+
+        this.lotes_pedido = [];
+        this.lotePedido_selected = "";
+        this.insumos = [];
+
+      }, (error) => {
+
+        this.lotes_pedido = [];
+        this.lotePedido_selected = "";
+        this.insumos = [];
+      });
+
+
+  }
+
+
 
 }
