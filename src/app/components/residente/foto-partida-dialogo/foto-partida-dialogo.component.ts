@@ -113,7 +113,10 @@ export class FotoPartidaDialogoComponent {
   }
 
   //cambia el tamaño de la imagen y la comprime
-  getScaledCanvas(image, maxDimension) {
+  getScaledCanvas(image, maxDimension, orientation) {
+
+    console.log("orientation", orientation);
+
 
     var thumbCanvas = document.createElement('canvas');
     if (image.width > maxDimension ||
@@ -137,11 +140,22 @@ export class FotoPartidaDialogoComponent {
 
   // devuelve una promesa con el Blob de 
   // la imagen aplicando un cambio de tamaño y calidad
-  generateImage():Promise<Blob> {
+  generateImage(): Promise<Blob> {
 
     //console.log("generateImage");
 
     return new Promise((resolve, reject) => {
+
+      //--------ini temporal-----------//
+      let imgOrientation = 1;
+
+      this.getOrientation(this.currentFile, function (orientation) {
+        console.log('ORIENTATION :: ', orientation);
+        imgOrientation = orientation;
+      });
+
+      //-----fin temporal------------//
+
 
       const createBlob = (url) => {
 
@@ -150,7 +164,7 @@ export class FotoPartidaDialogoComponent {
         image.onload = () => {
 
           let maxFullDimension = 1024;
-          let fullCanvas = this.getScaledCanvas(image, maxFullDimension);
+          let fullCanvas = this.getScaledCanvas(image, maxFullDimension, imgOrientation);
           fullCanvas.toBlob(resolve, 'image/jpeg', 0.8);
 
         };
@@ -164,7 +178,7 @@ export class FotoPartidaDialogoComponent {
       reader.onload = function () {
         //e.target.result;                          
         return createBlob(reader.result);
-      };      
+      };
 
       reader.readAsDataURL(this.currentFile);
 
@@ -174,27 +188,78 @@ export class FotoPartidaDialogoComponent {
 
   }
 
-
+  //cambiamos el currentFile con el archivo del input
   changeImage(event: Event, fileList: FileList) {
     //console.log("changeImage");
     this.currentFile = fileList[0];
   }
 
+
+  //Comprime (generateImage) y después hace el upload
   uploadImage() {
     //console.log("uploadImage");
 
-    this.generateImage()
-      .then((blob:any) => {
-        blob.name = this.currentFile.name;
-        //console.log("blob", blob);
-        this.uploader.addToQueue([blob]);
+         this.generateImage()
+          .then((blob: any) => {
+            blob.name = this.currentFile.name;
+            console.log("blob", blob);
+            //this.uploader.addToQueue([blob]);
+    
+            //this.uploader.uploadAll();
+    
+          }); 
 
-        this.uploader.uploadAll();
-        
-      });
+ /*    let imgOrientation = 1;
+
+    this.getOrientation(this.currentFile, function (orientation) {
+      console.log('ORIENTATION :: ', orientation);
+      imgOrientation = orientation;
+    }); */
 
   }
 
+
+  //
+  // img orientation - borrowed and adapted from people who are way smarter than I 
+  // https://github.com/blueimp/JavaScript-Load-Image/blob/master/js/load-image-meta.js
+  // 
+  getOrientation(file, callback) {
+
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+
+      //e.target.result
+      var view = new DataView(reader.result);
+
+      // check for jpeg marker '0xffd8', return if not img
+      if (view.getUint16(0, false) != 0xFFD8) return callback(-2);
+
+      var length = view.byteLength,
+        offset = 2;
+
+      while (offset < length) {
+        var marker = view.getUint16(offset, false);
+        offset += 2;
+
+        // check for EXIF marker '0xFFE1'
+        if (marker == 0xFFE1) {
+          if (view.getUint32(offset += 2, false) != 0x45786966) return callback(-1);
+          var little = view.getUint16(offset += 6, false) == 0x4949;
+          offset += view.getUint32(offset + 4, little);
+          var tags = view.getUint16(offset, little);
+          offset += 2;
+          for (var i = 0; i < tags; i++)
+            if (view.getUint16(offset + (i * 12), little) == 0x0112)
+              return callback(view.getUint16(offset + (i * 12) + 8, little));
+        } else if ((marker & 0xFF00) != 0xFF00) break;
+        else offset += view.getUint16(offset, false);
+      }
+      return callback(-1);
+    };
+
+    reader.readAsArrayBuffer(file.slice(0, 64 * 1024));
+  }
 
 
 
