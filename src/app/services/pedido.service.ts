@@ -30,6 +30,16 @@ export class PedidoService {
       .pipe(catchError(this.handleError("createPedido")));
   }
 
+  getPedidosObra(id_obra) {
+    return this.http.get(this.url + "get_pedidos_obra/" + id_obra)
+      .pipe(catchError(this.handleError("getPedidosObra")));
+  }
+
+  getPedidoInsumos(id_pedido) {
+    return this.http.get(this.url + "get_pedido_insumos/" + id_pedido)
+      .pipe(catchError(this.handleError("getPedidoInsumos")));
+  }
+
 
 
   private handleError<T>(operation = 'operation') {

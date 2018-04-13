@@ -255,7 +255,7 @@ export const ROUTES: Routes = [
             {
                 path: 'pedidos', component: PedidosComponent,
                 resolve: {
-                    obras: ObrasUsuarioResolverService                    
+                    obras: ObrasUsuarioResolverService                   
                 }
             },
             {
