@@ -119,21 +119,153 @@ export class FotoPartidaDialogoComponent {
 
 
     var thumbCanvas = document.createElement('canvas');
-    if (image.width > maxDimension ||
-      image.height > maxDimension) {
-      if (image.width > image.height) {
+    var ctx = thumbCanvas.getContext('2d');
+    var height = image.height,
+      width = image.width;
+
+    console.log("medidas imganen", "w:", width, "h:", height);
+
+    if (orientation > 4) {
+      // these are rotated, swap width and height and calculate aspect ratio
+      width = image.height;
+      height = image.width; //(width / image.width) * image.height;
+
+      //thumbCanvas.width = height;
+      //thumbCanvas.height = width; 
+    } else {
+      // these aren't rotated, so width and height remain normal
+      //    thumbCanvas.width = width;
+      //   thumbCanvas.height = height; 
+
+    }
+
+    console.log("medidas reales", "w:", width, "h:", height);
+
+
+    if (width > maxDimension || height > maxDimension) {
+      if (width > height) {
         thumbCanvas.width = maxDimension;
-        thumbCanvas.height = maxDimension * image.height / image.width;
+        thumbCanvas.height = maxDimension * height / width;
       } else {
-        thumbCanvas.width = maxDimension * image.width / image.height;
+        thumbCanvas.width = maxDimension * width / height;
         thumbCanvas.height = maxDimension;
       }
     } else {
-      thumbCanvas.width = image.width;
-      thumbCanvas.height = image.height;
+      thumbCanvas.width = width;
+      thumbCanvas.height = height;
     }
-    thumbCanvas.getContext('2d').drawImage(image, 0, 0, image.width, image.height,
-      0, 0, thumbCanvas.width, thumbCanvas.height);
+
+    console.log("medidas thumb", "w:", thumbCanvas.width, "h:", thumbCanvas.height);
+
+
+
+
+    /* 
+        if (image.width > maxDimension ||
+          image.height > maxDimension) {
+          if (image.width > image.height) {
+            thumbCanvas.width = maxDimension;
+            thumbCanvas.height = maxDimension * image.height / image.width;
+          } else {
+            thumbCanvas.width = maxDimension * image.width / image.height;
+            thumbCanvas.height = maxDimension;
+          }
+        } else {
+          thumbCanvas.width = image.width;
+          thumbCanvas.height = image.height;
+        } */
+    /*  thumbCanvas.getContext('2d').drawImage(image, 0, 0, image.width, image.height,
+       0, 0, thumbCanvas.width, thumbCanvas.height); */
+
+
+    switch (orientation) {
+      case 1:
+        // normal
+        console.log("normal");
+        
+        ctx.drawImage(image, 0, 0, width, height,
+          0, 0, thumbCanvas.width, thumbCanvas.height);
+        break;
+      case 2:
+        // flip horizontal
+        console.log("flip horizontal");
+        
+        ctx.translate(width, 0);
+        ctx.scale(-1, 1);
+        ctx.drawImage(image, 0, 0, width, height,
+          0, 0, thumbCanvas.width, thumbCanvas.height);
+        break;
+      case 3:
+        // rotate 180
+        console.log("rotate 180");
+        
+        ctx.translate(width, height);
+        ctx.rotate(Math.PI);
+        ctx.drawImage(image, 0, 0, width, height,
+          0, 0, thumbCanvas.width, thumbCanvas.height);
+        break;
+      case 4:
+        // flip vertical
+        console.log("flip vertical");
+        
+        ctx.translate(0, height);
+        ctx.scale(1, -1);
+        ctx.drawImage(image, 0, 0, width, height,
+          0, 0, thumbCanvas.width, thumbCanvas.height);
+        break;
+      case 5:
+        // flip vertical, rotate 90 clockwise
+        console.log("flip vertical, rotate");
+        
+        ctx.rotate(Math.PI / 2);
+        ctx.scale(1, -1);
+        ctx.drawImage(image, 0, 0, width, height,
+          0, 0, thumbCanvas.width, thumbCanvas.height);
+        break;
+      case 6:
+        // rotate 90 clockwise
+        console.log("rotate 90 clockwise");
+        ctx.rotate(Math.PI / 2);
+        ctx.translate(0, -height);
+        //ctx.translate(0, - width);//height
+    /*     ctx.drawImage(image, 0, 0, width, height,
+          0, 0, thumbCanvas.width, thumbCanvas.height); */
+          console.log("w:", width, height);
+          
+          //ctx.drawImage(image, 0, 0, width, height,0,0,thumbCanvas.width, thumbCanvas.height);
+          ctx.drawImage(image, 0, 0, width, height);
+        break;
+      case 7:
+        // flip horizontal, rotate 90 counter clockwise
+        console.log("flip horizontal, rotate");
+        
+        ctx.rotate(Math.PI / 2);
+        ctx.translate(width, -height);
+        ctx.scale(-1, 1);
+        ctx.drawImage(image, 0, 0, width, height,
+          0, 0, thumbCanvas.width, thumbCanvas.height);
+        break;
+      case 8:
+        // rotate 90 counter clockwise
+        console.log("rotate 90 counter clockwise");
+        
+        ctx.rotate(-Math.PI / 2);
+        ctx.translate(-width, 0);
+        ctx.drawImage(image, 0, 0, width, height,
+          0, 0, thumbCanvas.width, thumbCanvas.height);
+        break;
+      default:
+        // normal
+        console.log("default");
+        
+        ctx.drawImage(image, 0, 0, width, height,
+          0, 0, thumbCanvas.width, thumbCanvas.height);
+      //return;
+    }
+
+    console.log("return");
+    
+
     return thumbCanvas;
   }
 
@@ -199,22 +331,15 @@ export class FotoPartidaDialogoComponent {
   uploadImage() {
     //console.log("uploadImage");
 
-         this.generateImage()
-          .then((blob: any) => {
-            blob.name = this.currentFile.name;
-            console.log("blob", blob);
-            //this.uploader.addToQueue([blob]);
-    
-            //this.uploader.uploadAll();
-    
-          }); 
+    this.generateImage()
+      .then((blob: any) => {
+        blob.name = this.currentFile.name;
+        console.log("blob", blob);
+        this.uploader.addToQueue([blob]);
 
- /*    let imgOrientation = 1;
+        this.uploader.uploadAll();
 
-    this.getOrientation(this.currentFile, function (orientation) {
-      console.log('ORIENTATION :: ', orientation);
-      imgOrientation = orientation;
-    }); */
+      });
 
   }
 
