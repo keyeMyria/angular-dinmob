@@ -115,7 +115,7 @@ export class FotoPartidaDialogoComponent {
   //cambia el tamaño de la imagen y la comprime
   getScaledCanvas(image, maxDimension, orientation) {
 
-    console.log("orientation", orientation);
+    //console.log("orientation", orientation);
 
 
     var thumbCanvas = document.createElement('canvas');
@@ -123,23 +123,15 @@ export class FotoPartidaDialogoComponent {
     var height = image.height,
       width = image.width;
 
-    console.log("medidas imganen", "w:", width, "h:", height);
+    //console.log("medidas imganen", "w:", width, "h:", height);
 
     if (orientation > 4) {
       // these are rotated, swap width and height and calculate aspect ratio
       width = image.height;
-      height = image.width; //(width / image.width) * image.height;
-
-      //thumbCanvas.width = height;
-      //thumbCanvas.height = width; 
-    } else {
-      // these aren't rotated, so width and height remain normal
-      //    thumbCanvas.width = width;
-      //   thumbCanvas.height = height; 
-
+      height = image.width;
     }
 
-    console.log("medidas reales", "w:", width, "h:", height);
+    //console.log("medidas reales", "w:", width, "h:", height);
 
 
     if (width > maxDimension || height > maxDimension) {
@@ -155,116 +147,77 @@ export class FotoPartidaDialogoComponent {
       thumbCanvas.height = height;
     }
 
-    console.log("medidas thumb", "w:", thumbCanvas.width, "h:", thumbCanvas.height);
 
-
-
-
-    /* 
-        if (image.width > maxDimension ||
-          image.height > maxDimension) {
-          if (image.width > image.height) {
-            thumbCanvas.width = maxDimension;
-            thumbCanvas.height = maxDimension * image.height / image.width;
-          } else {
-            thumbCanvas.width = maxDimension * image.width / image.height;
-            thumbCanvas.height = maxDimension;
-          }
-        } else {
-          thumbCanvas.width = image.width;
-          thumbCanvas.height = image.height;
-        } */
-    /*  thumbCanvas.getContext('2d').drawImage(image, 0, 0, image.width, image.height,
-       0, 0, thumbCanvas.width, thumbCanvas.height); */
+    //console.log("medidas thumb", "w:", thumbCanvas.width, "h:", thumbCanvas.height);
 
 
     switch (orientation) {
       case 1:
-        // normal
-        console.log("normal");
-        
-        ctx.drawImage(image, 0, 0, width, height,
-          0, 0, thumbCanvas.width, thumbCanvas.height);
+        // ok
+        // console.log("normal");
+        ctx.drawImage(image, 0, 0, thumbCanvas.width, thumbCanvas.height);
         break;
       case 2:
         // flip horizontal
-        console.log("flip horizontal");
-        
-        ctx.translate(width, 0);
+        //console.log("flip horizontal");
+
+        ctx.translate(thumbCanvas.width, 0);
         ctx.scale(-1, 1);
-        ctx.drawImage(image, 0, 0, width, height,
-          0, 0, thumbCanvas.width, thumbCanvas.height);
+        ctx.drawImage(image, 0, 0, thumbCanvas.width, thumbCanvas.height);
         break;
       case 3:
-        // rotate 180
-        console.log("rotate 180");
-        
-        ctx.translate(width, height);
+        // ok
+        //console.log("rotate 180");    
         ctx.rotate(Math.PI);
-        ctx.drawImage(image, 0, 0, width, height,
-          0, 0, thumbCanvas.width, thumbCanvas.height);
+        ctx.translate(-thumbCanvas.width, -thumbCanvas.height);
+        ctx.drawImage(image, 0, 0, thumbCanvas.width, thumbCanvas.height);
         break;
       case 4:
         // flip vertical
-        console.log("flip vertical");
-        
-        ctx.translate(0, height);
+        //console.log("flip vertical");
+
+        ctx.translate(0, thumbCanvas.height);
         ctx.scale(1, -1);
-        ctx.drawImage(image, 0, 0, width, height,
-          0, 0, thumbCanvas.width, thumbCanvas.height);
+        ctx.drawImage(image, 0, 0, thumbCanvas.width, thumbCanvas.height);
         break;
       case 5:
+
         // flip vertical, rotate 90 clockwise
-        console.log("flip vertical, rotate");
-        
+        //console.log("flip vertical, rotate");
+
         ctx.rotate(Math.PI / 2);
         ctx.scale(1, -1);
-        ctx.drawImage(image, 0, 0, width, height,
-          0, 0, thumbCanvas.width, thumbCanvas.height);
+        ctx.drawImage(image, 0, 0, thumbCanvas.height, thumbCanvas.width);
         break;
       case 6:
-        // rotate 90 clockwise
-        console.log("rotate 90 clockwise");
+        //ok
+        //console.log("rotate 90 clockwise"); 
         ctx.rotate(Math.PI / 2);
-        ctx.translate(0, -height);
-        //ctx.translate(0, - width);//height
-    /*     ctx.drawImage(image, 0, 0, width, height,
-          0, 0, thumbCanvas.width, thumbCanvas.height); */
-          console.log("w:", width, height);
-          
-          //ctx.drawImage(image, 0, 0, width, height,0,0,thumbCanvas.width, thumbCanvas.height);
-          ctx.drawImage(image, 0, 0, width, height);
+        ctx.translate(0, -thumbCanvas.width);
+        ctx.drawImage(image, 0, 0, thumbCanvas.height, thumbCanvas.width);
         break;
       case 7:
         // flip horizontal, rotate 90 counter clockwise
-        console.log("flip horizontal, rotate");
-        
+        //console.log("flip horizontal, rotate");
+
         ctx.rotate(Math.PI / 2);
-        ctx.translate(width, -height);
+        ctx.translate(thumbCanvas.width, -thumbCanvas.height);
         ctx.scale(-1, 1);
-        ctx.drawImage(image, 0, 0, width, height,
-          0, 0, thumbCanvas.width, thumbCanvas.height);
+        ctx.drawImage(image, 0, 0, thumbCanvas.height, thumbCanvas.width);
         break;
       case 8:
-        // rotate 90 counter clockwise
-        console.log("rotate 90 counter clockwise");
-        
+        // ok
+        //console.log("rotate 90 counter clockwise");
         ctx.rotate(-Math.PI / 2);
-        ctx.translate(-width, 0);
-        ctx.drawImage(image, 0, 0, width, height,
-          0, 0, thumbCanvas.width, thumbCanvas.height);
+        ctx.translate(-thumbCanvas.height, 0);
+        ctx.drawImage(image, 0, 0, thumbCanvas.height, thumbCanvas.width);
         break;
       default:
-        // normal
-        console.log("default");
-        
-        ctx.drawImage(image, 0, 0, width, height,
-          0, 0, thumbCanvas.width, thumbCanvas.height);
-      //return;
+        //console.log("default");
+        ctx.drawImage(image, 0, 0, thumbCanvas.width, thumbCanvas.height);
+
     }
 
-    console.log("return");
-    
 
     return thumbCanvas;
   }
@@ -282,7 +235,7 @@ export class FotoPartidaDialogoComponent {
       let imgOrientation = 1;
 
       this.getOrientation(this.currentFile, function (orientation) {
-        console.log('ORIENTATION :: ', orientation);
+        //console.log('ORIENTATION :: ', orientation);
         imgOrientation = orientation;
       });
 
@@ -334,7 +287,7 @@ export class FotoPartidaDialogoComponent {
     this.generateImage()
       .then((blob: any) => {
         blob.name = this.currentFile.name;
-        console.log("blob", blob);
+        //console.log("blob", blob);
         this.uploader.addToQueue([blob]);
 
         this.uploader.uploadAll();

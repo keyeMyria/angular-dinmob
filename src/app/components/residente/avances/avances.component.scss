@@ -54,18 +54,70 @@ navbar {
         min-height: calc(100vh - 56px);
     }
 
-    .toolbar {
-        top:56px !important;
+    .fab-t1 {
+      
+        top:59px !important; 
+        right:4px !important; 
+      
     }
+    .fab-t2 {
+      
+        top:59px !important; 
+        right:66px !important; 
+      
+    }
+    .fab-t3 {
+      
+        top:59px !important; 
+        right:128px !important; 
+      
+    }
+    .fab-t4 {
+      
+        top:59px !important; 
+        right:190px !important; 
+      
+    }
+    .fab-t5 {
+      
+        top:59px !important; 
+        right:252px !important; 
+      
+    }
+
+    
 }
 
-.toolbar {
-    position:fixed;
-    top:64px;
-    z-index: 10;
-
+.fab-t1 {
+    position:fixed; 
+    top:67px; 
+    right:20px; 
+    z-index:100;
+}
+.fab-t2 {
+    position:fixed; 
+    top:67px; 
+    right:85px; 
+    z-index:100;
+}
+.fab-t3 {
+    position:fixed; 
+    top:67px; 
+    right:150px; 
+    z-index:100;
+}
+.fab-t4 {
+    position:fixed; 
+    top:67px; 
+    right:215px; 
+    z-index:100;
+}
+.fab-t5 {
+    position:fixed; 
+    top:67px; 
+    right:280px; 
+    z-index:100;
 }
 
-.toolbar-drawer {
- //width: calc(100% - 250px);
-}
+
+

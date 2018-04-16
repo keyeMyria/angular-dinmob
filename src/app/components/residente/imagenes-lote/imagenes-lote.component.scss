@@ -33,3 +33,19 @@ navbar {
         color:white;
     }
 }
+
+.fab-t1 {
+    position:fixed; 
+    top:67px; 
+    right:20px; 
+    z-index:100;
+}
+
+@media only screen and (max-width: 600px) {
+
+    .fab-t1 {      
+        top:59px !important; 
+        right:4px !important;       
+    }
+
+}
