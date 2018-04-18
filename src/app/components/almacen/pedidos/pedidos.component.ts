@@ -43,7 +43,7 @@ export class PedidosComponent implements OnInit {
       });
   }
 
-  cargarObra(obra_selected){
+  cargarObra(obra_selected) {
     this.pedidoSrv.getPedidosObra(obra_selected)
       .subscribe(pedidos => {
         this.pedidos = pedidos;
@@ -53,7 +53,7 @@ export class PedidosComponent implements OnInit {
   verPedido(pedido) {
 
     this.pedidoSrv.getPedidoInsumos(pedido.id_pedido)
-      .subscribe((res:any) => {
+      .subscribe((res: any) => {
         let dialogRef = this.dialog.open(VerPedidoDialogoComponent, {
           data: {
             descripcion: res.descripcion,
@@ -67,13 +67,18 @@ export class PedidosComponent implements OnInit {
           },
           width: '800px',
         });
-        
+
         dialogRef.afterClosed().subscribe(result => {
-    
+
         });
-      }, (error) =>{
+      }, (error) => {
 
       });
+
+  }
+
+  nuevoPedido() {
+    console.log("nuevo pedido");
 
   }
 

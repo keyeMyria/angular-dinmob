@@ -10,41 +10,58 @@
         </mat-form-field>
       </div>
 
-      <div class="table-responsive pt-3">
-        <table id="tablaInsumosAcumulados" class="table table-striped">
-          <thead>
-            <tr>
-              <th>Fecha</th>
-              <th>Usuario</th>
-              <th>Descripción</th>
-              <th>Estado</th>
-              <th width="130px"></th>
-              <th width="34px"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let pedido of pedidos">
-              <td class="ws-nowrap">{{pedido.fecha}}</td>
-              <td>{{pedido.usuario}}</td>
-              <td>{{pedido.descripcion}}</td>
-              <td>Activo</td>
-              <td class="text-right">
-                <button mat-button class="no-min" (click)="verPedido(pedido)">
-                  <i class="fa fa-question-circle"></i>
-                </button>
-                <button mat-button class="no-min">
-                  <i class="fa fa-pencil"></i>
-                </button>
-              </td>
-              <td class="text-right">
-                <button mat-button type="button" class="no-min">
-                  <i class="fa fa-times"></i>
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="card">
+        <div class="card-header padding-card-header">
+          <div class="d-flex">
+            <div class="align-self-center">Pedidos</div>
+            <div class="spacer"></div>
+            <div>
+              <button mat-icon-button (click)="nuevoPedido()">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table id="tablaInsumosAcumulados" class="table table-striped">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Usuario</th>
+                <th>Descripción</th>
+                <th>Estado</th>
+                <th width="130px"></th>
+                <th width="34px"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let pedido of pedidos">
+                <td class="ws-nowrap">{{pedido.fecha| date:'mediumDate':'':'es'}}</td>
+                <td>{{pedido.usuario}}</td>
+                <td>{{pedido.descripcion}}</td>
+                <td>Activo</td>
+                <td class="text-right">
+                  <button mat-button class="no-min" (click)="verPedido(pedido)">
+                    <i class="fa fa-question-circle"></i>
+                  </button>
+                  <button mat-button class="no-min">
+                    <i class="fa fa-pencil"></i>
+                  </button>
+                </td>
+                <td class="text-right">
+                  <button mat-button type="button" class="no-min">
+                    <i class="fa fa-times"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
       </div>
+
+
     </div>
   </div>
 </div>

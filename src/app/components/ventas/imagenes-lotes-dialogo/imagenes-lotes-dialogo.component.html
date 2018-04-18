@@ -1,5 +1,5 @@
 <h1 mat-dialog-title>{{data.lote.manzana}} {{data.lote.nombre}}</h1>
-<div mat-dialog-content class="imagenes">
+<div mat-dialog-content class="no-padding">
 
   <div class="card mb-2" *ngFor="let foto of data.fotos">
     <img class="card-img-top" [src]="foto.url" [alt]="foto.partida">

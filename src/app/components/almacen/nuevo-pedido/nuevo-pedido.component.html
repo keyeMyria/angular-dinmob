@@ -62,140 +62,143 @@
               <li class="breadcrumb-item text-primary">{{lotePedido_selected?.nombre}}</li>
             </ol>
             <!-- partidas -->
-            <mat-accordion [displayMode]="'default'">
+            <div class="acordeon-prototipo">
+              <mat-accordion [displayMode]="'default'">
 
-              <mat-expansion-panel [hideToggle]="true" *ngFor="let partida of lotePedido_selected.partidas" #par>
-                <mat-expansion-panel-header class="align-items-center" [ngClass]="{'bg-primary text-white':par.expanded}">
-                  <span class="font-weight-bold align-self-center mr-1 d-none d-md-inline-block">{{partida.codigo}}</span>
-                  <span class="align-self-center">{{partida.nombre}}</span>
-                  <div class="spacer"></div>
-                  <div class="collapse-header-btns">
-                    <span class="badge badge-pill badge-dark" *ngIf="partida.subpartidas.length">{{countInsumosPedidoPartida(partida)}}</span>
-                    <span class="badge badge-pill badge-dark" *ngIf="partida.insumos.length">{{countInsumosPedido(partida.insumos)}}</span>
-                  </div>
-                </mat-expansion-panel-header>
-
-
-                <!-- subpartidas -->
-                <mat-accordion [displayMode]="'default'" *ngIf="partida.subpartidas.length>0">
-
-                  <mat-expansion-panel [hideToggle]="true" *ngFor="let subpartida of partida.subpartidas" #sub>
-
-                    <mat-expansion-panel-header [ngClass]="{'bg-secondary text-white':sub.expanded}">
-                      <span class="font-weight-bold align-self-center mr-1 d-none d-md-inline-block">{{subpartida.codigo}}</span>
-                      <span class="align-self-center">{{subpartida.nombre}}</span>
-                      <div class="spacer"></div>
-                      <div class="collapse-header-btns">
-                        <span class="badge badge-pill badge-dark">{{countInsumosPedido(subpartida.insumos)}}</span>
-                      </div>
-                    </mat-expansion-panel-header>
-
-                    <!-- insumos -->
-                    <div class="table-responsive">
-                      <!-- *ngIf="partida.insumos.length" -->
-                      <table class="table table-striped table-align-middle">
-                        <thead>
-                          <tr>
-                            <th class="d-none d-md-table-cell">Código</th>
-                            <th>Insumo</th>
-                            <th>Unidad</th>
-                            <th class="text-right">Programado</th>
-                            <th class="text-right">Pedido</th>
-                            <th>Requerido</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr *ngFor="let insumo of subpartida.insumos">
-
-                            <td class="d-none d-md-table-cell">{{insumo.codigo}}</td>
-                            <td>{{insumo.insumo}}</td>
-                            <td>{{insumo.unidad}}</td>
-                            <td class="text-right">{{insumo.cantidad}}</td>
-                            <td class="text-right">{{insumo.pedido}}</td>
-                            <td>
-                              <input type="number" class="form-control" [(ngModel)]="insumo.requerido">
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
+                <mat-expansion-panel [hideToggle]="true" *ngFor="let partida of lotePedido_selected.partidas" #par>
+                  <mat-expansion-panel-header class="align-items-center" [ngClass]="{'bg-primary text-white':par.expanded}">
+                    <span class="font-weight-bold align-self-center mr-1 d-none d-md-inline-block">{{partida.codigo}}</span>
+                    <span class="align-self-center">{{partida.nombre}}</span>
+                    <div class="spacer"></div>
+                    <div class="collapse-header-btns">
+                      <span class="badge badge-pill badge-dark" *ngIf="partida.subpartidas.length">{{countInsumosPedidoPartida(partida)}}</span>
+                      <span class="badge badge-pill badge-dark" *ngIf="partida.insumos.length">{{countInsumosPedido(partida.insumos)}}</span>
                     </div>
-                  </mat-expansion-panel>
-
-                </mat-accordion>
-
-                <!-- insumos -->
-                <div class="table-responsive" *ngIf="partida.insumos.length>0">
+                  </mat-expansion-panel-header>
 
 
-                  <table class="table table-striped table-align-middle">
-                    <thead>
-                      <tr>
-                        <th class="hidden-xs">Código</th>
-                        <th>Insumo</th>
-                        <th>Unidad</th>
-                        <th class="text-right">Programado</th>
-                        <th class="text-right">Pedido</th>
-                        <th>Requerido</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let insumo of partida.insumos">
-                        <td class="hidden-xs">{{insumo.codigo}}</td>
-                        <td>{{insumo.insumo}}</td>
-                        <td>{{insumo.unidad}}</td>
-                        <td class="text-right">{{insumo.cantidad}}</td>
-                        <td class="text-right">{{insumo.pedido}}</td>
-                        <td>
-                          <input type="number" class="form-control" [(ngModel)]="insumo.requerido">
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+                  <!-- subpartidas -->
+                  <mat-accordion [displayMode]="'default'" *ngIf="partida.subpartidas.length>0">
+
+                    <mat-expansion-panel [hideToggle]="true" *ngFor="let subpartida of partida.subpartidas" #sub>
+
+                      <mat-expansion-panel-header [ngClass]="{'bg-secondary text-white':sub.expanded}">
+                        <span class="font-weight-bold align-self-center mr-1 d-none d-md-inline-block">{{subpartida.codigo}}</span>
+                        <span class="align-self-center">{{subpartida.nombre}}</span>
+                        <div class="spacer"></div>
+                        <div class="collapse-header-btns">
+                          <span class="badge badge-pill badge-dark">{{countInsumosPedido(subpartida.insumos)}}</span>
+                        </div>
+                      </mat-expansion-panel-header>
+
+                      <!-- insumos -->
+                      <div class="table-responsive">
+                        <!-- *ngIf="partida.insumos.length" -->
+                        <table class="table table-striped table-align-middle">
+                          <thead>
+                            <tr>
+                              <th class="d-none d-md-table-cell">Código</th>
+                              <th>Insumo</th>
+                              <th>Unidad</th>
+                              <th class="text-right">Programado</th>
+                              <th class="text-right">Pedido</th>
+                              <th>Requerido</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let insumo of subpartida.insumos">
+
+                              <td class="d-none d-md-table-cell">{{insumo.codigo}}</td>
+                              <td>{{insumo.insumo}}</td>
+                              <td>{{insumo.unidad}}</td>
+                              <td class="text-right">{{insumo.cantidad}}</td>
+                              <td class="text-right">{{insumo.pedido}}</td>
+                              <td>
+                                <input type="number" class="form-control" [(ngModel)]="insumo.requerido">
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </mat-expansion-panel>
+
+                  </mat-accordion>
+
+                  <!-- insumos -->
+                  <div class="table-responsive" *ngIf="partida.insumos.length>0">
 
 
-              </mat-expansion-panel>
-              <mat-expansion-panel [hideToggle]="true" *ngIf="lotePedido_selected.insumos_extra?.length > 0" #par>
-                <mat-expansion-panel-header class="align-items-center" [ngClass]="{'bg-primary text-white':par.expanded}">
-                  <!-- <span class="font-weight-bold align-self-center mr-1 d-none d-md-inline-block">{{partida.codigo}}</span> -->
-                  <span class="align-self-center">INSUMOS EXTRA</span>
-                  <div class="spacer"></div>
-                  <div class="collapse-header-btns">
-                    <span class="badge badge-pill badge-dark" *ngIf="partida.subpartidas.length">{{countInsumosPedidoPartida(partida)}}</span>
-                    <span class="badge badge-pill badge-dark" *ngIf="partida.insumos.length">{{countInsumosPedido(partida.insumos)}}</span>
+                    <table class="table table-striped table-align-middle">
+                      <thead>
+                        <tr>
+                          <th class="hidden-xs">Código</th>
+                          <th>Insumo</th>
+                          <th>Unidad</th>
+                          <th class="text-right">Programado</th>
+                          <th class="text-right">Pedido</th>
+                          <th>Requerido</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let insumo of partida.insumos">
+                          <td class="hidden-xs">{{insumo.codigo}}</td>
+                          <td>{{insumo.insumo}}</td>
+                          <td>{{insumo.unidad}}</td>
+                          <td class="text-right">{{insumo.cantidad}}</td>
+                          <td class="text-right">{{insumo.pedido}}</td>
+                          <td>
+                            <input type="number" class="form-control" [(ngModel)]="insumo.requerido">
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
-                </mat-expansion-panel-header>
-                <!-- insumos -->
-                <div class="table-responsive">
 
 
-                  <table class="table table-striped table-align-middle">
-                    <thead>
-                      <tr>
-                        <th class="hidden-xs">Código</th>
-                        <th>Insumo</th>
-                        <th>Unidad</th>
-                        <th class="text-right">Pedido</th>
-                        <th>Requerido</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let insumo of lotePedido_selected.insumos_extra">
-                        <td class="hidden-xs">{{insumo.codigo}}</td>
-                        <td>{{insumo.insumo}}</td>
-                        <td>{{insumo.unidad}}</td>
-                        <td class="text-right">{{insumo.pedido}}</td>
-                        <td>
-                          <input type="number" class="form-control" [(ngModel)]="insumo.requerido">
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+                </mat-expansion-panel>
+                <mat-expansion-panel [hideToggle]="true" *ngIf="lotePedido_selected.insumos_extra?.length > 0" #par>
+                  <mat-expansion-panel-header class="align-items-center" [ngClass]="{'bg-primary text-white':par.expanded}">
+                    <!-- <span class="font-weight-bold align-self-center mr-1 d-none d-md-inline-block">{{partida.codigo}}</span> -->
+                    <span class="align-self-center">INSUMOS EXTRA</span>
+                    <div class="spacer"></div>
+                    <div class="collapse-header-btns">
+                      <span class="badge badge-pill badge-dark" *ngIf="partida.subpartidas.length">{{countInsumosPedidoPartida(partida)}}</span>
+                      <span class="badge badge-pill badge-dark" *ngIf="partida.insumos.length">{{countInsumosPedido(partida.insumos)}}</span>
+                    </div>
+                  </mat-expansion-panel-header>
+                  <!-- insumos -->
+                  <div class="table-responsive">
 
 
-              </mat-expansion-panel>
-            </mat-accordion>
+                    <table class="table table-striped table-align-middle">
+                      <thead>
+                        <tr>
+                          <th class="hidden-xs">Código</th>
+                          <th>Insumo</th>
+                          <th>Unidad</th>
+                          <th class="text-right">Pedido</th>
+                          <th>Requerido</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let insumo of lotePedido_selected.insumos_extra">
+                          <td class="hidden-xs">{{insumo.codigo}}</td>
+                          <td>{{insumo.insumo}}</td>
+                          <td>{{insumo.unidad}}</td>
+                          <td class="text-right">{{insumo.pedido}}</td>
+                          <td>
+                            <input type="number" class="form-control" [(ngModel)]="insumo.requerido">
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+
 
           </div>
         </mat-tab>
@@ -203,8 +206,8 @@
         <mat-tab label="Pedido">
           <div class="container py-3">
 
-            <div class="my-3">
-              <button type="button" (click)="getInsumosAcumulados()" class="btn btn-primary btn-block">Acumulado</button>
+            <div class="my-3 text-center">
+              <button type="button" mat-raised-button color="primary" (click)="getInsumosAcumulados()" class="w-75">Acumulado</button>
             </div>
             <!--insumos pedido-->
             <div class="table-responsive">
@@ -238,7 +241,9 @@
               <input type="text" class="form-control" [(ngModel)]="pedido.descripcion">
             </div>
 
-            <button type="button" (click)="addPedido()" class="btn btn-primary">Guardar</button>
+            <div class="text-center">
+              <button type="button" mat-raised-button color="primary" (click)="addPedido()" class="w-75">Guardar</button>
+            </div>
 
           </div>
         </mat-tab>
