@@ -9,7 +9,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 export class VerPedidoDialogoComponent implements OnInit {
 
   insumos_acumulados: any = [];
-  
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<VerPedidoDialogoComponent>,
@@ -20,15 +20,57 @@ export class VerPedidoDialogoComponent implements OnInit {
     this.acumularInsumos();
   }
 
+  private clonar(objeto): any {
+
+    let strObject = JSON.stringify(objeto);
+    return JSON.parse(strObject);
+
+  }
+
   acumularInsumos() {
-    this.data.insumos.forEach((insumo: any) => {
-      let insum_acum = this.insumos_acumulados.find(insumo_acumulado => { insumo_acumulado.id_insumo == insumo.id_insumo });
-      if (insum_acum) {
-        insum_acum.cantidad += insumo.cantidad;
-      } else {
-        this.insumos_acumulados.push(insumo);
-      }
+
+    let ordenados = this.data.insumos.sort(function(a, b){
+      return a.id_insumo - b.id_insumo;
     });
+
+    this.insumos_acumulados = [];
+    let i = 0;
+
+    while(i < ordenados.length-1){
+      let j = i + 1;
+      let insumo = this.clonar(ordenados[i]);
+      insumo.cantidad = Number(insumo.cantidad);
+      this.insumos_acumulados.push(insumo);
+      while(ordenados[i].id_insumo == ordenados[j].id_insumo && j < ordenados.length){
+        this.insumos_acumulados[this.insumos_acumulados.length-1].cantidad += +ordenados[j].cantidad;
+        j++;
+      }
+      i=j;
+    }
+
+    if(i == ordenados.length -1){
+      let insumo = this.clonar(ordenados[ordenados.length-1]);
+      insumo.cantidad = Number(insumo.cantidad);
+      this.insumos_acumulados.push(insumo);
+    }
+
+/*     this.data.insumos.forEach((insumo: any) => {
+      if (this.insumos_acumulados.length == 0) {
+        this.insumos_acumulados.push(insumo)
+      } else {
+        this.insumos_acumulados.forEach((insumo_acumulado: any) => {
+
+          if (insumo_acumulado.id_insumo == insumo.id_insumo) {
+            insumo_acumulado.cantidad += insumo.cantidad;
+          } else {
+            this.insumos_acumulados.push(insumo)
+          }
+
+        });
+      }
+
+
+    }); */
   }
 
 

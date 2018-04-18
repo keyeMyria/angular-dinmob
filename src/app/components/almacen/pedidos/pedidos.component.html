@@ -28,17 +28,17 @@
               <td>{{pedido.usuario}}</td>
               <td>{{pedido.descripcion}}</td>
               <td>Activo</td>
-              <td>
-                <a class="btn btn-default btn-sm" (click)="verPedido(pedido)">
-                  <i class="material-icons">help</i>
-                </a>
-                <a class="btn btn-default btn-sm">
-                  <i class="material-icons">edit</i>
-                </a>
+              <td class="text-right">
+                <button mat-button class="no-min" (click)="verPedido(pedido)">
+                  <i class="fa fa-question-circle"></i>
+                </button>
+                <button mat-button class="no-min">
+                  <i class="fa fa-pencil"></i>
+                </button>
               </td>
-              <td>
-                <button type="button" class="btn btn-default btn-sm">
-                  <i class="material-icons">close</i>
+              <td class="text-right">
+                <button mat-button type="button" class="no-min">
+                  <i class="fa fa-times"></i>
                 </button>
               </td>
             </tr>
