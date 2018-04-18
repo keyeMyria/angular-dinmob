@@ -88,6 +88,8 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
       }).subscribe(res => {
 
         this.loading.start();
+        //console.log("loading start");
+
 
         this.lotes = res[0].lotes;
         this.scalePrototipos = res[0].scalePrototipos;
@@ -139,13 +141,15 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
         //console.log("valores escala prototipos", this.valuesPrototipos);
 
 
-
-
         if (this.jsonMap.mapa) {
           this.crearMapa(this.valuesEstadosVenta, this.scalePrototipos, this.scaleFormaPago, this.scaleLoteTipo);
         }
 
+        //setTimeout(() => {
         this.loading.stop();
+        //  console.log("loading stop");
+        //}, 3000);
+
 
       }, (error) => {
 
