@@ -249,7 +249,8 @@ export const ROUTES: Routes = [
             {
                 path: 'nuevo-pedido', component: NuevoPedidoComponent,
                 resolve: {
-                    obras: ObrasUsuarioResolverService                    
+                    obras: ObrasUsuarioResolverService,
+                    usuario: UsuarioLoggedResolverService                    
                 }
             },
             {

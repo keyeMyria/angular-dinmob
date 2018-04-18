@@ -27,6 +27,8 @@ export class NuevoPedidoComponent implements OnInit {
   insumos_pedido: any = [];
   pedido: any = {};
 
+  usuario: any;
+
   constructor(
     private media: MediaMatcher,
     private changeDetectorRef: ChangeDetectorRef,
@@ -44,8 +46,9 @@ export class NuevoPedidoComponent implements OnInit {
   ngOnInit() {
 
     this.route.data
-      .subscribe((data: { obras: any[] }) => {
+      .subscribe((data: { obras: any[], usuario: any }) => {
         this.obras = data.obras;
+        this.usuario = data.usuario;
       });
 
     this.route.paramMap
@@ -275,6 +278,7 @@ export class NuevoPedidoComponent implements OnInit {
 
     console.log("pedido", this.pedido);
 
+    this.pedido.id_usuario = this.usuario.id_usuario;
     this.pedidoSrv.createPedido(this.pedido, this.insumos_pedido)
       .subscribe(respuesta => {
 

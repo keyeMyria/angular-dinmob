@@ -3,80 +3,74 @@
 <div mat-dialog-content>
 
   <div>
-
-    <mat-card>
-      <mat-card-content>
-        <mat-tab-group class="demo-tab-group">
-          <mat-tab label="Datos">
-            <div class="py-3">
-              <p>
-                <b>Fecha: </b>{{data.fecha}}</p>
-              <p>
-                <b>Obra: </b>{{data.obra}}</p>
-              <p>
-                <b>Usuario: </b>{{data.usuario}}</p>
-              <p>
-                <b>Descripcion: </b>{{data.descripcion}}</p>
+    <mat-tab-group>
+      <mat-tab label="Datos">
+        <div class="py-3">
+          <p>
+            <b>Fecha: </b>{{data.fecha}}</p>
+          <p>
+            <b>Obra: </b>{{data.obra}}</p>
+          <p>
+            <b>Usuario: </b>{{data.usuario}}</p>
+          <p>
+            <b>Descripción: </b>{{data.descripcion}}</p>
+        </div>
+      </mat-tab>
+      <mat-tab label="Desglose">
+        <div class="demo-tab-content">
+          <div class="table-responsive pt-3">
+            <table id="tablaInsumosAcumulados" class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Manzana</th>
+                  <th>Lote</th>
+                  <th>Partida</th>
+                  <th>Subpartida</th>
+                  <th>Insumo</th>
+                  <th>Unidad</th>
+                  <th>Solicitado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let insumo of data.insumos">
+                  <td class="ws-nowrap">{{insumo.manzana}}</td>
+                  <td class="ws-nowrap">{{insumo.lote}}</td>
+                  <td>{{insumo.partida}}</td>
+                  <td>{{insumo.subpartida}}</td>
+                  <td>{{insumo.insumo}}</td>
+                  <td>{{insumo.unidad}}</td>
+                  <td>{{insumo.cantidad}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Acumulado">
+        <div class="demo-tab-content">
+          <div class="demo-tab-content">
+            <div class="table-responsive pt-3">
+              <table id="tablaInsumosAcumulados" class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Insumo</th>
+                    <th>Unidad</th>
+                    <th>Solicitado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let insumo of insumos_acumulados">
+                    <td>{{insumo.insumo}}</td>
+                    <td>{{insumo.unidad}}</td>
+                    <td>{{insumo.cantidad}}</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-          </mat-tab>
-          <mat-tab label="Desglose">
-            <div class="demo-tab-content">
-              <div class="table-responsive pt-3">
-                <table id="tablaInsumosAcumulados" class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th>Manzana</th>
-                      <th>Lote</th>
-                      <th>Partida</th>
-                      <th>Subpartida</th>
-                      <th>Insumo</th>
-                      <th>Unidad</th>
-                      <th>Solicitado</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let insumo of data.insumos">
-                      <td>{{insumo.manzana}}</td>
-                      <td>{{insumo.lote}}</td>
-                      <td>{{insumo.partida}}</td>
-                      <td>{{insumo.subpartida}}</td>
-                      <td>{{insumo.insumo}}</td>
-                      <td>{{insumo.unidad}}</td>
-                      <td>{{insumo.cantidad}}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </mat-tab>
-          <mat-tab label="Acumulado">
-            <div class="demo-tab-content">
-              <div class="demo-tab-content">
-                <div class="table-responsive pt-3">
-                  <table id="tablaInsumosAcumulados" class="table table-striped">
-                    <thead>
-                      <tr>
-                        <th>Insumo</th>
-                        <th>Unidad</th>
-                        <th>Solicitado</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let insumo of insumos_acumulados">
-                        <td>{{insumo.insumo}}</td>
-                        <td>{{insumo.unidad}}</td>
-                        <td>{{insumo.cantidad}}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </mat-tab>
-        </mat-tab-group>
-      </mat-card-content>
-    </mat-card>
-
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
   </div>
 
 </div>

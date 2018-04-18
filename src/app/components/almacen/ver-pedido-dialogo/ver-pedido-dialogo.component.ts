@@ -41,7 +41,7 @@ export class VerPedidoDialogoComponent implements OnInit {
       let insumo = this.clonar(ordenados[i]);
       insumo.cantidad = Number(insumo.cantidad);
       this.insumos_acumulados.push(insumo);
-      while(ordenados[i].id_insumo == ordenados[j].id_insumo && j < ordenados.length){
+      while(j < ordenados.length && ordenados[i].id_insumo == ordenados[j].id_insumo ){
         this.insumos_acumulados[this.insumos_acumulados.length-1].cantidad += +ordenados[j].cantidad;
         j++;
       }
@@ -54,23 +54,7 @@ export class VerPedidoDialogoComponent implements OnInit {
       this.insumos_acumulados.push(insumo);
     }
 
-/*     this.data.insumos.forEach((insumo: any) => {
-      if (this.insumos_acumulados.length == 0) {
-        this.insumos_acumulados.push(insumo)
-      } else {
-        this.insumos_acumulados.forEach((insumo_acumulado: any) => {
 
-          if (insumo_acumulado.id_insumo == insumo.id_insumo) {
-            insumo_acumulado.cantidad += insumo.cantidad;
-          } else {
-            this.insumos_acumulados.push(insumo)
-          }
-
-        });
-      }
-
-
-    }); */
   }
 
 
