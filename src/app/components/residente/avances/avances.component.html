@@ -2,19 +2,19 @@
     <mat-icon aria-label="toggle side drawer">format_align_left</mat-icon>
 </button>
 
-<button mat-fab class="fab-t2" (click)="addAvance()" [disabled]="!lote || selection.isEmpty()" matTooltip="Avance">
+<button mat-fab class="fab-t2" (click)="addAvance()" *ngIf="lote && !selection.isEmpty()" matTooltip="Avance">
     <mat-icon aria-label="toggle side drawer">check</mat-icon>
 </button>
 
-<button mat-fab class="fab-t3" (click)="addLiberacion()" [disabled]="!lote || selection.isEmpty()" matTooltip="Liberación">
+<button mat-fab class="fab-t3" (click)="addLiberacion()" *ngIf="lote && !selection.isEmpty()" matTooltip="Liberación">
     <mat-icon aria-label="toggle side drawer">attach_money</mat-icon>
 </button>
 
-<button mat-fab class="fab-t4" (click)="delLiberacion()" [disabled]="!lote || selection.isEmpty()" matTooltip="Eliminar Liberación">
+<button mat-fab class="fab-t4" (click)="delLiberacion()" *ngIf="lote && !selection.isEmpty()" matTooltip="Eliminar Liberación">
     <mat-icon aria-label="toggle side drawer">money_off</mat-icon>
 </button>
 
-<button mat-fab class="fab-t5" (click)="delAvance()" [disabled]="!lote || selection.isEmpty()" matTooltip="Eliminar Avance">
+<button mat-fab class="fab-t5" (click)="delAvance()" *ngIf="lote && !selection.isEmpty()" matTooltip="Eliminar Avance">
     <mat-icon aria-label="toggle side drawer">not_interested</mat-icon>
 </button>
 
