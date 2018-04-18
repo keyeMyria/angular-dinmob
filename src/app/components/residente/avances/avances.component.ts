@@ -106,9 +106,17 @@ export class AvancesComponent implements OnInit {
 
         this.selection.clear();
 
+        this.snackBar.open("Avance Agregado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
 
       }, (error) => {
-
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
       });
   }
 
@@ -135,9 +143,17 @@ export class AvancesComponent implements OnInit {
 
         this.selection.clear();
 
+        this.snackBar.open("Liberación Agregada", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
 
       }, (error) => {
-
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
       });
 
   }
@@ -164,9 +180,17 @@ export class AvancesComponent implements OnInit {
 
         this.selection.clear();
 
+        this.snackBar.open("Avance Eliminado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
 
       }, (error) => {
-
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
       });
 
   }
@@ -192,9 +216,17 @@ export class AvancesComponent implements OnInit {
 
         this.selection.clear();
 
+        this.snackBar.open("Liberación Eliminada", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
 
       }, (error) => {
-
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
       });
 
   }
