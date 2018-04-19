@@ -55,23 +55,21 @@ export class EditarPedidoComponent implements OnInit {
       .switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
-          return this.obraSrv.getAcordeonManzanas(params.get("obra"));
+          return Observable.forkJoin(
+            this.obraSrv.getAcordeonManzanas(params.get("obra")),
+            this.pedidoSrv.getPedidoEditable(params.get("id"))
+          );
         } else {
-          return Observable.of({ datos: {} });
+          return Observable.of([[], {}]);
         }
-      }).subscribe(obra => {
-        console.log("obra", obra);
-        this.obra = obra;
+      }).subscribe((res: any) => {
+        console.log("obra", res);
+        this.obra = res[0];
 
-        this.lotes_pedido = [];
+        this.lotes_pedido = res[1].lotes;
         this.lotePedido_selected = "";
       });
 
-      this.pedidoSrv.getPedidoEditable(12)
-        .subscribe((res: any) => {
-          console.log(res);
-          
-        }
 
   }
 

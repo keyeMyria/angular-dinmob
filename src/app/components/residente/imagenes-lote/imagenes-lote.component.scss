@@ -1,38 +1,4 @@
 
-.drawer-container{
-    height: 100%;
-}
-
-.avances .list-group-item {
-    padding-left: 5px !important;
-    padding-right: 0 !important;
-}
-
-
-navbar {
-
-    background: #BDBDBD;
-
-}
-
-.manzanas {
-    background-color: #2c3b41;
-    color:#8aa4af;
-}
-
-.estructura {
-    background-color: #222d32;
-}
-
-.manzanas .list-group-item{
-    background-color: #2c3b41;
-    color:#8aa4af;
-    cursor: pointer;
-
-    &:hover {
-        color:white;
-    }
-}
 
 .fab-t1 {
     position:fixed; 
