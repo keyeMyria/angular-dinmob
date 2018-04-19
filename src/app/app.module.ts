@@ -218,6 +218,7 @@ import { EditarPedidoComponent } from './components/almacen/editar-pedido/editar
 import { PedidoService } from './services/pedido.service';
 import { VerPedidoDialogoComponent } from './components/almacen/ver-pedido-dialogo/ver-pedido-dialogo.component';
 import { RegistroComponent } from './components/admin/registro/registro.component';
+import { LogService } from './services/log.service';
 
 
 
@@ -486,6 +487,7 @@ export function getToken() {
     ProveedorService,
     PagoTrabajadorService,
     PedidoService,
+    LogService,
 
     ObrasUsuarioResolverService,
     UsuariosAlmacenistasResolverService,
