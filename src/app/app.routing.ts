@@ -80,6 +80,7 @@ import { TiposPagoTrabajadorResolverService } from 'app/resolvers/tipos-pago-tra
 import { NuevoPedidoComponent } from './components/almacen/nuevo-pedido/nuevo-pedido.component';
 import { PedidosComponent } from './components/almacen/pedidos/pedidos.component';
 import { RegistroComponent } from './components/admin/registro/registro.component';
+import { EditarPedidoComponent } from 'app/components/almacen/editar-pedido/editar-pedido.component';
 
 
 
@@ -373,7 +374,13 @@ export const ROUTES: Routes = [
                     obras: ObrasUsuarioResolverService
                 }
             },
-
+            {
+                path: 'editar-pedido/:id/:obra', component: EditarPedidoComponent,
+                resolve: {
+                    obras: ObrasUsuarioResolverService,
+                    usuario: UsuarioLoggedResolverService
+                }
+            },
             { path: 'instituciones-credito', component: InstitucionesCreditoComponent },
             {
                 path: 'importar-prototipo', component: ImportarPrototipoComponent,

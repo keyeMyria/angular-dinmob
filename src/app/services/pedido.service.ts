@@ -40,6 +40,11 @@ export class PedidoService {
       .pipe(catchError(this.handleError("getPedidoInsumos")));
   }
 
+  getPedidoEditable(id_pedido) {
+    return this.http.get(this.url + 'get_pedido_editable/' + id_pedido)
+      .pipe(catchError(this.handleError("getPedidoEditable")));
+  }
+
 
 
   private handleError<T>(operation = 'operation') {
