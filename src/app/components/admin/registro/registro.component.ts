@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LogService } from '../../../services/log.service';
 
 @Component({
   selector: 'app-registro',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistroComponent implements OnInit {
 
-  constructor() { }
+  registro: any = [];
+  constructor(
+    private logSrv: LogService
+  ) { }
 
   ngOnInit() {
+    this.logSrv.getLog()
+      .subscribe(registro => {
+        this.registro = registro;
+      }, (error) => {
+
+      });
   }
 
 }

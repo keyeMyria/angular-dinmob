@@ -1,3 +1,44 @@
-<p>
-  registro works!
-</p>
+<div class="container mt-3 mb-5">
+  <div class="row">
+    <div class="col-12">
+
+
+      <div class="card">
+        <div class="card-header">Registro</div>
+
+        <div>
+          <div class="table-responsive">
+            <!-- matSort (matSortChange)="ordenarDatos($event)" -->
+            <table class="table table-hover table-striped table-align-middle">
+              <thead>
+                <tr>
+                  <!-- mat-sort-header="nombre" -->
+                  <th>Fecha</th>
+                  <!-- mat-sort-header="email" -->
+                  <th>Usuario</th>
+                  <!-- mat-sort-header="rol" -->
+                  <th>Controller</th>
+                  <th>Function</th>
+                  <th>Actividad</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let item of registro; let i = index">
+                  <td>{{item.fecha| date:'medium':'':'es'}}</td>
+                  <td>{{item.usuario}}</td>
+                  <td>{{item.controller}}</td>
+                  <td>{{item.function}}</td>
+                  <td>{{item.actividad}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+</div>

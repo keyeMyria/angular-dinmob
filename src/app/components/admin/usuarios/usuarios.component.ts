@@ -6,7 +6,6 @@ import { CambiarPasswordDialogoComponent } from "app/components/admin/cambiar-pa
 import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component";
 import { EditarUsuarioDialogoComponent } from "app/components/admin/editar-usuario-dialogo/editar-usuario-dialogo.component";
 import { CrearUsuarioDialogoComponent } from "app/components/admin/crear-usuario-dialogo/crear-usuario-dialogo.component";
-import { log } from 'util';
 
 @Component({
   selector: 'app-usuarios',
