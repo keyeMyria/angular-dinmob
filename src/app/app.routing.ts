@@ -132,7 +132,12 @@ export const ROUTES: Routes = [
                     control_almacen: UsuariosContolAlmacenResolverService
                 }
             },
-            { path: 'tablero', component: TableroComponent },
+            { 
+                path: 'tablero', component: TableroComponent,
+                resolve: {
+                    usuario: UsuarioLoggedResolverService
+                },
+             },
             { path: 'editar-prototipo/:id', component: EditarPrototipoComponent },
             {
                 path: 'estructura-obra', component: EstructuraObraComponent,
