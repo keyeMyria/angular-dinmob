@@ -31,7 +31,7 @@
   }
   
 
-.badge-apartado {
+  .badge-apartado {
     color:white;
     background-color: $apartado; 
   
@@ -180,12 +180,12 @@ table.table-align-middle  {
     padding-top: 0.25rem !important;
 }
 
-.bg-active{
+.bg-active {
     background-color: #b8daff;
 }
 
 
-.drawer-container{
+.drawer-container {
     height: 100%;
 }
 
@@ -203,7 +203,7 @@ table.table-align-middle  {
 //height: calc(100vh - 56px);
 /***************************/
 @media only screen and (max-width: 600px) {
-    .drawer-content{
+    .drawer-content {
         //56px del toolbar
         min-height: calc(100vh - 56px);
     }

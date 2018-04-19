@@ -79,6 +79,7 @@ import { ReportesComponent } from './components/admin/reportes/reportes.componen
 import { TiposPagoTrabajadorResolverService } from 'app/resolvers/tipos-pago-trabajador-resolver.service';
 import { NuevoPedidoComponent } from './components/almacen/nuevo-pedido/nuevo-pedido.component';
 import { PedidosComponent } from './components/almacen/pedidos/pedidos.component';
+import { RegistroComponent } from './components/admin/registro/registro.component';
 
 
 
@@ -132,12 +133,18 @@ export const ROUTES: Routes = [
                     control_almacen: UsuariosContolAlmacenResolverService
                 }
             },
-            { 
+            {
+                path: 'registro', component: RegistroComponent,
+                resolve: {
+                    usuario: UsuarioLoggedResolverService
+                }
+            },
+            {
                 path: 'tablero', component: TableroComponent,
                 resolve: {
                     usuario: UsuarioLoggedResolverService
-                },
-             },
+                }
+            },
             { path: 'editar-prototipo/:id', component: EditarPrototipoComponent },
             {
                 path: 'estructura-obra', component: EstructuraObraComponent,
@@ -255,13 +262,13 @@ export const ROUTES: Routes = [
                 path: 'nuevo-pedido', component: NuevoPedidoComponent,
                 resolve: {
                     obras: ObrasUsuarioResolverService,
-                    usuario: UsuarioLoggedResolverService                    
+                    usuario: UsuarioLoggedResolverService
                 }
             },
             {
                 path: 'pedidos', component: PedidosComponent,
                 resolve: {
-                    obras: ObrasUsuarioResolverService                   
+                    obras: ObrasUsuarioResolverService
                 }
             },
             {
@@ -280,7 +287,7 @@ export const ROUTES: Routes = [
             {
                 path: 'editar-entrada/:id', component: EditarEntradaComponent,
                 resolve: {
-                   proveedores: ProveedoresResolverService 
+                    proveedores: ProveedoresResolverService
                 }
             },
             {
@@ -366,7 +373,7 @@ export const ROUTES: Routes = [
                     obras: ObrasUsuarioResolverService
                 }
             },
-           
+
             { path: 'instituciones-credito', component: InstitucionesCreditoComponent },
             {
                 path: 'importar-prototipo', component: ImportarPrototipoComponent,

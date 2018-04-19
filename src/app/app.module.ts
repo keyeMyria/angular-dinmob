@@ -217,6 +217,7 @@ import { NuevoPedidoComponent } from './components/almacen/nuevo-pedido/nuevo-pe
 import { EditarPedidoComponent } from './components/almacen/editar-pedido/editar-pedido.component';
 import { PedidoService } from './services/pedido.service';
 import { VerPedidoDialogoComponent } from './components/almacen/ver-pedido-dialogo/ver-pedido-dialogo.component';
+import { RegistroComponent } from './components/admin/registro/registro.component';
 
 
 
@@ -354,6 +355,7 @@ export function getToken() {
     NuevoPedidoComponent,
     EditarPedidoComponent,
     VerPedidoDialogoComponent,
+    RegistroComponent,
 
 
 
