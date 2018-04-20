@@ -27,8 +27,8 @@
               <thead>
                 <tr>
                   <th>Nombre</th>
-                  <th>%Retención</th>
                   <th>Especialidad</th>
+                  <th class="text-center">Retención(%)</th>
                   <th></th>
 
                 </tr>
@@ -37,8 +37,8 @@
               <tbody>
                 <tr *ngFor="let trabajador of trabajadores">
                   <td>{{trabajador.nombre}}</td>
-                  <td>{{trabajador.retencion}}</td>
                   <td>{{trabajador.especialidad}}</td>
+                  <td class="text-center">{{trabajador.retencion}}</td>
                   <td class="text-right">
                     <button mat-button class="no-min" (click)="editarTrabajador(trabajador)">
                       <i class="fa fa-pencil"></i>
