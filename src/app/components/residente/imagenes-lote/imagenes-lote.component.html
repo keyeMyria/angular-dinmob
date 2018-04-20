@@ -61,7 +61,7 @@
           </a>
           <div class="card-body">
             <h5 class="card-title">{{foto.partida_padre}} {{foto.partida}}</h5>
-            <p class="card-text">{{foto.fecha}}</p>
+            <p class="card-text">{{foto.fecha| date:'medium':'':'es'}}</p>
             <p class="card-text">{{foto.descripcion}}</p>
             <div>
               <button mat-button class="no-min" color="warn" (click)="delFoto(foto)">

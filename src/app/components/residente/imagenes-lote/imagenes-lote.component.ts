@@ -88,7 +88,7 @@ export class ImagenesLoteComponent implements OnInit {
     let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
       data: {
         title: "Eliminar imagen",
-        content: `¿Desea eliminar la imagen de: ${foto.partida_padre} ${foto.partida}?`
+        content: `¿Desea eliminar la imagen de: ${foto.partida_padre} ${foto.partida} del ${foto.fecha}?`
       },
       width: "500px"
     });

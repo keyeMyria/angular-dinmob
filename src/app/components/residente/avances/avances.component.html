@@ -18,43 +18,6 @@
     <mat-icon aria-label="toggle side drawer">not_interested</mat-icon>
 </button>
 
-<!-- <div  style="position:fixed; top:200px; right:20px; z-index:100">
-    <button mat-raised-button class="no-min" color="accent"  (click)="drawer.opened= !drawer.opened">
-        <mat-icon aria-label="toggle side drawer">format_align_left</mat-icon>
-    </button>
-    
-    <button mat-raised-button class="no-min" color="accent" (click)="addAvance()" [disabled]="!lote || selection.isEmpty()"
-        matTooltip="Avance">
-        <mat-icon aria-label="toggle side drawer">check</mat-icon>
-    </button>
-    
-    
-    <button mat-raised-button class="no-min" color="accent" (click)="addLiberacion()" [disabled]="!lote || selection.isEmpty()"
-        matTooltip="Liberación">
-        <mat-icon aria-label="toggle side drawer">attach_money</mat-icon>
-    </button>
-    
-    <button mat-raised-button class="no-min" color="accent" (click)="delLiberacion()" [disabled]="!lote || selection.isEmpty()"
-        matTooltip="Eliminar Liberación">
-        <mat-icon aria-label="toggle side drawer">money_off</mat-icon>
-    </button>
-    
-    <button mat-raised-button class="no-min" color="accent" (click)="delAvance()" [disabled]="!lote || selection.isEmpty()"
-        matTooltip="Eliminar Avance">
-        <mat-icon aria-label="toggle side drawer">not_interested</mat-icon>
-    </button>
-</div> -->
-
-<!-- <mat-toolbar class="toolbar" color="primary">
-
-    <button mat-button>Terminar</button>
-    <button mat-button>Liberar</button>
-    <button mat-icon-button>
-        <mat-icon>delete</mat-icon>
-    </button>
-</mat-toolbar> 
- -->
-
 <mat-drawer-container class="drawer-container">
     <mat-drawer class="estructura" #drawer [mode]="mobileQuery.matches ? 'over':'side'" [opened]="!mobileQuery.matches" style="width:250px">
         <mat-card class="estructura">
@@ -64,12 +27,6 @@
                     <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>
                 </select>
             </div>
-            <!--    <div class="d-flex">
-                <span><i class="fa fa-share"></i></span>
-                <span>{{obra?.obra?.nombre || ""}}</span>
-                <div class="spacer"></div>
-                <span class="badge badge-pill badge-warning align-self-center mr-2">{{obra?.manzanas?.length || "0"}}</span>
-            </div> -->
         </mat-card>
         <div class="mb-3">
             <mat-accordion>
@@ -82,7 +39,6 @@
                     </mat-expansion-panel-header>
 
                     <ul class="list-group">
-                        <!--  <li class="list-group-item">({{lote.prototipos?.length || "0"}}) {{lote.nombre}}</li> -->
                         <button type="button" class="list-group-item list-group-item-action" *ngFor="let lote of manzana.lotes" (click)="getAvancesLote(lote)">({{lote.prototipos?.length || "0"}}) {{lote.nombre}}</button>
                     </ul>
 
@@ -93,15 +49,6 @@
 
     <mat-drawer-content>
 
-        <!--         <mat-toolbar class="toolbar d-flex justify-content-end" [ngClass]="{'toolbar-drawer':drawer.opened}" color="primary">
-
-            <button mat-button class="btn-toolbar">Terminar</button>
-            <button mat-button class="btn-toolbar">Liberar</button>
-            <button mat-button (click)="drawer.opened= !drawer.opened">
-                <mat-icon>menu</mat-icon>
-            </button>
-        </mat-toolbar> -->
-        <!-- 100vh = alto del dispositivo -56 de la main-toolbar, -56 de la toolbar cuando está en modo mobile -3rem= mb-5 -->
         <div class="container-fluid content pt-2 pb-5">
             <div class="row">
                 <div class="col">
@@ -134,14 +81,16 @@
                                     <span>{{partida.nombre}}</span>
                                     <div class="spacer"></div>
                                     <div class="collapse-header-btns">
-                                        <small class="">{{numSubpartidasFinalizadas(partida)}}
-                                            <span class="hidden-xs d-none d-md-inline-block">de {{partida.subpartidas.length || "1"}}</span>
+                                        <small class="d-none d-md-inline-block">{{numSubpartidasFinalizadas(partida)}}
+                                            <span class="">de {{partida.subpartidas.length || "1"}}</span>
                                         </small>
+                                        <small class="d-md-none">{{ partida.subpartidas.length==0? (numSubpartidasFinalizadas(partida)==1? 0:1) :
+                                            partida.subpartidas.length - numSubpartidasFinalizadas(partida)}}</small>
                                     </div>
                                 </mat-expansion-panel-header>
+
                                 <div *ngIf="partida.subpartidas.length>0">
                                     <ul class="list-group">
-                                        <!--  class="pointer"  -->
                                         <li class="list-group-item" *ngFor="let subpartida of partida?.subpartidas" (click)="selection.toggle(subpartida)" [ngClass]="{'bg-active':selection.isSelected(subpartida)}">
                                             <div class="d-flex align-items-center">
                                                 <mat-checkbox class="px-3" (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(subpartida) : null" [checked]="selection.isSelected(subpartida)">
@@ -194,6 +143,7 @@
                                         </li>
                                     </ul>
                                 </div>
+
                             </mat-expansion-panel>
 
 
