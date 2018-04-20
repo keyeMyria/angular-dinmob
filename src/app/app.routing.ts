@@ -81,6 +81,7 @@ import { NuevoPedidoComponent } from './components/almacen/nuevo-pedido/nuevo-pe
 import { PedidosComponent } from './components/almacen/pedidos/pedidos.component';
 import { RegistroComponent } from './components/admin/registro/registro.component';
 import { EditarPedidoComponent } from 'app/components/almacen/editar-pedido/editar-pedido.component';
+import { EstadosPedidoResolverService } from './resolvers/estados-pedido-resolver.service';
 
 
 
@@ -377,8 +378,8 @@ export const ROUTES: Routes = [
             {
                 path: 'editar-pedido/:id/:obra', component: EditarPedidoComponent,
                 resolve: {
-                    obras: ObrasUsuarioResolverService,
-                    usuario: UsuarioLoggedResolverService
+                    obras: ObrasUsuarioResolverService,                    
+                    estados: EstadosPedidoResolverService
                 }
             },
             { path: 'instituciones-credito', component: InstitucionesCreditoComponent },

@@ -4,6 +4,8 @@ import { PedidoService } from '../../../services/pedido.service';
 import { of } from "rxjs/observable/of";
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { VerPedidoDialogoComponent } from 'app/components/almacen/ver-pedido-dialogo/ver-pedido-dialogo.component';
+import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
+
 
 @Component({
   selector: 'app-pedidos',
@@ -41,6 +43,17 @@ export class PedidosComponent implements OnInit {
       }).subscribe(pedidos => {
         this.pedidos = pedidos;
       });
+  }
+
+  delPedido(pedido) {
+    let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
+      data: {
+        title: "Eliminar pedido",
+        content: `¿Desea eliminar el pedido de ${pedido.usuario} del ${pedido.fecha}?`
+      },
+      width: "500px"
+    });
+
   }
 
   cargarObra(obra_selected) {

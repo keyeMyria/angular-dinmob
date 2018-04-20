@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDrawer, MatDialog, MatTabChangeEvent } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { ObrasService } from 'app/services/obras.service';
 import { PedidoService } from '../../../services/pedido.service';
@@ -26,8 +26,7 @@ export class EditarPedidoComponent implements OnInit {
   insumos: any = [];
   insumos_pedido: any = [];
   pedido: any = {};
-
-  usuario: any;
+  estados: any = [];  
 
   constructor(
     private media: MediaMatcher,
@@ -35,6 +34,7 @@ export class EditarPedidoComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public snackBar: MatSnackBar,
+    public dialog: MatDialog,
     private obraSrv: ObrasService,
     private pedidoSrv: PedidoService
   ) {
@@ -46,9 +46,9 @@ export class EditarPedidoComponent implements OnInit {
   ngOnInit() {
 
     this.route.data
-      .subscribe((data: { obras: any[], usuario: any }) => {
-        this.obras = data.obras;
-        this.usuario = data.usuario;
+      .subscribe((data: { obras: any[], estados: any }) => {
+        this.obras = data.obras;    
+        this.estados= data.estados;    
       });
 
     this.route.paramMap
@@ -67,8 +67,10 @@ export class EditarPedidoComponent implements OnInit {
         this.obra = res[0];
 
         this.lotes_pedido = res[1].lotes;
+        this.pedido = res[1].pedido;
         this.lotePedido_selected = "";
       });
+
 
 
   }
@@ -180,6 +182,9 @@ export class EditarPedidoComponent implements OnInit {
 
   getInsumosAcumulados() {
 
+    //console.log("getInsumosAcumulados");
+    
+
     this.insumos = [];
 
     //buscamos los insumos de las partidas
@@ -271,7 +276,7 @@ export class EditarPedidoComponent implements OnInit {
 
 
 
-  addPedido() {
+ /*  addPedido() {
 
     this.pedido.id_obra = this.obra.obra.id_obra;
 
@@ -299,6 +304,28 @@ export class EditarPedidoComponent implements OnInit {
         this.lotePedido_selected = "";
         this.insumos = [];
       });
+
+
+  } */
+
+  updatePedido() {
+    let pedido: any = {descripcion: this.pedido.descripcion, id_pedido_estado: this.pedido.id_pedido_estado};
+    this.pedidoSrv.updatePedido(this.pedido.id_pedido, pedido, this.insumos_pedido)
+      .subscribe(respuesta => {
+
+        console.log("respuesta", respuesta);
+
+      });
+  }
+
+  onTabChange(event: MatTabChangeEvent) {
+    //console.log("tab change", event);
+
+    //si seleccionamos la tab Pedido
+    if (event.index == 1) {
+      this.getInsumosAcumulados();
+      this.getInsumosSinAcumular();
+    }
 
 
   }

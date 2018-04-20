@@ -219,6 +219,7 @@ import { PedidoService } from './services/pedido.service';
 import { VerPedidoDialogoComponent } from './components/almacen/ver-pedido-dialogo/ver-pedido-dialogo.component';
 import { RegistroComponent } from './components/admin/registro/registro.component';
 import { LogService } from './services/log.service';
+import { EstadosPedidoResolverService } from './resolvers/estados-pedido-resolver.service';
 
 
 
@@ -507,7 +508,8 @@ export function getToken() {
     ProveedoresResolverService,
     TrabajadoresResolverService,
     ResidentesObraResolverService,
-    TiposPagoTrabajadorResolverService
+    TiposPagoTrabajadorResolverService,
+    EstadosPedidoResolverService
 
   ],
   bootstrap: [AppComponent]

@@ -25,6 +25,17 @@ export class PedidoService {
       .pipe(catchError(this.handleError("getLote")));
   }
 
+  getEstados() {
+    return this.http.get(this.url + "get_pedido_estados/")
+      .pipe(catchError(this.handleError("getEstados")));
+  }
+
+  updatePedido(id_pedido, pedido, insumos) {
+    return this.http.post(this.url + 'update_pedido/' + id_pedido, { pedido: pedido, insumos: insumos })
+      .pipe(catchError(this.handleError("updatePedido")));
+  }
+
+
   createPedido(pedido, insumos) {
     return this.http.post(this.url + 'create_pedido', { pedido: pedido, insumos: insumos })
       .pipe(catchError(this.handleError("createPedido")));

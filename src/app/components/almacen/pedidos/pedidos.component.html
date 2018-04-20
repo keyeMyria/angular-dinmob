@@ -37,10 +37,10 @@
             </thead>
             <tbody>
               <tr *ngFor="let pedido of pedidos">
-                <td class="ws-nowrap">{{pedido.fecha| date:'mediumDate':'':'es'}}</td>
+                <td class="ws-nowrap">{{pedido.fecha | date:'mediumDate':'':'es'}}</td>
                 <td>{{pedido.usuario}}</td>
                 <td>{{pedido.descripcion}}</td>
-                <td>Activo</td>
+                <td>{{pedido.estado}}</td>
                 <td class="text-right">
                   <button mat-button class="no-min" (click)="verPedido(pedido)">
                     <i class="fa fa-question-circle"></i>
@@ -50,7 +50,7 @@
                   </button>
                 </td>
                 <td class="text-right">
-                  <button mat-button type="button" class="no-min">
+                  <button mat-button type="button" class="no-min" (click)="delPedido(pedido)">
                     <i class="fa fa-times"></i>
                   </button>
                 </td>
