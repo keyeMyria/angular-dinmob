@@ -17,48 +17,54 @@
         </div>
 
         <!--  filtros -->
-        <div class="form-inline mt-1">
+        <div class="form-row mt-1">
 
           <!-- fecha ini -->
-          <div class="input-group mx-2 mb-1">
-            <div class="input-group-prepend">
-              <span class="input-group-text">Del</span>
-            </div>
-            <input class="form-control" placeholder="yyyy-mm-dd" type="text" #del [matDatepicker]="dpFechaDel" (dateChange)="filtro(del, al, tipo_pago_selected)">
-            <div class="input-group-append">
-              <button class="btn btn-secondary" type="button" (click)="dpFechaDel.open()">
-                <i class="fa fa-calendar"></i>
-              </button>
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="input-group px-2 pb-1">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Del</span>
+              </div>
+              <input class="form-control" placeholder="yyyy-mm-dd" type="text" #del [matDatepicker]="dpFechaDel" (dateChange)="filtro(del, al, tipo_pago_selected)">
+              <div class="input-group-append">
+                <button class="btn btn-secondary" type="button" (click)="dpFechaDel.open()">
+                  <i class="fa fa-calendar"></i>
+                </button>
+              </div>
             </div>
           </div>
           <mat-datepicker touchUi="true" #dpFechaDel></mat-datepicker>
 
           <!-- fecha fin -->
-          <div class="input-group mx-2 mb-1">
-            <div class="input-group-prepend">
-              <span class="input-group-text">Al</span>
-            </div>
-            <input class="form-control" placeholder="yyyy-mm-dd" type="text" #al [matDatepicker]="dpFechaAl" (dateChange)="filtro(del, al, tipo_pago_selected)">
-            <div class="input-group-append">
-              <button class="btn btn-secondary" type="button" (click)="dpFechaAl.open()">
-                <i class="fa fa-calendar"></i>
-              </button>
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="input-group px-2 pb-1">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Al</span>
+              </div>
+              <input class="form-control" placeholder="yyyy-mm-dd" type="text" #al [matDatepicker]="dpFechaAl" (dateChange)="filtro(del, al, tipo_pago_selected)">
+              <div class="input-group-append">
+                <button class="btn btn-secondary" type="button" (click)="dpFechaAl.open()">
+                  <i class="fa fa-calendar"></i>
+                </button>
+              </div>
             </div>
           </div>
           <mat-datepicker touchUi="true" #dpFechaAl></mat-datepicker>
 
           <!-- tipo pago -->
-          <div class="form-group mx-2 mb-1">
-            <select class="form-control" [(ngModel)]="tipo_pago_selected" (change)="filtro(del, al, tipo_pago_selected)">
-              <option value="">Todos</option>
-              <option [value]="tipo.id_tipo_pago" *ngFor="let tipo of tipos">{{tipo.descripcion}}</option>
-            </select>
+          <div class="col-12 col-lg-4">
+            <div class="form-group px-2 pb-1">
+              <select class="form-control" [(ngModel)]="tipo_pago_selected" (change)="filtro(del, al, tipo_pago_selected)">
+                <option value="">Todos</option>
+                <option [value]="tipo.id_tipo_pago" *ngFor="let tipo of tipos">{{tipo.descripcion}}</option>
+              </select>
+            </div>
           </div>
 
         </div>
 
         <div class="row justify-content-center">
-          <div class="col-12 col-sm-3 py-3">
+          <div class="col py-3">
             <div class="text-center">
               <h5 class="text-dark">
                 {{sumaPagos()|currency}}
