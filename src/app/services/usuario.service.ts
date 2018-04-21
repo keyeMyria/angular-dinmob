@@ -11,6 +11,7 @@ import "rxjs/add/observable/throw";
 export class UsuarioService {
 
   url: string;
+  keyUsuario = "usr";
 
   constructor(
     private http: HttpClient,
@@ -20,8 +21,24 @@ export class UsuarioService {
   }
 
   getUsuarioLogged() {
-    return this.http.get(this.url+"logged")
-      .pipe(catchError(this.handleError("getUsuarioLogged")));
+
+   /*  let jsonUsuario = localStorage.getItem(this.keyUsuario);
+    if (jsonUsuario) {
+      console.log("usuario desde localStorage");
+
+      let usuario = JSON.parse(jsonUsuario);
+      return Observable.of(usuario);
+    } else {
+      console.log("usuario desde api"); */
+      
+      return this.http.get(this.url + "logged")
+        .pipe(catchError(this.handleError("getUsuarioLogged")));
+   /*  } */
+
+  }
+
+  setUsuarioLogged(value) {
+    localStorage.setItem(this.keyUsuario, value);
   }
 
   getUsuarios() {
