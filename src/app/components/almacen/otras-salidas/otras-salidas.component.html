@@ -1,0 +1,178 @@
+<div class="container mt-2 mb-5">
+  <div class="row">
+    <div class="col-12">
+      <div>
+        <mat-form-field class="w-100">
+          <mat-select placeholder="Obra" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)">
+            <mat-option *ngFor="let obra of obras" [value]="obra.id_obra">{{ obra.nombre }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          Materiales
+        </div>
+
+        <form class="mt-2 mx-3">
+          <div class="form-row align-items-center">
+            <div class="col-auto">
+              <div class="input-group mb-2">
+                <input type="text" class="form-control" placeholder="Buscar">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="button">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-auto">
+              <mat-checkbox>Ver sólo materiales con entrada</mat-checkbox>
+            </div>
+          </div>
+
+        </form>
+
+        <div class="table-responsive">
+          <table class="table table-hover table-striped">
+            <thead>
+              <tr>
+                <th>Extra</th>
+                <th>Código</th>
+                <th>Material</th>
+                <th>Unidad</th>
+                <th>Existencias</th>
+                <th>Salida</th>
+
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let insumo of insumos">
+                <td>
+                  <i *ngIf="(insumo.extra === '1')" class="fa fa-check"></i>
+                  <i *ngIf="(insumo.extra === '0')" class="fa fa-window-minimize"></i>
+                </td>
+                <td>{{insumo.codigo}}</td>
+                <td>{{insumo.insumo}}</td>
+                <td>{{insumo.unidad}}</td>
+                <td>{{insumo.existencias}}</td>
+                <td>
+                  <input type="number" class="form-control">
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+
+        </div>
+
+      </div>
+
+      <div class="card mt-5">
+        <div class="card-header">
+          Datos del Vale
+        </div>
+        <div class="container py-3">
+
+          <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
+
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label pt-0">Destino</label>
+              <div class="col-sm-9">
+                <div class="form-check">
+                  <mat-radio-button value="1">Otras Obras</mat-radio-button>
+                </div>
+                <div class="form-check">
+                  <mat-radio-button value="2">Urbanización</mat-radio-button>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row mt-2">
+              <label for="obra" class="col-sm-3 col-form-label">Obra</label>
+              <div class="col-sm-9">
+                <select class="form-control" id="obra" name="obra" [(ngModel)]="obra_selected" formControlName="obra" [ngClass]="{'is-invalid': form.get('obra').invalid  && (form.get('obra').dirty || form.get('obra').touched) }">
+                  <option *ngFor="let obra of obras" [value]="obra.id_obra">{{obra.nombre}}</option>
+                </select>
+                <div class="invalid-feedback">Seleccione una obra</div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="lote" class="col-sm-3 col-form-label">Lote</label>
+              <div class="col-sm-9">
+                <select class="form-control" id="lote" name="lote" formControlName="lote" [ngClass]="{'is-invalid': form.get('lote').invalid  && (form.get('lote').dirty || form.get('lote').touched) }">
+                  <option value="">Seleccionar...</option>
+                </select>
+                <div class="invalid-feedback">Seleccione un lote</div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="partida" class="col-sm-3 col-form-label">Partida</label>
+              <div class="col-sm-9">
+                <select class="form-control" id="partida" name="partida" formControlName="partida" [ngClass]="{'is-invalid': form.get('partida').invalid  && (form.get('partida').dirty || form.get('partida').touched) }">
+                  <option value="">Seleccionar...</option>
+                </select>
+                <div class="invalid-feedback">Seleccione una partida</div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="vale" class="col-sm-3 col-form-label">Num. Vale</label>
+              <div class="col-sm-9">
+                <input class="form-control" type="text" id="vale" name="vale" formControlName="vale">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="entrega" class="col-sm-3 col-form-label">Entrega</label>
+              <div class="col-sm-9">
+                <input readonly class="form-control" type="text" id="entrega" name="entrega" formControlName="entrega">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="recibe" class="col-sm-3 col-form-label">Recibe</label>
+              <div class="col-sm-9">
+                <select class="form-control" id="recibe" name="recibe" formControlName="recibe" [ngClass]="{'is-invalid': form.get('recibe').invalid  && (form.get('recibe').dirty || form.get('recibe').touched) }">
+                  <option value="">Seleccionar...</option>
+                </select>
+                <div class="invalid-feedback">Seleccione un trabajador</div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="autoriza" class="col-sm-3 col-form-label">Autoriza</label>
+              <div class="col-sm-9">
+                <select class="form-control" id="autoriza" name="autoriza" formControlName="autoriza" [ngClass]="{'is-invalid': form.get('autoriza').invalid  && (form.get('autoriza').dirty || form.get('autoriza').touched) }">
+                  <option value="">Seleccionar...</option>
+                </select>
+                <div class="invalid-feedback">Seleccione un residente</div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="notas" class="col-sm-3 col-form-label">Notas</label>
+              <div class="col-sm-9">
+                <textarea class="form-control" type="text" id="notas" name="notas" formControlName="notas"></textarea>
+              </div>
+            </div>
+
+
+            <div class="text-center">
+              <button type="submit" mat-raised-button color="primary" [disabled]="form.invalid">Guardar</button>
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
