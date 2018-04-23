@@ -30,7 +30,7 @@
                   <th>Fecha</th>
                   <th>Folio</th>
                   <th>Proveedor</th>
-               <!--    <th>Total</th> -->
+                  <!--    <th>Total</th> -->
                   <th></th>
 
                 </tr>
@@ -41,12 +41,16 @@
                   <td class="ws-nowrap">{{entrada.fecha| date:'mediumDate':'':'es'}}</td>
                   <td>{{entrada.folio}}</td>
                   <td>{{entrada.proveedor}}</td>
-                 <!--  <td>{{entrada.total}}</td> -->
+                  <!--  <td>{{entrada.total}}</td> -->
                   <td class="text-right">
                     <button mat-icon-button [matMenuTriggerFor]="menu">
                       <mat-icon>more_vert</mat-icon>
                     </button>
                     <mat-menu #menu="matMenu">
+                      <button mat-menu-item (click)="verEntrada(entrada)">
+                        <mat-icon>visibility</mat-icon>
+                        <span>Ver Entrada</span>
+                      </button>
                       <button mat-menu-item (click)="editarEntrada(entrada)">
                         <mat-icon>create</mat-icon>
                         <span>Editar Entrada</span>

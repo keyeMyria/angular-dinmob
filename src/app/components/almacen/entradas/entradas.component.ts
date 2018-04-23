@@ -6,6 +6,7 @@ import { EntradasService } from 'app/services/entradas.service';
 import { of } from "rxjs/observable/of";
 import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
 import { Observable } from 'rxjs/Observable';
+import { VerEntradaDialogoComponent } from '../ver-entrada-dialogo/ver-entrada-dialogo.component';
 
 @Component({
   selector: 'app-entradas',
@@ -31,7 +32,8 @@ export class EntradasComponent implements OnInit {
     private route: ActivatedRoute,
     public dialog: MatDialog,
     private entradaSrv: EntradasService,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    private entradasSrv: EntradasService,
   ) { }
 
   ngOnInit() {
@@ -78,6 +80,31 @@ export class EntradasComponent implements OnInit {
 
   editarEntrada(entrada) {
     this.router.navigate(["/editar-entrada", entrada.id_entrada]);
+  }
+
+  verEntrada(entrada) {
+
+    this.entradasSrv.getEntrada(entrada.id_entrada)
+      .subscribe(res => {
+        console.log("salida OK", res);
+        let dialogRef = this.dialog.open(VerEntradaDialogoComponent, {
+          data: {
+            datos: res.datos,
+            insumos:res.insumos
+          },
+          width: '800px'
+        });
+        dialogRef.afterClosed().subscribe(result => {
+
+          if (result === true) {
+
+          } else if (result && result.error) {
+          }
+
+        });
+      });
+
+
   }
 
   delEntrada(entrada) {
