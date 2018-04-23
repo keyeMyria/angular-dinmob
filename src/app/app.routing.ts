@@ -82,6 +82,7 @@ import { PedidosComponent } from './components/almacen/pedidos/pedidos.component
 import { RegistroComponent } from './components/admin/registro/registro.component';
 import { EditarPedidoComponent } from 'app/components/almacen/editar-pedido/editar-pedido.component';
 import { EstadosPedidoResolverService } from './resolvers/estados-pedido-resolver.service';
+import { OtrasSalidasComponent } from './components/almacen/otras-salidas/otras-salidas.component';
 
 
 
@@ -137,9 +138,9 @@ export const ROUTES: Routes = [
             },
             {
                 path: 'registro', component: RegistroComponent,
-                resolve: {
-                    usuario: UsuarioLoggedResolverService
-                }
+                /*     resolve: {
+                        usuario: UsuarioLoggedResolverService
+                    } */
             },
             {
                 path: 'tablero', component: TableroComponent,
@@ -378,7 +379,7 @@ export const ROUTES: Routes = [
             {
                 path: 'editar-pedido/:id/:obra', component: EditarPedidoComponent,
                 resolve: {
-                    obras: ObrasUsuarioResolverService,                    
+                    obras: ObrasUsuarioResolverService,
                     estados: EstadosPedidoResolverService
                 }
             },
@@ -394,7 +395,13 @@ export const ROUTES: Routes = [
                 resolve: {
                     obras: ObrasUsuarioResolverService
                 }
-            }
+            },
+            {
+                path: 'otras-salidas', component: OtrasSalidasComponent,
+                resolve: {
+                    obras: ObrasUsuarioResolverService,
+                }
+            },
 
 
 

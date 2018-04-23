@@ -220,6 +220,8 @@ import { VerPedidoDialogoComponent } from './components/almacen/ver-pedido-dialo
 import { RegistroComponent } from './components/admin/registro/registro.component';
 import { LogService } from './services/log.service';
 import { EstadosPedidoResolverService } from './resolvers/estados-pedido-resolver.service';
+import { VerEntradaDialogoComponent } from './components/almacen/ver-entrada-dialogo/ver-entrada-dialogo.component';
+import { OtrasSalidasComponent } from './components/almacen/otras-salidas/otras-salidas.component';
 
 
 
@@ -358,6 +360,8 @@ export function getToken() {
     EditarPedidoComponent,
     VerPedidoDialogoComponent,
     RegistroComponent,
+    VerEntradaDialogoComponent,
+    OtrasSalidasComponent,
 
 
 
@@ -442,7 +446,8 @@ export function getToken() {
     EditarGastoDialogoComponent,
     FormatoDialogoComponent,
     AvancesLoteDialogoComponent,
-    VerPedidoDialogoComponent
+    VerPedidoDialogoComponent,
+    VerEntradaDialogoComponent
 
 
 
