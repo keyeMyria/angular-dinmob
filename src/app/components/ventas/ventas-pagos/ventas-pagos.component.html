@@ -53,7 +53,7 @@
 
           <!-- tipo pago -->
           <div class="col-12 col-lg-4">
-            <div class="form-group px-2 pb-1">
+            <div class="px-2 pb-1">
               <select class="form-control" [(ngModel)]="tipo_pago_selected" (change)="filtro(del, al, tipo_pago_selected)">
                 <option value="">Todos</option>
                 <option [value]="tipo.id_tipo_pago" *ngFor="let tipo of tipos">{{tipo.descripcion}}</option>

@@ -83,6 +83,7 @@ import { RegistroComponent } from './components/admin/registro/registro.componen
 import { EditarPedidoComponent } from 'app/components/almacen/editar-pedido/editar-pedido.component';
 import { EstadosPedidoResolverService } from './resolvers/estados-pedido-resolver.service';
 import { OtrasSalidasComponent } from './components/almacen/otras-salidas/otras-salidas.component';
+import { UsuariosResolverService } from './resolvers/usuarios-resolver.service';
 
 
 
@@ -138,9 +139,9 @@ export const ROUTES: Routes = [
             },
             {
                 path: 'registro', component: RegistroComponent,
-                /*     resolve: {
-                        usuario: UsuarioLoggedResolverService
-                    } */
+                resolve: {
+                    usuarios: UsuariosResolverService
+                }
             },
             {
                 path: 'tablero', component: TableroComponent,

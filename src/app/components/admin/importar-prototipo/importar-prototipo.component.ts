@@ -132,7 +132,7 @@ export class ImportarPrototipoComponent implements OnInit {
       });
   }
 
-  cargarObra(id_obra) {
+/*   cargarObra(id_obra) {
 
     if (id_obra) {
       this.router.navigate([".", { obra: id_obra }]);
@@ -140,7 +140,7 @@ export class ImportarPrototipoComponent implements OnInit {
       this.router.navigate([".", {}]);
     }
 
-  }
+  } */
 
   reset() {
     this.partidas = [];
@@ -152,12 +152,12 @@ export class ImportarPrototipoComponent implements OnInit {
   }
 
   guardar() {
-    console.log("guardar", this.form, this.form.value);
+    //console.log("guardar", this.form, this.form.value);
     this.prototipoSrv.createPrototipoFromExcel(this.filename, this.form.get("obra").value, this.form.get("nombre_prototipo").value)
       .subscribe(respuesta => {
         //console.log("respuesta", respuesta);
         this.reset();
-        this.snackBar.open("Usuario Actualizado", "", {
+        this.snackBar.open("Prototipo Creado", "", {
           duration: 2000,
           panelClass: ["bg-success", "text-white"]
         });
@@ -184,3 +184,4 @@ export class ImportarPrototipoComponent implements OnInit {
   }
 
 }
+

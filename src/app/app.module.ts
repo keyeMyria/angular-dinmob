@@ -222,6 +222,7 @@ import { LogService } from './services/log.service';
 import { EstadosPedidoResolverService } from './resolvers/estados-pedido-resolver.service';
 import { VerEntradaDialogoComponent } from './components/almacen/ver-entrada-dialogo/ver-entrada-dialogo.component';
 import { OtrasSalidasComponent } from './components/almacen/otras-salidas/otras-salidas.component';
+import { UsuariosResolverService } from './resolvers/usuarios-resolver.service';
 
 
 
@@ -514,7 +515,8 @@ export function getToken() {
     TrabajadoresResolverService,
     ResidentesObraResolverService,
     TiposPagoTrabajadorResolverService,
-    EstadosPedidoResolverService
+    EstadosPedidoResolverService,
+    UsuariosResolverService
 
   ],
   bootstrap: [AppComponent]

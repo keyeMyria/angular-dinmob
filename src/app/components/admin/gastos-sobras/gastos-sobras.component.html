@@ -59,9 +59,9 @@
           </div>
           <mat-datepicker touchUi="true" #dpFechaAl></mat-datepicker>
 
-          <!-- tipo gasto -->
+          <!-- tipo gasto form-group -->
           <div class="col-12 col-lg-4">
-            <div class="form-group px-2 pb-1">
+            <div class=" px-2 pb-1">
               <select class="form-control" [(ngModel)]="tipo_gasto_selected" (change)="filtro(del, al, tipo_gasto_selected)">
                 <option value="">Todos</option>
                 <option [value]="tipo.id_tipo_gasto" *ngFor="let tipo of tipos">{{tipo.descripcion}}</option>

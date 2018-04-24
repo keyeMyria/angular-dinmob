@@ -183,102 +183,104 @@
 
 
                         <!-- acordeon de manzanas -->
-                        <mat-accordion [displayMode]="'default'">
-                            <mat-expansion-panel [hideToggle]="true" (opened)="selectManzana(i)" (closed)="onClosedManzana(i)" *ngFor="let manzana of obra.manzanas; let i=index"
-                                #panel>
-                                <mat-expansion-panel-header [ngClass]="{'bg-primary text-white':panel.expanded}">
-                                    <span class="align-self-center">{{manzana.nombre}}</span>
-                                    <div class="spacer"></div>
-                                    <div class="collapse-header-btns">
-                                        <span class="badge badge-pill badge-dark">{{manzana.lotes.length}}</span>
-                                        <button mat-icon-button [matMenuTriggerFor]="menu2" (click)="$event.stopPropagation()">
-                                            <mat-icon>more_vert</mat-icon>
-                                        </button>
-                                        <mat-menu #menu2="matMenu">
-                                            <button mat-menu-item (click)="editarManzana(manzana)">
-                                                <mat-icon>create</mat-icon>
-                                                <span>Editar</span>
+                        <div class="acordeon-prototipo">
+                            <mat-accordion [displayMode]="'default'">
+                                <mat-expansion-panel [hideToggle]="true" (opened)="selectManzana(i)" (closed)="onClosedManzana(i)" *ngFor="let manzana of obra.manzanas; let i=index"
+                                    #panel>
+                                    <mat-expansion-panel-header [ngClass]="{'bg-primary text-white':panel.expanded}">
+                                        <span class="align-self-center">{{manzana.nombre}}</span>
+                                        <div class="spacer"></div>
+                                        <div class="collapse-header-btns">
+                                            <span class="badge badge-pill badge-dark">{{manzana.lotes.length}}</span>
+                                            <button mat-icon-button [matMenuTriggerFor]="menu2" (click)="$event.stopPropagation()">
+                                                <mat-icon>more_vert</mat-icon>
                                             </button>
-                                            <button mat-menu-item (click)="addLotes(manzana)">
-                                                <mat-icon>add_box</mat-icon>
-                                                <span>Agregar lotes</span>
-                                            </button>
-                                            <button mat-menu-item (click)="delManzana(manzana)">
-                                                <mat-icon>delete</mat-icon>
-                                                <span>Eliminar</span>
-                                            </button>
-                                        </mat-menu>
+                                            <mat-menu #menu2="matMenu">
+                                                <button mat-menu-item (click)="editarManzana(manzana)">
+                                                    <mat-icon>create</mat-icon>
+                                                    <span>Editar</span>
+                                                </button>
+                                                <button mat-menu-item (click)="addLotes(manzana)">
+                                                    <mat-icon>add_box</mat-icon>
+                                                    <span>Agregar lotes</span>
+                                                </button>
+                                                <button mat-menu-item (click)="delManzana(manzana)">
+                                                    <mat-icon>delete</mat-icon>
+                                                    <span>Eliminar</span>
+                                                </button>
+                                            </mat-menu>
+                                        </div>
+                                    </mat-expansion-panel-header>
+
+
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-align-middle table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <mat-checkbox class="pl-3" color="accent" (change)="$event ? masterToggle(i) : null" [checked]="selection[i].hasValue() && isAllSelected(i)"
+                                                            [indeterminate]="selection[i].hasValue() && !isAllSelected(i)">
+                                                        </mat-checkbox>
+                                                    </th>
+                                                    <th>Lote</th>
+                                                    <th class="d-none d-md-table-cell">Código</th>
+                                                    <th>Prototipos</th>
+                                                    <th>Base</th>
+                                                    <th>Ampliación</th>
+                                                    <th>EnVenta</th>
+                                                    <th>Tipo</th>
+                                                    <th>Excedente(m)</th>
+                                                    <th>Excedente($)</th>
+                                                    <th>%V</th>
+                                                    <th>%G</th>
+                                                    <th>%E</th>
+                                                    <th style="width: 90px"> </th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let lote of manzana.lotes" (click)="selection[i].toggle(lote)" class="pointer" [ngClass]="{'table-primary':selection[i].isSelected(lote)}">
+                                                    <td>
+                                                        <mat-checkbox class="pl-3" color="accent" (click)="$event.stopPropagation()" (change)="$event ? selection[i].toggle(lote) : null"
+                                                            [checked]="selection[i].isSelected(lote)">
+                                                        </mat-checkbox>
+                                                    </td>
+                                                    <td class="ws-nowrap">{{ lote.nombre}}</td>
+                                                    <td class="d-none d-md-table-cell">{{lote.code}}</td>
+                                                    <td>
+                                                        <span *ngFor="let prototipo of lote.prototipos">
+                                                            {{prototipo.nombre}}
+                                                            <br>
+                                                        </span>
+                                                    </td>
+                                                    <td>{{lote.valor_base|currency}}</td>
+                                                    <td>{{lote.valor_ampliacion|currency}}</td>
+                                                    <td>{{lote.en_venta| numberToYesNo}}</td>
+                                                    <td>{{lote.irregular| numberToYesNo:'RI'}}</td>
+                                                    <td>{{lote.metros_excedente| number}}</td>
+                                                    <td>{{lote.precio_excedente| currency}}</td>
+                                                    <td>{{lote.comision_vendedor}}</td>
+                                                    <td>{{lote.comision_gerente}}</td>
+                                                    <td>{{lote.comision_expediente}}</td>
+                                                    <td class="text-right ws-nowrap">
+
+                                                        <button mat-button class="no-min" (click)="editarLote(manzana,lote, $event)">
+                                                            <i class="fa fa-pencil"></i>
+                                                        </button>
+                                                        <button mat-button class="no-min" (click)="delLote(manzana,lote, $event)">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
-                                </mat-expansion-panel-header>
 
 
-                                <div class="table-responsive">
-                                    <table class="table table-sm table-align-middle table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>
-                                                    <mat-checkbox class="pl-3" color="accent" (change)="$event ? masterToggle(i) : null" [checked]="selection[i].hasValue() && isAllSelected(i)"
-                                                        [indeterminate]="selection[i].hasValue() && !isAllSelected(i)">
-                                                    </mat-checkbox>
-                                                </th>
-                                                <th>Lote</th>
-                                                <th class="d-none d-md-table-cell">Código</th>
-                                                <th>Prototipos</th>
-                                                <th>Base</th>
-                                                <th>Ampliación</th>
-                                                <th>EnVenta</th>
-                                                <th>Tipo</th>
-                                                <th>Excedente(m)</th>
-                                                <th>Excedente($)</th>
-                                                <th>%V</th>
-                                                <th>%G</th>
-                                                <th>%E</th>
-                                                <th style="width: 90px"> </th>
-
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr *ngFor="let lote of manzana.lotes" (click)="selection[i].toggle(lote)" class="pointer" [ngClass]="{'table-primary':selection[i].isSelected(lote)}">
-                                                <td>
-                                                    <mat-checkbox class="pl-3" color="accent" (click)="$event.stopPropagation()" (change)="$event ? selection[i].toggle(lote) : null"
-                                                        [checked]="selection[i].isSelected(lote)">
-                                                    </mat-checkbox>
-                                                </td>
-                                                <td class="ws-nowrap">{{ lote.nombre}}</td>
-                                                <td class="d-none d-md-table-cell">{{lote.code}}</td>
-                                                <td>
-                                                    <span *ngFor="let prototipo of lote.prototipos">
-                                                        {{prototipo.nombre}}
-                                                        <br>
-                                                    </span>
-                                                </td>
-                                                <td>{{lote.valor_base|currency}}</td>
-                                                <td>{{lote.valor_ampliacion|currency}}</td>
-                                                <td>{{lote.en_venta| numberToYesNo}}</td>
-                                                <td>{{lote.irregular| numberToYesNo:'RI'}}</td>
-                                                <td>{{lote.metros_excedente| number}}</td>
-                                                <td>{{lote.precio_excedente| currency}}</td>
-                                                <td>{{lote.comision_vendedor}}</td>
-                                                <td>{{lote.comision_gerente}}</td>
-                                                <td>{{lote.comision_expediente}}</td>
-                                                <td class="text-right ws-nowrap">
-
-                                                    <button mat-button class="no-min" (click)="editarLote(manzana,lote, $event)">
-                                                        <i class="fa fa-pencil"></i>
-                                                    </button>
-                                                    <button mat-button class="no-min" (click)="delLote(manzana,lote, $event)">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-
-
-                            </mat-expansion-panel>
-                        </mat-accordion>
+                                </mat-expansion-panel>
+                            </mat-accordion>
+                        </div>
                     </div>
 
                 </div>

@@ -59,7 +59,7 @@ export class ProveedoresComponent implements OnInit {
 
       if (result === true) {
 
-        this.snackBar.open("Trabajador Agregado", "", {
+        this.snackBar.open("Proveedor Agregado", "", {
           duration: 2000,
           panelClass: ["bg-success", "text-white"]
         });
@@ -92,7 +92,7 @@ export class ProveedoresComponent implements OnInit {
 
       if (result === true) {
 
-        this.snackBar.open("Trabajador Actulizado", "", {
+        this.snackBar.open("Proveedor Actulizado", "", {
           duration: 2000,
           panelClass: ["bg-success", "text-white"]
         });
