@@ -43,7 +43,7 @@
 
     <div class="drawer-content">
 
-      <mat-tab-group>
+      <mat-tab-group (selectedTabChange)="onTabChange($event)">
         <mat-tab label="Lotes">
           <div class="container-fluid py-3">
             <div class="input-group">
@@ -206,9 +206,9 @@
         <mat-tab label="Pedido">
           <div class="container-fluid py-3">
 
-            <div class="my-3 text-center">
+            <!-- <div class="my-3 text-center">
               <button type="button" mat-raised-button color="primary" (click)="getInsumosAcumulados()" class="w-75">Acumulado</button>
-            </div>
+            </div> -->
             <!--insumos pedido-->
             <div class="table-responsive">
               <table id="tablaInsumosAcumulados" class="table table-striped">

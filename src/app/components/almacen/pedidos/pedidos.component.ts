@@ -21,7 +21,8 @@ export class PedidosComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private pedidoSrv: PedidoService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -49,9 +50,41 @@ export class PedidosComponent implements OnInit {
     let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
       data: {
         title: "Eliminar pedido",
-        content: `¿Desea eliminar el pedido de ${pedido.usuario} del ${pedido.fecha}?`
+        content: `¿Desea eliminar el pedido creado por ${pedido.usuario} del ${pedido.fecha}?`
       },
       width: "500px"
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result === true) {
+
+
+        this.pedidoSrv.delPedido(pedido.id_pedido)
+          .subscribe((res: any) => {
+            if (res.count == 1) {
+              let i = this.pedidos.indexOf(pedido);
+              this.pedidos.splice(i, 1);
+
+              this.snackBar.open("Pedido Eliminado", "", {
+                duration: 2000,
+                panelClass: ["bg-success", "text-white"]
+              });
+
+            } else {
+              this.snackBar.open("Ha ocurrido un error", "", {
+                duration: 3000,
+                panelClass: ["bg-danger", "text-white"]
+              });
+            }
+
+          }, (error) => {
+            this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+              duration: 3000,
+              panelClass: ["bg-danger", "text-white"]
+            });
+          });
+      }
     });
 
   }

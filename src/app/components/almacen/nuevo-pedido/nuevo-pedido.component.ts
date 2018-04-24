@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatTabChangeEvent } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { ObrasService } from 'app/services/obras.service';
 import { PedidoService } from '../../../services/pedido.service';
@@ -295,6 +295,18 @@ export class NuevoPedidoComponent implements OnInit {
         this.lotePedido_selected = "";
         this.insumos = [];
       });
+
+
+  }
+
+  onTabChange(event: MatTabChangeEvent) {
+    //console.log("tab change", event);
+
+    //si seleccionamos la tab Pedido
+    if (event.index == 1) {
+      this.getInsumosAcumulados();
+      this.getInsumosSinAcumular();
+    }
 
 
   }

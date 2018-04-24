@@ -56,6 +56,11 @@ export class PedidoService {
       .pipe(catchError(this.handleError("getPedidoEditable")));
   }
 
+  delPedido(id_pedido) {
+    return this.http.post(this.url + 'del_pedido/' + id_pedido, {})
+      .pipe(catchError(this.handleError("delPedido")));
+  }
+
 
 
   private handleError<T>(operation = 'operation') {
