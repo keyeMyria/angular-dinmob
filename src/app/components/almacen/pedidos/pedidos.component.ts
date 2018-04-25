@@ -124,7 +124,8 @@ export class PedidosComponent implements OnInit {
   }
 
   nuevoPedido() {
-    console.log("nuevo pedido");
+    //console.log("obra seleccionada", this.obra_selected);
+    this.router.navigate(["/nuevo-pedido", { obra: this.obra_selected }]);
 
   }
 

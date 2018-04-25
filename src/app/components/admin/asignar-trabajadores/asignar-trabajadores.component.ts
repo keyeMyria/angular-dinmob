@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { MatDrawer, MatDialog } from '@angular/material';
+import { MatDrawer, MatDialog, MatSnackBar } from '@angular/material';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
@@ -43,6 +43,7 @@ export class AsignarTrabajadoresComponent implements OnInit {
     private loteSrv: LotesService,
     private trabajadorSrv: TrabajadorService,
     public dialog: MatDialog,
+    public snackBar: MatSnackBar
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -108,6 +109,22 @@ export class AsignarTrabajadoresComponent implements OnInit {
 
       if (result === true) {
 
+        if (result === true) {
+
+          this.snackBar.open("Trabajador Actualizado", "", {
+            duration: 2000,
+            panelClass: ["bg-success", "text-white"]
+          });
+
+        } else if (result.error) {
+
+          this.snackBar.open(result.error, "", {
+            duration: 3000,
+            panelClass: ["bg-danger", "text-white"]
+          });
+
+        }
+
 
       }
 
@@ -171,6 +188,15 @@ export class AsignarTrabajadoresComponent implements OnInit {
         e.trabajador = "";
         e.id_trabajador = "";
         e.especialidad_trabajador = "";
+        this.snackBar.open("Asignación Actualizada", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+      }, (error) => {
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
       });
   }
 
@@ -192,27 +218,44 @@ export class AsignarTrabajadoresComponent implements OnInit {
           asignacion.trabajador = trabajador.nombre;
           asignacion.id_trabajador = trabajador.id_trabajador;
           asignacion.especialidad_trabajador = trabajador.especialidad;
+          this.snackBar.open("Trabajador Asignado", "", {
+            duration: 2000,
+            panelClass: ["bg-success", "text-white"]
+          });
 
           //cuando leemos inicialmente los datos, si no se ha realizado la asignacion entonces,
           // el id_lote es nulo
           if (!asignacion.id_lote) {
             asignacion.id_lote = this.lote.id_lote;
           }
-
         });
         this.selection.clear();
+      }, (error) => {
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
       });
 
   }
 
   copiarEspecialidades() {
     console.log("copiar especialidades");
-    
+
     this.loteSrv.copiarEspecialidadesLote(this.lote_origen, this.lote.id_lote)
-    .subscribe(especialidades=>{
-      this.selection.clear();
-      this.especialidades = especialidades;
-    });
+      .subscribe(especialidades => {
+        this.selection.clear();
+        this.especialidades = especialidades;
+        this.snackBar.open("Asignaciones Copiadas", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+      }, (error) => {
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+      });
   }
 
 }
