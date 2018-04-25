@@ -53,7 +53,7 @@ export class NuevoGastoDialogoComponent implements OnInit {
 
     this.gastoSrv.createGasto(frmGasto)
       .subscribe(gasto => {
-        this.data.gastos.push(gasto);
+        this.data.gastos.unshift(gasto);
         this.dialogRef.close(true);
 
       },

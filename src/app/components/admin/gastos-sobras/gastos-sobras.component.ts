@@ -46,7 +46,7 @@ export class GastosObrasComponent implements OnInit {
         }
       }).subscribe(gastos => {
         this.gastos = gastos;
-        this.gastosFiltrados = this.gastos.slice();
+        this.gastosFiltrados =  this.gastos; //this.gastos.slice();
       }, (error) => {
       });
 
