@@ -89,11 +89,16 @@ export class PedidosComponent implements OnInit {
 
   }
 
-  cargarObra(obra_selected) {
-    this.pedidoSrv.getPedidosObra(obra_selected)
-      .subscribe(pedidos => {
-        this.pedidos = pedidos;
-      });
+
+
+  cargarObra(id_obra) {
+
+    if (id_obra) {
+      this.router.navigate([".", { obra: id_obra }]);
+    } else {
+      this.router.navigate([".", {}]);
+    }
+
   }
 
   verPedido(pedido) {
@@ -124,7 +129,8 @@ export class PedidosComponent implements OnInit {
   }
 
   nuevoPedido() {
-    console.log("nuevo pedido");
+    //console.log("obra seleccionada", this.obra_selected);
+    this.router.navigate(["/nuevo-pedido", { obra: this.obra_selected }]);
 
   }
 

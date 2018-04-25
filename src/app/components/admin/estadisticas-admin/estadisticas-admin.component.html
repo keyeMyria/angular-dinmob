@@ -36,7 +36,7 @@
       <mat-card class="">
         <h3>{{(estadisticas?.count_manzanas|| 0) | number }}</h3>
         <p>MANZANAS</p>
-        <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
+        <i class="material-icons fa fa-apple mt-2 mr-2" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)"></i>
       </mat-card>
     </div>
 
@@ -44,7 +44,7 @@
       <mat-card class="">
         <h3>{{(estadisticas?.count_lotes?.Total || 0 ) | number }}</h3>
         <p>LOTES</p>
-        <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
+        <i class="material-icons fa fa-home" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)"></i>
       </mat-card>
     </div>
 
@@ -52,7 +52,7 @@
       <mat-card class="">
         <h3>{{(estadisticas?.count_prototipos|| 0) |number }}</h3>
         <p>PROTOTIPOS</p>
-        <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
+        <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">donut_large</i>
       </mat-card>
     </div>
 
@@ -68,7 +68,7 @@
       <mat-card class="">
         <h3>{{(estadisticas?.total_inventario|| 0) |currency }}</h3>
         <p>INVENTARIO</p>
-        <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
+        <i class="material-icons fa fa-sort-amount-desc mt-2 mr-2" style="font-size: 75px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)"></i>
       </mat-card>
     </div>
 
@@ -93,7 +93,7 @@
         <h3>{{(((estadisticas?.total_avances_ma*1 + estadisticas?.total_avances_mo*1)/estadisticas?.total_obra)|| 0) | percent:'1.2-2'}}
         </h3>
         <p>AVANCE OBRA</p>
-        <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
+        <i class="material-icons fa fa-percent mt-2 mr-2" style="font-size: 75px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)"></i>
       </mat-card>
     </div>
 
@@ -125,7 +125,7 @@
       <mat-card class="">
         <h3>{{(estadisticas?.count_salidas|| 0) |number }}</h3>
         <p>SALIDAS</p>
-        <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
+        <i class="material-icons fa fa-arrow-circle-o-up mt-2 mr-2" style="font-size: 80px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)"></i>
       </mat-card>
     </div>
 
@@ -133,7 +133,7 @@
       <mat-card class="">
         <h3>{{(estadisticas?.count_alertas|| 0) |number }}</h3>
         <p>SALIDAS ALERTA</p>
-        <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
+        <i class="material-icons fa fa-bell-o mt-2 mr-2" style="font-size: 75px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)"></i>
       </mat-card>
     </div>
 
@@ -141,7 +141,7 @@
       <mat-card class="">
         <h3>{{(estadisticas?.count_entradas|| 0) |number }}</h3>
         <p>ENTRADAS</p>
-        <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
+        <i class="material-icons fa fa-arrow-circle-o-down mt-2 mr-2" style="font-size: 80px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)"></i>
       </mat-card>
     </div>
 
@@ -150,7 +150,7 @@
         <h3 *ngIf="estadisticas.ultimo_avance">{{estadisticas.ultimo_avance | date:'mediumDate':'':'es'}}</h3>
         <h3 *ngIf="!estadisticas.ultimo_avance">-</h3>
         <p>ÚLTIMO AVANCE</p>
-        <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
+        <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">today</i>
       </mat-card>
     </div>
 
@@ -159,7 +159,7 @@
         <h3 *ngIf="estadisticas.ultimo_pago">{{estadisticas.ultimo_pago | date:'mediumDate':'':'es'}}</h3>
         <h3 *ngIf="!estadisticas.ultimo_pago">-</h3>
         <p>ÚLTIMO PAGO</p>
-        <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">attach_money</i>
+        <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">today</i>
       </mat-card>
     </div>
 
