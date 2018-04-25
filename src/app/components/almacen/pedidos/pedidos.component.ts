@@ -89,11 +89,16 @@ export class PedidosComponent implements OnInit {
 
   }
 
-  cargarObra(obra_selected) {
-    this.pedidoSrv.getPedidosObra(obra_selected)
-      .subscribe(pedidos => {
-        this.pedidos = pedidos;
-      });
+
+
+  cargarObra(id_obra) {
+
+    if (id_obra) {
+      this.router.navigate([".", { obra: id_obra }]);
+    } else {
+      this.router.navigate([".", {}]);
+    }
+
   }
 
   verPedido(pedido) {
