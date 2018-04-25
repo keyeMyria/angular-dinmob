@@ -244,7 +244,8 @@ export class MapasAvancesComponent implements OnInit {
             fotos: fotos,
             lote: this.lote_selected
           },
-          width: '700px',
+          width: '700px',          
+          //maxHeight:"90vh",
         });
 
         dialogRef.afterClosed().subscribe(result => {

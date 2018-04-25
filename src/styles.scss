@@ -113,7 +113,7 @@ body {
     //background-color: rgba(0,0,0,0.4);
   }
 
-.spacer{
+.spacer {
     flex: 1 1 auto;
 }
 
@@ -210,10 +210,7 @@ table.table-align-middle  {
     //dialogo imagenes en mapa avances
     .no-padding.mat-dialog-content {
         padding: 0 5px;
-    }
-
-
-
+    } 
 
 }
 
@@ -235,19 +232,31 @@ table.table-align-middle  {
 .manzanas {
     background-color: #2c3b41;
     color:#8aa4af;
+
+    .list-group-item.list-group-item-action {
+        background-color: #2c3b41;
+        color:#8aa4af;
+        cursor: pointer;
+    
+        &:hover {
+            color:white;
+        }
+    }
 }
+
 //acordeon de obra lateral
 .estructura {
     background-color: #222d32;
 }
 
 //acordeon de obra lateral
-.manzanas .list-group-item{
+/* .manzanas .list-group-item {
     background-color: #2c3b41;
     color:#8aa4af;
     cursor: pointer;
 
     &:hover {
-        color:white;
+        background-color: #2c3b41;
+        color:white !important;
     }
-}
+} */

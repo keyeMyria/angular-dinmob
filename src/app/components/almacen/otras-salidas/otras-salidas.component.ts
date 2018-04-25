@@ -64,4 +64,9 @@ export class OtrasSalidasComponent implements OnInit {
 
   }
 
+  guardar(){
+    console.log("guardar");
+    
+  }
+
 }

@@ -12,11 +12,14 @@
       <input [textMask]="{mask: maskCodigo, guide:false}" class="form-control" type="text" id="codigo" name="codigo"
         formControlName="codigo" [ngClass]="{'is-invalid': form.get('codigo').invalid  && (form.get('codigo').dirty || form.get('codigo').touched) }">
       <div class="invalid-feedback">Proporcione un codigo</div>
+      <small *ngIf="existe" id="passwordHelpBlock" class="form-text text-danger">
+        El código ya está asignado al insumo {{existente.insumo}}
+      </small>
     </div>
 
     <div class="form-group">
       <label for="nombre" class="col-form-label">Nombre</label>
-      <input class="form-control" type="text" id="nombre" name="nombre" formControlName="nombre" [ngClass]="{'is-invalid': form.get('nombre').invalid  && (form.get('nombre').dirty || form.get('nombre').touched) }">
+      <input class="form-control" type="text" id="nombre" name="nombre" formControlName="insumo" [ngClass]="{'is-invalid': form.get('insumo').invalid  && (form.get('insumo').dirty || form.get('insumo').touched) }">
       <div class="invalid-feedback">Proporcione un nombre</div>
     </div>
 

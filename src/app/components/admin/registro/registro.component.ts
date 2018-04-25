@@ -35,8 +35,19 @@ export class RegistroComponent implements OnInit {
   }
 
   registroUsuario(id_usuario) {
-    console.log("registro usuario", id_usuario);
+    if (id_usuario == "") {
+      this.logSrv.getLog()
+        .subscribe(registro => {
+          this.registro = registro;
+        }, (error) => {
 
+        });
+    } else {
+      this.logSrv.getLogUsuario(id_usuario)
+        .subscribe(registro => {
+          this.registro = registro
+        });
+    }
   }
 
 }

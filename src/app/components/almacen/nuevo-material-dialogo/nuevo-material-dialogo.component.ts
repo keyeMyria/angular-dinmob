@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
+import { InsumoService } from 'app/services/insumo.service';
 
 @Component({
   selector: 'app-nuevo-material-dialogo',
@@ -10,6 +11,8 @@ import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 })
 export class NuevoMaterialDialogoComponent implements OnInit {
   form: FormGroup;
+  existente: any = {};
+  existe = false;
   numberMask = createNumberMask({
     allowDecimal: true,
     prefix: '',
@@ -21,13 +24,14 @@ export class NuevoMaterialDialogoComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<NuevoMaterialDialogoComponent>,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private insumoSrv: InsumoService
   ) {
 
     this.form = this.fb.group({
-     /*  obra: ["", Validators.required], */
+     /* obra: ["", Validators.required], */
       codigo: ["", Validators.required],
-      nombre: ["", Validators.required],
+      insumo: ["", Validators.required],
       unidad: ["", Validators.required],
       existencias: ["0.0", Validators.required]
     });
@@ -37,7 +41,20 @@ export class NuevoMaterialDialogoComponent implements OnInit {
   }
 
   guardar() {
-    console.log("ok", this.form.value);
+   let existe = this.data.materiales.find(mat => mat.codigo == this.form.value.codigo);
+   if(existe == undefined){
+     this.insumoSrv.createMaterial(this.form.value, this.data.obra)
+      .subscribe(insumo => {
+        this.data.materiales.unshift(insumo);
+        this.dialogRef.close(true);
+      },
+      (error) => {
+        this.dialogRef.close({ error: "Ha ocurrido un error de conexión. Inténtelo más tarde" });
+      });
+   } else {
+     this.existente = existe;
+     this.existe = true
+   }
   }
 
 

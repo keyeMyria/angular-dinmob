@@ -23,6 +23,11 @@ export class LogService {
       .pipe(catchError(this.handleError("getLog")));
   }
 
+  getLogUsuario(id_usuario) {
+    return this.http.get(this.url + "get_log_usuario/" + id_usuario)
+      .pipe(catchError(this.handleError("getLogUsuario")));
+  }
+
 
 
 

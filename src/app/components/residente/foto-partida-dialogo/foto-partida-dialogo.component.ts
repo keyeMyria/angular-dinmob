@@ -286,7 +286,8 @@ export class FotoPartidaDialogoComponent {
 
     this.generateImage()
       .then((blob: any) => {
-        blob.name = this.currentFile.name;
+        let nombre = this.currentFile.name.substring(0, this.currentFile.name.lastIndexOf('.'));
+        blob.name = nombre + '.jpg';
         //console.log("blob", blob);
         this.uploader.addToQueue([blob]);
 

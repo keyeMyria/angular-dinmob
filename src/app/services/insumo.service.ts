@@ -37,6 +37,11 @@ export class InsumoService {
       .pipe(catchError(this.handleError("updateInsumoPartida")));
   }
 
+  createMaterial(insumo, id_obra) {
+    return this.http.post(this.url + 'create_material/', { insumo: insumo , id_obra: id_obra})
+      .pipe(catchError(this.handleError("createMaterial")));
+  }
+
   private handleError<T>(operation = 'operation') {
     return (error: HttpErrorResponse) => {
 

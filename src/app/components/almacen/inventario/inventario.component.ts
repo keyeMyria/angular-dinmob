@@ -45,7 +45,6 @@ export class InventarioComponent implements OnInit {
       }).subscribe(materiales => {
         //console.log("prototipos", prototipos);
         this.materiales = materiales;
-
       });
 
   }
@@ -53,7 +52,8 @@ export class InventarioComponent implements OnInit {
   editarMaterial(material) {
     let dialogRef = this.dialog.open(EditarMaterialDialogoComponent, {
       data: {
-        material: material
+        material: material,
+        obra: this.obra_selected
       },
       width: '500px'
     });
@@ -110,6 +110,8 @@ export class InventarioComponent implements OnInit {
   nuevoMaterial() {
     let dialogRef = this.dialog.open(NuevoMaterialDialogoComponent, {
       data: {
+        materiales: this.materiales,
+        obra: this.obra_selected
       },
       width: '500px'
     });
