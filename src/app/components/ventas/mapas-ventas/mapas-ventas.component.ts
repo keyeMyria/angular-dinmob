@@ -98,7 +98,7 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
         this.jsonMap = res[1];
 
         //console.log("escala", this.scalePrototipos, this.scaleLoteTipo, this.scaleFormaPago);
-
+        // el tipo que se mostrará primero es el de Ventas
         this.tipoMapa.tipo = TIPO_MAPA.EstadoVenta;
 
 
@@ -142,13 +142,21 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
 
 
         if (this.jsonMap.mapa) {
-          this.crearMapa(this.valuesEstadosVenta, this.scalePrototipos, this.scaleFormaPago, this.scaleLoteTipo);
+
+          setTimeout(() => {
+            //console.log("inicio creación mapa");
+            this.crearMapa(this.valuesEstadosVenta, this.scalePrototipos, this.scaleFormaPago, this.scaleLoteTipo);
+            //console.log("mapa creado");
+            this.loading.stop();
+          }, 100);
+        } else {
+          //setTimeout(() => {
+          this.loading.stop();
+          //console.log("loading stop");
+          //}, 3000);
         }
 
-        //setTimeout(() => {
-        this.loading.stop();
-        //  console.log("loading stop");
-        //}, 3000);
+
 
 
       }, (error) => {
