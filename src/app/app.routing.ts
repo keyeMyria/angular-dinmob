@@ -84,6 +84,7 @@ import { EditarPedidoComponent } from 'app/components/almacen/editar-pedido/edit
 import { EstadosPedidoResolverService } from './resolvers/estados-pedido-resolver.service';
 import { OtrasSalidasComponent } from './components/almacen/otras-salidas/otras-salidas.component';
 import { UsuariosResolverService } from './resolvers/usuarios-resolver.service';
+import { ArranqueComponent } from './components/admin/arranque/arranque.component';
 
 
 
@@ -403,6 +404,12 @@ export const ROUTES: Routes = [
                     obras: ObrasUsuarioResolverService,
                 }
             },
+            {
+                path: 'arranque', component: ArranqueComponent,
+                resolve: {
+                    obras: ObrasUsuarioResolverService,
+                }
+            }
 
 
 

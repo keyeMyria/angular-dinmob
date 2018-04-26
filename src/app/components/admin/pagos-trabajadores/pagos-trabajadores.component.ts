@@ -59,9 +59,9 @@ export class PagosTrabajadoresComponent implements OnInit {
     this.form = this.fb.group({
       obra: [null, Validators.required],
       trabajador_historial: [null, Validators.required],
-      inicio_obra: null,
-      fecha_inicio: [null],
-      fecha_fin: [null, Validators.required]
+      inicio_obra: [null],
+      fecha_inicio: [null, Validators.required],
+      fecha_fin: [null]
 
     });
   }

@@ -223,6 +223,7 @@ import { EstadosPedidoResolverService } from './resolvers/estados-pedido-resolve
 import { VerEntradaDialogoComponent } from './components/almacen/ver-entrada-dialogo/ver-entrada-dialogo.component';
 import { OtrasSalidasComponent } from './components/almacen/otras-salidas/otras-salidas.component';
 import { UsuariosResolverService } from './resolvers/usuarios-resolver.service';
+import { ArranqueComponent } from './components/admin/arranque/arranque.component';
 
 
 
@@ -363,6 +364,7 @@ export function getToken() {
     RegistroComponent,
     VerEntradaDialogoComponent,
     OtrasSalidasComponent,
+    ArranqueComponent,
 
 
 
