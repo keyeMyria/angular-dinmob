@@ -4,19 +4,47 @@
 
 
       <div class="card">
-        <div class="card-header">Registro</div>
-
-
-        <div class="container-fluid">
-          <div class="form-group row pt-3">
-            <div class="col-auto">
-              <select class="form-control" id="usuario" name="usuario" [(ngModel)]="id_usuario_selected" (change)="registroUsuario(id_usuario_selected)">
-                <option value="">Todos</option>
-                <option *ngFor="let usuario of usuarios" [value]="usuario.id_usuario">{{usuario.nombre}}</option>
-              </select>
+        <div class="card-header">
+          <div class="d-flex">
+            <div class="align-self-center">Registro</div>
+            <div class="spacer"></div>
+            <div>
+              <div class="input-group d-none d-sm-flex">
+                <select class="form-control" id="usuario" name="usuario" [(ngModel)]="id_usuario_selected" (change)="registroUsuario(id_usuario_selected)">
+                  <option value="">Todos</option>
+                  <option *ngFor="let usuario of usuarios" [value]="usuario.id_usuario">{{usuario.nombre}}</option>
+                </select>
+                <div class="input-group-append">
+                  <span class="input-group-text">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+
+
+
+
+        <div class="container-fluid d-block d-sm-none">
+          <div class="row py-1 justify-content-center">
+            <div class="col-12">
+              <div class="input-group">
+                <select class="form-control" id="usuario" name="usuario" [(ngModel)]="id_usuario_selected" (change)="registroUsuario(id_usuario_selected)">
+                  <option value="">Todos</option>
+                  <option *ngFor="let usuario of usuarios" [value]="usuario.id_usuario">{{usuario.nombre}}</option>
+                </select>
+                <div class="input-group-append">
+                  <span class="input-group-text">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
 
         <div>
           <div class="table-responsive">
