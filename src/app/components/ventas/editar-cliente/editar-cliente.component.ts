@@ -389,9 +389,7 @@ export class EditarClienteComponent implements OnInit {
 
     this.loteSrv.updateLote(this.compra_selected.id_lote, lote)
       .subscribe(lote => {
-        ;
-
-
+        
         this.compra_selected.valor_base = lote.valor_base;
         this.compra_selected.id_estado_venta = lote.id_estado_venta;
         this.compra_selected.fecha_cambio_estado = lote.fecha_cambio_estado;
@@ -414,8 +412,8 @@ export class EditarClienteComponent implements OnInit {
 
   //guarda el formulario
   guardarAlerta() {
-    console.log("guardar datos alerta", this.tab_selected);
-    console.log("mensaje alerta", this.formAlerta.value);
+    //console.log("guardar datos alerta", this.tab_selected);
+    //console.log("mensaje alerta", this.formAlerta.value);
 
     this.updateCliente(this.formAlerta.value);
 
