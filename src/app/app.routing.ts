@@ -166,7 +166,8 @@ export const ROUTES: Routes = [
             {
                 path: 'perfil', component: PerfilComponent,
                 resolve: {
-                    obras: ObrasUsuarioResolverService
+                    obras: ObrasUsuarioResolverService,
+                    usuario: UsuarioLoggedResolverService
                 }
             },
             {

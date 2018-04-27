@@ -46,25 +46,27 @@ export class PerfilComponent implements OnInit {
   ngOnInit() {
 
 
-    this.usuarioSrv.getUsuarioLogged()
-      .subscribe(usuario => {
-        this.usuario = usuario;
-        this.formDatos.patchValue(this.usuario);
-
-      }, (error) => {
-
-        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
-          duration: 3000,
-          panelClass: ["bg-danger", "text-white"]
-
-        });
-
-      });
+    /*     this.usuarioSrv.getUsuarioLogged()
+          .subscribe(usuario => {
+            this.usuario = usuario;
+            this.formDatos.patchValue(this.usuario);
+    
+          }, (error) => {
+    
+            this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+              duration: 3000,
+              panelClass: ["bg-danger", "text-white"]
+    
+            });
+    
+          }); */
 
 
     this.route.data
-      .subscribe((data: { obras: any }) => {
+      .subscribe((data: { obras: any, usuario: any }) => {
         this.obras = data.obras;
+        this.usuario = data.usuario;
+        this.formDatos.patchValue(this.usuario);
       });
 
   }
@@ -113,7 +115,7 @@ export class PerfilComponent implements OnInit {
   updatePassword() {
     this.usuarioSrv.updatePassword(this.usuario.id_usuario, this.formPassword.get("password").value)
       .subscribe(usuario => {
-        
+
         this.formPassword.reset();
 
         this.snackBar.open("Su contraseña ha cambiado", "", {
