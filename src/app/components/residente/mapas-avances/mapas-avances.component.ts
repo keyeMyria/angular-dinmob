@@ -9,6 +9,7 @@ import { PercentPipe } from '@angular/common';
 import { ImagenesLotesDialogoComponent } from '../../ventas/imagenes-lotes-dialogo/imagenes-lotes-dialogo.component';
 import { LotesService } from '../../../services/lotes.service';
 import { AvancesLoteDialogoComponent } from '../avances-lote-dialogo/avances-lote-dialogo.component';
+import { LoadingService } from 'app/services/loading.service';
 
 declare var jQuery: any;
 declare var $: any;
@@ -34,7 +35,8 @@ export class MapasAvancesComponent implements OnInit {
     private router: Router,
     private percentPipe: PercentPipe,
     public dialog: MatDialog,
-    private loteSrv: LotesService
+    private loteSrv: LotesService,
+    private loading: LoadingService
   ) { }
 
   ngOnInit() {
@@ -62,6 +64,8 @@ export class MapasAvancesComponent implements OnInit {
 
       }).subscribe(res => {
 
+        this.loading.start();
+
         this.lotes = res[0].lotes;
 
         this.jsonMap = res[1];
@@ -79,7 +83,12 @@ export class MapasAvancesComponent implements OnInit {
 
 
         if (this.jsonMap.mapa) {
-          this.crearMapa(this.valuesLotes);
+          setTimeout(() => {
+            this.crearMapa(this.valuesLotes);
+            this.loading.stop();
+          }, 100);
+        } else {
+          this.loading.stop();
         }
 
       }, (error) => {
@@ -244,7 +253,7 @@ export class MapasAvancesComponent implements OnInit {
             fotos: fotos,
             lote: this.lote_selected
           },
-          width: '700px',          
+          width: '700px',
           //maxHeight:"90vh",
         });
 
@@ -275,16 +284,16 @@ export class MapasAvancesComponent implements OnInit {
           },
           width: '800px',
         });
-    
+
         dialogRef.afterClosed().subscribe(result => {
-    
+
         });
 
-      }, (error) =>{
+      }, (error) => {
 
       });
 
-    
+
 
   }
 

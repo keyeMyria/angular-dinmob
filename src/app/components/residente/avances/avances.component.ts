@@ -290,17 +290,17 @@ export class AvancesComponent implements OnInit {
   getAvancesLote(lote) {
     //console.log("getAvancesLote", lote);
 
+    if (this.mobileQuery.matches) {
+      this.drawer.close();
+    }
+
     this.loteSrv.getAvances(lote.id_lote)
       .subscribe(response => {
         this.lote = response.lote;
         this.acordeon = response.acordeon;
         this.selection = new SelectionModel<any>(true, []);
 
-      });
-
-    if (this.mobileQuery.matches) {
-      this.drawer.close();
-    }
+      }); 
 
 
   }

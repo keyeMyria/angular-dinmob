@@ -14,7 +14,7 @@ import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar
 })
 export class ImagenesLoteComponent implements OnInit {
 
-  //@ViewChild(MatDrawer) drawer: MatDrawer;
+  @ViewChild(MatDrawer) drawer: MatDrawer;
 
 
   mobileQuery: MediaQueryList;
@@ -61,6 +61,12 @@ export class ImagenesLoteComponent implements OnInit {
   }
 
   getImagenesLote(lote) {
+
+    
+    if (this.mobileQuery.matches) {
+      this.drawer.close();
+    }
+    
     console.log("lote", lote);
     this.lote = lote;
 
