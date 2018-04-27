@@ -10,6 +10,24 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <!--<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">-->
+
+  <link rel="apple-touch-icon" sizes="57x57" href="assets/images/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="assets/images/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="assets/images/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="assets/images/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="assets/images/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="assets/images/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="assets/images/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="assets/images/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/images/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="assets/images/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="assets/images/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
 </head>
 
 <body>
@@ -17,7 +35,7 @@
     <style>
       app-root {
         display: flex;
-       /*  flex-direction: column; */
+        /*  flex-direction: column; */
         justify-content: center;
         align-items: center;
         height: 100vh;
@@ -39,12 +57,9 @@
       }
 
       body {
-        background: lightskyblue;
-        /* lightskyblue; */
+        background: lightskyblue;        
         margin: 0;
         padding: 0;
-
-        /*  margin:50px 300px; */
       }
 
       @keyframes dots {
@@ -67,124 +82,13 @@
       .d-3 {
         animation-delay: 1s;
       }
-
-
- /*      .load-bar {
-        position: relative;
-        margin-top: 20px;
-        width: 80%;
-        height: 6px;
-        background-color: #fdba2c;
-      }
-
-      .bar {
-        content: "";
-        display: inline;
-        position: absolute;
-        // width: 0;
-        //height: 100%; 
-        left: 50%;
-        text-align: center;
-      }
-
-      .bar:nth-child(1) {
-        background-color: #da4733;
-        animation: loading 3s linear infinite;
-      }
-
-      .bar:nth-child(2) {
-        background-color: #3b78e7;
-        animation: loading 3s linear 1s infinite;
-      }
-
-      .bar:nth-child(3) {
-        background-color: #fdba2c;
-        animation: loading 3s linear 2s infinite;
-      }
-
-      @keyframes loading {
-        from {
-          left: 50%;
-          width: 0;
-          z-index: 100;
-        }
-        33.3333% {
-          left: 0;
-          width: 100%;
-          z-index: 10;
-        }
-        to {
-          left: 0;
-          width: 100%;
-        }
-
-      }
-
-
-      .loader {
-        height: 4px;
-        width: 70%;
-        position: relative;
-        overflow: hidden;
-        background-color: #ddd;
-      }
-
-      .loader:before {
-        display: block;
-        position: absolute;
-        content: "";
-        left: -200px;
-        width: 200px;
-        height: 4px;
-        background-color: #2980b9;
-        animation: loading 2s linear infinite;
-      }
-
-      @keyframes loading {
-        from {
-          left: -200px;
-          width: 30%;
-        }
-        50% {
-          width: 30%;
-        }
-        70% {
-          width: 70%;
-        }
-        80% {
-          left: 50%;
-        }
-        95% {
-          left: 120%;
-        }
-        to {
-          left: 100%;
-        }
-      } */
-
-      
     </style>
-    <!--    <div>Cargando -->
-    Cargando
-    <!--  <div style="display: inline;"> -->
-      <span class="d">.</span>
-        <span class="d d-2">.</span>
-        <span class="d d-3">.</span>
-    <!--  </div> -->
-    <!-- </div> -->
-    <!--  <div class="slider">
-      <div class="line"></div>
-      <div class="subline inc"></div>
-      <div class="subline dec"></div>
-    </div> -->
+   
+    Cargando 
+    <span class="d">.</span>
+    <span class="d d-2">.</span>
+    <span class="d d-3">.</span>
 
-  <!--   <div class="load-bar">
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-    </div> -->
-
-    <!-- <div class="loader"></div> -->
 
   </app-root>
 </body>
