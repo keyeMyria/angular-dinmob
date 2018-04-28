@@ -5,16 +5,18 @@
     <div class="container-fluid pt-3">
 
       <div class="row">
+
         <div class="col">
+          <!-- formulario de avances -->
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Seleccione Trabajador</h5>
 
               <form [formGroup]="form" (ngSubmit)="getAvancesHistorial()" id="id_formHistorial">
 
-                <div class="mb-2">
+                <div class="form-group">
                   <label for="obra" class="form-label">Obra</label>
-                  <select class="form-control" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)" formControlName="obra" [ngClass]="{'is-invalid': form.get('obra').invalid  && (form.get('obra').dirty || form.get('obra').touched )}">
+                  <select class="form-control" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)" formControlName="id_obra" [ngClass]="{'is-invalid': form.get('id_obra').invalid  && (form.get('id_obra').dirty || form.get('id_obra').touched )}">
                     <option value="">Seleccionar...</option>
                     <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>
                   </select>
@@ -26,9 +28,9 @@
                   <select class="form-control" id="trabajador_historial" name="trabajador_historial" formControlName="trabajador_historial"
                     [ngClass]="{'is-invalid': form.get('trabajador_historial').invalid  && (form.get('trabajador_historial').dirty || form.get('trabajador_historial').touched )}">
                     <option value="">Seleccionar...</option>
-                    <option [value]="trabajador.id_trabajador" *ngFor="let trabajador of trabajadores">{{trabajador.nombre}}</option>
+                    <option [value]="trabajador.id_trabajador" *ngFor="let trabajador of trabajadores">{{trabajador.nombre}} ({{trabajador.especialidad}})</option>
                   </select>
-                  <div class="invalid-feedback">Seleccione trabajador</div>
+                  <div class="invalid-feedback">Seleccione un trabajador</div>
                 </div>
 
                 <mat-checkbox formControlName="inicio_obra" #inicioCheck>Inicio Obra</mat-checkbox>
@@ -37,7 +39,7 @@
                   <label for="fecha_inicio" class="form-label">Fecha Inicio</label>
                   <div class="input-group">
                     <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="fecha_inicio" placement="bottom-left" [matDatepicker]="dpFechaInicio"
-                      formControlName="fecha_inicio" [disabled]="inicioCheck.checked" [ngClass]="{'is-invalid':form.get('fecha_inicio').invalid && (form.get('fecha_inicio').dirty || form.get('fecha_inicio').touched )}">
+                      formControlName="fecha_inicio" [ngClass]="{'is-invalid':form.get('fecha_inicio').invalid && (form.get('fecha_inicio').dirty || form.get('fecha_inicio').touched )}">
                     <span class="input-group-append">
                       <button class="btn btn-secondary" type="button" (click)="dpFechaInicio.open()">
                         <i class="fa fa-calendar"></i>
@@ -76,9 +78,12 @@
               </div>
             </div>
           </div>
+
         </div>
 
         <div class="col">
+
+          <!-- formulario nuevo pago -->
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Nuevo Pago</h5>
@@ -90,9 +95,9 @@
                   <label for="id_trabajador" class="form-label">Trabajador</label>
                   <select class="form-control" id="id_trabajador" name="id_trabajador" formControlName="id_trabajador" [ngClass]="{'is-invalid': formNuevo.get('id_trabajador').invalid  && (formNuevo.get('id_trabajador').dirty || formNuevo.get('id_trabajador').touched )}">
                     <option value="">Seleccionar...</option>
-                    <option [value]="trabajador.id_trabajador" *ngFor="let trabajador of trabajadores">{{trabajador.nombre}}</option>
+                    <option [value]="trabajador.id_trabajador" *ngFor="let trabajador of trabajadores">{{trabajador.nombre}} ({{trabajador.especialidad}})</option>
                   </select>
-                  <div class="invalid-feedback">Seleccione trabajador</div>
+                  <div class="invalid-feedback">Seleccione un trabajador</div>
                 </div>
 
                 <div class="form-group">
@@ -125,7 +130,7 @@
                     <option value="">Seleccionar...</option>
                     <option *ngFor="let tipo of tipos" [value]="tipo.id_tipo_pago">{{tipo.tipo}}</option>
                   </select>
-                  <div class="invalid-feedback">Seleccione tipo</div>
+                  <div class="invalid-feedback">Seleccione un tipo</div>
                 </div>
 
                 <div class="form-group">
@@ -142,9 +147,12 @@
               </div>
             </div>
           </div>
+
         </div>
 
         <div class="col">
+
+          <!-- resumen avances periodo -->
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Avances Período</h5>
@@ -187,6 +195,8 @@
               </div>
             </div>
           </div>
+
+          <!-- resumen historico -->
           <div class="card mt-2">
             <div class="card-body">
               <h5 class="card-title">Histórico</h5>
@@ -223,6 +233,7 @@
               </div>
             </div>
           </div>
+
         </div>
 
       </div>
@@ -234,7 +245,7 @@
 
     <div class="container-fluid pt-3">
 
-      <div class="row" *ngFor="let pago of pagos_avances">
+      <div class="row">
         <div class="col-12 col-sm-3 py-1">
           <div class="text-center">
             <h5 class="text-success">
@@ -313,7 +324,7 @@
 
     <div class="container-fluid pt-3">
 
-      <div class="row" *ngFor="let pago of pagos">
+      <div class="row">
         <div class="col-12 col-sm-4 py-1">
           <div class="text-center">
             <h5 class="text-success">
@@ -352,11 +363,11 @@
           </thead>
 
           <tbody>
-            <tr *ngFor="let historial of historiales">
-              <td class="ws-nowrap">{{historial.fecha_pago| date:'mediumDate':'':'es'}}</td>
-              <td>{{historial.pagado|currency}}</td>
-              <td>{{historial.tipo}}</td>
-              <td>{{historial.notas}}</td>
+            <tr *ngFor="let pago of historial">
+              <td class="ws-nowrap">{{pago.fecha_pago| date:'mediumDate':'':'es'}}</td>
+              <td>{{pago.pagado|currency}}</td>
+              <td>{{pago.tipo}}</td>
+              <td>{{pago.notas}}</td>
             </tr>
 
           </tbody>

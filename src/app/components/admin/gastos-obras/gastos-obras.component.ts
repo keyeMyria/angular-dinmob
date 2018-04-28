@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { NuevoGastoDialogoComponent } from '../nuevo-gasto-dialogo/nuevo-gasto-dialogo.component';
 import { MatDialog, MatSnackBar } from '@angular/material';
@@ -9,11 +9,13 @@ import { of } from "rxjs/observable/of";
 import * as moment from 'moment';
 
 @Component({
-  selector: 'app-gastos-sobras',
-  templateUrl: './gastos-sobras.component.html',
-  styleUrls: ['./gastos-sobras.component.scss']
+  selector: 'app-gastos-obras',
+  templateUrl: './gastos-obras.component.html',
+  styleUrls: ['./gastos-obras.component.scss']
 })
 export class GastosObrasComponent implements OnInit {
+  @ViewChild('del') dpDel: ElementRef;
+  @ViewChild('al') dpAl: ElementRef;
   obras: any = [];
   obra_selected: string = "";
   gastos: any = [];
@@ -46,7 +48,7 @@ export class GastosObrasComponent implements OnInit {
         }
       }).subscribe(gastos => {
         this.gastos = gastos;
-        this.gastosFiltrados =  this.gastos; //this.gastos.slice();
+        this.gastosFiltrados = this.gastos.slice(); // this.gastos; 
       }, (error) => {
       });
 
@@ -65,7 +67,7 @@ export class GastosObrasComponent implements OnInit {
 
   nuevoGasto() {
     let obra = this.obras.find(obra => obra.id_obra == this.obra_selected);
-    console.log("obra seleccionada", this.obra_selected, obra);
+    //console.log("obra seleccionada", this.obra_selected, obra);
 
     let dialogRef = this.dialog.open(NuevoGastoDialogoComponent, {
       width: '500px',
@@ -83,6 +85,10 @@ export class GastosObrasComponent implements OnInit {
           duration: 2000,
           panelClass: ["bg-success", "text-white"]
         });
+
+        //console.log("del", this.dpDel.nativeElement, "al", this.dpAl.nativeElement);
+
+        this.filtro(this.dpDel.nativeElement, this.dpAl.nativeElement, this.tipo_gasto_selected);
 
       } else if (result && result.error) {
 
@@ -128,6 +134,9 @@ export class GastosObrasComponent implements OnInit {
   }
 
   filtro(del, al, id_tipo_gasto) {
+
+    //console.log("del", del, "al", al);
+
 
 
     let fecha_ini = del.value == "" ? "" : moment(del.value, "ll", "es").format("YYYY-MM-DD");
@@ -188,7 +197,7 @@ export class GastosObrasComponent implements OnInit {
 
   }
 
-  sumaGastos(){
+  sumaGastos() {
     let suma = 0;
 
     this.gastosFiltrados.forEach(gasto => {
@@ -215,14 +224,14 @@ export class GastosObrasComponent implements OnInit {
           .subscribe((res: any) => {
             if (res.count === 1) {
 
-              let i = this.gastos.indexOf(gasto);
-              this.gastos.splice(i, 1);
-
-
               this.snackBar.open("Gasto Eliminado", "", {
                 duration: 2000,
                 panelClass: ["bg-success", "text-white"]
               });
+
+              let i = this.gastos.indexOf(gasto);
+              this.gastos.splice(i, 1);
+              this.filtro(this.dpDel.nativeElement, this.dpAl.nativeElement, this.tipo_gasto_selected);
 
             } else {
               this.snackBar.open("Ha ocurrido un error", "", {

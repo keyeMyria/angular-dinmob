@@ -45,7 +45,7 @@ export class EditarGastoDialogoComponent implements OnInit {
   }
 
   guardar() {
-    console.log("ok", this.form.value);
+    //console.log("ok", this.form.value);
     let frmGasto = this.clonar(this.form.value);
     frmGasto.monto = frmGasto.monto.replace(/,/g, "");
 

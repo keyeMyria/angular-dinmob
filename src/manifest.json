@@ -1,10 +1,10 @@
 {
-    "name": "Ctrl+Inmobiliario",
+    "name": "Ctrl + Inmobiliario",
     "short_name": "CtrlInmob",
     "start_url": ".",
     "display": "standalone",
     "theme_color": "aliceblue",
-    "background_color": "blue",
+    "background_color": "aliceblue",
     "description": "Control de ventas, avances, almacén para el sector inmobiliario.",
     "icons": [
         {

@@ -87,7 +87,7 @@
             <table class="table table-hover table-striped">
               <thead>
                 <tr>
-                  <th>Tipo Gasto</th>
+                  <th>Tipo</th>
                   <th>Monto</th>
                   <th>Fecha</th>
                   <th>Nota</th>
@@ -99,7 +99,7 @@
                 <tr *ngFor="let gasto of gastosFiltrados">
                   <td>{{gasto.tipo_gasto}}</td>
                   <td>{{gasto.monto|currency}}</td>
-                  <td>{{gasto.fecha | date:'mediumDate':'':'es'}}</td>
+                  <td class="ws-nowrap">{{gasto.fecha | date:'mediumDate':'':'es'}}</td>
                   <td>{{gasto.nota}}</td>
                   <td class="text-right ws-nowrap">
                     <button mat-button class="no-min" (click)="editarGasto(gasto)">

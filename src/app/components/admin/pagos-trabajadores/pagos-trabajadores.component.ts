@@ -6,6 +6,7 @@ import * as moment from 'moment';
 import { TrabajadorService } from '../../../services/trabajador.service';
 import { of } from "rxjs/observable/of";
 import { PagoTrabajadorService } from 'app/services/pago-trabajador.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-pagos-trabajadores',
@@ -26,17 +27,12 @@ export class PagosTrabajadoresComponent implements OnInit {
   total_avances: any = {};
   total_historial: any = {};
   trabajadores: any = [];
-  historiales = [];
+  historial = [];
   avances = [];
   tipos: any = [];
 
-  pagos = [
-    { generado_neto: "5000", pagado: "1500", pendiente: "3500" }
-  ];
-
-  pagos_avances = [
-    { generado: "5000", retenciones: "1500", liberaciones: "3500", generado_neto_avances: "5000" }
-  ]
+/*   pagos = [];
+  pagos_avances = []; */
 
 
   constructor(
@@ -44,7 +40,8 @@ export class PagosTrabajadoresComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private trabajadorSrv: TrabajadorService,
-    private pagoTrabajadorSrv: PagoTrabajadorService
+    private pagoTrabajadorSrv: PagoTrabajadorService,
+    public snackBar: MatSnackBar
   ) {
     this.formNuevo = this.fb.group({
 
@@ -52,18 +49,35 @@ export class PagosTrabajadoresComponent implements OnInit {
       id_trabajador: ["", Validators.required],
       id_tipo_pago: ["", Validators.required],
       pagado: [null, Validators.required],
-      fecha_pago: [moment(null), Validators.required],
+      fecha_pago: [moment(), Validators.required],
       notas: [null],
     });
 
     this.form = this.fb.group({
-      obra: [null, Validators.required],
+      id_obra: [null, Validators.required],
       trabajador_historial: [null, Validators.required],
-      inicio_obra: [null],
-      fecha_inicio: [null, Validators.required],
-      fecha_fin: [null]
+      inicio_obra: [false],
+      fecha_inicio: [moment(), Validators.required],
+      fecha_fin: [moment(), Validators.required]
 
     });
+
+    this.form.controls["inicio_obra"].valueChanges
+      .subscribe((value) => {
+        //console.log("valueChanges", value);
+
+        if (value == true) {
+          this.form.controls["fecha_inicio"].disable();
+
+        } else {/* false*/
+          this.form.controls["fecha_inicio"].enable();
+
+        }
+
+      });
+
+
+
   }
 
   ngOnInit() {
@@ -103,16 +117,30 @@ export class PagosTrabajadoresComponent implements OnInit {
     this.pagoTrabajadorSrv.createPagoTrabajador(this.formNuevo.value)
       .subscribe(pago => {
         console.log("Pago id:", pago);
+        this.snackBar.open("Gasto Eliminado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      }, (error) => {
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
       });
   }
 
   getAvancesHistorial() {
-    this.trabajadorSrv.getAvances(this.form.value.trabajador_historial, this.form.value.fecha_inicio, this.form.value.fecha_fin)
+
+    //console.log("get avances", this.form.value);
+
+
+    this.trabajadorSrv.getAvances(this.form.value.id_obra, this.form.value.inicio_obra, this.form.value.trabajador_historial, this.form.value.fecha_inicio, this.form.value.fecha_fin)
       .subscribe(res => {
         this.avances = res.avances;
         this.total_avances = res.total_avances;
         this.total_historial = res.total_historial;
-        this.historiales = res.historial;
+        this.historial = res.historial;
       });
 
   }

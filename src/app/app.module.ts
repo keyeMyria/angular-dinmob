@@ -188,7 +188,7 @@ import { ImagenesLoteComponent } from './components/residente/imagenes-lote/imag
 import { ImagenesLotesDialogoComponent } from './components/ventas/imagenes-lotes-dialogo/imagenes-lotes-dialogo.component';
 import { ProveedoresComponent } from './components/admin/proveedores/proveedores.component';
 import { PagosTrabajadoresComponent } from './components/admin/pagos-trabajadores/pagos-trabajadores.component';
-import { GastosObrasComponent } from './components/admin/gastos-sobras/gastos-sobras.component';
+import { GastosObrasComponent } from './components/admin/gastos-obras/gastos-obras.component';
 import { EditarProveedorDialogoComponent } from './components/admin/editar-proveedor-dialogo/editar-proveedor-dialogo.component';
 import { NuevoProveedorDialogoComponent } from './components/admin/nuevo-proveedor-dialogo/nuevo-proveedor-dialogo.component';
 import { NuevoGastoDialogoComponent } from './components/admin/nuevo-gasto-dialogo/nuevo-gasto-dialogo.component';
