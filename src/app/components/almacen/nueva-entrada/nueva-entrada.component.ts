@@ -4,6 +4,7 @@ import { InsumoService } from 'app/services/insumo.service';
 import { of } from "rxjs/observable/of";
 import { EntradasService } from '../../../services/entradas.service';
 import { MatSnackBar, MatCheckbox } from '@angular/material';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-nueva-entrada',
@@ -11,7 +12,8 @@ import { MatSnackBar, MatCheckbox } from '@angular/material';
   styleUrls: ['./nueva-entrada.component.scss']
 })
 export class NuevaEntradaComponent implements OnInit {
-  @ViewChild("filtroEntrada") checkFiltro:MatCheckbox;
+  @ViewChild("filtroEntrada") checkFiltro: MatCheckbox;
+  // @ViewChild('formEntrada') form: NgForm;
 
   obras: any = [];
   proveedores: any = [];
@@ -63,7 +65,7 @@ export class NuevaEntradaComponent implements OnInit {
 
   }
 
-  crearEntrada() {
+  crearEntrada(form: NgForm) {
 
     let insumos = [];
     this.insumos.forEach(insumo => {
@@ -71,30 +73,39 @@ export class NuevaEntradaComponent implements OnInit {
         insumos.push({ id_insumo: insumo.id_insumo, cantidad: insumo.entrada });
       }
     });
-
     console.log(this.folio, this.id_proveedor, this.obra_selected, insumos);
 
-    this.entradaSrv.createEntrada(this.obra_selected, insumos, this.id_proveedor, this.folio)
-      .subscribe(insumos => {
-        //console.log("respuesta", insumos);
-        //volver a leer los insumos
-        this.insumos = insumos;
-        this.folio = "";
-        this.id_proveedor = "";
-        this.checkFiltro.checked = false;
-        this.insumos_filtrados = this.insumos.slice();
-        this.snackBar.open("Entrada Creada", "", {
-          duration: 2000,
-          panelClass: ["bg-success", "text-white"]
+    if (insumos.length > 0) {
+      this.entradaSrv.createEntrada(this.obra_selected, insumos, this.id_proveedor, this.folio)
+        .subscribe(insumos => {
+          //console.log("respuesta", insumos);
+          //volver a leer los insumos
+          this.insumos = insumos;
+          this.folio = "";
+          this.id_proveedor = "";
+          this.checkFiltro.checked = false;
+          this.insumos_filtrados = this.insumos.slice();
+
+          form.reset();
+
+          this.snackBar.open("Entrada Creada", "", {
+            duration: 2000,
+            panelClass: ["bg-success", "text-white"]
+          });
+
+        }, (error) => {
+          this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+            duration: 3000,
+            panelClass: ["bg-danger", "text-white"]
+          });
+
         });
 
-      }, (error) => {
-        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
-          duration: 3000,
-          panelClass: ["bg-danger", "text-white"]
-        });
+    } else {
+      //mostrar diálogo para que el usuario agregue insumos
 
-      });
+    }
+
   }
 
   aplicarFiltro(termino) {
@@ -115,10 +126,10 @@ export class NuevaEntradaComponent implements OnInit {
   insumosConEntrada($event, filtro) {
 
     console.log("change", $event.checked);
-    
+
 
     if ($event.checked == true) {
-      this.insumos_filtrados = this.insumos.filter( insumos => insumos.entrada > 0 );
+      this.insumos_filtrados = this.insumos.filter(insumos => insumos.entrada > 0);
       filtro.value = '';
     } else {
       this.insumos_filtrados = this.insumos.slice();

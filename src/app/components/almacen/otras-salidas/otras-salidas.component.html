@@ -20,7 +20,7 @@
               <div class="input-group mb-2">
                 <input type="text" class="form-control" placeholder="Buscar">
                 <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" type="button">
+                  <button class="btn btn-secondary" type="button">
                     <i class="fa fa-times" aria-hidden="true"></i>
                   </button>
                 </div>
@@ -73,9 +73,9 @@
 
       <div class="card mt-5">
         <div class="card-header">
-          Datos del Vale
+          Datos
         </div>
-        <div class="container py-3">
+        <div class="card-body">
 
           <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
 
@@ -122,7 +122,7 @@
             </div>
 
             <div class="form-group row">
-              <label for="vale" class="col-sm-3 col-form-label">Num. Vale</label>
+              <label for="vale" class="col-sm-3 col-form-label">Núm. Vale</label>
               <div class="col-sm-9">
                 <input class="form-control" type="text" id="vale" name="vale" formControlName="vale">
               </div>
@@ -163,11 +163,13 @@
             </div>
 
 
-            <div class="text-center">
-              <button type="submit" mat-raised-button color="primary" [disabled]="form.invalid">Guardar</button>
-            </div>
+
 
           </form>
+
+        </div>
+        <div class="card-footer text-center">
+          <button type="submit" mat-raised-button color="primary" [disabled]="form.invalid">Guardar</button>
 
         </div>
 

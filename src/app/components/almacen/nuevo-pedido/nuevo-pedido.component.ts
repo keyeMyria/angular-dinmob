@@ -94,7 +94,7 @@ export class NuevoPedidoComponent implements OnInit {
       return true;
     }
 
-  };
+  }
 
   getLote(lote) {
 
@@ -284,12 +284,22 @@ export class NuevoPedidoComponent implements OnInit {
 
         console.log("respuesta", respuesta);
 
+        this.snackBar.open("Pedido Creado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
 
         this.lotes_pedido = [];
         this.lotePedido_selected = "";
         this.insumos = [];
 
       }, (error) => {
+
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
 
         this.lotes_pedido = [];
         this.lotePedido_selected = "";
