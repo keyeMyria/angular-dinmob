@@ -22,11 +22,11 @@
     </div>
 
     <div class="col-12 col-md-6 col-lg-4 p-2">
-      <a class="no-decoration" [routerLink]="['/otras-salidas',obra_default]">
+      <a class="no-decoration" [routerLink]="['/pedidos',obra_default]">
         <mat-card class="d-flex align-items-center card-pointer">
-          <mat-card-title class="mb-0">Otras Salidas</mat-card-title>
+          <mat-card-title class="mb-0">Pedidos</mat-card-title>
           <span class="spacer"></span>
-          <i class="material-icons icono-tablero">unarchive</i>
+          <i class="fa fa-list icono-tablero" aria-hidden="true"></i>
         </mat-card>
       </a>
     </div>
@@ -44,9 +44,29 @@
     <div class="col-12 col-md-6 col-lg-4 p-2">
       <a class="no-decoration" [routerLink]="['/nueva-salida',obra_default]">
         <mat-card class="d-flex align-items-center card-pointer">
-          <mat-card-title class="mb-0">Nueva Salida</mat-card-title>
+          <mat-card-title class="mb-0">
+            <div>Nueva Salida</div>
+            <div>
+              <small>Paquetes</small>
+            </div>
+          </mat-card-title>
           <span class="spacer"></span>
           <i class="material-icons icono-tablero">add_box</i>
+        </mat-card>
+      </a>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-4 p-2">
+      <a class="no-decoration" [routerLink]="['/otras-salidas',obra_default]">
+        <mat-card class="d-flex align-items-center card-pointer">
+          <mat-card-title class="mb-0">
+            <div>Nueva Salida</div>
+            <div>
+              <small>Obras</small>
+            </div>
+          </mat-card-title>
+          <span class="spacer"></span>
+          <i class="material-icons icono-tablero">unarchive</i>
         </mat-card>
       </a>
     </div>
@@ -67,16 +87,6 @@
           <mat-card-title class="mb-0">Nuevo Pedido</mat-card-title>
           <span class="spacer"></span>
           <i class="fa fa-cart-plus icono-tablero" aria-hidden="true"></i>
-        </mat-card>
-      </a>
-    </div>
-
-    <div class="col-12 col-md-6 col-lg-4 p-2">
-      <a class="no-decoration" [routerLink]="['/pedidos',obra_default]">
-        <mat-card class="d-flex align-items-center card-pointer">
-          <mat-card-title class="mb-0">Pedidos</mat-card-title>
-          <span class="spacer"></span>
-          <i class="fa fa-list icono-tablero" aria-hidden="true"></i>
         </mat-card>
       </a>
     </div>
