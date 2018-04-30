@@ -1,10 +1,11 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
-import { MatSnackBar, MatTabChangeEvent } from '@angular/material';
+import { MatSnackBar, MatTabChangeEvent, MatDialog } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { ObrasService } from 'app/services/obras.service';
 import { PedidoService } from '../../../services/pedido.service';
+import { AlertaDialogoComponent } from 'app/components/admin/alerta-dialogo/alerta-dialogo.component';
 
 @Component({
   selector: 'app-nuevo-pedido',
@@ -36,7 +37,8 @@ export class NuevoPedidoComponent implements OnInit {
     private router: Router,
     public snackBar: MatSnackBar,
     private obraSrv: ObrasService,
-    private pedidoSrv: PedidoService
+    private pedidoSrv: PedidoService,
+    public dialog: MatDialog,
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -242,12 +244,6 @@ export class NuevoPedidoComponent implements OnInit {
 
       if (insumos[i].requerido > 0) {
 
-        /*    var id_insumo_partida = insumos[i].id_insumo_partida;
-           if (insumos[i].extra === "1") {
-             id_insumo_partida = null;
-           } */
-
-
         let newInsumo = {
           id_lote: id_lote,
           id_insumo_partida: insumos[i].extra === "1" ? null : insumos[i].id_insumo_partida,
@@ -269,42 +265,57 @@ export class NuevoPedidoComponent implements OnInit {
 
   addPedido() {
 
-    this.pedido.id_obra = this.obra.obra.id_obra;
+
 
     this.getInsumosSinAcumular();
-    console.log("insumos", this.insumos_pedido);
+    //console.log("insumos", this.insumos_pedido);
 
     // si los el array de insumos está vacío mostrar un aviso
 
-    console.log("pedido", this.pedido);
+    //console.log("pedido", this.pedido);
 
-    this.pedido.id_usuario = this.usuario.id_usuario;
-    this.pedidoSrv.createPedido(this.pedido, this.insumos_pedido)
-      .subscribe(respuesta => {
+    if (this.insumos_pedido.length > 0) {
 
-        console.log("respuesta", respuesta);
+      this.pedido.id_obra = this.obra.obra.id_obra;
+      this.pedido.id_usuario = this.usuario.id_usuario;
+      this.pedidoSrv.createPedido(this.pedido, this.insumos_pedido)
+        .subscribe(respuesta => {
 
-        this.snackBar.open("Pedido Creado", "", {
-          duration: 2000,
-          panelClass: ["bg-success", "text-white"]
+          //console.log("respuesta", respuesta);
+
+          this.snackBar.open("Pedido Creado", "", {
+            duration: 2000,
+            panelClass: ["bg-success", "text-white"]
+          });
+
+
+          this.lotes_pedido = [];
+          this.lotePedido_selected = "";
+          this.insumos = [];
+          this.pedido={};
+
+        }, (error) => {
+
+          this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+            duration: 3000,
+            panelClass: ["bg-danger", "text-white"]
+          });
+
+        /*   this.lotes_pedido = [];
+          this.lotePedido_selected = "";
+          this.insumos = []; */
         });
-
-
-        this.lotes_pedido = [];
-        this.lotePedido_selected = "";
-        this.insumos = [];
-
-      }, (error) => {
-
-        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
-          duration: 3000,
-          panelClass: ["bg-danger", "text-white"]
-        });
-
-        this.lotes_pedido = [];
-        this.lotePedido_selected = "";
-        this.insumos = [];
+    } else {
+      let dialogRef = this.dialog.open(AlertaDialogoComponent, {
+        data: {
+          title: "Corregir",
+          content: "El pedido que intenta crear no contiene ningún material.",
+          icon: true
+        },
+        //width: '500px',
       });
+    }
+
 
 
   }
