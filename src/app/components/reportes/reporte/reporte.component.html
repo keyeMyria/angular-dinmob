@@ -1,0 +1,178 @@
+<div class="container-fluid">
+  <div class="row">
+
+    <div class="col-6">
+
+      <div class="card mt-2">
+        <div class="card-body">
+          <h5 class="card-title">Reportes</h5>
+
+          <form [formGroup]="form" (ngSubmit)="getReporte()" id="id_formReporte">
+            <div class="form-group">
+              <label for="obra" class="form-label">Obra</label>
+              <select class="form-control" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)" formControlName="id_obra" [ngClass]="{'is-invalid': form.get('id_obra').invalid  && (form.get('id_obra').dirty || form.get('id_obra').touched )}">
+                <option value="">Seleccionar...</option>
+                <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>
+              </select>
+              <div class="invalid-feedback">Seleccione una obra</div>
+            </div>
+
+            <div class="form-group">
+              <label for="obra" class="form-label">Reporte</label>
+              <select class="form-control" formControlName="reporte" [ngClass]="{'is-invalid': form.get('reporte').invalid  && (form.get('reporte').dirty || form.get('reporte').touched )}">
+                <option value="">Seleccionar...</option>
+              </select>
+              <div class="invalid-feedback">Seleccione un reporte</div>
+            </div>
+
+            <div class="form-group">
+              <label for="obra" class="form-label">Ámbito</label>
+              <select class="form-control" formControlName="ambito" [ngClass]="{'is-invalid': form.get('ambito').invalid  && (form.get('ambito').dirty || form.get('ambito').touched )}">
+                <option value="">Seleccionar...</option>
+              </select>
+              <div class="invalid-feedback">Seleccione un Ámbito</div>
+            </div>
+
+            <mat-checkbox formControlName="inicio_obra" #inicioCheck>Inicio Obra</mat-checkbox>
+
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="fecha_inicio">Fecha Inicio</label>
+                <div class="input-group">
+                  <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="fecha_inicio" placement="bottom-left" [matDatepicker]="dpFechaInicio"
+                    formControlName="fecha_inicio" [ngClass]="{'is-invalid':form.get('fecha_inicio').invalid && (form.get('fecha_inicio').dirty || form.get('fecha_inicio').touched )}">
+                  <span class="input-group-append">
+                    <button class="btn btn-secondary" type="button" (click)="dpFechaInicio.open()">
+                      <i class="fa fa-calendar"></i>
+                    </button>
+                  </span>
+                </div>
+                <div *ngIf="form.get('fecha_inicio').invalid && (form.get('fecha_inicio').dirty || form.get('fecha_inicio').touched )" class="visible invalid-feedback">
+                  Seleccione una fecha
+                </div>
+                <mat-datepicker touchUi="true" #dpFechaInicio></mat-datepicker>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="fecha_fin">Fecha Fin</label>
+                <div class="input-group">
+                  <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="fecha_fin" placement="bottom-left" [matDatepicker]="dpFechaFin"
+                    formControlName="fecha_fin" [ngClass]="{'is-invalid':form.get('fecha_fin').invalid && (form.get('fecha_fin').dirty || form.get('fecha_fin').touched )}">
+                  <span class="input-group-append">
+                    <button class="btn btn-secondary" type="button" (click)="dpFechaFin.open()">
+                      <i class="fa fa-calendar"></i>
+                    </button>
+                  </span>
+                </div>
+                <div *ngIf="form.get('fecha_fin').invalid && (form.get('fecha_fin').dirty || form.get('fecha_fin').touched )" class="visible invalid-feedback">
+                  Seleccione una fecha
+                </div>
+                <mat-datepicker touchUi="true" #dpFechaFin></mat-datepicker>
+              </div>
+            </div>
+          </form>
+          <div class="form-group">
+            <div>
+              <button mat-raised-button class="btn-block" type="submit" color="primary" form="id_formReporte" [disabled]="form.invalid">Reporte</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="container-fluid"> -->
+      <div class="row">
+
+        <div class="col-6 pt-2">
+          <div class="card">
+            <div class="card-body">
+              <h3>-</h3>
+              <p>ÚLTIMO AVANCE</p>
+              <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">today</i>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6 pt-2">
+          <div class="card">
+            <div class="card-body">
+              <h3>-</h3>
+              <p>ÚLTIMO PAGO</p>
+              <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">today</i>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!--  </div> -->
+
+    </div>
+
+
+
+
+
+
+
+    <div class="col-6 ">
+      <div class="card mt-2 ">
+        <div class="card-body ">
+          <h5 class="card-title ">Seleccionar</h5>
+          <div class="table-responsive ">
+            <table class="table table-hover table-striped table-align-middle ">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Manzana</th>
+                  <th>Lote</th>
+                  <th>Prototipo</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <mat-checkbox></mat-checkbox>
+                  </td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mt-2 ">
+        <div class="card-body ">
+          <h5 class="card-title ">Seleccionar</h5>
+          <div class="table-responsive ">
+            <table class="table table-hover table-striped table-align-middle ">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Trabajador</th>
+                  <th>Especialidad</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>
+                    <mat-checkbox></mat-checkbox>
+                  </td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+
+  </div>
+</div>

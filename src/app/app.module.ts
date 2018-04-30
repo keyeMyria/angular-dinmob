@@ -224,6 +224,7 @@ import { VerEntradaDialogoComponent } from './components/almacen/ver-entrada-dia
 import { OtrasSalidasComponent } from './components/almacen/otras-salidas/otras-salidas.component';
 import { UsuariosResolverService } from './resolvers/usuarios-resolver.service';
 import { ArranqueComponent } from './components/admin/arranque/arranque.component';
+import { ReporteComponent } from './components/reportes/reporte/reporte.component';
 
 
 
@@ -365,6 +366,7 @@ export function getToken() {
     VerEntradaDialogoComponent,
     OtrasSalidasComponent,
     ArranqueComponent,
+    ReporteComponent
 
 
 
