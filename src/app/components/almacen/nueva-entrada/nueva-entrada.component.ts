@@ -3,8 +3,9 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { InsumoService } from 'app/services/insumo.service';
 import { of } from "rxjs/observable/of";
 import { EntradasService } from '../../../services/entradas.service';
-import { MatSnackBar, MatCheckbox } from '@angular/material';
+import { MatSnackBar, MatCheckbox, MatDialog } from '@angular/material';
 import { NgForm } from '@angular/forms';
+import { AlertaDialogoComponent } from '../../admin/alerta-dialogo/alerta-dialogo.component';
 
 @Component({
   selector: 'app-nueva-entrada',
@@ -28,7 +29,8 @@ export class NuevaEntradaComponent implements OnInit {
     private route: ActivatedRoute,
     private insumoSrv: InsumoService,
     private entradaSrv: EntradasService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit() {
@@ -103,6 +105,15 @@ export class NuevaEntradaComponent implements OnInit {
 
     } else {
       //mostrar diálogo para que el usuario agregue insumos
+
+      let dialogRef = this.dialog.open(AlertaDialogoComponent, {
+        data: {
+          title: "Corregir",
+          content: "La entrada que intenta crear no contiene ningún material.",
+          icon:true
+        },
+        //width: '500px',
+      });
 
     }
 

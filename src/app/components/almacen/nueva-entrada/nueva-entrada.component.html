@@ -11,7 +11,6 @@
 
       <div class="card">
         <div class="card-header">
-          <!-- <div class="align-self-center">Materiales</div> -->
           Materiales
         </div>
 
@@ -21,21 +20,13 @@
               <div class="input-group mb-2">
                 <input (keyup)="aplicarFiltro($event.target.value)" #filtro type="text" class="form-control" placeholder="Buscar" [disabled]="filtroEntrada.checked">
                 <div class="input-group-append">
-                  <button class="btn btn-secondary" type="button" (click)="borrarFiltro(filtro)"  [disabled]="filtroEntrada.checked">
+                  <button class="btn btn-secondary" type="button" (click)="borrarFiltro(filtro)" [disabled]="filtroEntrada.checked">
                     <i class="fa fa-times" aria-hidden="true"></i>
                   </button>
                 </div>
               </div>
             </div>
 
-            <!--             <div class="col-auto">
-              <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" id="">
-                <label class="form-check-label" for="">
-                  Ver sólo materiales con entrada
-                </label>
-              </div>
-            </div> -->
             <div class="col-auto">
               <mat-checkbox (change)="insumosConEntrada($event, filtro)" #filtroEntrada>Ver sólo materiales con entrada</mat-checkbox>
             </div>
@@ -43,7 +34,7 @@
         </form>
 
         <div class="table-responsive">
-          <table class="table table-hover table-striped">
+          <table class="table table-hover table-striped table-align-middle">
             <thead>
               <tr>
                 <th>Código</th>
@@ -60,9 +51,14 @@
                 <td>{{insumo.codigo}}</td>
                 <td>{{insumo.insumo}}</td>
                 <td>{{insumo.unidad}}</td>
-                <td>{{insumo.existencias}}</td>
                 <td>
-                  <input type="number" [(ngModel)]="insumo.entrada" class="form-control">
+                  <div>
+
+                    {{insumo.existencias}}
+                  </div>
+                </td>
+                <td style="width: 150px">                 
+                    <input type="number" [(ngModel)]="insumo.entrada" class="form-control">               
                 </td>
               </tr>
 
@@ -71,21 +67,9 @@
 
         </div>
 
-        <div class="card-footer">
+        <!--    <div class="card-footer">
 
-
-
-          <!--           <div class="form-inline">
-            <label class="form-label" for="proveedor">Proveedor</label>
-            <select id="proveedor" class="form-control" [(ngModel)]="id_proveedor">
-              <option value="">Seleccionar...</option>
-              <option [value]="p.id_proveedor" *ngFor="let p of proveedores">{{p.nombre}}</option>
-            </select>
-            <label class="form-label" for="Folio">Folio</label>
-            <input type="text" class="form-control" id="folio" [(ngModel)]="folio">
-            <button type="submit" class="btn btn-primary" (click)="crearEntrada()">Guardar</button>
-          </div> -->
-          <form  #formEntrada="ngForm"  (ngSubmit)="crearEntrada(formEntrada)">
+          <form #formEntrada="ngForm" (ngSubmit)="crearEntrada(formEntrada)">
             <div class="form-row">
 
               <div class="form-group col-md-8">
@@ -107,12 +91,46 @@
 
             </div>
 
-            <button mat-raised-button type="submit" class="btn-block" color="primary" [disabled]="formEntrada.invalid">Guardar</button>
-
+            <div class="text-center">
+              <button mat-raised-button type="submit" class="" color="primary" [disabled]="formEntrada.invalid">Guardar</button>
+            </div>
           </form>
-        </div>
+        </div> -->
 
       </div>
+
+      <div class="card mt-3">
+        <div class="card-header">Datos</div>
+        <div class="card-body">
+          <form #formEntrada="ngForm" id="id_form" (ngSubmit)="crearEntrada(formEntrada)">
+            <div class="form-row">
+
+              <div class="form-group col-md-8">
+                <label class="form-label" for="id_proveedor">Proveedor</label>
+                <select id="proveedor" class="form-control" name="id_proveedor" [(ngModel)]="id_proveedor" required #proveedor="ngModel"
+                  [ngClass]="{'is-invalid': proveedor.invalid && (proveedor.dirty || proveedor.touched)}">
+                  <option value="">Seleccionar...</option>
+                  <option [value]="p.id_proveedor" *ngFor="let p of proveedores">{{p.nombre}}</option>
+                </select>
+                <div class="invalid-feedback">Seleccione un proveedor</div>
+              </div>
+
+
+              <div class="form-group col-md-4">
+                <label class="form-label" for="folio">Folio</label>
+                <input type="text" class="form-control" id="folio" name="folio" [(ngModel)]="folio" required #folioValidation="ngModel" [ngClass]="{'is-invalid': folioValidation.invalid && (folioValidation.dirty || folioValidation.touched)}">
+                <div class="invalid-feedback">Proporcione un folio</div>
+              </div>
+
+            </div>
+          </form>
+        </div>
+        <div class="card-footer text-center">
+          <button mat-raised-button type="submit" form="id_form" color="primary" [disabled]="formEntrada.invalid">Guardar</button>
+        </div>
+      </div>
+
+
     </div>
   </div>
 </div>
