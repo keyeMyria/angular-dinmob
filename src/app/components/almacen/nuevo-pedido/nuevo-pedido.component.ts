@@ -130,7 +130,7 @@ export class NuevoPedidoComponent implements OnInit {
       let dialogRef = this.dialog.open(AlertaDialogoComponent, {
         data: {
           title: "Corregir",
-          content: "Cambie a la pestaña Lote para añadir materiales.",
+          content: "Cambie a la pestaña Lotes para añadir materiales.",
           icon: true
         },
 
