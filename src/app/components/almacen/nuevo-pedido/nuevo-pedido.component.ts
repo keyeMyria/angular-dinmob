@@ -1,7 +1,7 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
-import { MatSnackBar, MatTabChangeEvent, MatDialog } from '@angular/material';
+import { MatSnackBar, MatTabChangeEvent, MatDialog, MatTabGroup, MatDrawer } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { ObrasService } from 'app/services/obras.service';
 import { PedidoService } from '../../../services/pedido.service';
@@ -13,6 +13,8 @@ import { AlertaDialogoComponent } from 'app/components/admin/alerta-dialogo/aler
   styleUrls: ['./nuevo-pedido.component.scss']
 })
 export class NuevoPedidoComponent implements OnInit {
+  @ViewChild(MatTabGroup) tabGroup: MatTabGroup;
+  @ViewChild(MatDrawer) drawer: MatDrawer;
 
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
@@ -20,7 +22,6 @@ export class NuevoPedidoComponent implements OnInit {
   obras: any = [];
   obra_selected: string = "";
   obra: any;
-  // partidas: any = [];
   lote_selected: any = {};
   lotes_pedido: any = [];
   lotePedido_selected: any = "";
@@ -100,17 +101,40 @@ export class NuevoPedidoComponent implements OnInit {
 
   getLote(lote) {
 
-    if (!this.loteEstaEnPedido(lote.id_lote)) {
-      this.pedidoSrv.getLote(lote.id_lote)
-        .subscribe((response: any) => {
-          lote.partidas = response.partidas;
-          lote.insumos_extra = response.insumos_extra;
-          this.lotes_pedido.push(lote);
-          this.lotePedido_selected = this.lotes_pedido[this.lotes_pedido.length - 1];
+    if (this.tabGroup.selectedIndex == 0) {
+      /*   this.tabGroup.selectedIndex = 0;
+      } */
 
-        }, (error) => {
 
-        });
+      if (this.mobileQuery.matches) {
+        this.drawer.close();
+      }
+
+      if (!this.loteEstaEnPedido(lote.id_lote)) {
+        this.pedidoSrv.getLote(lote.id_lote)
+          .subscribe((response: any) => {
+            lote.partidas = response.partidas;
+            lote.insumos_extra = response.insumos_extra;
+            this.lotes_pedido.push(lote);
+            this.lotePedido_selected = this.lotes_pedido[this.lotes_pedido.length - 1];
+
+          }, (error) => {
+            this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+              duration: 3000,
+              panelClass: ["bg-danger", "text-white"]
+            });
+          });
+      }
+
+    } else {
+      let dialogRef = this.dialog.open(AlertaDialogoComponent, {
+        data: {
+          title: "Corregir",
+          content: "Cambie a la pestaña Lote para añadir materiales.",
+          icon: true
+        },
+
+      });
     }
 
   }
@@ -292,7 +316,7 @@ export class NuevoPedidoComponent implements OnInit {
           this.lotes_pedido = [];
           this.lotePedido_selected = "";
           this.insumos = [];
-          this.pedido={};
+          this.pedido = {};
 
         }, (error) => {
 
@@ -301,9 +325,9 @@ export class NuevoPedidoComponent implements OnInit {
             panelClass: ["bg-danger", "text-white"]
           });
 
-        /*   this.lotes_pedido = [];
-          this.lotePedido_selected = "";
-          this.insumos = []; */
+          /*   this.lotes_pedido = [];
+            this.lotePedido_selected = "";
+            this.insumos = []; */
         });
     } else {
       let dialogRef = this.dialog.open(AlertaDialogoComponent, {
