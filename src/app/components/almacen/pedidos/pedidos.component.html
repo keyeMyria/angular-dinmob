@@ -31,8 +31,7 @@
                 <th>Usuario</th>
                 <th>Descripción</th>
                 <th>Estado</th>
-                <th width="130px"></th>
-                <th width="34px"></th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -42,17 +41,27 @@
                 <td>{{pedido.descripcion}}</td>
                 <td>{{pedido.estado}}</td>
                 <td class="text-right">
-                  <button mat-button class="no-min" (click)="verPedido(pedido)">
-                    <i class="fa fa-question-circle"></i>
+                  <button mat-icon-button [matMenuTriggerFor]="menu">
+                    <mat-icon>more_vert</mat-icon>
                   </button>
-                  <button mat-button class="no-min" [routerLink]="['/editar-pedido',pedido.id_pedido, pedido.id_obra]">
-                    <i class="fa fa-pencil"></i>
-                  </button>
-                </td>
-                <td class="text-right">
-                  <button mat-button type="button" class="no-min" (click)="delPedido(pedido)">
-                    <i class="fa fa-times"></i>
-                  </button>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="verPedido(pedido)">
+                      <mat-icon>visibility</mat-icon>
+                      <span>Ver Pedido</span>
+                    </button>
+                    <button mat-menu-item [routerLink]="['/editar-pedido',pedido.id_pedido, pedido.id_obra]">
+                      <mat-icon>create</mat-icon>
+                      <span>Editar Pedido</span>
+                    </button>
+                    <button mat-menu-item>
+                      <mat-icon>file_download</mat-icon>
+                      <span>Reporte</span>
+                    </button>
+                    <button mat-menu-item (click)="delPedido(pedido)">
+                      <mat-icon>delete</mat-icon>
+                      <span>Eliminar</span>
+                    </button>
+                  </mat-menu>
                 </td>
               </tr>
             </tbody>
