@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-ver-pedido-dialogo',
@@ -9,12 +10,21 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 export class VerPedidoDialogoComponent implements OnInit {
 
   insumos_acumulados: any = [];
+  form: FormGroup;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<VerPedidoDialogoComponent>,
+    private fb: FormBuilder,
 
-  ) { }
+  ) {
+    this.form = this.fb.group({
+      fecha: [data.fecha],
+      obra: [data.obra],
+      usuario: [data.usuario],
+      descripcion: [data.descripcion]
+    });
+  }
 
   ngOnInit() {
     this.acumularInsumos();
@@ -29,27 +39,27 @@ export class VerPedidoDialogoComponent implements OnInit {
 
   acumularInsumos() {
 
-    let ordenados = this.data.insumos.sort(function(a, b){
+    let ordenados = this.data.insumos.sort(function (a, b) {
       return a.id_insumo - b.id_insumo;
     });
 
     this.insumos_acumulados = [];
     let i = 0;
 
-    while(i < ordenados.length-1){
+    while (i < ordenados.length - 1) {
       let j = i + 1;
       let insumo = this.clonar(ordenados[i]);
       insumo.cantidad = Number(insumo.cantidad);
       this.insumos_acumulados.push(insumo);
-      while(j < ordenados.length && ordenados[i].id_insumo == ordenados[j].id_insumo ){
-        this.insumos_acumulados[this.insumos_acumulados.length-1].cantidad += +ordenados[j].cantidad;
+      while (j < ordenados.length && ordenados[i].id_insumo == ordenados[j].id_insumo) {
+        this.insumos_acumulados[this.insumos_acumulados.length - 1].cantidad += +ordenados[j].cantidad;
         j++;
       }
-      i=j;
+      i = j;
     }
 
-    if(i == ordenados.length -1){
-      let insumo = this.clonar(ordenados[ordenados.length-1]);
+    if (i == ordenados.length - 1) {
+      let insumo = this.clonar(ordenados[ordenados.length - 1]);
       insumo.cantidad = Number(insumo.cantidad);
       this.insumos_acumulados.push(insumo);
     }

@@ -5,16 +5,43 @@
   <div>
     <mat-tab-group>
       <mat-tab label="Datos">
-        <div class="py-3">
-          <p>
+        <div class="container">
+          <form [formGroup]="form" class="mt-2">
+            <!--    <p>
             <b>Fecha: </b>{{data.fecha | date:'mediumDate':'':'es'}}</p>
           <p>
             <b>Obra: </b>{{data.obra}}</p>
           <p>
             <b>Usuario: </b>{{data.usuario}}</p>
           <p>
-            <b>Descripción: </b>{{data.descripcion}}</p>
+            <b>Descripción: </b>{{data.descripcion}}</p> -->
+            <div class="form-group row">
+              <label for="fecha" class="col-sm-3 col-form-label">Fecha</label>
+              <div class="col-sm-9">
+                <input readonly class="form-control" type="text" id="fecha" name="fecha" formControlName="fecha">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="obra" class="col-sm-3 col-form-label">Obra</label>
+              <div class="col-sm-9">
+                <input readonly class="form-control" type="text" id="obra" name="obra" formControlName="obra">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="usuario" class="col-sm-3 col-form-label">Usuario</label>
+              <div class="col-sm-9">
+                <input readonly class="form-control" type="text" id="usuario" name="usuario" formControlName="usuario">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="descripcion" class="col-sm-3 col-form-label">Descripción</label>
+              <div class="col-sm-9">
+                <textarea readonly class="form-control" type="text" id="descripcion" name="descripcion" formControlName="descripcion"></textarea>
+              </div>
+            </div>
+          </form>
         </div>
+
       </mat-tab>
       <mat-tab label="Desglose">
         <div class="demo-tab-content">
