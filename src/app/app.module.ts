@@ -224,8 +224,12 @@ import { VerEntradaDialogoComponent } from './components/almacen/ver-entrada-dia
 import { OtrasSalidasComponent } from './components/almacen/otras-salidas/otras-salidas.component';
 import { UsuariosResolverService } from './resolvers/usuarios-resolver.service';
 import { ArranqueComponent } from './components/admin/arranque/arranque.component';
+<<<<<<< HEAD
 import { ObraManzanasTrabajadoresResidentesResolverService } from 'app/resolvers/obra-manzanas-trabajadores-residentes-resolver.service';
 import { PartidasUrbanizacionResolverService } from 'app/resolvers/partidas-urbanizacion-resolver.service';
+=======
+import { ReporteComponent } from './components/reportes/reporte/reporte.component';
+>>>>>>> ec651e136df3cb17a4d629051e06641b11f2da6b
 
 
 
@@ -367,6 +371,7 @@ export function getToken() {
     VerEntradaDialogoComponent,
     OtrasSalidasComponent,
     ArranqueComponent,
+    ReporteComponent
 
 
 
