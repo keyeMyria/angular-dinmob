@@ -61,8 +61,8 @@
                 <td>{{insumo.existencias}}</td>
                 <td style="width: 150px">
                   <input type="number" [(ngModel)]="insumo.salida" #salida="ngModel" class="form-control" min="0" [max]="insumo.existencias">
-                  <div class="text-danger" *ngIf="insumo.salida > insumo.existencias">Mayor que existencias</div>
-                  <div class="text-danger" *ngIf="insumo.salida <= 0">Menor o igual que 0</div>
+                  <div class="text-danger" *ngIf="insumo.salida && (insumo.salida > insumo.existencias)">Mayor que existencias</div>
+                  <div class="text-danger" *ngIf="insumo.salida && (insumo.salida < 0)">Menor que 0</div>
                 </td>
               </tr>
 

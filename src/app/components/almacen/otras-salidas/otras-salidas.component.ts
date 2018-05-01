@@ -15,7 +15,7 @@ export class OtrasSalidasComponent implements OnInit {
   obra_selected: string = "";
   obras: any = [];
   form: FormGroup;
-/*   formInsumos: FormGroup; */
+  /*   formInsumos: FormGroup; */
   insumos: any[] = [];
   residentes: any = [];
   trabajadores: any = [];
@@ -45,9 +45,9 @@ export class OtrasSalidasComponent implements OnInit {
       notas: [""],
     });
 
- /*    this.formInsumos= this.fb.group({
-      insumos:this.fb.array([])
-    }); */
+    /*    this.formInsumos= this.fb.group({
+         insumos:this.fb.array([])
+       }); */
 
     this.form.controls["tipo"].valueChanges
       .subscribe((value) => {
@@ -59,7 +59,7 @@ export class OtrasSalidasComponent implements OnInit {
           this.form.controls["obra"].enable();
           this.form.controls["lote"].enable();
 
-        } else {/* false*/
+        } else {/* U*/
           this.form.controls["obra"].disable();
           this.form.controls["lote"].disable();
 
@@ -93,9 +93,9 @@ export class OtrasSalidasComponent implements OnInit {
       }).subscribe(insumos => {
         this.insumos = insumos;
         this.insumos_filtrados = this.insumos.slice();
-      /*   this.insumos.forEach(insumo=> {
-          (<FormArray>this.formInsumos.controls["insumos"]).push(new FormControl(insumo));
-        }); */
+        /*   this.insumos.forEach(insumo=> {
+            (<FormArray>this.formInsumos.controls["insumos"]).push(new FormControl(insumo));
+          }); */
       });
   }
 
@@ -131,8 +131,7 @@ export class OtrasSalidasComponent implements OnInit {
     //console.log("change", $event.checked);
 
     if ($event.checked == true) {
-      /* && (insumo.salida<= insumo.existencias) */
-      this.insumos_filtrados = this.insumos.filter(insumo => insumo.salida > 0 );
+      this.insumos_filtrados = this.insumos.filter(insumo => insumo.salida > 0);
       filtro.value = '';
     } else {
       this.insumos_filtrados = this.insumos.slice();
@@ -144,11 +143,25 @@ export class OtrasSalidasComponent implements OnInit {
   guardar() {
     console.log("guardar", this.form.value);
 
-    let insumos_salida_error = this.insumos.filter(insumo => insumo.salida > 0);
-    let insumos_salida = this.insumos.filter(insumo => insumo.salida > 0 && (insumo.salida<= insumo.existencias));
+    let insumos_salida = this.insumos.filter(insumo => insumo.salida > 0);
+    let insumos_errores = insumos_salida.filter(insumo => insumo.salida > insumo.existencias);
 
     if (insumos_salida.length > 0) {
       console.log("insumos", insumos_salida);
+      console.log("errores", insumos_errores);
+
+      if (insumos_errores.length == 0) {
+        //guardar
+      } else {
+        this.dialog.open(AlertaDialogoComponent, {
+          data: {
+            title: "Corregir",
+            content: "Las cantidades son incorrectas. La salida no puede ser mayor que las existencias.",
+            icon: true
+          },
+          width: '400px',
+        });
+      }
 
 
     } else {
@@ -165,4 +178,4 @@ export class OtrasSalidasComponent implements OnInit {
 
 }
 
-}
+
