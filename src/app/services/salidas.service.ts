@@ -23,9 +23,9 @@ export class SalidasService {
       .pipe(catchError(this.handleError("getSalidasObra")));
   }
 
-   //ok
-   getCountSalidasObra(id_obra, tipo_salida): Observable<any> {
-    return this.http.post(this.url + 'count_obra/' + id_obra, {tipo_salida: tipo_salida})
+  //ok
+  getCountSalidasObra(id_obra, tipo_salida): Observable<any> {
+    return this.http.post(this.url + 'count_obra/' + id_obra, { tipo_salida: tipo_salida })
       .pipe(catchError(this.handleError("getCountSalidasObra")));
   }
 
@@ -39,6 +39,11 @@ export class SalidasService {
   getSalida(id_salida) {
     return this.http.get(this.url + 'get_salida/' + id_salida)
       .pipe(catchError(this.handleError("getSalida")));
+  }
+
+  getPartidasUrbanizacion() {
+    return this.http.get(this.url + 'get_partidas_urbanizacion')
+      .pipe(catchError(this.handleError("getPartidasUrbanizacion")));
   }
 
   private handleError<T>(operation = 'operation') {

@@ -85,6 +85,8 @@ import { EstadosPedidoResolverService } from './resolvers/estados-pedido-resolve
 import { OtrasSalidasComponent } from './components/almacen/otras-salidas/otras-salidas.component';
 import { UsuariosResolverService } from './resolvers/usuarios-resolver.service';
 import { ArranqueComponent } from './components/admin/arranque/arranque.component';
+import { ObraManzanasTrabajadoresResidentesResolverService } from 'app/resolvers/obra-manzanas-trabajadores-residentes-resolver.service';
+import { PartidasUrbanizacionResolverService } from 'app/resolvers/partidas-urbanizacion-resolver.service';
 
 
 
@@ -258,6 +260,15 @@ export const ROUTES: Routes = [
                 }
             },
             {
+                path: 'otras-salidas', component: OtrasSalidasComponent,
+                resolve: {
+                    obras: ObrasUsuarioResolverService,
+                    obra:ObraManzanasTrabajadoresResidentesResolverService,
+                    partidas_urbanizacion:PartidasUrbanizacionResolverService,
+                    usuario: UsuarioLoggedResolverService
+                }
+            },
+            {
                 path: 'nueva-entrada', component: NuevaEntradaComponent,
                 resolve: {
                     obras: ObrasUsuarioResolverService,
@@ -397,12 +408,6 @@ export const ROUTES: Routes = [
                 path: 'reportes', component: ReportesComponent,
                 resolve: {
                     obras: ObrasUsuarioResolverService
-                }
-            },
-            {
-                path: 'otras-salidas', component: OtrasSalidasComponent,
-                resolve: {
-                    obras: ObrasUsuarioResolverService,
                 }
             },
             {

@@ -3,6 +3,7 @@
 </button>
 
 <mat-drawer-container class="drawer-container">
+
   <mat-drawer class="estructura" #drawer [mode]="mobileQuery.matches ? 'over':'side'" [opened]="!mobileQuery.matches" style="width:250px">
 
     <mat-card class="estructura">
@@ -45,6 +46,7 @@
 
       <mat-tab-group (selectedTabChange)="onTabChange($event)">
         <mat-tab label="Lotes">
+
           <div class="container-fluid py-3">
             <div class="input-group">
               <select class="form-control" [(ngModel)]="lotePedido_selected">
@@ -201,9 +203,11 @@
 
 
           </div>
+
         </mat-tab>
 
         <mat-tab label="Pedido">
+
           <div class="container-fluid py-3">
 
    
@@ -244,13 +248,13 @@
             </div>
 
           </div>
+          
         </mat-tab>
 
       </mat-tab-group>
 
     </div>
+
   </mat-drawer-content>
-
-
 
 </mat-drawer-container>

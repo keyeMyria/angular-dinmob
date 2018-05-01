@@ -224,6 +224,8 @@ import { VerEntradaDialogoComponent } from './components/almacen/ver-entrada-dia
 import { OtrasSalidasComponent } from './components/almacen/otras-salidas/otras-salidas.component';
 import { UsuariosResolverService } from './resolvers/usuarios-resolver.service';
 import { ArranqueComponent } from './components/admin/arranque/arranque.component';
+import { ObraManzanasTrabajadoresResidentesResolverService } from 'app/resolvers/obra-manzanas-trabajadores-residentes-resolver.service';
+import { PartidasUrbanizacionResolverService } from 'app/resolvers/partidas-urbanizacion-resolver.service';
 
 
 
@@ -518,7 +520,9 @@ export function getToken() {
     ResidentesObraResolverService,
     TiposPagoTrabajadorResolverService,
     EstadosPedidoResolverService,
-    UsuariosResolverService
+    UsuariosResolverService,
+    ObraManzanasTrabajadoresResidentesResolverService,
+    PartidasUrbanizacionResolverService
 
   ],
   bootstrap: [AppComponent]

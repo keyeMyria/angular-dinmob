@@ -138,15 +138,12 @@ export class NuevaEntradaComponent implements OnInit {
 
     console.log("change", $event.checked);
 
-
     if ($event.checked == true) {
       this.insumos_filtrados = this.insumos.filter(insumos => insumos.entrada > 0);
       filtro.value = '';
     } else {
       this.insumos_filtrados = this.insumos.slice();
     }
-
-
 
   }
 

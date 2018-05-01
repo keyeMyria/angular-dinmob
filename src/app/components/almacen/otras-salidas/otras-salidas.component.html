@@ -18,9 +18,9 @@
           <div class="form-row align-items-center">
             <div class="col-auto">
               <div class="input-group mb-2">
-                <input type="text" class="form-control" placeholder="Buscar">
+                <input (keyup)="aplicarFiltro($event.target.value)" #filtro type="text" class="form-control" placeholder="Buscar" [disabled]="filtroSalida.checked">
                 <div class="input-group-append">
-                  <button class="btn btn-secondary" type="button">
+                  <button class="btn btn-secondary" type="button" (click)="borrarFiltro(filtro)" [disabled]="filtroSalida.checked">
                     <i class="fa fa-times" aria-hidden="true"></i>
                   </button>
                 </div>
@@ -29,7 +29,7 @@
 
 
             <div class="col-auto">
-              <mat-checkbox>Ver sólo materiales con entrada</mat-checkbox>
+              <mat-checkbox (change)="insumosConSalida($event, filtro)" #filtroSalida>Ver sólo materiales con salida</mat-checkbox>
             </div>
           </div>
 
@@ -50,7 +50,7 @@
             </thead>
 
             <tbody>
-              <tr *ngFor="let insumo of insumos">
+              <tr *ngFor="let insumo of insumos_filtrados">
                 <td>
                   <i *ngIf="(insumo.extra === '1')" class="fa fa-check"></i>
                   <i *ngIf="(insumo.extra === '0')" class="fa fa-window-minimize"></i>
@@ -59,8 +59,10 @@
                 <td>{{insumo.insumo}}</td>
                 <td>{{insumo.unidad}}</td>
                 <td>{{insumo.existencias}}</td>
-                <td>
-                  <input type="number" class="form-control">
+                <td style="width: 150px">
+                  <input type="number" [(ngModel)]="insumo.salida" #salida="ngModel" class="form-control" min="0" [max]="insumo.existencias">
+                  <div class="text-danger" *ngIf="insumo.salida > insumo.existencias">Mayor que existencias</div>
+                  <div class="text-danger" *ngIf="insumo.salida <= 0">Menor o igual que 0</div>
                 </td>
               </tr>
 
@@ -71,7 +73,7 @@
 
       </div>
 
-      <div class="card mt-5">
+      <div class="card mt-3">
         <div class="card-header">
           Datos
         </div>
@@ -82,40 +84,43 @@
             <div class="form-group row">
               <label class="col-sm-3 col-form-label pt-0">Destino</label>
               <div class="col-sm-9">
-                <div class="form-check">
-                  <mat-radio-button value="1">Otras Obras</mat-radio-button>
-                </div>
-                <div class="form-check">
-                  <mat-radio-button value="2">Urbanización</mat-radio-button>
-                </div>
+                <mat-radio-group class="d-inline-flex flex-column" formControlName="tipo">
+                  <mat-radio-button value="O">Otras Obras</mat-radio-button>
+                  <mat-radio-button value="U">Urbanización</mat-radio-button>
+                </mat-radio-group>
               </div>
             </div>
 
-            <div class="form-group row mt-2">
+            <div class="form-group row mt-2" *ngIf=" form.get('tipo').value=='O'">
               <label for="obra" class="col-sm-3 col-form-label">Obra</label>
               <div class="col-sm-9">
-                <select class="form-control" id="obra" name="obra" [(ngModel)]="obra_selected" formControlName="obra" [ngClass]="{'is-invalid': form.get('obra').invalid  && (form.get('obra').dirty || form.get('obra').touched) }">
+                <select class="form-control" id="obra" name="obra" formControlName="obra" [ngClass]="{'is-invalid': form.get('obra').invalid  && (form.get('obra').dirty || form.get('obra').touched) }">
+                  <option value="">Seleccionar...</option>
                   <option *ngFor="let obra of obras" [value]="obra.id_obra">{{obra.nombre}}</option>
                 </select>
                 <div class="invalid-feedback">Seleccione una obra</div>
               </div>
             </div>
 
-            <div class="form-group row">
+            <div class="form-group row" *ngIf=" form.get('tipo').value=='O'">
               <label for="lote" class="col-sm-3 col-form-label">Lote</label>
               <div class="col-sm-9">
                 <select class="form-control" id="lote" name="lote" formControlName="lote" [ngClass]="{'is-invalid': form.get('lote').invalid  && (form.get('lote').dirty || form.get('lote').touched) }">
                   <option value="">Seleccionar...</option>
+                  <ng-container *ngFor="let manzana of manzanas">
+                    <option [value]="lote.id_lote" *ngFor="let lote of manzana.lotes">{{manzana.nombre + " / " + lote.nombre}}</option>
+                  </ng-container>
                 </select>
                 <div class="invalid-feedback">Seleccione un lote</div>
               </div>
             </div>
 
-            <div class="form-group row">
+            <div class="form-group row" *ngIf=" form.get('tipo').value=='U'">
               <label for="partida" class="col-sm-3 col-form-label">Partida</label>
               <div class="col-sm-9">
                 <select class="form-control" id="partida" name="partida" formControlName="partida" [ngClass]="{'is-invalid': form.get('partida').invalid  && (form.get('partida').dirty || form.get('partida').touched) }">
                   <option value="">Seleccionar...</option>
+                  <option [value]="partida.salida_urbanizacion_partida" *ngFor="let partida of partidas_urbanizacion">{{partida.nombre}}</option>
                 </select>
                 <div class="invalid-feedback">Seleccione una partida</div>
               </div>
@@ -131,7 +136,7 @@
             <div class="form-group row">
               <label for="entrega" class="col-sm-3 col-form-label">Entrega</label>
               <div class="col-sm-9">
-                <input readonly class="form-control" type="text" id="entrega" name="entrega" formControlName="entrega">
+                <input readonly class="form-control" type="text" id="entrega" name="entrega" [value]="usuario.nombre">
               </div>
             </div>
 
@@ -140,6 +145,7 @@
               <div class="col-sm-9">
                 <select class="form-control" id="recibe" name="recibe" formControlName="recibe" [ngClass]="{'is-invalid': form.get('recibe').invalid  && (form.get('recibe').dirty || form.get('recibe').touched) }">
                   <option value="">Seleccionar...</option>
+                  <option [value]="trabajador.id_trabajador" *ngFor="let trabajador of trabajadores">{{trabajador.nombre}} ({{trabajador.especialidad}})</option>
                 </select>
                 <div class="invalid-feedback">Seleccione un trabajador</div>
               </div>
@@ -150,6 +156,7 @@
               <div class="col-sm-9">
                 <select class="form-control" id="autoriza" name="autoriza" formControlName="autoriza" [ngClass]="{'is-invalid': form.get('autoriza').invalid  && (form.get('autoriza').dirty || form.get('autoriza').touched) }">
                   <option value="">Seleccionar...</option>
+                  <option [value]="usuario.id_usuario" *ngFor="let usuario of residentes">{{usuario.nombre}}</option>
                 </select>
                 <div class="invalid-feedback">Seleccione un residente</div>
               </div>
@@ -169,7 +176,7 @@
 
         </div>
         <div class="card-footer text-center">
-          <button type="submit" mat-raised-button color="primary" [disabled]="form.invalid">Guardar</button>
+          <button type="submit" mat-raised-button form="id_form" color="primary" [disabled]="form.invalid">Guardar</button>
 
         </div>
 

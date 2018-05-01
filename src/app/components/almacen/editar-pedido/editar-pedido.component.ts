@@ -1,10 +1,11 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
-import { MatSnackBar, MatDrawer, MatDialog, MatTabChangeEvent } from '@angular/material';
+import { MatSnackBar, MatDrawer, MatDialog, MatTabChangeEvent, MatTabGroup } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { ObrasService } from 'app/services/obras.service';
 import { PedidoService } from '../../../services/pedido.service';
+import { AlertaDialogoComponent } from 'app/components/admin/alerta-dialogo/alerta-dialogo.component';
 
 @Component({
   selector: 'app-editar-pedido',
@@ -12,6 +13,8 @@ import { PedidoService } from '../../../services/pedido.service';
   styleUrls: ['./editar-pedido.component.scss']
 })
 export class EditarPedidoComponent implements OnInit {
+  @ViewChild(MatTabGroup) tabGroup: MatTabGroup;
+  @ViewChild(MatDrawer) drawer: MatDrawer;
 
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
@@ -19,14 +22,13 @@ export class EditarPedidoComponent implements OnInit {
   obras: any = [];
   obra_selected: string = "";
   obra: any;
-  // partidas: any = [];
   lote_selected: any = {};
   lotes_pedido: any = [];
   lotePedido_selected: any = "";
   insumos: any = [];
   insumos_pedido: any = [];
   pedido: any = {};
-  estados: any = [];  
+  estados: any = [];
 
   constructor(
     private media: MediaMatcher,
@@ -47,8 +49,8 @@ export class EditarPedidoComponent implements OnInit {
 
     this.route.data
       .subscribe((data: { obras: any[], estados: any }) => {
-        this.obras = data.obras;    
-        this.estados= data.estados;    
+        this.obras = data.obras;
+        this.estados = data.estados;
       });
 
     this.route.paramMap
@@ -104,17 +106,33 @@ export class EditarPedidoComponent implements OnInit {
 
   getLote(lote) {
 
-    if (!this.loteEstaEnPedido(lote.id_lote)) {
-      this.pedidoSrv.getLote(lote.id_lote)
-        .subscribe((response: any) => {
-          lote.partidas = response.partidas;
-          lote.insumos_extra = response.insumos_extra;
-          this.lotes_pedido.push(lote);
-          this.lotePedido_selected = this.lotes_pedido[this.lotes_pedido.length - 1];
+    if (this.tabGroup.selectedIndex == 0) {
 
-        }, (error) => {
+      if (this.mobileQuery.matches) {
+        this.drawer.close();
+      }
 
-        });
+      if (!this.loteEstaEnPedido(lote.id_lote)) {
+        this.pedidoSrv.getLote(lote.id_lote)
+          .subscribe((response: any) => {
+            lote.partidas = response.partidas;
+            lote.insumos_extra = response.insumos_extra;
+            this.lotes_pedido.push(lote);
+            this.lotePedido_selected = this.lotes_pedido[this.lotes_pedido.length - 1];
+
+          }, (error) => {
+
+          });
+      }
+    } else {
+      let dialogRef = this.dialog.open(AlertaDialogoComponent, {
+        data: {
+          title: "Corregir",
+          content: "Cambie a la pestaña Lotes para añadir materiales.",
+          icon: true
+        },
+
+      });
     }
 
   }
@@ -183,7 +201,7 @@ export class EditarPedidoComponent implements OnInit {
   getInsumosAcumulados() {
 
     //console.log("getInsumosAcumulados");
-    
+
 
     this.insumos = [];
 
@@ -243,7 +261,6 @@ export class EditarPedidoComponent implements OnInit {
 
   }
 
-
   concatInsumosPedido(pedido, insumos, id_lote) {
     //console.log("concatInsumosPedido");
     for (var i = 0; i < insumos.length; i++) {
@@ -273,49 +290,37 @@ export class EditarPedidoComponent implements OnInit {
 
   }
 
-
-
-
- /*  addPedido() {
-
-    this.pedido.id_obra = this.obra.obra.id_obra;
-
-    this.getInsumosSinAcumular();
-    console.log("insumos", this.insumos_pedido);
-
-    // si los el array de insumos está vacío mostrar un aviso
-
-    console.log("pedido", this.pedido);
-
-    this.pedido.id_usuario = this.usuario.id_usuario;
-    this.pedidoSrv.createPedido(this.pedido, this.insumos_pedido)
-      .subscribe(respuesta => {
-
-        console.log("respuesta", respuesta);
-
-
-        this.lotes_pedido = [];
-        this.lotePedido_selected = "";
-        this.insumos = [];
-
-      }, (error) => {
-
-        this.lotes_pedido = [];
-        this.lotePedido_selected = "";
-        this.insumos = [];
-      });
-
-
-  } */
-
   updatePedido() {
-    let pedido: any = {descripcion: this.pedido.descripcion, id_pedido_estado: this.pedido.id_pedido_estado};
-    this.pedidoSrv.updatePedido(this.pedido.id_pedido, pedido, this.insumos_pedido)
-      .subscribe(respuesta => {
+    if (this.insumos_pedido.length > 0) {
+      let pedido: any = { descripcion: this.pedido.descripcion, id_pedido_estado: this.pedido.id_pedido_estado };
+      this.pedidoSrv.updatePedido(this.pedido.id_pedido, pedido, this.insumos_pedido)
+        .subscribe(respuesta => {
 
-        console.log("respuesta", respuesta);
+          console.log("respuesta", respuesta);
+          this.snackBar.open("Pedido Actualizado", "", {
+            duration: 2000,
+            panelClass: ["bg-success", "text-white"]
+          });
 
+
+        }, (error) => {
+
+          this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+            duration: 3000,
+            panelClass: ["bg-danger", "text-white"]
+          });
+        });
+
+    } else {
+      let dialogRef = this.dialog.open(AlertaDialogoComponent, {
+        data: {
+          title: "Corregir",
+          content: "El pedido que intenta actualizar no contiene ningún material.",
+          icon: true
+        },
+        //width: '500px',
       });
+    }
   }
 
   onTabChange(event: MatTabChangeEvent) {
