@@ -43,7 +43,7 @@
                 <th>Código</th>
                 <th>Material</th>
                 <th>Unidad</th>
-                <th>Existencias</th>
+                <th>Existencia</th>
                 <th>Salida</th>
 
               </tr>
@@ -94,7 +94,8 @@
             <div class="form-group row mt-2" *ngIf=" form.get('tipo').value=='O'">
               <label for="obra" class="col-sm-3 col-form-label">Obra</label>
               <div class="col-sm-9">
-                <select class="form-control" id="obra" name="obra" formControlName="obra" [ngClass]="{'is-invalid': form.get('obra').invalid  && (form.get('obra').dirty || form.get('obra').touched) }">
+                <select class="form-control" id="obra" name="obra" (change)="getLotesObra( form.get('obra').value)" formControlName="obra"
+                  [ngClass]="{'is-invalid': form.get('obra').invalid  && (form.get('obra').dirty || form.get('obra').touched) }">
                   <option value="">Seleccionar...</option>
                   <option *ngFor="let obra of obras" [value]="obra.id_obra">{{obra.nombre}}</option>
                 </select>

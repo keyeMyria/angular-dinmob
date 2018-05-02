@@ -105,10 +105,23 @@ export class ObrasService {
   }
 
   //ok
-  getLoteResidentesTrabajadores(id_obra) {
-    return this.http.get(this.url + "get_manzanas_lotes_trabajadores_residentes/" + id_obra, {})
-      .pipe(catchError(this.handleError("getLoteResidentesTrabjadores")));
+  getMaterialesResidentesTrabajadores(id_obra) {
+    return this.http.get(this.url + "get_materiales_trabajadores_residentes/" + id_obra)
+      .pipe(catchError(this.handleError("getMaterialesResidentesTrabajadores")));
   }
+
+  //ok
+  getManzanasResidentesTrabajadores(id_obra) {
+    return this.http.get(this.url + "get_manzanas_lotes_trabajadores_residentes/" + id_obra)
+      .pipe(catchError(this.handleError("getManzanasResidentesTrabajadores")));
+  }
+
+  //ok
+  getManzanasTrabajadores(id_obra) {
+    return this.http.get(this.url + "get_manzanas_lotes_trabajadores/" + id_obra)
+      .pipe(catchError(this.handleError("getManzanasTrabajadores")));
+  }
+
 
 
 

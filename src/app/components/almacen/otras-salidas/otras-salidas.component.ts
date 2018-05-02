@@ -5,6 +5,7 @@ import { InsumoService } from 'app/services/insumo.service';
 import { of } from "rxjs/observable/of";
 import { AlertaDialogoComponent } from 'app/components/admin/alerta-dialogo/alerta-dialogo.component';
 import { MatDialog } from '@angular/material';
+import { ObrasService } from '../../../services/obras.service';
 
 @Component({
   selector: 'app-otras-salidas',
@@ -15,7 +16,6 @@ export class OtrasSalidasComponent implements OnInit {
   obra_selected: string = "";
   obras: any = [];
   form: FormGroup;
-  /*   formInsumos: FormGroup; */
   insumos: any[] = [];
   residentes: any = [];
   trabajadores: any = [];
@@ -32,6 +32,7 @@ export class OtrasSalidasComponent implements OnInit {
     private fb: FormBuilder,
     private insumoSrv: InsumoService,
     public dialog: MatDialog,
+    private obraSrv: ObrasService
   ) {
     this.form = this.fb.group({
       tipo: "O",
@@ -45,9 +46,7 @@ export class OtrasSalidasComponent implements OnInit {
       notas: [""],
     });
 
-    /*    this.formInsumos= this.fb.group({
-         insumos:this.fb.array([])
-       }); */
+
 
     this.form.controls["tipo"].valueChanges
       .subscribe((value) => {
@@ -72,31 +71,34 @@ export class OtrasSalidasComponent implements OnInit {
 
   ngOnInit() {
     this.route.data
-      .subscribe((data: { obras: any[], obra: { obra: any, trabajadores: any, manzanas: any, residentes: any }, partidas_urbanizacion: any, usuario: any }) => {
+      .subscribe((data: { obras: any[], obra: { obra: any, trabajadores: any, materiales: any, residentes: any }, partidas_urbanizacion: any, usuario: any }) => {
         this.obras = data.obras;
         this.trabajadores = data.obra.trabajadores;
         this.residentes = data.obra.residentes;
         this.obra = data.obra.obra;
-        this.manzanas = data.obra.manzanas;
+        this.manzanas = [];
         this.partidas_urbanizacion = data.partidas_urbanizacion;
         this.usuario = data.usuario;
+
+        this.insumos = data.obra.materiales;
+        this.insumos_filtrados = this.insumos.slice();
       });
 
-    this.route.paramMap
-      .switchMap((params: ParamMap) => {
-        if (params.has("obra")) {
-          this.obra_selected = params.get("obra");
-          return this.insumoSrv.getMaterialesObra(params.get("obra"));
-        } else {
-          return of([]);
-        }
-      }).subscribe(insumos => {
-        this.insumos = insumos;
-        this.insumos_filtrados = this.insumos.slice();
-        /*   this.insumos.forEach(insumo=> {
-            (<FormArray>this.formInsumos.controls["insumos"]).push(new FormControl(insumo));
+    this.obra_selected = this.route.snapshot.params["obra"] ? this.route.snapshot.params["obra"] : "";
+
+
+    /*     this.route.paramMap
+          .switchMap((params: ParamMap) => {
+            if (params.has("obra")) {
+              this.obra_selected = params.get("obra");
+              return this.insumoSrv.getMaterialesObra(params.get("obra"));
+            } else {
+              return of([]);
+            }
+          }).subscribe(insumos => {
+            this.insumos = insumos;
+            this.insumos_filtrados = this.insumos.slice();       
           }); */
-      });
   }
 
   cargarObra(id_obra) {
@@ -156,7 +158,7 @@ export class OtrasSalidasComponent implements OnInit {
         this.dialog.open(AlertaDialogoComponent, {
           data: {
             title: "Corregir",
-            content: "Las cantidades son incorrectas. La salida no puede ser mayor que las existencias.",
+            content: "Las cantidades son incorrectas. La salida no puede ser mayor que la existencia.",
             icon: true
           },
           width: '400px',
@@ -174,6 +176,28 @@ export class OtrasSalidasComponent implements OnInit {
         //width: '500px',
       });
     }
+  }
+
+  getLotesObra(id_obra) {
+    if (id_obra != "") {
+      console.log("getLotesObra", id_obra);
+
+      this.obraSrv.getAcordeonManzanas(id_obra)
+        .subscribe(obra => {
+          //console.log("getLotes", obra.manzanas);
+          this.manzanas = obra.manzanas;
+
+
+        }, (error) => {
+
+        });
+
+
+    } else {
+      console.log("seleccione una obra");
+
+    }
+
   }
 
 }

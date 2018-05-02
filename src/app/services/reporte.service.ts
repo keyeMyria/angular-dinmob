@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { ConfigService } from 'app/services/config.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import { catchError, map, tap } from 'rxjs/operators';
+//esta es la forma correcta
+import "rxjs/add/observable/throw";
 
 @Injectable()
 export class ReporteService {
@@ -13,6 +17,11 @@ export class ReporteService {
     this.url = this.config.api_url + "reportes/";
   }
 
+  getTipos(){
+    return this.http.get(this.url + 'get_tipos/')
+    .pipe(catchError(this.handleError("getTipos")));
+  }
+
   getUrlReporteCompra(id_cliente, id_lote, id_compra) {
     return `${this.url}cliente_lote/${id_cliente}/${id_lote}/${id_compra}`;
   }
@@ -23,6 +32,19 @@ export class ReporteService {
 
   getUrlReportePagos(id_obra){
     return `${this.url}pagos/${id_obra}`;
+  }
+
+  private handleError<T>(operation = 'operation') {
+    return (error: HttpErrorResponse) => {
+
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+
+      // TODO: better job of transforming error for user consumption
+      console.log(`${operation} failed: ${error.message} (${error.status}- ${error.statusText})`);
+
+      return Observable.throw(error);
+    };
   }
 
 }

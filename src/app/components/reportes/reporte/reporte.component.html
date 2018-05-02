@@ -10,7 +10,8 @@
           <form [formGroup]="form" (ngSubmit)="getReporte()" id="id_formReporte">
             <div class="form-group">
               <label for="obra" class="form-label">Obra</label>
-              <select class="form-control" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)" formControlName="id_obra" [ngClass]="{'is-invalid': form.get('id_obra').invalid  && (form.get('id_obra').dirty || form.get('id_obra').touched )}">
+              <select class="form-control" [(ngModel)]="obra_selected" (change)="getManzanasTrabajadores(obra_selected)" formControlName="id_obra"
+                [ngClass]="{'is-invalid': form.get('id_obra').invalid  && (form.get('id_obra').dirty || form.get('id_obra').touched )}">
                 <option value="">Seleccionar...</option>
                 <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>
               </select>
@@ -19,16 +20,20 @@
 
             <div class="form-group">
               <label for="obra" class="form-label">Reporte</label>
-              <select class="form-control" formControlName="reporte" [ngClass]="{'is-invalid': form.get('reporte').invalid  && (form.get('reporte').dirty || form.get('reporte').touched )}">
+              <select [(ngModel)]="tipo_selected" class="form-control" formControlName="reporte" [ngClass]="{'is-invalid': form.get('reporte').invalid  && (form.get('reporte').dirty || form.get('reporte').touched )}">
                 <option value="">Seleccionar...</option>
+                <option *ngFor="let tipo of tipos" [value]="tipo.id_reporte">{{tipo.nombre}}</option>
               </select>
               <div class="invalid-feedback">Seleccione un reporte</div>
             </div>
 
             <div class="form-group">
               <label for="obra" class="form-label">Ámbito</label>
-              <select class="form-control" formControlName="ambito" [ngClass]="{'is-invalid': form.get('ambito').invalid  && (form.get('ambito').dirty || form.get('ambito').touched )}">
+              <select [(ngModel)]="ambito_selected" class="form-control" formControlName="ambito" [ngClass]="{'is-invalid': form.get('ambito').invalid  && (form.get('ambito').dirty || form.get('ambito').touched )}">
                 <option value="">Seleccionar...</option>
+                <option value="O">Obra</option>
+                <option value="L">Lote</option>
+                <option value="T">Trabajador</option>
               </select>
               <div class="invalid-feedback">Seleccione un Ámbito</div>
             </div>
@@ -72,7 +77,9 @@
           </form>
           <div class="form-group">
             <div>
-              <button mat-raised-button class="btn-block" type="submit" color="primary" form="id_formReporte" [disabled]="form.invalid">Reporte</button>
+              <button mat-raised-button class="btn" type="submit" color="primary" form="id_formReporte" [disabled]="form.invalid">Reporte</button>
+              <button mat-raised-button class="btn" (click)="showLotes()">Lotes</button>
+              <button mat-raised-button class="btn" (click)="showTrabajadores()">Trabajadores</button>
             </div>
           </div>
         </div>
@@ -84,7 +91,8 @@
         <div class="col-6 pt-2">
           <div class="card">
             <div class="card-body">
-              <h3>-</h3>
+              <h3 *ngIf="ultimo_avance">{{ultimo_avance | date:'mediumDate':'':'es'}}</h3>
+              <h3 *ngIf="!ultimo_avance">-</h3>
               <p>ÚLTIMO AVANCE</p>
               <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">today</i>
             </div>
@@ -94,7 +102,8 @@
         <div class="col-6 pt-2">
           <div class="card">
             <div class="card-body">
-              <h3>-</h3>
+              <h3 *ngIf="ultimo_pago">{{ultimo_pago | date:'mediumDate':'':'es'}}</h3>
+              <h3 *ngIf="!ultimo_pago">-</h3>
               <p>ÚLTIMO PAGO</p>
               <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">today</i>
             </div>
@@ -114,9 +123,54 @@
 
 
     <div class="col-6 ">
-      <div class="card mt-2 ">
-        <div class="card-body ">
-          <h5 class="card-title ">Seleccionar</h5>
+      <div *ngIf="ambito_selected == 'L' " class="card mt-2 ">
+        <div class="card-header ">Lotes</div>
+        <!-- acordeon de manzanas -->
+        <div class="acordeon-prototipo">
+          <mat-accordion [displayMode]="'default'" multi="true">
+            <mat-expansion-panel [hideToggle]="true" *ngFor="let manzana of manzanas; let i=index" #panel>
+              <mat-expansion-panel-header [ngClass]="{'bg-primary text-white':panel.expanded}">
+                <span class="align-self-center">{{manzana.nombre}}</span>
+                <div class="spacer"></div>
+                <div class="collapse-header-btns">
+                  <span class="badge badge-pill badge-dark">{{manzana.lotes.length}}</span>
+                </div>
+              </mat-expansion-panel-header>
+
+              <div class="table-responsive">
+                <table class="table table-align-middle table-striped">
+                  <!-- <thead>
+                    <tr>
+                      <th>
+                      </th>
+                      <th>Lote</th>
+                      <th>Prototipos</th>
+
+                    </tr>
+                  </thead> -->
+                  <tbody>
+                    <tr *ngFor="let lote of manzana.lotes" class="pointer" (click)="selection_lotes.toggle(lote)" [ngClass]="{'table-primary':selection_lotes.isSelected(lote)}">
+                      <td style="width: 55px">
+                        <mat-checkbox class="pl-1" (click)="$event.stopPropagation()" (change)="$event ? selection_lotes.toggle(lote) : null" [checked]="selection_lotes.isSelected(lote)"></mat-checkbox>
+                      </td>
+                      <td class="ws-nowrap">{{ lote.nombre}}</td>
+                      <td>
+                        <span *ngFor="let prototipo of lote.prototipos">
+                          {{prototipo.nombre}}
+                          <br>
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+        <!-- <div class="card-body ">
+          <h5 class="card-title ">Lotes</h5>
           <div class="table-responsive ">
             <table class="table table-hover table-striped table-align-middle ">
               <thead>
@@ -129,23 +183,28 @@
               </thead>
 
               <tbody>
-                <tr>
-                  <td>
-                    <mat-checkbox></mat-checkbox>
-                  </td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
+                <ng-container *ngFor="let mazana of manzanas">
+                  <tr *ngFor="let lote of mazana.lotes" class="pointer" (click)="selection_lotes.toggle(lote)" [ngClass]="{'table-primary':selection_lotes.isSelected(lote)}">
+                    <td>
+                      <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection_lotes.toggle(lote) : null" [checked]="selection_lotes.isSelected(lote)"></mat-checkbox>
+                    </td>
+                    <td>{{lote.manzana}}</td>
+                    <td>{{lote.nombre}}</td>
+                    <td>
+                      <span *ngFor="let prototipo of lote.prototipos">{{prototipo.nombre}} </span>
+                    </td>
+                  </tr>
+                </ng-container>
               </tbody>
             </table>
           </div>
-        </div>
+        </div> -->
       </div>
 
-      <div class="card mt-2 ">
-        <div class="card-body ">
-          <h5 class="card-title ">Seleccionar</h5>
+      <div *ngIf="ambito_selected == 'T' " class="card mt-2 ">
+     <!--    <h5 class="card-title ">Trabajadores</h5> -->
+        <div class="">
+
           <div class="table-responsive ">
             <table class="table table-hover table-striped table-align-middle ">
               <thead>
@@ -157,12 +216,12 @@
               </thead>
 
               <tbody>
-                <tr>
+                <tr *ngFor="let trabajador of trabajadores" class="pointer" (click)="selection_trabajadores.toggle(trabajador)" [ngClass]="{'table-primary':selection_trabajadores.isSelected(trabajador)}">
                   <td>
-                    <mat-checkbox></mat-checkbox>
+                    <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection_trabajadores.toggle(trabajador) : null" [checked]="selection_trabajadores.isSelected(trabajador)"></mat-checkbox>
                   </td>
-                  <td></td>
-                  <td></td>
+                  <td>{{trabajador.nombre}}</td>
+                  <td>{{trabajador.especialidad}}</td>
                 </tr>
               </tbody>
             </table>

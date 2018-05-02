@@ -85,9 +85,12 @@ import { EstadosPedidoResolverService } from './resolvers/estados-pedido-resolve
 import { OtrasSalidasComponent } from './components/almacen/otras-salidas/otras-salidas.component';
 import { UsuariosResolverService } from './resolvers/usuarios-resolver.service';
 import { ArranqueComponent } from './components/admin/arranque/arranque.component';
-import { ObraManzanasTrabajadoresResidentesResolverService } from 'app/resolvers/obra-manzanas-trabajadores-residentes-resolver.service';
 import { PartidasUrbanizacionResolverService } from 'app/resolvers/partidas-urbanizacion-resolver.service';
 import { ReporteComponent } from './components/reportes/reporte/reporte.component';
+import { ObraMaterialesTrabajadoresResidentesResolverService } from './resolvers/obra-materiales-trabajadores-residentes-resolver.service';
+import { ObraManzanasTrabajadoresResidentesResolverService } from 'app/resolvers/obra-manzanas-trabajadores-residentes-resolver.service';
+import { ReportesResolverService } from './resolvers/reportes-resolver.service';
+
 
 
 
@@ -257,7 +260,8 @@ export const ROUTES: Routes = [
                 path: 'nueva-salida', component: NuevaSalidaComponent,
                 resolve: {
                     obras: ObrasUsuarioResolverService,
-                    usuario: UsuarioLoggedResolverService
+                    usuario: UsuarioLoggedResolverService,
+                    obra:ObraManzanasTrabajadoresResidentesResolverService,
 
                 }
             },
@@ -265,7 +269,7 @@ export const ROUTES: Routes = [
                 path: 'otras-salidas', component: OtrasSalidasComponent,
                 resolve: {
                     obras: ObrasUsuarioResolverService,
-                    obra:ObraManzanasTrabajadoresResidentesResolverService,
+                    obra:ObraMaterialesTrabajadoresResidentesResolverService,
                     partidas_urbanizacion:PartidasUrbanizacionResolverService,
                     usuario: UsuarioLoggedResolverService
                 }
@@ -422,6 +426,7 @@ export const ROUTES: Routes = [
                 path: 'reporte', component: ReporteComponent,
                 resolve: {
                     obras: ObrasUsuarioResolverService,
+                    tipos: ReportesResolverService
                 }
             }
 

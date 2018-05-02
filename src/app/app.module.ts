@@ -224,9 +224,12 @@ import { VerEntradaDialogoComponent } from './components/almacen/ver-entrada-dia
 import { OtrasSalidasComponent } from './components/almacen/otras-salidas/otras-salidas.component';
 import { UsuariosResolverService } from './resolvers/usuarios-resolver.service';
 import { ArranqueComponent } from './components/admin/arranque/arranque.component';
-import { ObraManzanasTrabajadoresResidentesResolverService } from 'app/resolvers/obra-manzanas-trabajadores-residentes-resolver.service';
 import { PartidasUrbanizacionResolverService } from 'app/resolvers/partidas-urbanizacion-resolver.service';
 import { ReporteComponent } from './components/reportes/reporte/reporte.component';
+import { ObraManzanasTrabajadoresResidentesResolverService } from './resolvers/obra-manzanas-trabajadores-residentes-resolver.service';
+import { ObraMaterialesTrabajadoresResidentesResolverService } from './resolvers/obra-materiales-trabajadores-residentes-resolver.service';
+import { ReportesResolverService } from './resolvers/reportes-resolver.service';
+
 
 
 
@@ -523,8 +526,10 @@ export function getToken() {
     TiposPagoTrabajadorResolverService,
     EstadosPedidoResolverService,
     UsuariosResolverService,
+    PartidasUrbanizacionResolverService,
     ObraManzanasTrabajadoresResidentesResolverService,
-    PartidasUrbanizacionResolverService
+    ObraMaterialesTrabajadoresResidentesResolverService,
+    ReportesResolverService
 
   ],
   bootstrap: [AppComponent]

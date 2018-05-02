@@ -5,7 +5,7 @@ import { ObrasService } from '../services/obras.service';
 
 
 @Injectable()
-export class ObraManzanasTrabajadoresResidentesResolverService implements Resolve<any[]> {
+export class ObraMaterialesTrabajadoresResidentesResolverService implements Resolve<any[]> {
 
 
   constructor(
@@ -16,7 +16,7 @@ export class ObraManzanasTrabajadoresResidentesResolverService implements Resolv
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any[]> {
 
 
-    return this.obraSrv.getManzanasResidentesTrabajadores(route.params["obra"]).take(1).map((res: any[]) => {
+    return this.obraSrv.getMaterialesResidentesTrabajadores(route.params["obra"]).take(1).map((res: any[]) => {
       //console.log("resolver estados", estados);
       if (res) {
         return res;

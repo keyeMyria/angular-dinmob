@@ -18,7 +18,7 @@ export class InsumoService {
   }
 
   getMaterialesObra(id_obra):Observable<any> {
-    return this.http.get(this.url + 'materiales_obra/'+id_obra)
+    return this.http.get(this.url + 'get_materiales_obra/'+id_obra)
       .pipe(catchError(this.handleError("getMaterialesObra")));
   }
 
