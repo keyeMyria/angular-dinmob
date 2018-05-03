@@ -90,6 +90,8 @@ import { ReporteComponent } from './components/reportes/reporte/reporte.componen
 import { ObraMaterialesTrabajadoresResidentesResolverService } from './resolvers/obra-materiales-trabajadores-residentes-resolver.service';
 import { ObraManzanasTrabajadoresResidentesResolverService } from 'app/resolvers/obra-manzanas-trabajadores-residentes-resolver.service';
 import { ReportesResolverService } from './resolvers/reportes-resolver.service';
+import { ReporteSalidasComponent } from './components/almacen/reporte-salidas/reporte-salidas.component';
+import { ReporteEntradasComponent } from './components/almacen/reporte-entradas/reporte-entradas.component';
 
 
 
@@ -261,7 +263,7 @@ export const ROUTES: Routes = [
                 resolve: {
                     obras: ObrasUsuarioResolverService,
                     usuario: UsuarioLoggedResolverService,
-                    obra:ObraManzanasTrabajadoresResidentesResolverService,
+                    obra: ObraManzanasTrabajadoresResidentesResolverService,
 
                 }
             },
@@ -269,8 +271,8 @@ export const ROUTES: Routes = [
                 path: 'otras-salidas', component: OtrasSalidasComponent,
                 resolve: {
                     obras: ObrasUsuarioResolverService,
-                    obra:ObraMaterialesTrabajadoresResidentesResolverService,
-                    partidas_urbanizacion:PartidasUrbanizacionResolverService,
+                    obra: ObraMaterialesTrabajadoresResidentesResolverService,
+                    partidas_urbanizacion: PartidasUrbanizacionResolverService,
                     usuario: UsuarioLoggedResolverService
                 }
             },
@@ -428,7 +430,9 @@ export const ROUTES: Routes = [
                     obras: ObrasUsuarioResolverService,
                     tipos: ReportesResolverService
                 }
-            }
+            },
+            { path: 'reporte-salida', component: ReporteSalidasComponent },
+            { path: 'reporte_entradas', component: ReporteEntradasComponent },
 
 
 

@@ -229,6 +229,8 @@ import { ReporteComponent } from './components/reportes/reporte/reporte.componen
 import { ObraManzanasTrabajadoresResidentesResolverService } from './resolvers/obra-manzanas-trabajadores-residentes-resolver.service';
 import { ObraMaterialesTrabajadoresResidentesResolverService } from './resolvers/obra-materiales-trabajadores-residentes-resolver.service';
 import { ReportesResolverService } from './resolvers/reportes-resolver.service';
+import { ReporteSalidasComponent } from './components/almacen/reporte-salidas/reporte-salidas.component';
+import { ReporteEntradasComponent } from './components/almacen/reporte-entradas/reporte-entradas.component';
 
 
 
@@ -371,7 +373,9 @@ export function getToken() {
     VerEntradaDialogoComponent,
     OtrasSalidasComponent,
     ArranqueComponent,
-    ReporteComponent
+    ReporteComponent,
+    ReporteSalidasComponent,
+    ReporteEntradasComponent
 
 
 
