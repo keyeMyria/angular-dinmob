@@ -17,22 +17,44 @@ export class ReporteService {
     this.url = this.config.api_url + "reportes/";
   }
 
-  getTipos(){
+  getTipos() {
     return this.http.get(this.url + 'get_tipos/')
-    .pipe(catchError(this.handleError("getTipos")));
+      .pipe(catchError(this.handleError("getTipos")));
   }
 
   getUrlReporteCompra(id_cliente, id_lote, id_compra) {
     return `${this.url}cliente_lote/${id_cliente}/${id_lote}/${id_compra}`;
   }
 
-  getUrlReporteVentas(id_obra){
+  getUrlReporteVentas(id_obra) {
     return `${this.url}lotes_en_venta/${id_obra}`;
   }
 
-  getUrlReportePagos(id_obra){
+  getUrlReportePagos(id_obra) {
     return `${this.url}pagos/${id_obra}`;
   }
+
+
+  getUrlReporteAcumulado(id_obra, fecha_ini, fecha_fin, inicio) {
+    return `${this.url}acumulado/${id_obra}/${fecha_ini}/${fecha_fin}/${inicio}`;
+  }
+
+  getUrlReporteInventario(id_obra) {
+    return `${this.url}inventario/${id_obra}`;
+  }
+
+  getUrlReporteEntradas(id_obra, fecha_ini, fecha_fin, inicio) {
+    return `${this.url}entradas/${id_obra}/${fecha_ini}/${fecha_fin}/${inicio}`;
+  }
+
+  getUrlReporteSalidas(id_obra, fecha_ini, fecha_fin, inicio) {
+    return `${this.url}salidas/${id_obra}/${fecha_ini}/${fecha_fin}/${inicio}`;
+  }
+
+  getUrlReporteHistorial(ids) {
+    return `${this.url}historial_pagos/${ids}`;
+  }
+
 
   private handleError<T>(operation = 'operation') {
     return (error: HttpErrorResponse) => {
