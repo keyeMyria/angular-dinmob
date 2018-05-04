@@ -59,7 +59,7 @@
 
           <div class="card">
             <div class="card-body">
-               
+
               <form [formGroup]="form">
                 <div class="mb-2">
                   <select class="form-control" id="partidas" name="partidas" formControlName="partida" [(ngModel)]="partida_selected" (change)="getInsumosPartida(partida_selected)">
@@ -119,9 +119,13 @@
                       <td>{{insumo.consumido}}</td>
                       <td>{{insumo.existencias}}</td>
                       <td style="width: 150px">
-                        <input type="number" class="form-control" [(ngModel)]="insumo.salida">
+                        <input type="number" class="form-control" [(ngModel)]="insumo.salida" min="0" [max]="insumo.existencias">
+                        <small *ngIf="insumo.salida && insumo.salida <= 0" class="text-danger">error &lt; 0</small>
                       </td>
-                      <td></td>
+                      <td class="text-danger">
+                        <span *ngIf="(insumo.salida + insumo.consumido) - insumo.cantidad > 0.99">
+                          <!-- <i class="fa fa-exclamation-circle"></i> --> {{((insumo.salida + insumo.consumido) - insumo.cantidad|number:'.2-4') }}</span>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
