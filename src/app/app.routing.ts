@@ -430,8 +430,18 @@ export const ROUTES: Routes = [
                     tipos: ReportesResolverService
                 }
             },
-            { path: 'reporte-salidas', component: ReporteSalidasComponent },
-            { path: 'reporte-entradas', component: ReporteEntradasComponent },
+            {
+                path: 'reporte-salidas', component: ReporteSalidasComponent,
+                resolve: {
+                    obras: ObrasUsuarioResolverService
+                }
+            },
+            {
+                path: 'reporte-entradas', component: ReporteEntradasComponent,
+                resolve: {
+                    obras: ObrasUsuarioResolverService
+                }
+            },
 
 
 
