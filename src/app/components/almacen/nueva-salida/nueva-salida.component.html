@@ -62,7 +62,7 @@
 
               <form [formGroup]="form">
                 <div class="mb-2">
-                  <select class="form-control" id="partidas" name="partidas" formControlName="partida" [(ngModel)]="partida_selected" (change)="getInsumosPartida(partida_selected)">
+                  <select class="form-control" id="id_partida" name="id_partida" formControlName="id_partida" [(ngModel)]="partida_selected" (change)="getInsumosPartida(partida_selected)">
                     <option value="">Seleccionar...</option>
                     <option *ngFor="let partida of partidas" [value]="partida.id_partida">{{partida.nombre}}</option>
                   </select>
@@ -80,7 +80,7 @@
                       </div>
                     </div>
                   </div>
-                
+
                   <div class="col-auto">
                     <mat-checkbox (change)="insumosConSalida($event, filtro)" #filtroSalida>Ver sólo materiales con salida</mat-checkbox>
                   </div>
@@ -117,7 +117,7 @@
                       </td>
                       <td class="text-danger">
                         <span *ngIf="(insumo.salida + insumo.consumido) - insumo.cantidad > 0.99">
-                          <!-- <i class="fa fa-exclamation-circle"></i> --> {{((insumo.salida + insumo.consumido) - insumo.cantidad|number:'.2-4') }}</span>
+                          <!-- <i class="fa fa-exclamation-circle"></i> -->{{((insumo.salida + insumo.consumido) - insumo.cantidad|number:'.2-4') }}</span>
                       </td>
                     </tr>
                   </tbody>
@@ -146,10 +146,10 @@
                 </div>
 
                 <div class="form-group row">
-                  <label for="recibe" class="col-md-2 col-form-label">Recibe</label>
+                  <label for="id_trabajador_recibe" class="col-md-2 col-form-label">Recibe</label>
                   <div class="col-md-10">
-                    <select class="form-control" id="recibe" name="recibe" [ngClass]="{'is-invalid': form.get('recibe').invalid  && (form.get('recibe').dirty || form.get('recibe').touched) }"
-                      formControlName="recibe">
+                    <select class="form-control" id="id_trabajador_recibe" name="id_trabajador_recibe" [ngClass]="{'is-invalid': form.get('id_trabajador_recibe').invalid  && (form.get('id_trabajador_recibe').dirty || form.get('id_trabajador_recibe').touched) }"
+                      formControlName="id_trabajador_recibe">
                       <option value="">Seleccionar...</option>
                       <option *ngFor="let trabajador of trabajadores" [value]="trabajador.id_trabajador">{{trabajador.nombre}} ({{trabajador.especialidad}})</option>
                     </select>
@@ -158,10 +158,10 @@
                 </div>
 
                 <div class="form-group row">
-                  <label for="autoriza" class="col-md-2 col-form-label">Autoriza</label>
+                  <label for="id_usuario_autoriza" class="col-md-2 col-form-label">Autoriza</label>
                   <div class="col-md-10">
-                    <select class="form-control" id="autoriza" name="autoriza" [ngClass]="{'is-invalid': form.get('autoriza').invalid  && (form.get('autoriza').dirty || form.get('autoriza').touched) }"
-                      formControlName="autoriza">
+                    <select class="form-control" id="id_usuario_autoriza" name="id_usuario_autoriza" [ngClass]="{'is-invalid': form.get('id_usuario_autoriza').invalid  && (form.get('id_usuario_autoriza').dirty || form.get('id_usuario_autoriza').touched) }"
+                      formControlName="id_usuario_autoriza">
                       <option value="">Seleccionar...</option>
                       <option *ngFor="let residente of residentes" [value]="residente.id_usuario">{{residente.nombre}}</option>
                     </select>
@@ -183,6 +183,11 @@
                   </div>
                 </div>
 
+                <div class="form-group row">
+                  <div class="col-md-10 offset-md-2">
+                    <mat-checkbox formControlName="tiene_alerta">Con Excedentes</mat-checkbox>
+                  </div>
+                </div>
 
               </form>
               <!-- <div class="form-group">
