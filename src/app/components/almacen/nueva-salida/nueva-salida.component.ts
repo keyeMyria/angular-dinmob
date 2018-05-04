@@ -10,6 +10,7 @@ import { LotesService } from 'app/services/lotes.service';
 import { InsumoService } from 'app/services/insumo.service';
 import { AlertaDialogoComponent } from 'app/components/admin/alerta-dialogo/alerta-dialogo.component';
 
+
 @Component({
   selector: 'app-nueva-salida',
   templateUrl: './nueva-salida.component.html',
@@ -56,13 +57,17 @@ export class NuevaSalidaComponent implements OnInit {
     public dialog: MatDialog,
   ) {
     this.form = this.fb.group({
-      partida: ["", Validators.required],
-      entrega: ["", Validators.required],
-      recibe: ["", Validators.required],
-      autoriza: ["", Validators.required],
+      id_partida: ["", Validators.required],
+      id_usuario_entrega: ["", Validators.required],
+      id_trabajador_recibe: ["", Validators.required],
+      id_usuario_autoriza: ["", Validators.required],
       num_vale: [""],
       notas: [""],
+      tiene_alerta: [false]
     });
+
+    console.log("constructor", this.form.value);
+
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -83,13 +88,14 @@ export class NuevaSalidaComponent implements OnInit {
         this.insumos = [];
         this.nombre_partida = "";
         this.obra = data.obra.obra;
-        this.form.reset();
+        this.form.reset({ tiene_alerta: false, id_usuario_entrega: this.usuario.id_usuario });
+        console.log("onInit", this.form.value);
 
         this.trabajadores = data.obra.trabajadores;
         this.residentes = data.obra.residentes;
         this.manzanas = data.obra.manzanas;
 
-        this.form.patchValue({entrega: this.usuario.id_usuario});
+        this.form.patchValue({ entrega: this.usuario.id_usuario });
 
       });
 
@@ -127,13 +133,34 @@ export class NuevaSalidaComponent implements OnInit {
 
     let insumos_salida = this.insumos.filter(insumo => insumo.salida > 0);
     let insumos_errores = insumos_salida.filter(insumo => insumo.salida > insumo.existencias);
+    let insumos_excedentes = insumos_salida.filter(insumo => (insumo.salida + insumo.consumido) - insumo.cantidad > 0.99);
+
+    console.log("insumos", insumos_salida);
+    console.log("errores", insumos_errores);
+    console.log("excedentes", insumos_excedentes);
+    console.log("alerta", this.form.get("alerta").value);
+
 
     if (insumos_salida.length > 0) {
-      console.log("insumos", insumos_salida);
-      console.log("errores", insumos_errores);
+
 
       if (insumos_errores.length == 0) {
-        //guardar
+
+        if (insumos_excedentes.length > 0 && this.form.get("alerta").value == false) {
+          this.dialog.open(AlertaDialogoComponent, {
+            data: {
+              title: "Corregir",
+              content: "Para sacar materiales con excedente debe marcar la casilla CON EXCEDENTES.",
+              icon: true
+            },
+            width: '400px',
+          });
+
+        } else {
+
+        }
+
+
       } else {
         this.dialog.open(AlertaDialogoComponent, {
           data: {
@@ -208,14 +235,14 @@ export class NuevaSalidaComponent implements OnInit {
   }
 
   borrarFiltro(input_filtro) {
-    console.log("filtro", input_filtro.value);
+    //console.log("filtro", input_filtro.value);
     input_filtro.value = "";
     this.insumos_filtrados = this.insumos.slice();
   }
 
   insumosConSalida($event, filtro) {
 
-    console.log("change", $event.checked);
+    //console.log("change", $event.checked);
 
     if ($event.checked == true) {
       this.insumos_filtrados = this.insumos.filter(insumos => insumos.salida > 0);
@@ -227,10 +254,10 @@ export class NuevaSalidaComponent implements OnInit {
 
 
   }
-  
-  debug(){
+
+  debug() {
     console.log("form", this.form.value);
-    
+
   }
 
 

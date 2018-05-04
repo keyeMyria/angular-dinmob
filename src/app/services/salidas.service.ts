@@ -18,6 +18,13 @@ export class SalidasService {
   }
 
   //ok
+  createSalida(salida, insumos) {
+    return this.http.post(this.url + 'create_salida', { salida: salida, insumos: insumos })
+      .pipe(catchError(this.handleError("createSalida")));
+  }
+
+
+  //ok
   getSalidasObra(id_obra) {
     return this.http.get(this.url + 'obra/' + id_obra)
       .pipe(catchError(this.handleError("getSalidasObra")));

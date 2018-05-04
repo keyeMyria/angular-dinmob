@@ -143,14 +143,15 @@ export class OtrasSalidasComponent implements OnInit {
 
 
   guardar() {
-    console.log("guardar", this.form.value);
 
     let insumos_salida = this.insumos.filter(insumo => insumo.salida > 0);
     let insumos_errores = insumos_salida.filter(insumo => insumo.salida > insumo.existencias);
 
+    console.log("guardar", this.form.value);
+    console.log("insumos", insumos_salida);
+    console.log("errores", insumos_errores);
+
     if (insumos_salida.length > 0) {
-      console.log("insumos", insumos_salida);
-      console.log("errores", insumos_errores);
 
       if (insumos_errores.length == 0) {
         //guardar
@@ -179,6 +180,7 @@ export class OtrasSalidasComponent implements OnInit {
   }
 
   getLotesObra(id_obra) {
+
     if (id_obra != "") {
       console.log("getLotesObra", id_obra);
 
