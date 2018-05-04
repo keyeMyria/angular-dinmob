@@ -80,17 +80,9 @@
                       </div>
                     </div>
                   </div>
-
-                  <!--                   <div class="col-auto">
-                    <div class="form-check mb-2">
-                      <input class="form-check-input" type="checkbox" id="">
-                      <label class="form-check-label" for="">
-                        Ver sólo materiales con entrada
-                      </label>
-                    </div>
-                  </div> -->
+                
                   <div class="col-auto">
-                    <mat-checkbox (change)="insumosConSalida($event, filtro)" #filtroSalida>Ver sólo materiales con entrada</mat-checkbox>
+                    <mat-checkbox (change)="insumosConSalida($event, filtro)" #filtroSalida>Ver sólo materiales con salida</mat-checkbox>
                   </div>
 
                 </div>
@@ -120,7 +112,8 @@
                       <td>{{insumo.existencias}}</td>
                       <td style="width: 150px">
                         <input type="number" class="form-control" [(ngModel)]="insumo.salida" min="0" [max]="insumo.existencias">
-                        <small *ngIf="insumo.salida && insumo.salida <= 0" class="text-danger">error &lt; 0</small>
+                        <small *ngIf="insumo.salida && insumo.salida <= 0" class="text-danger">menor que 0</small>
+                        <small *ngIf="insumo.salida > insumo.existencias" class="text-danger">mayor que existencia</small>
                       </td>
                       <td class="text-danger">
                         <span *ngIf="(insumo.salida + insumo.consumido) - insumo.cantidad > 0.99">
