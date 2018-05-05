@@ -86,7 +86,7 @@ export class MapasAvancesComponent implements OnInit {
           setTimeout(() => {
             this.crearMapa(this.valuesLotes);
             this.loading.stop();
-          }, 100);
+          }, 0);
         } else {
           this.loading.stop();
         }
