@@ -5,7 +5,7 @@
 
   <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
     <div class="form-group">
-      <label for="nombre" class="control-label">Nombre</label>
+      <label for="nombre" class="col-form-label">Nombre</label>
       <input type="text" id="nombre" name="nombre" class="form-control" formControlName="nombre" 
       [ngClass]="{'is-invalid': form.get('nombre').invalid  && (form.get('nombre').dirty || form.get('nombre').touched )}">
       <span class="invalid-feedback">El nombre no puede estar vacío</span>
