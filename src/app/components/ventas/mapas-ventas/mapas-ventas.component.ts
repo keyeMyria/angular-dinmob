@@ -148,7 +148,7 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
             this.crearMapa(this.valuesEstadosVenta, this.scalePrototipos, this.scaleFormaPago, this.scaleLoteTipo);
             //console.log("mapa creado");
             this.loading.stop();
-          }, 0);
+          }, 100);
         } else {
           //setTimeout(() => {
           this.loading.stop();
