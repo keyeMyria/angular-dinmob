@@ -6,6 +6,7 @@
         <mat-accordion>
 
             <mat-expansion-panel *ngFor="let partida of data.acordeon" [hideToggle]="true">
+
                 <mat-expansion-panel-header [ngClass]="{'bg-info text-white': partidaFinalizada(partida)}">
                     <span>{{partida.nombre}}</span>
                     <div class="spacer"></div>
@@ -17,12 +18,13 @@
                             - numSubpartidasFinalizadas(partida)}}</small>
                     </div>
                 </mat-expansion-panel-header>
+
+                <!-- subpartidas -->
                 <div *ngIf="partida.subpartidas.length>0">
                     <ul class="list-group">
-                        <!--  class="pointer"  -->
+                        
                         <li class="list-group-item" *ngFor="let subpartida of partida?.subpartidas">
-                            <div class="d-flex align-items-center">
-
+                            <div class="d-flex align-items-center px-2">
 
                                 <div class="d-flex flex-column">
                                     <div style="font-size:0.91rem">{{subpartida.nombre}}</div>
@@ -34,16 +36,16 @@
                                     </div>
                                 </div>
 
-
-
                             </div>
                         </li>
                     </ul>
                 </div>
+
+                <!-- no tiene subpartidas -->
                 <div *ngIf="partida.subpartidas.length===0">
                     <ul class="list-group">
                         <li class="list-group-item">
-                            <div class="d-flex align-items-center">
+                            <div class="d-flex align-items-center px-2">
 
                                 <div class="d-flex flex-column">
                                     <div style="font-size:0.91rem">
@@ -58,9 +60,8 @@
                         </li>
                     </ul>
                 </div>
+                
             </mat-expansion-panel>
-
-
 
         </mat-accordion>
 
