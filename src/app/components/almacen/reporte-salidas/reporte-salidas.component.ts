@@ -12,6 +12,7 @@ export class ReporteSalidasComponent implements OnInit {
   obras: any = [];
   obra_selected: string = "";
   form: FormGroup;
+  toda_obra_selected:any;
 
   constructor(
     private router: Router,
@@ -44,6 +45,14 @@ export class ReporteSalidasComponent implements OnInit {
       this.router.navigate([".", {}]);
 
     }
+
+  }
+
+  getReporteSalidas(){
+
+  }
+
+  getManzanasTrabajadores(id_obra){
 
   }
 

@@ -46,4 +46,12 @@ export class ReporteEntradasComponent implements OnInit {
 
   }
 
+  getReporteEntradas(){
+
+  }
+
+  getManzanasTrabajadores(id_obra){
+
+  }
+
 }
