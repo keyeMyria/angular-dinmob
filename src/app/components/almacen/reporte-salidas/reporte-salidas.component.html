@@ -11,7 +11,7 @@
 
             <div class="form-group">
               <label for="obra" class="form-label">Obra</label>
-              <select class="form-control" [(ngModel)]="obra_selected" (change)="getManzanasTrabajadores(obra_selected)" formControlName="id_obra"
+              <select class="form-control" [(ngModel)]="obra_selected" (change)="getManzanasMateriales(obra_selected)" formControlName="id_obra"
                 [ngClass]="{'is-invalid': form.get('id_obra').invalid  && (form.get('id_obra').dirty || form.get('id_obra').touched )}">
                 <option value="">Seleccionar...</option>
                 <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>
@@ -21,17 +21,21 @@
 
             <div class="form-row">
               <div class="form-group col-md-6">
-                <mat-checkbox [(ngModel)]="toda_obra_selected">Toda la obra</mat-checkbox>
-                <select class="form-control" formControlName="toda_obra" [ngClass]="{'is-invalid': form.get('toda_obra').invalid  && (form.get('toda_obra').dirty || form.get('toda_obra').touched )}">
-                  <option value="">Seleccionar...</option>                  
+                <mat-checkbox formControlName="toda_obra">Toda la obra</mat-checkbox>
+                <select [(ngModel)]="lote_selected" class="form-control" formControlName="obra" [ngClass]="{'is-invalid': form.get('obra').invalid  && (form.get('obra').dirty || form.get('obra').touched )}">
+                  <option value="">Seleccionar...</option>
+                  <ng-container *ngFor="let manzana of manzanas">
+                    <option *ngFor="let lote of manzana.lotes" [value]="lote.id_lote">{{manzana.nombre + ' - ' + lote.nombre}}</option>
+                  </ng-container>                  
                 </select>
                 <div class="invalid-feedback">Seleccione una obra</div>
               </div>
 
               <div class="form-group col-md-6">
-                <mat-checkbox>Todos los insumos (en desarrollo..)</mat-checkbox>
-                <select class="form-control" formControlName="todo_insumo" [ngClass]="{'is-invalid': form.get('todo_insumo').invalid  && (form.get('todo_insumo').dirty || form.get('todo_insumo').touched )}">
+                <mat-checkbox formControlName="todo_insumo">Todos los insumos (en desarrollo..)</mat-checkbox>
+                <select [(ngModel)]="insumo_selected" class="form-control"  formControlName="insumo" [ngClass]="{'is-invalid': form.get('insumo').invalid  && (form.get('insumo').dirty || form.get('insumo').touched )}">
                   <option value="">Seleccionar...</option>
+                  <option *ngFor="let insumo of insumos" [value]="insumo.id_insumo">{{insumo.insumo}}</option>
                 </select>
                 <div class="invalid-feedback">Seleccione un insumo</div>
               </div>

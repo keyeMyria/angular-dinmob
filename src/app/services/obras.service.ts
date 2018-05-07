@@ -110,6 +110,11 @@ export class ObrasService {
       .pipe(catchError(this.handleError("getMaterialesResidentesTrabajadores")));
   }
 
+  getManzanasMateriales(id_obra) {
+    return this.http.get(this.url + "get_manzanas_lotes_materiales/" + id_obra)
+      .pipe(catchError(this.handleError("getManzanasMateriales")));
+  }
+
   //ok
   getManzanasResidentesTrabajadores(id_obra) {
     return this.http.get(this.url + "get_manzanas_lotes_trabajadores_residentes/" + id_obra)
