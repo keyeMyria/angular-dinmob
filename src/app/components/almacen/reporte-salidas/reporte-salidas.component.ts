@@ -76,7 +76,7 @@ export class ReporteSalidasComponent implements OnInit {
   }
 
   getReporteSalidas() {
-
+    console.log("salidas", this.form.value)
   }
 
   getManzanasMateriales(id_obra) {
