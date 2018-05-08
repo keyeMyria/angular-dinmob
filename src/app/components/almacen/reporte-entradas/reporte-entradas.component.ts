@@ -17,6 +17,7 @@ export class ReporteEntradasComponent implements OnInit {
   insumo_selected: string = "";
   insumos: any;
   manzanas: any;
+  entradas: any;
 
   constructor(
     private router: Router,
@@ -83,6 +84,7 @@ export class ReporteEntradasComponent implements OnInit {
   }
 
   getReporteEntradas() {
+    console.log("entradas", this.form.value);
 
   }
 
