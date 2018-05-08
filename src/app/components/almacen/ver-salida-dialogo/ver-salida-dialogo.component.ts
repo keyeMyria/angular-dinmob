@@ -22,14 +22,14 @@ export class VerSalidaDialogoComponent implements OnInit {
     this.form = this.fb.group({
       folio: [data.datos.folio],
       num_vale: [data.datos.num_vale],
-      tipo_salida: [data.datos.tipo],
+      tipo_salida: [data.datos.tipo_salida],
       fecha: [data.datos.fecha],
-      obra_destino: [data.datos.obra_destino],
-      nombre_lote: [data.datos.nombre_lote],
-      nombre_partida: [data.datos.nombre_partida],
-      autoriza: [data.datos.autoriza],
-      entrega: [data.datos.entraga],
-      nombre_trabajador: [data.datos.nombre_trabajador],
+      obra_origen: [data.datos.obra_origen],
+      lote: [data.datos.lote],
+      partida: [data.datos.partida],
+      usuario_autoriza: [data.datos.usuario_autoriza],
+      usuario_entrega: [data.datos.usuario_entrega],
+      trabajador_recibe: [data.datos.trabajador_recibe],
       notas: [data.datos.notas],
 
 
