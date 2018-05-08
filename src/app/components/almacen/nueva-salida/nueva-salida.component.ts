@@ -9,6 +9,7 @@ import { Observable } from 'rxjs/Observable';
 import { LotesService } from 'app/services/lotes.service';
 import { InsumoService } from 'app/services/insumo.service';
 import { AlertaDialogoComponent } from 'app/components/admin/alerta-dialogo/alerta-dialogo.component';
+import { SalidasService } from '../../../services/salidas.service';
 
 
 @Component({
@@ -53,6 +54,7 @@ export class NuevaSalidaComponent implements OnInit {
     private changeDetectorRef: ChangeDetectorRef,
     private obraSrv: ObrasService,
     private loteSrv: LotesService,
+    private salidaSrv: SalidasService,
     private insumoSrv: InsumoService,
     public dialog: MatDialog,
   ) {
@@ -61,12 +63,14 @@ export class NuevaSalidaComponent implements OnInit {
       id_usuario_entrega: ["", Validators.required],
       id_trabajador_recibe: ["", Validators.required],
       id_usuario_autoriza: ["", Validators.required],
+      id_obra_origen: ["", Validators.required],
+      id_lote: ["", Validators.required],
       num_vale: [""],
       notas: [""],
-      tiene_alerta: [false]
+      tiene_alerta: [false, Validators.required]
     });
 
-    console.log("constructor", this.form.value);
+    //console.log("constructor", this.form.value);
 
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -80,22 +84,30 @@ export class NuevaSalidaComponent implements OnInit {
 
     this.route.data
       .subscribe((data: { obras: any[], usuario: any, obra: { obra: any, trabajadores: any, manzanas: any, residentes: any } }) => {
+
+        console.log("route data");
+
+
         this.obras = data.obras;
         this.usuario = data.usuario;
-
-        this.partida_selected = "";
-        this.partidas = [];
-        this.insumos = [];
-        this.nombre_partida = "";
         this.obra = data.obra.obra;
-        this.form.reset({ tiene_alerta: false, id_usuario_entrega: this.usuario.id_usuario });
-        console.log("onInit", this.form.value);
-
         this.trabajadores = data.obra.trabajadores;
         this.residentes = data.obra.residentes;
         this.manzanas = data.obra.manzanas;
 
-        this.form.patchValue({ entrega: this.usuario.id_usuario });
+        //this.partida_selected = "";
+        //this.partidas = [];
+        //this.insumos = [];
+        //this.insumos_filtrados = [];
+        //this.nombre_partida = "";
+        this.initForm();
+
+        //this.form.reset({ tiene_alerta: false, id_usuario_entrega: this.usuario.id_usuario, id_partida: "" });
+        console.log("onInit", this.form.value);
+
+
+
+        //this.form.patchValue({ entrega: this.usuario.id_usuario });
 
       });
 
@@ -127,6 +139,25 @@ export class NuevaSalidaComponent implements OnInit {
           }); */
   }
 
+  initForm() {
+    console.log("initForm");
+
+    this.partidas = [];
+    this.insumos = [];
+    this.insumos_filtrados = [];
+    this.nombre_partida = "";
+    this.lote_selected = {};
+    this.form.reset({
+      id_partida: "",
+      id_usuario_entrega: this.usuario.id_usuario,
+      id_obra_origen: this.obra.id_obra,
+      id_trabajador_recibe: "",
+      id_usuario_autoriza: "",
+      tiene_alerta: false,
+    });
+
+  }
+
 
   guardar() {
     console.log("guardar", this.form.value);
@@ -138,15 +169,17 @@ export class NuevaSalidaComponent implements OnInit {
     console.log("insumos", insumos_salida);
     console.log("errores", insumos_errores);
     console.log("excedentes", insumos_excedentes);
-    console.log("alerta", this.form.get("alerta").value);
+    console.log("alerta", this.form.get("tiene_alerta").value);
 
-
+    //contiene algún insumo
     if (insumos_salida.length > 0) {
 
-
+      //no contiene errores
+      //la salida <= a la existencia
       if (insumos_errores.length == 0) {
 
-        if (insumos_excedentes.length > 0 && this.form.get("alerta").value == false) {
+        // tiene insumos excedentes y la casilla de excedentes no está marcada
+        if (insumos_excedentes.length > 0 && this.form.get("tiene_alerta").value == false) {
           this.dialog.open(AlertaDialogoComponent, {
             data: {
               title: "Corregir",
@@ -156,11 +189,25 @@ export class NuevaSalidaComponent implements OnInit {
             width: '400px',
           });
 
+          //tiene insumos excedentes y la casilla está marcada
+          // no tiene insumos excedentes
         } else {
+          //GUARDAR
+
+          this.salidaSrv.createSalida(this.form.value, insumos_salida)
+            .subscribe(res => {
+              //snackbar
+              console.log("respuesta", res);
+
+
+            }, error => {
+              //snackbar
+            });
+
 
         }
 
-
+        // insumos_errores.length > 0 hay algún error
       } else {
         this.dialog.open(AlertaDialogoComponent, {
           data: {
@@ -172,7 +219,7 @@ export class NuevaSalidaComponent implements OnInit {
         });
       }
 
-
+      //insumos_salida.length==0 ningún material
     } else {
       this.dialog.open(AlertaDialogoComponent, {
         data: {
@@ -207,12 +254,23 @@ export class NuevaSalidaComponent implements OnInit {
 
     this.loteSrv.getPartidasLote(lote.id_lote)
       .subscribe(partidas => {
+
+        this.initForm();
+        this.form.get("id_lote").setValue(lote.id_lote);
+
+
         this.partidas = partidas;
         this.lote_selected = lote;
+        /* 
+                this.insumos = [];
+                this.insumos_filtrados = [];
+                this.nombre_partida = ""; */
       });
   }
 
   getInsumosPartida(id_partida) {
+    console.log("getInsumosPartida");
+
     if (id_partida != "") {
       this.insumoSrv.getPartidaSalida(id_partida, this.obra_selected, this.lote_selected.id_lote)
         .subscribe(insumos => {
@@ -222,6 +280,7 @@ export class NuevaSalidaComponent implements OnInit {
         });
     } else {
       this.insumos = [];
+      this.insumos_filtrados = [];
       this.nombre_partida = "";
     }
   }

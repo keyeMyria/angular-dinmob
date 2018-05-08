@@ -62,7 +62,8 @@
 
               <form [formGroup]="form">
                 <div class="mb-2">
-                  <select class="form-control" id="id_partida" name="id_partida" formControlName="id_partida" [(ngModel)]="partida_selected" (change)="getInsumosPartida(partida_selected)">
+                  <select class="form-control" id="id_partida" name="id_partida" formControlName="id_partida" [(ngModel)]="partida_selected"
+                    (change)="getInsumosPartida(partida_selected)">
                     <option value="">Seleccionar...</option>
                     <option *ngFor="let partida of partidas" [value]="partida.id_partida">{{partida.nombre}}</option>
                   </select>
@@ -116,8 +117,9 @@
                         <small *ngIf="insumo.salida > insumo.existencias" class="text-danger">mayor que existencia</small>
                       </td>
                       <td class="text-danger">
-                        <span *ngIf="(insumo.salida + insumo.consumido) - insumo.cantidad > 0.99">
-                          <!-- <i class="fa fa-exclamation-circle"></i> -->{{((insumo.salida + insumo.consumido) - insumo.cantidad|number:'.2-4') }}</span>
+                        <span>{{insumo.salida|excedente:insumo.consumido:insumo.cantidad|number:'.2-4' }}</span>
+                        <!--   <span *ngIf="(insumo.salida + insumo.consumido) - insumo.cantidad > 0.99">
+                          {{((insumo.salida + (+insumo.consumido)) - insumo.cantidad|number:'.2-4') }}</span> -->
                       </td>
                     </tr>
                   </tbody>

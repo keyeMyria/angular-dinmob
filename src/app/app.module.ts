@@ -229,6 +229,7 @@ import { ObraMaterialesTrabajadoresResidentesResolverService } from './resolvers
 import { ReportesResolverService } from './resolvers/reportes-resolver.service';
 import { ReporteSalidasComponent } from './components/almacen/reporte-salidas/reporte-salidas.component';
 import { ReporteEntradasComponent } from './components/almacen/reporte-entradas/reporte-entradas.component';
+import { ExcedentePipe } from './pipes/excedente.pipe';
 
 
 
@@ -373,7 +374,8 @@ export function getToken() {
     ArranqueComponent,
     ReporteComponent,
     ReporteSalidasComponent,
-    ReporteEntradasComponent
+    ReporteEntradasComponent,
+    ExcedentePipe
 
 
 
