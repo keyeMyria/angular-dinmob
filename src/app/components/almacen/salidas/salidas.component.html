@@ -22,8 +22,8 @@
             </div>
           </div>
         </div>
-        <form class="form-inline mx-2 mb-2 mt-3">
-          <!--           <div class="form-check form-check-inline">
+        <!--         <form class="form-inline mx-2 mb-2 mt-3">
+          <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="inlineRadioOptions" id="" value="option1">
             <label class="form-check-label" for="">Todas</label>
           </div>
@@ -42,16 +42,26 @@
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="inlineRadioOptions" id="" value="option5">
             <label class="form-check-label" for="">Arranque</label>
-          </div> -->
-          <mat-radio-group [(ngModel)]="filtro_selected" name="filtros" (change)="filtro($event)" >
+          </div>
+          <mat-radio-group [(ngModel)]="filtro_selected" name="filtros" (change)="filtro($event)">
             <mat-radio-button class="ml-2" value="T">Todas</mat-radio-button>
             <mat-radio-button class="ml-2" value="P">Paquetes</mat-radio-button>
             <mat-radio-button class="ml-2" value="U">Urbanización</mat-radio-button>
             <mat-radio-button class="ml-2" value="O">Otras obras</mat-radio-button>
             <mat-radio-button class="ml-2" value="A">Arranque</mat-radio-button>
           </mat-radio-group>
-        </form>
-
+        </form> -->
+        <div class="container mt-2">
+          <div class="form-group">
+            <select class="form-control" [(ngModel)]="filtro_selected" name="filtros" (change)="filtro($event)">
+              <option value="T">Todas</option>
+              <option value="P">Paquetes</option>
+              <option value="U">Urbanización</option>
+              <option value="O">Otras obras</option>
+              <option value="A">Arranque</option>
+            </select>
+          </div>
+        </div>
 
         <div>
           <div class="table-responsive">
