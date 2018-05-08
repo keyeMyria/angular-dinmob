@@ -54,7 +54,7 @@ export class AvancesComponent implements OnInit {
   ngOnInit() {
     this.route.data
       .subscribe((data: { obras: any[] }) => {
-        //console.log("resusltado resolve ", data);
+        console.log("resusltado resolve ", data);
         this.obras = data.obras;
       });
     this.route.paramMap
@@ -66,7 +66,7 @@ export class AvancesComponent implements OnInit {
           return Observable.of({ datos: {} });
         }
       }).subscribe(obra => {
-        //console.log("obra", obra);
+        console.log("obra", obra);
         this.obra = obra;
       });
 
@@ -121,7 +121,7 @@ export class AvancesComponent implements OnInit {
   }
 
   addLiberacion() {
-    //console.log("selection", this.selection.selected);
+    console.log("selection", this.selection.selected);
 
     let ids = [];
 
@@ -159,7 +159,7 @@ export class AvancesComponent implements OnInit {
   }
 
   delAvance() {
-    //console.log("selection", this.selection.selected);
+    console.log("selection", this.selection.selected);
 
     let ids = [];
 
@@ -175,6 +175,7 @@ export class AvancesComponent implements OnInit {
 
           partida.fecha_fin = null;
           partida.fecha_liberacion = null;
+          
 
         });
 
@@ -196,7 +197,7 @@ export class AvancesComponent implements OnInit {
   }
 
   delLiberacion() {
-    //console.log("selection", this.selection.selected);
+    console.log("selection", this.selection.selected);
 
     let ids = [];
 
@@ -244,7 +245,7 @@ export class AvancesComponent implements OnInit {
   }
 
   numSubpartidasFinalizadas(partida) {
-    //console.log("partidaFinalizada" + partida.id_partida);
+    console.log("partidaFinalizada" + partida.id_partida);
     var count = 0;
 
     //tiene subpartidas
@@ -266,7 +267,7 @@ export class AvancesComponent implements OnInit {
   }
 
   partidaFinalizada(partida) {
-    //console.log("partidaFinalizada" + partida.id_partida);
+    console.log("partidaFinalizada" + partida.id_partida);
     var finalizada = true;
 
     //tiene subpartidas
@@ -288,7 +289,7 @@ export class AvancesComponent implements OnInit {
   }
 
   getAvancesLote(lote) {
-    //console.log("getAvancesLote", lote);
+    console.log("getAvancesLote", lote);
 
     if (this.mobileQuery.matches) {
       this.drawer.close();
@@ -300,7 +301,7 @@ export class AvancesComponent implements OnInit {
         this.acordeon = response.acordeon;
         this.selection = new SelectionModel<any>(true, []);
 
-      }); 
+      });
 
 
   }
