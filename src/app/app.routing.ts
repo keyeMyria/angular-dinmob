@@ -228,7 +228,7 @@ export const ROUTES: Routes = [
                 }
             },
             {
-                path: 'clientes-sin-lote', component: ClienteSinLoteComponent,
+                path: 'prospectos', component: ClienteSinLoteComponent,
                 resolve: {
                     obras: ObrasUsuarioResolverService
                 }
