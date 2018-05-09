@@ -17,6 +17,8 @@ import { SelectionModel } from '@angular/cdk/collections';
   styleUrls: ['./avances.component.scss']
 })
 export class AvancesComponent implements OnInit {
+  num_partidas_finalizadas: any;
+  num_partidas: any;
   @ViewChild(MatDrawer) drawer: MatDrawer;
 
   mobileQuery: MediaQueryList;
@@ -96,6 +98,9 @@ export class AvancesComponent implements OnInit {
       .subscribe(partidas => {
         console.log("partidas", partidas);
 
+        let count = Object.keys(partidas).length;
+        this.num_partidas_finalizadas += count;
+
         this.selection.selected.forEach(partida => {
 
           if (partidas[partida.id_partida]) {
@@ -170,12 +175,13 @@ export class AvancesComponent implements OnInit {
     this.loteSrv.delAvancePartida(ids, this.lote.id_lote)
       .subscribe(res => {
         console.log("partidas", res.count);
+        this.num_partidas_finalizadas -= res.count;
 
         this.selection.selected.forEach(partida => {
 
           partida.fecha_fin = null;
           partida.fecha_liberacion = null;
-          
+
 
         });
 
@@ -299,6 +305,8 @@ export class AvancesComponent implements OnInit {
       .subscribe(response => {
         this.lote = response.lote;
         this.acordeon = response.acordeon;
+        this.num_partidas = +response.num_partidas;
+        this.num_partidas_finalizadas = +response.num_partidas_finalizadas;
         this.selection = new SelectionModel<any>(true, []);
 
       });

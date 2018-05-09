@@ -74,12 +74,10 @@
 
 
 
-                    <div class="d-flex">
-                        <div class="spacer"></div>
-                        <span>3 DE 18 PARTIDAS</span>
-                        <span class="ml-1">
-                            <h5>76%</h5>
-                        </span>
+                    <div class="text-right" *ngIf="lote">
+                        <span>{{num_partidas_finalizadas||0}} de {{num_partidas||0}} partidas</span>
+                        <span class="ml-1 h5">{{ num_partidas_finalizadas/num_partidas |percent:'.2-2'}}</span>
+
                     </div>
 
 

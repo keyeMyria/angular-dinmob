@@ -112,6 +112,7 @@ export class MapasAvancesComponent implements OnInit {
     $("#map").vectorMap({
       map: 'map',
       backgroundColor: "transparent",
+      zoomButtons:true,
       //regionsSelectable: true,
       //regionsSelectableOne: true,
       regionStyle: {
