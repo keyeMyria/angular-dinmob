@@ -112,7 +112,7 @@ export class MapasAvancesComponent implements OnInit {
     $("#map").vectorMap({
       map: 'map',
       backgroundColor: "transparent",
-      zoomButtons:true,
+      zoomButtons: true,
       //regionsSelectable: true,
       //regionsSelectableOne: true,
       regionStyle: {
@@ -281,7 +281,9 @@ export class MapasAvancesComponent implements OnInit {
         let dialogRef = this.dialog.open(AvancesLoteDialogoComponent, {
           data: {
             lote: res.lote,
-            acordeon: res.acordeon
+            acordeon: res.acordeon,
+            num_partidas: res.num_partidas,
+            num_partidas_finalizadas: res.num_partidas_finalizadas
           },
           width: '800px',
         });
