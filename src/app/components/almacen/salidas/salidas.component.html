@@ -53,7 +53,7 @@
         </form> -->
         <div class="container mt-2">
           <div class="form-group">
-            <select class="form-control">
+            <select class="form-control" [(ngModel)]="filtro_selected" name="filtros" (change)="filtro($event)">
               <option value="T">Todas</option>
               <option value="P">Paquetes</option>
               <option value="U">Urbanización</option>
@@ -107,6 +107,11 @@
                       <button mat-menu-item (click)="verSalida(salida)">
                         <mat-icon>visibility</mat-icon>
                         <span>Ver Salida</span>
+                      </button>
+                      <button mat-menu-item >
+                        <mat-icon>visibility</mat-icon>
+                        <span *ngIf="salida.tiene_alerta=='1'">Autorizar</span>
+                        <span *ngIf="salida.tiene_alerta=='0'">Rechazar</span>
                       </button>
                       <button mat-menu-item>
                         <mat-icon>file_download</mat-icon>

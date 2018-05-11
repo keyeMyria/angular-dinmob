@@ -5,8 +5,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class DateToIsoPipe implements PipeTransform {
 
-  transform(value: any, args?: any): any {
-    return new Date(value).toISOString();
+  transform(value: string, args?: any): any {
+    
+    let date= value.replace(" ","T");
+    //console.log("pipe", date);
+    return date;
   }
 
 }

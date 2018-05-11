@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
-import { MatDrawer, MatDialog } from '@angular/material';
+import { MatDrawer, MatDialog, MatSnackBar } from '@angular/material';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ObrasService } from 'app/services/obras.service';
@@ -57,6 +57,7 @@ export class NuevaSalidaComponent implements OnInit {
     private salidaSrv: SalidasService,
     private insumoSrv: InsumoService,
     public dialog: MatDialog,
+    public snackBar: MatSnackBar
   ) {
     this.form = this.fb.group({
       id_partida: ["", Validators.required],
@@ -183,7 +184,7 @@ export class NuevaSalidaComponent implements OnInit {
           this.dialog.open(AlertaDialogoComponent, {
             data: {
               title: "Corregir",
-              content: "Para sacar materiales con excedente debe marcar la casilla CON EXCEDENTES.",
+              content: "Para sacar del almacén materiales con excedente debe marcar la casilla CON EXCEDENTES.",
               icon: true
             },
             width: '400px',
@@ -196,12 +197,21 @@ export class NuevaSalidaComponent implements OnInit {
 
           this.salidaSrv.createSalida(this.form.value, insumos_salida)
             .subscribe(res => {
-              //snackbar
+             
               console.log("respuesta", res);
+              this.initForm();
 
+              this.snackBar.open("Salida Creada", "", {
+                duration: 2000,
+                panelClass: ["bg-success", "text-white"]
+              });
 
             }, error => {
-              //snackbar
+         
+              this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+                duration: 3000,
+                panelClass: ["bg-danger", "text-white"]
+              });
             });
 
 
