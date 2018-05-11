@@ -230,6 +230,8 @@ import { ReportesResolverService } from './resolvers/reportes-resolver.service';
 import { ReporteSalidasComponent } from './components/almacen/reporte-salidas/reporte-salidas.component';
 import { ReporteEntradasComponent } from './components/almacen/reporte-entradas/reporte-entradas.component';
 import { ExcedentePipe } from './pipes/excedente.pipe';
+import { EstadisticasAdminResolverService } from './resolvers/estadisticas-admin-resolver.service';
+import { DateToIsoPipe } from './pipes/date-to-iso.pipe';
 
 
 
@@ -375,7 +377,8 @@ export function getToken() {
     ReporteComponent,
     ReporteSalidasComponent,
     ReporteEntradasComponent,
-    ExcedentePipe
+    ExcedentePipe,
+    DateToIsoPipe
 
 
 
@@ -533,7 +536,8 @@ export function getToken() {
     PartidasUrbanizacionResolverService,
     ObraManzanasTrabajadoresResidentesResolverService,
     ObraMaterialesTrabajadoresResidentesResolverService,
-    ReportesResolverService
+    ReportesResolverService,
+    EstadisticasAdminResolverService
 
   ],
   bootstrap: [AppComponent]

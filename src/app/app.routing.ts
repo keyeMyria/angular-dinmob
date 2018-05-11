@@ -91,6 +91,7 @@ import { ObraManzanasTrabajadoresResidentesResolverService } from 'app/resolvers
 import { ReportesResolverService } from './resolvers/reportes-resolver.service';
 import { ReporteSalidasComponent } from './components/almacen/reporte-salidas/reporte-salidas.component';
 import { ReporteEntradasComponent } from './components/almacen/reporte-entradas/reporte-entradas.component';
+import { EstadisticasAdminResolverService } from './resolvers/estadisticas-admin-resolver.service';
 
 
 
@@ -121,7 +122,8 @@ export const ROUTES: Routes = [
             {
                 path: 'estadisticas', component: EstadisticasAdminComponent,
                 resolve: {
-                    obras: ObrasUsuarioResolverService
+                    obras: ObrasUsuarioResolverService,
+                    estadisticas: EstadisticasAdminResolverService
                 }
             },
             {
