@@ -31,6 +31,7 @@
                 <tr>
                   <th>Nombre</th>
                   <th>Creación</th>
+                  <th>Total</th>
                   <th></th>
                 </tr>
               </thead>
@@ -39,6 +40,7 @@
                 <tr *ngFor="let prototipo of prototipos">
                   <td>{{prototipo.nombre}}</td>
                   <td class="ws-nowrap">{{prototipo.fecha_creacion| date:'mediumDate':'':'es'}}</td>
+                  <td>{{(prototipo.total || 0) |currency}}</td>
                   <td class="text-right">
                     <button mat-icon-button [matMenuTriggerFor]="menu">
                       <mat-icon>more_vert</mat-icon>

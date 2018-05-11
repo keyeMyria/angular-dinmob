@@ -17,6 +17,7 @@ export class ComisionesComponent implements OnInit {
   obras: any = [];
   obra_selected: string = "";
   comisiones: any = [];
+  usuario: any;
 
 
   constructor(
@@ -29,8 +30,9 @@ export class ComisionesComponent implements OnInit {
 
   ngOnInit() {
     this.route.data
-      .subscribe((data: { obras: any[], vendedores: any[] }) => {
+      .subscribe((data: { obras: any[], usuario: any }) => {
         this.obras = data.obras;
+        this.usuario = data.usuario;
 
       });
 
