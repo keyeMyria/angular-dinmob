@@ -44,7 +44,7 @@
     <div class="container-fluid pt-2 pb-5 drawer-content">
 
       <ol class="breadcrumb colorBread">
-     <!--    <li class="breadcrumb-item text-primary">
+        <!--    <li class="breadcrumb-item text-primary">
           {{lote?.obra}}
         </li> -->
         <li class="breadcrumb-item text-primary">
@@ -61,7 +61,7 @@
           </a>
           <div class="card-body">
             <h5 class="card-title">{{foto.partida_padre}} {{foto.partida}}</h5>
-            <p class="card-text">{{foto.fecha}}</p>
+            <p class="card-text">{{foto.fecha|dateToIso| date:'medium':'':'es'}}</p>
             <p class="card-text">{{foto.descripcion}}</p>
             <div>
               <button mat-button class="no-min" color="warn" (click)="delFoto(foto)">
