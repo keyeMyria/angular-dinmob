@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class ConfigService {
 
   //cambiar MANUALMENTE
-  prod: boolean = false;
+  production: boolean = environment.production;
 
   //se usa en todos los servicios
   api_url: string = "/api/index.php/";
@@ -12,7 +13,7 @@ export class ConfigService {
  constructor() {
 
     let localhost;
-    if (this.prod) {
+    if (this.production) {
       //produccion ->subdominio
       localhost = "";
       //localhost="/ramiro";
