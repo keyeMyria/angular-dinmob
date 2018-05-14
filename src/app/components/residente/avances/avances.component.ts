@@ -32,6 +32,7 @@ export class AvancesComponent implements OnInit {
   obras: any = [];
 
   selection: SelectionModel<any>;
+  trackByIdPartida = (index, item) => item.id_partida;
 
 
 
@@ -56,9 +57,10 @@ export class AvancesComponent implements OnInit {
   ngOnInit() {
     this.route.data
       .subscribe((data: { obras: any[] }) => {
-        console.log("resusltado resolve ", data);
+        console.log("resultado resolve ", data);
         this.obras = data.obras;
       });
+
     this.route.paramMap
       .switchMap((params: ParamMap) => {
         if (params.has("obra")) {
@@ -251,7 +253,7 @@ export class AvancesComponent implements OnInit {
   }
 
   numSubpartidasFinalizadas(partida) {
-    console.log("partidaFinalizada" + partida.id_partida);
+    console.log("partidaFinalizada", partida.id_partida);
     var count = 0;
 
     //tiene subpartidas
@@ -273,7 +275,7 @@ export class AvancesComponent implements OnInit {
   }
 
   partidaFinalizada(partida) {
-    console.log("partidaFinalizada" + partida.id_partida);
+    console.log("partidaFinalizada", partida.id_partida);
     var finalizada = true;
 
     //tiene subpartidas
