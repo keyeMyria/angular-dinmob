@@ -28,9 +28,10 @@ export class EstadisticasAdminComponent implements OnInit {
       .subscribe((data: { obras: any[], estadisticas:any }) => {
         this.obras = data.obras;
         this.estadisticas=data.estadisticas;
+        this.obra_selected = this.route.snapshot.params["obra"] ? this.route.snapshot.params["obra"] : "";
       });
 
-      this.obra_selected = this.route.snapshot.params["obra"] ? this.route.snapshot.params["obra"] : "";
+      
 
   /*   this.route.paramMap
       .switchMap((params: ParamMap) => {
