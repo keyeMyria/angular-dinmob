@@ -1,4 +1,4 @@
-<div class="container mt-2 mb-5">
+<div class="container-fluid mt-2 mb-5">
   <div class="row">
     <div class="col-12">
 
@@ -51,7 +51,7 @@
             <mat-radio-button class="ml-2" value="A">Arranque</mat-radio-button>
           </mat-radio-group>
         </form> -->
-        <div class="container mt-2">
+        <div class="container-fluid mt-2">
           <div class="form-group">
             <select class="form-control" [(ngModel)]="filtro_selected" name="filtros" (change)="filtro($event)">
               <option value="T">Todas</option>
@@ -69,7 +69,7 @@
               <thead>
                 <tr>
                   <th>Tipo</th>
-                  <th>Folio</th>
+                  <!--  <th>Folio</th> -->
                   <th>Vale</th>
                   <th>Fecha</th>
                   <th>Manzana</th>
@@ -86,19 +86,31 @@
 
               <tbody>
                 <tr *ngFor="let salida of salidas_filtradas">
-                  <td>{{salida.tipo}}</td>
-                  <td>{{salida.folio}}</td>
+                  <td>{{salida.id_tipo_salida}}</td>
+                  <!--   <td>{{salida.folio}}</td> -->
                   <td>{{salida.num_vale}}</td>
-                  <td class="ws-nowrap">{{salida.fecha| date:'mediumDate':'':'es'}}</td>
+                  <td class="ws-nowrap">{{salida.fecha|dateToIso| date:'medium':'':'es'}}</td>
                   <td class="ws-nowrap">{{salida.manzana}}</td>
                   <td class="ws-nowrap">{{salida.nombre_lote}}</td>
-                  <td>{{salida.nombre_partida_padre}}-{{salida.nombre_partida}}</td>
-                  <td>{{salida.obra_destino}}</td>
-                  <td></td>
                   <td>
-                    <span *ngIf="salida.tiene_alerta=='1'" class="badge" [ngClass]="{'badge-danger':salida.tiene_alerta=='1'}">Alerta</span>
+                    <span *ngIf="salida.id_tipo_salida=='P'">
+                      {{salida.nombre_partida_padre?salida.nombre_partida_padre + ' / ' + salida.nombre_partida: salida.nombre_partida }}
+                    </span>
+                    <span *ngIf="salida.id_tipo_salida=='U'">
+                      {{salida.partida_urba}}
+                    </span>
                   </td>
-                  <td></td>
+                  <td>{{salida.obra_destino}}</td>
+                  <td>{{salida.nombre_trabajador}}</td>
+                  <td>
+                    <span *ngIf="salida.tiene_alerta=='1'">
+                      <i class="fa fa-exclamation-circle text-danger"></i>
+                    </span>
+                  </td>
+                  <td>
+                    <span *ngIf="salida.tiene_alerta=='1' && salida.aceptada=='0'" class="badge badge-secondary">Rechazada</span>
+                    <span *ngIf="salida.tiene_alerta=='1' && salida.aceptada=='1'" class="badge badge-success">Aceptada</span>
+                  </td>
                   <td class="text-right">
                     <button mat-icon-button [matMenuTriggerFor]="menu">
                       <mat-icon>more_vert</mat-icon>
@@ -108,7 +120,7 @@
                         <mat-icon>visibility</mat-icon>
                         <span>Ver Salida</span>
                       </button>
-                      <button mat-menu-item >
+                      <button mat-menu-item>
                         <mat-icon>visibility</mat-icon>
                         <span *ngIf="salida.tiene_alerta=='1'">Autorizar</span>
                         <span *ngIf="salida.tiene_alerta=='0'">Rechazar</span>

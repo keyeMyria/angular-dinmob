@@ -154,7 +154,7 @@ export class NuevaSalidaComponent implements OnInit {
       id_obra_origen: this.obra.id_obra,
       id_trabajador_recibe: "",
       id_usuario_autoriza: "",
-      tiene_alerta: false,
+      tiene_alerta: false
     });
 
   }

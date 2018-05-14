@@ -4,8 +4,8 @@
   <mat-tab-group>
     <mat-tab label="Datos">
       <div class="container py-3">
-        <form [formGroup]="form" class="mt-2">
-<!--           <div class="form-group row">
+        <form class="mt-2">
+          <!--           <div class="form-group row">
             <label for="folio" class="col-sm-2 col-form-label">Folio</label>
             <div class="col-sm-10">
               <input type="text" readonly class="form-control" id="folio" name="folio" formControlName="folio">
@@ -14,61 +14,67 @@
           <div class="form-group row">
             <label for="vale" class="col-sm-2 col-form-label">Núm. Vale</label>
             <div class="col-sm-10">
-              <input type="text" readonly class="form-control" id="vale" name="vale" formControlName="num_vale">
+              <input type="text" readonly class="form-control" id="vale" name="vanum_vale" [value]="data.datos.num_vale">
             </div>
           </div>
           <div class="form-group row">
             <label for="tipo_salida" class="col-sm-2 col-form-label">Tipo</label>
             <div class="col-sm-10">
-              <input type="text" readonly class="form-control" id="tipo_salida" name="tipo_salida" formControlName="tipo_salida">
+              <input type="text" readonly class="form-control" id="tipo_salida" name="tipo_salida" [value]="data.datos.tipo_salida">
             </div>
           </div>
           <div class="form-group row">
             <label for="fecha" class="col-sm-2 col-form-label">Fecha</label>
             <div class="col-sm-10">
-              <input type="text" readonly class="form-control" id="fecha" name="fecha" formControlName="fecha">
+              <input type="text" readonly class="form-control" id="fecha" name="fecha" value="{{data.datos.fecha| dateToIso| date:'medium':'':'es'}}">
             </div>
           </div>
           <div class="form-group row">
-            <label for="obra_origen" class="col-sm-2 col-form-label">Obra</label>
+            <label for="obra_origen" class="col-sm-2 col-form-label">Obra origen</label>
             <div class="col-sm-10">
-              <input type="text" readonly class="form-control" id="obra_origen" name="obra_origen" formControlName="obra_origen">
+              <input type="text" readonly class="form-control" id="obra_origen" name="obra_origen" [value]="data.datos.obra_origen">
+            </div>
+          </div>
+          <div class="form-group row" *ngIf="data.datos.id_tipo_salida=='O'">
+            <label for="obra_destino" class="col-sm-2 col-form-label">Obra destino</label>
+            <div class="col-sm-10">
+              <input type="text" readonly class="form-control" id="obra_destino" name="obra_destino" [value]="data.datos.obra_destino">
             </div>
           </div>
           <div class="form-group row">
             <label for="lote" class="col-sm-2 col-form-label">Lote</label>
             <div class="col-sm-10">
-              <input type="text" readonly class="form-control" id="lote" name="lote" formControlName="lote">
+              <input type="text" readonly class="form-control" id="lote" name="lote" value="{{data.datos.manzana ? data.datos.manzana + ' / ' + data.datos.lote:''}}">
             </div>
           </div>
           <div class="form-group row">
             <label for="partida" class="col-sm-2 col-form-label">Partida</label>
             <div class="col-sm-10">
-              <input type="text" readonly class="form-control" id="partida" name="partida" formControlName="partida">
+              <input type="text" readonly class="form-control" id="partida" name="partida" [value]="partida">
             </div>
           </div>
           <div class="form-group row">
             <label for="usuario_autoriza" class="col-sm-2 col-form-label">Autoriza</label>
             <div class="col-sm-10">
-              <input type="text" readonly class="form-control" id="usuario_autoriza" name="usuario_autoriza" formControlName="usuario_autoriza">
+              <input type="text" readonly class="form-control" id="usuario_autoriza" name="usuario_autoriza" [value]="data.datos.usuario_autoriza">
             </div>
           </div>
           <div class="form-group row">
             <label for="usuario_entrega" class="col-sm-2 col-form-label">Entrega</label>
             <div class="col-sm-10">
-              <input type="text" readonly class="form-control" id="usuario_entrega" name="usuario_entrega" formControlName="usuario_entrega">
+              <input type="text" readonly class="form-control" id="usuario_entrega" name="usuario_entrega" [value]="data.datos.usuario_entrega">
             </div>
           </div>
           <div class="form-group row">
             <label for="trabajador_recibe" class="col-sm-2 col-form-label">Recibe</label>
             <div class="col-sm-10">
-              <input type="text" readonly class="form-control" id="trabajador_recibe" name="trabajador_recibe" formControlName="trabajador_recibe">
+              <input type="text" readonly class="form-control" id="trabajador_recibe" name="trabajador_recibe" [value]="data.datos.trabajador_recibe">
             </div>
           </div>
           <div class="form-group row">
             <label for="notas" class="col-sm-2 col-form-label">Nota</label>
             <div class="col-sm-10">
-              <textarea type="text" readonly class="form-control" id="notas" name="notas" formControlName="notas"></textarea>
+              <textarea type="text" readonly class="form-control" id="notas" name="notas" [value]="data.datos.notas"></textarea>
             </div>
           </div>
         </form>
@@ -82,7 +88,7 @@
               <th>Insumo</th>
               <th>Unidad</th>
               <th>Cantidad</th>
-              <th>Excedente</th>
+              <th *ngIf="data.datos.id_tipo_salida=='P'">Excedente</th>
             </tr>
           </thead>
           <tbody>
@@ -90,7 +96,7 @@
               <td>{{insumo.insumo}}</td>
               <td>{{insumo.unidad}}</td>
               <td>{{insumo.cantidad}}</td>
-              <td>{{insumo.excedente}}</td>
+              <td *ngIf="data.datos.id_tipo_salida=='P'">{{insumo.excedente}}</td>
             </tr>
           </tbody>
         </table>

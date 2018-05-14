@@ -4,8 +4,9 @@ import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@ang
 import { InsumoService } from 'app/services/insumo.service';
 import { of } from "rxjs/observable/of";
 import { AlertaDialogoComponent } from 'app/components/admin/alerta-dialogo/alerta-dialogo.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { ObrasService } from '../../../services/obras.service';
+import { SalidasService } from 'app/services/salidas.service';
 
 @Component({
   selector: 'app-otras-salidas',
@@ -24,6 +25,7 @@ export class OtrasSalidasComponent implements OnInit {
   obra: any = {};
   usuario: any = {};
   insumos_filtrados: any[] = [];
+  lote_selected: any = {};
 
 
   constructor(
@@ -32,37 +34,40 @@ export class OtrasSalidasComponent implements OnInit {
     private fb: FormBuilder,
     private insumoSrv: InsumoService,
     public dialog: MatDialog,
-    private obraSrv: ObrasService
+    private salidaSrv: SalidasService,
+    private obraSrv: ObrasService,
+    public snackBar: MatSnackBar
   ) {
+
     this.form = this.fb.group({
-      tipo: "O",
-      obra: ["", Validators.required],
-      lote: ["", Validators.required],
-      partida: [{ value: "", disabled: true }, Validators.required],
-      vale: [""],
-      entrega: [""],
-      recibe: ["", Validators.required],
-      autoriza: ["", Validators.required],
-      notas: [""],
+      id_tipo_salida: ["O", Validators.required],
+      id_obra_origen: ["", Validators.required],
+      id_obra_destino: ["", Validators.required],
+      id_lote: ["", Validators.required],
+      id_salida_urbanizacion_partida: [{ value: "", disabled: true }, Validators.required],
+      num_vale: [""],
+      id_usuario_entrega: ["", Validators.required],
+      id_trabajador_recibe: ["", Validators.required],
+      id_usuario_autoriza: ["", Validators.required],
+      notas: [""]
     });
 
 
 
-    this.form.controls["tipo"].valueChanges
+    this.form.controls["id_tipo_salida"].valueChanges
       .subscribe((value) => {
-        //console.log("valueChanges", value);
 
         if (value == "O") {
-          this.form.controls["partida"].disable();
+          this.form.controls["id_salida_urbanizacion_partida"].disable();
 
-          this.form.controls["obra"].enable();
-          this.form.controls["lote"].enable();
+          this.form.controls["id_obra_destino"].enable();
+          this.form.controls["id_lote"].enable();
 
-        } else {/* U*/
-          this.form.controls["obra"].disable();
-          this.form.controls["lote"].disable();
+        } else {
+          this.form.controls["id_obra_destino"].disable();
+          this.form.controls["id_lote"].disable();
 
-          this.form.controls["partida"].enable();
+          this.form.controls["id_salida_urbanizacion_partida"].enable();
 
         }
 
@@ -76,29 +81,39 @@ export class OtrasSalidasComponent implements OnInit {
         this.trabajadores = data.obra.trabajadores;
         this.residentes = data.obra.residentes;
         this.obra = data.obra.obra;
-        this.manzanas = [];
+        //this.manzanas = [];
         this.partidas_urbanizacion = data.partidas_urbanizacion;
         this.usuario = data.usuario;
 
+        this.initForm();
+
         this.insumos = data.obra.materiales;
         this.insumos_filtrados = this.insumos.slice();
+
+
       });
 
     this.obra_selected = this.route.snapshot.params["obra"] ? this.route.snapshot.params["obra"] : "";
+  }
 
+  initForm() {
+    console.log("initForm");
+    this.manzanas = [];
 
-    /*     this.route.paramMap
-          .switchMap((params: ParamMap) => {
-            if (params.has("obra")) {
-              this.obra_selected = params.get("obra");
-              return this.insumoSrv.getMaterialesObra(params.get("obra"));
-            } else {
-              return of([]);
-            }
-          }).subscribe(insumos => {
-            this.insumos = insumos;
-            this.insumos_filtrados = this.insumos.slice();       
-          }); */
+    this.insumos = [];
+    this.insumos_filtrados = [];
+    this.lote_selected = {};
+    this.form.reset({
+      id_tipo_salida: "O",
+      id_obra_origen: this.obra.id_obra,
+      id_obra_destino: "",
+      id_lote: "",
+      id_salida_urbanizacion_partida: "",
+      id_usuario_entrega: this.usuario.id_usuario,
+      id_trabajador_recibe: "",
+      id_usuario_autoriza: ""
+    });
+
   }
 
   cargarObra(id_obra) {
@@ -155,6 +170,30 @@ export class OtrasSalidasComponent implements OnInit {
 
       if (insumos_errores.length == 0) {
         //guardar
+
+        this.salidaSrv.createSalida(this.form.value, insumos_salida)
+          .subscribe(res => {
+
+            console.log("respuesta", res);
+            this.initForm();
+
+            this.insumos = res.materiales;
+            this.insumos_filtrados = this.insumos.slice();
+
+            this.snackBar.open("Salida Creada", "", {
+              duration: 2000,
+              panelClass: ["bg-success", "text-white"]
+            });
+
+          }, error => {
+
+            this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+              duration: 3000,
+              panelClass: ["bg-danger", "text-white"]
+            });
+          });
+
+
       } else {
         this.dialog.open(AlertaDialogoComponent, {
           data: {
@@ -201,6 +240,12 @@ export class OtrasSalidasComponent implements OnInit {
     }
 
   }
+
+  debug() {
+    console.log("form", this.form.value);
+
+  }
+
 
 }
 

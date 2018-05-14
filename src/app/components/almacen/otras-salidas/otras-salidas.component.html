@@ -84,18 +84,18 @@
             <div class="form-group row">
               <label class="col-sm-3 col-form-label pt-0">Destino</label>
               <div class="col-sm-9">
-                <mat-radio-group class="d-inline-flex flex-column" formControlName="tipo">
+                <mat-radio-group class="d-inline-flex flex-column" formControlName="id_tipo_salida">
                   <mat-radio-button value="O">Otras Obras</mat-radio-button>
                   <mat-radio-button value="U">Urbanización</mat-radio-button>
                 </mat-radio-group>
               </div>
             </div>
 
-            <div class="form-group row mt-2" *ngIf=" form.get('tipo').value=='O'">
+            <div class="form-group row mt-2" *ngIf=" form.get('id_tipo_salida').value=='O'">
               <label for="obra" class="col-sm-3 col-form-label">Obra</label>
               <div class="col-sm-9">
-                <select class="form-control" id="obra" name="obra" (change)="getLotesObra( form.get('obra').value)" formControlName="obra"
-                  [ngClass]="{'is-invalid': form.get('obra').invalid  && (form.get('obra').dirty || form.get('obra').touched) }">
+                <select class="form-control" id="obra" name="obra" (change)="getLotesObra( form.get('id_obra_destino').value)" formControlName="id_obra_destino"
+                  [ngClass]="{'is-invalid': form.get('id_obra_destino').invalid  && (form.get('id_obra_destino').dirty || form.get('id_obra_destino').touched) }">
                   <option value="">Seleccionar...</option>
                   <option *ngFor="let obra of obras" [value]="obra.id_obra">{{obra.nombre}}</option>
                 </select>
@@ -103,10 +103,10 @@
               </div>
             </div>
 
-            <div class="form-group row" *ngIf=" form.get('tipo').value=='O'">
+            <div class="form-group row" *ngIf=" form.get('id_tipo_salida').value=='O'">
               <label for="lote" class="col-sm-3 col-form-label">Lote</label>
               <div class="col-sm-9">
-                <select class="form-control" id="lote" name="lote" formControlName="lote" [ngClass]="{'is-invalid': form.get('lote').invalid  && (form.get('lote').dirty || form.get('lote').touched) }">
+                <select class="form-control" id="lote" name="lote" formControlName="id_lote" [ngClass]="{'is-invalid': form.get('id_lote').invalid  && (form.get('id_lote').dirty || form.get('id_lote').touched) }">
                   <option value="">Seleccionar...</option>
                   <ng-container *ngFor="let manzana of manzanas">
                     <option [value]="lote.id_lote" *ngFor="let lote of manzana.lotes">{{manzana.nombre + " / " + lote.nombre}}</option>
@@ -116,12 +116,12 @@
               </div>
             </div>
 
-            <div class="form-group row" *ngIf=" form.get('tipo').value=='U'">
+            <div class="form-group row" *ngIf=" form.get('id_tipo_salida').value=='U'">
               <label for="partida" class="col-sm-3 col-form-label">Partida</label>
               <div class="col-sm-9">
-                <select class="form-control" id="partida" name="partida" formControlName="partida" [ngClass]="{'is-invalid': form.get('partida').invalid  && (form.get('partida').dirty || form.get('partida').touched) }">
+                <select class="form-control" id="partida" name="partida" formControlName="id_salida_urbanizacion_partida" [ngClass]="{'is-invalid': form.get('id_salida_urbanizacion_partida').invalid  && (form.get('id_salida_urbanizacion_partida').dirty || form.get('id_salida_urbanizacion_partida').touched) }">
                   <option value="">Seleccionar...</option>
-                  <option [value]="partida.salida_urbanizacion_partida" *ngFor="let partida of partidas_urbanizacion">{{partida.nombre}}</option>
+                  <option [value]="partida.id_salida_urbanizacion_partida" *ngFor="let partida of partidas_urbanizacion">{{partida.nombre}}</option>
                 </select>
                 <div class="invalid-feedback">Seleccione una partida</div>
               </div>
@@ -130,7 +130,7 @@
             <div class="form-group row">
               <label for="vale" class="col-sm-3 col-form-label">Núm. Vale</label>
               <div class="col-sm-9">
-                <input class="form-control" type="text" id="vale" name="vale" formControlName="vale">
+                <input class="form-control" type="text" id="vale" name="vale" formControlName="num_vale">
               </div>
             </div>
 
@@ -144,7 +144,7 @@
             <div class="form-group row">
               <label for="recibe" class="col-sm-3 col-form-label">Recibe</label>
               <div class="col-sm-9">
-                <select class="form-control" id="recibe" name="recibe" formControlName="recibe" [ngClass]="{'is-invalid': form.get('recibe').invalid  && (form.get('recibe').dirty || form.get('recibe').touched) }">
+                <select class="form-control" id="recibe" name="recibe" formControlName="id_trabajador_recibe" [ngClass]="{'is-invalid': form.get('id_trabajador_recibe').invalid  && (form.get('id_trabajador_recibe').dirty || form.get('id_trabajador_recibe').touched) }">
                   <option value="">Seleccionar...</option>
                   <option [value]="trabajador.id_trabajador" *ngFor="let trabajador of trabajadores">{{trabajador.nombre}} ({{trabajador.especialidad}})</option>
                 </select>
@@ -155,7 +155,7 @@
             <div class="form-group row">
               <label for="autoriza" class="col-sm-3 col-form-label">Autoriza</label>
               <div class="col-sm-9">
-                <select class="form-control" id="autoriza" name="autoriza" formControlName="autoriza" [ngClass]="{'is-invalid': form.get('autoriza').invalid  && (form.get('autoriza').dirty || form.get('autoriza').touched) }">
+                <select class="form-control" id="autoriza" name="autoriza" formControlName="id_usuario_autoriza" [ngClass]="{'is-invalid': form.get('id_usuario_autoriza').invalid  && (form.get('id_usuario_autoriza').dirty || form.get('id_usuario_autoriza').touched) }">
                   <option value="">Seleccionar...</option>
                   <option [value]="usuario.id_usuario" *ngFor="let usuario of residentes">{{usuario.nombre}}</option>
                 </select>
@@ -178,6 +178,7 @@
         </div>
         <div class="card-footer text-center">
           <button type="submit" mat-raised-button form="id_form" color="primary" [disabled]="form.invalid">Guardar</button>
+          <button mat-raised-button type="button" color="primary" (click)="debug()">DEBUG</button>
 
         </div>
 
