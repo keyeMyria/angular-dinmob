@@ -14,6 +14,7 @@ import * as moment from 'moment';
 export class EditarObraDialogoComponent implements OnInit {
 
   form: FormGroup;
+
   numberMask = createNumberMask({
     allowDecimal: true,
     prefix: '',
@@ -32,6 +33,7 @@ export class EditarObraDialogoComponent implements OnInit {
 
       nombre: [data.obra.nombre, Validators.required],
       fecha_ini: [moment(data.obra.fecha_ini, "YYYY-MM-DD"), Validators.required],
+      credito: [data.obra.credito],
       en_venta: data.obra.en_venta == "0" ? false : true,
       residentes: this.fb.array([], this.checkUsuariosRepetidos),
       control_almacen: this.fb.array([], this.checkUsuariosRepetidos),
@@ -110,10 +112,20 @@ export class EditarObraDialogoComponent implements OnInit {
     (<FormArray>this.form.controls["control_almacen"]).removeAt(index);
   }
 
+  private clonar(objeto): any {
+
+    let strObject = JSON.stringify(objeto);
+    return JSON.parse(strObject);
+
+  }
+
   guardar() {
 
 
-    this.obraSrv.updateObra(this.data.obra.id_obra, this.form.value)
+    let obra = this.clonar(this.form.value);
+    obra.credito = obra.credito.replace(/,/g, "");
+
+    this.obraSrv.updateObra(this.data.obra.id_obra, obra)
       .subscribe(obra => {
         let i = this.data.obras.indexOf(this.data.obra);
         this.data.obras[i] = obra;

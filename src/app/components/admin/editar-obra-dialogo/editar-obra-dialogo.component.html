@@ -29,6 +29,11 @@
     </div>
 
     <div class="form-group">
+      <label class="col-form-label">Crédito</label>
+      <input type="text" class="form-control" formControlName="credito" [textMask]="{mask: numberMask}">      
+    </div>
+
+    <div class="form-group">
       <label class="col-form-label">Comisión Vendedor (%)</label>
       <input [textMask]="{mask: numberMask}" type="text" class="form-control" formControlName="comision_vendedor">
     </div>
