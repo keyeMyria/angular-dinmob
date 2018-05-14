@@ -27,6 +27,9 @@ export class EditarPrototipoComponent implements OnInit {
   insumo: any;
   insumos: any[];
 
+  trackByIdPartida = (index, item) => item.id_partida;
+  trackByIdInsumoPartida = (index, item) => item.id_insumo_partida;
+
 
 
   constructor(
