@@ -235,6 +235,7 @@ import { DateToIsoPipe } from './pipes/date-to-iso.pipe';
 import { CreditoPuenteComponent } from './components/credito-puente/credito-puente/credito-puente.component';
 import { CargoAbonoCreditoDialogoComponent } from './components/credito-puente/cargo-abono-credito-dialogo/cargo-abono-credito-dialogo.component';
 import { EditarCargoAbonoCreditoDialogoComponent } from './components/credito-puente/editar-cargo-abono-credito-dialogo/editar-cargo-abono-credito-dialogo.component';
+import { CreditoPuenteService } from './services/credito-puente.service';
 
 
 
@@ -519,6 +520,7 @@ export function getToken() {
     PagoTrabajadorService,
     PedidoService,
     LogService,
+    CreditoPuenteService,
 
     ObrasUsuarioResolverService,
     UsuariosAlmacenistasResolverService,
