@@ -23,7 +23,7 @@
     <div class="form-group row">
       <label for="fecha" class="col-sm-3 col-form-label"></label>
       <div class="input-group col-sm-9">
-        <mat-radio-group>
+        <mat-radio-group class="d-inline-flex flex-column" formControlName="es_ministracion">
           <mat-radio-button value="1">Ministración</mat-radio-button>
           <mat-radio-button value="2">Liberación</mat-radio-button>
         </mat-radio-group>
@@ -41,7 +41,7 @@
     <div class="form-group row">
       <label for="nota" class="col-sm-3 col-form-label">Nota</label>
       <div class="input-group col-sm-9">
-        <textarea class="form-control" type="text" id="nota" name="nota" formControlName="nota"row="3"></textarea>
+        <textarea class="form-control" type="text" id="nota" name="nota" formControlName="nota" row="3"></textarea>
       </div>
     </div>
 
