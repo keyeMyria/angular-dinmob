@@ -28,6 +28,7 @@ export class CargoAbonoCreditoDialogoComponent implements OnInit {
       fecha: [moment(""), Validators.required],
       monto: ["", Validators.required],
       nota: [""],
+      es_ministracion: ""
 
 
     });

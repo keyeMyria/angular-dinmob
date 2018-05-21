@@ -446,7 +446,12 @@ export const ROUTES: Routes = [
                     obras: ObrasUsuarioResolverService
                 }
             },
-            { path: 'credito-puente', component: CreditoPuenteComponent },
+            { 
+                path: 'credito-puente', component: CreditoPuenteComponent,
+                resolve: {
+                    obras: ObrasUsuarioResolverService
+                }
+             },
 
 
 
