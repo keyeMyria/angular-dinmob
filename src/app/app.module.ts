@@ -232,6 +232,9 @@ import { ReporteEntradasComponent } from './components/almacen/reporte-entradas/
 import { ExcedentePipe } from './pipes/excedente.pipe';
 import { EstadisticasAdminResolverService } from './resolvers/estadisticas-admin-resolver.service';
 import { DateToIsoPipe } from './pipes/date-to-iso.pipe';
+import { CreditoPuenteComponent } from './components/credito-puente/credito-puente/credito-puente.component';
+import { CargoAbonoCreditoDialogoComponent } from './components/credito-puente/cargo-abono-credito-dialogo/cargo-abono-credito-dialogo.component';
+import { EditarCargoAbonoCreditoDialogoComponent } from './components/credito-puente/editar-cargo-abono-credito-dialogo/editar-cargo-abono-credito-dialogo.component';
 
 
 
@@ -378,7 +381,10 @@ export function getToken() {
     ReporteSalidasComponent,
     ReporteEntradasComponent,
     ExcedentePipe,
-    DateToIsoPipe
+    DateToIsoPipe,
+    CreditoPuenteComponent,
+    CargoAbonoCreditoDialogoComponent,
+    EditarCargoAbonoCreditoDialogoComponent
 
 
 
@@ -464,7 +470,9 @@ export function getToken() {
     FormatoDialogoComponent,
     AvancesLoteDialogoComponent,
     VerPedidoDialogoComponent,
-    VerEntradaDialogoComponent
+    VerEntradaDialogoComponent,
+    CargoAbonoCreditoDialogoComponent,
+    EditarCargoAbonoCreditoDialogoComponent
 
 
 

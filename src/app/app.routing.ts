@@ -92,6 +92,7 @@ import { ReportesResolverService } from './resolvers/reportes-resolver.service';
 import { ReporteSalidasComponent } from './components/almacen/reporte-salidas/reporte-salidas.component';
 import { ReporteEntradasComponent } from './components/almacen/reporte-entradas/reporte-entradas.component';
 import { EstadisticasAdminResolverService } from './resolvers/estadisticas-admin-resolver.service';
+import { CreditoPuenteComponent } from './components/credito-puente/credito-puente/credito-puente.component';
 
 
 
@@ -445,6 +446,7 @@ export const ROUTES: Routes = [
                     obras: ObrasUsuarioResolverService
                 }
             },
+            { path: 'credito-puente', component: CreditoPuenteComponent },
 
 
 
