@@ -70,10 +70,27 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
 
     this.route.paramMap
       .switchMap((params: ParamMap) => {
-        if (params.has("obra")) {
-          this.obra_selected = params.get("obra");
+        let obra;
 
-          let obra = this.getObra(this.obra_selected);
+        if (params.has("index")) {
+
+          //convertimos el string a int
+          this.obra_selected = +params.get("index");
+          obra = this.obras[params.get("index")];
+
+          //unimos la consulta de los valores y el mapa
+          return Observable.forkJoin(
+            this.mapaSrv.getVentasLotesObra(obra.id_obra),
+            this.mapaSrv.getMapaObra(obra.mapa)
+          )
+
+
+
+        } else if (params.has("obra")) {
+
+          this.obra_selected = this.getIndexObra(params.get("obra"));
+
+          obra = this.obras[this.obra_selected]; //this.getObra(this.obra_selected);
 
           //unimos la consulta de los valores y el mapa
           return Observable.forkJoin(
@@ -87,6 +104,9 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
 
       }).subscribe(res => {
 
+        //console.log("respuesta", res);
+
+        //activamos el loading spinner
         this.loading.start();
         //console.log("loading start");
 
@@ -147,6 +167,7 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
             //console.log("inicio creación mapa");
             this.crearMapa(this.valuesEstadosVenta, this.scalePrototipos, this.scaleFormaPago, this.scaleLoteTipo);
             //console.log("mapa creado");
+            //detenemos el loading spinner
             this.loading.stop();
           }, 100);
         } else {
@@ -167,11 +188,9 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
 
   cargarObra(id_obra) {
 
-    //console.log("cargar obra", this.obras.find(obra => obra.id_obra == id_obra));
-
-
-    if (id_obra) {
-      this.router.navigate([".", { obra: id_obra }]);
+    //comparacion de tipo porque 0==""
+    if (id_obra !== "") {
+      this.router.navigate([".", { index: id_obra }]);
     } else {
       this.router.navigate([".", {}]);
 
@@ -179,8 +198,15 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
 
   }
 
-  private getObra(id_obra) {
-    return this.obras.find(obra => obra.id_obra == id_obra);
+  /*   private getObra(id_obra) {
+      return this.obras.find(obra => obra.id_obra == id_obra);
+    } */
+  private getIndexObra(id_obra) {
+    let op = this.obras.findIndex(obra => obra.id_obra == id_obra && obra.is_default == "1");
+    if (op == -1) {
+      op = this.obras.findIndex(obra => obra.id_obra == id_obra);
+    }
+    return op;
   }
 
   verClientes() {
@@ -273,7 +299,7 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
     $("#map").vectorMap({
       map: 'map',
       backgroundColor: "transparent",
-      zoomButtons:true,
+      zoomButtons: true,
       //regionsSelectable: true,
       //regionsSelectableOne: true,
       regionStyle: {
@@ -360,6 +386,8 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
             scale: {
               'Terreno': 'white',
               'Letras': 'black',
+              "Info": "#17a2b8",//cyan
+              "Verde": "#20c997",//teal
               'What': 'red'
             },
             attribute: 'fill',
