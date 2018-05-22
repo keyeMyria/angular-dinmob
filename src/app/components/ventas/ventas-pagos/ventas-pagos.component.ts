@@ -5,6 +5,7 @@ import { of } from "rxjs/observable/of";
 import { MatSnackBar, MatDialog } from '@angular/material';
 import * as moment from 'moment';
 import { SaldoVentaClienteDialogoComponent } from '../saldo-venta-cliente-dialogo/saldo-venta-cliente-dialogo.component';
+import { ClientesService } from '../../../services/clientes.service';
 
 @Component({
   selector: 'app-ventas-pagos',
@@ -25,6 +26,7 @@ export class VentasPagosComponent implements OnInit {
     private pagoSrv: VentasPagosService,
     public snackBar: MatSnackBar,
     public dialog: MatDialog,
+    private clienteSrv: ClientesService
   ) { }
 
   ngOnInit() {
@@ -157,22 +159,24 @@ export class VentasPagosComponent implements OnInit {
     return suma;
   }
 
-  editarCliente(pago){
+  editarCliente(pago) {
     this.router.navigate(["/editar-cliente", pago.id_cliente]);
   }
 
-  esquemaPagos() {
-    console.log("cliente",);
-    let dialogRef = this.dialog.open(SaldoVentaClienteDialogoComponent, {
-      data: {
-        
-      },
-      width: '500px'
-    });
+  resumenVenta(id_compra) {
+    this.clienteSrv.getCompra(id_compra)
+      .subscribe(compra => {
 
-    dialogRef.afterClosed().subscribe(result => {
+        let dialogRef = this.dialog.open(SaldoVentaClienteDialogoComponent, {
+          data: {
+            compra: compra
+          },
+          width: "800px"
+        });
 
-    });
+
+      }, (error) => {
+      });
 
   }
 

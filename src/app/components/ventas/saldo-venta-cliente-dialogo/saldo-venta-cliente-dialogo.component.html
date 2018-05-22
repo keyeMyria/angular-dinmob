@@ -1,9 +1,68 @@
-<h1 mat-dialog-title>Saldo Venta</h1>
-<div mat-dialog-content>
+<h1 mat-dialog-title>{{data.compra.manzana||''}} {{data.compra.lote||''}}</h1>
+<div mat-dialog-content class="no-padding">
+
+
+  <h5 class="text-center">{{data.compra.cliente}}</h5>
+
+
+  <div class="container-fluid">
+    <div class="form-row">
+
+      <div class="col-12 col-sm-4 py-3">
+        <div class="text-center">
+          <h4 class="text-primary">
+            {{(data.compra.valor_operacion|| 0) |unmaskNumber |currency }}
+          </h4>
+          <span>VALOR OPERACIÓN</span>
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-4 py-3">
+        <div class="text-center">
+          <h4 class="text-success">
+            {{totalPagosRealizados() | currency}}
+          </h4>
+          <span>-PAGOS REALIZADOS</span>
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-4 py-3">
+        <div class="text-center">
+          <h4 class="text-danger">
+            {{saldoPendiente() | currency}}
+          </h4>
+          <span>=SALDO PENDIENTE</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- pagos -->
+  <div class="table-responsive">
+    <table id="tablePagos" class="table table-striped table-hover table-align-middle mt-4">
+      <thead>
+        <tr>
+          <th>Pago</th>
+          <th>Monto</th>
+          <th>Tipo</th>
+          <th>Forma</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pago of data.compra.pagos">
+          <td class="ws-nowrap">{{pago.fecha_pago| date:'mediumDate':'':'es'}}</td>
+          <td>{{pago.monto|currency}}</td>
+          <td>{{pago.tipo_pago}}</td>
+          <td>{{pago.forma_pago}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
 
 
 </div>
 <div mat-dialog-actions>
-  <button mat-button type="button" [mat-dialog-close]="false">CERRAR</button>
+  <button mat-button class="btn-block" [mat-dialog-close]="true">CERRAR</button>
 </div>
