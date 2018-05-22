@@ -235,6 +235,7 @@ import { DateToIsoPipe } from './pipes/date-to-iso.pipe';
 import { CreditoPuenteComponent } from './components/credito-puente/credito-puente/credito-puente.component';
 import { CargoAbonoCreditoDialogoComponent } from './components/credito-puente/cargo-abono-credito-dialogo/cargo-abono-credito-dialogo.component';
 import { EditarCargoAbonoCreditoDialogoComponent } from './components/credito-puente/editar-cargo-abono-credito-dialogo/editar-cargo-abono-credito-dialogo.component';
+import { SaldoVentaClienteDialogoComponent } from './components/ventas/saldo-venta-cliente-dialogo/saldo-venta-cliente-dialogo.component';
 
 
 
@@ -384,7 +385,8 @@ export function getToken() {
     DateToIsoPipe,
     CreditoPuenteComponent,
     CargoAbonoCreditoDialogoComponent,
-    EditarCargoAbonoCreditoDialogoComponent
+    EditarCargoAbonoCreditoDialogoComponent,
+    SaldoVentaClienteDialogoComponent
 
 
 
@@ -472,7 +474,8 @@ export function getToken() {
     VerPedidoDialogoComponent,
     VerEntradaDialogoComponent,
     CargoAbonoCreditoDialogoComponent,
-    EditarCargoAbonoCreditoDialogoComponent
+    EditarCargoAbonoCreditoDialogoComponent,
+    SaldoVentaClienteDialogoComponent
 
 
 

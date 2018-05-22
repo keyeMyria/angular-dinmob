@@ -1,4 +1,4 @@
-<div class="container mt-2 mb-5">
+<div class="container-fluid mt-2 mb-5">
   <div class="row">
     <div class="col-12">
 
@@ -87,6 +87,7 @@
                   <th>Forma</th>
                   <th>Tipo</th>
                   <th>Validado</th>
+                  <th>Nota</th>
                   <th>
                     <i class="fa fa-file-o"></i>
                   </th>
@@ -108,14 +109,21 @@
                       {{pago.validado|numberToYesNo:'VAL'}}
                     </span>
                   </td>
+                  <td>{{pago.nota}}</td>
                   <td>
                     <a target="_blank" [href]="pago.url" *ngIf="pago.url">
                       <i class="fa fa-file-o"></i>
                     </a>
                   </td>
-                  <td class="text-right">
+                  <td class="text-right ws-nowrap">
                     <button mat-button class="no-min" (click)="setValidacionPago(pago)">
                       <i class="fa" [ngClass]="{'fa-check':pago.validado=='0','fa-ban':pago.validado=='1'}"></i>
+                    </button>
+                    <button mat-button class="no-min" (click)="editarCliente(pago)">
+                      <i class="fa fa-user"></i>
+                    </button>
+                    <button mat-button class="no-min" (click)="esquemaPagos()">
+                      <i class="fa fa-exclamation-circle"></i>
                     </button>
                   </td>
                 </tr>

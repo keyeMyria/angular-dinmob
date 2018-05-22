@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { VentasPagosService } from 'app/services/ventas-pagos.service';
 import { of } from "rxjs/observable/of";
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
 import * as moment from 'moment';
+import { SaldoVentaClienteDialogoComponent } from '../saldo-venta-cliente-dialogo/saldo-venta-cliente-dialogo.component';
 
 @Component({
   selector: 'app-ventas-pagos',
@@ -22,7 +23,8 @@ export class VentasPagosComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private pagoSrv: VentasPagosService,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit() {
@@ -153,6 +155,25 @@ export class VentasPagosComponent implements OnInit {
     });
 
     return suma;
+  }
+
+  editarCliente(pago){
+    this.router.navigate(["/editar-cliente", pago.id_cliente]);
+  }
+
+  esquemaPagos() {
+    console.log("cliente",);
+    let dialogRef = this.dialog.open(SaldoVentaClienteDialogoComponent, {
+      data: {
+        
+      },
+      width: '500px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+    });
+
   }
 
 }
