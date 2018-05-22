@@ -62,6 +62,13 @@ export class ClientesService {
       .pipe(catchError(this.handleError("getClienteConComprasYDocumentos")));
   }
 
+
+  //ok
+  getCompra(id_compra) {
+    return this.http.get(this.url + 'get_compra/' + id_compra)
+      .pipe(catchError(this.handleError("getCompra")));
+  }
+
   //ok
   createCliente(cliente, id_lote) {
     return this.http.post(this.url + 'create_cliente', { cliente: cliente, id_lote: id_lote })
