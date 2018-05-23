@@ -108,8 +108,9 @@
                     </span>
                   </td>
                   <td>
-                    <span *ngIf="salida.tiene_alerta=='1' && salida.aceptada=='0'" class="badge badge-secondary">Rechazada</span>
-                    <span *ngIf="salida.tiene_alerta=='1' && salida.aceptada=='1'" class="badge badge-success">Aceptada</span>
+                    <span class="badge" [ngClass]="salida.aceptada=='1'?'badge-success':'badge-secondary'" *ngIf="salida.tiene_alerta=='1'">
+                      {{salida.aceptada|numberToYesNo:'SAL'}}
+                    </span>
                   </td>
                   <td class="text-right">
                     <button mat-icon-button [matMenuTriggerFor]="menu">
@@ -120,10 +121,11 @@
                         <mat-icon>visibility</mat-icon>
                         <span>Ver Salida</span>
                       </button>
-                      <button mat-menu-item>
-                        <mat-icon>visibility</mat-icon>
-                        <span *ngIf="salida.tiene_alerta=='1'">Autorizar</span>
-                        <span *ngIf="salida.tiene_alerta=='0'">Rechazar</span>
+                      <button mat-menu-item (click)="setValidacion(salida)" *ngIf="salida.tiene_alerta=='1'">
+                    <!--     <i class="fa" [ngClass]="{'fa-check':salida.aceptada=='0','fa-ban':salida.aceptada=='1'}"></i> -->
+                        <mat-icon>{{salida.aceptada=="0"?'done':'block'}}</mat-icon>
+                        <span *ngIf="salida.aceptada=='1'">Rechazar</span>
+                        <span *ngIf="salida.aceptada=='0'">Autorizar</span>
                       </button>
                       <button mat-menu-item>
                         <mat-icon>file_download</mat-icon>

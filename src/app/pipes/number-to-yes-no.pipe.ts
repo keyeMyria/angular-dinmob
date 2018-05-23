@@ -56,7 +56,13 @@ export class NumberToYesNoPipe implements PipeTransform {
         }
         return 'Liberación';
       }
-
+      
+      if (tipo === 'SAL') {
+        if (value === '1') {
+          return 'Autorizado';
+        }
+        return 'Rechazado';
+      }
     }
 
 

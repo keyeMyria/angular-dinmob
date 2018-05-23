@@ -73,6 +73,30 @@ export class SalidasComponent implements OnInit {
 
   }
 
+  setValidacion(salida) {
+
+    let aceptada = 0;
+    if (salida.aceptada == "0") {
+      aceptada = 1;
+    }
+
+    this.salidaSrv.updateValidacion(salida.id_salida, aceptada)
+      .subscribe(aceptada => {
+        salida.aceptada = aceptada;
+        this.snackBar.open("Salida Actualizada", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      }, (error) => {
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+      });
+  }
+
+
   nuevaSalida() {
     this.router.navigate(["/nueva-salida", { obra: this.obra_selected }]);
   }
