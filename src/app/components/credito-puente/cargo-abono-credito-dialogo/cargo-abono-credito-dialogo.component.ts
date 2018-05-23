@@ -45,6 +45,7 @@ export class CargoAbonoCreditoDialogoComponent implements OnInit {
     this.creditoSrv.createMovimiento(this.form.value)
       .subscribe(mov => {
         this.data.movimientos.push(mov);
+        this.data.movimientos.sort((a, b) => Number(new Date(b.fecha)) - Number(new Date(a.fecha)));
         this.dialogRef.close(true);
 
       }, (error) => {

@@ -47,6 +47,7 @@ export class EditarCargoAbonoCreditoDialogoComponent implements OnInit {
 
         let i = this.data.movimientos.indexOf(this.data.mov);
         this.data.movimientos[i] = movimiento;
+        this.data.movimientos.sort((a, b) => Number(new Date(b.fecha)) - Number(new Date(a.fecha)));
         this.dialogRef.close(true);
 
       },
