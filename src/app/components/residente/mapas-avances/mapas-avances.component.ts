@@ -47,10 +47,25 @@ export class MapasAvancesComponent implements OnInit {
 
     this.route.paramMap
       .switchMap((params: ParamMap) => {
-        if (params.has("obra")) {
-          this.obra_selected = params.get("obra");
 
-          let obra = this.getObra(this.obra_selected);
+        let obra;
+
+        if (params.has("index")) {
+
+          //convertimos el string a int
+          this.obra_selected = +params.get("index");
+          obra = this.obras[params.get("index")];
+
+          //unimos la consulta de los valores y el mapa
+          return Observable.forkJoin(
+            this.mapaSrv.getAvancesLotesObra(obra.id_obra),
+            this.mapaSrv.getMapaObra(obra.mapa)
+          )
+
+
+        } else if (params.has("obra")) {
+          this.obra_selected = this.getIndexObra(params.get("obra"));
+          obra = this.obras[this.obra_selected];
 
           //unimos la consulta de los valores y el mapa
           return Observable.forkJoin(
@@ -219,14 +234,19 @@ export class MapasAvancesComponent implements OnInit {
 
   }
 
-  private getObra(id_obra) {
-    return this.obras.find(obra => obra.id_obra == id_obra);
+
+  private getIndexObra(id_obra) {
+    let op = this.obras.findIndex(obra => obra.id_obra == id_obra && obra.is_default == "1");
+    if (op == -1) {
+      op = this.obras.findIndex(obra => obra.id_obra == id_obra);
+    }
+    return op;
   }
 
   cargarObra(id_obra) {
 
-    if (id_obra) {
-      this.router.navigate([".", { obra: id_obra }]);
+    if (id_obra !== "") {
+      this.router.navigate([".", { index: id_obra }]);
     } else {
       this.router.navigate([".", {}]);
 
