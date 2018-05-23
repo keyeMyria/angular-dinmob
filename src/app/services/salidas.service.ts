@@ -53,6 +53,11 @@ export class SalidasService {
       .pipe(catchError(this.handleError("getPartidasUrbanizacion")));
   }
 
+  updateValidacion(id_salida, value) {
+    return this.http.post(this.url + 'update_validacion_salida/' + id_salida, { value: value })
+      .pipe(catchError(this.handleError("updateValidacion")));
+  }
+
   private handleError<T>(operation = 'operation') {
     return (error: HttpErrorResponse) => {
 
