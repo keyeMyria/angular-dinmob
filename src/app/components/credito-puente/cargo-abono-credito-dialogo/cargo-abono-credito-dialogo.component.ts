@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
 import * as moment from 'moment';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
+import { CreditoPuenteService } from '../../../services/credito-puente.service';
 
 @Component({
   selector: 'app-cargo-abono-credito-dialogo',
@@ -21,14 +22,16 @@ export class CargoAbonoCreditoDialogoComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<CargoAbonoCreditoDialogoComponent>,
     private fb: FormBuilder,
+    private creditoSrv: CreditoPuenteService
   ) {
     this.form = this.fb.group({
 
 
-      fecha: [moment(""), Validators.required],
+      fecha: [moment(), Validators.required],
       monto: ["", Validators.required],
+      id_obra: [this.data.id_obra, Validators.required],
       nota: [""],
-      es_ministracion: ""
+      es_ministracion: ["1", Validators.required]
 
 
     });
@@ -38,6 +41,19 @@ export class CargoAbonoCreditoDialogoComponent implements OnInit {
   }
 
   guardar() {
+    this.creditoSrv.createMovimiento(this.form.value)
+      .subscribe(mov => {
+        this.data.movimientos.push(mov);
+        this.dialogRef.close(true);
+
+      }, (error) => {
+        this.dialogRef.close({ error: "Ha ocurrido un error de conexión. Inténtelo más tarde" });
+      });
+  }
+
+  debug() {
+    console.log("form", this.form.value);
+
   }
 
 }
