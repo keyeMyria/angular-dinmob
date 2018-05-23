@@ -37,9 +37,13 @@
 
               <tbody>
                 <tr *ngFor="let mov of movimientos">
-                  <td>{{mov.fecha}}</td>
-                  <td><span *ngIf="mov.es_ministracion=='1'">{{mov.monto|currency}}</span></td>
-                  <td><span *ngIf="mov.es_ministracion=='0'">{{mov.monto|currency}}</span></td>
+                  <td>{{mov.fecha| date:'mediumDate':'':'es'}}</td>
+                  <td>
+                    <span *ngIf="mov.es_ministracion=='1'">{{mov.monto|currency}}</span>
+                  </td>
+                  <td>
+                    <span *ngIf="mov.es_ministracion=='0'">{{mov.monto|currency}}</span>
+                  </td>
                   <td>{{mov.nota}}</td>
                   <td class="text-right">
                     <button mat-button class="no-min" matTooltip="Editar" (click)="editarMovimiento(mov)">
@@ -51,9 +55,9 @@
                   </td>
                 </tr>
                 <tr>
-                  <td></td>
-                  <td>Total:</td>
-                  <td>Total:</td>
+                  <td>TOTALES</td>
+                  <th>{{totalMinistraciones() | currency}}</th>
+                  <th>{{totalLiberaciones() | currency}}</th>
                   <td></td>
                   <td></td>
                 </tr>
@@ -67,7 +71,7 @@
         <div class="card-body">
           <div class="text-right">
             <span>SALDO: </span>
-            <span class="ml-1 h5">$2,000.00</span>
+            <span class="ml-1 h5">{{saldo() | currency}}</span>
 
           </div>
         </div>

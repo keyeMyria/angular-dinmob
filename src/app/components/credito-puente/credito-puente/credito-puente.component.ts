@@ -57,51 +57,165 @@ export class CreditoPuenteComponent implements OnInit {
 
   }
 
+  totalMinistraciones() {
+    let total = 0;
+
+    if (this.movimientos) {
+      this.movimientos.forEach(mov => {
+
+        if (mov.es_ministracion === "1") {
+          total += +mov.monto;
+
+        }
+
+      });
+    }
+    return total;
+  }
+
+  totalLiberaciones() {
+    let total = 0;
+
+    if (this.movimientos) {
+      this.movimientos.forEach(mov => {
+
+        if (mov.es_ministracion === "0") {
+          total += +mov.monto;
+
+        }
+
+      });
+    }
+    return total;
+  }
+
+  saldo() {
+    let total = 0;
+
+    if (this.movimientos) {
+      this.movimientos.forEach(mov => {
+
+        if (mov.es_ministracion === "1") {
+          total += +mov.monto;
+
+        } else {
+          total -= +mov.monto
+        }
+
+      });
+    }
+    return total;
+  }
+
   nuevoMovimiento() {
 
     let dialogRef = this.dialog.open(CargoAbonoCreditoDialogoComponent, {
       data: {
-        id_obra:this.obra_selected,
-        movimientos:this.movimientos
+        id_obra: this.obra_selected,
+        movimientos: this.movimientos
       },
       width: "500px"
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+
+        this.snackBar.open("Movimiento Agregado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      } else if (result && result.error) {
+
+        this.snackBar.open(result.error, "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+
+      }
     });
 
   }
 
-  editarMovimiento() {
+  editarMovimiento(mov) {
 
     let dialogRef = this.dialog.open(EditarCargoAbonoCreditoDialogoComponent, {
       data: {
+        mov: mov,
+        movimientos: this.movimientos
       },
       width: "500px"
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+
+        this.snackBar.open("Movimiento Actulizado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      } else if (result && result.error) {
+
+        this.snackBar.open(result.error, "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+
+      }
     });
 
   }
 
-  delMovimiento() {
+  delMovimiento(mov) {
+
+    let tipo;
+    if (mov.es_ministracion == "1") {
+      tipo = "Ministración";
+    } else {
+      tipo = "Liberación";
+    }
 
     let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
       data: {
         title: "Eliminar Movimiento",
-        content: `¿Desea eliminar el movimiento: (tipo-fecha)?`
+        content: `¿Desea eliminar la ${tipo} del ${mov.fecha}?`
       },
       width: "500px"
     });
 
     dialogRef.afterClosed().subscribe(result => {
-
       if (result === true) {
+
+        this.creditoSrv.delMovimiento(mov.id_movimiento)
+          .subscribe((res: any) => {
+            if (res.count === 1) {
+
+              let i = this.movimientos.indexOf(mov);
+              this.movimientos.splice(i, 1);
+
+
+              this.snackBar.open("Movimiento Eliminado", "", {
+                duration: 2000,
+                panelClass: ["bg-success", "text-white"]
+              });
+
+            } else {
+              this.snackBar.open("Ha ocurrido un error", "", {
+                duration: 3000,
+                panelClass: ["bg-danger", "text-white"]
+              });
+            }
+
+          }, (error) => {
+            this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+              duration: 3000,
+              panelClass: ["bg-danger", "text-white"]
+            });
+          });
 
 
       }
-
     });
 
   }

@@ -41,6 +41,7 @@ export class CargoAbonoCreditoDialogoComponent implements OnInit {
   }
 
   guardar() {
+    this.form.value.monto = this.form.value.monto.replace(/,/g, "");
     this.creditoSrv.createMovimiento(this.form.value)
       .subscribe(mov => {
         this.data.movimientos.push(mov);

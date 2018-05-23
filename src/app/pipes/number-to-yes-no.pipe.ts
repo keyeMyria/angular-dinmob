@@ -50,6 +50,13 @@ export class NumberToYesNoPipe implements PipeTransform {
         return 'R';//regular
       }
 
+      if (tipo === 'MOV') {
+        if (value === '1') {
+          return 'Ministración';
+        }
+        return 'Liberación';
+      }
+
     }
 
 
