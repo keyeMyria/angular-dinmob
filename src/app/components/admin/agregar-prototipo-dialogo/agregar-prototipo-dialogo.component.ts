@@ -44,7 +44,7 @@ export class AgregarPrototipoDialogoComponent implements OnInit {
 
       }, (error) => {
         this.dialogRef.close({ error: "Ha ocurrido un error de conexión. Inténtelo más tarde" });
-      })
+      });
 
 
   }

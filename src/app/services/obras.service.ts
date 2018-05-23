@@ -68,13 +68,13 @@ export class ObrasService {
 
   //Devuelve las obras del usuario con una sesión iniciada
   getObrasUsuario() {
-    return this.http.get(this.url + 'usuario/')
+    return this.http.get(this.url + 'usuario')
       .pipe(catchError(this.handleError("getObrasUsuario")));
   }
 
   //Devuelve los mapas de las obras del usuario con una sesión iniciada
   getMapasUsuario() {
-    return this.http.get(this.url + 'usuario_mapas/')
+    return this.http.get(this.url + 'usuario_mapas')
       .pipe(catchError(this.handleError("getMapasUsuario")));
   }
 
