@@ -15,7 +15,7 @@ export class AuthService {
 
   url: string;
 
-  Rol = {
+/*   Rol = {
     Administrador: 1,
     Control: 2,
     Residente: 3,
@@ -27,7 +27,7 @@ export class AuthService {
     Recepcion: 9,
     ControlAlmacen: 10
 
-  }
+  } */
 
   redirectUrl: string;
 
