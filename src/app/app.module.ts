@@ -237,6 +237,12 @@ import { CargoAbonoCreditoDialogoComponent } from './components/credito-puente/c
 import { EditarCargoAbonoCreditoDialogoComponent } from './components/credito-puente/editar-cargo-abono-credito-dialogo/editar-cargo-abono-credito-dialogo.component';
 import { SaldoVentaClienteDialogoComponent } from './components/ventas/saldo-venta-cliente-dialogo/saldo-venta-cliente-dialogo.component';
 import { CreditoPuenteService } from './services/credito-puente.service';
+import { TableroContabilidadComponent } from './components/tablero-contabilidad/tablero-contabilidad.component';
+import { TableroResidenteComponent } from './components/tablero-residente/tablero-residente.component';
+import { TableroControlAlmacenComponent } from './components/tablero-control-almacen/tablero-control-almacen.component';
+import { TableroAsesorComponent } from './components/tablero-asesor/tablero-asesor.component';
+import { TableroPedidosComponent } from './components/tablero-pedidos/tablero-pedidos.component';
+import { TableroAlmacenistaComponent } from './components/tablero-almacenista/tablero-almacenista.component';
 
 
 
@@ -387,7 +393,13 @@ export function getToken() {
     CreditoPuenteComponent,
     CargoAbonoCreditoDialogoComponent,
     EditarCargoAbonoCreditoDialogoComponent,
-    SaldoVentaClienteDialogoComponent
+    SaldoVentaClienteDialogoComponent,
+    TableroContabilidadComponent,
+    TableroResidenteComponent,
+    TableroControlAlmacenComponent,
+    TableroAsesorComponent,
+    TableroPedidosComponent,
+    TableroAlmacenistaComponent
 
 
 

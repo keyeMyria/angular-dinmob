@@ -93,6 +93,12 @@ import { ReporteSalidasComponent } from './components/almacen/reporte-salidas/re
 import { ReporteEntradasComponent } from './components/almacen/reporte-entradas/reporte-entradas.component';
 import { EstadisticasAdminResolverService } from './resolvers/estadisticas-admin-resolver.service';
 import { CreditoPuenteComponent } from './components/credito-puente/credito-puente/credito-puente.component';
+import { TableroAlmacenistaComponent } from './components/tablero-almacenista/tablero-almacenista.component';
+import { TableroAsesorComponent } from './components/tablero-asesor/tablero-asesor.component';
+import { TableroContabilidadComponent } from './components/tablero-contabilidad/tablero-contabilidad.component';
+import { TableroPedidosComponent } from './components/tablero-pedidos/tablero-pedidos.component';
+import { TableroResidenteComponent } from './components/tablero-residente/tablero-residente.component';
+import { TableroControlAlmacenComponent } from './components/tablero-control-almacen/tablero-control-almacen.component';
 
 
 
@@ -184,7 +190,8 @@ export const ROUTES: Routes = [
             {
                 path: 'avances', component: AvancesComponent,
                 resolve: {
-                    obras: ObrasUsuarioResolverService
+                    obras: ObrasUsuarioResolverService,
+                    usuario: UsuarioLoggedResolverService
                 }
             },
             {
@@ -245,19 +252,22 @@ export const ROUTES: Routes = [
             {
                 path: 'salidas', component: SalidasComponent,
                 resolve: {
-                    obras: ObrasUsuarioResolverService
+                    obras: ObrasUsuarioResolverService,
+                    usuario: UsuarioLoggedResolverService
                 }
             },
             {
                 path: 'entradas', component: EntradasComponent,
                 resolve: {
-                    obras: ObrasUsuarioResolverService
+                    obras: ObrasUsuarioResolverService,
+                    usuario: UsuarioLoggedResolverService
                 }
             },
             {
                 path: 'inventario', component: InventarioComponent,
                 resolve: {
-                    obras: ObrasUsuarioResolverService
+                    obras: ObrasUsuarioResolverService,
+                    usuario: UsuarioLoggedResolverService
                 }
             },
             {
@@ -295,7 +305,8 @@ export const ROUTES: Routes = [
             {
                 path: 'pedidos', component: PedidosComponent,
                 resolve: {
-                    obras: ObrasUsuarioResolverService
+                    obras: ObrasUsuarioResolverService,
+                    usuario: UsuarioLoggedResolverService
                 }
             },
             {
@@ -339,7 +350,43 @@ export const ROUTES: Routes = [
                 path: 'tablero-almacen', component: TableroAlmacenComponent,
                 resolve: {
                     usuario: UsuarioLoggedResolverService
-                },
+                }
+            },
+            {
+                path: 'tablero-almacenista', component: TableroAlmacenistaComponent,
+                resolve: {
+                    usuario: UsuarioLoggedResolverService
+                }
+            },
+            {
+                path: 'tablero-asesor', component: TableroAsesorComponent,
+                resolve: {
+                    usuario: UsuarioLoggedResolverService
+                }
+            },
+            {
+                path: 'tablero-contabilidad', component: TableroContabilidadComponent,
+                resolve: {
+                    usuario: UsuarioLoggedResolverService
+                }
+            },
+            {
+                path: 'tablero-pedidos', component: TableroPedidosComponent,
+                resolve: {
+                    usuario: UsuarioLoggedResolverService
+                }
+            },
+            {
+                path: 'tablero-residente', component: TableroResidenteComponent,
+                resolve: {
+                    usuario: UsuarioLoggedResolverService
+                }
+            },
+            {
+                path: 'tablero-control-almacen', component: TableroControlAlmacenComponent,
+                resolve: {
+                    usuario: UsuarioLoggedResolverService
+                }
             },
             {
                 path: 'tablero-comisiones', component: TableroComisionesComponent,
@@ -358,15 +405,13 @@ export const ROUTES: Routes = [
             {
                 path: 'imagenes-lote', component: ImagenesLoteComponent,
                 resolve: {
-                    obras: ObrasUsuarioResolverService
+                    obras: ObrasUsuarioResolverService,
+                    usuario: UsuarioLoggedResolverService
                 }
             },
 
             {
                 path: 'proveedores', component: ProveedoresComponent,
-                resolve: {
-                    obras: ObrasUsuarioResolverService
-                }
             },
             {
                 path: 'pagos-trabajadores', component: PagosTrabajadoresComponent,
@@ -446,12 +491,12 @@ export const ROUTES: Routes = [
                     obras: ObrasUsuarioResolverService
                 }
             },
-            { 
+            {
                 path: 'credito-puente', component: CreditoPuenteComponent,
                 resolve: {
                     obras: ObrasUsuarioResolverService
                 }
-             },
+            },
 
 
 
