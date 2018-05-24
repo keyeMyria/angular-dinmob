@@ -1,4 +1,10 @@
 <div class="container mt-2 mb-5">
+
+  <button mat-fab style="position:fixed; top:68px; right:20px; z-index:100">
+    <mat-icon aria-label="toggle side drawer">sync</mat-icon>
+  </button>
+
+
   <div>
     <mat-form-field class="w-100">
       <mat-select placeholder="Obra" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)">
