@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { NuevoProveedorDialogoComponent } from '../nuevo-proveedor-dialogo/nuevo-proveedor-dialogo.component';
 import { EditarProveedorDialogoComponent } from '../editar-proveedor-dialogo/editar-proveedor-dialogo.component';
@@ -14,15 +13,11 @@ import { of } from "rxjs/observable/of";
   styleUrls: ['./proveedores.component.scss']
 })
 export class ProveedoresComponent implements OnInit {
-  obras: any = [];
-  obra_selected: string = "";
   proveedores: any = [];
   proveedores_filtrados: any = [];
   trackByIndex = (index, item) => item.id_proveedor;
 
   constructor(
-    private router: Router,
-    private route: ActivatedRoute,
     public dialog: MatDialog,
     private proveedorSrv: ProveedorService,
     public snackBar: MatSnackBar,
@@ -30,15 +25,8 @@ export class ProveedoresComponent implements OnInit {
 
   ngOnInit() {
 
-    this.route.paramMap
-      .switchMap((params: ParamMap) => {
-        if (params.has("obra")) {
-          this.obra_selected = params.get("obra");
-          return this.proveedorSrv.getProveedores();
-        } else {
-          return of([]);
-        }
-      }).subscribe(proveedores => {
+    this.proveedorSrv.getProveedores()
+      .subscribe(proveedores => {
         this.proveedores = proveedores;
         this.proveedores_filtrados = this.proveedores.slice();
       }, (error) => {
