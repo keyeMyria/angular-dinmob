@@ -44,27 +44,98 @@
     <mat-sidenav #navLeft class="app-sidenav-start" mode="over" align="start" opened="false" [fixedInViewport]="mobileQuery.matches"
       fixedTopGap="56">
 
-      <mat-nav-list class="mb-5" *ngIf="usuario.tipo_usuario=='Administrador'">
+      <mat-nav-list class="mb-5" *ngIf="usuario.id_tipo_usuario==Rol.Administrador">
 
         <h3 class="sidenav-title">Administración</h3>
-
 
         <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/usuarios']" routerLinkActive="active">Usuarios</a>
 
         <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/obras']" routerLinkActive="active">Obras</a>
 
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/prototipos', obra_default]" routerLinkActive="active">Prototipos</a>
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/credito-puente',obra_default]" routerLinkActive="active">Crédito Puente</a>
 
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/tablero']" routerLinkActive="active">Tablero</a>
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/estadisticas',obra_default]" routerLinkActive="active">Estadísticas</a>
 
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/estructura-obra', obra_default]" routerLinkActive="active">Estructura obra</a>
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/prototipos',obra_default]" routerLinkActive="active">Prototipos</a>
 
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/tablero-comisiones']" routerLinkActive="active">Comisiones</a>
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/estructura-obra',obra_default]" routerLinkActive="active">Estructura Obra</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/registro']" routerLinkActive="active">Registro</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/trabajadores',obra_default]" routerLinkActive="active">Trabajadores</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/asignar-trabajadores',obra_default]" routerLinkActive="active">Asignar Trabajadores</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/pagos-trabajadores',obra_default]" routerLinkActive="active">Pagos Trabajadores</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/importar-prototipo']" routerLinkActive="active">Importar Prototipo</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/proveedores']" routerLinkActive="active">Proveedores</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/gastos-obras',obra_default]" routerLinkActive="active">Gastos</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/arranque',obra_default]" routerLinkActive="active">Arranque</a>
+
+        <h3 class="sidenav-title">Ventas</h3>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/mapas-ventas', obra_default]" routerLinkActive="active">Mapas Ventas</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/clientes',obra_default]" routerLinkActive="active">Clientes</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/desarrollos',obra_default]" routerLinkActive="active">Lotes</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/alerta-clientes']" routerLinkActive="active">Alerta Clientes</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/prospectos']" routerLinkActive="active">Prospectos</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/nuevo-cliente']" routerLinkActive="active">Nuevo Cliente</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/estadisticas-ventas',obra_default]" routerLinkActive="active">Estadísticas Ventas</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/ventas-pagos',obra_default]" routerLinkActive="active">Ventas Pagos</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/instituciones-credito']" routerLinkActive="active">Instituciones Crédito</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/vendedores',obra_default]" routerLinkActive="active">Vendedores</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/reportes',obra_default]" routerLinkActive="active">Reportes</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/historial-apartados',obra_default]" routerLinkActive="active">Historial Apartados</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/comisiones',obra_default]" routerLinkActive="active">Comisiones</a>
+
+
+        <h3 class="sidenav-title">Avances</h3>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/mapas-avances', obra_default]" routerLinkActive="active">Mapas Avances</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/avances', obra_default]" routerLinkActive="active">Cargar Avances</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/imagenes-lote', obra_default]" routerLinkActive="active">Registro Fotográfico</a>
+
+        <h3 class="sidenav-title">Almacén</h3>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/salidas', obra_default]" routerLinkActive="active">Salidas</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/entradas', obra_default]" routerLinkActive="active">Entradas</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/pedidos',obra_default]" routerLinkActive="active">Pedidos</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/inventario',obra_default]" routerLinkActive="active">Inventario</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/nueva-salida', obra_default]" routerLinkActive="active">Nueva Salida</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/otras-salidas', obra_default]" routerLinkActive="active">Otras Salidas</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/nueva-entrada', obra_default]" routerLinkActive="active">Nueva Entrada</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/nuevo-pedido',obra_default]" routerLinkActive="active">Nuevo Pedido</a>
+
 
         <!-- <a mat-list-item>Avances</a> -->
         <!-- (click)="gotoRoute($event)" [routerLink]="['/tablero-avances']" routerLinkActive="active" -->
 
-       <!--  <a mat-list-item>Almacén</a> -->
+        <!--  <a mat-list-item>Almacén</a> -->
         <!-- (click)="gotoRoute($event)" [routerLink]="['/tablero-almacen']" routerLinkActive="active"  -->
 
         <!-- <a mat-list-item>Estadísticas</a> -->
@@ -73,96 +144,150 @@
         <!-- <a mat-list-item>Reportes</a> -->
         <!-- (click)="gotoRoute($event)" [routerLink]="['/reportes', obra_default]" routerLinkActive="active" -->
 
-
-
-
-
-
-
-
-
-
         <!-- <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/asignar-trabajadores']" routerLinkActive="active">Asignar Trabajadores</a> -->
 
 
 
       </mat-nav-list>
 
-      <!--       <mat-nav-list class="mb-5" *ngIf="usuario.tipo_usuario=='Administrador'">
-
-        <h3 class="sidenav-title">Almacén</h3>
-
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/salidas']" routerLinkActive="active">Salidas</a>
-
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/entradas']" routerLinkActive="active">Entradas</a>
-
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/inventario']" routerLinkActive="active">Inventario</a>
-
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/nueva-salida']" routerLinkActive="active">Nueva Salida</a>
-
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/nueva-entrada']" routerLinkActive="active">Nueva Entrada</a>
-
-      </mat-nav-list> -->
-
-
-      <mat-nav-list class="mb-5" *ngIf="usuario.tipo_usuario=='Administrador' || usuario.tipo_usuario=='Ventas' || usuario.tipo_usuario=='Asesor Ventas'">
+      <mat-nav-list class="mb-5" *ngIf="usuario.id_tipo_usuario==Rol.Ventas || usuario.id_tipo_usuario==Rol.AsesorVentas">
 
         <h3 class="sidenav-title">Ventas</h3>
 
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/mapas-venta', obra_default]" routerLinkActive="active">Mapas Ventas</a>
 
         <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/clientes', obra_default]" routerLinkActive="active">Clientes</a>
 
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/desarrollos', obra_default]" routerLinkActive="active">Desarrollos</a>
-
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/nuevo-cliente']" routerLinkActive="active">Nuevo cliente</a>
-
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/mapas-ventas', obra_default]" routerLinkActive="active">Mapas Ventas</a>
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/desarrollos', obra_default]" routerLinkActive="active">Lotes</a>
 
         <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/alerta-clientes']" routerLinkActive="active">Alerta Clientes</a>
 
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/clientes-sin-lote']" routerLinkActive="active">Clientes sin Lote</a>
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/prospectos']" routerLinkActive="active">Prospectos</a>
 
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/vendedores', obra_default]" routerLinkActive="active">Vendedores</a>
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/nuevo-cliente']" routerLinkActive="active">Nuevo cliente</a>
 
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/instituciones-credito']" routerLinkActive="active">Instituciones Crédito</a>
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/estadisticas-ventas', obra_default]" routerLinkActive="active">Estadísticas Ventas</a>
 
         <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/ventas-pagos', obra_default]" routerLinkActive="active">Ventas Pagos</a>
 
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/estadisticas-ventas', obra_default]" routerLinkActive="active">Estadísticas Ventas</a>
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/instituciones-credito']" routerLinkActive="active">Instituciones Crédito</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/vendedores', obra_default]" routerLinkActive="active">Vendedores</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/historial-apartados',obra_default]" routerLinkActive="active">Historial Apartados</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/comisiones',obra_default]" routerLinkActive="active">Comisiones</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/reportes',obra_default]" routerLinkActive="active">Reportes</a>
+
+      </mat-nav-list>
+
+
+      <mat-nav-list class="mb-5" *ngIf="usuario.id_tipo_usuario==Rol.Residente">
+
+        <h3 class="sidenav-title">Residente</h3>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/salidas', obra_default]" routerLinkActive="active">Salidas</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/entradas', obra_default]" routerLinkActive="active">Entradas</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/nueva-salida', obra_default]" routerLinkActive="active">Nueva Salida</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/otras-salidas', obra_default]" routerLinkActive="active">Otras Entradas</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/nueva-entrada', obra_default]" routerLinkActive="active">Nueva Entrada</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/mapas-avances', obra_default]" routerLinkActive="active">Mapas Avances</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/avances', obra_default]" routerLinkActive="active">Cargar Avances</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/imagenes-lote', obra_default]" routerLinkActive="active">Registro Fotográfico</a>
+
+
+
 
 
       </mat-nav-list>
 
-      <!--       <mat-nav-list class="mb-5" *ngIf="usuario.tipo_usuario=='Administrador' || usuario.tipo_usuario=='Almacén'">
 
-        <h3 class="sidenav-title">Almacén</h3>
+      <mat-nav-list class="mb-5" *ngIf="usuario.id_tipo_usuario==Rol.Contabilidad">
 
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/login']" routerLinkActive="active">Login</a>
+        <h3 class="sidenav-title">Contabilidad</h3>
 
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/clientes']" routerLinkActive="active">Clientes</a>
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/clientes', obra_default]" routerLinkActive="active">Clientes</a>
 
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/desarrollos']" routerLinkActive="active">Desarrollos</a>
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/ventas-pagos', obra_default]" routerLinkActive="active">Ventas Pagos</a>
 
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/nuevo-cliente']" routerLinkActive="active">Nuevo cliente</a>
-
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/cliente']" routerLinkActive="active">Cliente</a>
-
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/obras']" routerLinkActive="active">Obras</a>
-
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/tablero']" routerLinkActive="active">Tablero</a>
+      </mat-nav-list>
 
 
-      </mat-nav-list> -->
+      <mat-nav-list class="mb-5" *ngIf="usuario.id_tipo_usuario==Rol.Almacenista">
 
-      <!--       <mat-nav-list class="mb-5" *ngIf="usuario.tipo_usuario=='Administrador' || usuario.tipo_usuario=='Residente'">
+        <h3 class="sidenav-title">Almacenista</h3>
 
-        <h3 class="sidenav-title">Residente</h3>
 
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/avances',obra_default]" routerLinkActive="active">Avances</a>
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/salidas', obra_default]" routerLinkActive="active">Salidas</a>
 
-        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/mapas-avances']" routerLinkActive="active">Mapas avances</a>
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/entradas', obra_default]" routerLinkActive="active">Entradas</a>
 
-      </mat-nav-list> -->
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/nueva-salida', obra_default]" routerLinkActive="active">Nueva Salida</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/otras-salidas', obra_default]" routerLinkActive="active">Otras Entradas</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/nueva-entrada', obra_default]" routerLinkActive="active">Nueva Entrada</a>
+
+      </mat-nav-list>
+
+
+      <mat-nav-list class="mb-5" *ngIf="usuario.id_tipo_usuario==Rol.ControlAlmacen">
+
+        <h3 class="sidenav-title">Control Almacén</h3>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/mapas-avances', obra_default]" routerLinkActive="active">Mapas Avances</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/avances', obra_default]" routerLinkActive="active">Cargar Avances</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/imagenes-lote', obra_default]" routerLinkActive="active">Registro Fotográfico</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/salidas', obra_default]" routerLinkActive="active">Salidas</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/entradas', obra_default]" routerLinkActive="active">Entradas</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/nueva-salida', obra_default]" routerLinkActive="active">Nueva Salida</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/otras-salidas', obra_default]" routerLinkActive="active">Otras Entradas</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/nueva-entrada', obra_default]" routerLinkActive="active">Nueva Entrada</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/proveedores']" routerLinkActive="active">Proveedores</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/prototipos', obra_default]" routerLinkActive="active">Prototipos</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/importar-prototipo']" routerLinkActive="active">Importar Prototipo</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/arranque', obra_default]" routerLinkActive="active">Arranque</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/reporte-salida', obra_default]" routerLinkActive="active">Reporte Salidas</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/reporte-entradas', obra_default]" routerLinkActive="active">Reporte Entradas</a>
+
+
+
+
+      </mat-nav-list>
+
+      <mat-nav-list class="mb-5" *ngIf="usuario.id_tipo_usuario==Rol.Recepcion">
+
+        <h3 class="sidenav-title">Pedidos</h3>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/pedidos', obra_default]" routerLinkActive="active">Pedidos</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/nuevo-pedido',obra_default]" routerLinkActive="active">Nuevo Pedido</a>
+
+      </mat-nav-list>
+
+
+
 
 
     </mat-sidenav>

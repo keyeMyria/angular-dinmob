@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from "app/services/usuario.service";
 import { Router } from "@angular/router";
 import { AuthService } from "app/services/auth.service";
+import { Rol } from "../../constantes/roles";
 
 
 @Component({
@@ -40,43 +41,43 @@ export class LoginComponent {
 
         //la pagina principal cambia de acuerdo al rol de usuario
         switch (Number(res.usuario.id_tipo_usuario)) {
-          case this.auth.Rol.Administrador:
+          case Rol.Administrador:
             this.router.navigate(['/tablero']);
             break;
 
-          case this.auth.Rol.Almacenista:
-            this.router.navigate(['/tablero-almacen']);
+          case Rol.Almacenista:
+            this.router.navigate(['/tablero-almacenista']);
             break;
 
-          case this.auth.Rol.AsesorVentas:
+          case Rol.AsesorVentas:
             this.router.navigate(['/tablero-ventas']);
             break;
 
-          case this.auth.Rol.Contabilidad:
+          case Rol.Contabilidad:
+            this.router.navigate(['/tablero-contabilidad']);
+            break;
+
+          case Rol.Control:
             this.router.navigate(['/tablero']);
             break;
 
-          case this.auth.Rol.Control:
+          case Rol.ControlAlmacen:
+            this.router.navigate(['/tablero-control-almacen']);
+            break;
+
+          case Rol.Creditos:
             this.router.navigate(['/tablero']);
             break;
 
-          case this.auth.Rol.ControlAlmacen:
-            this.router.navigate(['/tablero']);
+          case Rol.Recepcion:
+            this.router.navigate(['/tablero-pedidos']);
             break;
 
-          case this.auth.Rol.Creditos:
-            this.router.navigate(['/tablero']);
+          case Rol.Residente:
+            this.router.navigate(['/tablero-residente']);
             break;
 
-          case this.auth.Rol.Recepcion:
-            this.router.navigate(['/tablero']);
-            break;
-
-          case this.auth.Rol.Residente:
-            this.router.navigate(['/tablero-avances']);
-            break;
-
-          case this.auth.Rol.Ventas:
+          case Rol.Ventas:
             this.router.navigate(['/tablero-ventas']);
             break;
 
