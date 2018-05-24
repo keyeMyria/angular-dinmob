@@ -7,6 +7,7 @@ import { of } from "rxjs/observable/of";
 import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
 import { Observable } from 'rxjs/Observable';
 import { VerEntradaDialogoComponent } from '../ver-entrada-dialogo/ver-entrada-dialogo.component';
+import { Rol } from "../../../constantes/roles";
 
 @Component({
   selector: 'app-entradas',
@@ -17,6 +18,8 @@ export class EntradasComponent implements OnInit {
   obras: any = [];
   obra_selected: string = "";
   entradas: any[] = [];
+  Rol = Rol;
+  usuario: any;
 
   // MatPaginator Inputs
   length: number; // = 100;
@@ -38,8 +41,9 @@ export class EntradasComponent implements OnInit {
 
   ngOnInit() {
     this.route.data
-      .subscribe((data: { obras: any[] }) => {
+      .subscribe((data: { obras: any[], usuario: any }) => {
         this.obras = data.obras;
+        this.usuario = data.usuario
       });
 
     /*     this.route.paramMap
@@ -90,7 +94,7 @@ export class EntradasComponent implements OnInit {
         let dialogRef = this.dialog.open(VerEntradaDialogoComponent, {
           data: {
             datos: res.datos,
-            insumos:res.insumos
+            insumos: res.insumos
           },
           width: '800px'
         });

@@ -9,6 +9,7 @@ import { Observable } from 'rxjs/Observable';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { FotoPartidaDialogoComponent } from 'app/components/residente/foto-partida-dialogo/foto-partida-dialogo.component';
 import { SelectionModel } from '@angular/cdk/collections';
+import { Rol } from "../../../constantes/roles";
 
 
 @Component({
@@ -30,6 +31,8 @@ export class AvancesComponent implements OnInit {
   obra: any;
   obra_selected: string = "";
   obras: any = [];
+  Rol = Rol;
+  usuario: any;
 
   selection: SelectionModel<any>;
   trackByIdPartida = (index, item) => item.id_partida;
@@ -56,9 +59,10 @@ export class AvancesComponent implements OnInit {
 
   ngOnInit() {
     this.route.data
-      .subscribe((data: { obras: any[] }) => {
-        console.log("resultado resolve ", data);
+      .subscribe((data: { obras: any[], usuario: any }) => {
+        //console.log("resultado resolve ", data);
         this.obras = data.obras;
+        this.usuario = data.usuario;
       });
 
     this.route.paramMap

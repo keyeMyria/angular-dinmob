@@ -72,7 +72,7 @@
                       <th>Fecha</th>
                       <th>Destinatario</th>
                       <th>Nota</th>
-                      <th class="text-right ws-nowrap" *ngIf="usuario.tipo_usuario=='Administrador'">
+                      <th class="text-right ws-nowrap" *ngIf="usuario.id_tipo_usuario==Rol.Administrador">
                         <button mat-button class="no-min" (click)="nuevoPago(comision)">
                           <i class="fa fa-plus"></i>
                         </button>
@@ -91,7 +91,7 @@
                       <td class="ws-nowrap">{{pago.fecha | date:'mediumDate':'':'es'}}</td>
                       <td>{{pago.destinatario}}</td>
                       <td>{{pago.nota}}</td>
-                      <td class="text-right ws-nowrap" *ngIf="usuario.tipo_usuario=='Administrador'">
+                      <td class="text-right ws-nowrap" *ngIf="usuario.id_tipo_usuario==Rol.Administrador">
 
                         <button mat-button class="no-min" (click)="editarPago(pago, comision)">
                           <i class="fa fa-pencil"></i>

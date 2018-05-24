@@ -39,7 +39,9 @@
                 <td class="ws-nowrap">{{pedido.fecha |dateToIso | date:'medium':'':'es'}}</td>
                 <td>{{pedido.usuario}}</td>
                 <td>{{pedido.descripcion}}</td>
-                <td><span class="badge badge-secondary">{{pedido.estado}}</span></td>
+                <td>
+                  <span class="badge badge-secondary">{{pedido.estado}}</span>
+                </td>
                 <td class="text-right">
                   <button mat-icon-button [matMenuTriggerFor]="menu">
                     <mat-icon>more_vert</mat-icon>
@@ -57,7 +59,7 @@
                       <mat-icon>file_download</mat-icon>
                       <span>Reporte</span>
                     </button>
-                    <button mat-menu-item (click)="delPedido(pedido)">
+                    <button mat-menu-item (click)="delPedido(pedido)" *ngIf="usuario.id_tipo_usuario==Rol.Administrador || usuario.id_tipo_usuario==Rol.ControlAlmacen">
                       <mat-icon>delete</mat-icon>
                       <span>Eliminar</span>
                     </button>

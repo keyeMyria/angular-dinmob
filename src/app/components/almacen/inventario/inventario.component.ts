@@ -7,6 +7,7 @@ import { NuevoMaterialDialogoComponent } from 'app/components/almacen/nuevo-mate
 import { InsumoService } from 'app/services/insumo.service';
 import { of } from "rxjs/observable/of";
 import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
+import { Rol } from "../../../constantes/roles";
 
 @Component({
   selector: 'app-inventario',
@@ -17,6 +18,8 @@ export class InventarioComponent implements OnInit {
   obras: any[] = [];
   obra_selected: string = "";
   materiales: any[] = [];
+  Rol = Rol;
+  usuario: any;
 
 
   constructor(
@@ -29,9 +32,10 @@ export class InventarioComponent implements OnInit {
 
   ngOnInit() {
     this.route.data
-      .subscribe((data: { obras: any[] }) => {
+      .subscribe((data: { obras: any[], usuario: any }) => {
         //console.log("resultado resolve ", data);
         this.obras = data.obras;
+        this.usuario = data.usuario;
       });
 
     this.route.paramMap

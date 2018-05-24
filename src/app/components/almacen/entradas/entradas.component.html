@@ -51,7 +51,7 @@
                         <mat-icon>visibility</mat-icon>
                         <span>Ver Entrada</span>
                       </button>
-                      <button mat-menu-item (click)="editarEntrada(entrada)">
+                      <button mat-menu-item (click)="editarEntrada(entrada)" *ngIf="usuario.id_tipo_usuario==Rol.Administrador || usuario.id_tipo_usuario==Rol.ControlAlmacen">
                         <mat-icon>create</mat-icon>
                         <span>Editar Entrada</span>
                       </button>
@@ -59,7 +59,7 @@
                         <mat-icon>file_download</mat-icon>
                         <span>Reporte</span>
                       </button>
-                      <button mat-menu-item (click)="delEntrada(entrada)">
+                      <button mat-menu-item (click)="delEntrada(entrada)" *ngIf="usuario.id_tipo_usuario==Rol.Administrador || usuario.id_tipo_usuario==Rol.ControlAlmacen">
                         <mat-icon>delete</mat-icon>
                         <span>Eliminar</span>
                       </button>

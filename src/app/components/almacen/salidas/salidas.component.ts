@@ -6,6 +6,7 @@ import { SalidasService } from 'app/services/salidas.service';
 import { of } from "rxjs/observable/of";
 import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
 import { Observable } from 'rxjs/Observable';
+import { Rol } from "../../../constantes/roles";
 
 @Component({
   selector: 'app-salidas',
@@ -17,8 +18,9 @@ export class SalidasComponent implements OnInit {
   obra_selected: string = "";
   salidas: any[] = [];
   filtro_selected: string = "T";
-
   salidas_filtradas: any[] = [];
+  Rol = Rol;
+  usuario: any;
 
   // MatPaginator Inputs
   length: number; // = 100;
@@ -37,8 +39,9 @@ export class SalidasComponent implements OnInit {
   ngOnInit() {
 
     this.route.data
-      .subscribe((data: { obras: any[] }) => {
+      .subscribe((data: { obras: any[], usuario: any }) => {
         this.obras = data.obras;
+        this.usuario = data.usuario;
       });
 
     /*  this.route.paramMap
@@ -170,7 +173,7 @@ export class SalidasComponent implements OnInit {
 
   onPageChange(event: PageEvent) {
     console.log("pageChange", event);
-    
+
     this.salidaSrv.getPageSalidasObra(this.obra_selected, event.pageSize, event.pageIndex, this.filtro_selected)
       .subscribe(salidas => {
         this.salidas = salidas;

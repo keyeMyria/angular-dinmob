@@ -5,6 +5,7 @@ import { of } from "rxjs/observable/of";
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { VerPedidoDialogoComponent } from 'app/components/almacen/ver-pedido-dialogo/ver-pedido-dialogo.component';
 import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
+import { Rol } from "../../../constantes/roles";
 
 
 @Component({
@@ -16,6 +17,8 @@ export class PedidosComponent implements OnInit {
   obras: any = [];
   obra_selected: string = "";
   pedidos: any = [];
+  Rol = Rol;
+  usuario: any;
 
   constructor(
     private router: Router,
@@ -27,9 +30,10 @@ export class PedidosComponent implements OnInit {
 
   ngOnInit() {
     this.route.data
-      .subscribe((data: { obras: any[] }) => {
+      .subscribe((data: { obras: any[], usuario: any }) => {
         //console.log("resultado resolve ", data);
         this.obras = data.obras;
+        this.usuario = data.usuario;
       });
 
     this.route.paramMap

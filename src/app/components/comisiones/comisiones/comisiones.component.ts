@@ -6,6 +6,7 @@ import { EditarPagoComisionDialogoComponent } from '../editar-pago-comision-dial
 import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component";
 import { ComisionService } from '../../../services/comision.service';
 import { of } from "rxjs/observable/of";
+import { Rol } from "../../../constantes/roles";
 
 
 @Component({
@@ -18,6 +19,7 @@ export class ComisionesComponent implements OnInit {
   obra_selected: string = "";
   comisiones: any = [];
   usuario: any;
+  Rol= Rol;
 
 
   constructor(

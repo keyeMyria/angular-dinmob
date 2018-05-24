@@ -6,6 +6,7 @@ import { ObrasService } from 'app/services/obras.service';
 import { Observable } from 'rxjs/Observable';
 import { LotesService } from '../../../services/lotes.service';
 import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
+import { Rol } from "../../../constantes/roles";
 
 @Component({
   selector: 'app-imagenes-lote',
@@ -25,6 +26,8 @@ export class ImagenesLoteComponent implements OnInit {
   obra: any;
   lote: any;
   fotos: any = [];
+  Rol = Rol;
+  usuario: any;
 
   constructor(
     private media: MediaMatcher,
@@ -43,8 +46,9 @@ export class ImagenesLoteComponent implements OnInit {
 
   ngOnInit() {
     this.route.data
-      .subscribe((data: { obras: any[] }) => {
+      .subscribe((data: { obras: any[], usuario: any }) => {
         this.obras = data.obras;
+        this.usuario = data.usuario;
       });
     this.route.paramMap
       .switchMap((params: ParamMap) => {
@@ -62,11 +66,11 @@ export class ImagenesLoteComponent implements OnInit {
 
   getImagenesLote(lote) {
 
-    
+
     if (this.mobileQuery.matches) {
       this.drawer.close();
     }
-    
+
     console.log("lote", lote);
     this.lote = lote;
 

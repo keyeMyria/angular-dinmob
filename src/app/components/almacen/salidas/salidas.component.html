@@ -121,7 +121,8 @@
                         <mat-icon>visibility</mat-icon>
                         <span>Ver Salida</span>
                       </button>
-                      <button mat-menu-item (click)="setValidacion(salida)" *ngIf="salida.tiene_alerta=='1'">
+                      <button mat-menu-item (click)="setValidacion(salida)" 
+                      *ngIf=" salida.tiene_alerta=='1' && ( usuario.id_tipo_usuario==Rol.Administrador || usuario.id_tipo_usuario==Rol.ControlAlmacen || usuario.id_tipo_usuario==Rol.Residente)">
                         <mat-icon>{{salida.aceptada=="0"?'done':'block'}}</mat-icon>
                         <span *ngIf="salida.aceptada=='1'">Rechazar</span>
                         <span *ngIf="salida.aceptada=='0'">Autorizar</span>
@@ -130,7 +131,7 @@
                         <mat-icon>file_download</mat-icon>
                         <span>Reporte</span>
                       </button>
-                      <button mat-menu-item (click)="delSalida(salida)">
+                      <button mat-menu-item (click)="delSalida(salida)" *ngIf="usuario.id_tipo_usuario==Rol.Administrador || usuario.id_tipo_usuario==Rol.ControlAlmacen">
                         <mat-icon>delete</mat-icon>
                         <span>Eliminar</span>
                       </button>

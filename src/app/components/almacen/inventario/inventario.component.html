@@ -11,12 +11,12 @@
       </div>
 
       <div class="card">
-        <div class="card-header padding-card-header">
+        <div class="card-header">
           <div class="d-flex">
             <div class="align-self-center">Inventario Almacén</div>
             <div class="spacer"></div>
             <div>
-              <button mat-icon-button (click)="nuevoMaterial()">
+              <button mat-icon-button (click)="nuevoMaterial()" *ngIf="usuario.id_tipo_usuario==Rol.Administrador || usuario.id_tipo_usuario==Rol.ControlAlmacen">
                 <mat-icon>add</mat-icon>
               </button>
             </div>
@@ -36,7 +36,7 @@
                 <th>Insumo</th>
                 <th>Unidad</th>
                 <th>Existencias</th>
-                <th style="width: 100px"></th>
+                <th style="width: 100px" *ngIf="usuario.id_tipo_usuario==Rol.Administrador || usuario.id_tipo_usuario==Rol.ControlAlmacen"></th>
 
               </tr>
             </thead>
@@ -51,7 +51,7 @@
                 <td>{{material.insumo}}</td>
                 <td>{{material.unidad}}</td>
                 <td>{{material.existencias}}</td>
-                <td class="text-right ws-nowrap">
+                <td class="text-right ws-nowrap" *ngIf="usuario.id_tipo_usuario==Rol.Administrador || usuario.id_tipo_usuario==Rol.ControlAlmacen">
                   <button mat-button class="no-min" (click)="editarMaterial(material)">
                     <i class="fa fa-pencil"></i>
                   </button>

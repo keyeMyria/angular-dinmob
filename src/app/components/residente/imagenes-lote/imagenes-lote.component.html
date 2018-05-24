@@ -64,7 +64,7 @@
             <p class="card-text">{{foto.fecha|dateToIso| date:'medium':'':'es'}}</p>
             <p class="card-text">{{foto.descripcion}}</p>
             <div>
-              <button mat-button class="no-min" color="warn" (click)="delFoto(foto)">
+              <button mat-button class="no-min" color="warn" (click)="delFoto(foto)" *ngIf="usuario.id_tipo_usuario==Rol.Administrador || usuario.id_tipo_usuario==Rol.ControlAlmacen">
                 <mat-icon>delete</mat-icon>
               </button>
 
