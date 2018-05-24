@@ -199,6 +199,7 @@ export class EditarClienteComponent implements OnInit {
       proyecto: null,
       desarrollador: null,
       valor_operacion: null,
+      valor_escrituracion: null,
       ubicacion: null,
       cp: null,
       id_tipo_operacion: "",
