@@ -197,6 +197,8 @@ export class MapasAvancesComponent implements OnInit {
             }
           }
 
+          tooltip += " <br> Avance: " + (lote.ultimo_avance? lote.ultimo_avance: "-");          
+
           let num_partidas = lote.num_partidas ? lote.num_partidas : 0;
 
           tooltip += " <br> " + lote.num_partidas_fin + " de " + num_partidas + " partidas";
@@ -208,6 +210,8 @@ export class MapasAvancesComponent implements OnInit {
           }
 
 
+
+
           tip.html(tooltip);
 
         } else {
@@ -216,6 +220,7 @@ export class MapasAvancesComponent implements OnInit {
           // evitamos que se muestre el tooltip
           e.preventDefault();
         }
+
 
       },
 

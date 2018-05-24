@@ -1,7 +1,9 @@
-<button mat-fab class="img-btn" [disabled]="!lote_selected" style="position:fixed; bottom:20px; right:90px; z-index:100" (click)="verAvances(lote_selected)">
-    <i class="material-icons">show_chart</i>
+<button mat-fab class="img-btn" [disabled]="!lote_selected" style="position:fixed; bottom:20px; right:90px; z-index:100"
+  (click)="verAvances(lote_selected)">
+  <i class="material-icons">show_chart</i>
 </button>
-<button mat-fab class="img-btn" [disabled]="!lote_selected" style="position:fixed; bottom:20px; right:20px; z-index:100" (click)="verImagenes()">
+<button mat-fab class="img-btn" [disabled]="!lote_selected" style="position:fixed; bottom:20px; right:20px; z-index:100"
+  (click)="verImagenes()">
   <!-- <mat-icon aria-label="fab-button">photo_camera</mat-icon> -->
   <!-- <i class="fa fa-camera"></i> -->
   <div>{{lote_selected?.num_fotos||0}}</div>
@@ -52,9 +54,19 @@
           <div class="texto" *ngIf="lote_selected">{{ (lote_selected?.responsable||'No Asignado')}}</div>
         </div>
 
+        <div class="form-group">
+          <label for="fecha" class="text-muted">Último Avance</label>
+          <div class="texto" *ngIf="lote_selected">{{lote_selected?.ultimo_avance| date:'mediumDate':'':'es'}}</div>
+        </div>
+
+        <div class="form-group">
+          <label for="fecha" class="text-muted">Última Fotografía</label>
+          <div class="texto" *ngIf="lote_selected">{{lote_selected?.ultima_foto| date:'mediumDate':'':'es'}}</div>
+        </div>
+
 
         <button mat-raised-button color="primary" class="btn-block" (click)="verImagenes()" [disabled]="!lote_selected">
-          <!-- <mat-icon aria-label="fab-button">photo_camera</mat-icon> --> Imágenes {{lote_selected?.num_fotos||0}}</button>
+          <!-- <mat-icon aria-label="fab-button">photo_camera</mat-icon> -->Imágenes {{lote_selected?.num_fotos||0}}</button>
         <button mat-raised-button color="primary" class="btn-block" (click)="verAvances(lote_selected)" [disabled]="!lote_selected">Avances</button>
 
 
