@@ -1,0 +1,87 @@
+<div class="container mt-3 mb-5">
+  <div class="row">
+
+    <div class="col-12 col-md-6 col-lg-4 p-2">
+      <a class="no-decoration" routerLink="/tablero-avances">
+        <!-- text-muted -->
+        <mat-card class="d-flex align-items-center">
+          <mat-card-title class="mb-0 ">Avances</mat-card-title>
+          <span class="spacer"></span>
+          <!-- text-muted -->
+          <i class="material-icons icono-tablero ">show_chart</i>
+        </mat-card>
+      </a>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-4 p-2">
+      <a class="no-decoration" routerLink="/tablero-almacen">
+        <mat-card class="d-flex align-items-center">
+          <mat-card-title class="mb-0 ">Almacén</mat-card-title>
+          <span class="spacer"></span>
+          <i class="material-icons icono-tablero ">description</i>
+        </mat-card>
+      </a>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-4 p-2">
+      <a class="no-decoration" [routerLink]="['/proveedores']">
+        <mat-card class="d-flex align-items-center card-pointer">
+          <mat-card-title class="mb-0">Proveedores</mat-card-title>
+          <span class="spacer"></span>
+          <i class="material-icons icono-tablero">airport_shuttle</i>
+        </mat-card>
+      </a>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-4 p-2">
+      <a class="no-decoration" [routerLink]="['/prototipos',obra_default]">
+        <mat-card class="d-flex align-items-center card-pointer">
+          <mat-card-title class="mb-0">Prototipos</mat-card-title>
+          <span class="spacer"></span>
+          <i class="material-icons icono-tablero">donut_large</i>
+        </mat-card>
+      </a>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-4 p-2">
+      <a class="no-decoration" [routerLink]="['/importar-prototipo']">
+        <mat-card class="d-flex align-items-center card-pointer">
+          <mat-card-title class="mb-0">Importar Prototipo</mat-card-title>
+          <span class="spacer"></span>
+          <i class="material-icons icono-tablero">description</i>
+        </mat-card>
+      </a>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-4 p-2">
+      <a class="no-decoration" [routerLink]="['/arranque',obra_default]">
+        <mat-card class="d-flex align-items-center card-pointer">
+          <mat-card-title class="mb-0">Arranque</mat-card-title>
+          <span class="spacer"></span>
+          <i class="material-icons icono-tablero">library_add</i>
+        </mat-card>
+      </a>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-4 p-2">
+      <a class="no-decoration" [routerLink]="['/reporte-salidas',obra_default]">
+        <mat-card class="d-flex align-items-center card-pointer">
+          <mat-card-title class="mb-0">Reporte Salidas</mat-card-title>
+          <span class="spacer"></span>
+          <i class="material-icons icono-tablero" aria-hidden="true">get_app</i>
+        </mat-card>
+      </a>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-4 p-2">
+      <a class="no-decoration" [routerLink]="['/reporte-entradas',obra_default]">
+        <mat-card class="d-flex align-items-center card-pointer">
+          <mat-card-title class="mb-0">Reporte Entradas</mat-card-title>
+          <span class="spacer"></span>
+          <i class="material-icons icono-tablero" aria-hidden="true">get_app</i>
+        </mat-card>
+      </a>
+    </div>
+
+  </div>
+</div>
