@@ -22,30 +22,37 @@ export class EstadisticasAdminComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
+
 
     this.route.data
-      .subscribe((data: { obras: any[], estadisticas:any }) => {
+      .subscribe((data: { obras: any[], estadisticas: any }) => {
         this.obras = data.obras;
-        this.estadisticas=data.estadisticas;
+        this.estadisticas = data.estadisticas;
         this.obra_selected = this.route.snapshot.params["obra"] ? this.route.snapshot.params["obra"] : "";
       });
 
-      
 
-  /*   this.route.paramMap
-      .switchMap((params: ParamMap) => {
-        if (params.has("obra")) {
-          this.obra_selected = params.get("obra");
-          return this.obraSrv.getEstadisticas(params.get("obra"));
-        } else {
-          return of([]);
-        }
-      }).subscribe(estadisticas => {
+
+    /*   this.route.paramMap
+        .switchMap((params: ParamMap) => {
+          if (params.has("obra")) {
+            this.obra_selected = params.get("obra");
+            return this.obraSrv.getEstadisticas(params.get("obra"));
+          } else {
+            return of([]);
+          }
+        }).subscribe(estadisticas => {
+          this.estadisticas = estadisticas;
+        }, (error) => {
+        }); */
+
+  }
+
+  refresh() {
+    this.obraSrv.getEstadisticas(this.obra_selected)
+      .subscribe(estadisticas => {
         this.estadisticas = estadisticas;
-      }, (error) => {
-      }); */
-
+      })
   }
 
 

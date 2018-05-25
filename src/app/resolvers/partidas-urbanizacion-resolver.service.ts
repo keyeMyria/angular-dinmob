@@ -18,11 +18,11 @@ export class PartidasUrbanizacionResolverService implements Resolve<any[]> {
 
 
     return this.salidaSrv.getPartidasUrbanizacion().take(1).map((partidas: any[]) => {
-      //console.log("resolver estados", estados);
+      
       if (partidas) {
         return partidas;
-      } else { // id not found
-        this.router.navigate(['/tablero']);
+      } else { 
+        //this.router.navigate(['/tablero']);
         return null;
       }
     });

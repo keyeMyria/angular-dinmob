@@ -17,14 +17,11 @@ export class EspecialidadesTrabajadorResolverService implements Resolve<any[]> {
 
 
     return this.trabajadorSrv.getEspecialidades().take(1).map((especialidades: any[]) => {
-
-      //console.log("resolver estados", estados);
-
-
+      
       if (especialidades) {
         return especialidades;
-      } else { // id not found
-        this.router.navigate(['/tablero']);
+      } else { 
+        //this.router.navigate(['/tablero']);
         return null;
       }
     });

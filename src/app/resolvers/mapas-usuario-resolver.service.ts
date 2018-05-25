@@ -23,8 +23,8 @@ export class MapasUsuarioResolverService {
     return this.obraSrv.getMapasUsuario().take(1).map(mapas => {
       if (mapas) {
         return mapas;
-      } else { // id not found
-        this.router.navigate(['/tablero']);
+      } else { 
+        //this.router.navigate(['/tablero']);
         return null;
       }
     });

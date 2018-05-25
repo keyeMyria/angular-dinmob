@@ -18,7 +18,7 @@ export class UsuariosAlmacenistasResolverService implements Resolve<any> {
       if (usuarios) {
         return usuarios;
       } else {
-        this.router.navigate(['/tablero']);
+        //this.router.navigate(['/tablero']);
         return null;
       }
     });

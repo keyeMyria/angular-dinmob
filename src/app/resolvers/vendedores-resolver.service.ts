@@ -17,16 +17,14 @@ export class VendedoresResolverService implements Resolve<any[]>{
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any[]> {
 
+    let id = route.paramMap.get('obra');
 
-    return this.vendedorSrv.getVendedoresObra(route.params.get('obra')).take(1).map((vendedores: any[]) => {
-
-      //console.log("resolver vendedores", vendedores);
-
-
+    return this.vendedorSrv.getVendedoresObra(id).take(1).map((vendedores: any[]) => {
+     
       if (vendedores) {
         return vendedores;
-      } else { // id not found
-        this.router.navigate(['/tablero']);
+      } else { 
+        //this.router.navigate(['/tablero']);
         return null;
       }
     });

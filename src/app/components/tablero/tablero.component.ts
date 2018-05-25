@@ -23,6 +23,10 @@ export class TableroComponent implements OnInit {
 
     this.route.data
       .subscribe((data: { usuario: any }) => {
+
+        //console.log("tablero data", data);
+
+
         this.usuario = data.usuario;
 
         if (this.usuario.id_obra_default) {
@@ -35,7 +39,7 @@ export class TableroComponent implements OnInit {
 
   }
 
-  gotoAdmin() {
+/*   gotoAdmin() {
     this.router.navigate(["/tablero-admin"]);
   }
 
@@ -49,7 +53,7 @@ export class TableroComponent implements OnInit {
 
   gotoAlmacen() {
     this.router.navigate(["/tablero-almacen"]);
-  }
+  } */
 
 
 }

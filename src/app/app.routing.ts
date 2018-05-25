@@ -102,7 +102,7 @@ import { TableroControlAlmacenComponent } from './components/tablero-control-alm
 
 
 
-
+import { Rol } from "./constantes/roles";
 
 
 
@@ -119,7 +119,7 @@ export const ROUTES: Routes = [
         },
         canActivate: [AuthGuard],
         children: [
-            { path: '', redirectTo: 'tablero', pathMatch: 'full' },
+            //{ path: '', redirectTo: 'tablero', pathMatch: 'full' },
             {
                 path: 'clientes', component: ClientesComponent,
                 resolve: {
@@ -165,6 +165,9 @@ export const ROUTES: Routes = [
                 path: 'tablero', component: TableroComponent,
                 resolve: {
                     usuario: UsuarioLoggedResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador]
                 }
             },
             { path: 'editar-prototipo/:id', component: EditarPrototipoComponent },
@@ -356,6 +359,9 @@ export const ROUTES: Routes = [
                 path: 'tablero-almacenista', component: TableroAlmacenistaComponent,
                 resolve: {
                     usuario: UsuarioLoggedResolverService
+                },
+                data: {
+                    permisos: [Rol.Almacenista]
                 }
             },
             {

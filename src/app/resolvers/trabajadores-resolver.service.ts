@@ -14,12 +14,13 @@ export class TrabajadoresResolverService implements Resolve<any> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):  Observable<any>  {
    
-   
-    return this.trabajadorSrv.getTrabajadoresObra(route.params.get('obra')).take(1).map(trabajadores => {
+    let id = route.paramMap.get('obra');
+
+    return this.trabajadorSrv.getTrabajadoresObra(id).take(1).map(trabajadores => {
       if (trabajadores) {
         return trabajadores;
       } else { 
-        this.router.navigate(['/tablero']);
+        //this.router.navigate(['/tablero']);
         return null;
       }
     });

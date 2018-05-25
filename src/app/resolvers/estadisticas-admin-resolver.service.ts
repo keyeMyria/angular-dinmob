@@ -16,14 +16,14 @@ export class EstadisticasAdminResolverService implements Resolve<any[]> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any[]> {
 
+    let id = route.paramMap.get('obra');
 
-    return this.obraSrv.getEstadisticas(route.params["obra"]).take(1).map((estadisticas: any[]) => {     
-
+    return this.obraSrv.getEstadisticas(id).take(1).map((estadisticas: any[]) => {     
 
       if (estadisticas) {
         return estadisticas;
-      } else { // id not found
-        this.router.navigate(['/tablero']);
+      } else { 
+        //this.router.navigate(['/tablero']);
         return null;
       }
     });
