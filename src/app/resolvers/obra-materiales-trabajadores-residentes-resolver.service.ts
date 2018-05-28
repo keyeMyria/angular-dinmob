@@ -15,13 +15,14 @@ export class ObraMaterialesTrabajadoresResidentesResolverService implements Reso
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any[]> {
 
+    let id = route.paramMap.get('obra');
 
-    return this.obraSrv.getMaterialesResidentesTrabajadores(route.params["obra"]).take(1).map((res: any[]) => {
-      //console.log("resolver estados", estados);
+    return this.obraSrv.getMaterialesResidentesTrabajadores(id).take(1).map((res: any[]) => {
+      
       if (res) {
         return res;
-      } else { // id not found
-        this.router.navigate(['/tablero']);
+      } else {
+        //this.router.navigate(['/tablero']);
         return null;
       }
     });

@@ -48,7 +48,7 @@ export class AvancesComponent implements OnInit {
     private obraSrv: ObrasService,
     private loteSrv: LotesService,
     public dialog: MatDialog,
-    private auth: AuthService,
+    private authSrv: AuthService,
     public snackBar: MatSnackBar
   ) {
 
@@ -59,11 +59,13 @@ export class AvancesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.usuario = this.authSrv.usuario;
+
     this.route.data
       .subscribe((data: { obras: any[], usuario: any }) => {
         //console.log("resultado resolve ", data);
         this.obras = data.obras;
-        this.usuario = data.usuario;
+        //this.usuario = data.usuario;
       });
 
     this.route.paramMap

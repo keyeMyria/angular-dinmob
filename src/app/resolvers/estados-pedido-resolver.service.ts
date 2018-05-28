@@ -10,7 +10,7 @@ import { PedidoService } from '../services/pedido.service';
 export class EstadosPedidoResolverService implements Resolve<any[]> {
 
   constructor(
-    private pedidoSrv:PedidoService,
+    private pedidoSrv: PedidoService,
     private router: Router
   ) { }
 
@@ -19,13 +19,10 @@ export class EstadosPedidoResolverService implements Resolve<any[]> {
 
     return this.pedidoSrv.getEstados().take(1).map((estados: any[]) => {
 
-      //console.log("resolver estados", estados);
-
-
       if (estados) {
         return estados;
-      } else { // id not found
-        this.router.navigate(['/tablero']);
+      } else {
+        //this.router.navigate(['/tablero']);
         return null;
       }
     });

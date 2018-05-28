@@ -20,14 +20,11 @@ export class ProveedoresResolverService implements Resolve<any[]>{
 
 
     return this.proveedorSrv.getNombresProveedores().take(1).map((proveedores: any[]) => {
-
-      //console.log("resolver proveedores", proveedores);
-
-
+      
       if (proveedores) {
         return proveedores;
       } else { 
-        this.router.navigate(['/tablero']);
+        //this.router.navigate(['/tablero']);
         return null;
       }
     });

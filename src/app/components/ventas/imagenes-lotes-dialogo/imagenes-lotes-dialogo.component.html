@@ -5,7 +5,7 @@
     <img class="card-img-top" [src]="foto.url" [alt]="foto.partida">
     <div class="card-body">
       <h5 class="card-title">{{foto.partida_padre}} {{foto.partida}}</h5>
-      <p class="card-text">{{foto.fecha}}</p>
+      <p class="card-text">{{foto.fecha|dateToIso| date:'medium':'':'es'}}</p>
       <p class="card-text">{{foto.descripcion}}</p>
       <div>
 

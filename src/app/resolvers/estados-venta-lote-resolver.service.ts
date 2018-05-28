@@ -18,14 +18,11 @@ export class EstadosVentaLoteResolverService implements Resolve<any[]> {
 
 
     return this.estadoSrv.getEstados().take(1).map((estados: any[]) => {
-
-      //console.log("resolver estados", estados);
-
-
+     
       if (estados) {
         return estados;
-      } else { // id not found
-        this.router.navigate(['/tablero']);
+      } else { 
+        //this.router.navigate(['/tablero']);
         return null;
       }
     });

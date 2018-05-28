@@ -15,13 +15,14 @@ export class ObraManzanasTrabajadoresResidentesResolverService implements Resolv
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any[]> {
 
+    let id = route.paramMap.get('obra');
 
-    return this.obraSrv.getManzanasResidentesTrabajadores(route.params["obra"]).take(1).map((res: any[]) => {
-      //console.log("resolver estados", estados);
+    return this.obraSrv.getManzanasResidentesTrabajadores(id).take(1).map((res: any[]) => {
+     
       if (res) {
         return res;
-      } else { // id not found
-        this.router.navigate(['/tablero']);
+      } else { 
+        //this.router.navigate(['/tablero']);
         return null;
       }
     });

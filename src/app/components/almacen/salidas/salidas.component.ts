@@ -7,6 +7,7 @@ import { of } from "rxjs/observable/of";
 import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
 import { Observable } from 'rxjs/Observable';
 import { Rol } from "../../../constantes/roles";
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-salidas',
@@ -34,14 +35,17 @@ export class SalidasComponent implements OnInit {
     private salidaSrv: SalidasService,
     public snackBar: MatSnackBar,
     private salidasSrv: SalidasService,
+    private authSrv: AuthService
   ) { }
 
   ngOnInit() {
 
+    this.usuario = this.authSrv.usuario;
+
     this.route.data
       .subscribe((data: { obras: any[], usuario: any }) => {
         this.obras = data.obras;
-        this.usuario = data.usuario;
+        //this.usuario = data.usuario;
       });
 
     /*  this.route.paramMap

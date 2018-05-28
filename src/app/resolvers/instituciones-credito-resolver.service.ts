@@ -20,13 +20,10 @@ export class InstitucionesCreditoResolverService implements Resolve<any[]> {
 
     return this.institucionSrv.getInstituciones().take(1).map((instituciones: any[]) => {
 
-      //console.log("resolver instituciones", instituciones);
-
-
       if (instituciones) {
         return instituciones;
-      } else { // id not found
-        this.router.navigate(['/tablero']);
+      } else { 
+        //this.router.navigate(['/tablero']);
         return null;
       }
     });

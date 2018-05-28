@@ -19,13 +19,11 @@ export class TiposOperacionResolverService implements Resolve<any[]> {
 
     return this.tipoSrv.getTipos().take(1).map((tipos: any[]) => {
 
-      //console.log("resolver tipos", tipos);
-
-
+      
       if (tipos) {
         return tipos;
-      } else { // id not found
-        this.router.navigate(['/tablero']);
+      } else { 
+        //this.router.navigate(['/tablero']);
         return null;
       }
     });

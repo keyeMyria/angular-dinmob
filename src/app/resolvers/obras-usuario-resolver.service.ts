@@ -11,23 +11,20 @@ import 'rxjs/add/operator/take';
 
 @Injectable()
 export class ObrasUsuarioResolverService implements Resolve<any[]> {
-  //usuario: Usuario;
+  
   constructor( 
-    private obraSrv:ObrasService,
-    //private auth: AuthService,
+    private obraSrv:ObrasService,    
     private router:Router
-  ) {
-    //this.usuario = this.auth.getUsuario();
-   }
+  ) {   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):  Observable<any[]>  {
    
-    // this.usuario.id_usuario
+    
     return this.obraSrv.getObrasUsuario().take(1).map(obras => {
       if (obras) {
         return obras;
-      } else { // id not found
-        this.router.navigate(['/tablero']);
+      } else { 
+        //this.router.navigate(['/tablero']);
         return null;
       }
     });

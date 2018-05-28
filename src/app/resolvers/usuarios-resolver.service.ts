@@ -15,13 +15,12 @@ export class UsuariosResolverService implements Resolve<any[]> {
   ) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any[]> {
-
-    // this.usuario.id_usuario
+    
     return this.usuarioSrv.getUsuarios().take(1).map((usuarios: any) => {
       if (usuarios) {
         return usuarios;
-      } else { // id not found
-        this.router.navigate(['/tablero']);
+      } else { 
+        //this.router.navigate(['/tablero']);
         return null;
       }
     });

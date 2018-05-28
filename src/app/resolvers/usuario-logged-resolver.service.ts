@@ -19,7 +19,7 @@ export class UsuarioLoggedResolverService implements Resolve<any> {
       if (usuario) {
         return usuario;
       } else {
-        this.router.navigate(['/login']);
+        //this.router.navigate(['/login']);
         return null;
       }
     });

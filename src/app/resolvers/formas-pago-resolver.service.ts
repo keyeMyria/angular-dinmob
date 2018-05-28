@@ -20,13 +20,11 @@ export class FormasPagoResolverService {
 
     return this.formaSrv.getFormas().take(1).map((formas: any[]) => {
 
-      //console.log("resolver formas", formas);
-
-
+     
       if (formas) {
         return formas;
-      } else { // id not found
-        this.router.navigate(['/tablero']);
+      } else { 
+        //this.router.navigate(['/tablero']);
         return null;
       }
     });
