@@ -28,6 +28,7 @@ export class ArranqueComponent implements OnInit {
   obra: any;
   obra_selected: string = "";
   obras: any = [];
+  trackByIndex = (index, item) => item.id_partida;
 
   selection: SelectionModel<any>;
 
@@ -83,7 +84,7 @@ export class ArranqueComponent implements OnInit {
 
   }
 
-  addAvance() {
+  addArranque() {
     //console.log("selection", this.selection.selected);
 
     let ids = [];
@@ -120,45 +121,8 @@ export class ArranqueComponent implements OnInit {
       });
   }
 
-  addLiberacion() {
-    //console.log("selection", this.selection.selected);
 
-    let ids = [];
-
-    this.selection.selected.forEach(partida => {
-      ids.push(partida.id_partida);
-    });
-
-    this.loteSrv.addLiberacionPartida(ids, this.lote.id_lote)
-      .subscribe(partidas => {
-        console.log("partidas", partidas);
-
-        this.selection.selected.forEach(partida => {
-
-          if (partidas[partida.id_partida]) {
-            partida.fecha_liberacion = partidas[partida.id_partida];
-          }
-
-        });
-
-        this.selection.clear();
-
-        this.snackBar.open("Liberación Agregada", "", {
-          duration: 2000,
-          panelClass: ["bg-success", "text-white"]
-        });
-
-
-      }, (error) => {
-        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
-          duration: 3000,
-          panelClass: ["bg-danger", "text-white"]
-        });
-      });
-
-  }
-
-  delAvance() {
+  delArranque() {
     //console.log("selection", this.selection.selected);
 
     let ids = [];
@@ -195,56 +159,9 @@ export class ArranqueComponent implements OnInit {
 
   }
 
-  delLiberacion() {
-    //console.log("selection", this.selection.selected);
-
-    let ids = [];
-
-    this.selection.selected.forEach(partida => {
-      ids.push(partida.id_partida);
-    });
-
-    this.loteSrv.delLiberacionPartida(ids, this.lote.id_lote)
-      .subscribe(res => {
-        console.log("partidas", res.count);
-
-        this.selection.selected.forEach(partida => {
-
-          partida.fecha_liberacion = null;
-
-        });
-
-        this.selection.clear();
-
-        this.snackBar.open("Liberación Eliminada", "", {
-          duration: 2000,
-          panelClass: ["bg-success", "text-white"]
-        });
-
-
-      }, (error) => {
-        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
-          duration: 3000,
-          panelClass: ["bg-danger", "text-white"]
-        });
-      });
-
-  }
-
-  comentarioAvances():
-    void {
-    let dialogRef = this.dialog.open(ComentarioAvancesDialogoComponent, {
-      width: '500px',
-      data: {}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
-  }
 
   numSubpartidasFinalizadas(partida) {
-    //console.log("partidaFinalizada" + partida.id_partida);
+    console.log("numSubpartidasFinalizadas" + partida.id_partida);
     var count = 0;
 
     //tiene subpartidas
@@ -266,7 +183,7 @@ export class ArranqueComponent implements OnInit {
   }
 
   partidaFinalizada(partida) {
-    //console.log("partidaFinalizada" + partida.id_partida);
+    console.log("partidaFinalizada" + partida.id_partida);
     var finalizada = true;
 
     //tiene subpartidas
@@ -287,7 +204,7 @@ export class ArranqueComponent implements OnInit {
 
   }
 
-  getAvancesLote(lote) {
+  getArranqueLote(lote) {
     //console.log("getAvancesLote", lote);
 
     this.loteSrv.getAvances(lote.id_lote)

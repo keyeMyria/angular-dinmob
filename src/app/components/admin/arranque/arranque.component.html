@@ -2,11 +2,11 @@
   <mat-icon aria-label="toggle side drawer">format_align_left</mat-icon>
 </button>
 
-<button mat-fab class="fab-t2" (click)="addLiberacion()" *ngIf="lote && !selection.isEmpty()" matTooltip="Arranque">
+<button mat-fab class="fab-t2" (click)="addArranque()" *ngIf="lote && !selection.isEmpty()" matTooltip="Arranque">
   <mat-icon aria-label="toggle side drawer">check</mat-icon>
 </button>
 
-<button mat-fab class="fab-t3" (click)="delAvance()" *ngIf="lote && !selection.isEmpty()" matTooltip="Eliminar Arranque">
+<button mat-fab class="fab-t3" (click)="delArranque()" *ngIf="lote && !selection.isEmpty()" matTooltip="Eliminar Arranque">
   <mat-icon aria-label="toggle side drawer">not_interested</mat-icon>
 </button>
 
@@ -32,7 +32,7 @@
           </mat-expansion-panel-header>
 
           <ul class="list-group">
-            <button type="button" class="list-group-item list-group-item-action" *ngFor="let lote of manzana.lotes" (click)="getAvancesLote(lote)">({{lote.prototipos?.length || "0"}}) {{lote.nombre}}</button>
+            <button type="button" class="list-group-item list-group-item-action" *ngFor="let lote of manzana.lotes" (click)="getArranqueLote(lote)">({{lote.prototipos?.length || "0"}}) {{lote.nombre}}</button>
           </ul>
 
         </mat-expansion-panel>
@@ -69,7 +69,7 @@
 
             <mat-accordion>
 
-              <mat-expansion-panel *ngFor="let partida of acordeon" [hideToggle]="true">
+              <mat-expansion-panel *ngFor="let partida of acordeon; trackBy: trackByIndex" [hideToggle]="true">
                 <mat-expansion-panel-header [ngClass]="{'bg-info text-white': partidaFinalizada(partida)}">
                   <span>{{partida.nombre}}</span>
                   <div class="spacer"></div>
@@ -84,7 +84,7 @@
 
                 <div *ngIf="partida.subpartidas.length>0">
                   <ul class="list-group">
-                    <li class="list-group-item" *ngFor="let subpartida of partida?.subpartidas" (click)="selection.toggle(subpartida)" [ngClass]="{'bg-active':selection.isSelected(subpartida)}">
+                    <li class="list-group-item" *ngFor="let subpartida of partida?.subpartidas; trackBy: trackByIndex" (click)="selection.toggle(subpartida)" [ngClass]="{'bg-active':selection.isSelected(subpartida)}">
                       <div class="d-flex align-items-center">
                         <mat-checkbox class="px-3" (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(subpartida) : null" [checked]="selection.isSelected(subpartida)">
                         </mat-checkbox>
