@@ -10,6 +10,7 @@ import { LotesService } from 'app/services/lotes.service';
 import { InsumoService } from 'app/services/insumo.service';
 import { AlertaDialogoComponent } from 'app/components/admin/alerta-dialogo/alerta-dialogo.component';
 import { SalidasService } from '../../../services/salidas.service';
+import { AuthService } from '../../../services/auth.service';
 
 
 @Component({
@@ -57,7 +58,8 @@ export class NuevaSalidaComponent implements OnInit {
     private salidaSrv: SalidasService,
     private insumoSrv: InsumoService,
     public dialog: MatDialog,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    private authSrv: AuthService
   ) {
     this.form = this.fb.group({
       id_partida: ["", Validators.required],
@@ -83,6 +85,8 @@ export class NuevaSalidaComponent implements OnInit {
 
   ngOnInit() {
 
+    this.authSrv = this.authSrv.usuario;
+
     this.route.data
       .subscribe((data: { obras: any[], usuario: any, obra: { obra: any, trabajadores: any, manzanas: any, residentes: any } }) => {
 
@@ -90,7 +94,7 @@ export class NuevaSalidaComponent implements OnInit {
 
 
         this.obras = data.obras;
-        this.usuario = data.usuario;
+        //this.usuario = data.usuario;
         this.obra = data.obra.obra;
         this.trabajadores = data.obra.trabajadores;
         this.residentes = data.obra.residentes;

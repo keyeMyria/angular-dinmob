@@ -38,10 +38,10 @@ export class LayoutComponent implements OnInit {
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
 
-    this.route.data
-      .subscribe((data: { usuario: any }) => {
+   /*  this.route.data
+      .subscribe((data: { usuario: any }) => { */
 
-        this.usuario = data.usuario;
+        this.usuario = this.auth.usuario; //data.usuario;
         this.username = this.usuario.nombre.split(" ")[0];
 
         if (this.usuario.id_obra_default) {
@@ -49,7 +49,7 @@ export class LayoutComponent implements OnInit {
         } else {
           this.obra_default = {};
         }
-      });
+     /*  }); */
   }
 
   ngOnInit() { }

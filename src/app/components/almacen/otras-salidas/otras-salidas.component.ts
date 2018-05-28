@@ -7,6 +7,7 @@ import { AlertaDialogoComponent } from 'app/components/admin/alerta-dialogo/aler
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { ObrasService } from '../../../services/obras.service';
 import { SalidasService } from 'app/services/salidas.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-otras-salidas',
@@ -36,7 +37,8 @@ export class OtrasSalidasComponent implements OnInit {
     public dialog: MatDialog,
     private salidaSrv: SalidasService,
     private obraSrv: ObrasService,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    private authSrv: AuthService
   ) {
 
     this.form = this.fb.group({
@@ -75,6 +77,9 @@ export class OtrasSalidasComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.usuario = this.authSrv.usuario;
+
     this.route.data
       .subscribe((data: { obras: any[], obra: { obra: any, trabajadores: any, materiales: any, residentes: any }, partidas_urbanizacion: any, usuario: any }) => {
         this.obras = data.obras;
@@ -83,7 +88,7 @@ export class OtrasSalidasComponent implements OnInit {
         this.obra = data.obra.obra;
         //this.manzanas = [];
         this.partidas_urbanizacion = data.partidas_urbanizacion;
-        this.usuario = data.usuario;
+        //this.usuario = data.usuario;
 
         this.initForm();
 

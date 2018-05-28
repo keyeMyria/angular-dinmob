@@ -5,6 +5,7 @@ import { ObrasService } from 'app/services/obras.service';
 import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -24,6 +25,7 @@ export class PerfilComponent implements OnInit {
   constructor(
     private usuarioSrv: UsuarioService,
     private obraSrv: ObrasService,
+    private authSrv: AuthService,
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar
@@ -60,12 +62,12 @@ export class PerfilComponent implements OnInit {
             });
     
           }); */
-
+    this.usuario = this.authSrv.usuario;
 
     this.route.data
       .subscribe((data: { obras: any, usuario: any }) => {
         this.obras = data.obras;
-        this.usuario = data.usuario;
+        //this.usuario = data.usuario;
         this.formDatos.patchValue(this.usuario);
       });
 

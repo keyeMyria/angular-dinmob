@@ -8,6 +8,7 @@ import { InsumoService } from 'app/services/insumo.service';
 import { of } from "rxjs/observable/of";
 import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
 import { Rol } from "../../../constantes/roles";
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-inventario',
@@ -27,15 +28,19 @@ export class InventarioComponent implements OnInit {
     public dialog: MatDialog,
     private insumoSrv: InsumoService,
     private router: Router,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    private authSrv: AuthService
   ) { }
 
   ngOnInit() {
+    
+    this.usuario = this.authSrv.usuario;
+
     this.route.data
       .subscribe((data: { obras: any[], usuario: any }) => {
         //console.log("resultado resolve ", data);
         this.obras = data.obras;
-        this.usuario = data.usuario;
+        //this.usuario = data.usuario;
       });
 
     this.route.paramMap

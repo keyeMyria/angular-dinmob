@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { ObrasService } from 'app/services/obras.service';
 import { PedidoService } from '../../../services/pedido.service';
 import { AlertaDialogoComponent } from 'app/components/admin/alerta-dialogo/alerta-dialogo.component';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-nuevo-pedido',
@@ -40,6 +41,7 @@ export class NuevoPedidoComponent implements OnInit {
     private obraSrv: ObrasService,
     private pedidoSrv: PedidoService,
     public dialog: MatDialog,
+    private authSrv:  AuthService
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -48,10 +50,12 @@ export class NuevoPedidoComponent implements OnInit {
 
   ngOnInit() {
 
+    this.usuario = this.authSrv.usuario;
+
     this.route.data
       .subscribe((data: { obras: any[], usuario: any }) => {
         this.obras = data.obras;
-        this.usuario = data.usuario;
+        //this.usuario = data.usuario;
       });
 
     this.route.paramMap
