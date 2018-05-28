@@ -28,13 +28,14 @@ export class LoginComponent {
 
     this.auth.login(usuario)
       .subscribe((res: any) => {
-        //console.log("hola login");
+        //console.log("login");
         
         this.loading = false;
 
         //guardamos el token el el localStorage
         this.auth.setToken(res.token);
-        //this.auth.setUsuario(JSON.stringify(res.usuario));
+        //guardamos el usuario en memoria
+        this.auth.usuario= res.usuario;
 
         // reset form properties
         //this.usuario = { email: "", password: "" };

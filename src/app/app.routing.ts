@@ -117,102 +117,153 @@ export const ROUTES: Routes = [
         resolve: {
             usuario: UsuarioLoggedResolverService
         },
-        canActivate: [AuthGuard],
+        /* canActivate: [AuthGuard], */
         children: [
             //{ path: '', redirectTo: 'tablero', pathMatch: 'full' },
             {
                 path: 'clientes', component: ClientesComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.Ventas, Rol.AsesorVentas, Rol.Contabilidad]
                 }
             },
             {
                 path: 'estadisticas', component: EstadisticasAdminComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService,
                     estadisticas: EstadisticasAdminResolverService
-                }
-            },
-            {
-                path: 'desarrollos', component: DesarrollosComponent,
-                resolve: {
-                    obras: ObrasUsuarioResolverService
-                }
-            },
-            {
-                path: 'nuevo-cliente', component: NuevoClienteComponent,
-                resolve: {
-                    obras: ObrasUsuarioResolverService
-                }
-            },
-            { path: 'cliente/:id', component: ClienteComponent },
-            {
-                path: 'obras', component: ObrasComponent,
-                resolve: {
-                    //obras: ObrasUsuarioResolverService,
-                    residentes: UsuariosResidentesResolverService,
-                    almacenistas: UsuariosAlmacenistasResolverService,
-                    control_almacen: UsuariosContolAlmacenResolverService
-                }
-            },
-            {
-                path: 'registro', component: RegistroComponent,
-                resolve: {
-                    usuarios: UsuariosResolverService
-                }
-            },
-            {
-                path: 'tablero', component: TableroComponent,
-                resolve: {
-                    usuario: UsuarioLoggedResolverService
                 },
                 data: {
                     permisos: [Rol.Administrador]
                 }
             },
-            { path: 'editar-prototipo/:id', component: EditarPrototipoComponent },
             {
-                path: 'estructura-obra', component: EstructuraObraComponent,
+                path: 'desarrollos', component: DesarrollosComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.Ventas, Rol.AsesorVentas]
+                }
+            },
+            {
+                path: 'nuevo-cliente', component: NuevoClienteComponent,
+                canActivate: [AuthGuard],
+                resolve: {
+                    obras: ObrasUsuarioResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.Ventas, Rol.AsesorVentas, Rol.Contabilidad]
+                }
+            },
+            { path: 'cliente/:id', component: ClienteComponent },
+            {
+                path: 'obras', component: ObrasComponent,
+                canActivate: [AuthGuard],
+                resolve: {
+                    //obras: ObrasUsuarioResolverService,
+                    residentes: UsuariosResidentesResolverService,
+                    almacenistas: UsuariosAlmacenistasResolverService,
+                    control_almacen: UsuariosContolAlmacenResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador]
+                }
+            },
+            {
+                path: 'registro', component: RegistroComponent,
+                canActivate: [AuthGuard],
+                resolve: {
+                    usuarios: UsuariosResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador]
+                }
+            },
+            {
+                path: 'editar-prototipo/:id', component: EditarPrototipoComponent,
+                canActivate: [AuthGuard],
+                data: {
+                    permisos: [Rol.Administrador, Rol.ControlAlmacen]
+                }
+            },
+            {
+                path: 'estructura-obra', component: EstructuraObraComponent,
+                canActivate: [AuthGuard],
+                resolve: {
+                    obras: ObrasUsuarioResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador]
                 }
             },
             {
                 path: 'prototipos', component: PrototiposComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.ControlAlmacen]
                 }
             },
             {
                 path: 'perfil', component: PerfilComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService,
                     usuario: UsuarioLoggedResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.Ventas, Rol.AsesorVentas, Rol.Almacenista, Rol.Contabilidad, Rol.ControlAlmacen, Rol.Residente, Rol.Recepcion]
                 }
             },
             {
                 path: 'avances', component: AvancesComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService,
                     usuario: UsuarioLoggedResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.ControlAlmacen, Rol.Residente]
                 }
             },
             {
                 path: 'mapas-avances', component: MapasAvancesComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     obras: MapasUsuarioResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.ControlAlmacen, Rol.Residente]
                 }
             },
             {
                 path: 'mapas-ventas', component: MapasVentasComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     obras: MapasUsuarioResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.Ventas, Rol.AsesorVentas]
                 }
             },
-            { path: 'usuarios', component: UsuariosComponent },
-            //{ path: 'crear-usuario', component: CrearUsuarioComponent },
+            {
+                path: 'usuarios', component: UsuariosComponent,
+                canActivate: [AuthGuard],
+                data: {
+                    permisos: [Rol.Administrador]
+                }
+            },
             {
                 path: 'editar-cliente/:id', component: EditarClienteComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService,
                     formas_pago: FormasPagoResolverService,
@@ -221,142 +272,262 @@ export const ROUTES: Routes = [
                     tipos_pago: TiposPagoResolverService,
                     estados: EstadosVentaLoteResolverService,
                     //vendedores: VendedoresResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.Ventas, Rol.AsesorVentas, Rol.Contabilidad]
                 }
             },
-            { path: 'acta-entrega/:id', component: ActaEntregaComponent },
-            { path: 'crear-acta-entrega', component: CrearActaEntregaComponent },
-            { path: 'actas-entrega', component: ActasEntregaComponent },
-            { path: 'editar-acta-entrega/:id', component: EditarActaEntregaComponent },
-            { path: 'generar-acta-entrega', component: GenerarActaEntregaComponent },
+            {
+                path: 'acta-entrega/:id', component: ActaEntregaComponent,
+                canActivate: [AuthGuard],
+                data: {
+                    permisos: [Rol.Administrador]
+                }
+            },
+            {
+                path: 'crear-acta-entrega', component: CrearActaEntregaComponent,
+                canActivate: [AuthGuard],
+                data: {
+                    permisos: [Rol.Administrador]
+                }
+            },
+            {
+                path: 'actas-entrega', component: ActasEntregaComponent,
+                canActivate: [AuthGuard],
+                data: {
+                    permisos: [Rol.Administrador]
+                }
+            },
+            {
+                path: 'editar-acta-entrega/:id', component: EditarActaEntregaComponent,
+                canActivate: [AuthGuard],
+                data: {
+                    permisos: [Rol.Administrador]
+                }
+            },
+            {
+                path: 'generar-acta-entrega', component: GenerarActaEntregaComponent,
+                canActivate: [AuthGuard],
+                data: {
+                    permisos: [Rol.Administrador]
+                }
+            },
             {
                 path: 'ventas/lote/:id', component: VentasLoteComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     estados: EstadosVentaLoteResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.Ventas, Rol.AsesorVentas]
                 }
             },
             {
                 path: 'alerta-clientes', component: AlertaClientesComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.Ventas, Rol.AsesorVentas]
                 }
             },
             {
                 path: 'prospectos', component: ClienteSinLoteComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.Ventas, Rol.AsesorVentas]
                 }
             },
             {
                 path: 'estadisticas-ventas', component: EstadisticasVentasComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.Ventas, Rol.AsesorVentas]
                 }
             },
             {
                 path: 'salidas', component: SalidasComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService,
                     usuario: UsuarioLoggedResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.Almacenista, Rol.ControlAlmacen, Rol.Residente]
                 }
             },
             {
                 path: 'entradas', component: EntradasComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService,
                     usuario: UsuarioLoggedResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.Almacenista, Rol.ControlAlmacen, Rol.Residente]
                 }
             },
             {
                 path: 'inventario', component: InventarioComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService,
                     usuario: UsuarioLoggedResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.ControlAlmacen, Rol.Residente]
                 }
             },
             {
                 path: 'nueva-salida', component: NuevaSalidaComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService,
                     usuario: UsuarioLoggedResolverService,
                     obra: ObraManzanasTrabajadoresResidentesResolverService,
 
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.Almacenista, Rol.ControlAlmacen, Rol.Residente]
                 }
             },
             {
                 path: 'otras-salidas', component: OtrasSalidasComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService,
                     obra: ObraMaterialesTrabajadoresResidentesResolverService,
                     partidas_urbanizacion: PartidasUrbanizacionResolverService,
                     usuario: UsuarioLoggedResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.Almacenista, Rol.ControlAlmacen, Rol.Residente]
                 }
             },
             {
                 path: 'nueva-entrada', component: NuevaEntradaComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService,
                     proveedores: ProveedoresResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.Almacenista, Rol.ControlAlmacen, Rol.Residente]
                 }
             },
             {
                 path: 'nuevo-pedido', component: NuevoPedidoComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService,
                     usuario: UsuarioLoggedResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.ControlAlmacen, Rol.Residente, Rol.Recepcion]
                 }
             },
             {
                 path: 'pedidos', component: PedidosComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService,
                     usuario: UsuarioLoggedResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.ControlAlmacen, Rol.Residente, Rol.Recepcion]
                 }
             },
             {
                 path: 'trabajadores', component: TrabajadoresComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService,
                     especialidades: EspecialidadesTrabajadorResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador]
                 }
             },
             {
                 path: 'asignar-trabajadores', component: AsignarTrabajadoresComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador]
                 }
             },
             {
                 path: 'editar-entrada/:id', component: EditarEntradaComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     proveedores: ProveedoresResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador]
+                }
+            },
+            {
+                path: 'tablero', component: TableroComponent,
+                canActivate: [AuthGuard],
+                resolve: {
+                    usuario: UsuarioLoggedResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador,]
                 }
             },
             {
                 path: 'tablero-admin', component: TableroAdminComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     usuario: UsuarioLoggedResolverService
                 },
+                data: {
+                    permisos: [Rol.Administrador]
+                }
             },
             {
                 path: 'tablero-avances', component: TableroAvancesComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     usuario: UsuarioLoggedResolverService
                 },
+                data: {
+                    permisos: [Rol.Administrador, Rol.ControlAlmacen, Rol.Residente]
+                }
             },
             {
                 path: 'tablero-ventas', component: TableroVentasComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     usuario: UsuarioLoggedResolverService
                 },
+                data: {
+                    permisos: [Rol.Administrador, Rol.Ventas]
+                }
             },
             {
                 path: 'tablero-almacen', component: TableroAlmacenComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     usuario: UsuarioLoggedResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.ControlAlmacen, Rol.Residente]
                 }
             },
             {
                 path: 'tablero-almacenista', component: TableroAlmacenistaComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     usuario: UsuarioLoggedResolverService
                 },
@@ -364,143 +535,237 @@ export const ROUTES: Routes = [
                     permisos: [Rol.Almacenista]
                 }
             },
-            {
+             {
                 path: 'tablero-asesor', component: TableroAsesorComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     usuario: UsuarioLoggedResolverService
+                },
+                data: {
+                    permisos: [Rol.AsesorVentas]
                 }
-            },
+            }, 
             {
                 path: 'tablero-contabilidad', component: TableroContabilidadComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     usuario: UsuarioLoggedResolverService
+                },
+                data: {
+                    permisos: [Rol.Contabilidad]
                 }
             },
             {
                 path: 'tablero-pedidos', component: TableroPedidosComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     usuario: UsuarioLoggedResolverService
+                },
+                data: {
+                    permisos: [Rol.Recepcion]
                 }
             },
             {
                 path: 'tablero-residente', component: TableroResidenteComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     usuario: UsuarioLoggedResolverService
+                },
+                data: {
+                    permisos: [Rol.Residente]
                 }
             },
             {
                 path: 'tablero-control-almacen', component: TableroControlAlmacenComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     usuario: UsuarioLoggedResolverService
+                },
+                data: {
+                    permisos: [Rol.ControlAlmacen]
                 }
             },
             {
                 path: 'tablero-comisiones', component: TableroComisionesComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     usuario: UsuarioLoggedResolverService
                 },
+                data: {
+                    permisos: [Rol.Administrador]
+                }
             },
             {
                 path: 'ventas-pagos', component: VentasPagosComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService,
                     tipos: TiposPagoResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.Ventas, Rol.Contabilidad]
                 }
             },
 
             {
                 path: 'imagenes-lote', component: ImagenesLoteComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService,
                     usuario: UsuarioLoggedResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.ControlAlmacen, Rol.Residente]
                 }
             },
 
             {
                 path: 'proveedores', component: ProveedoresComponent,
+                canActivate: [AuthGuard],
+                data: {
+                    permisos: [Rol.Administrador, Rol.ControlAlmacen]
+                }
             },
             {
                 path: 'pagos-trabajadores', component: PagosTrabajadoresComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService,
                     tipos: TiposPagoTrabajadorResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador]
                 }
             },
             {
                 path: 'gastos-obras', component: GastosObrasComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService,
                     tipos: TiposGastosResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador]
                 }
             },
             {
                 path: 'historial-apartados', component: HistorialApartadosComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService,
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.Ventas, Rol.AsesorVentas]
                 }
             },
             {
                 path: 'comisiones', component: ComisionesComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService,
                     usuario: UsuarioLoggedResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.Ventas]
                 }
             },
             {
                 path: 'vendedores', component: VendedoresComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.Ventas, Rol.AsesorVentas]
                 }
             },
             {
                 path: 'editar-pedido/:id/:obra', component: EditarPedidoComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService,
                     estados: EstadosPedidoResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.ControlAlmacen, Rol.Recepcion]
                 }
             },
-            { path: 'instituciones-credito', component: InstitucionesCreditoComponent },
+            {
+                path: 'instituciones-credito', component: InstitucionesCreditoComponent,
+                canActivate: [AuthGuard],
+                data: {
+                    permisos: [Rol.Administrador, Rol.Ventas, Rol.AsesorVentas]
+                }
+            },
             {
                 path: 'importar-prototipo', component: ImportarPrototipoComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.ControlAlmacen]
                 }
             },
             {
                 path: 'reportes', component: ReportesComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.Ventas, Rol.AsesorVentas]
                 }
             },
             {
                 path: 'arranque', component: ArranqueComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService,
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.ControlAlmacen]
                 }
             },
             {
                 path: 'reporte', component: ReporteComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService,
                     tipos: ReportesResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador]
                 }
             },
             {
                 path: 'reporte-salidas', component: ReporteSalidasComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.ControlAlmacen]
                 }
             },
             {
                 path: 'reporte-entradas', component: ReporteEntradasComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.ControlAlmacen]
                 }
             },
             {
                 path: 'credito-puente', component: CreditoPuenteComponent,
+                canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador]
                 }
             },
 

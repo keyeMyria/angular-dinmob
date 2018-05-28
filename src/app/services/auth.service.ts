@@ -14,20 +14,21 @@ import { UsuarioService } from 'app/services/usuario.service';
 export class AuthService {
 
   url: string;
+  usuario: any;
 
-/*   Rol = {
-    Administrador: 1,
-    Control: 2,
-    Residente: 3,
-    Almacenista: 4,
-    Contabilidad: 5,
-    Ventas: 6,
-    AsesorVentas: 7,
-    Creditos: 8,
-    Recepcion: 9,
-    ControlAlmacen: 10
-
-  } */
+  /*   Rol = {
+      Administrador: 1,
+      Control: 2,
+      Residente: 3,
+      Almacenista: 4,
+      Contabilidad: 5,
+      Ventas: 6,
+      AsesorVentas: 7,
+      Creditos: 8,
+      Recepcion: 9,
+      ControlAlmacen: 10
+  
+    } */
 
   redirectUrl: string;
 
@@ -84,6 +85,8 @@ export class AuthService {
       localStorage.setItem(this.keyUser, usuario);
     } */
 
+
+
   setToken(token) {
     localStorage.setItem(this.keyToken, token);
   }
@@ -108,18 +111,41 @@ export class AuthService {
   
     } */
 
-  /*   hasRole(roles: any[]) {
-      var visible = false;
-      var mi_rol = this.getRolUsuario();
-  
-      var i = roles.indexOf(mi_rol);
-  
-      if (i >= 0) {
-        visible = true;
-      }
-      return visible;
-  
-    } */
+  tienePermiso(roles: any[]) {
+
+    return this.checkPermiso(roles, +this.usuario.id_tipo_usuario);
+  }
+
+  tienePermisoAsync(roles: any[]) {
+
+    return this.usuarioSrv.getUsuarioLogged()
+    .map(usuario=>{
+      this.usuario = usuario;
+      return this.checkPermiso(roles, +this.usuario.id_tipo_usuario);
+    });
+     /*  .subscribe(usuario => {
+        this.usuario = usuario;
+        this.checkPermiso(roles, +this.usuario.id_tipo_usuario);
+
+      }); */
+
+
+  }
+
+  checkPermiso(roles: any, id_tipo_usuario: any): boolean {
+    let permiso = false;
+    let i = roles.indexOf(id_tipo_usuario);
+
+    if (i >= 0) {
+      permiso = true;
+      console.log("tiene permiso");
+
+    } else {
+
+      console.log("NO tiene permiso");
+    }
+    return permiso;
+  }
 
 
 
