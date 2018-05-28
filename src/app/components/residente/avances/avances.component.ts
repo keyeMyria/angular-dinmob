@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { LotesService } from 'app/services/lotes.service';
 import { ComentarioAvancesDialogoComponent } from 'app/components/residente/comentario-avances-dialogo/comentario-avances-dialogo.component';
 import { MatDialog, MatDrawer, MatSnackBar } from '@angular/material';
@@ -15,7 +15,8 @@ import { Rol } from "../../../constantes/roles";
 @Component({
   selector: 'app-avances',
   templateUrl: './avances.component.html',
-  styleUrls: ['./avances.component.scss']
+  styleUrls: ['./avances.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AvancesComponent implements OnInit {
   num_partidas_finalizadas: any;
@@ -28,7 +29,7 @@ export class AvancesComponent implements OnInit {
 
   lote: any;
   acordeon: any;
-  obra: any;
+  obra: any = { manzanas: [], obra: {} };
   obra_selected: string = "";
   obras: any = [];
   Rol = Rol;
