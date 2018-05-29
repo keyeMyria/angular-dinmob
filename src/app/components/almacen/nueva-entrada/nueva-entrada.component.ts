@@ -23,6 +23,7 @@ export class NuevaEntradaComponent implements OnInit {
   id_proveedor: string = "";
   folio: string = "";
   insumos_filtrados: any[] = [];
+  nota: any;
 
   constructor(
     private router: Router,
@@ -75,10 +76,10 @@ export class NuevaEntradaComponent implements OnInit {
         insumos.push({ id_insumo: insumo.id_insumo, cantidad: insumo.entrada });
       }
     });
-    console.log(this.folio, this.id_proveedor, this.obra_selected, insumos);
+    console.log(this.folio, this.id_proveedor, this.obra_selected, insumos, this.nota);
 
     if (insumos.length > 0) {
-      this.entradaSrv.createEntrada(this.obra_selected, insumos, this.id_proveedor, this.folio)
+      this.entradaSrv.createEntrada(this.obra_selected, insumos, this.id_proveedor, this.folio, this.nota)
         .subscribe(insumos => {
           //console.log("respuesta", insumos);
           //volver a leer los insumos
@@ -87,6 +88,7 @@ export class NuevaEntradaComponent implements OnInit {
           this.id_proveedor = "";
           this.checkFiltro.checked = false;
           this.insumos_filtrados = this.insumos.slice();
+          this.nota = "";
 
           form.reset();
 

@@ -57,15 +57,15 @@
                     {{insumo.existencias}}
                   </div>
                 </td>
-                <td style="width: 150px">                 
-                    <input type="number" [(ngModel)]="insumo.entrada" class="form-control">               
+                <td style="width: 150px">
+                  <input type="number" [(ngModel)]="insumo.entrada" class="form-control">
                 </td>
               </tr>
 
             </tbody>
           </table>
 
-        </div>     
+        </div>
 
       </div>
 
@@ -93,10 +93,16 @@
               </div>
 
             </div>
+
+            <div class="form-group">
+              <label for="nota" class="form-label">Nota</label>
+              <textarea type="text" class="form-control" id="nota" name="nota" [(ngModel)]="nota" row="3"></textarea>
+            </div>
+
           </form>
         </div>
         <div class="card-footer text-center">
-          <button mat-raised-button type="submit" form="id_form" color="primary" [disabled]="formEntrada.invalid">Guardar</button>
+          <button mat-raised-button type="submit" form="id_form" color="primary" [disabled]="formEntrada.invalid" >Guardar</button>
         </div>
       </div>
 
