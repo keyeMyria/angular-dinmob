@@ -541,9 +541,9 @@ export const ROUTES: Routes = [
             {
                 path: 'tablero-asesor', component: TableroAsesorComponent,
                 canActivate: [AuthGuard],
-                resolve: {
+/*                 resolve: {
                     usuario: UsuarioLoggedResolverService
-                },
+                }, */
                 data: {
                     permisos: [Rol.AsesorVentas]
                 }
@@ -551,9 +551,9 @@ export const ROUTES: Routes = [
             {
                 path: 'tablero-contabilidad', component: TableroContabilidadComponent,
                 canActivate: [AuthGuard],
-                resolve: {
+/*                 resolve: {
                     usuario: UsuarioLoggedResolverService
-                },
+                }, */
                 data: {
                     permisos: [Rol.Contabilidad]
                 }
@@ -561,9 +561,9 @@ export const ROUTES: Routes = [
             {
                 path: 'tablero-pedidos', component: TableroPedidosComponent,
                 canActivate: [AuthGuard],
-                resolve: {
+/*                 resolve: {
                     usuario: UsuarioLoggedResolverService
-                },
+                }, */
                 data: {
                     permisos: [Rol.Recepcion]
                 }
@@ -571,9 +571,9 @@ export const ROUTES: Routes = [
             {
                 path: 'tablero-residente', component: TableroResidenteComponent,
                 canActivate: [AuthGuard],
-                resolve: {
+/*                 resolve: {
                     usuario: UsuarioLoggedResolverService
-                },
+                }, */
                 data: {
                     permisos: [Rol.Residente]
                 }
@@ -581,9 +581,9 @@ export const ROUTES: Routes = [
             {
                 path: 'tablero-control-almacen', component: TableroControlAlmacenComponent,
                 canActivate: [AuthGuard],
-                resolve: {
+/*                 resolve: {
                     usuario: UsuarioLoggedResolverService
-                },
+                }, */
                 data: {
                     permisos: [Rol.ControlAlmacen]
                 }
@@ -591,9 +591,9 @@ export const ROUTES: Routes = [
             {
                 path: 'tablero-comisiones', component: TableroComisionesComponent,
                 canActivate: [AuthGuard],
-                resolve: {
+/*                 resolve: {
                     usuario: UsuarioLoggedResolverService
-                },
+                }, */
                 data: {
                     permisos: [Rol.Administrador]
                 }
@@ -615,7 +615,7 @@ export const ROUTES: Routes = [
                 canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService,
-                    usuario: UsuarioLoggedResolverService
+                    //usuario: UsuarioLoggedResolverService
                 },
                 data: {
                     permisos: [Rol.Administrador, Rol.ControlAlmacen, Rol.Residente]
@@ -666,7 +666,7 @@ export const ROUTES: Routes = [
                 canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService,
-                    usuario: UsuarioLoggedResolverService
+                    //usuario: UsuarioLoggedResolverService
                 },
                 data: {
                     permisos: [Rol.Administrador, Rol.Ventas]

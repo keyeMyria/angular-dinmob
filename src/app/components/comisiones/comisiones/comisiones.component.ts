@@ -7,6 +7,7 @@ import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar
 import { ComisionService } from '../../../services/comision.service';
 import { of } from "rxjs/observable/of";
 import { Rol } from "../../../constantes/roles";
+import { AuthService } from '../../../services/auth.service';
 
 
 @Component({
@@ -27,14 +28,18 @@ export class ComisionesComponent implements OnInit {
     private route: ActivatedRoute,
     private dialog: MatDialog,
     public snackBar: MatSnackBar,
-    private comisionSrv: ComisionService
+    private comisionSrv: ComisionService,
+    private authSrv: AuthService
   ) { }
 
   ngOnInit() {
+
+    this.usuario = this.authSrv.usuario;
+
     this.route.data
       .subscribe((data: { obras: any[], usuario: any }) => {
         this.obras = data.obras;
-        this.usuario = data.usuario;
+        //this.usuario = data.usuario;
 
       });
 

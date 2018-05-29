@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { LotesService } from '../../../services/lotes.service';
 import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
 import { Rol } from "../../../constantes/roles";
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-imagenes-lote',
@@ -37,7 +38,8 @@ export class ImagenesLoteComponent implements OnInit {
     private obraSrv: ObrasService,
     private loteSrv: LotesService,
     public dialog: MatDialog,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    private authSrv: AuthService
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -45,10 +47,13 @@ export class ImagenesLoteComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.usuario = this.authSrv.usuario;
+
     this.route.data
       .subscribe((data: { obras: any[], usuario: any }) => {
         this.obras = data.obras;
-        this.usuario = data.usuario;
+        //this.usuario = data.usuario;
       });
     this.route.paramMap
       .switchMap((params: ParamMap) => {
