@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { ConfigService } from 'app/services/config.service';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { catchError, map, tap } from 'rxjs/operators';
 //esta es la forma correcta
 import "rxjs/add/observable/throw";
+import { HttpResponse } from '@angular/common/http';
 
 @Injectable()
 export class ReporteService {
@@ -53,6 +54,28 @@ export class ReporteService {
 
   getUrlReporteHistorial(ids) {
     return `${this.url}historial_pagos/${ids}`;
+  }
+
+  getReporteSalidaAlmacen(id_salida) {
+
+
+    /*    const httpOptions = {
+         headers: new HttpHeaders({
+           'Content-Type': 'text/plain',
+         })
+       };
+    */
+    return this.http.get(this.url + 'salida_almacen/' + id_salida, { responseType: 'blob' })
+      .pipe(catchError(this.handleError("getReporteSalidaAlmacen")));
+
+  }
+
+
+  getReporteEntradaAlmacen(id_entrada) {
+
+    return this.http.get(this.url + 'entrada_almacen/' + id_entrada, { responseType: 'blob' })
+      .pipe(catchError(this.handleError("getReporteEntradaAlmacen")));
+
   }
 
 

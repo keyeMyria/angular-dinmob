@@ -9,6 +9,8 @@ import { Observable } from 'rxjs/Observable';
 import { VerEntradaDialogoComponent } from '../ver-entrada-dialogo/ver-entrada-dialogo.component';
 import { Rol } from "../../../constantes/roles";
 import { AuthService } from '../../../services/auth.service';
+import { ReporteService } from '../../../services/reporte.service';
+import * as FileSaver from "file-saver";
 
 @Component({
   selector: 'app-entradas',
@@ -38,7 +40,8 @@ export class EntradasComponent implements OnInit {
     private entradaSrv: EntradasService,
     public snackBar: MatSnackBar,
     private entradasSrv: EntradasService,
-    private authSrv: AuthService
+    private authSrv: AuthService,
+    private reporteSrv:ReporteService
   ) { }
 
   ngOnInit() {
@@ -164,6 +167,20 @@ export class EntradasComponent implements OnInit {
       });
 
   }
+
+  getReporteEntrada(entrada) {
+    this.reporteSrv.getReporteEntradaAlmacen(entrada.id_entrada)
+      .subscribe(data => this.downloadFile(data, `ReporteEntrda_${entrada.fecha}`));
+
+
+  }
+
+  downloadFile(data, filename) {
+    let contentType = "application/pdf";
+    let blob = new Blob([data], { type: contentType });
+    FileSaver.saveAs(blob, filename);
+  }
+
 
 
 

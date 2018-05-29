@@ -8,6 +8,8 @@ import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar
 import { Observable } from 'rxjs/Observable';
 import { Rol } from "../../../constantes/roles";
 import { AuthService } from '../../../services/auth.service';
+import { ReporteService } from '../../../services/reporte.service';
+import * as FileSaver from "file-saver";
 
 @Component({
   selector: 'app-salidas',
@@ -35,7 +37,8 @@ export class SalidasComponent implements OnInit {
     private salidaSrv: SalidasService,
     public snackBar: MatSnackBar,
     private salidasSrv: SalidasService,
-    private authSrv: AuthService
+    private authSrv: AuthService,
+    private reporteSrv: ReporteService
   ) { }
 
   ngOnInit() {
@@ -203,6 +206,19 @@ export class SalidasComponent implements OnInit {
     } else {
       this.salidas_filtradas = this.salidas.slice();
     } */
+  }
+
+  getReporteSalida(salida) {
+    this.reporteSrv.getReporteSalidaAlmacen(salida.id_salida)
+      .subscribe(data => this.downloadFile(data, `ReporteSalida_${salida.num_vale}`));
+     
+
+  }
+
+  downloadFile(data, filename) {
+    let contentType = "application/pdf";
+    let blob = new Blob([data], { type: contentType });
+    FileSaver.saveAs(blob, filename);
   }
 
 }
