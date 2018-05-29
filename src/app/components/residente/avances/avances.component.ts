@@ -79,6 +79,7 @@ export class AvancesComponent implements OnInit {
       }).subscribe(obra => {
         console.log("obra", obra);
         this.obra = obra;
+        this.changeDetectorRef.markForCheck();
       });
 
 
@@ -317,6 +318,8 @@ export class AvancesComponent implements OnInit {
         this.num_partidas = +response.num_partidas;
         this.num_partidas_finalizadas = +response.num_partidas_finalizadas;
         this.selection = new SelectionModel<any>(true, []);
+
+        this.changeDetectorRef.markForCheck();
 
       });
 

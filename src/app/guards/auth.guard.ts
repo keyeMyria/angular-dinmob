@@ -19,12 +19,11 @@ export class AuthGuard implements CanActivate {
     console.log("url", state.url);
 
     let url: string = state.url;
-    // si length es > 0 entonces queremos acceder a una ruta hija
-    // sino entonces queremos acceder a raiz /
+   
     if (next.data.permisos) {
 
       console.log("permisos", next.data.permisos);
-      if (this.checkLogin(url)) {
+      if (this.authSrv.IsLoggedIn()) {
         if (this.authSrv.usuario) {
           console.log("sync");
 
@@ -37,6 +36,12 @@ export class AuthGuard implements CanActivate {
       } else {
         console.log("NO TIENE PERMISOS");
 
+        //guardamos la ruta para una posterior redireccion
+        //despues de hacer login
+        this.authSrv.redirectUrl = url;
+
+        //redireccion al login
+        this.router.navigate(["/login"]);
         return false;
       }
     } else {

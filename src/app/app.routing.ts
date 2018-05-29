@@ -117,7 +117,10 @@ export const ROUTES: Routes = [
         /*  resolve: {
              usuario: UsuarioLoggedResolverService
          }, */
-        /* canActivate: [AuthGuard], */
+        canActivate: [AuthGuard],
+        data: {
+            permisos: [Rol.Administrador, Rol.Almacenista, Rol.AsesorVentas, Rol.Contabilidad, Rol.Control, Rol.ControlAlmacen, Rol.Creditos, Rol.Recepcion, Rol.Residente, Rol.Ventas]
+        },
         children: [
             //{ path: '', redirectTo: 'tablero', pathMatch: 'full' },
             {
@@ -518,9 +521,9 @@ export const ROUTES: Routes = [
             {
                 path: 'tablero-almacen', component: TableroAlmacenComponent,
                 canActivate: [AuthGuard],
-/*                 resolve: {
-                    usuario: UsuarioLoggedResolverService
-                }, */
+                /*                 resolve: {
+                                    usuario: UsuarioLoggedResolverService
+                                }, */
                 data: {
                     permisos: [Rol.Administrador, Rol.ControlAlmacen, Rol.Residente]
                 }
@@ -528,9 +531,9 @@ export const ROUTES: Routes = [
             {
                 path: 'tablero-almacenista', component: TableroAlmacenistaComponent,
                 canActivate: [AuthGuard],
-/*                 resolve: {
-                    usuario: UsuarioLoggedResolverService
-                }, */
+                /*                 resolve: {
+                                    usuario: UsuarioLoggedResolverService
+                                }, */
                 data: {
                     permisos: [Rol.Almacenista]
                 }
