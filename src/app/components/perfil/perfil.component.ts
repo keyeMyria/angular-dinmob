@@ -97,6 +97,7 @@ export class PerfilComponent implements OnInit {
   updateUsuario() {
     this.usuarioSrv.updateUsuario(this.usuario.id_usuario, this.formDatos.value)
       .subscribe(usuario => {
+        this.authSrv.usuario = usuario;
         this.usuario = usuario;
         this.formDatos.patchValue(this.usuario);
 
