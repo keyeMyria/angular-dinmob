@@ -9,7 +9,7 @@
 
           <div class="form-group row mt-2">
             <label for="proveedor" class="col-sm-3 col-form-label">Proveedor</label>
-            <div class="col-sm-9">        
+            <div class="col-sm-9">
               <input readonly class="form-control" type="text" id="proveedor" name="proveedor" formControlName="proveedor">
             </div>
           </div>
@@ -18,8 +18,8 @@
             <label for="fecha" class="col-sm-3 col-form-label">Fecha</label>
             <div class="col-sm-9">
               <div class="input-group">
-                <input readonly class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha" id="fecha" placement="bottom-left" [matDatepicker]="dpFechaProgramada"
-                  formControlName="fecha">
+                <input readonly class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha" id="fecha" placement="bottom-left"
+                  [matDatepicker]="dpFechaProgramada" formControlName="fecha">
                 <span class="input-group-append">
                   <button class="btn btn-secondary" type="button" (click)="dpFechaProgramada.open()" disabled>
                     <i class="fa fa-calendar"></i>
@@ -47,7 +47,7 @@
           <div class="form-group row">
             <label for="al_contado" class="col-sm-3 col-form-label">Forma de Pago</label>
             <div class="col-sm-9">
-              <select readonly class="form-control" id="al_contado" name="al_contado" formControlName="al_contado" >
+              <select readonly class="form-control" id="al_contado" name="al_contado" formControlName="al_contado">
                 <option value="">Seleccionar...</option>
                 <option value="0">Crédito</option>
                 <option value="1">Contado</option>
@@ -58,11 +58,18 @@
           <div class="form-group row">
             <label for="es_factura" class="col-sm-3 col-form-label">Documento</label>
             <div class="col-sm-9">
-              <select readonly class="form-control" id="es_factura" formControlName="es_factura" >
+              <select readonly class="form-control" id="es_factura" formControlName="es_factura">
                 <option value="">Seleccionar...</option>
                 <option value="0">Remisión</option>
                 <option value="1">Factura</option>
               </select>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="nota" class="col-sm-3 col-form-label">Nota</label>
+            <div class="col-sm-9">
+              <textarea readonly class="form-control" type="text" id="nota" name="nota" formControlName="nota" rows="3"></textarea>
             </div>
           </div>
 

@@ -30,6 +30,7 @@ export class VerEntradaDialogoComponent implements OnInit {
       total: [data.datos.total],
       al_contado: [data.datos.al_contado],
       es_factura: [data.datos.es_factura],
+      nota: [data.datos.nota]
      
 
 

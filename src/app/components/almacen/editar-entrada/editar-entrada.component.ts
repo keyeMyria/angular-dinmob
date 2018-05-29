@@ -35,6 +35,7 @@ export class EditarEntradaComponent implements OnInit {
       total: ["", Validators.required],
       al_contado: ["", Validators.required],
       es_factura: ["", Validators.required],
+      nota: [""]
     });
   }
 
