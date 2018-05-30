@@ -192,12 +192,12 @@ export class NuevoClienteComponent {
           this.router.navigate(["clientes", { obra: id_obra }]);
 
         } else {
-          this.router.navigate(["clientes-sin-lote"]);
+          this.router.navigate(["prospectos"]);
         }
 
       }, (error) => {
         
-        this.router.navigate(["clientes-sin-lote"]);
+        this.router.navigate(["prospectos"]);
       });
 
 
