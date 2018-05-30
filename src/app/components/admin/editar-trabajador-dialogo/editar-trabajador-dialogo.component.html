@@ -27,6 +27,8 @@
       <div class="col-sm-8">
         <input [textMask]="{mask: numberMask}" class="form-control" type="text" name="retencion" id="retencion" formControlName="retencion"
           [ngClass]="{'is-invalid': form.get('retencion').invalid  && (form.get('retencion').dirty || form.get('retencion').touched )}">
+        <small id="retencion" class="form-text text-muted">Debe ser un número entero.</small>
+        <div class="invalid-feedback">Especifique una cantidad (%)</div>
       </div>
     </div>
     <!-- 
