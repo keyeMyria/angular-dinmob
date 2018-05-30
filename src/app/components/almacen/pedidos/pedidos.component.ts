@@ -140,9 +140,9 @@ export class PedidosComponent implements OnInit {
 
   }
 
-  getReporteSalida(pedido) {
+  getReportePedido(pedido) {
     this.reporteSrv.getReportePedido(pedido.id_pedido)
-      .subscribe(data => this.downloadFile(data, `ReportePedido_${pedido.num_vale}`));
+      .subscribe(data => this.downloadFile(data, `ReportePedido_${pedido.fecha}`));
 
 
   }
