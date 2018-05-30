@@ -85,7 +85,7 @@ export class NuevaSalidaComponent implements OnInit {
 
   ngOnInit() {
 
-    this.authSrv = this.authSrv.usuario;
+    this.usuario = this.authSrv.usuario;
 
     this.route.data
       .subscribe((data: { obras: any[], usuario: any, obra: { obra: any, trabajadores: any, manzanas: any, residentes: any } }) => {
