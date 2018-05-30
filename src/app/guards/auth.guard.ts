@@ -11,30 +11,30 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    console.log("canActivateGuard");
+    //console.log("canActivateGuard");
 
 
     //console.log("next", next);
     //console.log("state", state);
-    console.log("url", state.url);
+    //console.log("url", state.url);
 
     let url: string = state.url;
    
     if (next.data.permisos) {
 
-      console.log("permisos", next.data.permisos);
+      //console.log("permisos", next.data.permisos);
       if (this.authSrv.IsLoggedIn()) {
         if (this.authSrv.usuario) {
-          console.log("sync");
+          //console.log("sync");
 
           return this.authSrv.tienePermiso(next.data.permisos);
         } else {
-          console.log("async");
+          //console.log("async");
 
           return this.authSrv.tienePermisoAsync(next.data.permisos);
         }
       } else {
-        console.log("NO TIENE PERMISOS");
+        //console.log("NO TIENE PERMISOS");
 
         //guardamos la ruta para una posterior redireccion
         //despues de hacer login
@@ -45,7 +45,7 @@ export class AuthGuard implements CanActivate {
         return false;
       }
     } else {
-      console.log("NO TIENE PERMISOS");
+      //console.log("NO TIENE PERMISOS");
       return false;
     }
 
