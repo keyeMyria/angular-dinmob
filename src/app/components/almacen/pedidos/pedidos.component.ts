@@ -7,6 +7,8 @@ import { VerPedidoDialogoComponent } from 'app/components/almacen/ver-pedido-dia
 import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
 import { Rol } from "../../../constantes/roles";
 import { AuthService } from '../../../services/auth.service';
+import { ReporteService } from '../../../services/reporte.service';
+import * as FileSaver from "file-saver";
 
 
 @Component({
@@ -27,7 +29,8 @@ export class PedidosComponent implements OnInit {
     private pedidoSrv: PedidoService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
-    private authSrv: AuthService
+    private authSrv: AuthService,
+    private reporteSrv: ReporteService
   ) { }
 
   ngOnInit() {
@@ -135,6 +138,19 @@ export class PedidosComponent implements OnInit {
 
       });
 
+  }
+
+  getReporteSalida(pedido) {
+    this.reporteSrv.getReportePedido(pedido.id_pedido)
+      .subscribe(data => this.downloadFile(data, `ReportePedido_${pedido.num_vale}`));
+
+
+  }
+
+  downloadFile(data, filename) {
+    let contentType = "application/pdf";
+    let blob = new Blob([data], { type: contentType });
+    FileSaver.saveAs(blob, filename);
   }
 
   nuevoPedido() {
