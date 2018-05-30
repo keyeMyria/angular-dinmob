@@ -78,6 +78,13 @@ export class ReporteService {
 
   }
 
+  getReportePedido(id_pedido) {
+
+    return this.http.get(this.url + 'pedido/' + id_pedido, { responseType: 'blob' })
+      .pipe(catchError(this.handleError("getReportePedido")));
+
+  }
+
 
   private handleError<T>(operation = 'operation') {
     return (error: HttpErrorResponse) => {
