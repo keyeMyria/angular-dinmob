@@ -46,7 +46,7 @@
       <mat-tab label="Desglose">
         <div class="demo-tab-content">
           <div class="table-responsive pt-3">
-            <table id="tablaInsumosAcumulados" class="table table-striped">
+            <table id="tablaInsumos" class="table table-striped">
               <thead>
                 <tr>
                   <th>Manzana</th>
@@ -59,7 +59,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let insumo of data.insumos">
+                <tr *ngFor="let insumo of data.pedido.insumos">
                   <td class="ws-nowrap">{{insumo.manzana}}</td>
                   <td class="ws-nowrap">{{insumo.lote}}</td>
                   <td>{{insumo.partida}}</td>
@@ -86,7 +86,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let insumo of insumos_acumulados">
+                  <tr *ngFor="let insumo of data.pedido.insumos_acumulados">
                     <td>{{insumo.insumo}}</td>
                     <td>{{insumo.unidad}}</td>
                     <td>{{insumo.cantidad}}</td>

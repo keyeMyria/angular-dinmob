@@ -9,7 +9,7 @@ import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@ang
 })
 export class VerPedidoDialogoComponent implements OnInit {
 
-  insumos_acumulados: any = [];
+  //insumos_acumulados: any = [];
   form: FormGroup;
 
   constructor(
@@ -19,53 +19,56 @@ export class VerPedidoDialogoComponent implements OnInit {
 
   ) {
     this.form = this.fb.group({
-      fecha: [data.fecha],
-      obra: [data.obra],
-      usuario: [data.usuario],
-      descripcion: [data.descripcion]
+      fecha: [data.pedido.fecha],
+      obra: [data.pedido.obra],
+      usuario: [data.pedido.usuario],
+      descripcion: [data.pedido.descripcion]
     });
   }
 
   ngOnInit() {
-    this.acumularInsumos();
+    //this.acumularInsumos();
   }
 
-  private clonar(objeto): any {
+  /*   private clonar(objeto): any {
+  
+      let strObject = JSON.stringify(objeto);
+      return JSON.parse(strObject);
+  
+    } */
 
-    let strObject = JSON.stringify(objeto);
-    return JSON.parse(strObject);
-
-  }
-
-  acumularInsumos() {
-
-    let ordenados = this.data.insumos.sort(function (a, b) {
-      return a.id_insumo - b.id_insumo;
-    });
-
-    this.insumos_acumulados = [];
-    let i = 0;
-
-    while (i < ordenados.length - 1) {
-      let j = i + 1;
-      let insumo = this.clonar(ordenados[i]);
-      insumo.cantidad = Number(insumo.cantidad);
-      this.insumos_acumulados.push(insumo);
-      while (j < ordenados.length && ordenados[i].id_insumo == ordenados[j].id_insumo) {
-        this.insumos_acumulados[this.insumos_acumulados.length - 1].cantidad += +ordenados[j].cantidad;
-        j++;
+  /*   acumularInsumos() {
+  
+      //ordenamos por id_insumo
+      let ordenados = this.data.insumos.sort(function (a, b) {
+        return a.id_insumo - b.id_insumo;
+      });
+  
+      this.insumos_acumulados = [];
+      let i = 0;
+  
+      //recorrido para ir sumando cantidades
+      while (i < ordenados.length - 1) {
+        let j = i + 1;
+        let insumo = this.clonar(ordenados[i]);
+        insumo.cantidad = Number(insumo.cantidad);
+        this.insumos_acumulados.push(insumo);
+        while (j < ordenados.length && ordenados[i].id_insumo == ordenados[j].id_insumo) {
+          this.insumos_acumulados[this.insumos_acumulados.length - 1].cantidad += +ordenados[j].cantidad;
+          j++;
+        }
+        i = j;
       }
-      i = j;
+  
+      //añadimos el ultimo insumo del array
+      if (i == ordenados.length - 1) {
+        let insumo = this.clonar(ordenados[ordenados.length - 1]);
+        insumo.cantidad = Number(insumo.cantidad);
+        this.insumos_acumulados.push(insumo);
+      }
+   
+  
     }
-
-    if (i == ordenados.length - 1) {
-      let insumo = this.clonar(ordenados[ordenados.length - 1]);
-      insumo.cantidad = Number(insumo.cantidad);
-      this.insumos_acumulados.push(insumo);
-    }
-
-
-  }
-
+  */
 
 }

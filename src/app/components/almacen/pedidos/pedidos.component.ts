@@ -116,24 +116,17 @@ export class PedidosComponent implements OnInit {
   verPedido(pedido) {
 
     this.pedidoSrv.getPedidoInsumos(pedido.id_pedido)
-      .subscribe((res: any) => {
+      .subscribe((pedido: any) => {
         let dialogRef = this.dialog.open(VerPedidoDialogoComponent, {
           data: {
-            descripcion: res.descripcion,
-            fecha: res.fecha,
-            id_obra: res.id_obra,
-            id_pedido: res.id_obra,
-            id_usuario: res.id_usuario,
-            insumos: res.insumos,
-            obra: res.obra,
-            usuario: res.usuario
+            pedido: pedido
           },
           width: '800px',
         });
 
-        dialogRef.afterClosed().subscribe(result => {
+    /*     dialogRef.afterClosed().subscribe(result => {
 
-        });
+        }); */
       }, (error) => {
 
       });
