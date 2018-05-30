@@ -123,7 +123,9 @@ export class EditarObraDialogoComponent implements OnInit {
 
 
     let obra = this.clonar(this.form.value);
-    obra.credito = obra.credito.replace(/,/g, "");
+    if (obra.credito) {
+      obra.credito = obra.credito.replace(/,/g, "");
+    }
 
     this.obraSrv.updateObra(this.data.obra.id_obra, obra)
       .subscribe(obra => {
