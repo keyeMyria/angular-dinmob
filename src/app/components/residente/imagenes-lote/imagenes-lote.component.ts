@@ -64,7 +64,7 @@ export class ImagenesLoteComponent implements OnInit {
           return Observable.of({ datos: {} });
         }
       }).subscribe(obra => {
-        console.log("obra", obra);
+        //console.log("obra", obra);
         this.obra = obra;
       });
   }
@@ -76,7 +76,7 @@ export class ImagenesLoteComponent implements OnInit {
       this.drawer.close();
     }
 
-    console.log("lote", lote);
+    //console.log("lote", lote);
     this.lote = lote;
 
     this.loteSrv.getFotosAvances(lote.id_lote)

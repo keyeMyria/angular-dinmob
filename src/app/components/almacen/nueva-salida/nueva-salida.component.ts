@@ -90,7 +90,7 @@ export class NuevaSalidaComponent implements OnInit {
     this.route.data
       .subscribe((data: { obras: any[], usuario: any, obra: { obra: any, trabajadores: any, manzanas: any, residentes: any } }) => {
 
-        console.log("route data");
+        //console.log("route data");
 
 
         this.obras = data.obras;
@@ -108,7 +108,7 @@ export class NuevaSalidaComponent implements OnInit {
         this.initForm();
 
         //this.form.reset({ tiene_alerta: false, id_usuario_entrega: this.usuario.id_usuario, id_partida: "" });
-        console.log("onInit", this.form.value);
+        //console.log("onInit", this.form.value);
 
 
 
@@ -145,7 +145,7 @@ export class NuevaSalidaComponent implements OnInit {
   }
 
   initForm() {
-    console.log("initForm");
+    //console.log("initForm");
 
     this.partidas = [];
     this.insumos = [];
@@ -165,16 +165,16 @@ export class NuevaSalidaComponent implements OnInit {
 
 
   guardar() {
-    console.log("guardar", this.form.value);
+    //console.log("guardar", this.form.value);
 
     let insumos_salida = this.insumos.filter(insumo => insumo.salida > 0);
     let insumos_errores = insumos_salida.filter(insumo => insumo.salida > insumo.existencias);
     let insumos_excedentes = insumos_salida.filter(insumo => (insumo.salida + insumo.consumido) - insumo.cantidad > 0.99);
 
-    console.log("insumos", insumos_salida);
-    console.log("errores", insumos_errores);
-    console.log("excedentes", insumos_excedentes);
-    console.log("alerta", this.form.get("tiene_alerta").value);
+    //console.log("insumos", insumos_salida);
+    //console.log("errores", insumos_errores);
+    //console.log("excedentes", insumos_excedentes);
+    //console.log("alerta", this.form.get("tiene_alerta").value);
 
     //contiene algún insumo
     if (insumos_salida.length > 0) {
@@ -202,7 +202,7 @@ export class NuevaSalidaComponent implements OnInit {
           this.salidaSrv.createSalida(this.form.value, insumos_salida)
             .subscribe(res => {
              
-              console.log("respuesta", res);
+              //console.log("respuesta", res);
               this.initForm();
 
               this.snackBar.open("Salida Creada", "", {
@@ -264,7 +264,7 @@ export class NuevaSalidaComponent implements OnInit {
   }
 
   getPartidasLote(lote) {
-    console.log("getPartidasLote", lote);
+    //console.log("getPartidasLote", lote);
 
     this.loteSrv.getPartidasLote(lote.id_lote)
       .subscribe(partidas => {
@@ -283,7 +283,7 @@ export class NuevaSalidaComponent implements OnInit {
   }
 
   getInsumosPartida(id_partida) {
-    console.log("getInsumosPartida");
+    //console.log("getInsumosPartida");
 
     if (id_partida != "") {
       this.insumoSrv.getPartidaSalida(id_partida, this.obra_selected, this.lote_selected.id_lote)
