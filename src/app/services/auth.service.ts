@@ -138,11 +138,11 @@ export class AuthService {
 
     if (i >= 0) {
       permiso = true;
-      console.log("tiene permiso");
+      //console.log("tiene permiso");
 
     } else {
 
-      console.log("NO tiene permiso");
+      //console.log("NO tiene permiso");
     }
     return permiso;
   }
