@@ -16,7 +16,7 @@ import { Rol } from "../../../constantes/roles";
   selector: 'app-avances',
   templateUrl: './avances.component.html',
   styleUrls: ['./avances.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  //changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AvancesComponent implements OnInit {
   num_partidas_finalizadas: any;
@@ -79,7 +79,7 @@ export class AvancesComponent implements OnInit {
       }).subscribe(obra => {
         console.log("obra", obra);
         this.obra = obra;
-        this.changeDetectorRef.markForCheck();
+        //this.changeDetectorRef.markForCheck();
       });
 
 
@@ -319,7 +319,7 @@ export class AvancesComponent implements OnInit {
         this.num_partidas_finalizadas = +response.num_partidas_finalizadas;
         this.selection = new SelectionModel<any>(true, []);
 
-        this.changeDetectorRef.markForCheck();
+        //this.changeDetectorRef.markForCheck();
 
       });
 
