@@ -67,7 +67,7 @@ export class NuevoPedidoComponent implements OnInit {
           return Observable.of({ datos: {} });
         }
       }).subscribe(obra => {
-        console.log("obra", obra);
+        //console.log("obra", obra);
         this.obra = obra;
 
         this.lotes_pedido = [];

@@ -131,14 +131,14 @@ export class NuevaEntradaComponent implements OnInit {
   }
 
   borrarFiltro(input_filtro) {
-    console.log("filtro", input_filtro.value);
+    //console.log("filtro", input_filtro.value);
     input_filtro.value = "";
     this.insumos_filtrados = this.insumos.slice();
   }
 
   insumosConEntrada($event, filtro) {
 
-    console.log("change", $event.checked);
+    //console.log("change", $event.checked);
 
     if ($event.checked == true) {
       this.insumos_filtrados = this.insumos.filter(insumos => insumos.entrada > 0);

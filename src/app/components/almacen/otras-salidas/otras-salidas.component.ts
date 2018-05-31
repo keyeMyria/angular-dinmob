@@ -102,7 +102,7 @@ export class OtrasSalidasComponent implements OnInit {
   }
 
   initForm() {
-    console.log("initForm");
+    //console.log("initForm");
     this.manzanas = [];
 
     this.insumos = [];
@@ -167,9 +167,9 @@ export class OtrasSalidasComponent implements OnInit {
     let insumos_salida = this.insumos.filter(insumo => insumo.salida > 0);
     let insumos_errores = insumos_salida.filter(insumo => insumo.salida > insumo.existencias);
 
-    console.log("guardar", this.form.value);
-    console.log("insumos", insumos_salida);
-    console.log("errores", insumos_errores);
+    //console.log("guardar", this.form.value);
+    //console.log("insumos", insumos_salida);
+    //console.log("errores", insumos_errores);
 
     if (insumos_salida.length > 0) {
 
@@ -179,7 +179,7 @@ export class OtrasSalidasComponent implements OnInit {
         this.salidaSrv.createSalida(this.form.value, insumos_salida)
           .subscribe(res => {
 
-            console.log("respuesta", res);
+            //console.log("respuesta", res);
             this.initForm();
 
             this.insumos = res.materiales;
@@ -226,7 +226,7 @@ export class OtrasSalidasComponent implements OnInit {
   getLotesObra(id_obra) {
 
     if (id_obra != "") {
-      console.log("getLotesObra", id_obra);
+      //console.log("getLotesObra", id_obra);
 
       this.obraSrv.getAcordeonManzanas(id_obra)
         .subscribe(obra => {
@@ -240,7 +240,7 @@ export class OtrasSalidasComponent implements OnInit {
 
 
     } else {
-      console.log("seleccione una obra");
+      //console.log("seleccione una obra");
 
     }
 
