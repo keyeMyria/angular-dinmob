@@ -54,9 +54,10 @@ export class EditarGastoDialogoComponent implements OnInit {
         // Actualizamos la lista original de gastos
         let i = this.data.gastos.indexOf(this.data.gasto);
         this.data.gastos[i] = gasto;
+        this.data.gastos.sort((a, b) => Number(new Date(b.fecha)) - Number(new Date(a.fecha)));
         // Actualizamos la lista de gastos filtrados
-        let j = this.data.gastosFiltrados.indexOf(this.data.gasto);
-        this.data.gastosFiltrados[j] = gasto;
+     /*    let j = this.data.gastosFiltrados.indexOf(this.data.gasto);
+        this.data.gastosFiltrados[j] = gasto; */
 
         this.dialogRef.close(true);
 

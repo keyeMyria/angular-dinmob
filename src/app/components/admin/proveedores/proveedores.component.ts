@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { NuevoProveedorDialogoComponent } from '../nuevo-proveedor-dialogo/nuevo-proveedor-dialogo.component';
 import { EditarProveedorDialogoComponent } from '../editar-proveedor-dialogo/editar-proveedor-dialogo.component';
@@ -16,6 +16,8 @@ export class ProveedoresComponent implements OnInit {
   proveedores: any = [];
   proveedores_filtrados: any = [];
   trackByIndex = (index, item) => item.id_proveedor;
+
+  @ViewChild('term') term: ElementRef;
 
   constructor(
     public dialog: MatDialog,
@@ -47,6 +49,9 @@ export class ProveedoresComponent implements OnInit {
 
       if (result === true) {
 
+        //aplicamos el filtro por si el nuevo elemento cumple el filtro
+        this.doFilter();
+
         this.snackBar.open("Proveedor Agregado", "", {
           duration: 2000,
           panelClass: ["bg-success", "text-white"]
@@ -70,7 +75,7 @@ export class ProveedoresComponent implements OnInit {
       data: {
         proveedor: proveedor,
         proveedores: this.proveedores,
-        proveedores_filtrados: this.proveedores_filtrados
+        /*     proveedores_filtrados: this.proveedores_filtrados */
       },
       width: '500px'
     });
@@ -85,7 +90,7 @@ export class ProveedoresComponent implements OnInit {
           panelClass: ["bg-success", "text-white"]
         });
 
-
+        this.doFilter();
 
       } else if (result && result.error) {
 
@@ -101,10 +106,26 @@ export class ProveedoresComponent implements OnInit {
 
   filtrar(event) {
 
-    this.proveedores_filtrados = this.proveedores.filter(proveedor => {
-      return proveedor.nombre.toLowerCase().includes(event.srcElement.value.toLowerCase());
-    });
+    this.filter(event.srcElement.value);
 
+    /*     this.proveedores_filtrados = this.proveedores.filter(proveedor => {
+          return proveedor.nombre.toLowerCase().includes(event.srcElement.value.toLowerCase());
+        });
+     */
+  }
+
+  doFilter() {
+
+    //console.log("doFilter", this.term.nativeElement.value);
+
+    this.filter(this.term.nativeElement.value);
+
+  }
+
+  filter(term: string) {
+    this.proveedores_filtrados = this.proveedores.filter(proveedor => {
+      return proveedor.nombre.toLowerCase().includes(term.toLowerCase());
+    });
   }
 
   delProveedor(proveedor) {
@@ -126,6 +147,9 @@ export class ProveedoresComponent implements OnInit {
 
               let i = this.proveedores.indexOf(proveedor);
               this.proveedores.splice(i, 1);
+
+              let j = this.proveedores_filtrados.indexOf(proveedor);
+              this.proveedores_filtrados.splice(j, 1);
 
 
               this.snackBar.open("Proveedor Eliminado", "", {

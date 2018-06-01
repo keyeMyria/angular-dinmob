@@ -16,7 +16,7 @@
 
         <div class="form-inline m-2">
           <div class="input-group ">
-            <input type="search" placeholder="Buscar..." class="form-control" (keyup)="filtrar($event)">
+            <input type="search" placeholder="Buscar..." class="form-control" #term (keyup)="filtrar($event)">
             <div class="input-group-append">
               <span class="input-group-text">
                 <i class="fa fa-search" aria-hidden="true"></i>
@@ -27,6 +27,7 @@
 
 
         <div>
+
 
           <mat-accordion [displayMode]="'default'" multi="true">
             <mat-expansion-panel [hideToggle]="true" *ngFor="let proveedor of proveedores_filtrados; trackBy: trackByIndex" #panel>
