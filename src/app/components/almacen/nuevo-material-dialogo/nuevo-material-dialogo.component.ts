@@ -29,10 +29,10 @@ export class NuevoMaterialDialogoComponent implements OnInit {
   ) {
 
     this.form = this.fb.group({
-     /* obra: ["", Validators.required], */
       codigo: ["", Validators.required],
       insumo: ["", Validators.required],
       unidad: ["", Validators.required],
+      precio: [""],
       existencias: ["0.0", Validators.required]
     });
   }
@@ -41,20 +41,25 @@ export class NuevoMaterialDialogoComponent implements OnInit {
   }
 
   guardar() {
-   let existe = this.data.materiales.find(mat => mat.codigo == this.form.value.codigo);
-   if(existe == undefined){
-     this.insumoSrv.createMaterial(this.form.value, this.data.obra)
-      .subscribe(insumo => {
-        this.data.materiales.unshift(insumo);
-        this.dialogRef.close(true);
-      },
-      (error) => {
-        this.dialogRef.close({ error: "Ha ocurrido un error de conexión. Inténtelo más tarde" });
-      });
-   } else {
-     this.existente = existe;
-     this.existe = true
-   }
+    //comprobamos que el código no exista
+    let existe = this.data.materiales.find(mat => mat.codigo == this.form.value.codigo);
+
+    //si no existe podemos crearlo
+    if (existe == undefined) {
+      this.insumoSrv.createMaterial(this.form.value, this.data.obra)
+        .subscribe(insumo => {
+          this.data.materiales.unshift(insumo);
+          this.data.materiales.sort((a, b) => a.insumo > b.insumo ? 1 : -1);
+
+          this.dialogRef.close(true);
+        },
+          (error) => {
+            this.dialogRef.close({ error: "Ha ocurrido un error de conexión. Inténtelo más tarde" });
+          });
+    } else {
+      this.existente = existe;
+      this.existe = true
+    }
   }
 
 

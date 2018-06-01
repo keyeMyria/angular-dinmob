@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { EditarDocumentoDialogoComponent } from 'app/components/ventas/editar-documento-dialogo/editar-documento-dialogo.component';
 import { EditarMaterialDialogoComponent } from 'app/components/almacen/editar-material-dialogo/editar-material-dialogo.component';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatDialog, MatSnackBar, Sort } from '@angular/material';
 import { NuevoMaterialDialogoComponent } from 'app/components/almacen/nuevo-material-dialogo/nuevo-material-dialogo.component';
 import { InsumoService } from 'app/services/insumo.service';
 import { of } from "rxjs/observable/of";
@@ -18,7 +18,8 @@ import { AuthService } from '../../../services/auth.service';
 export class InventarioComponent implements OnInit {
   obras: any[] = [];
   obra_selected: string = "";
-  materiales: any[] = [];
+  materiales: any = [];
+  materiales_filtrados: any = [];
   Rol = Rol;
   usuario: any;
 
@@ -33,7 +34,7 @@ export class InventarioComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
+
     this.usuario = this.authSrv.usuario;
 
     this.route.data
@@ -54,6 +55,7 @@ export class InventarioComponent implements OnInit {
       }).subscribe(materiales => {
         //console.log("prototipos", prototipos);
         this.materiales = materiales;
+        this.materiales_filtrados = this.materiales.slice();
       });
 
   }
@@ -62,7 +64,8 @@ export class InventarioComponent implements OnInit {
     let dialogRef = this.dialog.open(EditarMaterialDialogoComponent, {
       data: {
         material: material,
-        obra: this.obra_selected
+        materiales: this.materiales,
+        materiales_filtrados: this.materiales_filtrados
       },
       width: '500px'
     });
@@ -99,18 +102,38 @@ export class InventarioComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
 
-        this.snackBar.open("Insumo Eliminado", "", {
-          duration: 2000,
-          panelClass: ["bg-success", "text-white"]
-        });
+        this.insumoSrv.delInsumo(material.id_insumo)
+          .subscribe(res => {
 
-      } else if (result && result.error) {
+            if (res.count === 1) {
 
-        this.snackBar.open(result.error, "Ha ocurrido un error", {
-          duration: 3000,
-          panelClass: ["bg-danger", "text-white"]
-        });
+              let i = this.materiales.indexOf(material);
+              this.materiales.splice(i, 1);
 
+              let j = this.materiales_filtrados.indexOf(material);
+              this.materiales_filtrados.splice(j, 1);
+
+
+              this.snackBar.open("Material Eliminado", "", {
+                duration: 2000,
+                panelClass: ["bg-success", "text-white"]
+              });
+
+            } else {
+              this.snackBar.open("Ha ocurrido un error", "", {
+                duration: 3000,
+                panelClass: ["bg-danger", "text-white"]
+              });
+            }
+
+          }, (error) => {
+
+            this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+              duration: 3000,
+              panelClass: ["bg-danger", "text-white"]
+            });
+
+          });
       }
     });
 
@@ -120,6 +143,7 @@ export class InventarioComponent implements OnInit {
     let dialogRef = this.dialog.open(NuevoMaterialDialogoComponent, {
       data: {
         materiales: this.materiales,
+        materiales_filtrados: this.materiales_filtrados,
         obra: this.obra_selected
       },
       width: '500px'
@@ -127,6 +151,8 @@ export class InventarioComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
 
       if (result === true) {
+
+        this.ordenar({ active: null, direction: "" });
 
         this.snackBar.open("Inventario Actualizado", "", {
           duration: 2000,
@@ -156,4 +182,33 @@ export class InventarioComponent implements OnInit {
 
   }
 
+  filtrar(event) {
+
+    this.materiales_filtrados = this.materiales.filter(material => {
+      return material.insumo.toLowerCase().includes(event.srcElement.value.toLowerCase());
+    });
+
+  }
+
+  ordenar(sort: Sort) {
+    const data = this.materiales.slice();
+    if (!sort.active || sort.direction == '') {
+      this.materiales_filtrados = data;
+      return;
+    }
+
+    this.materiales_filtrados = data.sort((a, b) => {
+      let isAsc = sort.direction == 'asc';
+      switch (sort.active) {
+        case 'codigo': return compare(a.codigo, b.codigo, isAsc);
+        case 'insumo': return compare(a.insumo, b.insumo, isAsc);
+        default: return 0;
+      }
+    });
+  }
+
+}
+
+function compare(a, b, isAsc) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

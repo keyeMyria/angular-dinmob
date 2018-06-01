@@ -12,7 +12,7 @@
       <input [textMask]="{mask: maskCodigo, guide:false}" class="form-control" type="text" id="codigo" name="codigo"
         formControlName="codigo" [ngClass]="{'is-invalid': form.get('codigo').invalid  && (form.get('codigo').dirty || form.get('codigo').touched) }">
       <div class="invalid-feedback">Proporcione un codigo</div>
-      <small *ngIf="existe" id="passwordHelpBlock" class="form-text text-danger">
+      <small *ngIf="existe" class="form-text text-danger">
         El código ya está asignado al insumo {{existente.insumo}}
       </small>
     </div>
@@ -27,6 +27,12 @@
       <label for="unidad" class="col-form-label">Unidad</label>
       <input class="form-control" type="text" id="unidad" name="unidad" formControlName="unidad" [ngClass]="{'is-invalid': form.get('unidad').invalid  && (form.get('unidad').dirty || form.get('unidad').touched) }">
       <div class="invalid-feedback">Proporcione una unidad</div>
+    </div>
+
+    <div class="form-group">
+      <label for="precio" class="col-form-label">Precio</label>
+      <input [textMask]="{mask: numberMask}" class="form-control" type="text" id="precio" name="precio" formControlName="precio"
+        [ngClass]="{'is-invalid': form.get('precio').invalid  && (form.get('precio').dirty || form.get('precio').touched) }">
     </div>
 
     <div class="form-group">
