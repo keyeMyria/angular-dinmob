@@ -734,11 +734,12 @@ export class EditarClienteComponent implements OnInit {
     if (this.compra_selected.pagos) {
       this.compra_selected.pagos.forEach(pago => {
 
-        //personalización CIVSA, para otras empresas sumar todo independiente del tipo 
-        if (pago.tipo_pago != "Apartado" && pago.tipo_pago != "Avalúo") {
-          total += +pago.monto;
+        total += +pago.monto;
 
-        }
+        //personalización CIVSA, para otras empresas sumar todo independiente del tipo 
+      /*   if (pago.tipo_pago != "Apartado" && pago.tipo_pago != "Avalúo") {
+          total += +pago.monto;
+        } */
 
       });
     }

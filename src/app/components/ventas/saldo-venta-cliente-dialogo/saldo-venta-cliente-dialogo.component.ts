@@ -26,11 +26,12 @@ export class SaldoVentaClienteDialogoComponent implements OnInit {
     if (this.data.compra.pagos) {
       this.data.compra.pagos.forEach(pago => {
 
+        total += +pago.monto;
+        
         //personalización CIVSA, para otras empresas sumar todo independiente del tipo 
-        if (pago.tipo_pago != "Apartado" && pago.tipo_pago != "Avalúo") {
+      /*   if (pago.tipo_pago != "Apartado" && pago.tipo_pago != "Avalúo") {
           total += +pago.monto;
-
-        }
+        } */
 
       });
     }
