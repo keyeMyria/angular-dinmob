@@ -359,6 +359,7 @@
               <th>Pago</th>
               <th>Tipo</th>
               <th>Notas</th>
+              <th></th>
             </tr>
           </thead>
 
@@ -368,6 +369,14 @@
               <td>{{pago.pagado|currency}}</td>
               <td>{{pago.tipo}}</td>
               <td>{{pago.notas}}</td>
+              <td class="text-right">
+                <button mat-button class="no-min" (click)="editarPago(pago)">
+                  <i class="fa fa-pencil"></i>
+                </button>
+                <button mat-button class="no-min" (click)="delPago(pago)">
+                  <i class="fa fa-times"></i>
+                </button>
+              </td>
             </tr>
 
           </tbody>

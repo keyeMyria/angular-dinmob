@@ -18,8 +18,18 @@ export class PagoTrabajadorService {
 
   //ok
   createPagoTrabajador(pago) {
-    return this.http.post(this.url + 'create_pago_trabajador/', {pago: pago})
+    return this.http.post(this.url + 'create_pago_trabajador/', { pago: pago })
       .pipe(catchError(this.handleError("createPagoTrabajador")));
+  }
+
+  updatePagoTrabajador(id_pago, pago) {
+    return this.http.post(this.url + 'update_pago_trabajador/' + id_pago, { pago: pago })
+      .pipe(catchError(this.handleError("updatePagoTrabajador")));
+  }
+
+  delPagoTrabajador(id_pago) {
+    return this.http.post(this.url + 'del_pago_trabajador/' + id_pago, {})
+      .pipe(catchError(this.handleError("delPagoTrabajador")));
   }
 
   //ok

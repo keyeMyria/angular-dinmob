@@ -243,6 +243,7 @@ import { TableroControlAlmacenComponent } from './components/tablero-control-alm
 import { TableroAsesorComponent } from './components/tablero-asesor/tablero-asesor.component';
 import { TableroPedidosComponent } from './components/tablero-pedidos/tablero-pedidos.component';
 import { TableroAlmacenistaComponent } from './components/tablero-almacenista/tablero-almacenista.component';
+import { EditarPagoTrabajadorDialogoComponent } from './components/admin/editar-pago-trabajador-dialogo/editar-pago-trabajador-dialogo.component';
 
 
 
@@ -399,7 +400,8 @@ export function getToken() {
     TableroControlAlmacenComponent,
     TableroAsesorComponent,
     TableroPedidosComponent,
-    TableroAlmacenistaComponent
+    TableroAlmacenistaComponent,
+    EditarPagoTrabajadorDialogoComponent
 
 
 
@@ -488,7 +490,8 @@ export function getToken() {
     VerEntradaDialogoComponent,
     CargoAbonoCreditoDialogoComponent,
     EditarCargoAbonoCreditoDialogoComponent,
-    SaldoVentaClienteDialogoComponent
+    SaldoVentaClienteDialogoComponent,
+    EditarPagoTrabajadorDialogoComponent
 
 
 
