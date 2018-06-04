@@ -96,10 +96,13 @@ export class PerfilComponent implements OnInit {
 
   updateUsuario() {
     this.usuarioSrv.updateUsuario(this.usuario.id_usuario, this.formDatos.value)
-      .subscribe(usuario => {
+      .subscribe((usuario:any) => {
         this.authSrv.usuario = usuario;
         this.usuario = usuario;
         this.formDatos.patchValue(this.usuario);
+
+        //notificamos cambios en el nombre
+        //this.authSrv.setUsername(usuario.nombre);
 
         this.snackBar.open("Usuario Actualizado", "", {
           duration: 2000,
