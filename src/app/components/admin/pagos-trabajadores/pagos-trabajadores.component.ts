@@ -6,7 +6,9 @@ import * as moment from 'moment';
 import { TrabajadorService } from '../../../services/trabajador.service';
 import { of } from "rxjs/observable/of";
 import { PagoTrabajadorService } from 'app/services/pago-trabajador.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
+import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component";
+import { EditarPagoTrabajadorDialogoComponent } from '../editar-pago-trabajador-dialogo/editar-pago-trabajador-dialogo.component';
 
 @Component({
   selector: 'app-pagos-trabajadores',
@@ -31,8 +33,8 @@ export class PagosTrabajadoresComponent implements OnInit {
   avances = [];
   tipos: any = [];
 
-/*   pagos = [];
-  pagos_avances = []; */
+  /*   pagos = [];
+    pagos_avances = []; */
 
 
   constructor(
@@ -41,7 +43,8 @@ export class PagosTrabajadoresComponent implements OnInit {
     private fb: FormBuilder,
     private trabajadorSrv: TrabajadorService,
     private pagoTrabajadorSrv: PagoTrabajadorService,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    public dialog: MatDialog,
   ) {
     this.formNuevo = this.fb.group({
 
@@ -114,10 +117,11 @@ export class PagosTrabajadoresComponent implements OnInit {
 
   createPago() {
     //console.log("Crear Pago", this.formNuevo.value)
+    this.formNuevo.value.pagado = this.formNuevo.value.pagado.replace(/,/g, "");
     this.pagoTrabajadorSrv.createPagoTrabajador(this.formNuevo.value)
       .subscribe(pago => {
         console.log("Pago id:", pago);
-        this.snackBar.open("Gasto Eliminado", "", {
+        this.snackBar.open("Pago Agregado", "", {
           duration: 2000,
           panelClass: ["bg-success", "text-white"]
         });
@@ -142,6 +146,88 @@ export class PagosTrabajadoresComponent implements OnInit {
         this.total_historial = res.total_historial;
         this.historial = res.historial;
       });
+
+  }
+
+  editarPago(pago) {
+
+    let dialogRef = this.dialog.open(EditarPagoTrabajadorDialogoComponent, {
+      data: {
+        pago: pago,
+        tipos: this.tipos,
+        historial: this.historial,
+        trabajadores: this.trabajadores
+      },
+      width: "500px"
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+
+        this.snackBar.open("Pago Actualizado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      } else if (result && result.error) {
+
+        this.snackBar.open(result.error, "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+
+      }
+    });
+
+  }
+
+
+
+  delPago(pago) {
+
+    let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
+      data: {
+        title: "Eliminar Pago",
+        content: `¿Desea eliminar el pago del ${pago.fecha_pago}?`
+      },
+      width: "500px"
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result === true) {
+
+        this.pagoTrabajadorSrv.delPagoTrabajador(pago.id_pago)
+          .subscribe((res: any) => {
+            if (res.count === 1) {
+
+              let i = this.historial.indexOf(pago);
+              this.historial.splice(i, 1);
+
+
+              this.snackBar.open("Pago Eliminado", "", {
+                duration: 2000,
+                panelClass: ["bg-success", "text-white"]
+              });
+
+            } else {
+              this.snackBar.open("Ha ocurrido un error", "", {
+                duration: 3000,
+                panelClass: ["bg-danger", "text-white"]
+              });
+            }
+
+          }, (error) => {
+            this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+              duration: 3000,
+              panelClass: ["bg-danger", "text-white"]
+            });
+          });
+
+
+      }
+
+    });
 
   }
 
