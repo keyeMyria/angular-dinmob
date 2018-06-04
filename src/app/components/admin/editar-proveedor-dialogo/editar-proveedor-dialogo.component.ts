@@ -41,9 +41,10 @@ export class EditarProveedorDialogoComponent implements OnInit {
         // Edita la lista original de proveedores
         let i = this.data.proveedores.indexOf(this.data.proveedor);
         this.data.proveedores[i] = proveedor;
+        this.data.proveedores.sort((a, b) => a.nombre > b.nombre ? 1 : -1);
         // Edita la lista de proveedores filtrados
-        let j = this.data.proveedores_filtrados.indexOf(this.data.proveedor);
-        this.data.proveedores_filtrados[j] = proveedor;
+       /*  let j = this.data.proveedores_filtrados.indexOf(this.data.proveedor);
+        this.data.proveedores_filtrados[j] = proveedor; */
 
         this.dialogRef.close(true);
         

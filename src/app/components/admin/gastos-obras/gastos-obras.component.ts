@@ -121,6 +121,8 @@ export class GastosObrasComponent implements OnInit {
           panelClass: ["bg-success", "text-white"]
         });
 
+        this.filtro(this.dpDel.nativeElement, this.dpAl.nativeElement, this.tipo_gasto_selected);
+
       } else if (result && result.error) {
 
         this.snackBar.open(result.error, "", {

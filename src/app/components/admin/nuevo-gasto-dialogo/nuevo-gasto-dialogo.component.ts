@@ -54,6 +54,7 @@ export class NuevoGastoDialogoComponent implements OnInit {
     this.gastoSrv.createGasto(frmGasto)
       .subscribe(gasto => {
         this.data.gastos.unshift(gasto);
+        this.data.gastos.sort((a, b) => Number(new Date(b.fecha)) - Number(new Date(a.fecha)));
         this.dialogRef.close(true);
 
       },

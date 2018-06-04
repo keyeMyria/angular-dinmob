@@ -17,13 +17,13 @@ export class InsumoService {
     this.url = this.config.api_url + "insumos/";
   }
 
-  getMaterialesObra(id_obra):Observable<any> {
-    return this.http.get(this.url + 'get_materiales_obra/'+id_obra)
+  getMaterialesObra(id_obra): Observable<any> {
+    return this.http.get(this.url + 'get_materiales_obra/' + id_obra)
       .pipe(catchError(this.handleError("getMaterialesObra")));
   }
 
-  getPartidaSalida(id_partida, id_obra, id_lote):Observable<any> {
-    return this.http.post(this.url + 'get_partida_salida/'+id_partida, { id_obra: id_obra, id_lote: id_lote })
+  getPartidaSalida(id_partida, id_obra, id_lote): Observable<any> {
+    return this.http.post(this.url + 'get_partida_salida/' + id_partida, { id_obra: id_obra, id_lote: id_lote })
       .pipe(catchError(this.handleError("getPartidaSalida")));
   }
 
@@ -38,9 +38,15 @@ export class InsumoService {
   }
 
   createMaterial(insumo, id_obra) {
-    return this.http.post(this.url + 'create_material/', { insumo: insumo , id_obra: id_obra})
+    return this.http.post(this.url + 'create_material/', { insumo: insumo, id_obra: id_obra })
       .pipe(catchError(this.handleError("createMaterial")));
   }
+
+  delInsumo(id) {
+    return this.http.post(this.url + "del_insumo/" + id, {})
+      .pipe(catchError(this.handleError("delInsumo")));
+  }
+
 
   private handleError<T>(operation = 'operation') {
     return (error: HttpErrorResponse) => {

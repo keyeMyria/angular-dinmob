@@ -34,10 +34,11 @@ export class NuevoProveedorDialogoComponent implements OnInit {
   }
 
   guardar() {
-    console.log("ok", this.form.value);
+    //console.log("ok", this.form.value);
     this.proveedorSrv.createProveedor(this.form.value)
       .subscribe(proveedor => {
         this.data.proveedores.push(proveedor);
+        this.data.proveedores.sort((a, b) => a.nombre > b.nombre ? 1 : -1);
         this.dialogRef.close(true);
 
       },
