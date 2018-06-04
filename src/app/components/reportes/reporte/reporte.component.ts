@@ -5,6 +5,7 @@ import { ObrasService } from '../../../services/obras.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import * as moment from 'moment';
 import { ReporteService } from '../../../services/reporte.service';
+import * as FileSaver from "file-saver";
 
 @Component({
   selector: 'app-reporte',
@@ -39,11 +40,26 @@ export class ReporteComponent implements OnInit {
       id_obra: [null, Validators.required],
       reporte: [null, Validators.required],
       ambito: [null, Validators.required],
-      inicio_obra: [null, Validators.required],
+      inicio_obra: [false],
       fecha_ini: [moment(), Validators.required],
       fecha_fin: [moment(), Validators.required]
 
     });
+
+    this.form.controls["inicio_obra"].valueChanges
+      .subscribe((value) => {
+        //console.log("valueChanges", value);
+
+        if (value == true) {
+          this.form.controls["fecha_ini"].disable();
+
+        } else {/* false*/
+          this.form.controls["fecha_ini"].enable();
+
+        }
+
+      });
+
   }
 
   ngOnInit() {
@@ -95,43 +111,65 @@ export class ReporteComponent implements OnInit {
   }
 
   getReporte() {
-    let url = '';
+    let trabajadores = [];
+    let lotes = [];
+    let date = new Date().toDateString();
     switch (this.tipo_selected) {
       case "ACU":
-        url = this.reporteSrv.getUrlReporteAcumulado(this.form.get("id_obra").value, this.form.get("fecha_ini").value, this.form.get("fecha_fin").value, this.form.get("inicio_obra").value);
-        this.reporte(url);
+        this.reporteSrv.getReporteAcumulado(this.form.get("id_obra").value, this.form.get("fecha_ini").value, this.form.get("fecha_fin").value, this.form.get("inicio_obra").value)
+          .subscribe(data => this.downloadFile(data, `ReporteAcumulado_${date}`));
+
         break;
       case "AVN":
-        console.log("AVN");
+
+        trabajadores = [];
+        this.selection_trabajadores.selected.forEach(trabajador => {
+          trabajadores.push(trabajador.id_trabajador);
+        });
+
+        lotes = [];
+        this.selection_lotes.selected.forEach(lote => {
+          lotes.push(lote.id_lote);
+        });
+
+        this.reporteSrv.getReporteAvances(this.form.get("id_obra").value, this.form.get("fecha_ini").value, this.form.get("fecha_fin").value, this.form.get("inicio_obra").value, this.form.get("ambito").value, lotes, lotes)
+          .subscribe(data => this.downloadFile(data, `ReporteEntradas_${date}`));
         break;
       case "ENT":
-        url = this.reporteSrv.getUrlReporteEntradas(this.form.get("id_obra").value, this.form.get("fecha_ini").value, this.form.get("fecha_fin").value, this.form.get("inicio_obra").value);
-        this.reporte(url);
+        this.reporteSrv.getReporteEntradas(this.form.get("id_obra").value, this.form.get("fecha_ini").value, this.form.get("fecha_fin").value, this.form.get("inicio_obra").value)
+          .subscribe(data => this.downloadFile(data, `ReporteEntradas_${date}`));
+
         break;
       case "HPT":
-        let ids = '';
+        trabajadores = [];
         this.selection_trabajadores.selected.forEach(trabajador => {
-          ids += trabajador.id_trabajador + '_';
+          trabajadores.push(trabajador.id_trabajador);
         });
-        ids = ids.substr(0, ids.length - 1);
-        url = this.reporteSrv.getUrlReporteHistorial(ids);
-        this.reporte(url);
+
+        this.reporteSrv.getReporteHistorial(this.form.get("id_obra").value, trabajadores)
+          .subscribe(data => this.downloadFile(data, `ReporteHistorialPagos_${date}`));
         break;
       case "INV":
-        url = this.reporteSrv.getUrlReporteInventario(this.form.get("id_obra").value);
-        this.reporte(url);
+        this.reporteSrv.getReporteInventario(this.form.get("id_obra").value)
+          .subscribe(data => this.downloadFile(data, `ReporteInventario_${date}`));
         break;
       case "PAT":
         console.log("PAT");
         break;
       case "SAL":
-        url = this.reporteSrv.getUrlReporteSalidas(this.form.get("id_obra").value, this.form.get("fecha_ini").value, this.form.get("fecha_fin").value, this.form.get("inicio_obra").value);
-        this.reporte(url);
+        this.reporteSrv.getReporteSalidas(this.form.get("id_obra").value, this.form.get("fecha_ini").value, this.form.get("fecha_fin").value, this.form.get("inicio_obra").value)
+          .subscribe(data => this.downloadFile(data, `ReporteSalidas_${date}`));
         break;
 
       default:
         console.log("Seleccione un tipo de reporte");
     }
+  }
+
+  downloadFile(data, filename) {
+    let contentType = "application/pdf";
+    let blob = new Blob([data], { type: contentType });
+    FileSaver.saveAs(blob, filename);
   }
 
 }

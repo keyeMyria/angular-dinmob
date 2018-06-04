@@ -59,7 +59,7 @@ export class AvancesComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("onInit");
+    //console.log("onInit");
 
     this.usuario = this.authSrv.usuario;
 
@@ -88,11 +88,11 @@ export class AvancesComponent implements OnInit {
 
   }
 
-  ngAfterViewInit() {
-    console.log("afterViewInit");
-    //this.changeDetectorRef.detach();
-
-  }
+  /*   ngAfterViewInit() {
+      console.log("afterViewInit");
+      //this.changeDetectorRef.detach();
+  
+    } */
 
   cargarObra(id_obra: string) {
 

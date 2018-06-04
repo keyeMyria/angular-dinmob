@@ -1,13 +1,14 @@
 <div class="container-fluid">
   <div class="row">
 
+    <!-- PARAMETROS DEL REPORTE -->
     <div class="col-6">
 
       <div class="card mt-2">
         <div class="card-body">
           <h5 class="card-title">Reportes</h5>
 
-          <form [formGroup]="form" (ngSubmit)="getReporte()" id="id_formReporte">
+          <form [formGroup]="form" (ngSubmit)="getReporte()" id="id_form">
             <div class="form-group">
               <label for="obra" class="form-label">Obra</label>
               <select class="form-control" [(ngModel)]="obra_selected" (change)="getManzanasTrabajadores(obra_selected)" formControlName="id_obra"
@@ -77,7 +78,7 @@
           </form>
           <div class="form-group">
             <div>
-              <button mat-raised-button class="btn" type="submit" color="primary" form="id_formReporte" [disabled]="form.invalid">Reporte</button>
+              <button mat-raised-button class="btn" type="submit" color="primary" form="id_form" [disabled]="form.invalid">Reporte</button>
               <button mat-raised-button class="btn" (click)="showLotes()">Lotes</button>
               <button mat-raised-button class="btn" (click)="showTrabajadores()">Trabajadores</button>
             </div>
@@ -117,12 +118,9 @@
     </div>
 
 
-
-
-
-
-
     <div class="col-6 ">
+
+      <!-- LOTES -->
       <div *ngIf="ambito_selected == 'L' " class="card mt-2 ">
         <div class="card-header ">Lotes</div>
         <!-- acordeon de manzanas -->
@@ -201,10 +199,11 @@
         </div> -->
       </div>
 
+      <!-- TRABAJADORES -->
       <div *ngIf="ambito_selected == 'T' " class="card mt-2 ">
-     <!--    <h5 class="card-title ">Trabajadores</h5> -->
+     
         <div class="">
-
+          <!-- tabla de trabajadores -->
           <div class="table-responsive ">
             <table class="table table-hover table-striped table-align-middle ">
               <thead>
@@ -227,6 +226,7 @@
             </table>
           </div>
         </div>
+
       </div>
 
 
