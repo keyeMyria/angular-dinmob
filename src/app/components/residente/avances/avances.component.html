@@ -10,13 +10,11 @@
     <mat-icon aria-label="toggle side drawer">attach_money</mat-icon>
 </button>
 
-<button mat-fab class="fab-t4" (click)="delLiberacion()" matTooltip="Eliminar Liberación" 
-*ngIf="lote && !selection.isEmpty() && (usuario.id_tipo_usuario==Rol.Administrador || usuario.id_tipo_usuario==Rol.ControlAlmacen)">
+<button mat-fab class="fab-t4" (click)="delLiberacion()" matTooltip="Eliminar Liberación" *ngIf="lote && !selection.isEmpty() && (usuario.id_tipo_usuario==Rol.Administrador || usuario.id_tipo_usuario==Rol.ControlAlmacen)">
     <mat-icon aria-label="toggle side drawer">money_off</mat-icon>
 </button>
 
-<button mat-fab class="fab-t5" (click)="delAvance()" matTooltip="Eliminar Avance" 
-*ngIf="lote && !selection.isEmpty() && (usuario.id_tipo_usuario==Rol.Administrador || usuario.id_tipo_usuario==Rol.ControlAlmacen)">
+<button mat-fab class="fab-t5" (click)="delAvance()" matTooltip="Eliminar Avance" *ngIf="lote && !selection.isEmpty() && (usuario.id_tipo_usuario==Rol.Administrador || usuario.id_tipo_usuario==Rol.ControlAlmacen)">
     <mat-icon aria-label="toggle side drawer">not_interested</mat-icon>
 </button>
 
@@ -158,6 +156,9 @@
 
                             </mat-expansion-panel>
 
+
+                            <!-- <app-partida-cargar-avance *ngFor="let partida of acordeon; trackBy: trackByIdPartida" [partida]="partida" [selection]="selection"></app-partida-cargar-avance>
+ -->
 
 
                         </mat-accordion>

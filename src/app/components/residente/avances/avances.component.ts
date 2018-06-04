@@ -59,6 +59,8 @@ export class AvancesComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log("onInit");
+
     this.usuario = this.authSrv.usuario;
 
     this.route.data
@@ -77,11 +79,18 @@ export class AvancesComponent implements OnInit {
           return Observable.of({ datos: {} });
         }
       }).subscribe(obra => {
-        console.log("obra", obra);
+        //console.log("obra", obra);
         this.obra = obra;
         //this.changeDetectorRef.markForCheck();
+        //this.changeDetectorRef.detectChanges();
       });
 
+
+  }
+
+  ngAfterViewInit() {
+    console.log("afterViewInit");
+    //this.changeDetectorRef.detach();
 
   }
 
@@ -120,6 +129,8 @@ export class AvancesComponent implements OnInit {
         });
 
         this.selection.clear();
+
+        //this.changeDetectorRef.detectChanges();
 
         this.snackBar.open("Avance Agregado", "", {
           duration: 2000,
@@ -305,7 +316,7 @@ export class AvancesComponent implements OnInit {
   }
 
   getAvancesLote(lote) {
-    console.log("getAvancesLote", lote);
+    //console.log("getAvancesLote", lote);
 
     if (this.mobileQuery.matches) {
       this.drawer.close();
@@ -360,7 +371,7 @@ export class AvancesComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.mobileQuery.removeListener(this._mobileQueryListener)
+    this.mobileQuery.removeListener(this._mobileQueryListener);
 
   }
 
