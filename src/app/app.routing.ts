@@ -137,8 +137,9 @@ export const ROUTES: Routes = [
                 path: 'estadisticas', component: EstadisticasAdminComponent,
                 canActivate: [AuthGuard],
                 resolve: {
-                    obras: ObrasUsuarioResolverService,
-                    estadisticas: EstadisticasAdminResolverService
+                    datos:EstadisticasAdminResolverService
+                    //estadisticas: EstadisticasAdminResolverService,
+                    //obras: ObrasUsuarioResolverService,
                 },
                 data: {
                     permisos: [Rol.Administrador]

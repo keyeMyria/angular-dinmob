@@ -25,9 +25,14 @@ export class EstadisticasAdminComponent implements OnInit {
 
 
     this.route.data
-      .subscribe((data: { obras: any[], estadisticas: any }) => {
-        this.obras = data.obras;
-        this.estadisticas = data.estadisticas;
+      //.subscribe((data: { obras: any[], estadisticas: any }) => {
+        .subscribe((data:{ datos:{estadisticas:any, obras:any}})=>{
+          //console.log("data", data.datos);
+          
+        //this.obras = data.obras;
+        //this.estadisticas = data.estadisticas;
+        this.obras= data.datos.obras;
+        this.estadisticas= data.datos.estadisticas;
         this.obra_selected = this.route.snapshot.params["obra"] ? this.route.snapshot.params["obra"] : "";
       });
 
