@@ -86,15 +86,14 @@
                         <mat-accordion>
 
                             <mat-expansion-panel *ngFor="let partida of acordeon; trackBy: trackByIdPartida" [hideToggle]="true">
-                                <mat-expansion-panel-header [ngClass]="{'bg-info text-white': partidaFinalizada(partida)}">
+                                <mat-expansion-panel-header [ngClass]="{'bg-info text-white': partida.subpartidas.length==0? (partida.fecha_fin != null) : (partida.subpartidas.length - partida.num_subpartidas_finalizadas==0)}">
                                     <span>{{partida.nombre}}</span>
                                     <div class="spacer"></div>
                                     <div class="collapse-header-btns">
-                                        <small class="d-none d-md-inline-block">{{numSubpartidasFinalizadas(partida)}}
+                                        <small class="d-none d-md-inline-block">{{partida.subpartidas.length==0? (partida.fecha_fin? 1:0) : partida.num_subpartidas_finalizadas}}
                                             <span class="">de {{partida.subpartidas.length || "1"}}</span>
                                         </small>
-                                        <small class="d-md-none">{{ partida.subpartidas.length==0? (numSubpartidasFinalizadas(partida)==1? 0:1) :
-                                            partida.subpartidas.length - numSubpartidasFinalizadas(partida)}}</small>
+                                        <small class="d-md-none">{{ partida.subpartidas.length==0? (partida.fecha_fin? 0:1) : partida.subpartidas.length - partida.num_subpartidas_finalizadas}}</small>
                                     </div>
                                 </mat-expansion-panel-header>
 
