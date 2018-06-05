@@ -99,9 +99,9 @@ export class ObrasService {
   }
 
   //ok
-  getEstadisticas(id_obra) {
-    return this.http.get(this.url + "get_estadisticas/" + id_obra, {})
-      .pipe(catchError(this.handleError("getEstadisticas")));
+  getEstadisticas(id_obra) {   
+      return this.http.get(this.url + "get_estadisticas/" + id_obra, {})
+        .pipe(catchError(this.handleError("getEstadisticas")));    
   }
 
   //ok

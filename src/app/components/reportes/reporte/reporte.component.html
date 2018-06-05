@@ -76,13 +76,13 @@
               </div>
             </div>
           </form>
-          <div class="form-group">
-            <div>
-              <button mat-raised-button class="btn" type="submit" color="primary" form="id_form" [disabled]="form.invalid">Reporte</button>
-              <button mat-raised-button class="btn" (click)="showLotes()">Lotes</button>
-              <button mat-raised-button class="btn" (click)="showTrabajadores()">Trabajadores</button>
-            </div>
+
+          <div class="text-center">
+            <button mat-raised-button class="btn" type="submit" color="primary" form="id_form" [disabled]="form.invalid">REPORTE</button>
+            <!-- <button mat-raised-button class="btn" (click)="showLotes()">Lotes</button> -->
+            <!-- <button mat-raised-button class="btn" (click)="showTrabajadores()">Trabajadores</button> -->
           </div>
+
         </div>
       </div>
 
@@ -201,7 +201,7 @@
 
       <!-- TRABAJADORES -->
       <div *ngIf="ambito_selected == 'T' " class="card mt-2 ">
-     
+
         <div class="">
           <!-- tabla de trabajadores -->
           <div class="table-responsive ">

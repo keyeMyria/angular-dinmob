@@ -43,6 +43,7 @@
                 <th mat-sort-header="insumo">Insumo</th>
                 <th>Unidad</th>
                 <th>Existencias</th>
+                <th>Precio</th>
                 <th style="width: 100px" *ngIf="usuario.id_tipo_usuario==Rol.Administrador || usuario.id_tipo_usuario==Rol.ControlAlmacen"></th>
 
               </tr>
@@ -58,6 +59,7 @@
                 <td>{{material.insumo}}</td>
                 <td>{{material.unidad}}</td>
                 <td>{{material.existencias}}</td>
+                <td>{{material.precio|currency}}</td>
                 <td class="text-right ws-nowrap" *ngIf="usuario.id_tipo_usuario==Rol.Administrador || usuario.id_tipo_usuario==Rol.ControlAlmacen">
                   <button mat-button class="no-min" (click)="editarMaterial(material)">
                     <i class="fa fa-pencil"></i>
