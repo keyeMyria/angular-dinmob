@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { EditarNombrePrototipoDialogoComponent } from 'app/components/admin/editar-nombre-prototipo-dialogo/editar-nombre-prototipo-dialogo.component';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { AgregarPartidaDialogoComponent } from 'app/components/admin/agregar-partida-dialogo/agregar-partida-dialogo.component';
@@ -17,7 +17,8 @@ import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar
 @Component({
   selector: 'app-editar-prototipo',
   templateUrl: './editar-prototipo.component.html',
-  styleUrls: ['./editar-prototipo.component.scss']
+  styleUrls: ['./editar-prototipo.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EditarPrototipoComponent implements OnInit {
   selectedOption: string;
@@ -36,8 +37,9 @@ export class EditarPrototipoComponent implements OnInit {
     private prototipoSrv: PrototiposService,
     private route: ActivatedRoute,
     private router: Router,
-    public dialog: MatDialog,
-    public snackBar: MatSnackBar
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar,
+    private changeDetectorRef:ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -47,6 +49,11 @@ export class EditarPrototipoComponent implements OnInit {
       .subscribe(res => {
         this.prototipo = res.prototipo;
         this.partidas = res.partidas;
+
+        this.changeDetectorRef.markForCheck();
+
+
+
       }, (error) => {
         this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
           duration: 3000
