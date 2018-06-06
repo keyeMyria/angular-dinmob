@@ -35,8 +35,8 @@ export class ReporteEntradasComponent implements OnInit {
 
     });
 
-    this.desableSelect("todo_insumo", "insumo");
-    this.desableSelect("inicio_obra", "fecha_ini");
+    this.disableSelect("todo_insumo", "insumo");
+    this.disableSelect("inicio_obra", "fecha_ini");
 
 
   }
@@ -49,7 +49,7 @@ export class ReporteEntradasComponent implements OnInit {
   }
 
 
-  desableSelect(check, control) {
+  disableSelect(check, control) {
     this.form.controls[check].valueChanges
       .subscribe((value) => {
 
@@ -84,7 +84,7 @@ export class ReporteEntradasComponent implements OnInit {
   }
 
   getReporteEntradas() {
-    console.log("entradas", this.form.value);
+    console.log("reporte", this.form.value);
 
   }
 

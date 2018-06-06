@@ -5,7 +5,7 @@
       <div class="card">
         <div class="card-body">
 
-          <h5 class="card-title">Reportes</h5>
+          <h5 class="card-title">Salidas de Almacén</h5>
 
           <form [formGroup]="form" (ngSubmit)="getReporteSalidas()" id="id_formReporteSalidas">
 
@@ -21,19 +21,19 @@
 
             <div class="form-row">
               <div class="form-group col-md-6">
-                <mat-checkbox formControlName="toda_obra">Toda la obra</mat-checkbox>
-                <select [(ngModel)]="lote_selected" class="form-control" formControlName="obra" [ngClass]="{'is-invalid': form.get('obra').invalid  && (form.get('obra').dirty || form.get('obra').touched )}">
+                <mat-checkbox formControlName="all_obra">Toda la obra</mat-checkbox>
+                <select [(ngModel)]="lote_selected" class="form-control" formControlName="id_lote" [ngClass]="{'is-invalid': form.get('id_lote').invalid  && (form.get('id_lote').dirty || form.get('id_lote').touched )}">
                   <option value="">Seleccionar...</option>
                   <ng-container *ngFor="let manzana of manzanas">
                     <option *ngFor="let lote of manzana.lotes" [value]="lote.id_lote">{{manzana.nombre + ' - ' + lote.nombre}}</option>
-                  </ng-container>                  
+                  </ng-container>
                 </select>
-                <div class="invalid-feedback">Seleccione una obra</div>
+                <div class="invalid-feedback">Seleccione un lote</div>
               </div>
 
               <div class="form-group col-md-6">
-                <mat-checkbox formControlName="todo_insumo">Todos los insumos (en desarrollo..)</mat-checkbox>
-                <select [(ngModel)]="insumo_selected" class="form-control"  formControlName="insumo" [ngClass]="{'is-invalid': form.get('insumo').invalid  && (form.get('insumo').dirty || form.get('insumo').touched )}">
+                <mat-checkbox formControlName="all_insumos">Todos los insumos</mat-checkbox>
+                <select [(ngModel)]="insumo_selected" class="form-control" formControlName="id_insumo" [ngClass]="{'is-invalid': form.get('id_insumo').invalid  && (form.get('id_insumo').dirty || form.get('id_insumo').touched )}">
                   <option value="">Seleccionar...</option>
                   <option *ngFor="let insumo of insumos" [value]="insumo.id_insumo">{{insumo.insumo}}</option>
                 </select>
@@ -41,7 +41,7 @@
               </div>
             </div>
 
-            <mat-checkbox formControlName="inicio_obra">Inicio Obra</mat-checkbox>
+            <mat-checkbox formControlName="inicio">Inicio Obra</mat-checkbox>
 
             <div class="form-row">
               <div class="form-group col-md-6">
@@ -81,8 +81,8 @@
           </form>
 
         </div>
-        <div class="card-footer">
-          <button mat-raised-button class="btn" type="submit" color="primary" form="id_formReporteSalidas" [disabled]="form.invalid">Reporte</button>
+        <div class="card-footer text-center">
+          <button mat-raised-button class="btn" type="submit" color="primary" form="id_formReporteSalidas" [disabled]="form.invalid">REPORTE</button>
         </div>
       </div>
 
@@ -91,29 +91,158 @@
           <mat-tab-group>
             <mat-tab label="Consumido">
 
+              <div *ngIf="partidas.length">
+                <h5>CONSUMIDO EN LOTE</h5>
+                <div class="table-responsive">
+                  <table class="table table-hover table-striped table-align-middle">
+                    <thead>
+                      <tr>
+                        <th>Obra</th>
+                        <th>Unidad</th>
+                        <th>Salida</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr *ngFor="let insumo of partidas">
+                        <td>{{insumo.insumo}}</td>
+                        <td>{{insumo.unidad}}</td>
+                        <td>{{insumo.salida}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div *ngIf="paquetes.length && !form.get('all_obra')">
+                <h5>CONSUMIDO EN PAQUETES</h5>
+                <div class="table-responsive">
+                  <table class="table table-hover table-striped table-align-middle">
+                    <thead>
+                      <tr>
+                        <th>Prototipo</th>
+                        <th>Partida</th>
+                        <th>Subpartida</th>
+                        <th>Programado</th>
+                        <th>Consumido</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr *ngFor="let salida of paquetes">
+                        <td class="ws-nowrap">{{salida.prototipo}}</td>
+                        <td>{{salida.partida}}</td>
+                        <td>{{salida.subpartida}}</td>
+                        <td>{{salida.programado}}</td>
+                        <td>{{salida.consumido}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div *ngIf="paquetes.length && form.get('all_obra')">
+                <h5>CONSUMIDO EN PAQUETES</h5>
+                <div class="table-responsive">
+                  <table class="table table-hover table-striped table-align-middle">
+                    <thead>
+                      <tr>
+                        <th>Manzana</th>
+                        <th>Lote</th>
+                        <th>Prototipo</th>
+                        <th>Partida</th>
+                        <th>Subpartida</th>
+                        <th>Programado</th>
+                        <th>Consumido</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr *ngFor="let salida of paquetes">
+                        <td class="ws-nowrap">{{salida.manzana}}</td>
+                        <td class="ws-nowrap">{{salida.lote}}</td>
+                        <td class="ws-nowrap">{{salida.prototipo}}</td>
+                        <td>{{salida.partida}}</td>
+                        <td>{{salida.subpartida}}</td>
+                        <td>{{salida.programado}}</td>
+                        <td>{{salida.consumido}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div *ngIf="urbanizacion.length">
+                <h5>CONSUMIDO EN URBANIZACIÓN</h5>
+                <div class="table-responsive">
+                  <table class="table table-hover table-striped table-align-middle">
+                    <thead>
+                      <tr>
+                        <th>Partida</th>
+                        <th>Consumido</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr *ngFor="let partida of urbanizacion">
+                        <td>{{partida.nombre}}</td>
+                        <td>{{partida.cantidad}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div *ngIf="otras_obras.length">
+                <h5>CONSUMIDO EN OTRAS OBRAS</h5>
+                <div class="table-responsive">
+                  <table class="table table-hover table-striped table-align-middle">
+                    <thead>
+                      <tr>
+                        <th>Obra</th>
+                        <th>Consumido</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr *ngFor="let obra of otras_obras">
+                        <td>{{obra.destino}}</td>
+                        <td>{{obra.cantidad}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
             </mat-tab>
             <mat-tab label="Salida">
               <div class="table-responsive">
                 <table class="table table-hover table-striped table-align-middle">
                   <thead>
                     <tr>
-                      <th>Folio</th>
-                      <th>Vale</th>
+                      <th>Núm.Vale</th>
                       <th>Fecha</th>
+                      <th>Tipo</th>
                       <th>Partida</th>
                       <th>Subpartida</th>
                       <th>Alerta</th>
+                      <th></th>
                     </tr>
                   </thead>
 
                   <tbody>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                    <tr *ngFor="let salida of salidas">
+                      <td>{{salida.num_vale}}</td>
+                      <td>{{salida.fecha}}</td>
+                      <td>{{salida.tipo_salida}}</td>
+                      <td>{{salida.partida}}</td>
+                      <td>{{salida.subpartida}}</td>
+                      <td>{{salida.tiene_alerta}}</td>
+                      <td>
+                        <button class="btn btn-sm btn-outline-dark">
+                          <i class="fa fa-check"></i>
+                        </button>
+                      </td>
                     </tr>
 
                   </tbody>

@@ -58,6 +58,11 @@ export class SalidasService {
       .pipe(catchError(this.handleError("updateValidacion")));
   }
 
+  getReporteSalidas(reporte) {
+    return this.http.post(this.url + 'get_reporte_salidas/', { reporte: reporte })
+      .pipe(catchError(this.handleError("getReporteSalidas")));
+  }
+
   private handleError<T>(operation = 'operation') {
     return (error: HttpErrorResponse) => {
 
