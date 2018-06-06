@@ -32,6 +32,10 @@ export class NuevoPedidoComponent implements OnInit {
 
   usuario: any;
 
+  trackByIdPartida = (index, item) => item.id_partida;
+  trackByIdInsumo = (index, item) => item.id_insumo;
+  trackByIdInsumoPartida = (index, item) => item.id_insumo_partida;
+
   constructor(
     private media: MediaMatcher,
     private changeDetectorRef: ChangeDetectorRef,
@@ -41,7 +45,7 @@ export class NuevoPedidoComponent implements OnInit {
     private obraSrv: ObrasService,
     private pedidoSrv: PedidoService,
     public dialog: MatDialog,
-    private authSrv:  AuthService
+    private authSrv: AuthService
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -144,6 +148,8 @@ export class NuevoPedidoComponent implements OnInit {
   }
 
   countInsumosPedido(insumos) {
+    console.log("countInsumosPedido");
+
     let count = 0;
 
     for (let i = 0; i < insumos.length; i++) {
@@ -156,6 +162,8 @@ export class NuevoPedidoComponent implements OnInit {
   }
 
   countInsumosPedidoPartida(partida) {
+    console.log("countInsumosPedidoPartida");
+
     let count = 0;
 
     for (let i = 0; i < partida.subpartidas.length; i++) {
@@ -264,7 +272,6 @@ export class NuevoPedidoComponent implements OnInit {
 
   }
 
-
   concatInsumosPedido(pedido, insumos, id_lote) {
     //console.log("concatInsumosPedido");
     for (var i = 0; i < insumos.length; i++) {
@@ -287,9 +294,6 @@ export class NuevoPedidoComponent implements OnInit {
     }
 
   }
-
-
-
 
   addPedido() {
 
