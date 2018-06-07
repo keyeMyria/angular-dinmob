@@ -31,6 +31,8 @@
                 <div class="invalid-feedback">Seleccione un lote</div>
               </div>
 
+              <!-- <div>all_obra: {{form.get('all_obra').value|json}}</div> -->
+
               <div class="form-group col-md-6">
                 <mat-checkbox formControlName="all_insumos">Todos los insumos</mat-checkbox>
                 <select [(ngModel)]="insumo_selected" class="form-control" formControlName="id_insumo" [ngClass]="{'is-invalid': form.get('id_insumo').invalid  && (form.get('id_insumo').dirty || form.get('id_insumo').touched )}">
@@ -91,31 +93,58 @@
           <mat-tab-group>
             <mat-tab label="Consumido">
 
-              <div *ngIf="partidas.length">
-                <h5>CONSUMIDO EN LOTE</h5>
+              <div *ngIf="partidas.length && !form.get('all_obra').value">
+                <h5 class="text-center pt-3">CONSUMIDO EN LOTE</h5>
                 <div class="table-responsive">
                   <table class="table table-hover table-striped table-align-middle">
                     <thead>
                       <tr>
-                        <th>Obra</th>
+                        <th>Insumo</th>
                         <th>Unidad</th>
-                        <th>Salida</th>
+                        <th>Programado</th>
+                        <th>Consumido</th>
                       </tr>
                     </thead>
 
                     <tbody>
-                      <tr *ngFor="let insumo of partidas">
+                      <tr *ngFor="let insumo of partidas" [ngClass]="{'table-danger': +insumo.consumido>+insumo.programado}">
                         <td>{{insumo.insumo}}</td>
                         <td>{{insumo.unidad}}</td>
-                        <td>{{insumo.salida}}</td>
+                        <td>{{insumo.programado|number:'.2-6'}}</td>
+                        <td>{{insumo.consumido|number:'.2-6'}}</td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
               </div>
 
-              <div *ngIf="paquetes.length && !form.get('all_obra')">
-                <h5>CONSUMIDO EN PAQUETES</h5>
+              <div *ngIf="partidas.length && form.get('all_obra').value">
+                <h5 class="text-center pt-3">CONSUMIDO EN OBRA</h5>
+                <div class="table-responsive">
+                  <table class="table table-hover table-striped table-align-middle">
+                    <thead>
+                      <tr>
+                        <th>Insumo</th>
+                        <th>Unidad</th>
+                        <th>Programado</th>
+                        <th>Consumido</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr *ngFor="let insumo of partidas" [ngClass]="{'table-danger': +insumo.consumido>+insumo.programado}">
+                        <td>{{insumo.insumo}}</td>
+                        <td>{{insumo.unidad}}</td>
+                        <td>{{insumo.programado|number:'.2-6'}}</td>
+                        <td>{{insumo.consumido|number:'.2-6'}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div *ngIf="paquetes.length && !form.get('all_obra').value">
+                <h5 class="text-center pt-3">CONSUMIDO EN PAQUETES</h5>
                 <div class="table-responsive">
                   <table class="table table-hover table-striped table-align-middle">
                     <thead>
@@ -129,20 +158,20 @@
                     </thead>
 
                     <tbody>
-                      <tr *ngFor="let salida of paquetes">
+                      <tr *ngFor="let salida of paquetes" [ngClass]="{'table-danger': +salida.consumido>+salida.programado}">
                         <td class="ws-nowrap">{{salida.prototipo}}</td>
                         <td>{{salida.partida}}</td>
                         <td>{{salida.subpartida}}</td>
-                        <td>{{salida.programado}}</td>
-                        <td>{{salida.consumido}}</td>
+                        <td>{{salida.programado|number:'.2-6'}}</td>
+                        <td>{{salida.consumido|number:'.2-6'}}</td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
               </div>
 
-              <div *ngIf="paquetes.length && form.get('all_obra')">
-                <h5>CONSUMIDO EN PAQUETES</h5>
+              <div *ngIf="paquetes.length && form.get('all_obra').value">
+                <h5 class="text-center pt-3">CONSUMIDO EN PAQUETES</h5>
                 <div class="table-responsive">
                   <table class="table table-hover table-striped table-align-middle">
                     <thead>
@@ -158,14 +187,14 @@
                     </thead>
 
                     <tbody>
-                      <tr *ngFor="let salida of paquetes">
+                      <tr *ngFor="let salida of paquetes" [ngClass]="{'table-danger': +salida.consumido>+salida.programado}">
                         <td class="ws-nowrap">{{salida.manzana}}</td>
                         <td class="ws-nowrap">{{salida.lote}}</td>
                         <td class="ws-nowrap">{{salida.prototipo}}</td>
                         <td>{{salida.partida}}</td>
                         <td>{{salida.subpartida}}</td>
-                        <td>{{salida.programado}}</td>
-                        <td>{{salida.consumido}}</td>
+                        <td>{{salida.programado|number:'.2-6'}}</td>
+                        <td>{{salida.consumido|number:'.2-6'}}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -173,7 +202,7 @@
               </div>
 
               <div *ngIf="urbanizacion.length">
-                <h5>CONSUMIDO EN URBANIZACIÓN</h5>
+                <h5 class="text-center pt-3">CONSUMIDO EN URBANIZACIÓN</h5>
                 <div class="table-responsive">
                   <table class="table table-hover table-striped table-align-middle">
                     <thead>
@@ -186,7 +215,7 @@
                     <tbody>
                       <tr *ngFor="let partida of urbanizacion">
                         <td>{{partida.nombre}}</td>
-                        <td>{{partida.cantidad}}</td>
+                        <td>{{partida.cantidad|number:'.2-6'}}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -194,12 +223,12 @@
               </div>
 
               <div *ngIf="otras_obras.length">
-                <h5>CONSUMIDO EN OTRAS OBRAS</h5>
+                <h5 class="text-center pt-3">CONSUMIDO EN OTRAS OBRAS</h5>
                 <div class="table-responsive">
                   <table class="table table-hover table-striped table-align-middle">
                     <thead>
                       <tr>
-                        <th>Obra</th>
+                        <th>Insumo</th>
                         <th>Consumido</th>
                       </tr>
                     </thead>
@@ -207,7 +236,7 @@
                     <tbody>
                       <tr *ngFor="let obra of otras_obras">
                         <td>{{obra.destino}}</td>
-                        <td>{{obra.cantidad}}</td>
+                        <td>{{obra.cantidad|number:'.2-6'}}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -215,7 +244,7 @@
               </div>
 
             </mat-tab>
-            <mat-tab label="Salida">
+            <mat-tab label="Salidas">
               <div class="table-responsive">
                 <table class="table table-hover table-striped table-align-middle">
                   <thead>
