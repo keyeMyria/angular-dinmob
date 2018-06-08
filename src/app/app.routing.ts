@@ -103,6 +103,7 @@ import { TableroControlAlmacenComponent } from './components/tablero-control-alm
 
 
 import { Rol } from "./constantes/roles";
+import { UsuariosAsesoresResolverService } from './resolvers/usuarios-asesores-resolver.service';
 
 
 
@@ -275,6 +276,7 @@ export const ROUTES: Routes = [
                     tipos_operacion: TiposOperacionResolverService,
                     tipos_pago: TiposPagoResolverService,
                     estados: EstadosVentaLoteResolverService,
+                    asesores: UsuariosAsesoresResolverService
                     //vendedores: VendedoresResolverService
                 },
                 data: {

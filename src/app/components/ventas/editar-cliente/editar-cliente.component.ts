@@ -229,7 +229,7 @@ export class EditarClienteComponent implements OnInit {
   ngOnInit() {
     /* vendedores:any */
     this.route.data
-      .subscribe((data: { obras: any[], formas_pago: any[], instituciones_credito: any[], tipos_operacion: any[], tipos_pago: any[], estados: any[] }) => {
+      .subscribe((data: { obras: any[], formas_pago: any[], instituciones_credito: any[], tipos_operacion: any[], tipos_pago: any[], estados: any[], asesores: any }) => {
         //console.log("resultado resolve ", data);
         this.obras = data.obras;
         this.formas_pago = data.formas_pago;
@@ -237,12 +237,17 @@ export class EditarClienteComponent implements OnInit {
         this.tipos_operacion = data.tipos_operacion;
         this.tipos_pago = data.tipos_pago;
         this.estados = data.estados;
+        this.asesores = data.asesores;
         //this.vendedores=data.vendedores;
       });
 
 
     let id = this.route.snapshot.paramMap.get('id');
 
+    // la compra contiene los vendedores
+    // porque cada obra tiene sus propios vendedores
+    // entonces si las compras son de distintas obras
+    // no sabríamos cuales traer
     this.clienteSrv.getClienteConComprasYDocumentos(id)
       .subscribe(response => {
         this.cliente = response.cliente;
@@ -390,7 +395,7 @@ export class EditarClienteComponent implements OnInit {
 
     this.loteSrv.updateLote(this.compra_selected.id_lote, lote)
       .subscribe(lote => {
-        
+
         this.compra_selected.valor_base = lote.valor_base;
         this.compra_selected.id_estado_venta = lote.id_estado_venta;
         this.compra_selected.fecha_cambio_estado = lote.fecha_cambio_estado;
@@ -737,9 +742,9 @@ export class EditarClienteComponent implements OnInit {
         total += +pago.monto;
 
         //personalización CIVSA, para otras empresas sumar todo independiente del tipo 
-      /*   if (pago.tipo_pago != "Apartado" && pago.tipo_pago != "Avalúo") {
-          total += +pago.monto;
-        } */
+        /*   if (pago.tipo_pago != "Apartado" && pago.tipo_pago != "Avalúo") {
+            total += +pago.monto;
+          } */
 
       });
     }
@@ -763,7 +768,7 @@ export class EditarClienteComponent implements OnInit {
 
   //activa o desactiva la compra
   toggleActivacionCompra(compra) {
-    console.log("toggleActivacion", compra);
+    //console.log("toggleActivacion", compra);
     let activo = 0;
     if (compra.activo == "0") {
       activo = 1;
