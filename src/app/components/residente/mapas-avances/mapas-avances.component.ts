@@ -28,6 +28,9 @@ export class MapasAvancesComponent implements OnInit {
   lotes: any = [];
   lote_selected: any = null;
   valuesLotes: any = {};
+  valuesDiscretosLotes: any = {};
+  variableContinua: boolean = true;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -91,8 +94,10 @@ export class MapasAvancesComponent implements OnInit {
         //creamos los valores para la escala de estados
         this.valuesLotes = {};
         this.lotes.forEach(lote => {
-          //comprobar luego con datos
+          // comprobar luego con datos
           this.valuesLotes[lote.code] = lote.valor ? lote.valor : 0;
+          // escala personalizada
+          this.valuesDiscretosLotes[lote.code] = lote.valor_discreto ? lote.valor_discreto : 0;
         });
 
 
@@ -109,6 +114,40 @@ export class MapasAvancesComponent implements OnInit {
       }, (error) => {
 
       });
+  }
+
+  toggleEscala() {
+
+    if (this.variableContinua) {
+
+      this.variableContinua = false;
+      this.escalaDiscreta();
+    } else {
+      this.variableContinua = true;
+      this.escalaContinua();
+    }
+
+  }
+
+  escalaDiscreta() {
+    //console.log("asignacion de la escala de prototipos");
+    // region 0 valor continuo
+    // region 1 valor discreto
+    // region 2 texto
+
+    this.map.series.regions[1].setValues(this.valuesDiscretosLotes);
+    //this.tipoMapa.disabled = true;
+
+  }
+  escalaContinua() {
+    //console.log("asignacion de la escala de prototipos");
+    // region 0 valor continuo
+    // region 1 valor discreto
+    // region 2 texto
+
+    this.map.series.regions[0].setValues(this.valuesLotes);
+    //this.tipoMapa.disabled = true;
+
   }
 
 
@@ -168,6 +207,37 @@ export class MapasAvancesComponent implements OnInit {
 
           },
           {
+            values: {},
+            scale: {
+              '1': '#00a65a', //green
+              '2': '#f39c12', //amarillo     
+              '3': '#d81b60', //maroon 
+              '4': '#00c0ef', //aqua        
+              '5': '#605ca8' //purple''
+            },
+            legend: {
+              vertical: true,
+              title: 'Escala',
+              labelRender: function (scale) {
+                if (scale == 1) {
+                  return '0-20%';
+                }
+                else if (scale == 2) {
+                  return '20-40%';
+                }
+                else if (scale == 3) {
+                  return '40-60%';
+                }
+                else if (scale == 4) {
+                  return '60-80%';
+                }
+                else if (scale == 5) {
+                  return '80-100%';
+                }
+              }
+            }
+          },
+          {
             scale: {
               'Terreno': 'white',
               'Letras': 'black',
@@ -197,7 +267,7 @@ export class MapasAvancesComponent implements OnInit {
             }
           }
 
-          tooltip += " <br> Avance: " + (lote.ultimo_avance? lote.ultimo_avance: "-");          
+          tooltip += " <br> Avance: " + (lote.ultimo_avance ? lote.ultimo_avance : "-");
 
           let num_partidas = lote.num_partidas ? lote.num_partidas : 0;
 
