@@ -5,6 +5,8 @@ import * as moment from 'moment';
 import { log } from 'util';
 import { ObrasService } from '../../../services/obras.service';
 import { SalidasService } from '../../../services/salidas.service';
+import { MatDialog } from '@angular/material';
+import { VerSalidaDialogoComponent } from 'app/components/almacen/ver-salida-dialogo/ver-salida-dialogo.component';
 
 @Component({
   selector: 'app-reporte-salidas',
@@ -34,7 +36,8 @@ export class ReporteSalidasComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private obrasSrv: ObrasService,
-    private salidaSrv: SalidasService
+    private salidaSrv: SalidasService,
+    public dialog: MatDialog,
   ) {
     this.form = this.fb.group({
       id_obra: [null],
@@ -112,6 +115,31 @@ export class ReporteSalidasComponent implements OnInit {
           this.datos_obra = res.obra;
         });
     }
+  }
+
+  verSalida(salida) {
+
+    this.salidaSrv.getSalida(salida.id_salida)
+      .subscribe(res => {
+        //console.log("salida OK", res);
+        let dialogRef = this.dialog.open(VerSalidaDialogoComponent, {
+          data: {
+            datos: res.datos,
+            insumos: res.insumos
+          },
+          width: '800px'
+        });
+        dialogRef.afterClosed().subscribe(result => {
+
+          if (result === true) {
+
+          } else if (result && result.error) {
+          }
+
+        });
+      });
+
+
   }
 
 }

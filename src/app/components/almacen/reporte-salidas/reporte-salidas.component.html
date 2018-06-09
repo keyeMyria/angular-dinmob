@@ -266,10 +266,14 @@
                       <td>{{salida.tipo_salida}}</td>
                       <td>{{salida.partida}}</td>
                       <td>{{salida.subpartida}}</td>
-                      <td>{{salida.tiene_alerta}}</td>
                       <td>
-                        <button class="btn btn-sm btn-outline-dark">
-                          <i class="fa fa-check"></i>
+                        <span *ngIf="salida.tiene_alerta=='1'">
+                          <i class="fa fa-exclamation-circle text-danger"></i>
+                        </span>
+                      </td>
+                      <td>
+                        <button class="btn btn-sm btn-outline-dark" (click)="verSalida(salida)">
+                          <i class="fa fa-eye"></i>
                         </button>
                       </td>
                     </tr>
