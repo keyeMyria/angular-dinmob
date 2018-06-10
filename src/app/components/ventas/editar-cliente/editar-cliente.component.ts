@@ -356,6 +356,9 @@ export class EditarClienteComponent implements OnInit {
     if (compra.valor_operacion !== null) {
       compra.valor_operacion = compra.valor_operacion.replace(/,/g, "");
     }
+    if (compra.valor_escrituracion !== null) {
+      compra.valor_escrituracion = compra.valor_escrituracion.replace(/,/g, "");
+    }
 
     this.clienteSrv.updateCompra(this.compra_selected.id_compra, compra)
       .subscribe(compra => {
