@@ -88,7 +88,11 @@ export class FotoPartidaDialogoComponent {
 
       if (status == 200) {
         //this.data.documentos.push(JSON.parse(response).doc);
-        this.data.partida.num_fotos = Number(this.data.partida.num_fotos) + 1;
+        if (this.data.partida.num_fotos) {
+          this.data.partida.num_fotos = Number(this.data.partida.num_fotos) + 1;
+        } else {
+          this.data.partida.num_fotos = 1;
+        }
         this.result = true;
       }
 

@@ -36,35 +36,38 @@ export class ReporteService {
   }
 
 
-  getUrlReporteAcumulado(id_obra, fecha_ini, fecha_fin, inicio) {
-    return `${this.url}acumulado/${id_obra}/${fecha_ini}/${fecha_fin}/${inicio}`;
+  getReporteAcumulado(id_obra, fecha_ini, fecha_fin, inicio) {
+    return this.http.post(this.url + 'acumulado/', { id_obra: id_obra, fecha_fin: fecha_fin, fecha_ini: fecha_ini, inicio: inicio }, { responseType: 'blob' })
+      .pipe(catchError(this.handleError("getReporteAcumulado")));
   }
 
-  getUrlReporteInventario(id_obra) {
-    return `${this.url}inventario/${id_obra}`;
+  getReporteInventario(id_obra) {
+    return this.http.post(this.url + 'inventario/', { id_obra: id_obra }, { responseType: 'blob' })
+      .pipe(catchError(this.handleError("getReporteInventario")));
   }
 
-  getUrlReporteEntradas(id_obra, fecha_ini, fecha_fin, inicio) {
-    return `${this.url}entradas/${id_obra}/${fecha_ini}/${fecha_fin}/${inicio}`;
+  getReporteEntradas(id_obra, fecha_ini, fecha_fin, inicio) {
+    return this.http.post(this.url + 'entradas/', { id_obra: id_obra, fecha_fin: fecha_fin, fecha_ini: fecha_ini, inicio: inicio }, { responseType: 'blob' })
+      .pipe(catchError(this.handleError("getReporteEntradas")));
   }
 
-  getUrlReporteSalidas(id_obra, fecha_ini, fecha_fin, inicio) {
-    return `${this.url}salidas/${id_obra}/${fecha_ini}/${fecha_fin}/${inicio}`;
+  getReporteAvances(id_obra, fecha_ini, fecha_fin, inicio, ambito, lotes, trabajadores) {
+
+    return this.http.post(this.url + 'avances/', { id_obra: id_obra, fecha_fin: fecha_fin, fecha_ini: fecha_ini, inicio: inicio, ambito: ambito, lotes: lotes, trabajadores: trabajadores }, { responseType: 'blob' })
+      .pipe(catchError(this.handleError("getReporteAvances")));
   }
 
-  getUrlReporteHistorial(ids) {
-    return `${this.url}historial_pagos/${ids}`;
+  getReporteSalidas(id_obra, fecha_ini, fecha_fin, inicio) {
+    return this.http.post(this.url + 'salidas/', { id_obra: id_obra, fecha_fin: fecha_fin, fecha_ini: fecha_ini, inicio: inicio }, { responseType: 'blob' })
+      .pipe(catchError(this.handleError("getReporteSalidas")));
+  }
+
+  getReporteHistorial(id_obra, ids) {
+    return this.http.post(this.url + 'historial_pagos/', { id_obra: id_obra, ids: ids }, { responseType: 'blob' })
+      .pipe(catchError(this.handleError("getReporteHistorial")));
   }
 
   getReporteSalidaAlmacen(id_salida) {
-
-
-    /*    const httpOptions = {
-         headers: new HttpHeaders({
-           'Content-Type': 'text/plain',
-         })
-       };
-    */
     return this.http.get(this.url + 'salida_almacen/' + id_salida, { responseType: 'blob' })
       .pipe(catchError(this.handleError("getReporteSalidaAlmacen")));
 
@@ -72,14 +75,12 @@ export class ReporteService {
 
 
   getReporteEntradaAlmacen(id_entrada) {
-
     return this.http.get(this.url + 'entrada_almacen/' + id_entrada, { responseType: 'blob' })
       .pipe(catchError(this.handleError("getReporteEntradaAlmacen")));
 
   }
 
   getReportePedido(id_pedido) {
-
     return this.http.get(this.url + 'pedido/' + id_pedido, { responseType: 'blob' })
       .pipe(catchError(this.handleError("getReportePedido")));
 

@@ -67,14 +67,14 @@
             <div class="acordeon-prototipo">
               <mat-accordion [displayMode]="'default'">
 
-                <mat-expansion-panel [hideToggle]="true" *ngFor="let partida of lotePedido_selected.partidas" #par>
+                <mat-expansion-panel [hideToggle]="true" *ngFor="let partida of lotePedido_selected?.partidas; trackBy: trackByIdPartida" #par>
                   <mat-expansion-panel-header class="align-items-center" [ngClass]="{'bg-primary text-white':par.expanded}">
                     <span class="font-weight-bold align-self-center mr-1 d-none d-md-inline-block">{{partida.codigo}}</span>
                     <span class="align-self-center">{{partida.nombre}}</span>
                     <div class="spacer"></div>
                     <div class="collapse-header-btns">
-                      <span class="badge badge-pill badge-dark" *ngIf="partida.subpartidas.length">{{countInsumosPedidoPartida(partida)}}</span>
-                      <span class="badge badge-pill badge-dark" *ngIf="partida.insumos.length">{{countInsumosPedido(partida.insumos)}}</span>
+                      <!-- <span class="badge badge-pill badge-dark" *ngIf="partida.subpartidas.length">{{countInsumosPedidoPartida(partida)}}</span>
+                      <span class="badge badge-pill badge-dark" *ngIf="partida.insumos.length">{{countInsumosPedido(partida.insumos)}}</span> -->
                     </div>
                   </mat-expansion-panel-header>
 
@@ -82,14 +82,14 @@
                   <!-- subpartidas -->
                   <mat-accordion [displayMode]="'default'" *ngIf="partida.subpartidas.length>0">
 
-                    <mat-expansion-panel [hideToggle]="true" *ngFor="let subpartida of partida.subpartidas" #sub>
+                    <mat-expansion-panel [hideToggle]="true" *ngFor="let subpartida of partida.subpartidas; trackBy: trackByIdPartida" #sub>
 
                       <mat-expansion-panel-header [ngClass]="{'bg-secondary text-white':sub.expanded}">
                         <span class="font-weight-bold align-self-center mr-1 d-none d-md-inline-block">{{subpartida.codigo}}</span>
                         <span class="align-self-center">{{subpartida.nombre}}</span>
                         <div class="spacer"></div>
                         <div class="collapse-header-btns">
-                          <span class="badge badge-pill badge-dark">{{countInsumosPedido(subpartida.insumos)}}</span>
+                          <!-- <span class="badge badge-pill badge-dark">{{countInsumosPedido(subpartida.insumos)}}</span> -->
                         </div>
                       </mat-expansion-panel-header>
 
@@ -108,7 +108,7 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr *ngFor="let insumo of subpartida.insumos">
+                            <tr *ngFor="let insumo of subpartida.insumos; trackBy: trackByIdInsumoPartida">
 
                               <td class="d-none d-md-table-cell">{{insumo.codigo}}</td>
                               <td>{{insumo.insumo}}</td>
@@ -165,8 +165,8 @@
                     <span class="align-self-center">INSUMOS EXTRA</span>
                     <div class="spacer"></div>
                     <div class="collapse-header-btns">
-                      <span class="badge badge-pill badge-dark" *ngIf="partida.subpartidas.length">{{countInsumosPedidoPartida(partida)}}</span>
-                      <span class="badge badge-pill badge-dark" *ngIf="partida.insumos.length">{{countInsumosPedido(partida.insumos)}}</span>
+                      <!-- <span class="badge badge-pill badge-dark" *ngIf="partida.subpartidas.length">{{countInsumosPedidoPartida(partida)}}</span>
+                      <span class="badge badge-pill badge-dark" *ngIf="partida.insumos.length">{{countInsumosPedido(partida.insumos)}}</span> -->
                     </div>
                   </mat-expansion-panel-header>
                   <!-- insumos -->
@@ -183,7 +183,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr *ngFor="let insumo of lotePedido_selected.insumos_extra">
+                        <tr *ngFor="let insumo of lotePedido_selected.insumos_extra; trackBy: trackByIdInsumo">
                           <td class="hidden-xs">{{insumo.codigo}}</td>
                           <td>{{insumo.insumo}}</td>
                           <td>{{insumo.unidad}}</td>
@@ -198,7 +198,9 @@
 
 
                 </mat-expansion-panel>
+
               </mat-accordion>
+
             </div>
 
 

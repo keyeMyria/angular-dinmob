@@ -59,6 +59,8 @@ export class AvancesComponent implements OnInit {
   }
 
   ngOnInit() {
+    //console.log("onInit");
+
     this.usuario = this.authSrv.usuario;
 
     this.route.data
@@ -77,13 +79,15 @@ export class AvancesComponent implements OnInit {
           return Observable.of({ datos: {} });
         }
       }).subscribe(obra => {
-        console.log("obra", obra);
+        //console.log("obra", obra);
         this.obra = obra;
         //this.changeDetectorRef.markForCheck();
+        //this.changeDetectorRef.detectChanges();
       });
 
 
   }
+
 
   cargarObra(id_obra: string) {
 
@@ -105,21 +109,36 @@ export class AvancesComponent implements OnInit {
     });
 
     this.loteSrv.addAvancePartida(ids, this.lote.id_lote)
-      .subscribe(partidas => {
-        console.log("partidas", partidas);
+      .subscribe(res => {
+        //console.log("response", res);
 
-        let count = Object.keys(partidas).length;
-        this.num_partidas_finalizadas += count;
 
+        this.num_partidas_finalizadas = res.num_partidas_finalizadas;
+
+        let update = new Set();
         this.selection.selected.forEach(partida => {
 
-          if (partidas[partida.id_partida]) {
-            partida.fecha_fin = partidas[partida.id_partida];
+          //si la partida en la seleccion fue devuelta 
+          if (res.avances[partida.id_partida]) {
+            partida.fecha_fin = res.avances[partida.id_partida];
+            partida.fecha_liberacion = null;
+
+            if (partida.partida) {
+              update.add(partida.partida);
+            }
           }
 
         });
 
+        update.forEach(id_partida => {
+          let i = this.acordeon.findIndex(partida => partida.id_partida == id_partida);
+          this.updateSubpartidasFinalizadas(this.acordeon[i]);
+        });
+
+
         this.selection.clear();
+
+        //this.changeDetectorRef.detectChanges();
 
         this.snackBar.open("Avance Agregado", "", {
           duration: 2000,
@@ -136,7 +155,7 @@ export class AvancesComponent implements OnInit {
   }
 
   addLiberacion() {
-    console.log("selection", this.selection.selected);
+    //console.log("selection", this.selection.selected);
 
     let ids = [];
 
@@ -146,7 +165,7 @@ export class AvancesComponent implements OnInit {
 
     this.loteSrv.addLiberacionPartida(ids, this.lote.id_lote)
       .subscribe(partidas => {
-        console.log("partidas", partidas);
+        //console.log("partidas", partidas);
 
         this.selection.selected.forEach(partida => {
 
@@ -174,7 +193,7 @@ export class AvancesComponent implements OnInit {
   }
 
   delAvance() {
-    console.log("selection", this.selection.selected);
+    //console.log("selection", this.selection.selected);
 
     let ids = [];
 
@@ -184,16 +203,29 @@ export class AvancesComponent implements OnInit {
 
     this.loteSrv.delAvancePartida(ids, this.lote.id_lote)
       .subscribe(res => {
-        console.log("partidas", res.count);
-        this.num_partidas_finalizadas -= res.count;
+        //console.log("partidas", res);
+        this.num_partidas_finalizadas = res.num_partidas_finalizadas;
 
+        let update = new Set();
         this.selection.selected.forEach(partida => {
 
-          partida.fecha_fin = null;
-          partida.fecha_liberacion = null;
+          if (res.avances[partida.id_partida]) {
+            partida.fecha_fin = null;
+            partida.fecha_liberacion = null;
 
+            if (partida.partida) {
+              update.add(partida.partida);
+            }
+
+          }
 
         });
+
+        update.forEach(id_partida => {
+          let i = this.acordeon.findIndex(partida => partida.id_partida == id_partida);
+          this.updateSubpartidasFinalizadas(this.acordeon[i]);
+        });
+
 
         this.selection.clear();
 
@@ -213,7 +245,7 @@ export class AvancesComponent implements OnInit {
   }
 
   delLiberacion() {
-    console.log("selection", this.selection.selected);
+    //console.log("selection", this.selection.selected);
 
     let ids = [];
 
@@ -223,11 +255,13 @@ export class AvancesComponent implements OnInit {
 
     this.loteSrv.delLiberacionPartida(ids, this.lote.id_lote)
       .subscribe(res => {
-        console.log("partidas", res.count);
+        //console.log("partidas", res.count);
 
         this.selection.selected.forEach(partida => {
 
-          partida.fecha_liberacion = null;
+          if (res.avances[partida.id_partida]) {
+            partida.fecha_liberacion = null;
+          }
 
         });
 
@@ -260,52 +294,66 @@ export class AvancesComponent implements OnInit {
     });
   }
 
-  numSubpartidasFinalizadas(partida) {
-    console.log("partidaFinalizada", partida.id_partida);
+  /*   numSubpartidasFinalizadas(partida) {
+      //console.log("partidaFinalizada", partida.id_partida);
+      var count = 0;
+  
+      //tiene subpartidas
+      if (partida.subpartidas.length) {
+  
+        for (var i = 0; i < partida.subpartidas.length; i++) {
+  
+          if (partida.subpartidas[i].fecha_fin !== null) {
+            count++;
+          }
+        }
+  
+      } else {
+        count = partida.fecha_fin !== null ? 1 : 0;
+      }
+  
+      return count;
+  
+    } */
+
+
+  updateSubpartidasFinalizadas(partida) {
+    //console.log("updatePartida", partida.id_partida);
     var count = 0;
+    for (var i = 0; i < partida.subpartidas.length; i++) {
 
-    //tiene subpartidas
-    if (partida.subpartidas.length) {
-
-      for (var i = 0; i < partida.subpartidas.length; i++) {
-
-        if (partida.subpartidas[i].fecha_fin !== null) {
-          count++;
-        }
+      if (partida.subpartidas[i].fecha_fin !== null) {
+        count++;
       }
-
-    } else {
-      count = partida.fecha_fin !== null ? 1 : 0;
     }
-
-    return count;
+    partida.num_subpartidas_finalizadas = count;
 
   }
 
-  partidaFinalizada(partida) {
-    console.log("partidaFinalizada", partida.id_partida);
-    var finalizada = true;
-
-    //tiene subpartidas
-    if (partida.subpartidas.length) {
-
-      for (var i = 0; i < partida.subpartidas.length; i++) {
-        //si encontramos alguna sin finalizar devolvemos false
-        if (partida.subpartidas[i].fecha_fin === null) {
-          return false;
+  /*   partidaFinalizada(partida) {
+      // console.log("partidaFinalizada", partida.id_partida);
+      var finalizada = true;
+  
+      //tiene subpartidas
+      if (partida.subpartidas.length) {
+  
+        for (var i = 0; i < partida.subpartidas.length; i++) {
+          //si encontramos alguna sin finalizar devolvemos false
+          if (partida.subpartidas[i].fecha_fin === null) {
+            return false;
+          }
         }
+  
+      } else {
+        finalizada = partida.fecha_fin !== null;
       }
-
-    } else {
-      finalizada = partida.fecha_fin !== null;
-    }
-
-    return finalizada;
-
-  }
+  
+      return finalizada;
+  
+    } */
 
   getAvancesLote(lote) {
-    console.log("getAvancesLote", lote);
+    //console.log("getAvancesLote", lote);
 
     if (this.mobileQuery.matches) {
       this.drawer.close();
@@ -326,11 +374,10 @@ export class AvancesComponent implements OnInit {
 
   }
 
-  addFoto(partida) {
-
-    //console.log("partida", partida);
+  addFoto(partida) {   
 
 
+    //dentro del dialogo se incrementa el numero de fotos
     let dialogRef = this.dialog.open(FotoPartidaDialogoComponent, {
       width: '500px',
       data: {
@@ -360,7 +407,7 @@ export class AvancesComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.mobileQuery.removeListener(this._mobileQueryListener)
+    this.mobileQuery.removeListener(this._mobileQueryListener);
 
   }
 

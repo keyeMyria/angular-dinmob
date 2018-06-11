@@ -1,3 +1,8 @@
+<button mat-fab class="img-btn" style="position:fixed; bottom:20px; right:160px; z-index:100"
+  (click)="toggleEscala()">
+  <i class="material-icons">{{variableContinua?'apps':'all_inclusive'}}</i>
+  <!-- <i class="material-icons">apps</i> -->
+</button>
 <button mat-fab class="img-btn" [disabled]="!lote_selected" style="position:fixed; bottom:20px; right:90px; z-index:100"
   (click)="verAvances(lote_selected)">
   <i class="material-icons">show_chart</i>

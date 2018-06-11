@@ -10,26 +10,43 @@ export class EstadisticasAdminResolverService implements Resolve<any[]> {
 
 
   constructor(
-    private obraSrv:ObrasService,
+    private obraSrv: ObrasService,
     private router: Router
   ) { }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any[]> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
 
     let id = route.paramMap.get('obra');
 
-    return this.obraSrv.getEstadisticas(id).take(1).map((estadisticas: any[]) => {     
-
-      if (estadisticas) {
-        return estadisticas;
-      } else { 
-        //this.router.navigate(['/tablero']);
-        return null;
+    return Observable.forkJoin(
+      this.obraSrv.getEstadisticas(id),
+      this.obraSrv.getObrasUsuario()
+    ).map(res => {
+      //console.log("res", res);
+      if (res[0]) {
+        return { estadisticas: res[0], obras: res[1] };
+      } else {
+        return { estadisticas: {}, obras: [] };
       }
     });
+
+    /*   Observable.of([[], []]); */
+
+    /*  return this.obraSrv.getEstadisticas(id).take(1).map((estadisticas: any[]) => { 
+       if (estadisticas) {
+         return estadisticas;
+       } else {         
+         return null;
+       }
+     }); */
 
   }
 
 }
+
+
+
+
+
 
 

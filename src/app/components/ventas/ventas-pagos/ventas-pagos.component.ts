@@ -6,6 +6,8 @@ import { MatSnackBar, MatDialog } from '@angular/material';
 import * as moment from 'moment';
 import { SaldoVentaClienteDialogoComponent } from '../saldo-venta-cliente-dialogo/saldo-venta-cliente-dialogo.component';
 import { ClientesService } from '../../../services/clientes.service';
+import { AuthService } from 'app/services/auth.service';
+import { Rol } from "../../../constantes/roles";
 
 @Component({
   selector: 'app-ventas-pagos',
@@ -19,6 +21,8 @@ export class VentasPagosComponent implements OnInit {
   pagos: any = [];
   pagosFiltrados: any = [];
   tipo_pago_selected: string = "";
+  usuario: any;
+  Rol= Rol;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,10 +30,13 @@ export class VentasPagosComponent implements OnInit {
     private pagoSrv: VentasPagosService,
     public snackBar: MatSnackBar,
     public dialog: MatDialog,
-    private clienteSrv: ClientesService
+    private clienteSrv: ClientesService,
+    private authSrv: AuthService
   ) { }
 
   ngOnInit() {
+
+    this.usuario = this.authSrv.usuario;
 
     this.route.data
       .subscribe((data: { obras: any, tipos: any }) => {

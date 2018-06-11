@@ -33,6 +33,7 @@
           <div class="acordeon-prototipo">
             <mat-accordion [displayMode]="'default'">
 
+              <!-- cabecera partida -->
               <mat-expansion-panel [hideToggle]="true" *ngFor="let partida of partidas; trackBy: trackByIdPartida" #par>
                 <mat-expansion-panel-header class="align-items-center" [ngClass]="{'bg-primary text-white':par.expanded}">
                   <span class="font-weight-bold align-self-center mr-1 d-none d-md-inline-block">{{partida.codigo}}</span>
@@ -61,12 +62,11 @@
                   </div>
                 </mat-expansion-panel-header>
 
-
                 <!-- subpartidas -->
                 <mat-accordion [displayMode]="'default'" *ngIf="partida.subpartidas.length>0">
 
                   <mat-expansion-panel [hideToggle]="true" *ngFor="let subpartida of partida.subpartidas; trackBy: trackByIdPartida" #sub>
-
+                    <!-- cabecera subpartida -->
                     <mat-expansion-panel-header [ngClass]="{'bg-secondary text-white':sub.expanded}">
                       <span class="font-weight-bold align-self-center mr-1 d-none d-md-inline-block">{{subpartida.codigo}}</span>
                       <span class="align-self-center">{{subpartida.nombre}}</span>
@@ -131,10 +131,11 @@
                                 <span>Eliminar</span>
                               </button>
                             </mat-menu> -->
-                              <button mat-button class="no-min" (click)="editarInsumo(insumo)">
+                            
+                              <button  class="btn btn-outline-dark btn-sm no-min" (click)="editarInsumo(insumo)">
                                 <i class="fa fa-pencil"></i>
                               </button>
-                              <button mat-button class="no-min" (click)="delInsumo(insumo)">
+                              <button  class="btn btn-outline-dark btn-sm no-min" (click)="delInsumo(insumo)">
                                 <i class="fa fa-times"></i>
                               </button>
                             </td>
@@ -185,10 +186,10 @@
                             </button>
                           </mat-menu> -->
 
-                          <button mat-button class="no-min" (click)="editarInsumo(insumo)">
+                          <button  class="btn btn-outline-dark btn-sm no-min" (click)="editarInsumo(insumo)">
                             <i class="fa fa-pencil"></i>
                           </button>
-                          <button mat-button class="no-min" (click)="delInsumo(insumo)">
+                          <button  class="btn btn-outline-dark btn-sm no-min" (click)="delInsumo(insumo)">
                             <i class="fa fa-times"></i>
                           </button>
                         </td>
@@ -196,7 +197,6 @@
                     </tbody>
                   </table>
                 </div>
-
 
               </mat-expansion-panel>
 

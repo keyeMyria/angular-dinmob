@@ -7,6 +7,7 @@ import { MatSidenav } from '@angular/material';
 import { UsuarioService } from 'app/services/usuario.service';
 import { Rol } from "../../constantes/roles";
 import { RolRoute } from "../../constantes/default-routes";
+import { Subscription } from 'rxjs/Subscription';
 
 
 
@@ -25,10 +26,12 @@ export class LayoutComponent implements OnInit {
   Rol = Rol;
   private _mobileQueryListener: () => void;
 
+  /* usuarioChangedSubscription:Subscription; */
+
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private media: MediaMatcher,
-    private auth: AuthService,
+    private authSrv: AuthService,
     private usuarioSrv: UsuarioService,
     private router: Router,
     private route: ActivatedRoute,
@@ -38,18 +41,22 @@ export class LayoutComponent implements OnInit {
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
 
-   /*  this.route.data
-      .subscribe((data: { usuario: any }) => { */
+    /*  this.route.data
+       .subscribe((data: { usuario: any }) => { */
 
-        this.usuario = this.auth.usuario; //data.usuario;
-        this.username = this.usuario.nombre.split(" ")[0];
+    this.usuario = this.authSrv.usuario; //data.usuario;
+    this.username = this.usuario.nombre.split(" ")[0];
 
-        if (this.usuario.id_obra_default) {
-          this.obra_default = { obra: this.usuario.id_obra_default };
-        } else {
-          this.obra_default = {};
-        }
-     /*  }); */
+    if (this.usuario.id_obra_default) {
+      this.obra_default = { obra: this.usuario.id_obra_default };
+    } else {
+      this.obra_default = {};
+    }
+    /*  }); */
+
+   /*  this.usuarioChangedSubscription=auth.usuarioChanged$.subscribe(nombre => {
+      this.username = nombre.split(" ")[0];
+    }); */
   }
 
   ngOnInit() { }
@@ -114,12 +121,14 @@ export class LayoutComponent implements OnInit {
   }
 
   logout() {
-    this.auth.logout();
+    this.authSrv.logout();
     this.router.navigate(['/login']);
   }
 
   ngOnDestroy(): void {
-    this.mobileQuery.removeListener(this._mobileQueryListener)
+    this.mobileQuery.removeListener(this._mobileQueryListener);
+    
+    //this.usuarioChangedSubscription.unsubscribe();
 
   }
 

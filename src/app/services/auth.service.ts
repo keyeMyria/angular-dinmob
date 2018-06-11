@@ -7,6 +7,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 //esta es la forma correcta
 import "rxjs/add/observable/throw";
 import { UsuarioService } from 'app/services/usuario.service';
+import { Subject } from 'rxjs/Subject';
 
 
 
@@ -35,6 +36,10 @@ export class AuthService {
   keyToken: string = "token";
   //keyUser: string = "usuario";
 
+  private usuarioChangedSource = new Subject<string>();
+  usuarioChanged$ = this.usuarioChangedSource.asObservable();
+
+
   constructor(
     private http: HttpClient,
     private config: ConfigService,
@@ -43,6 +48,10 @@ export class AuthService {
 
   ) {
     this.url = this.config.api_url + "auth/";
+  }
+
+  setUsername(nombre: string) {
+    this.usuarioChangedSource.next(nombre);
   }
 
   login(usuario) {
@@ -119,15 +128,15 @@ export class AuthService {
   tienePermisoAsync(roles: any[]) {
 
     return this.usuarioSrv.getUsuarioLogged()
-    .map(usuario=>{
-      this.usuario = usuario;
-      return this.checkPermiso(roles, +this.usuario.id_tipo_usuario);
-    });
-     /*  .subscribe(usuario => {
+      .map(usuario => {
         this.usuario = usuario;
-        this.checkPermiso(roles, +this.usuario.id_tipo_usuario);
+        return this.checkPermiso(roles, +this.usuario.id_tipo_usuario);
+      });
+    /*  .subscribe(usuario => {
+       this.usuario = usuario;
+       this.checkPermiso(roles, +this.usuario.id_tipo_usuario);
 
-      }); */
+     }); */
 
 
   }
