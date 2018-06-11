@@ -116,7 +116,7 @@
                     </a>
                   </td>
                   <td class="text-right ws-nowrap">
-                    <button mat-button class="no-min" (click)="setValidacionPago(pago)">
+                    <button mat-button class="no-min" (click)="setValidacionPago(pago)" *ngIf="usuario.id_tipo_usuario==Rol.Administrador || usuario.id_tipo_usuario==Rol.Contabilidad">
                       <i class="fa" [ngClass]="{'fa-check':pago.validado=='0','fa-ban':pago.validado=='1'}"></i>
                     </button>
                     <button mat-button class="no-min" (click)="editarCliente(pago)">
