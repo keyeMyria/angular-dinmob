@@ -9,16 +9,13 @@ import { AgregarInsumoDialogoComponent } from 'app/components/admin/agregar-insu
 import { EditarInsumoDialogoComponent } from 'app/components/admin/editar-insumo-dialogo/editar-insumo-dialogo.component';
 import { PrototiposService } from "app/services/prototipos.service";
 import { ActivatedRoute, Router, ParamMap } from "@angular/router";
-import { Prototipo } from "app/model/prototipo";
-import { Partida } from "app/model/partida";
-import { Insumo } from "app/model/insumo";
 import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
 
 @Component({
   selector: 'app-editar-prototipo',
   templateUrl: './editar-prototipo.component.html',
   styleUrls: ['./editar-prototipo.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  //changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EditarPrototipoComponent implements OnInit {
   selectedOption: string;
@@ -36,10 +33,9 @@ export class EditarPrototipoComponent implements OnInit {
   constructor(
     private prototipoSrv: PrototiposService,
     private route: ActivatedRoute,
-    private router: Router,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
-    private changeDetectorRef:ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -50,7 +46,7 @@ export class EditarPrototipoComponent implements OnInit {
         this.prototipo = res.prototipo;
         this.partidas = res.partidas;
 
-        this.changeDetectorRef.markForCheck();
+        //this.changeDetectorRef.markForCheck();
 
 
 
@@ -102,15 +98,25 @@ export class EditarPrototipoComponent implements OnInit {
       },
       width: '500px',
     });
+
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
-        if (result === true) {
-          this.snackBar.open("Partida Agregada", "Cerrar", {
-            duration: 2000
-          });
-        }
+
+        this.snackBar.open("Partida Agregada", "Cerrar", {
+          duration: 2000
+        });
+
+      } else if (result && result.error) {
+
+        this.snackBar.open(result.error, "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+
       }
     });
+
+
   }
 
   editarPartida(partida) {
@@ -150,13 +156,21 @@ export class EditarPrototipoComponent implements OnInit {
       },
       width: '500px',
     });
+
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
-        if (result === true) {
-          this.snackBar.open("Subpartida Agregada", "Cerrar", {
-            duration: 2000
-          });
-        }
+
+        this.snackBar.open("Subpartida Agregada", "Cerrar", {
+          duration: 2000
+        });
+
+      } else if (result && result.error) {
+
+        this.snackBar.open(result.error, "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+
       }
     });
   }
@@ -197,13 +211,21 @@ export class EditarPrototipoComponent implements OnInit {
       },
       width: '500px',
     });
+
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
-        if (result === true) {
-          this.snackBar.open("Insumo Agregado", "Cerrar", {
-            duration: 2000
-          });
-        }
+
+        this.snackBar.open("Insumo Agregado", "Cerrar", {
+          duration: 2000
+        });
+
+      } else if (result && result.error) {
+
+        this.snackBar.open(result.error, "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+
       }
 
     });
@@ -218,6 +240,7 @@ export class EditarPrototipoComponent implements OnInit {
       },
       width: '500px',
     });
+
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
 
@@ -247,15 +270,50 @@ export class EditarPrototipoComponent implements OnInit {
       },
       width: '500px',
     });
+
     dialogRef.afterClosed().subscribe(result => {
+
       if (result === true) {
+
+        this.prototipoSrv.delPartida(partida.id_partida)
+          .subscribe((res: any) => {
+
+            if (res.count === 1) {
+
+              let i = this.partidas.indexOf(partida);
+              this.partidas.splice(i, 1);
+
+
+              this.snackBar.open("Partida Eliminada", "", {
+                duration: 2000,
+                panelClass: ["bg-success", "text-white"]
+              });
+
+            } else {
+              this.snackBar.open("Ha ocurrido un error", "", {
+                duration: 3000,
+                panelClass: ["bg-danger", "text-white"]
+              });
+            }
+
+          }, (error) => {
+            this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+              duration: 3000,
+              panelClass: ["bg-danger", "text-white"]
+            });
+          });
+
       }
 
     });
 
   }
 
-  delSubpartida(subpartida) {
+  delSubpartida(subpartida, partida) {
+
+    console.log("subpartida", subpartida);
+    console.log("partida", partida);
+    
 
 
     let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
@@ -268,6 +326,32 @@ export class EditarPrototipoComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
+
+        this.prototipoSrv.delPartida(subpartida.id_partida)
+          .subscribe((res: any) => {
+            if (res.count === 1) {
+
+              let i = partida.subpartidas.indexOf(subpartida);
+              partida.subpartidas.splice(i, 1);
+
+              this.snackBar.open("Subpartida Eliminada", "", {
+                duration: 2000,
+                panelClass: ["bg-success", "text-white"]
+              });
+
+            } else {
+              this.snackBar.open("Ha ocurrido un error", "", {
+                duration: 3000,
+                panelClass: ["bg-danger", "text-white"]
+              });
+            }
+
+          }, (error) => {
+            this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+              duration: 3000,
+              panelClass: ["bg-danger", "text-white"]
+            });
+          });
       }
     });
   }
@@ -283,6 +367,32 @@ export class EditarPrototipoComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
+        this.prototipoSrv.delInsumoPartida(insumo.id_insumo)
+          .subscribe((res: any) => {
+            if (res.count === 1) {
+
+              let i = this.insumos.indexOf(insumo);
+              this.insumos.splice(i, 1);
+
+
+              this.snackBar.open("Partida Eliminada", "", {
+                duration: 2000,
+                panelClass: ["bg-success", "text-white"]
+              });
+
+            } else {
+              this.snackBar.open("Ha ocurrido un error", "", {
+                duration: 3000,
+                panelClass: ["bg-danger", "text-white"]
+              });
+            }
+
+          }, (error) => {
+            this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+              duration: 3000,
+              panelClass: ["bg-danger", "text-white"]
+            });
+          });
       }
     });
 

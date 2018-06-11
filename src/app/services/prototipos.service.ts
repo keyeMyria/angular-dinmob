@@ -64,6 +64,16 @@ export class PrototiposService {
       .pipe(catchError(this.handleError("updatePartida")));
   }
 
+  delPartida(id_partida) {
+    return this.http.post(this.url + 'del_partida/' + id_partida, {})
+      .pipe(catchError(this.handleError("delPartida")));
+  }
+
+  delInsumoPartida(id_insumo_partida) {
+    return this.http.post(this.url + 'del_insumo_partida/' + id_insumo_partida, {})
+      .pipe(catchError(this.handleError("delPrototipo")));
+  }
+
 
   private handleError<T>(operation = 'operation') {
     return (error: HttpErrorResponse) => {
