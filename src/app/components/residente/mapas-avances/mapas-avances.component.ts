@@ -92,7 +92,9 @@ export class MapasAvancesComponent implements OnInit {
 
 
         //creamos los valores para la escala de estados
+        this.variableContinua=true;
         this.valuesLotes = {};
+        this.valuesDiscretosLotes = {};
         this.lotes.forEach(lote => {
           // comprobar luego con datos
           this.valuesLotes[lote.code] = lote.valor ? lote.valor : 0;
