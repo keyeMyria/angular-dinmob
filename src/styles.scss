@@ -222,6 +222,10 @@ table.table-align-middle  {
         display: none !important;
     }
 
+    .mat-card.card-tablero{
+        padding: 18px 16px !important;
+    }
+
 }
 
 
@@ -276,4 +280,8 @@ table.table-align-middle  {
     margin: 0 0px 0px 20px;
     color:  #3f51b5;
     
+}
+
+.mat-card.card-tablero {
+    padding: 18px;
 }
