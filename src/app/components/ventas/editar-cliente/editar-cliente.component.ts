@@ -800,11 +800,18 @@ export class EditarClienteComponent implements OnInit {
   //????es necesario eliminarla del selection si está seleccionada??
   delCompra(compra) {
     //console.log("delCompra", compra);
-    this.clienteSrv.delCompra(compra.id_cliente, compra.id_lote)
+    this.clienteSrv.delCompra(compra.id_compra)
       .subscribe(res => {
         if (res.count == 1) {
           let i = this.compras.indexOf(compra);
           this.compras.splice(i, 1);
+
+          // ui estado
+          this.selection.clear();
+          this.compra_selected = {};
+          this.formInmueble.reset();
+          this.formLote.reset();
+         
 
           this.snackBar.open("Compra Eliminada", "", {
             duration: 2000,

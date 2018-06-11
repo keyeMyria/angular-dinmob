@@ -108,8 +108,14 @@ export class ClientesService {
 
 
   //ok
-  delCompra(id_cliente, id_lote) {
-    return this.http.post(this.url + 'del_compra/' + id_cliente + "/" + id_lote, {})
+  /*   delCompra(id_cliente, id_lote) {
+      return this.http.post(this.url + 'del_compra/' + id_cliente + "/" + id_lote, {})
+        .pipe(catchError(this.handleError("delCompra")));
+    } */
+
+  //ok
+  delCompra(id_compra) {
+    return this.http.post(this.url + 'del_compra/' + id_compra, {})
       .pipe(catchError(this.handleError("delCompra")));
   }
 
