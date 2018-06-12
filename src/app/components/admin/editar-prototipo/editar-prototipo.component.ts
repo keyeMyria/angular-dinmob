@@ -59,6 +59,96 @@ export class EditarPrototipoComponent implements OnInit {
 
   }
 
+
+  agregarPartida() {
+
+    let dialogRef = this.dialog.open(AgregarPartidaDialogoComponent, {
+      data: {
+        prototipo: this.prototipo,
+        partidas: this.partidas
+      },
+      width: '500px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+
+        this.snackBar.open("Partida Agregada", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      } else if (result && result.error) {
+
+        this.snackBar.open(result.error, "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+
+      }
+    });
+
+
+  }
+
+  agregarSubpartida(partida) {
+
+    let dialogRef = this.dialog.open(AgregarSubpartidaDialogoComponent, {
+      data: {
+        partida: partida,
+        prototipo: this.prototipo
+      },
+      width: '500px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+
+        this.snackBar.open("Subpartida Agregada", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      } else if (result && result.error) {
+
+        this.snackBar.open(result.error, "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+
+      }
+    });
+  }
+
+  agregarInsumo(partida) {
+
+    let dialogRef = this.dialog.open(AgregarInsumoDialogoComponent, {
+      data: {
+        partida: partida
+      },
+      width: '500px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+
+        this.snackBar.open("Insumo Agregado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      } else if (result && result.error) {
+
+        this.snackBar.open(result.error, "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+
+      }
+
+    });
+  }
+
   editarNombre(prototipo) {
 
 
@@ -90,35 +180,6 @@ export class EditarPrototipoComponent implements OnInit {
     });
   }
 
-  agregarPartida() {
-
-    let dialogRef = this.dialog.open(AgregarPartidaDialogoComponent, {
-      data: {
-        prototipo: this.prototipo
-      },
-      width: '500px',
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === true) {
-
-        this.snackBar.open("Partida Agregada", "Cerrar", {
-          duration: 2000
-        });
-
-      } else if (result && result.error) {
-
-        this.snackBar.open(result.error, "", {
-          duration: 3000,
-          panelClass: ["bg-danger", "text-white"]
-        });
-
-      }
-    });
-
-
-  }
-
   editarPartida(partida) {
 
     let dialogRef = this.dialog.open(EditarPartidaDialogoComponent, {
@@ -135,33 +196,6 @@ export class EditarPrototipoComponent implements OnInit {
         this.snackBar.open("Partida Actualizada", "", {
           duration: 2000,
           panelClass: ["bg-success", "text-white"]
-        });
-
-      } else if (result && result.error) {
-
-        this.snackBar.open(result.error, "", {
-          duration: 3000,
-          panelClass: ["bg-danger", "text-white"]
-        });
-
-      }
-    });
-  }
-
-  agregarSubpartida() {
-
-    let dialogRef = this.dialog.open(AgregarSubpartidaDialogoComponent, {
-      data: {
-        subpartida: this.subpartida
-      },
-      width: '500px',
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === true) {
-
-        this.snackBar.open("Subpartida Agregada", "Cerrar", {
-          duration: 2000
         });
 
       } else if (result && result.error) {
@@ -202,35 +236,6 @@ export class EditarPrototipoComponent implements OnInit {
     });
   }
 
-  agregarInsumo() {
-
-    let dialogRef = this.dialog.open(AgregarInsumoDialogoComponent, {
-      data: {
-        insumos: this.insumos,
-        insumo: this.insumo
-      },
-      width: '500px',
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === true) {
-
-        this.snackBar.open("Insumo Agregado", "Cerrar", {
-          duration: 2000
-        });
-
-      } else if (result && result.error) {
-
-        this.snackBar.open(result.error, "", {
-          duration: 3000,
-          panelClass: ["bg-danger", "text-white"]
-        });
-
-      }
-
-    });
-  }
-
   editarInsumo(insumo) {
 
 
@@ -244,7 +249,7 @@ export class EditarPrototipoComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
 
-        this.snackBar.open("Insumo actualizado", "", {
+        this.snackBar.open("Insumo Actualizado", "", {
           duration: 2000,
           panelClass: ["bg-success", "text-white"]
         });
@@ -278,7 +283,7 @@ export class EditarPrototipoComponent implements OnInit {
         this.prototipoSrv.delPartida(partida.id_partida)
           .subscribe((res: any) => {
 
-            if (res.count === 1) {
+            if (res.count == 1) {
 
               let i = this.partidas.indexOf(partida);
               this.partidas.splice(i, 1);
@@ -311,9 +316,9 @@ export class EditarPrototipoComponent implements OnInit {
 
   delSubpartida(subpartida, partida) {
 
-    console.log("subpartida", subpartida);
-    console.log("partida", partida);
-    
+    //console.log("subpartida", subpartida);
+    //console.log("partida", partida);
+
 
 
     let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
@@ -329,7 +334,7 @@ export class EditarPrototipoComponent implements OnInit {
 
         this.prototipoSrv.delPartida(subpartida.id_partida)
           .subscribe((res: any) => {
-            if (res.count === 1) {
+            if (res.count == 1) {
 
               let i = partida.subpartidas.indexOf(subpartida);
               partida.subpartidas.splice(i, 1);
@@ -356,26 +361,26 @@ export class EditarPrototipoComponent implements OnInit {
     });
   }
 
-  delInsumo(insumo) {
+  delInsumo(insumo, partida) {
     let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
       data: {
         title: "Eliminar Insumo",
-        content: `¿Desea eliminar el Insumo: ${insumo.insumo}?`
+        content: `¿Desea eliminar el insumo: ${insumo.insumo}?`
       },
       width: '500px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
-        this.prototipoSrv.delInsumoPartida(insumo.id_insumo)
+        this.prototipoSrv.delInsumoPartida(insumo.id_insumo_partida)
           .subscribe((res: any) => {
-            if (res.count === 1) {
+            if (res.count == 1) {
 
-              let i = this.insumos.indexOf(insumo);
-              this.insumos.splice(i, 1);
+              let i = partida.insumos.indexOf(insumo);
+              partida.insumos.splice(i, 1);
 
 
-              this.snackBar.open("Partida Eliminada", "", {
+              this.snackBar.open("Insumo Eliminado", "", {
                 duration: 2000,
                 panelClass: ["bg-success", "text-white"]
               });

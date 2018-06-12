@@ -27,7 +27,7 @@ export class EditarInsumoDialogoComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<EditarInsumoDialogoComponent>,
     private fb: FormBuilder,
-    private insumoSrv: InsumoService 
+    private insumoSrv: InsumoService
   ) {
     this.form = this.fb.group({
       insumo: [data.insumo.insumo],
@@ -45,15 +45,18 @@ export class EditarInsumoDialogoComponent implements OnInit {
 
   guardar() {
     console.log("ok", this.form.value)
-    let insumo = {cantidad:this.form.get("cantidad").value, precio:this.form.get("precio").value};
+    let cantidad = this.form.get("cantidad").value.replace(/,/g, "");
+    let precio = this.form.get("precio").value.replace(/,/g, "");
+
+    let insumo = { cantidad: cantidad, precio: precio };
     this.insumoSrv.updateInsumoPartida(this.data.insumo.id_insumo_partida, insumo)
-    .subscribe(insumo => {
-      this.data.insumo.cantidad = insumo.cantidad;
-      this.data.insumo.precio = insumo.precio;
-      this.dialogRef.close(true);
-    }, (error) => {
-      this.dialogRef.close({ error: "Ha ocurrido un error de conexión. Inténtelo más tarde" });
-    })
+      .subscribe(insumo => {
+        this.data.insumo.cantidad = insumo.cantidad;
+        this.data.insumo.precio = insumo.precio;
+        this.dialogRef.close(true);
+      }, (error) => {
+        this.dialogRef.close({ error: "Ha ocurrido un error de conexión. Inténtelo más tarde" });
+      })
   }
 
 }

@@ -71,7 +71,17 @@ export class PrototiposService {
 
   delInsumoPartida(id_insumo_partida) {
     return this.http.post(this.url + 'del_insumo_partida/' + id_insumo_partida, {})
-      .pipe(catchError(this.handleError("delPrototipo")));
+      .pipe(catchError(this.handleError("delInsumoPartida")));
+  }
+
+  createPartida(partida) {
+    return this.http.post(this.url + "create_partida/", { partida: partida })
+      .pipe(catchError(this.handleError("createPartida")));
+  }
+
+  createInsumoPartida(insumo) {
+    return this.http.post(this.url + "create_insumo_partida/", { insumo: insumo })
+      .pipe(catchError(this.handleError("createInsumoPartida")));
   }
 
 

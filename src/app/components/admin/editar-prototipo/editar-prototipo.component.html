@@ -50,7 +50,7 @@
                         <mat-icon>create</mat-icon>
                         <span>Editar</span>
                       </button>
-                      <button mat-menu-item (click)="agregarSubpartida()">
+                      <button mat-menu-item (click)="agregarSubpartida(partida)">
                         <mat-icon>add</mat-icon>
                         <span>Agregar Subpartida</span>
                       </button>
@@ -81,7 +81,7 @@
                             <mat-icon>create</mat-icon>
                             <span>Editar</span>
                           </button>
-                          <button mat-menu-item (click)="agregarInsumo()">
+                          <button mat-menu-item (click)="agregarInsumo(subpartida)">
                             <mat-icon>add</mat-icon>
                             <span>Agregar Insumo</span>
                           </button>
@@ -132,10 +132,10 @@
                               </button>
                             </mat-menu> -->
                             
-                              <button  class="btn btn-outline-dark btn-sm no-min" (click)="editarInsumo(insumo)">
+                              <button  class="btn btn-outline-dark btn-sm no-min" (click)="editarInsumo(insumo,subpartida)">
                                 <i class="fa fa-pencil"></i>
                               </button>
-                              <button  class="btn btn-outline-dark btn-sm no-min" (click)="delInsumo(insumo)">
+                              <button  class="btn btn-outline-dark btn-sm no-min" (click)="delInsumo(insumo, subpartida)">
                                 <i class="fa fa-times"></i>
                               </button>
                             </td>
@@ -186,10 +186,10 @@
                             </button>
                           </mat-menu> -->
 
-                          <button  class="btn btn-outline-dark btn-sm no-min" (click)="editarInsumo(insumo)">
+                          <button  class="btn btn-outline-dark btn-sm no-min" (click)="editarInsumo(insumo, partida)">
                             <i class="fa fa-pencil"></i>
                           </button>
-                          <button  class="btn btn-outline-dark btn-sm no-min" (click)="delInsumo(insumo)">
+                          <button  class="btn btn-outline-dark btn-sm no-min" (click)="delInsumo(insumo, partida)">
                             <i class="fa fa-times"></i>
                           </button>
                         </td>

@@ -30,7 +30,7 @@ export class EditarPartidaDialogoComponent implements OnInit {
   }
 
   guardar() {
-    console.log("partida", this.form.value);
+    //console.log("partida", this.form.value);
     this.prototipoSrv.updatePartida(this.data.partida.id_partida, this.form.value)
     .subscribe(partida => {
       this.data.partida.codigo = partida.codigo;
