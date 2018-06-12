@@ -10,6 +10,7 @@ import { EditarInsumoDialogoComponent } from 'app/components/admin/editar-insumo
 import { PrototiposService } from "app/services/prototipos.service";
 import { ActivatedRoute, Router, ParamMap } from "@angular/router";
 import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
+import { InsumoService } from '../../../services/insumo.service';
 
 @Component({
   selector: 'app-editar-prototipo',
@@ -23,7 +24,7 @@ export class EditarPrototipoComponent implements OnInit {
   partidas: any;
   subpartida: any;
   insumo: any;
-  insumos: any[];
+  insumos: any = [];
 
   trackByIdPartida = (index, item) => item.id_partida;
   trackByIdInsumoPartida = (index, item) => item.id_insumo_partida;
@@ -32,6 +33,7 @@ export class EditarPrototipoComponent implements OnInit {
 
   constructor(
     private prototipoSrv: PrototiposService,
+    private insumoSrv: InsumoService,
     private route: ActivatedRoute,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
@@ -122,9 +124,36 @@ export class EditarPrototipoComponent implements OnInit {
 
   agregarInsumo(partida) {
 
+    if (this.insumos.length > 0) {
+
+      this.agregarInsumoPartida(partida, this.insumos);
+
+    } else {
+
+      this.insumoSrv.getMaterialesObra(this.prototipo.id_obra)
+        .subscribe(insumos => {
+
+          this.insumos = insumos;
+          this.agregarInsumoPartida(partida, this.insumos);
+
+        }, (error) => {
+
+          this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+            duration: 3000,
+            panelClass: ["bg-danger", "text-white"]
+          });
+
+        });
+    }
+
+
+  }
+
+  agregarInsumoPartida(partida, insumos) {
     let dialogRef = this.dialog.open(AgregarInsumoDialogoComponent, {
       data: {
-        partida: partida
+        partida: partida,
+        insumos: insumos
       },
       width: '500px',
     });
@@ -147,6 +176,7 @@ export class EditarPrototipoComponent implements OnInit {
       }
 
     });
+
   }
 
   editarNombre(prototipo) {
@@ -402,8 +432,6 @@ export class EditarPrototipoComponent implements OnInit {
     });
 
   }
-
-
 
 
 }

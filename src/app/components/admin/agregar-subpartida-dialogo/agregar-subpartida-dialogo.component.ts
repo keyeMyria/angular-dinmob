@@ -33,7 +33,7 @@ export class AgregarSubpartidaDialogoComponent implements OnInit {
   guardar() {
     this.prototipoSrv.createPartida(this.form.value)
       .subscribe(partida => {
-        this.data.partida.push(partida);
+        this.data.partida.subpartidas.push(partida);
         this.dialogRef.close(true);
       }, (error) => {
         this.dialogRef.close({ error: "Ha ocurrido un error de conexión. Inténtelo más tarde" });
