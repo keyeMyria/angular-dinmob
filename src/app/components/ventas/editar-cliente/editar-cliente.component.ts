@@ -796,8 +796,7 @@ export class EditarClienteComponent implements OnInit {
 
   }
 
-  //elimina la compra indicada
-  //????es necesario eliminarla del selection si está seleccionada??
+  //elimina la compra indicada  
   delCompra(compra) {
     //console.log("delCompra", compra);
     this.clienteSrv.delCompra(compra.id_compra)
