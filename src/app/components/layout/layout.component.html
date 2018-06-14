@@ -62,6 +62,7 @@
 
         <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/registro']" routerLinkActive="active">Registro</a>
 
+        <!-- ini civsa -->
         <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/trabajadores',obra_default]" routerLinkActive="active">Trabajadores</a>
 
         <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/asignar-trabajadores',obra_default]" routerLinkActive="active">Asignar Trabajadores</a>
@@ -75,6 +76,7 @@
         <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/gastos-obras',obra_default]" routerLinkActive="active">Gastos</a>
 
         <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/arranque',obra_default]" routerLinkActive="active">Arranque</a>
+        <!-- fin civsa -->
 
         <h3 class="sidenav-title">Ventas</h3>
 
@@ -130,22 +132,6 @@
         <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/nueva-entrada', obra_default]" routerLinkActive="active">Nueva Entrada</a>
 
         <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/nuevo-pedido',obra_default]" routerLinkActive="active">Nuevo Pedido</a>
-
-
-        <!-- <a mat-list-item>Avances</a> -->
-        <!-- (click)="gotoRoute($event)" [routerLink]="['/tablero-avances']" routerLinkActive="active" -->
-
-        <!--  <a mat-list-item>Almacén</a> -->
-        <!-- (click)="gotoRoute($event)" [routerLink]="['/tablero-almacen']" routerLinkActive="active"  -->
-
-        <!-- <a mat-list-item>Estadísticas</a> -->
-        <!-- (click)="gotoRoute($event)" [routerLink]="['/estadisticas', obra_default]" routerLinkActive="active" -->
-
-        <!-- <a mat-list-item>Reportes</a> -->
-        <!-- (click)="gotoRoute($event)" [routerLink]="['/reportes', obra_default]" routerLinkActive="active" -->
-
-        <!-- <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/asignar-trabajadores']" routerLinkActive="active">Asignar Trabajadores</a> -->
-
 
 
       </mat-nav-list>
@@ -309,7 +295,7 @@
     </mat-sidenav> -->
 
     <mat-sidenav-content>
-      
+
       <router-outlet></router-outlet>
 
     </mat-sidenav-content>
