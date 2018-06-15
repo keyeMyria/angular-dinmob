@@ -742,12 +742,12 @@ export class EditarClienteComponent implements OnInit {
     if (this.compra_selected.pagos) {
       this.compra_selected.pagos.forEach(pago => {
 
-        total += +pago.monto;
-
-        //personalización CIVSA, para otras empresas sumar todo independiente del tipo 
-        /*   if (pago.tipo_pago != "Apartado" && pago.tipo_pago != "Avalúo") {
-            total += +pago.monto;
-          } */
+        //total += +pago.monto;        
+       
+        //solo sumamos los pagos con id_tipo_pago < 100
+        if (pago.id_tipo_pago < 100) {
+          total += +pago.monto;
+        }
 
       });
     }
@@ -810,7 +810,7 @@ export class EditarClienteComponent implements OnInit {
           this.compra_selected = {};
           this.formInmueble.reset();
           this.formLote.reset();
-         
+
 
           this.snackBar.open("Compra Eliminada", "", {
             duration: 2000,

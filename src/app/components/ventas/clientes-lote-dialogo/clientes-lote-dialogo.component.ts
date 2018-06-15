@@ -48,12 +48,17 @@ export class ClientesLoteDialogoComponent implements OnInit {
     if (this.cliente_selected.pagos) {
       this.cliente_selected.pagos.forEach(pago => {
 
-        total += +pago.monto;
+        //total += +pago.monto;
 
         //personalización CIVSA, para otras empresas sumar todo independiente del tipo 
-    /*     if (pago.tipo_pago != "Apartado" && pago.tipo_pago != "Avalúo") {
+        /*     if (pago.tipo_pago != "Apartado" && pago.tipo_pago != "Avalúo") {
+              total += +pago.monto;
+            } */
+
+        //solo sumamos los pagos con id_tipo_pago < 100
+        if (pago.id_tipo_pago < 100) {
           total += +pago.monto;
-        } */
+        }
 
       });
     }
