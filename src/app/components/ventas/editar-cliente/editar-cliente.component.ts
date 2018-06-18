@@ -18,6 +18,7 @@ import { VentasPagosService } from 'app/services/ventas-pagos.service';
 import { UploadFileDialogoComponent } from 'app/components/ventas/upload-file-dialogo/upload-file-dialogo.component';
 import { ReporteService } from 'app/services/reporte.service';
 import { LotesService } from 'app/services/lotes.service';
+import { AlertaDialogoComponent } from '../../admin/alerta-dialogo/alerta-dialogo.component';
 
 @Component({
   selector: 'app-editar-cliente',
@@ -743,7 +744,7 @@ export class EditarClienteComponent implements OnInit {
       this.compra_selected.pagos.forEach(pago => {
 
         //total += +pago.monto;        
-       
+
         //solo sumamos los pagos con id_tipo_pago < 100
         if (pago.id_tipo_pago < 100) {
           total += +pago.monto;
@@ -772,6 +773,9 @@ export class EditarClienteComponent implements OnInit {
   //activa o desactiva la compra
   toggleActivacionCompra(compra) {
     //console.log("toggleActivacion", compra);
+
+    // si la compra está activa entonces la cancelamos activo=0
+    // sino la activamos activo=1
     let activo = 0;
     if (compra.activo == "0") {
       activo = 1;
@@ -779,13 +783,27 @@ export class EditarClienteComponent implements OnInit {
 
     this.clienteSrv.setActivacionCompra(compra.id_compra, activo)
       .subscribe(res => {
-        compra.activo = res.activo;
-        compra.fecha_cancelacion = res.fecha_cancelacion;
-        compra.fecha_activo = res.fecha_activo;
-        this.snackBar.open("Compra Actualizada", "", {
-          duration: 2000,
-          panelClass: ["bg-success", "text-white"]
-        });
+        // si la respuesta tiene error es porque ya hay otro cliente asociado al lote
+        if (res.error) {
+
+          let dialogRef = this.dialog.open(AlertaDialogoComponent, {
+            data: {
+              title: "Corregir",
+              content: `El lote seleccionado ya está activo para el cliente: ${res.cliente}. Debe cancelarlo antes de continuar.`,
+              icon: true
+            },
+            width: '500px',
+          });
+
+        } else {
+          compra.activo = res.activo;
+          compra.fecha_cancelacion = res.fecha_cancelacion;
+          compra.fecha_activo = res.fecha_activo;
+          this.snackBar.open("Compra Actualizada", "", {
+            duration: 2000,
+            panelClass: ["bg-success", "text-white"]
+          });
+        }
 
       }, (error) => {
         this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
