@@ -244,6 +244,11 @@ import { TableroAsesorComponent } from './components/tablero-asesor/tablero-ases
 import { TableroPedidosComponent } from './components/tablero-pedidos/tablero-pedidos.component';
 import { TableroAlmacenistaComponent } from './components/tablero-almacenista/tablero-almacenista.component';
 import { EditarPagoTrabajadorDialogoComponent } from './components/admin/editar-pago-trabajador-dialogo/editar-pago-trabajador-dialogo.component';
+import { MapasEscrituracionComponent } from './components/escrituracion/mapas-escrituracion/mapas-escrituracion.component';
+import { LotesComponent } from './components/escrituracion/lotes/lotes.component';
+import { ConfiguracionComponent } from './components/escrituracion/configuracion/configuracion.component';
+import { EquiposVentasComponent } from './components/escrituracion/equipos-ventas/equipos-ventas.component';
+import { TableroEscrituracionComponent } from './components/escrituracion/tablero-escrituracion/tablero-escrituracion.component';
 
 
 
@@ -401,7 +406,12 @@ export function getToken() {
     TableroAsesorComponent,
     TableroPedidosComponent,
     TableroAlmacenistaComponent,
-    EditarPagoTrabajadorDialogoComponent
+    EditarPagoTrabajadorDialogoComponent,
+    MapasEscrituracionComponent,
+    LotesComponent,
+    ConfiguracionComponent,
+    EquiposVentasComponent,
+    TableroEscrituracionComponent
 
 
 
