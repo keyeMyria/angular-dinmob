@@ -104,7 +104,10 @@ import { TableroControlAlmacenComponent } from './components/tablero-control-alm
 
 import { Rol } from "./constantes/roles";
 import { UsuariosAsesoresResolverService } from './resolvers/usuarios-asesores-resolver.service';
-
+import { TableroEscrituracionComponent } from './components/escrituracion/tablero-escrituracion/tablero-escrituracion.component';
+import { ConfiguracionComponent } from './components/escrituracion/configuracion/configuracion.component';
+import { EquiposVentasComponent } from './components/escrituracion/equipos-ventas/equipos-ventas.component';
+import { MapasEscrituracionComponent } from './components/escrituracion/mapas-escrituracion/mapas-escrituracion.component';
 
 
 export const ROUTES: Routes = [
@@ -138,7 +141,7 @@ export const ROUTES: Routes = [
                 path: 'estadisticas', component: EstadisticasAdminComponent,
                 canActivate: [AuthGuard],
                 resolve: {
-                    datos:EstadisticasAdminResolverService
+                    datos: EstadisticasAdminResolverService
                     //estadisticas: EstadisticasAdminResolverService,
                     //obras: ObrasUsuarioResolverService,
                 },
@@ -544,9 +547,9 @@ export const ROUTES: Routes = [
             {
                 path: 'tablero-asesor', component: TableroAsesorComponent,
                 canActivate: [AuthGuard],
-/*                 resolve: {
-                    usuario: UsuarioLoggedResolverService
-                }, */
+                /*                 resolve: {
+                                    usuario: UsuarioLoggedResolverService
+                                }, */
                 data: {
                     permisos: [Rol.AsesorVentas]
                 }
@@ -554,9 +557,9 @@ export const ROUTES: Routes = [
             {
                 path: 'tablero-contabilidad', component: TableroContabilidadComponent,
                 canActivate: [AuthGuard],
-/*                 resolve: {
-                    usuario: UsuarioLoggedResolverService
-                }, */
+                /*                 resolve: {
+                                    usuario: UsuarioLoggedResolverService
+                                }, */
                 data: {
                     permisos: [Rol.Contabilidad]
                 }
@@ -564,9 +567,9 @@ export const ROUTES: Routes = [
             {
                 path: 'tablero-pedidos', component: TableroPedidosComponent,
                 canActivate: [AuthGuard],
-/*                 resolve: {
-                    usuario: UsuarioLoggedResolverService
-                }, */
+                /*                 resolve: {
+                                    usuario: UsuarioLoggedResolverService
+                                }, */
                 data: {
                     permisos: [Rol.Recepcion]
                 }
@@ -574,9 +577,9 @@ export const ROUTES: Routes = [
             {
                 path: 'tablero-residente', component: TableroResidenteComponent,
                 canActivate: [AuthGuard],
-/*                 resolve: {
-                    usuario: UsuarioLoggedResolverService
-                }, */
+                /*                 resolve: {
+                                    usuario: UsuarioLoggedResolverService
+                                }, */
                 data: {
                     permisos: [Rol.Residente]
                 }
@@ -584,9 +587,9 @@ export const ROUTES: Routes = [
             {
                 path: 'tablero-control-almacen', component: TableroControlAlmacenComponent,
                 canActivate: [AuthGuard],
-/*                 resolve: {
-                    usuario: UsuarioLoggedResolverService
-                }, */
+                /*                 resolve: {
+                                    usuario: UsuarioLoggedResolverService
+                                }, */
                 data: {
                     permisos: [Rol.ControlAlmacen]
                 }
@@ -594,9 +597,9 @@ export const ROUTES: Routes = [
             {
                 path: 'tablero-comisiones', component: TableroComisionesComponent,
                 canActivate: [AuthGuard],
-/*                 resolve: {
-                    usuario: UsuarioLoggedResolverService
-                }, */
+                /*                 resolve: {
+                                    usuario: UsuarioLoggedResolverService
+                                }, */
                 data: {
                     permisos: [Rol.Administrador]
                 }
@@ -774,6 +777,44 @@ export const ROUTES: Routes = [
                     permisos: [Rol.Administrador, Rol.Contabilidad]
                 }
             },
+            {
+                path: 'tablero-escrituracion', component: TableroEscrituracionComponent,
+                canActivate: [AuthGuard],
+                data: {
+                    permisos: [Rol.Administrador, Rol.Contabilidad]
+                }
+            },
+            {
+                path: 'configuración', component: ConfiguracionComponent,
+                canActivate: [AuthGuard],
+                resolve: {
+                    obras: ObrasUsuarioResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.Contabilidad]
+                }
+            },
+            {
+                path: 'equipos-ventas', component: EquiposVentasComponent,
+                canActivate: [AuthGuard],
+                resolve: {
+                    obras: ObrasUsuarioResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.Contabilidad]
+                }
+            },
+            {
+                path: 'mapas-escrituracion', component: MapasEscrituracionComponent,
+                canActivate: [AuthGuard],
+                resolve: {
+                    obras: ObrasUsuarioResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.Contabilidad]
+                }
+            },
+
 
 
 
