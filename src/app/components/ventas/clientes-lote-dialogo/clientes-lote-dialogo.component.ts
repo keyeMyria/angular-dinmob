@@ -58,6 +58,9 @@ export class ClientesLoteDialogoComponent implements OnInit {
         //solo sumamos los pagos con id_tipo_pago < 100
         if (pago.id_tipo_pago < 100) {
           total += +pago.monto;
+        } else if (pago.id_tipo_pago == 101) {
+          // restamos las devoluciones
+          total = total - pago.monto;
         }
 
       });
