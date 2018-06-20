@@ -47,7 +47,7 @@
 
               <tbody>
                 <tr *ngFor="let mov of movimientos">
-                  <td>{{mov.fecha| date:'mediumDate':'':'es'}}</td>
+                  <td class="ws-nowrap">{{mov.fecha| date:'mediumDate':'':'es'}}</td>
                   <td>
                     <span *ngIf="mov.es_ministracion=='1'">{{mov.monto|currency}}</span>
                   </td>
