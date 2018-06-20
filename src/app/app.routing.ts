@@ -105,9 +105,13 @@ import { TableroControlAlmacenComponent } from './components/tablero-control-alm
 import { Rol } from "./constantes/roles";
 import { UsuariosAsesoresResolverService } from './resolvers/usuarios-asesores-resolver.service';
 import { TableroEscrituracionComponent } from './components/escrituracion/tablero-escrituracion/tablero-escrituracion.component';
-import { ConfiguracionComponent } from './components/escrituracion/configuracion/configuracion.component';
-import { EquiposVentasComponent } from './components/escrituracion/equipos-ventas/equipos-ventas.component';
+
 import { MapasEscrituracionComponent } from './components/escrituracion/mapas-escrituracion/mapas-escrituracion.component';
+import { ConfiguracionEscrituracionComponent } from './components/escrituracion/configuracion-escrituracion/configuracion-escrituracion.component';
+import { EquiposVentasEscrituracionComponent } from './components/escrituracion/equipos-ventas-escrituracion/equipos-ventas-escrituracion.component';
+import { ClientesEscrituracionComponent } from './components/escrituracion/clientes-escrituracion/clientes-escrituracion.component';
+import { LotesEscrituracionComponent } from './components/escrituracion/lotes-escrituracion/lotes-escrituracion.component';
+import { EditarClienteEscrituracionComponent } from './components/escrituracion/editar-cliente-escrituracion/editar-cliente-escrituracion.component';
 
 
 export const ROUTES: Routes = [
@@ -785,7 +789,7 @@ export const ROUTES: Routes = [
                 }
             },
             {
-                path: 'configuración', component: ConfiguracionComponent,
+                path: 'escrituracion/configuracion', component: ConfiguracionEscrituracionComponent,
                 canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService
@@ -795,7 +799,7 @@ export const ROUTES: Routes = [
                 }
             },
             {
-                path: 'equipos-ventas', component: EquiposVentasComponent,
+                path: 'escrituracion/equipos', component: EquiposVentasEscrituracionComponent,
                 canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService
@@ -805,7 +809,7 @@ export const ROUTES: Routes = [
                 }
             },
             {
-                path: 'mapas-escrituracion', component: MapasEscrituracionComponent,
+                path: 'escrituracion/clientes', component: ClientesEscrituracionComponent,
                 canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService
@@ -814,6 +818,31 @@ export const ROUTES: Routes = [
                     permisos: [Rol.Administrador, Rol.Contabilidad]
                 }
             },
+
+            {
+                path: 'escrituracion/lotes', component: LotesEscrituracionComponent,
+                canActivate: [AuthGuard],
+                resolve: {
+                    obras: ObrasUsuarioResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.Contabilidad]
+                }
+            },
+            {
+                path: 'escrituracion/mapas', component: MapasEscrituracionComponent,
+                canActivate: [AuthGuard],
+                resolve: {
+                    obras: MapasUsuarioResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.Contabilidad]
+                }
+            },
+            {
+                path: 'escrituracion/editar', component: EditarClienteEscrituracionComponent
+            },
+
 
 
 

@@ -245,10 +245,14 @@ import { TableroPedidosComponent } from './components/tablero-pedidos/tablero-pe
 import { TableroAlmacenistaComponent } from './components/tablero-almacenista/tablero-almacenista.component';
 import { EditarPagoTrabajadorDialogoComponent } from './components/admin/editar-pago-trabajador-dialogo/editar-pago-trabajador-dialogo.component';
 import { MapasEscrituracionComponent } from './components/escrituracion/mapas-escrituracion/mapas-escrituracion.component';
-import { LotesComponent } from './components/escrituracion/lotes/lotes.component';
-import { ConfiguracionComponent } from './components/escrituracion/configuracion/configuracion.component';
-import { EquiposVentasComponent } from './components/escrituracion/equipos-ventas/equipos-ventas.component';
 import { TableroEscrituracionComponent } from './components/escrituracion/tablero-escrituracion/tablero-escrituracion.component';
+import { ClientesEscrituracionComponent } from './components/escrituracion/clientes-escrituracion/clientes-escrituracion.component';
+import { LotesEscrituracionComponent } from './components/escrituracion/lotes-escrituracion/lotes-escrituracion.component';
+import { ConfiguracionEscrituracionComponent } from './components/escrituracion/configuracion-escrituracion/configuracion-escrituracion.component';
+import { EquiposVentasEscrituracionComponent } from './components/escrituracion/equipos-ventas-escrituracion/equipos-ventas-escrituracion.component';
+import { AgregarVendedorEquipoDialogoComponent } from './components/escrituracion/agregar-vendedor-equipo-dialogo/agregar-vendedor-equipo-dialogo.component';
+import { AgregarEquipoDialogoComponent } from './components/escrituracion/agregar-equipo-dialogo/agregar-equipo-dialogo.component';
+import { EditarClienteEscrituracionComponent } from './components/escrituracion/editar-cliente-escrituracion/editar-cliente-escrituracion.component';
 
 
 
@@ -408,10 +412,14 @@ export function getToken() {
     TableroAlmacenistaComponent,
     EditarPagoTrabajadorDialogoComponent,
     MapasEscrituracionComponent,
-    LotesComponent,
-    ConfiguracionComponent,
-    EquiposVentasComponent,
-    TableroEscrituracionComponent
+    TableroEscrituracionComponent,
+    ClientesEscrituracionComponent,
+    LotesEscrituracionComponent,
+    ConfiguracionEscrituracionComponent,
+    EquiposVentasEscrituracionComponent,
+    AgregarVendedorEquipoDialogoComponent,
+    AgregarEquipoDialogoComponent,
+    EditarClienteEscrituracionComponent
 
 
 
@@ -501,7 +509,9 @@ export function getToken() {
     CargoAbonoCreditoDialogoComponent,
     EditarCargoAbonoCreditoDialogoComponent,
     SaldoVentaClienteDialogoComponent,
-    EditarPagoTrabajadorDialogoComponent
+    EditarPagoTrabajadorDialogoComponent,
+    AgregarVendedorEquipoDialogoComponent,
+    AgregarEquipoDialogoComponent
 
 
 

@@ -1,0 +1,154 @@
+<div class="container mt-2 mb-5">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header padding-card-header">
+          <div class="d-flex">
+            <div class="align-self-center">Equipos Ventas</div>
+            <div class="spacer"></div>
+            <div>
+              <button mat-icon-button (click)="agregarEquipo()">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!--         <div class="form-inline m-2">
+          <div class="input-group ">
+            <input type="search" placeholder="Buscar..." class="form-control" #term (keyup)="filtrar($event)">
+            <div class="input-group-append">
+              <span class="input-group-text">
+                <i class="fa fa-search" aria-hidden="true"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+ -->
+
+        <div>
+
+
+          <mat-accordion [displayMode]="'default'">
+            <mat-expansion-panel [hideToggle]="true">
+              <mat-expansion-panel-header>
+                <span class="align-self-center">Equipo 1</span>
+                <div class="spacer"></div>
+                <div class="collapse-header-btns">
+                  <span class="badge badge-pill badge-dark">3</span>
+                  <button mat-icon-button [matMenuTriggerFor]="menu2" (click)="$event.stopPropagation()">
+                    <mat-icon>more_vert</mat-icon>
+                  </button>
+                  <mat-menu #menu2="matMenu">
+                    <button mat-menu-item (click)="agregarVendedor()">
+                      <mat-icon>add_box</mat-icon>
+                      <span>Agregar Vendedor</span>
+                    </button>
+                    <button mat-menu-item>
+                      <mat-icon>create</mat-icon>
+                      <span>Editar</span>
+                    </button>
+                  </mat-menu>
+                </div>
+              </mat-expansion-panel-header>
+              <mat-list>
+                <mat-list-item>
+                  <h3 mat-line>Gabriela Gonzalez López</h3>
+                  <button mat-icon-button>
+                    <mat-icon>clear</mat-icon>
+                  </button>
+                </mat-list-item>
+                <mat-list-item>
+                  <h3 mat-line>José Perez Gutierrez</h3>
+                  <button mat-icon-button>
+                    <mat-icon>clear</mat-icon>
+                  </button>
+                </mat-list-item>
+                <mat-list-item>
+                  <h3 mat-line>Gabriela Gonzalez López</h3>
+                  <button mat-icon-button>
+                    <mat-icon>clear</mat-icon>
+                  </button>
+                </mat-list-item>
+              </mat-list>
+            </mat-expansion-panel>
+          </mat-accordion>
+
+          <mat-accordion [displayMode]="'default'">
+            <mat-expansion-panel [hideToggle]="true">
+              <mat-expansion-panel-header>
+                <span class="align-self-center">Equipo 2</span>
+                <div class="spacer"></div>
+                <div class="collapse-header-btns">
+                  <span class="badge badge-pill badge-dark">3</span>
+                  <button mat-icon-button [matMenuTriggerFor]="menu2" (click)="$event.stopPropagation()">
+                    <mat-icon>more_vert</mat-icon>
+                  </button>
+                  <mat-menu #menu2="matMenu">
+                    <button mat-menu-item (click)="agregarVendedor()">
+                      <mat-icon>add_box</mat-icon>
+                      <span>Agregar Vendedor</span>
+                    </button>
+                    <button mat-menu-item>
+                      <mat-icon>create</mat-icon>
+                      <span>Editar</span>
+                    </button>
+                  </mat-menu>
+                </div>
+              </mat-expansion-panel-header>
+              <div class="table-responsive">
+                <table class="table table-sm table-align-middle table-striped">
+                  <!-- 
+                  <thead>
+                    <tr>
+                      <th>
+                        <mat-checkbox></mat-checkbox>
+                      </th>
+                      <th>Nombre</th>
+                      <th style="width: 90px"> </th>
+                    </tr>
+                  </thead> -->
+                  <tbody>
+                    <tr>
+                      <td>
+                        <mat-checkbox></mat-checkbox>
+                      </td>
+                      <td>Hector Herrera</td>
+                      <td>
+                        <button mat-button class="no-min">
+                          <i class="fa fa-times"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <mat-checkbox></mat-checkbox>
+                      </td>
+                      <td>Javier Rodriguez</td>
+                      <td>
+                        <button mat-button class="no-min">
+                          <i class="fa fa-times"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <mat-checkbox></mat-checkbox>
+                      </td>
+                      <td>Pedro Paramo</td>
+                      <td>
+                        <button mat-button class="no-min">
+                          <i class="fa fa-times"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
