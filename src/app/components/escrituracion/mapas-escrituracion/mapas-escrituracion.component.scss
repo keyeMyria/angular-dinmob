@@ -1,0 +1,58 @@
+.content {
+    /*********funciona cuando  pantalla > 600px **********/
+    //height: 100%;
+    //position: relative;
+    /**************************************************/
+
+
+    height: calc(100vh - 64px);
+    display: flex;
+    flex-direction: column;
+
+    /********** aplicar cuando pantalla < 600 px *****/
+    //height toolbar = pantalla < 600px? 56px: 64px
+    //height: calc(100vh - 64px);
+    /***************************/
+}
+
+@media only screen and (max-width: 600px) {
+
+    .content{
+        height: calc(100vh - 56px);
+    }  
+
+}
+
+
+
+
+.map {
+   
+    display: flex;
+    //flex-direction: column;
+    flex-grow: 1;
+    
+  
+}
+
+
+.map-toolbar {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-around;
+}
+
+.toolbar-slide-toogle {
+    align-self: center;
+    height: unset;    
+
+}
+
+:host /deep/ label.mat-slide-toggle-label {
+    margin-bottom: 0 !important;
+}
+
+
+.texto{
+    min-height: 24px;
+}

@@ -1,3 +1,216 @@
-<p>
-  mapas-escrituracion works!
-</p>
+<button mat-fab [disabled]="!lote_selected" style="position:fixed; bottom:20px; right:90px; z-index:100" (click)="verClientes()">
+    <!-- <mat-icon aria-label="fab-button">person</mat-icon> -->
+    <small>{{lote_selected?.code}}</small>
+  </button>
+  
+  <button mat-fab style="position:fixed; bottom:20px; right:20px; z-index:100" (click)="configMapa()">
+    <mat-icon aria-label="fab-button">settings</mat-icon>
+  </button>
+  
+  <div class="content p-2">
+  
+    <mat-form-field class="w-100">
+      <!-- (change)="getMapa()" -->
+      <mat-select placeholder="Obra" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)">
+        <mat-option *ngFor="let obra of obras; let i= index" [value]="i">{{ obra.nombre }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+  
+  
+    <!-- opcion 1 -->
+    <!-- <div class="map" id="map"></div> -->
+  
+  
+    <!-- opcion 2 -->
+    <!-- background-color: yellow; -->
+    <div class="map no-gutters" style="position:relative">
+  
+      <!-- mapa -->
+      <!-- style="background-color: green" -->
+      <div id="map" class="col-12 col-lg-9">
+  
+      </div>
+  
+      <!-- datos -->
+      <!-- style="background-color: red" -->
+      <div class="d-none d-lg-block col-lg-3">
+  
+        <mat-card>
+  
+          <div class="form-group row">
+            <label for="nombre" class="col-sm-4 text-muted">Lote</label>
+            <div class="col-sm-8">
+              <div class="texto">{{lote_selected?.manzana}} {{lote_selected?.nombre}}</div>
+            </div>
+          </div>
+  
+          <div class="form-group row">
+            <label for="prototipos" class="col-sm-4 text-muted">Prototipos</label>
+            <div class="col-sm-8">
+              <div class="texto">{{lote_selected?.prototipos|prototiposToString}}</div>
+            </div>
+          </div>
+  
+          <div class="form-group row">
+            <label for="valor_base" class="col-sm-4 text-muted">Valor Base</label>
+            <div class="col-sm-8">
+              <div class="texto">{{lote_selected?.valor_base|currency}}</div>
+            </div>
+          </div>
+  
+          <div class="form-group row" *ngIf="lote_selected && lote_selected.precio_excedente!='0.00' && lote_selected.metros_excedente!='0.00'">
+            <label for="excedente" class="col-sm-4 text-muted">Excedente</label>
+            <div class="col-sm-8">
+              <!--     <div class="texto">{{lote_selected?.precio_excedente * lote_selected?.metros_excedente | currency }} ({{lote_selected?.metros_excedente
+                | number }} m
+                <sup>2</sup> x {{lote_selected?.precio_excedente | currency}})</div>
+            </div> -->
+              <div class="texto">{{lote_selected?.precio_excedente * lote_selected?.metros_excedente | currency }}
+                <i class="fa fa-question-circle text-muted" aria-hidden="true" matTooltip="{{(lote_selected?.metros_excedente | number )+ 'm&#178; x ' + (lote_selected?.precio_excedente | currency)}}"></i>
+              </div>
+            </div>
+          </div>
+  
+          <div class="form-group row">
+            <label for="estado" class="col-sm-4 text-muted">Estado Venta</label>
+            <div class="col-sm-8">
+              <div class="texto">{{lote_selected?.estado_venta}}</div>
+            </div>
+          </div>
+  
+          <div class="form-group row">
+            <label for="tipo" class="col-sm-4 text-muted">Tipo</label>
+            <div class="col-sm-8">
+              <div class="texto">{{lote_selected?.tipo}}</div>
+            </div>
+          </div>
+  
+          <div class="form-group row" *ngIf="lote_selected?.forma_pago">
+            <label for="forma" class="col-sm-4 text-muted">Forma Pago</label>
+            <div class="col-sm-8">
+              <div class="texto">{{lote_selected?.forma_pago}}</div>
+            </div>
+          </div>
+  
+          <!--         <div class="form-group">
+            <label for="nombre" class="text-muted">Lote</label>
+             <input type="text" class="form-control-plaintext d-block" readonly id="nombre" [value]=" (lote_selected?.nombre_manzana + ' ' + lote_selected?.nombre)||''"> 
+            <div class="texto">{{lote_selected?.manzana}} {{lote_selected?.nombre}}</div>
+          </div>
+  
+          <div class="form-group">
+            <label for="prototipos" class="text-muted">Prototipos</label>
+            <div class="texto">{{lote_selected?.prototipos|prototiposToString}}</div>
+          </div>
+  
+          <div class="form-group">
+            <label for="valor_base" class="text-muted">Valor Base</label>
+            <div class="texto">{{lote_selected?.valor_base|currency}}</div>
+          </div>
+  
+          <div class="form-group" *ngIf="lote_selected?.precio_excedente && lote_selected?.metros_excedente">
+            <label for="excedente" class="text-muted">Excedente</label>
+            <div class="texto">{{lote_selected?.precio_excedente * lote_selected?.metros_excedente | currency }} ({{lote_selected?.metros_excedente
+              | number }}m
+              <sup>2</sup> x {{lote_selected?.precio_excedente | currency}})</div>
+          </div>
+  
+          <div class="form-group">
+            <label for="valor_ampliacion" class="text-muted">Valor Ampliación</label>
+            <div class="texto">{{lote_selected?.valor_ampliacion|currency}}</div>
+          </div>
+  
+          <div class="form-group">
+            <label for="fecha" class="text-muted">Fecha Cambio de Estado</label>
+            <div class="texto">{{lote_selected?.fecha_cambio_estado | date:'mediumDate':'':'es'}}</div>
+          </div>
+  
+          <div class="form-group">
+            <label for="estado" class="text-muted">Estado Venta</label>
+            <div class="texto">{{lote_selected?.estado_venta}}</div>
+          </div>
+  
+          <div class="form-group">
+            <label for="tipo" class="text-muted">Tipo</label>
+            <div class="texto">{{lote_selected?.tipo}}</div>
+          </div>
+  
+          <div class="form-group" *ngIf="lote_selected?.forma_pago">
+            <label for="forma" class="text-muted">Forma Pago</label>
+            <div class="texto">{{lote_selected?.forma_pago}}</div>
+          </div> -->
+  
+  
+  
+  
+  
+          <!--         <div class="form-row">
+            <div class="col-md-4 mb-3">
+              <div class="text-center">
+                <label class="text-muted">M2</label>
+                <div class="texto">{{lote_selected?.valor_ampliacion|currency}}</div>
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <div class="text-center">
+                <label class="text-muted">Precio por M2</label>
+                <div class="texto">{{lote_selected?.valor_ampliacion|currency}}</div>
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <div class="text-center">
+                <label class="text-muted">Total</label>
+                <div class="texto">{{lote_selected?.valor_ampliacion|currency}}</div>
+              </div>
+            </div>
+  
+          </div> -->
+  
+          <div class="form-group">
+            <mat-slide-toggle [checked]="verLeyenda.toggle" (change)="toggleVerLeyenda($event)">Leyenda</mat-slide-toggle>
+          </div>
+          <button mat-raised-button color="primary" class="btn-block" (click)="verClientes()" [disabled]="!lote_selected">Clientes</button>
+          <!--   <button mat-raised-button color="primary" class="btn-block" (click)="escalaPrototipos()">Prototipos</button>
+          <button mat-raised-button color="primary" class="btn-block" (click)="escalaEstados()">Lotes</button> -->
+  
+  
+  
+        </mat-card>
+  
+      </div>
+  
+    </div>
+  
+  
+  
+    <!-- <mat-toolbar color="primary" class="map-footer">
+  
+      <div class="map-toolbar">
+  
+        <button mat-button (click)="getMapa()">
+          <mat-icon>map</mat-icon> MAPA
+        </button>
+  
+        <button mat-button>
+          <mat-icon>contacts</mat-icon> CLIENTE
+        </button>
+  
+        <button mat-button>
+          <mat-icon>domain</mat-icon> LOTE
+        </button>
+  
+        <button mat-button>
+          <mat-icon>assignment_turned_in</mat-icon> ESTADO
+        </button>
+  
+        <button mat-icon-button>
+          <mat-icon>person</mat-icon>
+        </button>
+  
+        <mat-slide-toggle class="toolbar-slide-toogle">LEYENDA</mat-slide-toggle>
+  
+      </div>
+    </mat-toolbar> -->
+  
+  </div>

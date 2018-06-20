@@ -253,6 +253,7 @@ import { EquiposVentasEscrituracionComponent } from './components/escrituracion/
 import { AgregarVendedorEquipoDialogoComponent } from './components/escrituracion/agregar-vendedor-equipo-dialogo/agregar-vendedor-equipo-dialogo.component';
 import { AgregarEquipoDialogoComponent } from './components/escrituracion/agregar-equipo-dialogo/agregar-equipo-dialogo.component';
 import { EditarClienteEscrituracionComponent } from './components/escrituracion/editar-cliente-escrituracion/editar-cliente-escrituracion.component';
+import { ClientesLoteEscrituracionDialogoComponent } from './components/escrituracion/clientes-lote-escrituracion-dialogo/clientes-lote-escrituracion-dialogo.component';
 
 
 
@@ -419,7 +420,8 @@ export function getToken() {
     EquiposVentasEscrituracionComponent,
     AgregarVendedorEquipoDialogoComponent,
     AgregarEquipoDialogoComponent,
-    EditarClienteEscrituracionComponent
+    EditarClienteEscrituracionComponent,
+    ClientesLoteEscrituracionDialogoComponent
 
 
 
@@ -511,7 +513,8 @@ export function getToken() {
     SaldoVentaClienteDialogoComponent,
     EditarPagoTrabajadorDialogoComponent,
     AgregarVendedorEquipoDialogoComponent,
-    AgregarEquipoDialogoComponent
+    AgregarEquipoDialogoComponent,
+    ClientesLoteEscrituracionDialogoComponent
 
 
 
