@@ -28,7 +28,11 @@ export class AppComponent {
              return;
            } */
         //window.scrollTo(0, 0);
-        document.querySelector('.mat-sidenav-content').scrollTop = 0;
+        const sidenav = document.querySelector('.mat-sidenav-content');
+        if (sidenav) {
+          sidenav.scrollTop = 0;
+        }
+        
       });
   }
 
