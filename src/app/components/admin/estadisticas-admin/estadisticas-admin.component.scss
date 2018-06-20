@@ -1,17 +1,17 @@
 .mat-icon-card {
-    font-size: 90px; 
+    font-size: 70px;//90px; 
     position:absolute; 
     right:0; 
-    top:0;
+    bottom:0;
     color:rgba(0, 0, 0, 0.15);
 }
 
 .fa-icon-card {
-    font-size: 80px; 
+    font-size: 60px;//80px; 
     position:absolute; 
-    right:0; 
-    top:0;
+    right:0;     
+    bottom: 0;
     color:rgba(0, 0, 0, 0.15);
-    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
     padding-right: 0.6rem;
 }
