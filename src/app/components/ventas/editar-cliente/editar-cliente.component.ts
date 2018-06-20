@@ -820,36 +820,53 @@ export class EditarClienteComponent implements OnInit {
   //elimina la compra indicada  
   delCompra(compra) {
     //console.log("delCompra", compra);
-    this.clienteSrv.delCompra(compra.id_compra)
-      .subscribe(res => {
-        if (res.count == 1) {
-          let i = this.compras.indexOf(compra);
-          this.compras.splice(i, 1);
 
-          // ui estado
-          this.selection.clear();
-          this.compra_selected = {};
-          this.formInmueble.reset();
-          this.formLote.reset();
+    let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
+      data: {
+        title: "Eliminar compra",
+        content: `¿Desea eliminar la compra de: ${compra.manzana} ${compra.lote}?. Los pagos asociados también serán eliminados.`
+      },
+      width: "500px"
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result === true) {
+
+        this.clienteSrv.delCompra(compra.id_compra)
+          .subscribe(res => {
+            if (res.count == 1) {
+              let i = this.compras.indexOf(compra);
+              this.compras.splice(i, 1);
+
+              // ui estado
+              this.selection.clear();
+              this.compra_selected = {};
+              this.formInmueble.reset();
+              this.formLote.reset();
 
 
-          this.snackBar.open("Compra Eliminada", "", {
-            duration: 2000,
-            panelClass: ["bg-success", "text-white"]
+              this.snackBar.open("Compra Eliminada", "", {
+                duration: 2000,
+                panelClass: ["bg-success", "text-white"]
+              });
+            } else {
+              this.snackBar.open("Ha ocurrido un error", "", {
+                duration: 2000,
+                panelClass: ["bg-danger", "text-white"]
+              });
+            }
+
+          }, (error) => {
+            this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+              duration: 3000,
+              panelClass: ["bg-danger", "text-white"]
+            });
           });
-        } else {
-          this.snackBar.open("Ha ocurrido un error", "", {
-            duration: 2000,
-            panelClass: ["bg-danger", "text-white"]
-          });
-        }
 
-      }, (error) => {
-        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
-          duration: 3000,
-          panelClass: ["bg-danger", "text-white"]
-        });
-      });
+      }
+
+    });
 
   }
 
