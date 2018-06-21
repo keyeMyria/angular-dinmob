@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material'
 import { EditarClienteEscrituracionDialogoComponent } from '../editar-cliente-escrituracion-dialogo/editar-cliente-escrituracion-dialogo.component';
+import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component";
 
 @Component({
   selector: 'app-clientes-escrituracion',
@@ -18,7 +19,7 @@ export class ClientesEscrituracionComponent implements OnInit {
   }
 
 
-  editarCliente(){
+  editarCliente() {
     let dialogRef = this.dialog.open(EditarClienteEscrituracionDialogoComponent, {
       data: {
       },
@@ -44,6 +45,23 @@ export class ClientesEscrituracionComponent implements OnInit {
       }
 
     });
-  } 
+  }
+
+  delCliente() {
+
+    let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
+      data: {
+        title: "Eliminar Cliente",
+        content: `¿Desea eliminar el cliente?`
+      },
+      width: "500px"
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+      }
+    });
+
+  }
 
 }
