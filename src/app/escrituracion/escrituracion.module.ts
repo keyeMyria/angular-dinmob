@@ -27,19 +27,19 @@ import { TextMaskModule } from 'angular2-text-mask';
   declarations: [
     HomeComponent,
     TableroComponent,
-    ConfiguracionEscrituracionComponent,
+  /*   ConfiguracionEscrituracionComponent,
     AgregarEquipoDialogoComponent,
     AgregarVendedorEquipoDialogoComponent,
     EquiposVentasEscrituracionComponent,
     ClientesEscrituracionComponent,
     LotesEscrituracionComponent,
     MapasEscrituracionComponent,
-    EditarClienteEscrituracionComponent,
+    EditarClienteEscrituracionComponent, */
 
   ],
   entryComponents:[
-    AgregarEquipoDialogoComponent,
-    AgregarVendedorEquipoDialogoComponent
+  /*   AgregarEquipoDialogoComponent,
+    AgregarVendedorEquipoDialogoComponent */
   ]
 })
 export class EscrituracionModule { }
