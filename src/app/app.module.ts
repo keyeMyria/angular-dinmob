@@ -255,6 +255,7 @@ import { AgregarEquipoDialogoComponent } from './components/escrituracion/agrega
 import { EditarClienteEscrituracionComponent } from './components/escrituracion/editar-cliente-escrituracion/editar-cliente-escrituracion.component';
 import { ClientesLoteEscrituracionDialogoComponent } from './components/escrituracion/clientes-lote-escrituracion-dialogo/clientes-lote-escrituracion-dialogo.component';
 import { EditarClienteEscrituracionDialogoComponent } from './components/escrituracion/editar-cliente-escrituracion-dialogo/editar-cliente-escrituracion-dialogo.component';
+import { EditarLoteEscrituracionDialogoComponent } from './components/escrituracion/editar-lote-escrituracion-dialogo/editar-lote-escrituracion-dialogo.component';
 
 
 
@@ -423,7 +424,8 @@ export function getToken() {
     AgregarEquipoDialogoComponent,
     EditarClienteEscrituracionComponent,
     ClientesLoteEscrituracionDialogoComponent,
-    EditarClienteEscrituracionDialogoComponent
+    EditarClienteEscrituracionDialogoComponent,
+    EditarLoteEscrituracionDialogoComponent
 
 
 
@@ -517,7 +519,8 @@ export function getToken() {
     AgregarVendedorEquipoDialogoComponent,
     AgregarEquipoDialogoComponent,
     ClientesLoteEscrituracionDialogoComponent,
-    EditarClienteEscrituracionDialogoComponent
+    EditarClienteEscrituracionDialogoComponent,
+    EditarLoteEscrituracionDialogoComponent
 
 
 

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { EditarLoteEscrituracionDialogoComponent } from '../editar-lote-escrituracion-dialogo/editar-lote-escrituracion-dialogo.component';
+import { MatDialog, MatSnackBar, MatDrawer } from '@angular/material';
 
 @Component({
   selector: 'app-lotes-escrituracion',
@@ -14,6 +16,8 @@ export class LotesEscrituracionComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -32,5 +36,34 @@ export class LotesEscrituracionComponent implements OnInit {
     }
 
   }
+
+  editarLote() {
+    let dialogRef = this.dialog.open(EditarLoteEscrituracionDialogoComponent, {
+      data: {
+      },
+      width: '800px',
+
+    });
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result === true) {
+
+        this.snackBar.open("Equipo Agregado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      } else if (result && result.error) {
+
+        this.snackBar.open(result.error, "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+
+      }
+
+    });
+  }
+
 
 }
