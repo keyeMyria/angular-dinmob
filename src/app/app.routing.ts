@@ -131,11 +131,11 @@ export const ROUTES: Routes = [
         },
         children: [
             //{ path: '', redirectTo: 'tablero', pathMatch: 'full' },
-            {
+        /*     {
                 path: 'escrituracion',
                 loadChildren: 'app/escrituracion/escrituracion.module#EscrituracionModule',
                 data: { preload: true }
-            },
+            }, */
             {
                 path: 'clientes', component: ClientesComponent,
                 canActivate: [AuthGuard],
