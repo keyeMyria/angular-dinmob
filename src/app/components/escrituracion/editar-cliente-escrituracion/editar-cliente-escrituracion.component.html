@@ -1,7 +1,16 @@
 <!-- [disabled]="formGenerales.invalid"  -->
-<button mat-fab style="position:fixed; top:120px; right:20px; z-index: 10">
+<button mat-fab *ngIf="tab_selected=='Cliente'" [disabled]="formGenerales.invalid" (click)="guardarGenerales()" style="position:fixed; top:120px; right:20px; z-index: 10">
   <mat-icon>save</mat-icon>
 </button>
+
+<button mat-fab *ngIf="tab_selected=='Documentos'" [disabled]="formDocumentos.invalid" (click)="guardarDocumentos()" style="position:fixed; top:120px; right:20px; z-index: 10">
+  <mat-icon>clear</mat-icon>
+</button>
+
+<button mat-fab *ngIf="tab_selected=='Inmueble'" [disabled]="formInmueble.invalid" (click)="guardarInmueble()" style="position:fixed; top:120px; right:20px; z-index: 10">
+  <mat-icon>save</mat-icon>
+</button>
+
 
 
 
@@ -10,11 +19,13 @@
   <!-- Datos Generales -->
   <mat-tab label="Cliente">
     <div class="container py-3">
-      <form>
+      <form [formGroup]="formGenerales" (ngSubmit)="guardarGenerales()">
+
         <div class="form-group row">
-          <label class="col-form-label col-sm-3">Nombre</label>
+          <label for="nombre" class="col-form-label col-sm-3">Nombre</label>
           <div class="col-sm-9">
-            <input type="text" class="form-control" name="nombre">
+            <input type="text" class="form-control" id="nombre" name="nombre" formControlName="nombre" [ngClass]="{'is-invalid': formGenerales.get('nombre').invalid  && (formGenerales.get('nombre').dirty || formGenerales.get('nombre').touched )}">
+            <div class="invalid-feedback">Proporcione un nombre</div>
           </div>
         </div>
 
@@ -23,28 +34,37 @@
           <label class="col-form-label col-sm-3" for="fecha_nacimiento">Fecha de nacimiento</label>
           <div class="col-sm-9">
             <div class="input-group">
-              <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_nacimiento" id="fecha_nacimiento" [matDatepicker]="dpFechaNacimiento">
+              <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_nacimiento" id="fecha_nacimiento" [matDatepicker]="dpFechaNacimiento"
+                formControlName="fecha_nacimiento" [ngClass]="{'is-invalid':formGenerales.get('fecha_nacimiento').invalid && (formGenerales.get('fecha_nacimiento').dirty || formGenerales.get('fecha_nacimiento').touched )}">
               <span class="input-group-append">
                 <button class="btn btn-secondary" type="button" (click)="dpFechaNacimientoPF.open()">
                   <i class="fa fa-calendar"></i>
                 </button>
               </span>
             </div>
+            <div *ngIf="formGenerales.get('fecha_nacimiento').invalid && (formGenerales.get('fecha_nacimiento').dirty || formGenerales.get('fecha_nacimiento').touched )"
+              class="visible invalid-feedback">
+              Seleccione una fecha
+            </div>
             <mat-datepicker touchUi="true" #dpFechaNacimiento></mat-datepicker>
           </div>
         </div>
 
         <div class="form-group row">
-          <label class="col-form-label col-sm-3">CURP</label>
+          <label for="curp_cliente" class="col-form-label col-sm-3">CURP</label>
           <div class="col-sm-9">
-            <input [textMask]="{mask: maskCURP}" type="text" class="form-control" name="curp">
+            <input [textMask]="{mask: maskCURP}" type="text" class="form-control" id="curp_cliente" name="curp_cliente" formControlName="curp_cliente"
+              [ngClass]="{'is-invalid': formGenerales.get('curp_cliente').invalid  && (formGenerales.get('curp_cliente').dirty || formGenerales.get('curp_cliente').touched )}">
+            <div class="invalid-feedback">Proporcione una Curp</div>
           </div>
         </div>
 
         <div class="form-group row">
-          <label class="col-form-label col-sm-3">Número de celular</label>
+          <label for="telefono_cliente" class="col-form-label col-sm-3">Número de celular</label>
           <div class="col-sm-9">
-            <input [textMask]="{mask: maskPhone}" type="text" class="form-control" name="celular">
+            <input [textMask]="{mask: maskPhone}" type="text" class="form-control" id="telefono_cliente" name="telefono_cliente" formControlName="telefono_cliente"
+              [ngClass]="{'is-invalid': formGenerales.get('telefono_cliente').invalid  && (formGenerales.get('telefono_cliente').dirty || formGenerales.get('telefono_cliente').touched )}">
+            <div class="invalid-feedback">Proporcione un numero telefónico</div>
           </div>
         </div>
 
@@ -53,31 +73,31 @@
 
   </mat-tab>
 
-
-
   <!-- <Documentos> -->
   <mat-tab label="Documentos">
     <div class="container py-3">
-      <mat-list>
-        <mat-list-item>
-          <h3 mat-line>Curp</h3>
-          <button mat-icon-button>
-            <mat-checkbox></mat-checkbox>
-          </button>
-        </mat-list-item>
-        <mat-list-item>
-          <h3 mat-line>IFE</h3>
-          <button mat-icon-button>
-            <mat-checkbox></mat-checkbox>
-          </button>
-        </mat-list-item>
-        <mat-list-item>
-          <h3 mat-line>RFC</h3>
-          <button mat-icon-button>
-            <mat-checkbox></mat-checkbox>
-          </button>
-        </mat-list-item>
-      </mat-list>
+      <form [formGroup]="formDocumentos" (ngSubmit)="guardarDocumentos()">
+        <mat-list>
+          <mat-list-item>
+            <h3 mat-line>Curp</h3>
+            <button mat-icon-button>
+              <mat-checkbox formControlName="curp_documentos"></mat-checkbox>
+            </button>
+          </mat-list-item>
+          <mat-list-item>
+            <h3 mat-line>IFE</h3>
+            <button mat-icon-button>
+              <mat-checkbox formControlName="ife_documentos"></mat-checkbox>
+            </button>
+          </mat-list-item>
+          <mat-list-item>
+            <h3 mat-line>RFC</h3>
+            <button mat-icon-button>
+              <mat-checkbox formControlName="rfc_documentos"></mat-checkbox>
+            </button>
+          </mat-list-item>
+        </mat-list>
+      </form>
     </div>
   </mat-tab>
 
@@ -149,21 +169,21 @@
 
       <!-- propiedades del lote -->
 
-      <form>
+      <form [formGroup]="formInmueble" (ngSubmit)="guardarInmueble()">
 
         <div class="form-group row">
-          <label for="" class="col-form-label col-sm-3">Precio de Lista</label>
+          <label class="col-form-label col-sm-3">Precio de Lista</label>
           <div class="col-sm-9">
-            <input [textMask]="{mask: numbermask}" type="text" class="form-control">
+            <input [textMask]="{mask: numbermask}" type="text" class="form-control" name="precio_lista" formControlName="precio_lista">
           </div>
         </div>
 
         <div class="form-group row mt-3">
           <label class="col-form-label col-sm-3">Vendedor</label>
           <div class="col-sm-9">
-            <select class="form-control" name="">
-              <option [value]="1">Vendedor 1</option>
-              <option [value]="2">Vendedor 2</option>
+            <select class="form-control" name="id_vendedor" formControlName="id_vendedor">
+              <option>Seleccionar...</option>
+              <option>Vendedor 1</option>
             </select>
           </div>
         </div>
@@ -171,7 +191,7 @@
         <div class="form-group row mt-3">
           <label class="col-form-label col-sm-3">Tipo Crédito</label>
           <div class="col-sm-9">
-            <select class="form-control" name="">
+            <select class="form-control" name="tipo_credito" formControlName="tipo_credito">
               <option [value]="1">Crédito 1</option>
               <option [value]="2">Crédito 2</option>
             </select>
