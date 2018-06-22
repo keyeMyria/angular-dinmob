@@ -11,6 +11,7 @@ import { MatDialog, MatSnackBar } from '@angular/material';
   styleUrls: ['./editar-cliente-escrituracion-dialogo.component.scss']
 })
 export class EditarClienteEscrituracionDialogoComponent implements OnInit {
+  estados_selected: string;
   numbermask = createNumberMask({
     allowDecimal: true,
     prefix: '',

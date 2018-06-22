@@ -9,6 +9,8 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 })
 export class EditarLoteEscrituracionDialogoComponent implements OnInit {
 
+  estados_selected: string;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<EditarLoteEscrituracionDialogoComponent>,
