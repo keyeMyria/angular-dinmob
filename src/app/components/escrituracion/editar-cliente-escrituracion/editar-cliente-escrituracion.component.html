@@ -30,21 +30,22 @@
         </div>
 
         <div class="form-group row">
-            <label for="fecha_nacimiento" class="col-form-label col-sm-3">Fecha Nacimiento</label>
-            <div class="input-group col-sm-9">
-              <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="fecha_nacimiento" placement="bottom-left" [matDatepicker]="dpFechaNacimiento"
-                formControlName="fecha_nacimiento" [ngClass]="{'is-invalid':formGenerales.get('fecha_nacimiento').invalid && (formGenerales.get('fecha_nacimiento').dirty || formGenerales.get('fecha_nacimiento').touched )}">
-              <span class="input-group-append">
-                <button class="btn btn-secondary" type="button" (click)="dpFechaNacimiento.open()">
-                  <i class="fa fa-calendar"></i>
-                </button>
-              </span>
-            </div>
-            <div *ngIf="formGenerales.get('fecha_nacimiento').invalid && (formGenerales.get('fecha_nacimiento').dirty || formGenerales.get('fecha_nacimiento').touched )" class="visible invalid-feedback">
+          <label for="fecha_nacimiento" class="col-form-label col-sm-3">Fecha Nacimiento</label>
+          <div class="input-group col-sm-9">
+            <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="fecha_nacimiento" placement="bottom-left" [matDatepicker]="dpFechaNacimiento"
+              formControlName="fecha_nacimiento" [ngClass]="{'is-invalid':formGenerales.get('fecha_nacimiento').invalid && (formGenerales.get('fecha_nacimiento').dirty || formGenerales.get('fecha_nacimiento').touched )}">
+            <span class="input-group-append">
+              <button class="btn btn-secondary" type="button" (click)="dpFechaNacimiento.open()">
+                <i class="fa fa-calendar"></i>
+              </button>
+            </span>
+            <div *ngIf="formGenerales.get('fecha_nacimiento').invalid && (formGenerales.get('fecha_nacimiento').dirty || formGenerales.get('fecha_nacimiento').touched )"
+              class="visible invalid-feedback">
               Seleccione una fecha
             </div>
-            <mat-datepicker touchUi="true" #dpFechaNacimiento></mat-datepicker>
           </div>
+          <mat-datepicker touchUi="true" #dpFechaNacimiento></mat-datepicker>
+        </div>
 
         <div class="form-group row">
           <label for="curp_cliente" class="col-form-label col-sm-3">CURP</label>
@@ -56,7 +57,7 @@
         </div>
 
         <div class="form-group row">
-          <label for="telefono_cliente" class="col-form-label col-sm-3">Número de celular</label>
+          <label for="telefono_cliente" class="col-form-label col-sm-3">Teléfono</label>
           <div class="col-sm-9">
             <input [textMask]="{mask: maskPhone}" type="text" class="form-control" id="telefono_cliente" name="telefono_cliente" formControlName="telefono_cliente"
               [ngClass]="{'is-invalid': formGenerales.get('telefono_cliente').invalid  && (formGenerales.get('telefono_cliente').dirty || formGenerales.get('telefono_cliente').touched )}">
@@ -191,6 +192,38 @@
               <option [value]="1">Crédito 1</option>
               <option [value]="2">Crédito 2</option>
             </select>
+          </div>
+        </div>
+
+        <div class="form-group row mt-3">
+          <label class="col-form-label col-sm-3">Estado</label>
+          <div class="col-sm-9">
+            <select class="form-control" name="estado" formControlName="estado">
+              <option [value]="1">Apartado</option>
+              <option [value]="2">Documentos</option>
+              <option [value]="3">Escriturado</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Fecha Apartado</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Fecha Documentos</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-form-label col-sm-3">Fecha Escriturado</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control">
           </div>
         </div>
 

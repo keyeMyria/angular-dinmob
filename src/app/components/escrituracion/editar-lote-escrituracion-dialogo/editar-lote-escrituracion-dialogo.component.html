@@ -13,12 +13,7 @@
           <th>Estado</th>
           <th>Activación</th>
           <th>Cancelación</th>
-          <th class="text-right" style="width:66px">
-            <button mat-icon-button tabindex="-1">
-              <mat-icon>add</mat-icon>
-            </button>
-          </th>
-
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -79,7 +74,7 @@
           </div>
 
           <div class="form-group row">
-            <label class="col-form-label col-sm-3">Número de celular</label>
+            <label class="col-form-label col-sm-3">Teléfono</label>
             <div class="col-sm-9">
               <input [textMask]="{mask: maskPhone}" type="text" class="form-control" name="celular">
             </div>
@@ -123,26 +118,17 @@
     <!-- <Documentos> -->
     <mat-tab label="Documentos">
       <div class="container py-3">
-        <mat-list>
-          <mat-list-item>
-            <h3 mat-line>Curp</h3>
-            <button mat-icon-button>
-              <mat-checkbox></mat-checkbox>
-            </button>
-          </mat-list-item>
-          <mat-list-item>
-            <h3 mat-line>IFE</h3>
-            <button mat-icon-button>
-              <mat-checkbox></mat-checkbox>
-            </button>
-          </mat-list-item>
-          <mat-list-item>
-            <h3 mat-line>RFC</h3>
-            <button mat-icon-button>
-              <mat-checkbox></mat-checkbox>
-            </button>
-          </mat-list-item>
-        </mat-list>
+        <mat-selection-list>
+          <mat-list-option>
+            Curp
+          </mat-list-option>
+          <mat-list-option>
+            IFE
+          </mat-list-option>
+          <mat-list-option>
+            RFC
+          </mat-list-option>
+        </mat-selection-list>
       </div>
     </mat-tab>
 
@@ -158,5 +144,5 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button type="button" [mat-dialog-close]="false">CANCELAR</button>
-  <button type="submit" mat-button color="primary">ACTUALIZAR</button>
+  <button type="submit" mat-button color="primary">GUARDAR</button>
 </div>
