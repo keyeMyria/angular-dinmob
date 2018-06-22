@@ -12,7 +12,7 @@ import { PrototiposService } from '../../../services/prototipos.service';
 export class EditarSubpartidaDialogoComponent implements OnInit {
   form: FormGroup;
 
-  constructor( 
+  constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<EditarSubpartidaDialogoComponent>,
     private fb: FormBuilder,
@@ -29,15 +29,15 @@ export class EditarSubpartidaDialogoComponent implements OnInit {
   }
 
   guardar() {
-    console.log("subpartida", this.form.value);
+    //console.log("subpartida", this.form.value);
     this.prototipoSrv.updatePartida(this.data.subpartida.id_partida, this.form.value)
-    .subscribe(partida => {
-      this.data.subpartida.codigo = partida.codigo;
-      this.data.subpartida.nombre = partida.nombre;
-      this.dialogRef.close(true);
-    }, (error) => {
-      this.dialogRef.close({ error: "Ha ocurrido un error de conexión. Inténtelo más tarde" });
-    })
+      .subscribe((partida: any) => {
+        this.data.subpartida.codigo = partida.codigo;
+        this.data.subpartida.nombre = partida.nombre;
+        this.dialogRef.close(true);
+      }, (error) => {
+        this.dialogRef.close({ error: "Ha ocurrido un error de conexión. Inténtelo más tarde" });
+      })
   }
 
 }

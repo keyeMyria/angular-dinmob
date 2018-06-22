@@ -1,11 +1,13 @@
+
+import {forkJoin as observableForkJoin,  of ,  Observable } from 'rxjs';
+
+import {switchMap} from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { EditarEntradaDialogoComponent } from 'app/components/almacen/editar-entrada-dialogo/editar-entrada-dialogo.component';
 import { MatDialog, MatSnackBar, PageEvent } from '@angular/material';
 import { EntradasService } from 'app/services/entradas.service';
-import { of } from "rxjs/observable/of";
 import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
-import { Observable } from 'rxjs/Observable';
 import { VerEntradaDialogoComponent } from '../ver-entrada-dialogo/ver-entrada-dialogo.component';
 import { Rol } from "../../../constantes/roles";
 import { AuthService } from '../../../services/auth.service';
@@ -67,18 +69,18 @@ export class EntradasComponent implements OnInit {
     
           }); */
 
-    this.route.paramMap
-      .switchMap((params: ParamMap) => {
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
-          return Observable.forkJoin(
+          return observableForkJoin(
             this.entradaSrv.getCountEntradasObra(params.get("obra")),
             this.entradaSrv.getPageEntradasObra(params.get("obra"), this.pageSize, 0)
           );
         } else {
           return of([0, []]);
         }
-      }).subscribe(res => {
+      })).subscribe(res => {
         this.length = res[0].count;
         this.entradas = res[1];
 
@@ -97,8 +99,8 @@ export class EntradasComponent implements OnInit {
   verEntrada(entrada) {
 
     this.entradasSrv.getEntrada(entrada.id_entrada)
-      .subscribe(res => {
-        console.log("salida OK", res);
+      .subscribe((res:any) => {
+        //console.log("salida OK", res);
         let dialogRef = this.dialog.open(VerEntradaDialogoComponent, {
           data: {
             datos: res.datos,

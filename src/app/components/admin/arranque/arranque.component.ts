@@ -1,3 +1,7 @@
+
+import {of as observableOf,  Observable } from 'rxjs';
+
+import {switchMap} from 'rxjs/operators';
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { LotesService } from 'app/services/lotes.service';
 import { ComentarioAvancesDialogoComponent } from 'app/components/residente/comentario-avances-dialogo/comentario-avances-dialogo.component';
@@ -5,7 +9,6 @@ import { MatDialog, MatDrawer, MatSnackBar } from '@angular/material';
 import { ObrasService } from 'app/services/obras.service';
 import { AuthService } from 'app/services/auth.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { FotoPartidaDialogoComponent } from 'app/components/residente/foto-partida-dialogo/foto-partida-dialogo.component';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -58,15 +61,15 @@ export class ArranqueComponent implements OnInit {
         //console.log("resusltado resolve ", data);
         this.obras = data.obras;
       });
-    this.route.paramMap
-      .switchMap((params: ParamMap) => {
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
           return this.obraSrv.getAcordeonManzanas(params.get("obra"));
         } else {
-          return Observable.of({ datos: {} });
+          return observableOf({ datos: {} });
         }
-      }).subscribe(obra => {
+      })).subscribe(obra => {
         //console.log("obra", obra);
         this.obra = obra;
       });
@@ -132,8 +135,8 @@ export class ArranqueComponent implements OnInit {
     });
 
     this.loteSrv.delAvancePartida(ids, this.lote.id_lote)
-      .subscribe(res => {
-        console.log("partidas", res.count);
+      .subscribe((res: any) => {
+        //console.log("partidas", res.count);
 
         this.selection.selected.forEach(partida => {
 
@@ -208,7 +211,7 @@ export class ArranqueComponent implements OnInit {
     //console.log("getAvancesLote", lote);
 
     this.loteSrv.getAvances(lote.id_lote)
-      .subscribe(response => {
+      .subscribe((response: any) => {
         this.lote = response.lote;
         this.acordeon = response.acordeon;
         this.selection = new SelectionModel<any>(true, []);

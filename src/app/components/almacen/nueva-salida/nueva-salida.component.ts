@@ -5,7 +5,7 @@ import { MatDrawer, MatDialog, MatSnackBar } from '@angular/material';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ObrasService } from 'app/services/obras.service';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { LotesService } from 'app/services/lotes.service';
 import { InsumoService } from 'app/services/insumo.service';
 import { AlertaDialogoComponent } from 'app/components/admin/alerta-dialogo/alerta-dialogo.component';
@@ -36,16 +36,16 @@ export class NuevaSalidaComponent implements OnInit {
   obras: any = [];
   obra_selected: string = "";
   obra: any;
-  partidas: any[] = [];
+  partidas: any = [];
   partida_selected: string = "";
   lote_selected: any = {};
-  insumos: any[] = [];
+  insumos: any = [];
   residentes: any = [];
   trabajadores: any = [];
   manzanas: any = [];
   usuario: any = {};
   nombre_partida: string = "";
-  insumos_filtrados: any[] = [];
+  insumos_filtrados: any = [];
 
   constructor(
     private fb: FormBuilder,
@@ -201,7 +201,7 @@ export class NuevaSalidaComponent implements OnInit {
 
           this.salidaSrv.createSalida(this.form.value, insumos_salida)
             .subscribe(res => {
-             
+
               //console.log("respuesta", res);
               this.initForm();
 
@@ -211,7 +211,7 @@ export class NuevaSalidaComponent implements OnInit {
               });
 
             }, error => {
-         
+
               this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
                 duration: 3000,
                 panelClass: ["bg-danger", "text-white"]

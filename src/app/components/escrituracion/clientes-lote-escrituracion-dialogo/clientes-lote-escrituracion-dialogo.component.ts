@@ -11,6 +11,11 @@ import { ReporteService } from 'app/services/reporte.service';
   styleUrls: ['./clientes-lote-escrituracion-dialogo.component.scss']
 })
 export class ClientesLoteEscrituracionDialogoComponent implements OnInit {
+
+  public maskCURP = [/[A-Z0-9]/i, /[A-Z0-9]/i, /[A-Z0-9]/i, /[A-Z0-9]/i, '-', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /[A-Z]/i, '-', /[A-Z]/i, /[A-Z]/i, '-', /[A-Z0-9]/i, /[A-Z0-9]/i, /[A-Z0-9]/i, '-', /[A-Z0-9]/i, /[A-Z0-9]/i];
+  public maskPhone = ['(', /\d/, /\d/, /\d/, ')', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+
+
   cliente_selected: any = { pagos: [] };
 
   //selector de clientes

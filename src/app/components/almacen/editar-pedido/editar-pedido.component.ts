@@ -1,8 +1,11 @@
+
+import {of as observableOf, forkJoin as observableForkJoin,  Observable } from 'rxjs';
+
+import {switchMap} from 'rxjs/operators';
 import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { MatSnackBar, MatDrawer, MatDialog, MatTabChangeEvent, MatTabGroup } from '@angular/material';
-import { Observable } from 'rxjs/Observable';
 import { ObrasService } from 'app/services/obras.service';
 import { PedidoService } from '../../../services/pedido.service';
 import { AlertaDialogoComponent } from 'app/components/admin/alerta-dialogo/alerta-dialogo.component';
@@ -53,18 +56,18 @@ export class EditarPedidoComponent implements OnInit {
         this.estados = data.estados;
       });
 
-    this.route.paramMap
-      .switchMap((params: ParamMap) => {
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
-          return Observable.forkJoin(
+          return observableForkJoin(
             this.obraSrv.getAcordeonManzanas(params.get("obra")),
             this.pedidoSrv.getPedidoEditable(params.get("id"))
           );
         } else {
-          return Observable.of([[], {}]);
+          return observableOf([[], {}]);
         }
-      }).subscribe((res: any) => {
+      })).subscribe((res: any) => {
         console.log("obra", res);
         this.obra = res[0];
 

@@ -1,10 +1,12 @@
+
+import {forkJoin as observableForkJoin,  of ,  Observable } from 'rxjs';
+
+import {switchMap} from 'rxjs/operators';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MapasService } from "app/services/mapas.service";
 import 'jvectormap';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import { of } from "rxjs/observable/of";
-import { Observable } from 'rxjs/Observable';
 import { CurrencyPipe } from '@angular/common';
 import { LotesService } from 'app/services/lotes.service';
 import { MapasVentasConfigDialogoComponent } from 'app/components/ventas/mapas-ventas-config-dialogo/mapas-ventas-config-dialogo.component';
@@ -64,8 +66,8 @@ export class MapasEscrituracionComponent implements OnInit, OnDestroy {
 
 
 
-    this.route.paramMap
-      .switchMap((params: ParamMap) => {
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
         let obra;
 
         if (params.has("index")) {
@@ -75,7 +77,7 @@ export class MapasEscrituracionComponent implements OnInit, OnDestroy {
           obra = this.obras[params.get("index")];
 
           //unimos la consulta de los valores y el mapa
-          return Observable.forkJoin(
+          return observableForkJoin(
             this.mapaSrv.getVentasLotesObra(obra.id_obra),
             this.mapaSrv.getMapaObra(obra.mapa)
           )
@@ -89,7 +91,7 @@ export class MapasEscrituracionComponent implements OnInit, OnDestroy {
           obra = this.obras[this.obra_selected]; //this.getObra(this.obra_selected);
 
           //unimos la consulta de los valores y el mapa
-          return Observable.forkJoin(
+          return observableForkJoin(
             this.mapaSrv.getVentasLotesObra(obra.id_obra),
             this.mapaSrv.getMapaObra(obra.mapa)
           )
@@ -98,7 +100,7 @@ export class MapasEscrituracionComponent implements OnInit, OnDestroy {
           return of([[], {}]);
         }
 
-      }).subscribe(res => {
+      })).subscribe((res: any) => {
 
         //console.log("respuesta", res);
 
@@ -184,8 +186,8 @@ export class MapasEscrituracionComponent implements OnInit, OnDestroy {
   cargarObra(id_obra) {
 
     //comparacion de tipo porque 0==""
-    console.log("cargar obra", id_obra);
-    
+    //console.log("cargar obra", id_obra);
+
     if (id_obra !== "") {
       this.router.navigate(["/escrituracion/mapas", { index: id_obra }]);
     } else {
@@ -208,7 +210,7 @@ export class MapasEscrituracionComponent implements OnInit, OnDestroy {
 
   verClientes() {
     this.loteSrv.getDetallesLoteVentas(this.lote_selected.id_lote)
-      .subscribe(res => {
+      .subscribe((res:any) => {
 
         let dialogRef = this.dialog.open(ClientesLoteEscrituracionDialogoComponent, {
           data: {

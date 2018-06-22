@@ -1,9 +1,10 @@
+
+import {throwError as observableThrowError,  Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ConfigService } from 'app/services/config.service';
 import { catchError, map, tap } from 'rxjs/operators';
 import "rxjs/add/observable/throw";
-import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class PagoTrabajadorService {
@@ -47,7 +48,7 @@ export class PagoTrabajadorService {
       // TODO: better job of transforming error for user consumption
       console.log(`${operation} failed: ${error.message} (${error.status}- ${error.statusText})`);
 
-      return Observable.throw(error);
+      return observableThrowError(error);
     };
   }
 }

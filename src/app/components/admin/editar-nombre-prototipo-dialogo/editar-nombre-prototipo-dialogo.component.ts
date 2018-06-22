@@ -34,7 +34,7 @@ export class EditarNombrePrototipoDialogoComponent implements OnInit {
   guardar() {
 
     this.prototipoSrv.updatePrototipo(this.data.prototipo.id_prototipo, this.form.value)
-      .subscribe(prototipo => {
+      .subscribe((prototipo: any) => {
         this.data.prototipo.nombre = prototipo.nombre;
         this.dialogRef.close(true);
       }, (error) => {

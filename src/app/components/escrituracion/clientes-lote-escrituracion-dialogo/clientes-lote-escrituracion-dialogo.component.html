@@ -109,7 +109,8 @@
     <!-- Datos Generales -->
     <mat-tab label="Cliente">
       <div class="container py-3">
-        <form *ngFor="let pago of cliente_selected.pagos">
+        <form>
+
           <div class="form-group row">
             <label class="col-form-label col-sm-3">Nombre</label>
             <div class="col-sm-9">
@@ -124,7 +125,7 @@
               <div class="input-group">
                 <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_nacimiento" id="fecha_nacimiento" [matDatepicker]="dpFechaNacimiento">
                 <span class="input-group-append">
-                  <button class="btn btn-secondary" type="button" (click)="dpFechaNacimientoPF.open()">
+                  <button class="btn btn-secondary" type="button" (click)="dpFechaNacimiento.open()">
                     <i class="fa fa-calendar"></i>
                   </button>
                 </span>
@@ -150,7 +151,7 @@
           <div class="form-group row">
             <label class="col-form-label col-sm-3">Precio Venta</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" name="" []>
+              <input type="text" class="form-control" name="">
             </div>
           </div>
 
@@ -185,26 +186,12 @@
     <!-- <Documentos> -->
     <mat-tab label="Documentos">
       <div class="container py-3">
-        <mat-list *ngFor="let pago of cliente_selected.pagos">
-          <mat-list-item>
-            <h3 mat-line>Curp</h3>
-            <button mat-icon-button>
-              <mat-checkbox></mat-checkbox>
-            </button>
-          </mat-list-item>
-          <mat-list-item>
-            <h3 mat-line>IFE</h3>
-            <button mat-icon-button>
-              <mat-checkbox></mat-checkbox>
-            </button>
-          </mat-list-item>
-          <mat-list-item>
-            <h3 mat-line>RFC</h3>
-            <button mat-icon-button>
-              <mat-checkbox></mat-checkbox>
-            </button>
-          </mat-list-item>
-        </mat-list>
+        <mat-selection-list>
+          <mat-list-option>IFE</mat-list-option>
+          <mat-list-option>CURP</mat-list-option>
+          <mat-list-option>ACTA DE NACIMIENTO</mat-list-option>
+          <mat-list-option>COMPROBANTE DE DOMICILIO</mat-list-option>
+        </mat-selection-list>
       </div>
     </mat-tab>
 

@@ -11,7 +11,7 @@
 
   <mat-form-field class="w-100">
     <!-- (change)="getMapa()" -->
-    <mat-select placeholder="Obra" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)">
+    <mat-select placeholder="Obra" [(ngModel)]="obra_selected" (selectionChange)="cargarObra(obra_selected)">
       <mat-option *ngFor="let obra of obras; let i= index" [value]="i">{{ obra.nombre }}</mat-option>
     </mat-select>
   </mat-form-field>

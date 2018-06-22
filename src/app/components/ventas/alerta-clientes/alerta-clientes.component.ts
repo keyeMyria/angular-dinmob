@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { ClientesService } from 'app/services/clientes.service';
-import { of } from "rxjs/observable/of";
+import { of } from "rxjs";
 import { ConfirmarDeshabilitarAlertaDialogoComponent } from 'app/components/ventas/confirmar-deshabilitar-alerta-dialogo/confirmar-deshabilitar-alerta-dialogo.component';
 import { MatSnackBar, MatDialog } from '@angular/material';
 
@@ -12,7 +12,7 @@ import { MatSnackBar, MatDialog } from '@angular/material';
   styleUrls: ['./alerta-clientes.component.scss']
 })
 export class AlertaClientesComponent implements OnInit {
-  clientes: any[] = [];
+  clientes: any = [];
   obras: any = [];
   obra_selected: string = "";
 
@@ -58,17 +58,17 @@ export class AlertaClientesComponent implements OnInit {
     this.router.navigate(["/editar-cliente", cliente.id_cliente]);
   }
 
-/* 
-  cargarObra(id_obra) {
-
-    if (id_obra) {
-      this.router.navigate([".", { obra: id_obra }]);
-    } else {
-      this.router.navigate([".", {}]);
-
-    }
-
-  } */
+  /* 
+    cargarObra(id_obra) {
+  
+      if (id_obra) {
+        this.router.navigate([".", { obra: id_obra }]);
+      } else {
+        this.router.navigate([".", {}]);
+  
+      }
+  
+    } */
 
 
   deshabilitarAlerta(cliente) {

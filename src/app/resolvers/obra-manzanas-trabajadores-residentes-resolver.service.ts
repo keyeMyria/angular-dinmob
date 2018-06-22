@@ -1,6 +1,8 @@
+
+import {map, take} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { ObrasService } from '../services/obras.service';
 
 
@@ -17,7 +19,7 @@ export class ObraManzanasTrabajadoresResidentesResolverService implements Resolv
 
     let id = route.paramMap.get('obra');
 
-    return this.obraSrv.getManzanasResidentesTrabajadores(id).take(1).map((res: any[]) => {
+    return this.obraSrv.getManzanasResidentesTrabajadores(id).pipe(take(1),map((res: any[]) => {
      
       if (res) {
         return res;
@@ -25,7 +27,7 @@ export class ObraManzanasTrabajadoresResidentesResolverService implements Resolv
         //this.router.navigate(['/tablero']);
         return null;
       }
-    });
+    }),);
 
   }
 

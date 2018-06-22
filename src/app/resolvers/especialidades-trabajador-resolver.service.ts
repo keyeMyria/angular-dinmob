@@ -1,7 +1,9 @@
+
+import {map, take} from 'rxjs/operators';
 import { TrabajadorService } from '../services/trabajador.service';
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 
 @Injectable()
@@ -16,7 +18,7 @@ export class EspecialidadesTrabajadorResolverService implements Resolve<any[]> {
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any[]> {
 
 
-    return this.trabajadorSrv.getEspecialidades().take(1).map((especialidades: any[]) => {
+    return this.trabajadorSrv.getEspecialidades().pipe(take(1),map((especialidades: any[]) => {
       
       if (especialidades) {
         return especialidades;
@@ -24,7 +26,7 @@ export class EspecialidadesTrabajadorResolverService implements Resolve<any[]> {
         //this.router.navigate(['/tablero']);
         return null;
       }
-    });
+    }),);
 
   }
 

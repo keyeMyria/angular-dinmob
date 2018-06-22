@@ -1,7 +1,9 @@
+
+import {switchMap} from 'rxjs/operators';
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { InsumoService } from 'app/services/insumo.service';
-import { of } from "rxjs/observable/of";
+import { of } from "rxjs";
 import { EntradasService } from '../../../services/entradas.service';
 import { MatSnackBar, MatCheckbox, MatDialog } from '@angular/material';
 import { NgForm } from '@angular/forms';
@@ -19,10 +21,10 @@ export class NuevaEntradaComponent implements OnInit {
   obras: any = [];
   proveedores: any = [];
   obra_selected: string = "";
-  insumos: any[] = [];
+  insumos: any = [];
   id_proveedor: string = "";
   folio: string = "";
-  insumos_filtrados: any[] = [];
+  insumos_filtrados: any = [];
   nota: any;
 
   constructor(
@@ -40,15 +42,15 @@ export class NuevaEntradaComponent implements OnInit {
         this.obras = data.obras;
         this.proveedores = data.proveedores;
       });
-    this.route.paramMap
-      .switchMap((params: ParamMap) => {
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
           return this.insumoSrv.getMaterialesObra(params.get("obra"));
         } else {
           return of([]);
         }
-      }).subscribe(insumos => {
+      })).subscribe(insumos => {
 
         this.insumos = insumos;
         this.insumos_filtrados = this.insumos.slice();
@@ -80,7 +82,7 @@ export class NuevaEntradaComponent implements OnInit {
 
     if (insumos.length > 0) {
       this.entradaSrv.createEntrada(this.obra_selected, insumos, this.id_proveedor, this.folio, this.nota)
-        .subscribe(insumos => {
+        .subscribe((insumos: any) => {
           //console.log("respuesta", insumos);
           //volver a leer los insumos
           this.insumos = insumos;
@@ -112,7 +114,7 @@ export class NuevaEntradaComponent implements OnInit {
         data: {
           title: "Corregir",
           content: "La entrada que intenta crear no contiene ningún material.",
-          icon:true
+          icon: true
         },
         //width: '500px',
       });
