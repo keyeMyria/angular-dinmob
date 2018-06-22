@@ -186,7 +186,7 @@ export class MapasEscrituracionComponent implements OnInit, OnDestroy {
   cargarObra(id_obra) {
 
     //comparacion de tipo porque 0==""
-    console.log("cargar obra", id_obra);
+    //console.log("cargar obra", id_obra);
 
     if (id_obra !== "") {
       this.router.navigate(["/escrituracion/mapas", { index: id_obra }]);
