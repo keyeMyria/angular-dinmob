@@ -28,7 +28,7 @@ export class EditarInstitutoCreditoDialogoComponent implements OnInit {
 
   guardar() {
     this.institucionSrv.updateInstitucion(this.data.institucion.id_institucion_credito, this.form.value)
-      .subscribe(institucion => {
+      .subscribe((institucion: any) => {
         this.data.institucion.nombre = institucion.nombre;
         this.dialogRef.close(true);
       }, (error) => {

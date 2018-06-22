@@ -1,7 +1,9 @@
+
+import {switchMap} from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { VentasPagosService } from 'app/services/ventas-pagos.service';
-import { of } from "rxjs/observable/of";
+import { of } from "rxjs";
 import { MatSnackBar, MatDialog } from '@angular/material';
 import * as moment from 'moment';
 import { SaldoVentaClienteDialogoComponent } from '../saldo-venta-cliente-dialogo/saldo-venta-cliente-dialogo.component';
@@ -22,7 +24,7 @@ export class VentasPagosComponent implements OnInit {
   pagosFiltrados: any = [];
   tipo_pago_selected: string = "";
   usuario: any;
-  Rol= Rol;
+  Rol = Rol;
 
   constructor(
     private route: ActivatedRoute,
@@ -44,15 +46,15 @@ export class VentasPagosComponent implements OnInit {
         this.tipos = data.tipos;
       });
 
-    this.route.paramMap
-      .switchMap((params: ParamMap) => {
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
           return this.pagoSrv.getPagosObra(params.get("obra"));
         } else {
           return of([]);
         }
-      }).subscribe(pagos => {
+      })).subscribe(pagos => {
         this.pagos = pagos;
         this.pagosFiltrados = this.pagos.slice();
       }, (error) => {
@@ -68,7 +70,7 @@ export class VentasPagosComponent implements OnInit {
     }
 
     this.pagoSrv.setValidacion(pago.id_pago, validado)
-      .subscribe(res => {
+      .subscribe((res: any) => {
         pago.validado = res.validado;
         this.snackBar.open("Pago Actualizado", "", {
           duration: 2000,

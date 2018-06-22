@@ -18,7 +18,7 @@ export class EditarPartidaDialogoComponent implements OnInit {
     public dialogRef: MatDialogRef<EditarPartidaDialogoComponent>,
     private fb: FormBuilder,
     private prototipoSrv: PrototiposService
-  ) { 
+  ) {
     this.form = this.fb.group({
       codigo: [data.partida.codigo, Validators.required],
       nombre: [data.partida.nombre, Validators.required]
@@ -32,13 +32,13 @@ export class EditarPartidaDialogoComponent implements OnInit {
   guardar() {
     //console.log("partida", this.form.value);
     this.prototipoSrv.updatePartida(this.data.partida.id_partida, this.form.value)
-    .subscribe(partida => {
-      this.data.partida.codigo = partida.codigo;
-      this.data.partida.nombre = partida.nombre;
-      this.dialogRef.close(true);
-    }, (error) => {
-      this.dialogRef.close({ error: "Ha ocurrido un error de conexión. Inténtelo más tarde" });
-    })
+      .subscribe((partida: any) => {
+        this.data.partida.codigo = partida.codigo;
+        this.data.partida.nombre = partida.nombre;
+        this.dialogRef.close(true);
+      }, (error) => {
+        this.dialogRef.close({ error: "Ha ocurrido un error de conexión. Inténtelo más tarde" });
+      })
   }
 
 }

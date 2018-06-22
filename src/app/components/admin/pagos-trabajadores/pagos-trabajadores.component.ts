@@ -1,10 +1,12 @@
+
+import {switchMap} from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
 import * as moment from 'moment';
 import { TrabajadorService } from '../../../services/trabajador.service';
-import { of } from "rxjs/observable/of";
+import { of } from "rxjs";
 import { PagoTrabajadorService } from 'app/services/pago-trabajador.service';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component";
@@ -90,15 +92,15 @@ export class PagosTrabajadoresComponent implements OnInit {
         this.tipos = data.tipos;
       });
 
-    this.route.paramMap
-      .switchMap((params: ParamMap) => {
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
           return this.trabajadorSrv.getTrabajadoresObra(params.get("obra"));
         } else {
           return of([]);
         }
-      }).subscribe(trabajadores => {
+      })).subscribe(trabajadores => {
         this.trabajadores = trabajadores;
       }, (error) => {
       });
@@ -140,7 +142,7 @@ export class PagosTrabajadoresComponent implements OnInit {
 
 
     this.trabajadorSrv.getAvances(this.form.value.id_obra, this.form.value.inicio_obra, this.form.value.trabajador_historial, this.form.value.fecha_inicio, this.form.value.fecha_fin)
-      .subscribe(res => {
+      .subscribe((res: any) => {
         this.avances = res.avances;
         this.total_avances = res.total_avances;
         this.total_historial = res.total_historial;

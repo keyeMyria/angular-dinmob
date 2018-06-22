@@ -1,10 +1,12 @@
+
+import {map, take} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { LoteEstadoVentaService } from 'app/services/lote-estado-venta.service';
 
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/take';
+
+
 
 @Injectable()
 export class EstadosVentaLoteResolverService implements Resolve<any[]> {
@@ -17,7 +19,7 @@ export class EstadosVentaLoteResolverService implements Resolve<any[]> {
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any[]> {
 
 
-    return this.estadoSrv.getEstados().take(1).map((estados: any[]) => {
+    return this.estadoSrv.getEstados().pipe(take(1),map((estados: any[]) => {
      
       if (estados) {
         return estados;
@@ -25,7 +27,7 @@ export class EstadosVentaLoteResolverService implements Resolve<any[]> {
         //this.router.navigate(['/tablero']);
         return null;
       }
-    });
+    }),);
 
   }
 

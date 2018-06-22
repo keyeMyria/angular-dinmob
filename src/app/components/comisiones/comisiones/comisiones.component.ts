@@ -1,3 +1,5 @@
+
+import {switchMap} from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { NuevoPagoComisionDialogoComponent } from '../nuevo-pago-comision-dialogo/nuevo-pago-comision-dialogo.component';
@@ -5,7 +7,7 @@ import { MatDialog, MatSnackBar } from '@angular/material';
 import { EditarPagoComisionDialogoComponent } from '../editar-pago-comision-dialogo/editar-pago-comision-dialogo.component';
 import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component";
 import { ComisionService } from '../../../services/comision.service';
-import { of } from "rxjs/observable/of";
+import { of } from "rxjs";
 import { Rol } from "../../../constantes/roles";
 import { AuthService } from '../../../services/auth.service';
 
@@ -43,15 +45,15 @@ export class ComisionesComponent implements OnInit {
 
       });
 
-    this.route.paramMap
-      .switchMap((params: ParamMap) => {
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
           return this.comisionSrv.getComisionesObra(params.get("obra"));
         } else {
           return of([]);
         }
-      }).subscribe(comisiones => {
+      })).subscribe(comisiones => {
         this.comisiones = comisiones;
       }, (error) => {
       });

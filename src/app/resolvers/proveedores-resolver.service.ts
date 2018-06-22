@@ -1,9 +1,11 @@
+
+import {map, take} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/take';
+
+
 
 import { ProveedorService } from '../services/proveedor.service';
 
@@ -19,7 +21,7 @@ export class ProveedoresResolverService implements Resolve<any[]>{
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any[]> {
 
 
-    return this.proveedorSrv.getNombresProveedores().take(1).map((proveedores: any[]) => {
+    return this.proveedorSrv.getNombresProveedores().pipe(take(1),map((proveedores: any[]) => {
       
       if (proveedores) {
         return proveedores;
@@ -27,7 +29,7 @@ export class ProveedoresResolverService implements Resolve<any[]>{
         //this.router.navigate(['/tablero']);
         return null;
       }
-    });
+    }),);
 
   }
 

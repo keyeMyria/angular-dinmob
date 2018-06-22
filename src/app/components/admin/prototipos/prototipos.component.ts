@@ -1,3 +1,5 @@
+
+import {switchMap} from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { ObrasService } from "app/services/obras.service";
 import { AgregarPrototipoDialogoComponent } from "app/components/admin/agregar-prototipo-dialogo/agregar-prototipo-dialogo.component";
@@ -11,7 +13,7 @@ import { EditarNombrePrototipoDialogoComponent } from 'app/components/admin/edit
 
 
 //import 'rxjs/add/observable/of';
-import { of } from 'rxjs/observable/of';
+import { of } from 'rxjs';
 import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
 
 
@@ -27,7 +29,7 @@ export class PrototiposComponent implements OnInit {
     datos: {}
   };
   obra_selected: string = "";
-  prototipos: Prototipo[];
+  prototipos: any = [];
 
   constructor(
     public snackBar: MatSnackBar,
@@ -48,15 +50,15 @@ export class PrototiposComponent implements OnInit {
       });
 
 
-    this.route.paramMap
-      .switchMap((params: ParamMap) => {
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
           return this.prototipoSrv.getPrototiposObra(params.get("obra"));
         } else {
           return of([]);
         }
-      }).subscribe(prototipos => {
+      })).subscribe(prototipos => {
 
 
         this.prototipos = prototipos;

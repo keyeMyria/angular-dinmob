@@ -94,7 +94,7 @@ export class ReporteSalidasComponent implements OnInit {
     this.salidas = [];
     this.urbanizacion = [];
     this.salidaSrv.getReporteSalidas(this.form.value)
-      .subscribe(res => {
+      .subscribe((res: any) => {
         this.otras_obras = res.otras_obras;
         this.paquetes = res.paquetes;
         this.partidas = res.partidas;
@@ -120,7 +120,7 @@ export class ReporteSalidasComponent implements OnInit {
   verSalida(salida) {
 
     this.salidaSrv.getSalida(salida.id_salida)
-      .subscribe(res => {
+      .subscribe((res: any) => {
         //console.log("salida OK", res);
         let dialogRef = this.dialog.open(VerSalidaDialogoComponent, {
           data: {

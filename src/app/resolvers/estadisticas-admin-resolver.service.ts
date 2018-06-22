@@ -1,7 +1,10 @@
 
+import {forkJoin as observableForkJoin,  Observable } from 'rxjs';
+
+import {map} from 'rxjs/operators';
+
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
 import { ObrasService } from '../services/obras.service';
 
 
@@ -18,17 +21,17 @@ export class EstadisticasAdminResolverService implements Resolve<any[]> {
 
     let id = route.paramMap.get('obra');
 
-    return Observable.forkJoin(
+    return observableForkJoin(
       this.obraSrv.getEstadisticas(id),
       this.obraSrv.getObrasUsuario()
-    ).map(res => {
+    ).pipe(map(res => {
       //console.log("res", res);
       if (res[0]) {
         return { estadisticas: res[0], obras: res[1] };
       } else {
         return { estadisticas: {}, obras: [] };
       }
-    });
+    }));
 
     /*   Observable.of([[], []]); */
 

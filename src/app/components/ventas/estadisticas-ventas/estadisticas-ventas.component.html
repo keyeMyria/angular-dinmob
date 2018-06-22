@@ -1,7 +1,7 @@
 <div class="container mt-2 mb-5">
   <div>
     <mat-form-field class="w-100">
-      <mat-select placeholder="Obra" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)">
+      <mat-select placeholder="Obra" [(ngModel)]="obra_selected" (selectionChange)="cargarObra(obra_selected)">
         <mat-option *ngFor="let obra of obras" [value]="obra.id_obra">{{ obra.nombre }}</mat-option>
       </mat-select>
     </mat-form-field>

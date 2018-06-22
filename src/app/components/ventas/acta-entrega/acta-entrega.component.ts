@@ -1,3 +1,5 @@
+
+import {switchMap} from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { ActaEntregaService } from 'app/services/acta-entrega.service';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
@@ -20,10 +22,10 @@ export class ActaEntregaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.paramMap
-      .switchMap((params: ParamMap) =>
-        this.actaSrv.getActa(params.get('id')))
-      .subscribe(res => {
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) =>
+        this.actaSrv.getActa(params.get('id'))))
+      .subscribe((res: any) => {
         this.acta = res.acta;
         this.areas = res.areas;
         this.equipamiento = res.equipamiento;

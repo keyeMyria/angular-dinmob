@@ -1,10 +1,12 @@
+
+import {forkJoin as observableForkJoin,  Observable ,  of } from 'rxjs';
+
+import {switchMap} from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { MapasService } from "app/services/mapas.service";
 import 'jvectormap';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import { Observable } from 'rxjs/Observable';
-import { of } from "rxjs/observable/of";
 import { PercentPipe } from '@angular/common';
 import { ImagenesLotesDialogoComponent } from '../../ventas/imagenes-lotes-dialogo/imagenes-lotes-dialogo.component';
 import { LotesService } from '../../../services/lotes.service';
@@ -48,8 +50,8 @@ export class MapasAvancesComponent implements OnInit {
         this.obras = data.obras;
       });
 
-    this.route.paramMap
-      .switchMap((params: ParamMap) => {
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
 
         let obra;
 
@@ -60,7 +62,7 @@ export class MapasAvancesComponent implements OnInit {
           obra = this.obras[params.get("index")];
 
           //unimos la consulta de los valores y el mapa
-          return Observable.forkJoin(
+          return observableForkJoin(
             this.mapaSrv.getAvancesLotesObra(obra.id_obra),
             this.mapaSrv.getMapaObra(obra.mapa)
           )
@@ -71,7 +73,7 @@ export class MapasAvancesComponent implements OnInit {
           obra = this.obras[this.obra_selected];
 
           //unimos la consulta de los valores y el mapa
-          return Observable.forkJoin(
+          return observableForkJoin(
             this.mapaSrv.getAvancesLotesObra(obra.id_obra),
             this.mapaSrv.getMapaObra(obra.mapa)
           )
@@ -80,7 +82,7 @@ export class MapasAvancesComponent implements OnInit {
           return of([[], {}]);
         }
 
-      }).subscribe(res => {
+      })).subscribe((res: any) => {
 
         this.loading.start();
 
@@ -92,7 +94,7 @@ export class MapasAvancesComponent implements OnInit {
 
 
         //creamos los valores para la escala de estados
-        this.variableContinua=true;
+        this.variableContinua = true;
         this.valuesLotes = {};
         this.valuesDiscretosLotes = {};
         this.lotes.forEach(lote => {
@@ -373,7 +375,7 @@ export class MapasAvancesComponent implements OnInit {
   verAvances(lote) {
 
     this.loteSrv.getAvances(lote.id_lote)
-      .subscribe(res => {
+      .subscribe((res: any) => {
 
         let dialogRef = this.dialog.open(AvancesLoteDialogoComponent, {
           data: {

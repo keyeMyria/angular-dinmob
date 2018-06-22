@@ -4,7 +4,7 @@ import { NuevoProveedorDialogoComponent } from '../nuevo-proveedor-dialogo/nuevo
 import { EditarProveedorDialogoComponent } from '../editar-proveedor-dialogo/editar-proveedor-dialogo.component';
 import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component";
 import { ProveedorService } from '../../../services/proveedor.service';
-import { of } from "rxjs/observable/of";
+import { of } from "rxjs";
 
 
 @Component({

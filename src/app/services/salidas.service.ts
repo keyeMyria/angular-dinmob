@@ -1,6 +1,7 @@
+
+import {throwError as observableThrowError,  Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable } from "rxjs/Observable";
 import { catchError, map, tap } from 'rxjs/operators';
 //esta es la forma correcta
 import "rxjs/add/observable/throw";
@@ -72,7 +73,7 @@ export class SalidasService {
       // TODO: better job of transforming error for user consumption
       console.log(`${operation} failed: ${error.message} (${error.status}- ${error.statusText})`);
 
-      return Observable.throw(error);
+      return observableThrowError(error);
     };
   }
 

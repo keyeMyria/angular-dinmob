@@ -1,9 +1,11 @@
+
+import {switchMap} from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 
 import { ObrasService } from "app/services/obras.service";
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 //import { Observable } from 'rxjs/Observable';
-import { of } from "rxjs/observable/of";
+import { of } from "rxjs";
 import { AuthService } from 'app/services/auth.service';
 
 
@@ -34,15 +36,15 @@ export class DesarrollosComponent implements OnInit {
         this.obras = data.obras;
       });
 
-    this.route.paramMap
-      .switchMap((params: ParamMap) => {
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
           return this.obraSrv.getLotesEnVenta(params.get("obra"));
         } else {
           return of({});
         }
-      }).subscribe(obra => {
+      })).subscribe(obra => {
         this.obra = obra;
       },(error)=>{
       });

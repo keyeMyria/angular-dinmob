@@ -11,7 +11,7 @@ import { MatSnackBar, MatDialog } from '@angular/material';
 })
 export class ClienteSinLoteComponent implements OnInit {
 
-  clientes: any[] = [];
+  clientes: any = [];
 
 
   constructor(
@@ -53,7 +53,7 @@ export class ClienteSinLoteComponent implements OnInit {
       if (result === true) {
 
         this.clienteSrv.delCliente(cliente.id_cliente)
-          .subscribe(res => {
+          .subscribe((res: any) => {
 
             if (res.count === 1) {
 

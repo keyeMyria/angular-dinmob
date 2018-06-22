@@ -32,7 +32,7 @@ export class AgregarManzanaDialogoComponent implements OnInit {
 
     this.formManzana.controls["tipo"].valueChanges
       .subscribe((value) => {
-        console.log("valueChanges", value);
+        //console.log("valueChanges", value);
 
         if (value == "nombre") {
 
@@ -79,7 +79,7 @@ export class AgregarManzanaDialogoComponent implements OnInit {
 
     //console.log("createManzanas");  
     //console.log("obra", this.data.obra);
-    
+
 
     if (this.formManzana.value.tipo == "nombre") {
 
@@ -95,7 +95,7 @@ export class AgregarManzanaDialogoComponent implements OnInit {
     } else {
 
       this.manzanaSrv.addManzanaByNumero(this.formManzana.value.prefijo, this.formManzana.value.ini, this.formManzana.value.fin, this.data.obra.obra.id_obra)
-        .subscribe(manzanas => {
+        .subscribe((manzanas: any) => {
           this.data.obra.manzanas.push(...manzanas);
           for (let i = 0; i < manzanas.length; i++) {
             this.data.selection.push(new SelectionModel<any>(true, []));

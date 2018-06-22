@@ -1,6 +1,8 @@
+
+import {map, take} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { SalidasService } from '../services/salidas.service';
 
 
@@ -17,7 +19,7 @@ export class PartidasUrbanizacionResolverService implements Resolve<any[]> {
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any[]> {
 
 
-    return this.salidaSrv.getPartidasUrbanizacion().take(1).map((partidas: any[]) => {
+    return this.salidaSrv.getPartidasUrbanizacion().pipe(take(1),map((partidas: any[]) => {
       
       if (partidas) {
         return partidas;
@@ -25,7 +27,7 @@ export class PartidasUrbanizacionResolverService implements Resolve<any[]> {
         //this.router.navigate(['/tablero']);
         return null;
       }
-    });
+    }),);
 
   }
 

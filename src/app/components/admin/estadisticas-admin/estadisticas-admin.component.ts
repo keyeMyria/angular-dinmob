@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ObrasService } from 'app/services/obras.service';
-import { of } from "rxjs/observable/of";
+import { of } from "rxjs";
 import { MatSnackBar } from '@angular/material';
 
 @Component({

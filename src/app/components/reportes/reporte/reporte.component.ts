@@ -86,7 +86,7 @@ export class ReporteComponent implements OnInit {
     this.manzanas = [];
     if (id_obra != "") {
       this.obrasSrv.getManzanasTrabajadores(id_obra)
-        .subscribe(res => {
+        .subscribe((res:any) => {
           this.trabajadores = res.trabajadores;
           this.manzanas = res.manzanas;
           this.ultimo_avance = res.ultimo_avance;

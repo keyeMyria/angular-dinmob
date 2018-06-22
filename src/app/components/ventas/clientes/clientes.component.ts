@@ -1,3 +1,5 @@
+
+import {switchMap} from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { EditarClienteComponent } from "app/components/ventas/editar-cliente/editar-cliente.component";
@@ -7,8 +9,7 @@ import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar
 import { ObrasService } from "app/services/obras.service";
 import { Router, ActivatedRoute, ParamMap } from "@angular/router";
 import { AuthService } from "app/services/auth.service";
-import { Observable } from 'rxjs/Observable';
-import { of } from "rxjs/observable/of";
+import { Observable ,  of } from 'rxjs';
 import { VerDatosFirmaDialogoComponent } from 'app/components/ventas/ver-datos-firma-dialogo/ver-datos-firma-dialogo.component';
 import { VerCedulaFiscalDialogoComponent } from 'app/components/ventas/ver-cedula-fiscal-dialogo/ver-cedula-fiscal-dialogo.component';
 
@@ -20,7 +21,7 @@ import { VerCedulaFiscalDialogoComponent } from 'app/components/ventas/ver-cedul
 
 export class ClientesComponent implements OnInit {
   //clientes$: Observable<Cliente[]>;
-  clientes: Cliente[] = [];
+  clientes: any = [];
   obras: any = [];
   obra_selected: string = "";
 
@@ -45,8 +46,8 @@ export class ClientesComponent implements OnInit {
         this.obras = data.obras;
       });
 
-    this.route.paramMap
-      .switchMap((params: ParamMap) => {
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
           return this.clienteSrv.getClientesObra(params.get("obra"));
@@ -54,10 +55,10 @@ export class ClientesComponent implements OnInit {
           return of([]);
         }
 
-      }).subscribe(clientes => {
+      })).subscribe(clientes => {
         this.clientes = clientes;
       });
-      
+
 
 
 
@@ -170,7 +171,7 @@ export class ClientesComponent implements OnInit {
       if (result === true) {
 
         this.clienteSrv.delCliente(cliente.id_cliente)
-          .subscribe(res => {
+          .subscribe((res: any) => {
 
             if (res.count === 1) {
               // let i = this.clientes.indexOf(cliente);

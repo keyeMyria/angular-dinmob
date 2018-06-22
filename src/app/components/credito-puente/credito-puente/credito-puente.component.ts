@@ -1,3 +1,5 @@
+
+import {switchMap} from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { CargoAbonoCreditoDialogoComponent } from '../cargo-abono-credito-dialogo/cargo-abono-credito-dialogo.component';
@@ -5,7 +7,7 @@ import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar
 import { EditarCargoAbonoCreditoDialogoComponent } from '../editar-cargo-abono-credito-dialogo/editar-cargo-abono-credito-dialogo.component';
 import { ActivatedRoute, Router, ParamMap } from "@angular/router";
 import { CreditoPuenteService } from '../../../services/credito-puente.service';
-import { of } from "rxjs/observable/of";
+import { of } from "rxjs";
 
 @Component({
   selector: 'app-credito-puente',
@@ -32,15 +34,15 @@ export class CreditoPuenteComponent implements OnInit {
         this.obras = data.obras;
       });
 
-    this.route.paramMap
-      .switchMap((params: ParamMap) => {
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
           return this.creditoSrv.getMovimientos(params.get("obra"));
         } else {
           return of([]);
         }
-      }).subscribe(movimientos => {
+      })).subscribe(movimientos => {
         this.movimientos = movimientos;
       }, (error) => {
       });

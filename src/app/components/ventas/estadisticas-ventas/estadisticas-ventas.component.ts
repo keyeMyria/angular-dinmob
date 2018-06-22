@@ -1,7 +1,9 @@
+
+import {switchMap} from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ObrasService } from 'app/services/obras.service';
-import { of } from "rxjs/observable/of";
+import { of } from "rxjs";
 import { MatSnackBar } from '@angular/material';
 
 @Component({
@@ -27,15 +29,15 @@ export class EstadisticasVentasComponent implements OnInit {
         this.obras = data.obras;
       });
 
-    this.route.paramMap
-      .switchMap((params: ParamMap) => {
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
           return this.obraSrv.getEstadisticasVentas(params.get("obra"));
         } else {
           return of({});
         }
-      }).subscribe(res => {
+      })).subscribe(res => {
         this.estadisticas = res;
       }, (error) => {
         this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {

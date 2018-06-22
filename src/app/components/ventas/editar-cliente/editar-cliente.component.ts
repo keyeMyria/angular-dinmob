@@ -250,7 +250,7 @@ export class EditarClienteComponent implements OnInit {
     // entonces si las compras son de distintas obras
     // no sabríamos cuales traer
     this.clienteSrv.getClienteConComprasYDocumentos(id)
-      .subscribe(response => {
+      .subscribe((response: any) => {
         this.cliente = response.cliente;
         this.compras = response.compras;
         this.documentos_cliente = response.documentos_cliente;
@@ -362,7 +362,7 @@ export class EditarClienteComponent implements OnInit {
     }
 
     this.clienteSrv.updateCompra(this.compra_selected.id_compra, compra)
-      .subscribe(compra => {
+      .subscribe((compra: any) => {
         let i = this.compras.indexOf(this.compra_selected);
         this.compras[i] = compra;
 
@@ -398,7 +398,7 @@ export class EditarClienteComponent implements OnInit {
     }
 
     this.loteSrv.updateLote(this.compra_selected.id_lote, lote)
-      .subscribe(lote => {
+      .subscribe((lote: any) => {
 
         this.compra_selected.valor_base = lote.valor_base;
         this.compra_selected.id_estado_venta = lote.id_estado_venta;
@@ -492,7 +492,7 @@ export class EditarClienteComponent implements OnInit {
   //actualiza el cliente
   updateCliente(cliente) {
     this.clienteSrv.updateCliente(this.cliente.id_cliente, cliente)
-      .subscribe(res => {
+      .subscribe((res: any) => {
 
         this.cliente = res;
         //asignamos todos los formularios
@@ -651,7 +651,7 @@ export class EditarClienteComponent implements OnInit {
 
       if (result == true) {
         this.clienteSrv.delDocumento(doc.id_documento)
-          .subscribe(res => {
+          .subscribe((res: any) => {
             if (res.count == 1) {
 
               let i = documentos.indexOf(doc);
@@ -699,7 +699,7 @@ export class EditarClienteComponent implements OnInit {
       if (result === true) {
 
         this.pagoSrv.delPago(pago.id_pago)
-          .subscribe(res => {
+          .subscribe((res: any) => {
 
             if (res.count == 1) {
               let i = compra.pagos.indexOf(pago);
@@ -782,7 +782,7 @@ export class EditarClienteComponent implements OnInit {
     }
 
     this.clienteSrv.setActivacionCompra(compra.id_compra, activo)
-      .subscribe(res => {
+      .subscribe((res: any) => {
         // si la respuesta tiene error es porque ya hay otro cliente asociado al lote
         if (res.error) {
 
@@ -818,7 +818,7 @@ export class EditarClienteComponent implements OnInit {
   delCompra(compra) {
     //console.log("delCompra", compra);
     this.clienteSrv.delCompra(compra.id_compra)
-      .subscribe(res => {
+      .subscribe((res: any) => {
         if (res.count == 1) {
           let i = this.compras.indexOf(compra);
           this.compras.splice(i, 1);

@@ -1,10 +1,12 @@
+
+import {map, take} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { TipoPagoService } from 'app/services/tipo-pago.service';
 
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/take';
+
+
 
 @Injectable()
 export class TiposPagoResolverService implements Resolve<any[]> {
@@ -17,7 +19,7 @@ export class TiposPagoResolverService implements Resolve<any[]> {
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any[]> {
 
 
-    return this.tipoSrv.getTipos().take(1).map((tipos: any[]) => {
+    return this.tipoSrv.getTipos().pipe(take(1),map((tipos: any[]) => {
 
       if (tipos) {
         return tipos;
@@ -25,7 +27,7 @@ export class TiposPagoResolverService implements Resolve<any[]> {
         //this.router.navigate(['/tablero']);
         return null;
       }
-    });
+    }),);
 
   }
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
 import { InsumoService } from 'app/services/insumo.service';
-import { of } from "rxjs/observable/of";
+import { of } from "rxjs";
 import { AlertaDialogoComponent } from 'app/components/admin/alerta-dialogo/alerta-dialogo.component';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { ObrasService } from '../../../services/obras.service';
@@ -18,14 +18,14 @@ export class OtrasSalidasComponent implements OnInit {
   obra_selected: string = "";
   obras: any = [];
   form: FormGroup;
-  insumos: any[] = [];
+  insumos: any = [];
   residentes: any = [];
   trabajadores: any = [];
   manzanas: any = [];
   partidas_urbanizacion: any = [];
   obra: any = {};
   usuario: any = {};
-  insumos_filtrados: any[] = [];
+  insumos_filtrados: any = [];
   lote_selected: any = {};
 
 
@@ -177,7 +177,7 @@ export class OtrasSalidasComponent implements OnInit {
         //guardar
 
         this.salidaSrv.createSalida(this.form.value, insumos_salida)
-          .subscribe(res => {
+          .subscribe((res: any) => {
 
             //console.log("respuesta", res);
             this.initForm();
@@ -229,7 +229,7 @@ export class OtrasSalidasComponent implements OnInit {
       //console.log("getLotesObra", id_obra);
 
       this.obraSrv.getAcordeonManzanas(id_obra)
-        .subscribe(obra => {
+        .subscribe((obra: any) => {
           //console.log("getLotes", obra.manzanas);
           this.manzanas = obra.manzanas;
 

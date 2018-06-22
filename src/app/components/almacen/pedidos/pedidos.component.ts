@@ -1,7 +1,9 @@
+
+import {switchMap} from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { PedidoService } from '../../../services/pedido.service';
-import { of } from "rxjs/observable/of";
+import { of } from "rxjs";
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { VerPedidoDialogoComponent } from 'app/components/almacen/ver-pedido-dialogo/ver-pedido-dialogo.component';
 import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
@@ -44,8 +46,8 @@ export class PedidosComponent implements OnInit {
         //this.usuario = data.usuario;
       });
 
-    this.route.paramMap
-      .switchMap((params: ParamMap) => {
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
           return this.pedidoSrv.getPedidosObra(params.get("obra"));
@@ -53,7 +55,7 @@ export class PedidosComponent implements OnInit {
           return of([]);
         }
 
-      }).subscribe(pedidos => {
+      })).subscribe(pedidos => {
         this.pedidos = pedidos;
       });
   }

@@ -1,11 +1,13 @@
+
+import {forkJoin as observableForkJoin,  of ,  Observable } from 'rxjs';
+
+import {switchMap} from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { VerSalidaDialogoComponent } from 'app/components/almacen/ver-salida-dialogo/ver-salida-dialogo.component';
 import { MatDialog, MatSnackBar, PageEvent } from '@angular/material';
 import { SalidasService } from 'app/services/salidas.service';
-import { of } from "rxjs/observable/of";
 import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
-import { Observable } from 'rxjs/Observable';
 import { Rol } from "../../../constantes/roles";
 import { AuthService } from '../../../services/auth.service';
 import { ReporteService } from '../../../services/reporte.service';
@@ -63,18 +65,18 @@ export class SalidasComponent implements OnInit {
          this.salidas = salidas;
  
        }); */
-    this.route.paramMap
-      .switchMap((params: ParamMap) => {
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
-          return Observable.forkJoin(
+          return observableForkJoin(
             this.salidaSrv.getCountSalidasObra(params.get("obra"), this.filtro_selected),
             this.salidaSrv.getPageSalidasObra(params.get("obra"), this.pageSize, 0, this.filtro_selected)
           );
         } else {
           return of([0, []]);
         }
-      }).subscribe(res => {
+      })).subscribe(res => {
         this.length = res[0].count;
         this.salidas = res[1];
         this.salidas_filtradas = this.salidas.slice();
@@ -114,7 +116,7 @@ export class SalidasComponent implements OnInit {
   verSalida(salida) {
 
     this.salidasSrv.getSalida(salida.id_salida)
-      .subscribe(res => {
+      .subscribe((res: any) => {
         //console.log("salida OK", res);
         let dialogRef = this.dialog.open(VerSalidaDialogoComponent, {
           data: {
@@ -192,7 +194,7 @@ export class SalidasComponent implements OnInit {
   filtro($event) {
     console.log("change", $event.value);
 
-    return Observable.forkJoin(
+    return observableForkJoin(
       this.salidaSrv.getCountSalidasObra(this.obra_selected, this.filtro_selected),
       this.salidaSrv.getPageSalidasObra(this.obra_selected, this.pageSize, 0, this.filtro_selected)
     ).subscribe(res => {
@@ -211,7 +213,7 @@ export class SalidasComponent implements OnInit {
   getReporteSalida(salida) {
     this.reporteSrv.getReporteSalidaAlmacen(salida.id_salida)
       .subscribe(data => this.downloadFile(data, `ReporteSalida_${salida.num_vale}`));
-     
+
 
   }
 

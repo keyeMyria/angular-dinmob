@@ -1,13 +1,13 @@
+
+import {throwError as observableThrowError,  Observable ,  Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from "@auth0/angular-jwt";
-import { Observable } from "rxjs/Observable";
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ConfigService } from 'app/services/config.service';
 import { catchError, map, tap } from 'rxjs/operators';
 //esta es la forma correcta
 import "rxjs/add/observable/throw";
 import { UsuarioService } from 'app/services/usuario.service';
-import { Subject } from 'rxjs/Subject';
 
 
 
@@ -127,11 +127,11 @@ export class AuthService {
 
   tienePermisoAsync(roles: any[]) {
 
-    return this.usuarioSrv.getUsuarioLogged()
-      .map(usuario => {
+    return this.usuarioSrv.getUsuarioLogged().pipe(
+      map(usuario => {
         this.usuario = usuario;
         return this.checkPermiso(roles, +this.usuario.id_tipo_usuario);
-      });
+      }));
     /*  .subscribe(usuario => {
        this.usuario = usuario;
        this.checkPermiso(roles, +this.usuario.id_tipo_usuario);
@@ -170,7 +170,7 @@ export class AuthService {
       // TODO: better job of transforming error for user consumption
       console.log(`${operation} failed: ${error.message} (${error.status}- ${error.statusText})`);
 
-      return Observable.throw(error);
+      return observableThrowError(error);
     };
   }
 
