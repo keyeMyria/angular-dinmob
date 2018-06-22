@@ -663,7 +663,7 @@ export const ROUTES: Routes = [
                     tipos: TiposGastosResolverService
                 },
                 data: {
-                    permisos: [Rol.Administrador]
+                    permisos: [Rol.Administrador, Rol.Contabilidad]
                 }
             },
             {

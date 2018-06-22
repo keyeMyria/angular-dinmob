@@ -80,6 +80,36 @@
     <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-2">
       <div class="card mat-elevation-z2">
         <div class="card-body">
+          <h3>{{(estadisticas?.saldo_proveedores || 0) |currency }}</h3>
+          <p>SALDO PROVEEDORES</p>
+          <i class="material-icons mat-icon-card">attach_money</i>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-2">
+      <div class="card mat-elevation-z2">
+        <div class="card-body">
+          <h3>{{(estadisticas?.total_intereses_futuros || 0) |currency }}</h3>
+          <p>INTERESES FUTUROS</p>
+          <i class="material-icons mat-icon-card">attach_money</i>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-2">
+      <div class="card mat-elevation-z2">
+        <div class="card-body">
+          <h3>{{(estadisticas?.total_otros_gastos || 0) |currency }}</h3>
+          <p>OTROS GASTOS</p>
+          <i class="material-icons mat-icon-card">attach_money</i>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-2">
+      <div class="card mat-elevation-z2">
+        <div class="card-body">
           <h3>{{(estadisticas?.count_manzanas|| 0) | number }}</h3>
           <p>MANZANAS</p>
           <i class="fa-icon-card fa fa-apple"></i>
