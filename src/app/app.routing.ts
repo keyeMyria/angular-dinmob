@@ -112,6 +112,7 @@ import { EquiposVentasEscrituracionComponent } from './components/escrituracion/
 import { ClientesEscrituracionComponent } from './components/escrituracion/clientes-escrituracion/clientes-escrituracion.component';
 import { LotesEscrituracionComponent } from './components/escrituracion/lotes-escrituracion/lotes-escrituracion.component';
 import { EditarClienteEscrituracionComponent } from './components/escrituracion/editar-cliente-escrituracion/editar-cliente-escrituracion.component';
+import { HistorialAvancesComponent } from './components/residente/historial-avances/historial-avances.component';
 
 
 export const ROUTES: Routes = [
@@ -246,6 +247,16 @@ export const ROUTES: Routes = [
                 resolve: {
                     obras: ObrasUsuarioResolverService,
                     //usuario: UsuarioLoggedResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.ControlAlmacen, Rol.Residente]
+                }
+            },
+            {
+                path: 'historial-avances', component: HistorialAvancesComponent,
+                canActivate: [AuthGuard],
+                resolve: {
+                    obras: ObrasUsuarioResolverService                   
                 },
                 data: {
                     permisos: [Rol.Administrador, Rol.ControlAlmacen, Rol.Residente]
