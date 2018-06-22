@@ -1,7 +1,7 @@
 
-import {forkJoin as observableForkJoin,  Observable ,  of } from 'rxjs';
+import { forkJoin as observableForkJoin, Observable, of } from 'rxjs';
 
-import {switchMap} from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { MapasService } from "app/services/mapas.service";
 import 'jvectormap';
@@ -32,6 +32,8 @@ export class MapasAvancesComponent implements OnInit {
   valuesLotes: any = {};
   valuesDiscretosLotes: any = {};
   variableContinua: boolean = true;
+
+  scalePctAvance: any = {};
 
 
   constructor(
@@ -87,6 +89,7 @@ export class MapasAvancesComponent implements OnInit {
         this.loading.start();
 
         this.lotes = res[0].lotes;
+        this.scalePctAvance = res[0].scalePctAvance;
 
         this.jsonMap = res[1];
 
@@ -101,14 +104,16 @@ export class MapasAvancesComponent implements OnInit {
           // comprobar luego con datos
           this.valuesLotes[lote.code] = lote.valor ? lote.valor : 0;
           // escala personalizada
-          this.valuesDiscretosLotes[lote.code] = lote.valor_discreto ? lote.valor_discreto : 0;
+          this.valuesDiscretosLotes[lote.code] = lote.valor_discreto ? lote.valor_discreto : 1;
         });
+        //console.log("values discretos", this.valuesDiscretosLotes);
+
 
 
 
         if (this.jsonMap.mapa) {
           setTimeout(() => {
-            this.crearMapa(this.valuesLotes);
+            this.crearMapa(this.valuesLotes, this.scalePctAvance);
             this.loading.stop();
           }, 100);
         } else {
@@ -156,7 +161,7 @@ export class MapasAvancesComponent implements OnInit {
 
 
 
-  crearMapa(values) {
+  crearMapa(values, scalePctAvance) {
 
 
 
@@ -212,30 +217,35 @@ export class MapasAvancesComponent implements OnInit {
           },
           {
             values: {},
-            scale: {
-              '1': '#00a65a', //green
-              '2': '#f39c12', //amarillo     
-              '3': '#d81b60', //maroon 
-              '4': '#00c0ef', //aqua        
-              '5': '#605ca8' //purple''
-            },
+            scale: scalePctAvance,
+        /*     scale: {
+              '1': 'white',
+              '2': '#00a65a', // green
+              '3': '#f39c12', // amarillo
+              '4': '#d81b60', //maroon
+              '5': '#00c0ef', // aqua
+              '6': '#605ca8'  //purple
+            }, */
             legend: {
               vertical: true,
               title: 'Escala',
               labelRender: function (scale) {
+                //return scale;
                 if (scale == 1) {
+                  return '0%';
+                } else if (scale == 2) {
                   return '0-20%';
                 }
-                else if (scale == 2) {
+                else if (scale == 3) {
                   return '20-40%';
                 }
-                else if (scale == 3) {
+                else if (scale == 4) {
                   return '40-60%';
                 }
-                else if (scale == 4) {
+                else if (scale == 5) {
                   return '60-80%';
                 }
-                else if (scale == 5) {
+                else if (scale == 6) {
                   return '80-100%';
                 }
               }
