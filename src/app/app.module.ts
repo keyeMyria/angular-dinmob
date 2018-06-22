@@ -256,6 +256,7 @@ import { EditarClienteEscrituracionComponent } from './components/escrituracion/
 import { ClientesLoteEscrituracionDialogoComponent } from './components/escrituracion/clientes-lote-escrituracion-dialogo/clientes-lote-escrituracion-dialogo.component';
 import { EditarClienteEscrituracionDialogoComponent } from './components/escrituracion/editar-cliente-escrituracion-dialogo/editar-cliente-escrituracion-dialogo.component';
 import { EditarLoteEscrituracionDialogoComponent } from './components/escrituracion/editar-lote-escrituracion-dialogo/editar-lote-escrituracion-dialogo.component';
+import { HistorialAvancesComponent } from './components/residente/historial-avances/historial-avances.component';
 
 
 
@@ -425,7 +426,8 @@ export function getToken() {
     EditarClienteEscrituracionComponent,
     ClientesLoteEscrituracionDialogoComponent,
     EditarClienteEscrituracionDialogoComponent,
-    EditarLoteEscrituracionDialogoComponent
+    EditarLoteEscrituracionDialogoComponent,
+    HistorialAvancesComponent
 
 
 
