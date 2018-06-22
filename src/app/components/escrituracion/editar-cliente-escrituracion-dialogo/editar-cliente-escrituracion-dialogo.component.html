@@ -26,10 +26,10 @@
                   <i class="fa fa-calendar"></i>
                 </button>
               </span>
-            </div>
-            <div *ngIf="formGenerales.get('fecha_nacimiento').invalid && (formGenerales.get('fecha_nacimiento').dirty || formGenerales.get('fecha_nacimiento').touched )"
-              class="visible invalid-feedback">
-              Seleccione una fecha
+              <div *ngIf="formGenerales.get('fecha_nacimiento').invalid && (formGenerales.get('fecha_nacimiento').dirty || formGenerales.get('fecha_nacimiento').touched )"
+                class="visible invalid-feedback">
+                Seleccione una fecha
+              </div>
             </div>
             <mat-datepicker touchUi="true" #dpFechaNacimiento></mat-datepicker>
           </div>
@@ -44,7 +44,7 @@
           </div>
 
           <div class="form-group row">
-            <label for="telefono_cliente" class="col-form-label col-sm-3">Número de celular</label>
+            <label for="telefono_cliente" class="col-form-label col-sm-3">Teléfono</label>
             <div class="col-sm-9">
               <input [textMask]="{mask: maskPhone}" type="text" class="form-control" id="telefono_cliente" name="telefono_cliente" formControlName="telefono_cliente"
                 [ngClass]="{'is-invalid': formGenerales.get('telefono_cliente').invalid  && (formGenerales.get('telefono_cliente').dirty || formGenerales.get('telefono_cliente').touched )}">
@@ -61,26 +61,17 @@
     <mat-tab label="Documentos">
       <div class="container py-3">
         <form [formGroup]="formDocumentos" (ngSubmit)="guardarDocumentos()">
-          <mat-list>
-            <mat-list-item>
-              <h3 mat-line>Curp</h3>
-              <button mat-icon-button>
-                <mat-checkbox formControlName="curp_documentos"></mat-checkbox>
-              </button>
-            </mat-list-item>
-            <mat-list-item>
-              <h3 mat-line>IFE</h3>
-              <button mat-icon-button>
-                <mat-checkbox formControlName="ife_documentos"></mat-checkbox>
-              </button>
-            </mat-list-item>
-            <mat-list-item>
-              <h3 mat-line>RFC</h3>
-              <button mat-icon-button>
-                <mat-checkbox formControlName="rfc_documentos"></mat-checkbox>
-              </button>
-            </mat-list-item>
-          </mat-list>
+          <mat-selection-list>
+            <mat-list-option>
+              Curp
+            </mat-list-option>
+            <mat-list-option>
+              IFE
+            </mat-list-option>
+            <mat-list-option>
+              RFC
+            </mat-list-option>
+          </mat-selection-list>
         </form>
       </div>
     </mat-tab>
@@ -100,12 +91,7 @@
                 <th>Estado</th>
                 <th>Activación</th>
                 <th>Cancelación</th>
-                <!-- -->
-                <th class="text-right" style="width:66px">
-                  <button mat-icon-button matTooltip="Nueva Compra">
-                    <mat-icon>add</mat-icon>
-                  </button>
-                </th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -125,23 +111,18 @@
                     <mat-icon>more_vert</mat-icon>
                   </button>
                   <mat-menu #menu3="matMenu">
-                    <button mat-menu->
-                      <mat-icon>cancel</mat-icon>
-                      <span>activas</span>
-                    </button>
-                    <button mat-menu-item>
+                    <button mat-menu-item (click)="delLote()">
                       <mat-icon>delete</mat-icon>
                       <span>Eliminar</span>
                     </button>
-                    <button mat-menu-item>
+                    <!--                     <button mat-menu-item>
                       <mat-icon>picture_as_pdf</mat-icon>
                       <span>Reporte</span>
                     </button>
                     <button mat-menu-item>
                       <mat-icon>assignment_late</mat-icon>
                       <span>Ir a Lote</span>
-                    </button>
-
+                    </button> -->
                   </mat-menu>
 
                 </td>
@@ -156,7 +137,7 @@
         <form [formGroup]="formInmueble" (ngSubmit)="guardarInmueble()">
 
           <div class="form-group row">
-            <label class="col-form-label col-sm-3">Precio de Lista</label>
+            <label class="col-form-label col-sm-3">Precio Venta</label>
             <div class="col-sm-9">
               <input [textMask]="{mask: numbermask}" type="text" class="form-control" name="precio_lista" formControlName="precio_lista">
             </div>
@@ -182,6 +163,56 @@
             </div>
           </div>
 
+          <div class="form-group row mt-3">
+            <label class="col-form-label col-sm-3">Estado</label>
+            <div class="col-sm-9">
+              <select class="form-control" name="estado">
+                <option [value]="1">Apartado</option>
+                <option [value]="2">Documentos</option>
+                <option [value]="3">Escriturado</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="fecha_apardado" class="col-form-label col-sm-3">Fecha Apartado</label>
+            <div class="input-group col-sm-9">
+              <input class="form-control" placeholder="yyyy-mm-dd" type="text" placement="bottom-left" [matDatepicker]="dpFechaApartado">
+              <span class="input-group-append">
+                <button class="btn btn-secondary" type="button" (click)="dpFechaApartado.open()">
+                  <i class="fa fa-calendar"></i>
+                </button>
+              </span>
+            </div>
+            <mat-datepicker touchUi="true" #dpdpFechaApartado></mat-datepicker>
+          </div>
+
+          <div class="form-group row">
+            <label for="fecha_documentos" class="col-form-label col-sm-3">Fecha Documentos</label>
+            <div class="input-group col-sm-9">
+              <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="fecha_documentos" placement="bottom-left" [matDatepicker]="dpFechaDocumentos">
+              <span class="input-group-append">
+                <button class="btn btn-secondary" type="button" (click)="dpFechaDocumentos.open()">
+                  <i class="fa fa-calendar"></i>
+                </button>
+              </span>
+            </div>
+            <mat-datepicker touchUi="true" #dpFechaDocumentos></mat-datepicker>
+          </div>
+
+          <div class="form-group row">
+            <label for="fecha_escriturado" class="col-form-label col-sm-3">Fecha Escriturado</label>
+            <div class="input-group col-sm-9">
+              <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="fecha_escriturado" placement="bottom-left" [matDatepicker]="dpFechaEscriturado">
+              <span class="input-group-append">
+                <button class="btn btn-secondary" type="button" (click)="dpFechaEscriturado.open()">
+                  <i class="fa fa-calendar"></i>
+                </button>
+              </span>
+            </div>
+            <mat-datepicker touchUi="true" #dpdpFechaEscriturado></mat-datepicker>
+          </div>
+
 
         </form>
 
@@ -199,5 +230,5 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button type="button" [mat-dialog-close]="false">CANCELAR</button>
-  <button type="submit" mat-button color="primary">ACTUALIZAR</button>
+  <button type="submit" mat-button color="primary">GUARDAR</button>
 </div>

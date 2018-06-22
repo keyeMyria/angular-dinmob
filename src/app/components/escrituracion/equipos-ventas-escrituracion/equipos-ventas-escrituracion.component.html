@@ -17,9 +17,9 @@
         <div>
 
 
-          <mat-accordion [displayMode]="'default'">
-            <mat-expansion-panel [hideToggle]="true">
-              <mat-expansion-panel-header>
+          <mat-accordion [displayMode]="'default'" multi="true">
+            <mat-expansion-panel [hideToggle]="true" #panel>
+              <mat-expansion-panel-header [ngClass]="{'bg-primary text-white':panel.expanded}">
                 <span class="align-self-center">Equipo 1</span>
                 <div class="spacer"></div>
                 <div class="collapse-header-btns">
@@ -32,7 +32,7 @@
                       <mat-icon>add_box</mat-icon>
                       <span>Agregar Vendedor</span>
                     </button>
-                    <button mat-menu-item>
+                    <button mat-menu-item (click)="editarEquipo()">
                       <mat-icon>create</mat-icon>
                       <span>Editar</span>
                     </button>
@@ -44,24 +44,24 @@
                   <tbody>
                     <tr>
                       <td>Hector Herrera</td>
-                      <td class="text-right ws-nowrap">
-                        <button mat-button>
+                      <td class="text-right ws-nowrap no-min">
+                        <button mat-button class="no-min" (click)="delVendedor()">
                           <i class="fa fa-times"></i>
                         </button>
                       </td>
                     </tr>
                     <tr>
                       <td>Javier Rodriguez</td>
-                      <td class="text-right ws-nowrap">
-                        <button mat-button>
+                      <td class="text-right ws-nowrap no-min">
+                        <button mat-button class="no-min" (click)="delVendedor()">
                           <i class="fa fa-times"></i>
                         </button>
                       </td>
                     </tr>
                     <tr>
                       <td>Pedro Paramo</td>
-                      <td class="text-right ws-nowrap">
-                        <button mat-button>
+                      <td class="text-right ws-nowrap no-min">
+                        <button mat-button class="no-min" (click)="delVendedor()">
                           <i class="fa fa-times"></i>
                         </button>
                       </td>
@@ -70,11 +70,9 @@
                 </table>
               </div>
             </mat-expansion-panel>
-          </mat-accordion>
 
-          <mat-accordion [displayMode]="'default'">
-            <mat-expansion-panel [hideToggle]="true">
-              <mat-expansion-panel-header>
+            <mat-expansion-panel [hideToggle]="true" #panel2>
+              <mat-expansion-panel-header [ngClass]="{'bg-primary text-white':panel2.expanded}">
                 <span class="align-self-center">Equipo 2</span>
                 <div class="spacer"></div>
                 <div class="collapse-header-btns">
@@ -87,7 +85,7 @@
                       <mat-icon>add_box</mat-icon>
                       <span>Agregar Vendedor</span>
                     </button>
-                    <button mat-menu-item>
+                    <button mat-menu-item (click)="editarEquipo()">
                       <mat-icon>create</mat-icon>
                       <span>Editar</span>
                     </button>
@@ -100,7 +98,7 @@
                     <tr>
                       <td>Hector Herrera</td>
                       <td class="text-right ws-nowrap">
-                        <button mat-button>
+                        <button mat-button class="no-min" (click)="delVendedor()">
                           <i class="fa fa-times"></i>
                         </button>
                       </td>
@@ -108,7 +106,7 @@
                     <tr>
                       <td>Javier Rodriguez</td>
                       <td class="text-right ws-nowrap">
-                        <button mat-button>
+                        <button mat-button class="no-min" (click)="delVendedor()">
                           <i class="fa fa-times"></i>
                         </button>
                       </td>
@@ -116,7 +114,7 @@
                     <tr>
                       <td>Pedro Paramo</td>
                       <td class="text-right ws-nowrap">
-                        <button mat-button>
+                        <button mat-button class="no-min" (click)="delVendedor()">
                           <i class="fa fa-times"></i>
                         </button>
                       </td>
@@ -126,6 +124,7 @@
               </div>
             </mat-expansion-panel>
           </mat-accordion>
+
         </div>
       </div>
     </div>
