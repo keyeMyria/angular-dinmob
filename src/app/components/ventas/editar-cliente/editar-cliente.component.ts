@@ -834,7 +834,7 @@ export class EditarClienteComponent implements OnInit {
       if (result === true) {
 
         this.clienteSrv.delCompra(compra.id_compra)
-          .subscribe(res => {
+          .subscribe((res:any) => {
             if (res.count == 1) {
               let i = this.compras.indexOf(compra);
               this.compras.splice(i, 1);
