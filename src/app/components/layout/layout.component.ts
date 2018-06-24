@@ -7,7 +7,7 @@ import { MatSidenav } from '@angular/material';
 import { UsuarioService } from 'app/services/usuario.service';
 import { Rol } from "../../constantes/roles";
 import { RolRoute } from "../../constantes/default-routes";
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 
 

@@ -1,3 +1,5 @@
+
+import {switchMap} from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { CrearVendedorDialogoComponent } from '../crear-vendedor-dialogo/crear-vendedor-dialogo.component';
@@ -5,7 +7,7 @@ import { MatDialog, MatSnackBar } from '@angular/material';
 import { EditarVendedorDialogoComponent } from '../editar-vendedor-dialogo/editar-vendedor-dialogo.component';
 import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component";
 import { VendedorService } from '../../../services/vendedor.service';
-import { of } from "rxjs/observable/of";
+import { of } from "rxjs";
 
 @Component({
   selector: 'app-vendedores',
@@ -32,15 +34,15 @@ export class VendedoresComponent implements OnInit {
         this.obras = data.obras;
       });
 
-    this.route.paramMap
-      .switchMap((params: ParamMap) => {
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
           return this.vendedorSrv.getVendedoresObra(params.get("obra"));
         } else {
           return of([]);
         }
-      }).subscribe(vendedores => {
+      })).subscribe(vendedores => {
         this.vendedores = vendedores;
       }, (error) => {
       });

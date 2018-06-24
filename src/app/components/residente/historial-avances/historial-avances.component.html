@@ -1,0 +1,78 @@
+<div class="container mt-2 mb-5">
+  <div class="row">
+    <div class="col-12">
+
+
+      <!--      <div class="text-center">
+        <hr>
+        <span class="badge badge-primary">5 jun. 2018</span>
+      </div> -->
+
+      <div class="hr-sect  pt-4">
+        <span class="badge badge-pill badge-primary">5 jun. 2018</span>
+      </div>
+
+      <mat-accordion [displayMode]="'default'" multi="true">
+
+        <mat-expansion-panel [hideToggle]="true" #panel>
+          <mat-expansion-panel-header [ngClass]="{'bg-primary text-white':panel.expanded}">
+            <span class="align-self-center">Manzana 1 Lote 1</span>
+          </mat-expansion-panel-header>
+
+          <table class="table table-align-middle">
+            <tbody>
+              <tr>
+                <td>Partida 2/ Subpartida 1</td>
+              </tr>
+              <tr>
+                <td>Partida 2/ Subpartida 2</td>
+              </tr>
+              <tr>
+                <td>Partida 2/ Subpartida 3</td>
+              </tr>
+              <tr>
+                <td>Partida 2/ Subpartida 4</td>
+              </tr>
+            </tbody>
+          </table>
+
+        </mat-expansion-panel>
+
+      </mat-accordion>
+
+      <div class="hr-sect pt-4">
+        <span class="badge badge-pill badge-primary">2 jun. 2018</span>
+      </div>
+
+      <mat-accordion [displayMode]="'default'" multi="true">
+
+        <mat-expansion-panel [hideToggle]="true" #panel2>
+          <mat-expansion-panel-header [ngClass]="{'bg-primary text-white':panel2.expanded}">
+            <span class="align-self-center">Manzana 1 Lote 1</span>
+          </mat-expansion-panel-header>
+
+          <table class="table table-align-middle">
+            <tbody>
+              <tr>
+                <td>Partida 2/ Subpartida 1</td>
+              </tr>
+              <tr>
+                <td>Partida 2/ Subpartida 2</td>
+              </tr>
+              <tr>
+                <td>Partida 2/ Subpartida 3</td>
+              </tr>
+              <tr>
+                <td>Partida 2/ Subpartida 4</td>
+              </tr>
+            </tbody>
+          </table>
+
+        </mat-expansion-panel>
+
+      </mat-accordion>
+
+
+    </div>
+  </div>
+</div>

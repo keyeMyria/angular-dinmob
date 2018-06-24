@@ -44,13 +44,13 @@ export class EditarInsumoDialogoComponent implements OnInit {
   }
 
   guardar() {
-    console.log("ok", this.form.value)
+    //console.log("ok", this.form.value)
     let cantidad = this.form.get("cantidad").value.replace(/,/g, "");
     let precio = this.form.get("precio").value.replace(/,/g, "");
 
     let insumo = { cantidad: cantidad, precio: precio };
     this.insumoSrv.updateInsumoPartida(this.data.insumo.id_insumo_partida, insumo)
-      .subscribe(insumo => {
+      .subscribe((insumo: any) => {
         this.data.insumo.cantidad = insumo.cantidad;
         this.data.insumo.precio = insumo.precio;
         this.dialogRef.close(true);

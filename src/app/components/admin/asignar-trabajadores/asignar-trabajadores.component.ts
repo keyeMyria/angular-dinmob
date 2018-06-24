@@ -1,8 +1,11 @@
+
+import {of as observableOf, forkJoin as observableForkJoin,  Observable } from 'rxjs';
+
+import {switchMap} from 'rxjs/operators';
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { MatDrawer, MatDialog, MatSnackBar } from '@angular/material';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
 import { ObrasService } from 'app/services/obras.service';
 import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component";
 import { LotesService } from '../../../services/lotes.service';
@@ -25,10 +28,10 @@ export class AsignarTrabajadoresComponent implements OnInit {
   obra_selected: string = "";
   obra: any;
   trabajador_selected: string = "";
-  especialidades: any[] = [];
-  trabajadores: any[] = [];
+  especialidades: any = [];
+  trabajadores: any = [];
   lote: any = {};
-  lotes_iguales: any[] = [];
+  lotes_iguales: any = [];
   lote_origen: string = "";
 
   //selector de especialidades
@@ -55,18 +58,18 @@ export class AsignarTrabajadoresComponent implements OnInit {
       .subscribe((data: { obras: any[] }) => {
         this.obras = data.obras;
       });
-    this.route.paramMap
-      .switchMap((params: ParamMap) => {
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
-          return Observable.forkJoin(
+          return observableForkJoin(
             this.obraSrv.getAcordeonManzanas(params.get("obra")),
             this.trabajadorSrv.getTrabajadoresObra(params.get("obra"))
           );
         } else {
-          return Observable.of([[], []]);
+          return observableOf([[], []]);
         }
-      }).subscribe(res => {
+      })).subscribe(res => {
         //console.log("obra", obra);
         this.obra = res[0];
         this.trabajadores = res[1];

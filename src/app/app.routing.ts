@@ -104,7 +104,15 @@ import { TableroControlAlmacenComponent } from './components/tablero-control-alm
 
 import { Rol } from "./constantes/roles";
 import { UsuariosAsesoresResolverService } from './resolvers/usuarios-asesores-resolver.service';
+import { TableroEscrituracionComponent } from './components/escrituracion/tablero-escrituracion/tablero-escrituracion.component';
 
+import { MapasEscrituracionComponent } from './components/escrituracion/mapas-escrituracion/mapas-escrituracion.component';
+import { ConfiguracionEscrituracionComponent } from './components/escrituracion/configuracion-escrituracion/configuracion-escrituracion.component';
+import { EquiposVentasEscrituracionComponent } from './components/escrituracion/equipos-ventas-escrituracion/equipos-ventas-escrituracion.component';
+import { ClientesEscrituracionComponent } from './components/escrituracion/clientes-escrituracion/clientes-escrituracion.component';
+import { LotesEscrituracionComponent } from './components/escrituracion/lotes-escrituracion/lotes-escrituracion.component';
+import { EditarClienteEscrituracionComponent } from './components/escrituracion/editar-cliente-escrituracion/editar-cliente-escrituracion.component';
+import { HistorialAvancesComponent } from './components/residente/historial-avances/historial-avances.component';
 
 
 export const ROUTES: Routes = [
@@ -124,6 +132,11 @@ export const ROUTES: Routes = [
         },
         children: [
             //{ path: '', redirectTo: 'tablero', pathMatch: 'full' },
+        /*     {
+                path: 'escrituracion',
+                loadChildren: 'app/escrituracion/escrituracion.module#EscrituracionModule',
+                data: { preload: true }
+            }, */
             {
                 path: 'clientes', component: ClientesComponent,
                 canActivate: [AuthGuard],
@@ -138,7 +151,7 @@ export const ROUTES: Routes = [
                 path: 'estadisticas', component: EstadisticasAdminComponent,
                 canActivate: [AuthGuard],
                 resolve: {
-                    datos:EstadisticasAdminResolverService
+                    datos: EstadisticasAdminResolverService
                     //estadisticas: EstadisticasAdminResolverService,
                     //obras: ObrasUsuarioResolverService,
                 },
@@ -234,6 +247,16 @@ export const ROUTES: Routes = [
                 resolve: {
                     obras: ObrasUsuarioResolverService,
                     //usuario: UsuarioLoggedResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.ControlAlmacen, Rol.Residente]
+                }
+            },
+            {
+                path: 'historial-avances', component: HistorialAvancesComponent,
+                canActivate: [AuthGuard],
+                resolve: {
+                    obras: ObrasUsuarioResolverService                   
                 },
                 data: {
                     permisos: [Rol.Administrador, Rol.ControlAlmacen, Rol.Residente]
@@ -544,9 +567,9 @@ export const ROUTES: Routes = [
             {
                 path: 'tablero-asesor', component: TableroAsesorComponent,
                 canActivate: [AuthGuard],
-/*                 resolve: {
-                    usuario: UsuarioLoggedResolverService
-                }, */
+                /*                 resolve: {
+                                    usuario: UsuarioLoggedResolverService
+                                }, */
                 data: {
                     permisos: [Rol.AsesorVentas]
                 }
@@ -554,9 +577,9 @@ export const ROUTES: Routes = [
             {
                 path: 'tablero-contabilidad', component: TableroContabilidadComponent,
                 canActivate: [AuthGuard],
-/*                 resolve: {
-                    usuario: UsuarioLoggedResolverService
-                }, */
+                /*                 resolve: {
+                                    usuario: UsuarioLoggedResolverService
+                                }, */
                 data: {
                     permisos: [Rol.Contabilidad]
                 }
@@ -564,9 +587,9 @@ export const ROUTES: Routes = [
             {
                 path: 'tablero-pedidos', component: TableroPedidosComponent,
                 canActivate: [AuthGuard],
-/*                 resolve: {
-                    usuario: UsuarioLoggedResolverService
-                }, */
+                /*                 resolve: {
+                                    usuario: UsuarioLoggedResolverService
+                                }, */
                 data: {
                     permisos: [Rol.Recepcion]
                 }
@@ -574,9 +597,9 @@ export const ROUTES: Routes = [
             {
                 path: 'tablero-residente', component: TableroResidenteComponent,
                 canActivate: [AuthGuard],
-/*                 resolve: {
-                    usuario: UsuarioLoggedResolverService
-                }, */
+                /*                 resolve: {
+                                    usuario: UsuarioLoggedResolverService
+                                }, */
                 data: {
                     permisos: [Rol.Residente]
                 }
@@ -584,9 +607,9 @@ export const ROUTES: Routes = [
             {
                 path: 'tablero-control-almacen', component: TableroControlAlmacenComponent,
                 canActivate: [AuthGuard],
-/*                 resolve: {
-                    usuario: UsuarioLoggedResolverService
-                }, */
+                /*                 resolve: {
+                                    usuario: UsuarioLoggedResolverService
+                                }, */
                 data: {
                     permisos: [Rol.ControlAlmacen]
                 }
@@ -594,9 +617,9 @@ export const ROUTES: Routes = [
             {
                 path: 'tablero-comisiones', component: TableroComisionesComponent,
                 canActivate: [AuthGuard],
-/*                 resolve: {
-                    usuario: UsuarioLoggedResolverService
-                }, */
+                /*                 resolve: {
+                                    usuario: UsuarioLoggedResolverService
+                                }, */
                 data: {
                     permisos: [Rol.Administrador]
                 }
@@ -651,7 +674,7 @@ export const ROUTES: Routes = [
                     tipos: TiposGastosResolverService
                 },
                 data: {
-                    permisos: [Rol.Administrador]
+                    permisos: [Rol.Administrador, Rol.Contabilidad]
                 }
             },
             {
@@ -774,6 +797,69 @@ export const ROUTES: Routes = [
                     permisos: [Rol.Administrador, Rol.Contabilidad]
                 }
             },
+            {
+                path: 'tablero-escrituracion', component: TableroEscrituracionComponent,
+                canActivate: [AuthGuard],
+                data: {
+                    permisos: [Rol.Administrador, Rol.Contabilidad]
+                }
+            },
+            {
+                path: 'escrituracion/configuracion', component: ConfiguracionEscrituracionComponent,
+                canActivate: [AuthGuard],
+                resolve: {
+                    obras: ObrasUsuarioResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.Contabilidad]
+                }
+            },
+            {
+                path: 'escrituracion/equipos', component: EquiposVentasEscrituracionComponent,
+                canActivate: [AuthGuard],
+                resolve: {
+                    obras: ObrasUsuarioResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.Contabilidad]
+                }
+            },
+            {
+                path: 'escrituracion/clientes', component: ClientesEscrituracionComponent,
+                canActivate: [AuthGuard],
+                resolve: {
+                    obras: ObrasUsuarioResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.Contabilidad]
+                }
+            },
+
+            {
+                path: 'escrituracion/lotes', component: LotesEscrituracionComponent,
+                canActivate: [AuthGuard],
+                resolve: {
+                    obras: ObrasUsuarioResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.Contabilidad]
+                }
+            },
+            {
+                path: 'escrituracion/mapas', component: MapasEscrituracionComponent,
+                canActivate: [AuthGuard],
+                resolve: {
+                    obras: MapasUsuarioResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.Contabilidad]
+                }
+            },
+            {
+                path: 'escrituracion/editar', component: EditarClienteEscrituracionComponent
+            },
+
+
 
 
 

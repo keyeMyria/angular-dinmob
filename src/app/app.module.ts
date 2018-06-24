@@ -244,6 +244,20 @@ import { TableroAsesorComponent } from './components/tablero-asesor/tablero-ases
 import { TableroPedidosComponent } from './components/tablero-pedidos/tablero-pedidos.component';
 import { TableroAlmacenistaComponent } from './components/tablero-almacenista/tablero-almacenista.component';
 import { EditarPagoTrabajadorDialogoComponent } from './components/admin/editar-pago-trabajador-dialogo/editar-pago-trabajador-dialogo.component';
+import { MapasEscrituracionComponent } from './components/escrituracion/mapas-escrituracion/mapas-escrituracion.component';
+import { TableroEscrituracionComponent } from './components/escrituracion/tablero-escrituracion/tablero-escrituracion.component';
+import { ClientesEscrituracionComponent } from './components/escrituracion/clientes-escrituracion/clientes-escrituracion.component';
+import { LotesEscrituracionComponent } from './components/escrituracion/lotes-escrituracion/lotes-escrituracion.component';
+import { ConfiguracionEscrituracionComponent } from './components/escrituracion/configuracion-escrituracion/configuracion-escrituracion.component';
+import { EquiposVentasEscrituracionComponent } from './components/escrituracion/equipos-ventas-escrituracion/equipos-ventas-escrituracion.component';
+import { AgregarVendedorEquipoDialogoComponent } from './components/escrituracion/agregar-vendedor-equipo-dialogo/agregar-vendedor-equipo-dialogo.component';
+import { AgregarEquipoDialogoComponent } from './components/escrituracion/agregar-equipo-dialogo/agregar-equipo-dialogo.component';
+import { EditarClienteEscrituracionComponent } from './components/escrituracion/editar-cliente-escrituracion/editar-cliente-escrituracion.component';
+import { ClientesLoteEscrituracionDialogoComponent } from './components/escrituracion/clientes-lote-escrituracion-dialogo/clientes-lote-escrituracion-dialogo.component';
+import { EditarClienteEscrituracionDialogoComponent } from './components/escrituracion/editar-cliente-escrituracion-dialogo/editar-cliente-escrituracion-dialogo.component';
+import { EditarLoteEscrituracionDialogoComponent } from './components/escrituracion/editar-lote-escrituracion-dialogo/editar-lote-escrituracion-dialogo.component';
+import { HistorialAvancesComponent } from './components/residente/historial-avances/historial-avances.component';
+import { EditarEquipoDialogoComponent } from './components/escrituracion/editar-equipo-dialogo/editar-equipo-dialogo.component';
 
 
 
@@ -401,7 +415,21 @@ export function getToken() {
     TableroAsesorComponent,
     TableroPedidosComponent,
     TableroAlmacenistaComponent,
-    EditarPagoTrabajadorDialogoComponent
+    EditarPagoTrabajadorDialogoComponent,
+    MapasEscrituracionComponent,
+    TableroEscrituracionComponent,
+    ClientesEscrituracionComponent,
+    LotesEscrituracionComponent,
+    ConfiguracionEscrituracionComponent,
+    EquiposVentasEscrituracionComponent,
+    AgregarVendedorEquipoDialogoComponent,
+    AgregarEquipoDialogoComponent,
+    EditarClienteEscrituracionComponent,
+    ClientesLoteEscrituracionDialogoComponent,
+    EditarClienteEscrituracionDialogoComponent,
+    EditarLoteEscrituracionDialogoComponent,
+    HistorialAvancesComponent,
+    EditarEquipoDialogoComponent
 
 
 
@@ -491,7 +519,13 @@ export function getToken() {
     CargoAbonoCreditoDialogoComponent,
     EditarCargoAbonoCreditoDialogoComponent,
     SaldoVentaClienteDialogoComponent,
-    EditarPagoTrabajadorDialogoComponent
+    EditarPagoTrabajadorDialogoComponent,
+    AgregarVendedorEquipoDialogoComponent,
+    AgregarEquipoDialogoComponent,
+    ClientesLoteEscrituracionDialogoComponent,
+    EditarClienteEscrituracionDialogoComponent,
+    EditarLoteEscrituracionDialogoComponent,
+    EditarEquipoDialogoComponent
 
 
 

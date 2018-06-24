@@ -108,7 +108,7 @@ export class ObrasComponent implements OnInit {
       if (result === true) {
 
         this.obrasSrv.delObra(obra.id_obra)
-          .subscribe(res => {
+          .subscribe((res: any) => {
 
             if (res.count === 1) {
 

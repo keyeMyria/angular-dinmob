@@ -1,0 +1,56 @@
+<div class="container mt-2 mb-5">
+  <div class="row">
+    <div class="col-12">
+
+
+      <div class="card">
+        <div class="card-header">
+          Clientes
+        </div>
+        <div>
+          <div class="table-responsive">
+            <table class="table table-hover table-striped table-align-middle">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Manzana</th>
+                  <th>Lote</th>
+                  <th>Estado</th>
+                  <th></th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>José Enrique Perez Aguilar</td>
+                  <td class="ws-nowrap">Manzana 2</td>
+                  <td class="ws-nowrap">Lote 5</td>
+                  <td></td>
+                  <td class="text-right">
+                    <button mat-icon-button [matMenuTriggerFor]="menu">
+                      <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                      <button mat-menu-item (click)="editarCliente()">
+                        <mat-icon>create</mat-icon>
+                        <span>Editar</span>
+                      </button>
+                      <button mat-menu-item (click)="delCliente()">
+                        <mat-icon>delete</mat-icon>
+                        <span>Eliminar</span>
+                      </button>
+                    </mat-menu>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+</div>

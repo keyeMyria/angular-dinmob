@@ -1,10 +1,12 @@
+
+import { forkJoin as observableForkJoin, Observable, of } from 'rxjs';
+
+import { switchMap } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { MapasService } from "app/services/mapas.service";
 import 'jvectormap';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import { Observable } from 'rxjs/Observable';
-import { of } from "rxjs/observable/of";
 import { PercentPipe } from '@angular/common';
 import { ImagenesLotesDialogoComponent } from '../../ventas/imagenes-lotes-dialogo/imagenes-lotes-dialogo.component';
 import { LotesService } from '../../../services/lotes.service';
@@ -31,6 +33,8 @@ export class MapasAvancesComponent implements OnInit {
   valuesDiscretosLotes: any = {};
   variableContinua: boolean = true;
 
+  scalePctAvance: any = {};
+
 
   constructor(
     private route: ActivatedRoute,
@@ -48,8 +52,8 @@ export class MapasAvancesComponent implements OnInit {
         this.obras = data.obras;
       });
 
-    this.route.paramMap
-      .switchMap((params: ParamMap) => {
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
 
         let obra;
 
@@ -60,7 +64,7 @@ export class MapasAvancesComponent implements OnInit {
           obra = this.obras[params.get("index")];
 
           //unimos la consulta de los valores y el mapa
-          return Observable.forkJoin(
+          return observableForkJoin(
             this.mapaSrv.getAvancesLotesObra(obra.id_obra),
             this.mapaSrv.getMapaObra(obra.mapa)
           )
@@ -71,7 +75,7 @@ export class MapasAvancesComponent implements OnInit {
           obra = this.obras[this.obra_selected];
 
           //unimos la consulta de los valores y el mapa
-          return Observable.forkJoin(
+          return observableForkJoin(
             this.mapaSrv.getAvancesLotesObra(obra.id_obra),
             this.mapaSrv.getMapaObra(obra.mapa)
           )
@@ -80,11 +84,12 @@ export class MapasAvancesComponent implements OnInit {
           return of([[], {}]);
         }
 
-      }).subscribe(res => {
+      })).subscribe((res: any) => {
 
         this.loading.start();
 
         this.lotes = res[0].lotes;
+        this.scalePctAvance = res[0].scalePctAvance;
 
         this.jsonMap = res[1];
 
@@ -92,21 +97,23 @@ export class MapasAvancesComponent implements OnInit {
 
 
         //creamos los valores para la escala de estados
-        this.variableContinua=true;
+        this.variableContinua = true;
         this.valuesLotes = {};
         this.valuesDiscretosLotes = {};
         this.lotes.forEach(lote => {
           // comprobar luego con datos
           this.valuesLotes[lote.code] = lote.valor ? lote.valor : 0;
           // escala personalizada
-          this.valuesDiscretosLotes[lote.code] = lote.valor_discreto ? lote.valor_discreto : 0;
+          this.valuesDiscretosLotes[lote.code] = lote.valor_discreto ? lote.valor_discreto : 1;
         });
+        //console.log("values discretos", this.valuesDiscretosLotes);
+
 
 
 
         if (this.jsonMap.mapa) {
           setTimeout(() => {
-            this.crearMapa(this.valuesLotes);
+            this.crearMapa(this.valuesLotes, this.scalePctAvance);
             this.loading.stop();
           }, 100);
         } else {
@@ -154,7 +161,7 @@ export class MapasAvancesComponent implements OnInit {
 
 
 
-  crearMapa(values) {
+  crearMapa(values, scalePctAvance) {
 
 
 
@@ -210,30 +217,35 @@ export class MapasAvancesComponent implements OnInit {
           },
           {
             values: {},
-            scale: {
-              '1': '#00a65a', //green
-              '2': '#f39c12', //amarillo     
-              '3': '#d81b60', //maroon 
-              '4': '#00c0ef', //aqua        
-              '5': '#605ca8' //purple''
-            },
+            scale: scalePctAvance,
+        /*     scale: {
+              '1': 'white',
+              '2': '#00a65a', // green
+              '3': '#f39c12', // amarillo
+              '4': '#d81b60', //maroon
+              '5': '#00c0ef', // aqua
+              '6': '#605ca8'  //purple
+            }, */
             legend: {
               vertical: true,
               title: 'Escala',
               labelRender: function (scale) {
+                //return scale;
                 if (scale == 1) {
+                  return '0%';
+                } else if (scale == 2) {
                   return '0-20%';
                 }
-                else if (scale == 2) {
+                else if (scale == 3) {
                   return '20-40%';
                 }
-                else if (scale == 3) {
+                else if (scale == 4) {
                   return '40-60%';
                 }
-                else if (scale == 4) {
+                else if (scale == 5) {
                   return '60-80%';
                 }
-                else if (scale == 5) {
+                else if (scale == 6) {
                   return '80-100%';
                 }
               }
@@ -373,7 +385,7 @@ export class MapasAvancesComponent implements OnInit {
   verAvances(lote) {
 
     this.loteSrv.getAvances(lote.id_lote)
-      .subscribe(res => {
+      .subscribe((res: any) => {
 
         let dialogRef = this.dialog.open(AvancesLoteDialogoComponent, {
           data: {

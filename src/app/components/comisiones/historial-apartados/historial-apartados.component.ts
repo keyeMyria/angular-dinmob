@@ -1,10 +1,12 @@
+
+import {forkJoin as observableForkJoin,  of ,  Observable } from 'rxjs';
+
+import {switchMap} from 'rxjs/operators';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { VentasPagosService } from 'app/services/ventas-pagos.service';
-import { of } from "rxjs/observable/of";
 import { VendedorService } from '../../../services/vendedor.service';
-import { Observable } from 'rxjs/Observable';
 import * as moment from 'moment';
 
 @Component({
@@ -40,18 +42,18 @@ export class HistorialApartadosComponent implements OnInit {
         this.obras = data.obras;
       });
 
-    this.route.paramMap
-      .switchMap((params: ParamMap) => {
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
-          return Observable.forkJoin(
+          return observableForkJoin(
             this.pagoSrv.getApartadosObra(params.get("obra")),
             this.vendedorSrv.getVendedoresObra(params.get("obra"))
           );
         } else {
           return of([[], []]);
         }
-      }).subscribe(res => {
+      })).subscribe(res => {
         this.apartados = res[0];
         this.apartadosFiltrados = this.apartados.slice();
         this.vendedores = res[1];

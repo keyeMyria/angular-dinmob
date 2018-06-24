@@ -12,7 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class NuevoClienteComponent {
 
-  
+
   manzanas: any = [];
   obras: any = [];
 
@@ -157,15 +157,15 @@ export class NuevoClienteComponent {
     //console.log("cargar obra", id_obra);
 
     if (id_obra) {
-      
+
       this.obraSrv.getLotesEnVentaLibres(id_obra)
-        .subscribe(obra => {
+        .subscribe((obra: any) => {
           //console.log("getLotes", obra.manzanas);
           this.manzanas = obra.manzanas;
           this.formInmueble.get("lote").setValue("");
-          
+
         }, (error) => {
-          
+
         });
 
     } else {
@@ -181,12 +181,12 @@ export class NuevoClienteComponent {
 
     //console.log("inmueble", this.formInmueble.value);
 
-    
+
     let id_obra = this.formInmueble.get('obra').value;
 
     this.clienteSrv.createCliente(this.form.value, this.formInmueble.get('lote').value)
-      .subscribe(res => {
-        
+      .subscribe((res: any) => {
+
         //console.log("Cliente Creado", res);
         if (res.compra) {
           this.router.navigate(["clientes", { obra: id_obra }]);
@@ -196,7 +196,7 @@ export class NuevoClienteComponent {
         }
 
       }, (error) => {
-        
+
         this.router.navigate(["prospectos"]);
       });
 

@@ -1,3 +1,7 @@
+
+import {of as observableOf, forkJoin as observableForkJoin,  Observable } from 'rxjs';
+
+import {switchMap} from 'rxjs/operators';
 import { Component, OnInit, ViewChild, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { ObrasService } from "app/services/obras.service";
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
@@ -7,7 +11,6 @@ import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import "rxjs/add/observable/of";
 import "rxjs/add/observable/forkJoin";
-import { Observable } from 'rxjs/Observable';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { AgregarManzanaDialogoComponent } from 'app/components/admin/agregar-manzana-dialogo/agregar-manzana-dialogo.component';
 import { AgregarLoteDialogoComponent } from 'app/components/admin/agregar-lote-dialogo/agregar-lote-dialogo.component';
@@ -47,8 +50,8 @@ export class EstructuraObraComponent implements OnInit, OnDestroy {
     { [k: string]: string } = { '=0': 'Ningún lote seleccionado', '=1': 'Un lote seleccionado', 'other': '# lotes seleccionados' };
 
 
-  obras: any[] = [];
-  prototipos: any[] = [];
+  obras: any = [];
+  prototipos: any = [];
 
   obra: any = {};
 
@@ -99,20 +102,20 @@ export class EstructuraObraComponent implements OnInit, OnDestroy {
       });
 
 
-    this.route.paramMap
-      .switchMap((params: ParamMap) => {
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
 
           //unimos la consulta de las manzanas y los prototipos
-          return Observable.forkJoin(
+          return observableForkJoin(
             this.obraSrv.getAcordeonManzanas(params.get("obra")),
             this.prototipoSrv.getPrototiposObra(params.get("obra"))
           );
         } else {
-          return Observable.of([{ datos: {} }, []]);
+          return observableOf([{ datos: {} }, []]);
         }
-      }).subscribe(res => {
+      })).subscribe(res => {
         //console.log("res", res);
         this.obra = res[0];
         this.prototipos = res[1];
@@ -318,7 +321,7 @@ export class EstructuraObraComponent implements OnInit, OnDestroy {
       if (result === true) {
 
         this.loteSrv.delLote(lote.id_lote)
-          .subscribe(res => {
+          .subscribe((res: any) => {
 
             if (res.count == 1) {
 
@@ -368,7 +371,7 @@ export class EstructuraObraComponent implements OnInit, OnDestroy {
       if (result === true) {
 
         this.manzanaSrv.delManzana(manzana.id_manzana)
-          .subscribe(res => {
+          .subscribe((res: any) => {
 
             if (res.count == 1) {
 
@@ -414,7 +417,7 @@ export class EstructuraObraComponent implements OnInit, OnDestroy {
 
     let valor = this.opValorBase.value.replace(/,/g, "");
     this.loteSrv.bulkUpdate(id_lotes, { valor_base: valor })
-      .subscribe(res => {
+      .subscribe((res: any) => {
 
         if (res.count) {
           //todo ok
@@ -466,7 +469,7 @@ export class EstructuraObraComponent implements OnInit, OnDestroy {
 
     let valor = this.opMetrosExcedente.value.replace(/,/g, "");
     this.loteSrv.bulkUpdate(id_lotes, { metros_excedente: valor })
-      .subscribe(res => {
+      .subscribe((res: any) => {
 
         if (res.count) {
           //todo ok
@@ -519,7 +522,7 @@ export class EstructuraObraComponent implements OnInit, OnDestroy {
 
     let valor = this.opPrecioExcedente.value.replace(/,/g, "");
     this.loteSrv.bulkUpdate(id_lotes, { precio_excedente: valor })
-      .subscribe(res => {
+      .subscribe((res: any) => {
 
         if (res.count) {
           //todo ok
@@ -572,7 +575,7 @@ export class EstructuraObraComponent implements OnInit, OnDestroy {
 
     let valor = this.opValorAmpliacion.value.replace(/,/g, "");
     this.loteSrv.bulkUpdate(id_lotes, { valor_ampliacion: valor })
-      .subscribe(res => {
+      .subscribe((res: any) => {
 
         if (res.count) {
           //todo ok
@@ -625,7 +628,7 @@ export class EstructuraObraComponent implements OnInit, OnDestroy {
 
 
     this.loteSrv.bulkUpdate(id_lotes, { en_venta: this.opEnVenta.value })
-      .subscribe(res => {
+      .subscribe((res: any) => {
         if (res.count) {
           //todo ok
 
@@ -675,7 +678,7 @@ export class EstructuraObraComponent implements OnInit, OnDestroy {
 
 
     this.loteSrv.bulkUpdate(id_lotes, { irregular: this.opTipo.value })
-      .subscribe(res => {
+      .subscribe((res: any) => {
         if (res.count) {
           //todo ok
 
@@ -725,7 +728,7 @@ export class EstructuraObraComponent implements OnInit, OnDestroy {
 
 
     this.loteSrv.bulkUpdate(id_lotes, { comision_vendedor: this.opComisionVendedor.value })
-      .subscribe(res => {
+      .subscribe((res: any) => {
         if (res.count) {
           //todo ok
 
@@ -773,7 +776,7 @@ export class EstructuraObraComponent implements OnInit, OnDestroy {
 
 
     this.loteSrv.bulkUpdate(id_lotes, { comision_gerente: this.opComisionGerente.value })
-      .subscribe(res => {
+      .subscribe((res: any) => {
         if (res.count) {
           //todo ok
 
@@ -821,7 +824,7 @@ export class EstructuraObraComponent implements OnInit, OnDestroy {
 
 
     this.loteSrv.bulkUpdate(id_lotes, { comision_expediente: this.opComisionExpediente.value })
-      .subscribe(res => {
+      .subscribe((res: any) => {
         if (res.count) {
           //todo ok
 
@@ -877,7 +880,7 @@ export class EstructuraObraComponent implements OnInit, OnDestroy {
     };
 
     this.loteSrv.bulkAddLotePrototipo(id_lotes, prototipo.id_prototipo)
-      .subscribe(res => {
+      .subscribe((res: any) => {
         //console.log("respuesta", res);
 
 

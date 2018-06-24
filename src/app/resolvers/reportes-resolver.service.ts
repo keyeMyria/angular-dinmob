@@ -1,9 +1,11 @@
+
+import {map, take} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/take';
+
+
 import { ReporteService } from '../services/reporte.service';
 
 @Injectable()
@@ -17,7 +19,7 @@ export class ReportesResolverService implements Resolve<any[]> {
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any[]> {
 
 
-    return this.reporteSrv.getTipos().take(1).map((tipos: any[]) => {
+    return this.reporteSrv.getTipos().pipe(take(1),map((tipos: any[]) => {
       
       if (tipos) {
         return tipos;
@@ -25,7 +27,7 @@ export class ReportesResolverService implements Resolve<any[]> {
         //this.router.navigate(['/tablero']);
         return null;
       }
-    });
+    }),);
 
   }
 

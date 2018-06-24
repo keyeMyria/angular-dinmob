@@ -1,9 +1,12 @@
+
+import {of as observableOf,  Observable } from 'rxjs';
+
+import {switchMap} from 'rxjs/operators';
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { MatDrawer, MatDialog, MatSnackBar } from '@angular/material';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { ObrasService } from 'app/services/obras.service';
-import { Observable } from 'rxjs/Observable';
 import { LotesService } from '../../../services/lotes.service';
 import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
 import { Rol } from "../../../constantes/roles";
@@ -55,15 +58,15 @@ export class ImagenesLoteComponent implements OnInit {
         this.obras = data.obras;
         //this.usuario = data.usuario;
       });
-    this.route.paramMap
-      .switchMap((params: ParamMap) => {
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
           return this.obraSrv.getAcordeonManzanasNumFotos(params.get("obra"));
         } else {
-          return Observable.of({ datos: {} });
+          return observableOf({ datos: {} });
         }
-      }).subscribe(obra => {
+      })).subscribe(obra => {
         //console.log("obra", obra);
         this.obra = obra;
       });
@@ -90,7 +93,7 @@ export class ImagenesLoteComponent implements OnInit {
 
   girarFoto(imagen, grados) {
     this.loteSrv.girarFoto(imagen.id_imagen, grados)
-      .subscribe(res => {
+      .subscribe((res: any) => {
         imagen.url = res.url;
       }, (error) => {
 
@@ -115,7 +118,7 @@ export class ImagenesLoteComponent implements OnInit {
 
 
         this.loteSrv.delFoto(foto.id_imagen)
-          .subscribe(res => {
+          .subscribe((res: any) => {
             if (res.count == 1) {
               let i = this.fotos.indexOf(foto);
               this.fotos.splice(i, 1);

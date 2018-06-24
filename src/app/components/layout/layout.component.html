@@ -41,7 +41,7 @@
 
 
   <mat-sidenav-container class="app-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-    <mat-sidenav #navLeft class="app-sidenav-start" mode="over" align="start" opened="false" [fixedInViewport]="mobileQuery.matches"
+    <mat-sidenav #navLeft class="app-sidenav-start" mode="over" position="start" opened="false" [fixedInViewport]="mobileQuery.matches"
       fixedTopGap="56">
 
       <mat-nav-list class="mb-5" *ngIf="usuario.id_tipo_usuario==Rol.Administrador">
@@ -278,7 +278,7 @@
 
     </mat-sidenav>
 
-    <!--     <mat-sidenav #navRight class="sidenav-end" mode="over" align="end" opened="false">
+    <!--     <mat-sidenav #navRight class="sidenav-end" mode="over" position="end" opened="false">
       <mat-tab-group>
         <mat-tab label="Tab 1">
           <h3>Encabezado</h3>

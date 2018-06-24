@@ -59,7 +59,7 @@ export class VentasLoteComponent implements OnInit {
     let id = this.route.snapshot.paramMap.get('id');
 
     this.loteSrv.getDetallesLoteVentas(id)
-      .subscribe(res => {
+      .subscribe((res: any) => {
         //console.log("Lote OK", res);
         this.lote = res.lote;
         this.clientes = res.clientes;
@@ -82,7 +82,7 @@ export class VentasLoteComponent implements OnInit {
 
 
     this.loteSrv.updateLote(this.lote.id_lote, lote)
-      .subscribe(lote => {
+      .subscribe((lote: any) => {
         this.lote = lote;
         this.form.patchValue(this.lote);
         this.snackBar.open("Lote Actualizado", "", {

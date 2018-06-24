@@ -1,0 +1,198 @@
+<h1 mat-dialog-title>Editar Lote</h1>
+<div mat-dialog-content>
+
+
+
+  <!-- clientes -->
+  <div class="table-responsive">
+    <table class="table table-striped table-hover table-align-middle">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Nombre</th>
+          <th>Estado</th>
+          <th>Activación</th>
+          <th>Cancelación</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+
+          <td>
+            <mat-checkbox class="pl-2"></mat-checkbox>
+          </td>
+
+          <td class="ws-nowrap">José Perez</td>
+          <td></td>
+          <td class="ws-nowrap">21JUN.2018</td>
+          <td class="ws-nowrap"></td>
+          <td class="text-right">
+            <button mat-icon-button>
+              <mat-icon>picture_as_pdf</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <mat-tab-group>
+
+    <!-- Datos Generales -->
+    <mat-tab label="Cliente">
+      <div class="container py-3">
+        <form>
+
+          <div class="form-group row mt-3">
+            <label class="col-form-label col-sm-3">Estado</label>
+            <div class="col-sm-9">
+              <select class="form-control" name="estado" [(ngModel)]="estados_selected">
+                <option [value]="1">Apartado</option>
+                <option [value]="2">Documentos</option>
+                <option [value]="3">Escriturado</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group row" *ngIf="estados_selected == '1'">
+            <label for="fecha_apardado" class="col-form-label col-sm-3">Fecha Apartado</label>
+            <div class="input-group col-sm-9">
+              <input class="form-control" placeholder="yyyy-mm-dd" type="text" placement="bottom-left" [matDatepicker]="dpFechaApartado">
+              <span class="input-group-append">
+                <button class="btn btn-secondary" type="button" (click)="dpFechaApartado.open()">
+                  <i class="fa fa-calendar"></i>
+                </button>
+              </span>
+            </div>
+            <mat-datepicker touchUi="true" #dpFechaApartado></mat-datepicker>
+          </div>
+
+          <div class="form-group row" *ngIf="estados_selected == '2'">
+            <label for="fecha_documentos" class="col-form-label col-sm-3">Fecha Documentos</label>
+            <div class="input-group col-sm-9">
+              <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="fecha_documentos" placement="bottom-left" [matDatepicker]="dpFechaDocumentos">
+              <span class="input-group-append">
+                <button class="btn btn-secondary" type="button" (click)="dpFechaDocumentos.open()">
+                  <i class="fa fa-calendar"></i>
+                </button>
+              </span>
+            </div>
+            <mat-datepicker touchUi="true" #dpFechaDocumentos></mat-datepicker>
+          </div>
+
+          <div class="form-group row" *ngIf="estados_selected == '3'">
+            <label for="fecha_escriturado" class="col-form-label col-sm-3">Fecha Escriturado</label>
+            <div class="input-group col-sm-9">
+              <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="fecha_escriturado" placement="bottom-left" [matDatepicker]="dpFechaEscriturado">
+              <span class="input-group-append">
+                <button class="btn btn-secondary" type="button" (click)="dpFechaEscriturado.open()">
+                  <i class="fa fa-calendar"></i>
+                </button>
+              </span>
+            </div>
+            <mat-datepicker touchUi="true" #dpFechaEscriturado></mat-datepicker>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">Nombre</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="nombre">
+            </div>
+          </div>
+
+
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3" for="fecha_nacimiento">Fecha de nacimiento</label>
+            <div class="col-sm-9">
+              <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_nacimiento" id="fecha_nacimiento" [matDatepicker]="dpFechaNacimiento">
+                <span class="input-group-append">
+                  <button class="btn btn-secondary" type="button" (click)="dpFechaNacimientoPF.open()">
+                    <i class="fa fa-calendar"></i>
+                  </button>
+                </span>
+              </div>
+              <mat-datepicker touchUi="true" #dpFechaNacimiento></mat-datepicker>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">CURP</label>
+            <div class="col-sm-9">
+              <input [textMask]="{mask: maskCURP}" type="text" class="form-control" name="curp">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">Teléfono</label>
+            <div class="col-sm-9">
+              <input [textMask]="{mask: maskPhone}" type="text" class="form-control" name="celular">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">Precio Venta</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">Vendedor</label>
+            <div class="col-sm-9">
+              <select class="form-control" name="">
+                <option [value]="1">Vendedor 1</option>
+                <option [value]="2">Vendedor 2</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-form-label col-sm-3">Tipo Crédito</label>
+            <div class="col-sm-9">
+              <select class="form-control" name="">
+                <option [value]="1">Crédito 1</option>
+                <option [value]="2">Crédito 2</option>
+              </select>
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+    </mat-tab>
+
+
+
+    <!-- <Documentos> -->
+    <mat-tab label="Documentos">
+      <div class="container py-3">
+        <mat-selection-list>
+          <mat-list-option>
+            Curp
+          </mat-list-option>
+          <mat-list-option>
+            IFE
+          </mat-list-option>
+          <mat-list-option>
+            RFC
+          </mat-list-option>
+        </mat-selection-list>
+      </div>
+    </mat-tab>
+
+
+
+
+
+
+  </mat-tab-group>
+
+
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button type="button" [mat-dialog-close]="false">CANCELAR</button>
+  <button type="submit" mat-button color="primary">GUARDAR</button>
+</div>

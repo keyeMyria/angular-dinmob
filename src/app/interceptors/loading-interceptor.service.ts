@@ -1,8 +1,10 @@
+
+import {tap} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpResponse, HttpHandler, HttpEvent } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { LoadingService } from 'app/services/loading.service';
-import 'rxjs/add/operator/do';
+
 
 
 @Injectable()
@@ -19,7 +21,7 @@ export class LoadingInterceptorService implements HttpInterceptor {
     //console.log("start", this.count);
     this.loadingSrv.start();
 
-    return next.handle(req).do((event: HttpEvent<any>) => {
+    return next.handle(req).pipe(tap((event: HttpEvent<any>) => {
       // if the event is for http response
       if (event instanceof HttpResponse) {
         // stop our loader here
@@ -34,7 +36,7 @@ export class LoadingInterceptorService implements HttpInterceptor {
       // if any error (not for just HttpResponse) we stop our loader
       this.loadingSrv.stop();
       this.count = 0;
-    });
+    }));
   }
 
 }

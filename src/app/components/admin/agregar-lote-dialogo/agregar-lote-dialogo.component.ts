@@ -93,7 +93,7 @@ export class AgregarLoteDialogoComponent implements OnInit {
     if (this.formLote.value.tipo == "nombre") {
 
       this.loteSrv.addLoteByNombre(this.formLote.value.nombre, this.data.manzana.id_manzana)
-        .subscribe(lote => {
+        .subscribe((lote: any) => {
 
           this.data.manzana.lotes.push(lote);
           this.dialogRef.close(true);
@@ -105,7 +105,7 @@ export class AgregarLoteDialogoComponent implements OnInit {
     } else {
 
       this.loteSrv.addLoteByNumero(this.formLote.value.prefijo, this.formLote.value.ini, this.formLote.value.fin, this.data.manzana.id_manzana)
-        .subscribe(lotes => {
+        .subscribe((lotes: any) => {
           this.data.manzana.lotes.push(...lotes);
           this.dialogRef.close(true);
         }, (error) => {

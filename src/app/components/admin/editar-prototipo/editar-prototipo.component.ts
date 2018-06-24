@@ -1,3 +1,5 @@
+
+import {switchMap} from 'rxjs/operators';
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { EditarNombrePrototipoDialogoComponent } from 'app/components/admin/editar-nombre-prototipo-dialogo/editar-nombre-prototipo-dialogo.component';
 import { MatDialog, MatSnackBar } from '@angular/material';
@@ -41,10 +43,10 @@ export class EditarPrototipoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.paramMap
-      .switchMap((params: ParamMap) =>
-        this.prototipoSrv.getAcordeonPartidas(params.get('id')))
-      .subscribe(res => {
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) =>
+        this.prototipoSrv.getAcordeonPartidas(params.get('id'))))
+      .subscribe((res: any) => {
         this.prototipo = res.prototipo;
         this.partidas = res.partidas;
 

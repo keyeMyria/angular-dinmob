@@ -1,3 +1,5 @@
+
+import {switchMap} from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { EditarDocumentoDialogoComponent } from 'app/components/ventas/editar-documento-dialogo/editar-documento-dialogo.component';
@@ -5,7 +7,7 @@ import { EditarMaterialDialogoComponent } from 'app/components/almacen/editar-ma
 import { MatDialog, MatSnackBar, Sort } from '@angular/material';
 import { NuevoMaterialDialogoComponent } from 'app/components/almacen/nuevo-material-dialogo/nuevo-material-dialogo.component';
 import { InsumoService } from 'app/services/insumo.service';
-import { of } from "rxjs/observable/of";
+import { of } from "rxjs";
 import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
 import { Rol } from "../../../constantes/roles";
 import { AuthService } from '../../../services/auth.service';
@@ -44,15 +46,15 @@ export class InventarioComponent implements OnInit {
         //this.usuario = data.usuario;
       });
 
-    this.route.paramMap
-      .switchMap((params: ParamMap) => {
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
           return this.insumoSrv.getMaterialesObra(params.get("obra"));
         } else {
           return of([]);
         }
-      }).subscribe(materiales => {
+      })).subscribe(materiales => {
         //console.log("prototipos", prototipos);
         this.materiales = materiales;
         this.materiales_filtrados = this.materiales.slice();
@@ -103,7 +105,7 @@ export class InventarioComponent implements OnInit {
       if (result === true) {
 
         this.insumoSrv.delInsumo(material.id_insumo)
-          .subscribe(res => {
+          .subscribe((res: any) => {
 
             if (res.count === 1) {
 

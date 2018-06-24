@@ -1,8 +1,11 @@
+
+import {of as observableOf,  Observable } from 'rxjs';
+
+import {switchMap} from 'rxjs/operators';
 import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { MatSnackBar, MatTabChangeEvent, MatDialog, MatTabGroup, MatDrawer } from '@angular/material';
-import { Observable } from 'rxjs/Observable';
 import { ObrasService } from 'app/services/obras.service';
 import { PedidoService } from '../../../services/pedido.service';
 import { AlertaDialogoComponent } from 'app/components/admin/alerta-dialogo/alerta-dialogo.component';
@@ -62,15 +65,15 @@ export class NuevoPedidoComponent implements OnInit {
         //this.usuario = data.usuario;
       });
 
-    this.route.paramMap
-      .switchMap((params: ParamMap) => {
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
           return this.obraSrv.getAcordeonManzanas(params.get("obra"));
         } else {
-          return Observable.of({ datos: {} });
+          return observableOf({ datos: {} });
         }
-      }).subscribe(obra => {
+      })).subscribe(obra => {
         //console.log("obra", obra);
         this.obra = obra;
 

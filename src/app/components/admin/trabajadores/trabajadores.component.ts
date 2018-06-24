@@ -1,3 +1,5 @@
+
+import {switchMap} from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { MatDialog, MatSnackBar } from '@angular/material';
@@ -5,7 +7,7 @@ import { NuevoTrabajadorDialogoComponent } from 'app/components/admin/nuevo-trab
 import { EditarTrabajadorDialogoComponent } from 'app/components/admin/editar-trabajador-dialogo/editar-trabajador-dialogo.component';
 import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component";
 import { TrabajadorService } from '../../../services/trabajador.service';
-import { of } from "rxjs/observable/of";
+import { of } from "rxjs";
 
 
 @Component({
@@ -34,15 +36,15 @@ export class TrabajadoresComponent implements OnInit {
         this.especialidades = data.especialidades;
       });
 
-    this.route.paramMap
-      .switchMap((params: ParamMap) => {
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
           return this.trabajadorSrv.getTrabajadoresObra(params.get("obra"));
         } else {
           return of([]);
         }
-      }).subscribe(trabajadores => {
+      })).subscribe(trabajadores => {
         this.trabajadores = trabajadores;
       }, (error) => {
       });
