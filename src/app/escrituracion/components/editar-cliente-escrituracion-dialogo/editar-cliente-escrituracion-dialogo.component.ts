@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
 import { MatDialog, MatSnackBar } from '@angular/material';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-editar-cliente-escrituracion-dialogo',
@@ -36,7 +37,7 @@ export class EditarClienteEscrituracionDialogoComponent implements OnInit {
   ) {
     this.formGenerales = this.fb.group({
       nombre: [null, Validators.required],
-      fecha_nacimiento: [null, Validators.required],
+      fecha_nacimiento: [moment(), Validators.required],
       curp_cliente: [null, Validators.required],
       telefono_cliente: [null, Validators.required]
     });
@@ -49,9 +50,14 @@ export class EditarClienteEscrituracionDialogoComponent implements OnInit {
     });
 
     this.formInmueble = this.fb.group({
-      precio_lista: null,
-      id_vendedor: null,
-      tipo_credito: null
+      precio_lista: [null, Validators.required],
+      id_vendedor: [null, Validators.required],
+      tipo_credito: [null, Validators.required],
+      estado: [null, Validators.required],
+      fecha_apartado: [moment(), Validators.required],
+      fecha_documentos: [moment(), Validators.required],
+      fecha_escriturado: [moment(), Validators.required],
+
 
     });
   }
@@ -77,16 +83,16 @@ export class EditarClienteEscrituracionDialogoComponent implements OnInit {
   }
 
   guardarGenerales() {
-    //console.log("guardar datos generales", this.tab_selected);
+    console.log("guardar datos generales", this.tab_selected);
   }
 
   guardarDocumentos() {
-    //console.log("guardar datos generales", this.tab_selected);
+    console.log("guardar datos generales", this.tab_selected);
   }
 
 
   guardarInmueble() {
-    //console.log("guardar datos generales", this.tab_selected);
+    console.log("guardar datos generales", this.tab_selected);
   }
 
 
