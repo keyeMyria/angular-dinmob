@@ -1,7 +1,7 @@
 
-import {forkJoin as observableForkJoin,  of ,  Observable } from 'rxjs';
+import { forkJoin as observableForkJoin, of } from 'rxjs';
 
-import {switchMap} from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MapasService } from "app/services/mapas.service";
 import 'jvectormap';
@@ -106,8 +106,6 @@ export class MapasEscrituracionComponent implements OnInit, OnDestroy {
 
         //activamos el loading spinner
         this.loading.start();
-        //console.log("loading start");
-
 
         this.lotes = res[0].lotes;
         this.scalePrototipos = res[0].scalePrototipos;
@@ -156,23 +154,15 @@ export class MapasEscrituracionComponent implements OnInit, OnDestroy {
         });
 
 
-        //console.log("valores escala prototipos", this.valuesPrototipos);
-
-
         if (this.jsonMap.mapa) {
 
           setTimeout(() => {
-            //console.log("inicio creación mapa");
             this.crearMapa(this.valuesEstadosVenta, this.scalePrototipos, this.scaleFormaPago, this.scaleLoteTipo);
-            //console.log("mapa creado");
-            //detenemos el loading spinner
             this.loading.stop();
           }, 100);
+
         } else {
-          //setTimeout(() => {
           this.loading.stop();
-          //console.log("loading stop");
-          //}, 3000);
         }
 
 
@@ -197,9 +187,7 @@ export class MapasEscrituracionComponent implements OnInit, OnDestroy {
 
   }
 
-  /*   private getObra(id_obra) {
-      return this.obras.find(obra => obra.id_obra == id_obra);
-    } */
+
   private getIndexObra(id_obra) {
     let op = this.obras.findIndex(obra => obra.id_obra == id_obra && obra.is_default == "1");
     if (op == -1) {
@@ -210,7 +198,7 @@ export class MapasEscrituracionComponent implements OnInit, OnDestroy {
 
   verClientes() {
     this.loteSrv.getDetallesLoteVentas(this.lote_selected.id_lote)
-      .subscribe((res:any) => {
+      .subscribe((res: any) => {
 
         let dialogRef = this.dialog.open(ClientesLoteEscrituracionDialogoComponent, {
           data: {

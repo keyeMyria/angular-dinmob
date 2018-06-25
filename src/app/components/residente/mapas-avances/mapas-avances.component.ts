@@ -1,5 +1,5 @@
 
-import { forkJoin as observableForkJoin, Observable, of } from 'rxjs';
+import { forkJoin as observableForkJoin, of } from 'rxjs';
 
 import { switchMap } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';

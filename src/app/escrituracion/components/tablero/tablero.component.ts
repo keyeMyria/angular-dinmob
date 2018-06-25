@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'app/services/auth.service';
 
 @Component({
   selector: 'app-tablero',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TableroComponent implements OnInit {
 
-  constructor() { }
+  obra_default: any;
+  usuario: any;
+
+  constructor(
+    private authSrv: AuthService
+  ) { }
 
   ngOnInit() {
+    this.usuario = this.authSrv.usuario;
+
+    if (this.usuario.id_obra_default) {
+      this.obra_default = { obra: this.usuario.id_obra_default };
+    } else {
+      this.obra_default = {};
+    }
   }
 
 }

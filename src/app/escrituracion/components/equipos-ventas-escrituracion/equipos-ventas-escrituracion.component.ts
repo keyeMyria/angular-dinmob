@@ -3,7 +3,7 @@ import { AgregarEquipoDialogoComponent } from '../agregar-equipo-dialogo/agregar
 import { MatDialog, MatSnackBar, MatDrawer } from '@angular/material';
 import { AgregarVendedorEquipoDialogoComponent } from '../agregar-vendedor-equipo-dialogo/agregar-vendedor-equipo-dialogo.component';
 import { EditarEquipoDialogoComponent } from '../editar-equipo-dialogo/editar-equipo-dialogo.component';
-import { ConfirmarBorradoDialogoComponent } from '../../admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
+import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
 
 @Component({
   selector: 'app-equipos-ventas-escrituracion',
