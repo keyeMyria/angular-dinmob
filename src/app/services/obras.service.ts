@@ -1,5 +1,5 @@
 
-import {throwError as observableThrowError,  Observable } from 'rxjs';
+import { throwError as observableThrowError, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ConfigService } from 'app/services/config.service';
@@ -100,9 +100,9 @@ export class ObrasService {
   }
 
   //ok
-  getEstadisticas(id_obra) {   
-      return this.http.get(this.url + "get_estadisticas/" + id_obra, {})
-        .pipe(catchError(this.handleError("getEstadisticas")));    
+  getEstadisticas(id_obra) {
+    return this.http.get(this.url + "get_estadisticas/" + id_obra, {})
+      .pipe(catchError(this.handleError("getEstadisticas")));
   }
 
   //ok
@@ -126,6 +126,12 @@ export class ObrasService {
   getManzanasTrabajadores(id_obra) {
     return this.http.get(this.url + "get_manzanas_lotes_trabajadores/" + id_obra)
       .pipe(catchError(this.handleError("getManzanasTrabajadores")));
+  }
+
+  //ok
+  getUltimosAvances(id_obra) {
+    return this.http.get(this.url + "get_ultimos_avances/" + id_obra)
+      .pipe(catchError(this.handleError("getUltimosAvances")));
   }
 
 
