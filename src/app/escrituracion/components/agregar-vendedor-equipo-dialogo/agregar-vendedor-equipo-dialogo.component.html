@@ -1,14 +1,17 @@
 <h1 mat-dialog-title>Agregar Vendedor</h1>
 <div mat-dialog-content>
-  <form>
+  <form [formGroup]="form" (ngSubmit)="guardar()">
     <div class="form-group">
-      <label for="inputState">Vendedor</label>
-      <select id="inputState" class="form-control">
+      <label for="id_vendedor">Vendedor</label>
+      <select id="id_vendedor" name="id_vendedor" class="form-control" [ngClass]="{'is-invalid':form.get('id_vendedor').invalid && (form.get('id_vendedor').dirty || form.get('id_vendedor').touched )}">
         <option>Seleccionar</option>
         <option value="1">Vendedor 1</option>
         <option value="2">Vendedor 2</option>
         <option value="3">Vendedor 3</option>
       </select>
+      <div *ngIf="form.get('id_vendedor').invalid && (form.get('id_vendedor').dirty || form.get('id_vendedor').touched )" class="visible invalid-feedback">
+        Seleccione vendedor
+      </div>
     </div>
   </form>
 </div>

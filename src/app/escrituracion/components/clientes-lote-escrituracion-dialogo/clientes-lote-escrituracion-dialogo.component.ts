@@ -1,9 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { Cliente } from 'app/model/cliente';
 import { SelectionModel } from '@angular/cdk/collections';
-import { Router } from '@angular/router';
 import { ReporteService } from 'app/services/reporte.service';
+import createNumberMask from 'text-mask-addons/dist/createNumberMask';
+import * as moment from 'moment';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-clientes-lote-escrituracion-dialogo',
@@ -11,12 +12,17 @@ import { ReporteService } from 'app/services/reporte.service';
   styleUrls: ['./clientes-lote-escrituracion-dialogo.component.scss']
 })
 export class ClientesLoteEscrituracionDialogoComponent implements OnInit {
-
+  numbermask = createNumberMask({
+    allowDecimal: true,
+    prefix: '',
+    decimalLimit: 2
+  });
   public maskCURP = [/[A-Z0-9]/i, /[A-Z0-9]/i, /[A-Z0-9]/i, /[A-Z0-9]/i, '-', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /[A-Z]/i, '-', /[A-Z]/i, /[A-Z]/i, '-', /[A-Z0-9]/i, /[A-Z0-9]/i, /[A-Z0-9]/i, '-', /[A-Z0-9]/i, /[A-Z0-9]/i];
   public maskPhone = ['(', /\d/, /\d/, /\d/, ')', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
-
   cliente_selected: any = { pagos: [] };
+  formGenerales: FormGroup;
+  formDocumentos: FormGroup;
 
   //selector de clientes
   selection = new SelectionModel<any>(false);
@@ -24,9 +30,27 @@ export class ClientesLoteEscrituracionDialogoComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<ClientesLoteEscrituracionDialogoComponent>,
-    private router: Router,
-    private reporteSrv: ReporteService
-  ) { }
+    private reporteSrv: ReporteService,
+    private fb: FormBuilder
+  ) {
+    this.formGenerales = this.fb.group({
+      nombre: [null, Validators.required],
+      fecha_nacimiento: [moment(), Validators.required],
+      curp: [null, Validators.required],
+      telefono: [null, Validators.required],
+      precio_venta: [null, Validators.required],
+      id_vendedor: [null, Validators.required],
+      id_tipo_credito: [null, Validators.required],
+    });
+    this.formDocumentos = this.fb.group({
+      curp: null,
+      ife: null,
+      acta_nacimiento: null,
+      comprobante: null,
+
+
+    });
+  }
 
   ngOnInit() {
 

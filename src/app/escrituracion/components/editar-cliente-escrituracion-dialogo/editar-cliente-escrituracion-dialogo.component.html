@@ -195,7 +195,7 @@
             <label for="fecha_apartado" class="col-form-label col-sm-3">Fecha Apartado</label>
             <div class="input-group col-sm-9">
               <input class="form-control" placeholder="yyyy-mm-dd" type="text" placement="bottom-left" [matDatepicker]="dpFechaApartado"
-                id="fecha_apartado" name="fecha_apartado" formControlName="fecha_apartado" [(ngModel)]="estados_selected" [ngClass]="{'is-invalid':formInmueble.get('fecha_apartado').invalid && (formInmueble.get('fecha_apartado').dirty || formInmueble.get('fecha_apartado').touched )}">
+                id="fecha_apartado" name="fecha_apartado" formControlName="fecha_apartado" [ngClass]="{'is-invalid':formInmueble.get('fecha_apartado').invalid && (formInmueble.get('fecha_apartado').dirty || formInmueble.get('fecha_apartado').touched )}">
               <span class="input-group-append">
                 <button class="btn btn-secondary" type="button" (click)="dpFechaApartado.open()">
                   <i class="fa fa-calendar"></i>
@@ -213,7 +213,7 @@
             <label for="fecha_documentos" class="col-form-label col-sm-3">Fecha Documentos</label>
             <div class="input-group col-sm-9">
               <input class="form-control" placeholder="yyyy-mm-dd" type="text" placement="bottom-left" [matDatepicker]="dpFechaDocumentos"
-                id="fecha_documentos" name="fecha_documentos" formControlName="fecha_documentos" [(ngModel)]="estados_selected"
+                id="fecha_documentos" name="fecha_documentos" formControlName="fecha_documentos"
                 [ngClass]="{'is-invalid':formInmueble.get('fecha_documentos').invalid && (formInmueble.get('fecha_documentos').dirty || formInmueble.get('fecha_documentos').touched )}">
               <span class="input-group-append">
                 <button class="btn btn-secondary" type="button" (click)="dpFechaDocumentos.open()">
@@ -232,7 +232,7 @@
             <label for="fecha_escriturado" class="col-form-label col-sm-3">Fecha Escriturado</label>
             <div class="input-group col-sm-9">
               <input class="form-control" placeholder="yyyy-mm-dd" type="text" placement="bottom-left" [matDatepicker]="dpFechaEscriturado"
-                id="fecha_escriturado" name="fecha_escriturado" formControlName="fecha_escriturado" [(ngModel)]="estados_selected"
+                id="fecha_escriturado" name="fecha_escriturado" formControlName="fecha_escriturado"
                 [ngClass]="{'is-invalid':formInmueble.get('fecha_escriturado').invalid && (formInmueble.get('fecha_escriturado').dirty || formInmueble.get('fecha_escriturado').touched )}">
               <span class="input-group-append">
                 <button class="btn btn-secondary" type="button" (click)="dpFechaEscriturado.open()">
