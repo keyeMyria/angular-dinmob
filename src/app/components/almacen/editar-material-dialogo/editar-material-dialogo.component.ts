@@ -34,20 +34,32 @@ export class EditarMaterialDialogoComponent implements OnInit {
   ngOnInit() {
   }
 
-  guardar() {
-    console.log("ok", this.form.value);
+  private clonar(objeto): any {
 
-    this.insumoSrv.updateInsumo(this.data.material.id_insumo, this.form.value)
+    let strObject = JSON.stringify(objeto);
+    return JSON.parse(strObject);
+
+  }
+
+  guardar() {
+    //console.log("ok", this.form.value);
+
+    let insumo = this.clonar(this.form.value);
+    if (insumo.existencias) {
+      insumo.existencias = insumo.existencias.replace(/,/g, "");
+    }
+
+    this.insumoSrv.updateInsumo(this.data.material.id_insumo, insumo)
       .subscribe(insumo => {
 
-         // Edita la lista original de materiales
-         let i = this.data.materiales.indexOf(this.data.material);
-         this.data.materiales[i] = insumo;
-         // Edita la lista de materiales filtrados
-         let j = this.data.materiales_filtrados.indexOf(this.data.material);
-         this.data.materiales_filtrados[j] = insumo;
- 
-         this.dialogRef.close(true);
+        // Edita la lista original de materiales
+        let i = this.data.materiales.indexOf(this.data.material);
+        this.data.materiales[i] = insumo;
+        // Edita la lista de materiales filtrados
+        let j = this.data.materiales_filtrados.indexOf(this.data.material);
+        this.data.materiales_filtrados[j] = insumo;
+
+        this.dialogRef.close(true);
 
       }, (error) => {
         this.dialogRef.close({ error: "Ha ocurrido un error. Vuelva a intentarlo más tarde." });
