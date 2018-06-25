@@ -1,5 +1,5 @@
 
-import {throwError as observableThrowError,  Observable } from 'rxjs';
+import { throwError as observableThrowError, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -62,6 +62,11 @@ export class SalidasService {
   getReporteSalidas(reporte) {
     return this.http.post(this.url + 'get_reporte_salidas/', { reporte: reporte })
       .pipe(catchError(this.handleError("getReporteSalidas")));
+  }
+
+  delSalida(id) {
+    return this.http.post(this.url + 'del_salida/' + id, {})
+      .pipe(catchError(this.handleError("delSalida")));
   }
 
   private handleError<T>(operation = 'operation') {

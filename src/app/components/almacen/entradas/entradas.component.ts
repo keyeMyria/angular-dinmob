@@ -108,14 +108,7 @@ export class EntradasComponent implements OnInit {
           },
           width: '800px'
         });
-        dialogRef.afterClosed().subscribe(result => {
 
-          if (result === true) {
-
-          } else if (result && result.error) {
-          }
-
-        });
       });
 
 

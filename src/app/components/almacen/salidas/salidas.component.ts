@@ -1,7 +1,7 @@
 
-import {forkJoin as observableForkJoin,  of ,  Observable } from 'rxjs';
+import { forkJoin as observableForkJoin, of, Observable } from 'rxjs';
 
-import {switchMap} from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { VerSalidaDialogoComponent } from 'app/components/almacen/ver-salida-dialogo/ver-salida-dialogo.component';
@@ -21,9 +21,9 @@ import * as FileSaver from "file-saver";
 export class SalidasComponent implements OnInit {
   obras: any = [];
   obra_selected: string = "";
-  salidas: any[] = [];
+  salidas: any = [];
   filtro_selected: string = "T";
-  salidas_filtradas: any[] = [];
+  salidas_filtradas: any = [];
   Rol = Rol;
   usuario: any;
 
@@ -76,7 +76,7 @@ export class SalidasComponent implements OnInit {
         } else {
           return of([0, []]);
         }
-      })).subscribe(res => {
+      })).subscribe((res: any) => {
         this.length = res[0].count;
         this.salidas = res[1];
         this.salidas_filtradas = this.salidas.slice();
@@ -125,14 +125,7 @@ export class SalidasComponent implements OnInit {
           },
           width: '800px'
         });
-        dialogRef.afterClosed().subscribe(result => {
 
-          if (result === true) {
-
-          } else if (result && result.error) {
-          }
-
-        });
       });
 
 
@@ -151,17 +144,42 @@ export class SalidasComponent implements OnInit {
 
       if (result === true) {
 
-        this.snackBar.open("Obra Creada", "", {
-          duration: 2000,
-          panelClass: ["bg-success", "text-white"]
-        });
+        this.salidaSrv.delSalida(salida.id_salida)
+          .subscribe((res: any) => {
+            if (res.count == 1) {
 
-      } else if (result && result.error) {
 
-        this.snackBar.open("La operación no ha podido ser completada. Inténtelo más tarde", "", {
-          duration: 3000,
-          panelClass: ["bg-danger", "text-white"]
-        });
+
+              let i = this.salidas.indexOf(salida);
+              let j = this.salidas_filtradas.indexOf(salida);
+
+              this.salidas.splice(i, 1);
+              this.salidas_filtradas.splice(j, 1);
+
+              this.snackBar.open("Salida Eliminada", "", {
+                duration: 2000,
+                panelClass: ["bg-success", "text-white"]
+              });
+
+            } else {
+
+              this.snackBar.open("Ha ocurrido un error", "", {
+                duration: 3000,
+                panelClass: ["bg-danger", "text-white"]
+              });
+
+            }
+
+          }, (error) => {
+
+            this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+              duration: 3000,
+              panelClass: ["bg-danger", "text-white"]
+            });
+
+          });
+
+
       }
 
     });
@@ -181,7 +199,7 @@ export class SalidasComponent implements OnInit {
   }
 
   onPageChange(event: PageEvent) {
-    console.log("pageChange", event);
+    //console.log("pageChange", event);
 
     this.salidaSrv.getPageSalidasObra(this.obra_selected, event.pageSize, event.pageIndex, this.filtro_selected)
       .subscribe(salidas => {
@@ -192,7 +210,7 @@ export class SalidasComponent implements OnInit {
   }
 
   filtro($event) {
-    console.log("change", $event.value);
+    //console.log("change", $event.value);
 
     return observableForkJoin(
       this.salidaSrv.getCountSalidasObra(this.obra_selected, this.filtro_selected),
