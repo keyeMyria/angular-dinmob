@@ -1,7 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { AuthService } from "app/services/auth.service";
 import { Router, ActivatedRoute } from "@angular/router";
-import { Usuario } from "app/model/usuario";
 import { MediaMatcher } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material';
 import { UsuarioService } from 'app/services/usuario.service';
@@ -112,7 +111,7 @@ export class LayoutComponent implements OnInit {
   }
 
   gotoRoute(event) {
-    console.log("gotoRoute");
+    //console.log("gotoRoute");
 
     //event.preventDefault();
     //event.stopPropagation();

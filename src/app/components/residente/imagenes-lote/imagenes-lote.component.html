@@ -7,7 +7,7 @@
 
     <mat-card class="estructura">
       <div class="mb-2">
-        <select class="form-control" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)">
+        <select class="form-control" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)" tabindex="-1">
           <option value="">Seleccionar...</option>
           <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>
         </select>
