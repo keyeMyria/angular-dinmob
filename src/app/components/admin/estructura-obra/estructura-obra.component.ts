@@ -1,7 +1,7 @@
 
-import {of as observableOf, forkJoin as observableForkJoin,  Observable } from 'rxjs';
+import { of as observableOf, forkJoin as observableForkJoin, Observable } from 'rxjs';
 
-import {switchMap} from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { Component, OnInit, ViewChild, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { ObrasService } from "app/services/obras.service";
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
@@ -173,7 +173,7 @@ export class EstructuraObraComponent implements OnInit, OnDestroy {
 
   }
 
-
+  /* editamos el nombre de la manzana */
   editarManzana(manzana) {
     let dialogRef = this.dialog.open(EditarManzanaDialogoComponent, {
       data: {
@@ -927,7 +927,7 @@ export class EstructuraObraComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.mobileQuery.removeListener(this._mobileQueryListener)
+    this.mobileQuery.removeListener(this._mobileQueryListener);
 
   }
 
