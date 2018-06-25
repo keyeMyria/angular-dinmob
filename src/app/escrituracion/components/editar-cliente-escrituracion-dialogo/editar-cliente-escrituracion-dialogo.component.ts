@@ -18,6 +18,8 @@ export class EditarClienteEscrituracionDialogoComponent implements OnInit {
     decimalLimit: 2
   });
 
+  tab_selected: string;
+
   public maskCURP = [/[A-Z0-9]/i, /[A-Z0-9]/i, /[A-Z0-9]/i, /[A-Z0-9]/i, '-', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /[A-Z]/i, '-', /[A-Z]/i, /[A-Z]/i, '-', /[A-Z0-9]/i, /[A-Z0-9]/i, /[A-Z0-9]/i, '-', /[A-Z0-9]/i, /[A-Z0-9]/i];
   public maskPhone = ['(', /\d/, /\d/, /\d/, ')', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
@@ -72,6 +74,19 @@ export class EditarClienteEscrituracionDialogoComponent implements OnInit {
       }
     });
 
+  }
+
+  guardarGenerales() {
+    //console.log("guardar datos generales", this.tab_selected);
+  }
+
+  guardarDocumentos() {
+    //console.log("guardar datos generales", this.tab_selected);
+  }
+
+
+  guardarInmueble() {
+    //console.log("guardar datos generales", this.tab_selected);
   }
 
 
