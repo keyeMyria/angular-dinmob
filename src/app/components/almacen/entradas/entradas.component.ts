@@ -1,7 +1,7 @@
 
-import {forkJoin as observableForkJoin,  of ,  Observable } from 'rxjs';
+import { forkJoin as observableForkJoin, of, Observable } from 'rxjs';
 
-import {switchMap} from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { EditarEntradaDialogoComponent } from 'app/components/almacen/editar-entrada-dialogo/editar-entrada-dialogo.component';
@@ -22,7 +22,7 @@ import * as FileSaver from "file-saver";
 export class EntradasComponent implements OnInit {
   obras: any = [];
   obra_selected: string = "";
-  entradas: any[] = [];
+  entradas: any = [];
   Rol = Rol;
   usuario: any;
 
@@ -43,7 +43,7 @@ export class EntradasComponent implements OnInit {
     public snackBar: MatSnackBar,
     private entradasSrv: EntradasService,
     private authSrv: AuthService,
-    private reporteSrv:ReporteService
+    private reporteSrv: ReporteService
   ) { }
 
   ngOnInit() {
@@ -80,7 +80,7 @@ export class EntradasComponent implements OnInit {
         } else {
           return of([0, []]);
         }
-      })).subscribe(res => {
+      })).subscribe((res: any) => {
         this.length = res[0].count;
         this.entradas = res[1];
 
@@ -88,7 +88,7 @@ export class EntradasComponent implements OnInit {
   }
 
   nuevaEntrada() {
-    console.log("obra seleccionada", this.obra_selected);
+    //console.log("obra seleccionada", this.obra_selected);
     this.router.navigate(["/nueva-entrada", { obra: this.obra_selected }]);
   }
 
@@ -99,7 +99,7 @@ export class EntradasComponent implements OnInit {
   verEntrada(entrada) {
 
     this.entradasSrv.getEntrada(entrada.id_entrada)
-      .subscribe((res:any) => {
+      .subscribe((res: any) => {
         //console.log("salida OK", res);
         let dialogRef = this.dialog.open(VerEntradaDialogoComponent, {
           data: {
@@ -132,17 +132,40 @@ export class EntradasComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
-        this.snackBar.open("Entrada Eliminada", "", {
-          duration: 2000,
-          panelClass: ["bg-success", "text-white"]
-        });
 
-      } else if (result && result.error) {
-        this.snackBar.open("La operación no ha podido ser completada. Inténtelo más tarde", "", {
-          duration: 3000,
-          panelClass: ["bg-danger", "text-white"]
-        });
+        this.entradaSrv.delEntrada(entrada.id_entrada)
+          .subscribe((res: any) => {
+            if (res.count == 1) {
+
+
+              let i = this.entradas.indexOf(entrada);
+              this.entradas.splice(i, 1);
+
+              this.snackBar.open("Entrada Eliminada", "", {
+                duration: 2000,
+                panelClass: ["bg-success", "text-white"]
+              });
+
+            } else {
+
+              this.snackBar.open("Ha ocurrido un error", "", {
+                duration: 3000,
+                panelClass: ["bg-danger", "text-white"]
+              });
+
+            }
+
+          }, (error) => {
+
+            this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+              duration: 3000,
+              panelClass: ["bg-danger", "text-white"]
+            });
+
+          });
+
       }
+
     });
 
   }
