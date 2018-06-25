@@ -58,7 +58,7 @@
                 <td>{{material.codigo}}</td>
                 <td>{{material.insumo}}</td>
                 <td>{{material.unidad}}</td>
-                <td>{{material.existencias}}</td>
+                <td>{{material.existencias | number:'.2-2'}}</td>
                 <!-- <td>{{material.precio|currency}}</td> -->
                 <td class="text-right ws-nowrap" *ngIf="usuario.id_tipo_usuario==Rol.Administrador || usuario.id_tipo_usuario==Rol.ControlAlmacen">
                   <button mat-button class="no-min" (click)="editarMaterial(material)">

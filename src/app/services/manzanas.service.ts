@@ -36,6 +36,13 @@ export class ManzanasService {
       .pipe(catchError(this.handleError("delManzana")));
   }
 
+  //ok
+  updateManzana(id_manzana, manzana) {
+    return this.http.post(this.url + 'update_manzana/' + id_manzana, { manzana: manzana })
+      .pipe(catchError(this.handleError("updateManzana")));
+  }
+
+
   private handleError(operation = 'operation') {
     return (error: HttpErrorResponse) => {
 
