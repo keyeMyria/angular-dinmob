@@ -19,7 +19,8 @@ export class EditarLoteEscrituracionDialogoComponent implements OnInit {
   public maskPhone = ['(', /\d/, /\d/, /\d/, ')', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
   estados_selected: string;
-  form: FormGroup;
+  formGenerales: FormGroup;
+  formDocumentos: FormGroup;
 
 
 
@@ -30,7 +31,7 @@ export class EditarLoteEscrituracionDialogoComponent implements OnInit {
     public dialogRef: MatDialogRef<EditarLoteEscrituracionDialogoComponent>,
     private fb: FormBuilder,
   ) {
-    this.form = this.fb.group({
+    this.formGenerales = this.fb.group({
       id_estado: [null, Validators.required],
       fecha_apartado: [moment(), Validators.required],
       fecha_documentos: [moment(), Validators.required],
@@ -42,11 +43,27 @@ export class EditarLoteEscrituracionDialogoComponent implements OnInit {
       precio_venta: [null, Validators.required],
       id_vendedor: [null, Validators.required],
       id_tipo_credito: [null, Validators.required],
-
     });
+    this.formDocumentos = this.fb.group({
+      curp: null,
+      ine: null,
+      acta_nacimiento: null,
+      comprobante: null,
+    });
+
   }
 
   ngOnInit() {
   }
+
+  guardarGenerales() {
+
+  }
+
+  guardarDocumentos() {
+
+  }
+
+
 
 }

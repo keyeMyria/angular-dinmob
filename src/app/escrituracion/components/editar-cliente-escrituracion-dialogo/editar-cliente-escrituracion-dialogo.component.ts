@@ -1,9 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import * as moment from 'moment';
 
 @Component({
@@ -33,7 +33,6 @@ export class EditarClienteEscrituracionDialogoComponent implements OnInit {
     public dialogRef: MatDialogRef<EditarClienteEscrituracionDialogoComponent>,
     private fb: FormBuilder,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar
   ) {
     this.formGenerales = this.fb.group({
       nombre: [null, Validators.required],
