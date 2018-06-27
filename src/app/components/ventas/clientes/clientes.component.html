@@ -38,17 +38,39 @@
             <table class="table table-hover table-striped table-align-middle">
               <thead>
                 <tr>
-                  <!-- <th>Id</th> -->
                   <th>Nombre</th>
                   <th>Manzana</th>
                   <th>Lote</th>
                   <th>Estado</th>
                   <th></th>
                 </tr>
+                <tr>
+                  <th>
+                    <input type="text" class="form-control" name="" id="" placeholder="Nombre" #nombre (keyup)="filtrar(nombre.value, lote.value, estado.value, manzana.value)">
+                  </th>
+                  <th>
+                    <select name="" id="" class="form-control" #manzana (change)="filtrar(nombre.value, lote.value, estado.value, manzana.value)">
+                      <option value="">Todas</option>
+                      <option [value]="m.nombre" *ngFor="let m of manzanas">{{m.nombre}}</option>
+
+                    </select>
+                  </th>
+                  <th>
+                    <input type="text" class="form-control" name="" id="" placeholder="Lote" #lote (keyup)="filtrar(nombre.value, lote.value, estado.value, manzana.value)">
+                  </th>
+                  <th>
+                    <select name="" id="" class="form-control" #estado (change)="filtrar(nombre.value, lote.value, estado.value, manzana.value)">
+                      <option value="">Todos</option>
+                      <option [value]="e.descripcion" *ngFor="let e of estados">{{e.descripcion}}</option>
+
+                    </select>
+                  </th>
+                  <th></th>
+                </tr>
               </thead>
 
               <tbody>
-                <tr *ngFor="let cliente of clientes">
+                <tr *ngFor="let cliente of clientes_filtrados">
                   <!-- <td>{{cliente.id_cliente}}</td> -->
                   <td>{{cliente.nombre}}</td>
                   <td class="ws-nowrap">{{cliente.manzana}}</td>

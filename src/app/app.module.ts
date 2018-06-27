@@ -9,7 +9,6 @@ import { TextMaskModule } from "angular2-text-mask";
 import { FileUploadModule } from 'ng2-file-upload/file-upload/file-upload.module';
 import { JwtModule } from '@auth0/angular-jwt';
 import { ColorPickerModule } from 'ngx-color-picker';
-import { EscrituracionModule } from 'app/escrituracion/escrituracion.module';
 
 //servicios
 import { LoadingService } from 'app/services/loading.service';
@@ -131,6 +130,7 @@ import { VendedoresResolverService } from './resolvers/vendedores-resolver.servi
 import { TiposGastosResolverService } from './resolvers/tipos-gastos-resolver.service';
 import { TrabajadoresResolverService } from './resolvers/trabajadores-resolver.service';
 import { ResidentesObraResolverService } from './resolvers/residentes-obra-resolver.service';
+import { ManzanasResolverService } from './resolvers/manzanas-resolver.service';
 
 
 //components
@@ -245,6 +245,7 @@ import { TableroPedidosComponent } from './components/tablero-pedidos/tablero-pe
 import { TableroAlmacenistaComponent } from './components/tablero-almacenista/tablero-almacenista.component';
 import { EditarPagoTrabajadorDialogoComponent } from './components/admin/editar-pago-trabajador-dialogo/editar-pago-trabajador-dialogo.component';
 import { HistorialAvancesComponent } from './components/residente/historial-avances/historial-avances.component';
+
 
 
 
@@ -547,7 +548,8 @@ export function getToken() {
     ObraManzanasTrabajadoresResidentesResolverService,
     ObraMaterialesTrabajadoresResidentesResolverService,
     ReportesResolverService,
-    EstadisticasAdminResolverService
+    EstadisticasAdminResolverService,
+    ManzanasResolverService
 
   ],
   bootstrap: [AppComponent]

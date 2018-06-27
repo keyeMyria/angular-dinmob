@@ -103,6 +103,7 @@ import { TableroControlAlmacenComponent } from './components/tablero-control-alm
 import { Rol } from "./constantes/roles";
 import { UsuariosAsesoresResolverService } from './resolvers/usuarios-asesores-resolver.service';
 import { HistorialAvancesComponent } from './components/residente/historial-avances/historial-avances.component';
+import { ManzanasResolverService } from 'app/resolvers/manzanas-resolver.service';
 
 
 export const ROUTES: Routes = [
@@ -131,7 +132,9 @@ export const ROUTES: Routes = [
                 path: 'clientes', component: ClientesComponent,
                 canActivate: [AuthGuard],
                 resolve: {
-                    obras: ObrasUsuarioResolverService
+                    obras: ObrasUsuarioResolverService, 
+                    estados: EstadosVentaLoteResolverService,
+                    manzanas: ManzanasResolverService
                 },
                 data: {
                     permisos: [Rol.Administrador, Rol.Ventas, Rol.AsesorVentas, Rol.Contabilidad]
