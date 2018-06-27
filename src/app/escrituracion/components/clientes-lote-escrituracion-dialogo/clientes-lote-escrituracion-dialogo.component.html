@@ -14,9 +14,9 @@
           <th>Activación</th>
           <th>Cancelación</th>
           <th class="text-right" style="width:66px">
-            <button mat-icon-button tabindex="-1">
+            <!--             <button mat-icon-button tabindex="-1">
               <mat-icon>add</mat-icon>
-            </button>
+            </button> -->
           </th>
 
         </tr>
@@ -108,16 +108,85 @@
     <!-- Datos Generales -->
     <mat-tab label="Cliente">
       <div class="container py-3">
-        <form [formGroup]="formGenerales" (ngSubmit)="guardar()">
+        <form [formGroup]="formGenerales" (ngSubmit)="guardar()" *ngFor="let pago of cliente_selected.pagos">
+
+          <div class="form-group row mt-3">
+            <label for="id_estado" class="col-form-label col-sm-3">Estado</label>
+            <div class="col-sm-9">
+              <select class="form-control" id="id_estado" name="id_estado" formControlName="id_estado" [(ngModel)]="estados_selected" [ngClass]="{'is-invalid':formGenerales.get('id_estado').invalid && (formGenerales.get('id_estado').dirty || formGenerales.get('id_estado').touched )}">
+                <option [value]="1">Apartado</option>
+                <option [value]="2">Documentos</option>
+                <option [value]="3">Escriturado</option>
+              </select>
+              <div *ngIf="formGenerales.get('id_estado').invalid && (formGenerales.get('id_estado').dirty || formGenerales.get('id_estado').touched )"
+                class="visible invalid-feedback">
+                Seleccione una fecha
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row" *ngIf="estados_selected == '1'">
+            <label for="fecha_apartado" class="col-form-label col-sm-3">Fecha Apartado</label>
+            <div class="input-group col-sm-9">
+              <input id="fecha_apartado" name="fecha_apartado" formControlName="fecha_apartado" class="form-control" placeholder="yyyy-mm-dd"
+                type="text" placement="bottom-left" [matDatepicker]="dpFechaApartado" [ngClass]="{'is-invalid':formGenerales.get('fecha_apartado').invalid && (formGenerales.get('fecha_apartado').dirty || formGenerales.get('fecha_apartado').touched )}">
+              <span class="input-group-append">
+                <button class="btn btn-secondary" type="button" (click)="dpFechaApartado.open()">
+                  <i class="fa fa-calendar"></i>
+                </button>
+              </span>
+              <div *ngIf="formGenerales.get('fecha_apartado').invalid && (formGenerales.get('fecha_apartado').dirty || formGenerales.get('fecha_apartado').touched )"
+                class="visible invalid-feedback">
+                Seleccione una fecha
+              </div>
+            </div>
+            <mat-datepicker touchUi="true" #dpFechaApartado></mat-datepicker>
+          </div>
+
+          <div class="form-group row" *ngIf="estados_selected == '2'">
+            <label for="fecha_documentos" class="col-form-label col-sm-3">Fecha Documentos</label>
+            <div class="input-group col-sm-9">
+              <input id="fecha_documentos" name="fecha_documentos" formControlName="fecha_documentos" class="form-control" placeholder="yyyy-mm-dd"
+                type="text" placement="bottom-left" [matDatepicker]="dpFechaDocumentos" [ngClass]="{'is-invalid':formGenerales.get('fecha_documentos').invalid && (formGenerales.get('fecha_documentos').dirty || formGenerales.get('fecha_documentos').touched )}">
+              <span class="input-group-append">
+                <button class="btn btn-secondary" type="button" (click)="dpFechaDocumentos.open()">
+                  <i class="fa fa-calendar"></i>
+                </button>
+              </span>
+              <div *ngIf="formGenerales.get('fecha_documentos').invalid && (formGenerales.get('fecha_documentos').dirty || formGenerales.get('fecha_documentos').touched )"
+                class="visible invalid-feedback">
+                Seleccione una fecha
+              </div>
+            </div>
+            <mat-datepicker touchUi="true" #dpFechaDocumentos></mat-datepicker>
+          </div>
+
+          <div class="form-group row" *ngIf="estados_selected == '3'">
+            <label for="fecha_escriturado" class="col-form-label col-sm-3">Fecha Escriturado</label>
+            <div class="input-group col-sm-9">
+              <input id="fecha_escriturado" name="fecha_escriturado" formControlName="fecha_escriturado" class="form-control" placeholder="yyyy-mm-dd"
+                type="text" placement="bottom-left" [matDatepicker]="dpFechaEscriturado" [ngClass]="{'is-invalid':formGenerales.get('fecha_escriturado').invalid && (formGenerales.get('fecha_escriturado').dirty || formGenerales.get('fecha_escriturado').touched )}">
+              <span class="input-group-append">
+                <button class="btn btn-secondary" type="button" (click)="dpFechaEscriturado.open()">
+                  <i class="fa fa-calendar"></i>
+                </button>
+              </span>
+              <div *ngIf="formGenerales.get('fecha_escriturado').invalid && (formGenerales.get('fecha_escriturado').dirty || formGenerales.get('fecha_escriturado').touched )"
+                class="visible invalid-feedback">
+                Seleccione una fecha
+              </div>
+            </div>
+            <mat-datepicker touchUi="true" #dpFechaEscriturado></mat-datepicker>
+          </div>
 
           <div class="form-group row">
             <label for="nombre" class="col-form-label col-sm-3">Nombre</label>
             <div class="col-sm-9">
               <input type="text" class="form-control" id="nombre" name="nombre" formControlName="nombre" [ngClass]="{'is-invalid':formGenerales.get('nombre').invalid && (formGenerales.get('nombre').dirty || formGenerales.get('nombre').touched )}">
-            </div>
-            <div *ngIf="formGenerales.get('nombre').invalid && (formGenerales.get('nombre').dirty || formGenerales.get('nombre').touched )"
-              class="visible invalid-feedback">
-              Escriba el nombre del cliente
+              <div *ngIf="formGenerales.get('nombre').invalid && (formGenerales.get('nombre').dirty || formGenerales.get('nombre').touched )"
+                class="visible invalid-feedback">
+                Escriba el nombre del cliente
+              </div>
             </div>
           </div>
 
@@ -126,8 +195,8 @@
             <label class="col-form-label col-sm-3" for="fecha_nacimiento">Fecha de nacimiento</label>
             <div class="col-sm-9">
               <div class="input-group">
-                <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_nacimiento" formControlName="fecha_nacimiento" id="fecha_nacimiento" [matDatepicker]="dpFechaNacimiento"
-                  [ngClass]="{'is-invalid':formGenerales.get('fecha_nacimiento').invalid && (formGenerales.get('fecha_nacimiento').dirty || formGenerales.get('fecha_nacimiento').touched )}">
+                <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="fecha_nacimiento" formControlName="fecha_nacimiento"
+                  id="fecha_nacimiento" [matDatepicker]="dpFechaNacimiento" [ngClass]="{'is-invalid':formGenerales.get('fecha_nacimiento').invalid && (formGenerales.get('fecha_nacimiento').dirty || formGenerales.get('fecha_nacimiento').touched )}">
                 <span class="input-group-append">
                   <button class="btn btn-secondary" type="button" (click)="dpFechaNacimiento.open()">
                     <i class="fa fa-calendar"></i>
@@ -156,7 +225,8 @@
           <div class="form-group row">
             <label for="telefono" class="col-form-label col-sm-3">Teléfono</label>
             <div class="col-sm-9">
-              <input [textMask]="{mask: maskPhone}" type="text" class="form-control" name="telefono" id="telefono" formControlName="telefono" [ngClass]="{'is-invalid':formGenerales.get('telefono').invalid && (formGenerales.get('telefono').dirty || formGenerales.get('telefono').touched )}">
+              <input [textMask]="{mask: maskPhone}" type="text" class="form-control" name="telefono" id="telefono" formControlName="telefono"
+                [ngClass]="{'is-invalid':formGenerales.get('telefono').invalid && (formGenerales.get('telefono').dirty || formGenerales.get('telefono').touched )}">
               <div *ngIf="formGenerales.get('telefono').invalid && (formGenerales.get('telefono').dirty || formGenerales.get('telefono').touched )"
                 class="visible invalid-feedback">
                 Escriba el teléfono del cliente
@@ -165,9 +235,30 @@
           </div>
 
           <div class="form-group row">
+            <label class="col-form-label col-sm-3" for="dtu">DTU</label>
+            <div class="col-sm-9">
+              <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd" type="text" name="dtu" formControlName="dtu"
+                  id="dtu" [matDatepicker]="dpFechaDtu" [ngClass]="{'is-invalid':formGenerales.get('dtu').invalid && (formGenerales.get('dtu').dirty || formGenerales.get('dtu').touched )}">
+                <span class="input-group-append">
+                  <button class="btn btn-secondary" type="button" (click)="dpFechaDtu.open()">
+                    <i class="fa fa-calendar"></i>
+                  </button>
+                </span>
+              </div>
+              <div *ngIf="formGenerales.get('dtu').invalid && (formGenerales.get('dtu').dirty || formGenerales.get('dtu').touched )"
+                class="visible invalid-feedback">
+                Seleccione una fecha
+              </div>
+            </div>
+            <mat-datepicker touchUi="true" #dpFechaDtu></mat-datepicker>
+          </div>
+
+          <div class="form-group row">
             <label for="precio_venta" class="col-form-label col-sm-3">Precio Venta</label>
             <div class="col-sm-9">
-              <input [textMask]="{mask: numbermask}" type="text" class="form-control" id="precio_venta" name="precio_venta" formControlName="precio_venta" [ngClass]="{'is-invalid':formGenerales.get('precio_venta').invalid && (formGenerales.get('precio_venta').dirty || formGenerales.get('precio_venta').touched )}">
+              <input [textMask]="{mask: numbermask}" type="text" class="form-control" id="precio_venta" name="precio_venta" formControlName="precio_venta"
+                [ngClass]="{'is-invalid':formGenerales.get('precio_venta').invalid && (formGenerales.get('precio_venta').dirty || formGenerales.get('precio_venta').touched )}">
               <div *ngIf="formGenerales.get('precio_venta').invalid && (formGenerales.get('precio_venta').dirty || formGenerales.get('precio_venta').touched )"
                 class="visible invalid-feedback">
                 Indique el precio
@@ -214,12 +305,12 @@
     <!-- <Documentos> -->
     <mat-tab label="Documentos">
       <div class="container py-3">
-        <form [formGroup]="formDocumentos" (ngSubmit)="guardar()">
+        <form [formGroup]="formDocumentos" (ngSubmit)="guardar()" *ngFor="let pago of cliente_selected.pagos">
           <mat-selection-list>
-            <mat-list-option formControlName="ife">IFE</mat-list-option>
-            <mat-list-option formControlName="curp">CURP</mat-list-option>
-            <mat-list-option formControlName="acta_nacimiento">ACTA DE NACIMIENTO</mat-list-option>
-            <mat-list-option formControlName="comprobante">COMPROBANTE DE DOMICILIO</mat-list-option>
+            <mat-list-option>IFE</mat-list-option>
+            <mat-list-option>CURP</mat-list-option>
+            <mat-list-option>ACTA DE NACIMIENTO</mat-list-option>
+            <mat-list-option>COMPROBANTE DE DOMICILIO</mat-list-option>
           </mat-selection-list>
         </form>
       </div>
@@ -236,5 +327,6 @@
 
 </div>
 <div mat-dialog-actions>
-  <button mat-button class="btn-block" [mat-dialog-close]="true">CERRAR</button>
+  <button mat-button type="button" [mat-dialog-close]="false">CANCELAR</button>
+  <button type="submit" mat-button color="primary">GUARDAR</button>
 </div>

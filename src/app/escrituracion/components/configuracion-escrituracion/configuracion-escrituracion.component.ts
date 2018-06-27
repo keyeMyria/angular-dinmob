@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-configuracion-escrituracion',
@@ -13,9 +14,9 @@ export class ConfiguracionEscrituracionComponent implements OnInit {
     private fb: FormBuilder,
   ) {
     this.form = this.fb.group({
-      etapa_uno: null,
-      etapa_dos: null,
-      etapa_tres: null,
+      etapa_uno: moment(null),
+      etapa_dos: moment(null),
+      etapa_tres: moment(null),
     });
   }
 

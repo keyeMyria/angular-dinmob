@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import * as moment from 'moment';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
+import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-editar-lote-escrituracion-dialogo',
@@ -23,7 +24,9 @@ export class EditarLoteEscrituracionDialogoComponent implements OnInit {
   formDocumentos: FormGroup;
 
 
-
+  selection = new SelectionModel<any>(false);
+  cliente_selected: any = null;
+  clientes: any = [{ nombre: "José Perez", manzana: "manzana1", lote: "lote 1" }];
 
 
   constructor(
@@ -38,6 +41,7 @@ export class EditarLoteEscrituracionDialogoComponent implements OnInit {
       fecha_escriturado: [moment(), Validators.required],
       nombre: [null, Validators.required],
       fecha_nacimiento: [moment(), Validators.required],
+      dtu: [moment(), Validators.required],
       curp: [null, Validators.required],
       telefono: [null, Validators.required],
       precio_venta: [null, Validators.required],
@@ -54,6 +58,24 @@ export class EditarLoteEscrituracionDialogoComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  selectCliente(cliente) {
+
+    //this.selection.isEmpty();
+    //this.selection.hasValue();
+
+    this.selection.toggle(cliente);
+    if (this.selection.selected.length > 0) {
+      this.cliente_selected = this.selection.selected[0];
+
+    } else {
+      this.cliente_selected = null;
+    }
+
+    console.log("cliente", this.cliente_selected);
+
+
   }
 
   guardarGenerales() {

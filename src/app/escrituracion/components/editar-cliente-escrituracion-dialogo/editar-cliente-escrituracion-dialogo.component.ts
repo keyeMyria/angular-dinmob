@@ -5,6 +5,7 @@ import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
 import { MatDialog } from '@angular/material';
 import * as moment from 'moment';
+import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-editar-cliente-escrituracion-dialogo',
@@ -27,6 +28,10 @@ export class EditarClienteEscrituracionDialogoComponent implements OnInit {
   formGenerales: FormGroup;
   formDocumentos: FormGroup;
   formInmueble: FormGroup;
+
+  selection = new SelectionModel<any>(false);
+  cliente_selected: any = null;
+  clientes: any = [{ obra: "Tres marias", manzana: "manzana1", lote: "lote 1" }];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -53,6 +58,7 @@ export class EditarClienteEscrituracionDialogoComponent implements OnInit {
       id_vendedor: [null, Validators.required],
       tipo_credito: [null, Validators.required],
       estado: [null, Validators.required],
+      dtu: [moment(), Validators.required],
       fecha_apartado: [moment(), Validators.required],
       fecha_documentos: [moment(), Validators.required],
       fecha_escriturado: [moment(), Validators.required],
@@ -62,6 +68,47 @@ export class EditarClienteEscrituracionDialogoComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  selectCliente(cliente) {
+
+    //this.selection.isEmpty();
+    //this.selection.hasValue();
+
+    this.selection.toggle(cliente);
+    if (this.selection.selected.length > 0) {
+      this.cliente_selected = this.selection.selected[0];
+
+    } else {
+      this.cliente_selected = null;
+    }
+
+    console.log("cliente", this.cliente_selected);
+
+
+  }
+
+  totalPagosRealizados() {
+    let total = 0;
+
+    if (this.cliente_selected.pagos) {
+      this.cliente_selected.pagos.forEach(pago => {
+
+        //total += +pago.monto;
+
+        //personalización CIVSA, para otras empresas sumar todo independiente del tipo 
+        /*     if (pago.tipo_pago != "Apartado" && pago.tipo_pago != "Avalúo") {
+              total += +pago.monto;
+            } */
+
+        //solo sumamos los pagos con id_tipo_pago < 100
+        if (pago.id_tipo_pago < 100) {
+          total += +pago.monto;
+        }
+
+      });
+    }
+    return total;
   }
 
   delLote() {

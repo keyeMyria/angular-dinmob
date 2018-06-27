@@ -121,4 +121,21 @@ export class EquiposVentasEscrituracionComponent implements OnInit {
 
   }
 
+  delEquipo() {
+
+    let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
+      data: {
+        title: "Eliminar Equipo",
+        content: `¿Desea eliminar el equipo?`
+      },
+      width: "500px"
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+      }
+    });
+
+  }
+
 }

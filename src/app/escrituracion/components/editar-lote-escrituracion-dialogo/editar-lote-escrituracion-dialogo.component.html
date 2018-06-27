@@ -17,13 +17,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr class="pointer" (click)="selectCliente(cliente)" [ngClass]="{'table-primary':selection.isSelected(cliente)}" *ngFor="let cliente of clientes">
 
           <td>
-            <mat-checkbox class="pl-2"></mat-checkbox>
+            <mat-checkbox class="pl-2" (click)="$event.stopPropagation()" (change)="$event ? selectCliente(cliente) : null" [checked]="selection.isSelected(cliente)"></mat-checkbox>
           </td>
 
-          <td class="ws-nowrap">José Perez</td>
+          <td class="ws-nowrap">{{cliente.nombre}}</td>
           <td></td>
           <td class="ws-nowrap">21JUN.2018</td>
           <td class="ws-nowrap"></td>
@@ -42,7 +42,7 @@
     <!-- Datos Generales -->
     <mat-tab label="Cliente">
       <div class="container py-3">
-        <form [formGroup]="formGenerales" (ngSubmit)="guardarGenerales()">
+        <form [formGroup]="formGenerales" (ngSubmit)="guardarGenerales()" *ngIf="cliente_selected">
 
           <div class="form-group row mt-3">
             <label for="id_estado" class="col-form-label col-sm-3">Estado</label>
@@ -126,7 +126,7 @@
 
 
           <div class="form-group row">
-            <label for="fecha_nacimiento" class="col-form-label col-sm-3" for="fecha_nacimiento">Fecha de nacimiento</label>
+            <label for="fecha_nacimiento" class="col-form-label col-sm-3">Fecha de nacimiento</label>
             <div class="col-sm-9">
               <div class="input-group">
                 <input id="fecha_nacimiento" name="fecha_nacimiento" formControlName="fecha_nacimiento" class="form-control" placeholder="yyyy-mm-dd"
@@ -166,6 +166,26 @@
                 Indique el teléfono del cliente
               </div>
             </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="dtu" class="col-form-label col-sm-3">DTU</label>
+            <div class="col-sm-9">
+              <div class="input-group">
+                <input id="dtu" name="dtu" formControlName="dtu" class="form-control" placeholder="yyyy-mm-dd"
+                  type="text" [matDatepicker]="dpFechaDtu" [ngClass]="{'is-invalid':formGenerales.get('dtu').invalid && (formGenerales.get('dtu').dirty || formGenerales.get('dtu').touched )}">
+                <span class="input-group-append">
+                  <button class="btn btn-secondary" type="button" (click)="dpFechaDtu.open()">
+                    <i class="fa fa-calendar"></i>
+                  </button>
+                </span>
+              </div>
+              <div *ngIf="formGenerales.get('dtu').invalid && (formGenerales.get('dtu').dirty || formGenerales.get('dtu').touched )"
+                class="visible invalid-feedback">
+                Seleccione una fecha
+              </div>
+            </div>
+            <mat-datepicker touchUi="true" #dpFechaDtu></mat-datepicker>
           </div>
 
           <div class="form-group row">
@@ -218,7 +238,7 @@
     <!-- <Documentos> -->
     <mat-tab label="Documentos">
       <div class="container py-3">
-        <form [formGroup]="formDocumentos" (ngSubmit)="guardarDocumentos()">
+        <form [formGroup]="formDocumentos" (ngSubmit)="guardarDocumentos()" *ngIf="cliente_selected">
           <mat-selection-list>
             <mat-list-option>IFE</mat-list-option>
             <mat-list-option>CURP</mat-list-option>

@@ -5,30 +5,48 @@
       <h5 class="">Umbral Notificaciones</h5>
       <hr>
 
-      <form [formGroup]="form" (ngSubmit)="guardarDocumentos()">
+      <form [formGroup]="form" (ngSubmit)="guardar()">
 
         <div class="form-group row">
-          <label for="etapa_uno" class="col-form-label col-sm-2">Etapa 1</label>
-          <div class="col-sm-10" id="etapa_uno" name="etapa_uno" formControlName="etapa_uno">
-            <input type="text" class="form-control">
-            <small class="fomr-text text-muted">*Número de días.</small>
+          <label for="etapa_uno" class="col-form-label col-sm-3">Etapa 1</label>
+          <div class="input-group col-sm-9">
+            <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="etapa_uno" name="etapa_uno" placement="bottom-left" [matDatepicker]="dpFechaEtapaUno"
+              formControlName="etapa_uno">
+            <span class="input-group-append">
+              <button class="btn btn-secondary" type="button" (click)="dpFechaEtapaUno.open()">
+                <i class="fa fa-calendar"></i>
+              </button>
+            </span>
           </div>
+          <mat-datepicker touchUi="true" #dpFechaEtapaUno></mat-datepicker>
         </div>
 
         <div class="form-group row">
-          <label for="etapa_dos" class="col-form-label col-sm-2">Etapa 2</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="etapa_dos" name="etapa_dos" formControlName="etapa_dos">
-            <small class="fomr-text text-muted">*Número de días.</small>
+          <label for="etapa_dos" class="col-form-label col-sm-3">Etapa 2</label>
+          <div class="input-group col-sm-9">
+            <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="etapa_dos" name="etapa_dos" placement="bottom-left" [matDatepicker]="dpFechaEtapaDos"
+              formControlName="etapa_dos">
+            <span class="input-group-append">
+              <button class="btn btn-secondary" type="button" (click)="dpFechaEtapaDos.open()">
+                <i class="fa fa-calendar"></i>
+              </button>
+            </span>
           </div>
+          <mat-datepicker touchUi="true" #dpFechaEtapaDos></mat-datepicker>
         </div>
 
         <div class="form-group row">
-          <label for="etapa_tres" class="col-form-label col-sm-2">Etapa 3</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="etapa_tres" name="etapa_tres" formControlName="etapa_tres">
-            <small class="fomr-text text-muted">*Número de días.</small>
+          <label for="etapa_tres" class="col-form-label col-sm-3">Etapa 3</label>
+          <div class="input-group col-sm-9">
+            <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="etapa_tres" name="etapa_tres" placement="bottom-left" [matDatepicker]="dpFechaEtapaTres"
+              formControlName="etapa_tres">
+            <span class="input-group-append">
+              <button class="btn btn-secondary" type="button" (click)="dpFechaEtapaTres.open()">
+                <i class="fa fa-calendar"></i>
+              </button>
+            </span>
           </div>
+          <mat-datepicker touchUi="true" #dpFechaEtapaTres></mat-datepicker>
         </div>
 
         <button type="button" class="btn btn-primary">Guardar</button>

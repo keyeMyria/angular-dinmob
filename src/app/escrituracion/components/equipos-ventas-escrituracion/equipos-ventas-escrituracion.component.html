@@ -24,10 +24,10 @@
                 <div class="spacer"></div>
                 <div class="collapse-header-btns">
                   <span class="badge badge-pill badge-dark">3</span>
-                  <button mat-icon-button [matMenuTriggerFor]="menu2" (click)="$event.stopPropagation()">
+                  <button mat-icon-button [matMenuTriggerFor]="menu1" (click)="$event.stopPropagation()">
                     <mat-icon>more_vert</mat-icon>
                   </button>
-                  <mat-menu #menu2="matMenu">
+                  <mat-menu #menu1="matMenu">
                     <button mat-menu-item (click)="agregarVendedor()">
                       <mat-icon>add_box</mat-icon>
                       <span>Agregar Vendedor</span>
@@ -35,6 +35,10 @@
                     <button mat-menu-item (click)="editarEquipo()">
                       <mat-icon>create</mat-icon>
                       <span>Editar</span>
+                    </button>
+                    <button mat-menu-item (click)="delEquipo()">
+                      <mat-icon>clear</mat-icon>
+                      <span>Eliminar</span>
                     </button>
                   </mat-menu>
                 </div>
@@ -88,6 +92,10 @@
                     <button mat-menu-item (click)="editarEquipo()">
                       <mat-icon>create</mat-icon>
                       <span>Editar</span>
+                    </button>
+                    <button mat-menu-item (click)="delEquipo()">
+                      <mat-icon>clear</mat-icon>
+                      <span>Eliminar</span>
                     </button>
                   </mat-menu>
                 </div>
