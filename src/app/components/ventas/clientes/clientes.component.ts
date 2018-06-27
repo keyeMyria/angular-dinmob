@@ -1,5 +1,5 @@
 
-import {switchMap} from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { EditarClienteComponent } from "app/components/ventas/editar-cliente/editar-cliente.component";
@@ -9,7 +9,7 @@ import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar
 import { ObrasService } from "app/services/obras.service";
 import { Router, ActivatedRoute, ParamMap } from "@angular/router";
 import { AuthService } from "app/services/auth.service";
-import { Observable ,  of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { VerDatosFirmaDialogoComponent } from 'app/components/ventas/ver-datos-firma-dialogo/ver-datos-firma-dialogo.component';
 import { VerCedulaFiscalDialogoComponent } from 'app/components/ventas/ver-cedula-fiscal-dialogo/ver-cedula-fiscal-dialogo.component';
 
@@ -22,8 +22,11 @@ import { VerCedulaFiscalDialogoComponent } from 'app/components/ventas/ver-cedul
 export class ClientesComponent implements OnInit {
   //clientes$: Observable<Cliente[]>;
   clientes: any = [];
+  clientes_filtrados: any = [];
   obras: any = [];
   obra_selected: string = "";
+  estados: any = [];
+  manzanas: any = [];
 
 
 
@@ -41,9 +44,12 @@ export class ClientesComponent implements OnInit {
 
   ngOnInit() {
     this.route.data
-      .subscribe((data: { obras: any[] }) => {
+      .subscribe((data: { obras: any, estados: any, manzanas: any }) => {
         //console.log("resultado resolve ", data);
         this.obras = data.obras;
+        data.estados.push({ descripcion: "Cancelado" });
+        this.estados = data.estados;
+        this.manzanas = data.manzanas;
       });
 
     this.route.paramMap.pipe(
@@ -57,6 +63,7 @@ export class ClientesComponent implements OnInit {
 
       })).subscribe(clientes => {
         this.clientes = clientes;
+        this.clientes_filtrados = this.clientes.slice();
       });
 
 
@@ -199,6 +206,54 @@ export class ClientesComponent implements OnInit {
 
   }
 
+  filtrar(nombre, lote, estado, manzana) {
+
+    //console.log("filtro", nombre, lote, estado, manzana);
+
+    if (estado != "" && manzana != "") {
+      //filtro completo
+
+      this.clientes_filtrados = this.clientes.filter(cliente => {
+        return cliente.nombre.toLowerCase().includes(nombre.toLowerCase()) &&
+          cliente.lote.toLowerCase().includes(lote.toLowerCase()) &&
+          cliente.estado_lote == estado &&
+          cliente.manzana == manzana;
+      });
+
+    } else if (estado != "") {
+
+      this.clientes_filtrados = this.clientes.filter(cliente => {
+        return cliente.nombre.toLowerCase().includes(nombre.toLowerCase()) &&
+          cliente.lote.toLowerCase().includes(lote.toLowerCase()) &&
+          cliente.estado_lote == estado;
+      });
+
+    } else if (manzana != "") {
+
+      this.clientes_filtrados = this.clientes.filter(cliente => {
+        return cliente.nombre.toLowerCase().includes(nombre.toLowerCase()) &&
+          cliente.lote.toLowerCase().includes(lote.toLowerCase()) &&
+          cliente.manzana == manzana;
+      });
+
+    } else {
+      //no tiene manzana ni estado
+
+      this.clientes_filtrados = this.clientes.filter(cliente => {
+        return cliente.nombre.toLowerCase().includes(nombre.toLowerCase()) &&
+          cliente.lote.toLowerCase().includes(lote.toLowerCase());
+      });
+
+    }
+
+    /* this.clientes_filtrados = this.clientes.filter(cliente => {
+      return cliente.nombre.toLowerCase().includes(nombre.toLowerCase()) &&
+        cliente.lote.toLowerCase().includes(lote.toLowerCase()) &&
+        cliente.estado_lote.includes(estado) &&
+        cliente.manzana.includes(manzana);
+    }); */
+
+  }
 
 }
 
