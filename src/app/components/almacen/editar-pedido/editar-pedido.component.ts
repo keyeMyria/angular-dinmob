@@ -68,7 +68,7 @@ export class EditarPedidoComponent implements OnInit {
           return observableOf([[], {}]);
         }
       })).subscribe((res: any) => {
-        console.log("obra", res);
+        //console.log("obra", res);
         this.obra = res[0];
 
         this.lotes_pedido = res[1].lotes;
@@ -299,7 +299,7 @@ export class EditarPedidoComponent implements OnInit {
       this.pedidoSrv.updatePedido(this.pedido.id_pedido, pedido, this.insumos_pedido)
         .subscribe(respuesta => {
 
-          console.log("respuesta", respuesta);
+          //console.log("respuesta", respuesta);
           this.snackBar.open("Pedido Actualizado", "", {
             duration: 2000,
             panelClass: ["bg-success", "text-white"]
