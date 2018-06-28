@@ -1,7 +1,7 @@
 
-import {of as observableOf,  Observable } from 'rxjs';
+import { of as observableOf, Observable } from 'rxjs';
 
-import {switchMap} from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
@@ -364,6 +364,24 @@ export class NuevoPedidoComponent implements OnInit {
       this.getInsumosSinAcumular();
     }
 
+
+  }
+
+  toggleCantidadesPartida(partida, event) {
+    event.stopPropagation();
+
+    if (partida.on == true) {
+      partida.on = false;
+      partida.insumos.forEach(insumo => {
+        insumo.requerido = "";
+      });
+    } else {
+      partida.on = true;
+      partida.insumos.forEach(insumo => {
+        insumo.requerido = insumo.cantidad;
+      });
+    }
+    console.log("toggle cantidades partida");
 
   }
 
