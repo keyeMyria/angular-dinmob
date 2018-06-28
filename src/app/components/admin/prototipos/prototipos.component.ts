@@ -1,13 +1,11 @@
 
-import {switchMap} from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { ObrasService } from "app/services/obras.service";
 import { AgregarPrototipoDialogoComponent } from "app/components/admin/agregar-prototipo-dialogo/agregar-prototipo-dialogo.component";
 import { MatDialog, MatSnackBar } from "@angular/material";
 import { Router, ActivatedRoute, ParamMap } from "@angular/router";
-
 import { PrototiposService } from 'app/services/prototipos.service';
-import { Prototipo } from "app/model/prototipo";
 import { AuthService } from 'app/services/auth.service';
 import { EditarNombrePrototipoDialogoComponent } from 'app/components/admin/editar-nombre-prototipo-dialogo/editar-nombre-prototipo-dialogo.component';
 
@@ -177,6 +175,26 @@ export class PrototiposComponent implements OnInit {
       }
 
     });
+
+  }
+
+
+  updateColorPrototipo(prototipo, color) {
+    console.log("updateColor", prototipo, color);
+    this.prototipoSrv.updatePrototipo(prototipo.id_prototipo, { color: color })
+      .subscribe((p: any) => {
+        let i = this.prototipos.indexOf(prototipo);
+        this.prototipos[i].color = p.color;
+        this.snackBar.open("Color Actualizado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+      }, (error) => {
+        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+      });
 
   }
 
