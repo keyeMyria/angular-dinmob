@@ -132,7 +132,7 @@ export const ROUTES: Routes = [
                 path: 'clientes', component: ClientesComponent,
                 canActivate: [AuthGuard],
                 resolve: {
-                    obras: ObrasUsuarioResolverService, 
+                    obras: ObrasUsuarioResolverService,
                     estados: EstadosVentaLoteResolverService,
                     manzanas: ManzanasResolverService
                 },
@@ -156,7 +156,9 @@ export const ROUTES: Routes = [
                 path: 'desarrollos', component: DesarrollosComponent,
                 canActivate: [AuthGuard],
                 resolve: {
-                    obras: ObrasUsuarioResolverService
+                    obras: ObrasUsuarioResolverService,
+                    estados: EstadosVentaLoteResolverService,
+                    manzanas: ManzanasResolverService
                 },
                 data: {
                     permisos: [Rol.Administrador, Rol.Ventas, Rol.AsesorVentas]
