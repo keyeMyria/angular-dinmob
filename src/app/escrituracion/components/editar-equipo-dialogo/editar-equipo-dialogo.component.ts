@@ -23,4 +23,8 @@ export class EditarEquipoDialogoComponent implements OnInit {
   ngOnInit() {
   }
 
+  guardar(){
+    
+  }
+
 }

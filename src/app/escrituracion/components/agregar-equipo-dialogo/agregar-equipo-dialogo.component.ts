@@ -24,4 +24,8 @@ export class AgregarEquipoDialogoComponent implements OnInit {
   ngOnInit() {
   }
 
+  guardar(){
+    
+  }
+
 }

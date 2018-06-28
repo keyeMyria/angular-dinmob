@@ -23,4 +23,8 @@ export class ConfiguracionEscrituracionComponent implements OnInit {
   ngOnInit() {
   }
 
+  guardar(){
+    
+  }
+
 }
