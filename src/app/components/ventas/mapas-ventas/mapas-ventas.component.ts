@@ -1,7 +1,7 @@
 
-import {forkJoin as observableForkJoin,  of ,  Observable } from 'rxjs';
+import { forkJoin as observableForkJoin, of, Observable } from 'rxjs';
 
-import {switchMap} from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MapasService } from "app/services/mapas.service";
 import 'jvectormap';
@@ -46,6 +46,7 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
   scaleFormaPago: any = {};
   valuesPrototipos: any = {};
   valuesEstadosVenta: any = {};
+  scaleEstadoVenta: any = {};
 
   valuesFormaPago: any = {};
   valuesLoteTipo: any = {};
@@ -117,6 +118,7 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
         this.scalePrototipos = res[0].scalePrototipos;
         this.scaleLoteTipo = res[0].scaleLotesTipo;
         this.scaleFormaPago = res[0].scaleFormasPago;
+        this.scaleEstadoVenta = res[0].scaleEstadoVenta;
         this.jsonMap = res[1];
 
         //console.log("escala", this.scalePrototipos, this.scaleLoteTipo, this.scaleFormaPago);
@@ -167,7 +169,7 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
 
           setTimeout(() => {
             //console.log("inicio creación mapa");
-            this.crearMapa(this.valuesEstadosVenta, this.scalePrototipos, this.scaleFormaPago, this.scaleLoteTipo);
+            this.crearMapa(this.valuesEstadosVenta, this.scaleEstadoVenta, this.scalePrototipos, this.scaleFormaPago, this.scaleLoteTipo);
             //console.log("mapa creado");
             //detenemos el loading spinner
             this.loading.stop();
@@ -286,7 +288,7 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
   }
 
 
-  crearMapa(values, scalePrototipos, scaleFormaPago, scaleLoteTipo) {
+  crearMapa(values, scaleEstadoVenta, scalePrototipos, scaleFormaPago, scaleLoteTipo) {
 
     this.verLeyenda.toggle = true;
 
@@ -335,14 +337,15 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
         regions: [
           {
             values: values,
-            scale: {
-              'Libre': '#00a65a', //green
-              'Apartado': '#f39c12', //amarillo     
-              'Bloqueado': '#d81b60', //maroon 
-              'Contrato': '#00c0ef', //aqua        
-              'Escriturado': '#605ca8' //purple
-
-            },
+            /*   scale: {
+                'Libre': '#00a65a', //green
+                'Apartado': '#f39c12', //amarillo     
+                'Bloqueado': '#d81b60', //maroon 
+                'Contrato': '#00c0ef', //aqua        
+                'Escriturado': '#605ca8' //purple
+  
+              }, */
+            scale: scaleEstadoVenta,
             legend: {
               vertical: true,
               title: 'Estado',
