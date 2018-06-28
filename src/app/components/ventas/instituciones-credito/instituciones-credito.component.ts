@@ -123,7 +123,7 @@ export class InstitucionesCreditoComponent implements OnInit {
   }
 
   updateColorInstitucion(institucion, color) {
-    console.log("updateColor", institucion, color);
+    //console.log("updateColor", institucion, color);
     this.institucionSrv.updateInstitucion(institucion.id_institucion_credito, { color: color })
       .subscribe(insti => {
         let i = this.instituciones.indexOf(institucion);

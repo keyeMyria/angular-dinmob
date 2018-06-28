@@ -29,7 +29,7 @@
               </thead>
               <tbody>
                 <tr *ngFor="let institucion of instituciones">
-                  <th>
+                  <td>
                     <input class="input-color form-control" [(colorPicker)]="institucion.color" [style.background]="institucion.color" 
                     [cpOKButton]="true"
                     [cpOKButtonClass]="'btn btn-outline-dark btn-block'" 
@@ -40,7 +40,7 @@
 
                     [cpSaveClickOutside]="false"
                       (colorPickerSelect)="updateColorInstitucion(institucion,$event)" />
-                  </th>
+                  </td>
                   <td>{{institucion.nombre}}</td>
                   <td class="text-right ws-nowrap">
 
