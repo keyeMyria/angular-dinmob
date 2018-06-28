@@ -12,6 +12,7 @@ import { ImagenesLotesDialogoComponent } from '../../ventas/imagenes-lotes-dialo
 import { LotesService } from '../../../services/lotes.service';
 import { AvancesLoteDialogoComponent } from '../avances-lote-dialogo/avances-lote-dialogo.component';
 import { LoadingService } from 'app/services/loading.service';
+import { MapasAvancesConfigDialogoComponent } from '../mapas-avances-config-dialogo/mapas-avances-config-dialogo.component';
 
 declare var jQuery: any;
 declare var $: any;
@@ -34,6 +35,7 @@ export class MapasAvancesComponent implements OnInit {
   variableContinua: boolean = true;
 
   scalePctAvance: any = {};
+  verLeyenda: any = { toggle: true };
 
 
   constructor(
@@ -123,6 +125,29 @@ export class MapasAvancesComponent implements OnInit {
       }, (error) => {
 
       });
+  }
+
+  toggleVerLeyenda(event) {
+    //console.log("ver leyenda", event.checked);
+    this.verLeyenda.toggle = event.checked;
+    $(".jvectormap-legend-cnt.jvectormap-legend-cnt-v").toggleClass("d-none");
+    //let items= $(".jvectormap-legend-cnt.jvectormap-legend-cnt-v");
+    //console.log(items);
+
+
+  }
+
+
+  configMapa() {
+    //console.log("configMapa");
+    let dialogRef = this.dialog.open(MapasAvancesConfigDialogoComponent, {
+      data: {
+        map: this.map,
+        verLeyenda: this.verLeyenda,
+      },
+      width: "400px"
+    });
+
   }
 
   toggleEscala() {
@@ -218,14 +243,14 @@ export class MapasAvancesComponent implements OnInit {
           {
             values: {},
             scale: scalePctAvance,
-        /*     scale: {
-              '1': 'white',
-              '2': '#00a65a', // green
-              '3': '#f39c12', // amarillo
-              '4': '#d81b60', //maroon
-              '5': '#00c0ef', // aqua
-              '6': '#605ca8'  //purple
-            }, */
+            /*     scale: {
+                  '1': 'white',
+                  '2': '#00a65a', // green
+                  '3': '#f39c12', // amarillo
+                  '4': '#d81b60', //maroon
+                  '5': '#00c0ef', // aqua
+                  '6': '#605ca8'  //purple
+                }, */
             legend: {
               vertical: true,
               title: 'Escala',
@@ -408,6 +433,7 @@ export class MapasAvancesComponent implements OnInit {
 
 
   }
+
 
 
 }

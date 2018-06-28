@@ -245,6 +245,7 @@ import { TableroPedidosComponent } from './components/tablero-pedidos/tablero-pe
 import { TableroAlmacenistaComponent } from './components/tablero-almacenista/tablero-almacenista.component';
 import { EditarPagoTrabajadorDialogoComponent } from './components/admin/editar-pago-trabajador-dialogo/editar-pago-trabajador-dialogo.component';
 import { HistorialAvancesComponent } from './components/residente/historial-avances/historial-avances.component';
+import { MapasAvancesConfigDialogoComponent } from './components/residente/mapas-avances-config-dialogo/mapas-avances-config-dialogo.component';
 
 
 
@@ -396,6 +397,7 @@ export function getToken() {
     TableroAlmacenistaComponent,
     EditarPagoTrabajadorDialogoComponent,
     HistorialAvancesComponent,
+    MapasAvancesConfigDialogoComponent,
 
   ],
 
@@ -479,6 +481,7 @@ export function getToken() {
     EditarCargoAbonoCreditoDialogoComponent,
     SaldoVentaClienteDialogoComponent,
     EditarPagoTrabajadorDialogoComponent,
+    MapasAvancesConfigDialogoComponent
   
 
   ],
