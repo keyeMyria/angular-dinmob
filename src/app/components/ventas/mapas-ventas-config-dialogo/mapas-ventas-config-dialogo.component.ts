@@ -13,6 +13,7 @@ declare var $: any;
 })
 export class MapasVentasConfigDialogoComponent implements OnInit {
 
+  
   Tipo = TIPO_MAPA;
 
   constructor(
