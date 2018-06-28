@@ -52,7 +52,6 @@
                     <select name="" id="" class="form-control" #manzana (change)="filtrar(nombre.value, lote.value, estado.value, manzana.value)">
                       <option value="">Todas</option>
                       <option [value]="m.nombre" *ngFor="let m of manzanas">{{m.nombre}}</option>
-
                     </select>
                   </th>
                   <th>
