@@ -28,9 +28,19 @@
     <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-2">
       <div class="card mat-elevation-z2">
         <div class="card-body">
-          <!-- <h3>{{((estadisticas?.falta_por_vender*1 + estadisticas?.total_ventas*1) || 0) |currency }}</h3> -->
           <h3>{{ (estadisticas?.valor_proyecto || 0) | currency}}</h3>
           <p>VALOR PROYECTO</p>
+          <i class="material-icons mat-icon-card">attach_money</i>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-2">
+      <div class="card mat-elevation-z2">
+        <div class="card-body">
+          <h3>{{ (estadisticas?.count_lotes.Libre || 0) + ' de ' + (estadisticas?.count_lotes.Total || 0) }}</h3>
+          <p>LOTES LIBRES</p>
           <i class="material-icons mat-icon-card">attach_money</i>
         </div>
       </div>
@@ -59,7 +69,6 @@
     <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-2">
       <div class="card mat-elevation-z2">
         <div class="card-body">
-          <!-- <h3>{{(estadisticas?.total_ventas - estadisticas?.pagado_ventas || 0) |currency }}</h3> -->
           <h3>{{ (estadisticas?.adeudos_clientes || 0) | currency}}</h3>
           <p>ADEUDOS CLIENTES</p>
           <i class="material-icons mat-icon-card">attach_money</i>
@@ -170,7 +179,6 @@
     <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-2">
       <div class="card mat-elevation-z2">
         <div class="card-body">
-          <!-- <h3>{{(estadisticas?.total_obra - (estadisticas.total_avances_ma*1 + estadisticas.total_avances_mo*1)|| 0) |currency}}</h3> -->
           <h3>{{ (estadisticas?.pendiente_obra || 0) | currency}}</h3>
           <p>PENDIENTE OBRA</p>
           <i class="material-icons mat-icon-card">attach_money</i>
@@ -191,8 +199,6 @@
     <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-2">
       <div class="card mat-elevation-z2">
         <div class="card-body">
-          <!-- <h3>{{(((estadisticas?.total_avances_ma*1 + estadisticas?.total_avances_mo*1)/estadisticas?.total_obra)|| 0) | percent:'1.2-2'}}
-          </h3> -->
           <h3>{{ (estadisticas?.avance_obra_pct || 0) | percent:'1.2-2' }}</h3>
           <p>AVANCE OBRA</p>
           <i class="fa-icon-card fa fa-percent"></i>
@@ -223,7 +229,6 @@
     <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-2">
       <div class="card mat-elevation-z2">
         <div class="card-body">
-          <!-- <h3>{{ (estadisticas?.total_avances_mo*1 + estadisticas?.total_avances_ma*1) || 0 |currency }}</h3> -->
           <h3>{{ (estadisticas?.avance_obra || 0) | currency}}</h3>
           <p>AVANCE MO + MA</p>
           <i class="material-icons mat-icon-card">attach_money</i>
