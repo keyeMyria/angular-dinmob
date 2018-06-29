@@ -151,7 +151,7 @@ export class NuevoPedidoComponent implements OnInit {
   }
 
   countInsumosPedido(insumos) {
-    console.log("countInsumosPedido");
+    //console.log("countInsumosPedido");
 
     let count = 0;
 
@@ -165,7 +165,7 @@ export class NuevoPedidoComponent implements OnInit {
   }
 
   countInsumosPedidoPartida(partida) {
-    console.log("countInsumosPedidoPartida");
+    //console.log("countInsumosPedidoPartida");
 
     let count = 0;
 
@@ -381,7 +381,7 @@ export class NuevoPedidoComponent implements OnInit {
         insumo.requerido = insumo.cantidad;
       });
     }
-    console.log("toggle cantidades partida");
+    //console.log("toggle cantidades partida");
 
   }
 
