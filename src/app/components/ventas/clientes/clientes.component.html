@@ -75,7 +75,7 @@
                   <td class="ws-nowrap">{{cliente.manzana}}</td>
                   <td class="ws-nowrap">{{cliente.lote}}</td>
                   <td>
-                    <span class="badge badge-{{cliente.estado_lote|lowercase}}">{{cliente.estado_lote}}</span>
+                    <span [style.background-color]="cliente.color" [class.text-white]="cliente.color" class="badge">{{cliente.estado_lote}}</span>
                   </td>
                   <td class="text-right">
                     <button mat-icon-button [matMenuTriggerFor]="menu">

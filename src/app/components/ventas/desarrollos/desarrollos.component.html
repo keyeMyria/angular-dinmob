@@ -60,7 +60,7 @@
                   <td class="ws-nowrap">{{lote.nombre}}</td>
                   <td>{{lote.valor_base|currency}}</td>
                   <td>
-                    <span class="badge badge-{{lote.estado_venta|lowercase}}">{{lote.estado_venta}}</span>
+                    <span [style.background-color]="lote.color" [class.text-white]="lote.color" class="badge">{{lote.estado_venta}}</span>
                   </td>
                   <td class="ws-nowrap">{{lote.fecha_cambio_estado|date:'mediumDate':'':'es'}}</td>
                   <td>
