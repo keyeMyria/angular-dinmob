@@ -33,7 +33,7 @@ export class EditarLoteDialogoComponent implements OnInit {
       nombre: [this.data.lote.nombre, Validators.required],
       code: this.data.lote.code,
       valor_base: this.data.lote.valor_base,
-      valor_ampliacion: this.data.lote.valor_ampliacion,
+      valor_terreno: this.data.lote.valor_terreno,
       metros_excedente: this.data.lote.metros_excedente,
       precio_excedente: this.data.lote.precio_excedente,
       irregular: this.data.lote.irregular,
@@ -94,7 +94,7 @@ export class EditarLoteDialogoComponent implements OnInit {
 
     let lote = this.clonar(this.form.value);
     lote.valor_base = lote.valor_base.replace(/,/g, "");
-    lote.valor_ampliacion = lote.valor_ampliacion.replace(/,/g, "");
+    lote.valor_terreno = lote.valor_terreno.replace(/,/g, "");
 
     this.loteSrv.updateLoteConPrototipos(this.data.lote.id_lote, lote)
       .subscribe(lote => {

@@ -61,7 +61,7 @@ export class EstructuraObraComponent implements OnInit, OnDestroy {
   opPrototipo = new FormControl("", Validators.required);
   opEnVenta = new FormControl("", Validators.required);
   opValorBase = new FormControl("", Validators.required);
-  opValorAmpliacion = new FormControl("", Validators.required);
+  opValorTerreno = new FormControl("", Validators.required);
   opTipo = new FormControl("", Validators.required);
   opMetrosExcedente = new FormControl("", Validators.required);
   opPrecioExcedente = new FormControl("", Validators.required);
@@ -458,7 +458,7 @@ export class EstructuraObraComponent implements OnInit, OnDestroy {
 
   }
 
-  /* actualizamos la propiedad valor_ampliacion a los lotes seleccionados */
+  /* actualizamos la propiedad metros_excedentes a los lotes seleccionados */
   updateMetrosExcedente() {
 
     let id_lotes = [];
@@ -511,7 +511,7 @@ export class EstructuraObraComponent implements OnInit, OnDestroy {
 
   }
 
-  /* actualizamos la propiedad valor_ampliacion a los lotes seleccionados */
+  /* actualizamos la propiedad precio_excedente los lotes seleccionados */
   updatePrecioExcedente() {
 
     let id_lotes = [];
@@ -564,8 +564,8 @@ export class EstructuraObraComponent implements OnInit, OnDestroy {
 
   }
 
-  /* actualizamos la propiedad valor_ampliacion a los lotes seleccionados */
-  updateValorAmpliacion() {
+  /* actualizamos la propiedad valor_terreno a los lotes seleccionados */
+  updateValorTerreno() {
 
     let id_lotes = [];
 
@@ -573,8 +573,8 @@ export class EstructuraObraComponent implements OnInit, OnDestroy {
       id_lotes.push(lote.id_lote);
     });
 
-    let valor = this.opValorAmpliacion.value.replace(/,/g, "");
-    this.loteSrv.bulkUpdate(id_lotes, { valor_ampliacion: valor })
+    let valor = this.opValorTerreno.value.replace(/,/g, "");
+    this.loteSrv.bulkUpdate(id_lotes, { valor_terreno: valor })
       .subscribe((res: any) => {
 
         if (res.count) {
@@ -582,7 +582,7 @@ export class EstructuraObraComponent implements OnInit, OnDestroy {
 
           //actualizamos la vista
           this.selection[this.manzana_selected].selected.forEach(lote => {
-            lote.valor_ampliacion = valor;
+            lote.valor_terreno = valor;
           });
 
           //eliminamos la seleccion
