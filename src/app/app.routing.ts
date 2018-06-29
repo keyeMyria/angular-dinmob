@@ -104,6 +104,7 @@ import { Rol } from "./constantes/roles";
 import { UsuariosAsesoresResolverService } from './resolvers/usuarios-asesores-resolver.service';
 import { HistorialAvancesComponent } from './components/residente/historial-avances/historial-avances.component';
 import { ManzanasResolverService } from 'app/resolvers/manzanas-resolver.service';
+import { TareasComponent } from './components/admin/tareas/tareas.component';
 
 
 export const ROUTES: Routes = [
@@ -790,6 +791,13 @@ export const ROUTES: Routes = [
                 },
                 data: {
                     permisos: [Rol.Administrador, Rol.Contabilidad]
+                }
+            },
+            {
+                path: 'tareas', component: TareasComponent,
+                canActivate: [AuthGuard],
+                data: {
+                    permisos: [Rol.Administrador]
                 }
             },
 

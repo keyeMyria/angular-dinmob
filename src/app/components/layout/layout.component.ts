@@ -53,9 +53,9 @@ export class LayoutComponent implements OnInit {
     }
     /*  }); */
 
-   /*  this.usuarioChangedSubscription=auth.usuarioChanged$.subscribe(nombre => {
-      this.username = nombre.split(" ")[0];
-    }); */
+    /*  this.usuarioChangedSubscription=auth.usuarioChanged$.subscribe(nombre => {
+       this.username = nombre.split(" ")[0];
+     }); */
   }
 
   ngOnInit() { }
@@ -126,9 +126,13 @@ export class LayoutComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
-    
+
     //this.usuarioChangedSubscription.unsubscribe();
 
+  }
+
+  addTareas() {
+    this.router.navigate(['/tareas']);
   }
 
 

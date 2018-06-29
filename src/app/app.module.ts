@@ -246,6 +246,7 @@ import { TableroAlmacenistaComponent } from './components/tablero-almacenista/ta
 import { EditarPagoTrabajadorDialogoComponent } from './components/admin/editar-pago-trabajador-dialogo/editar-pago-trabajador-dialogo.component';
 import { HistorialAvancesComponent } from './components/residente/historial-avances/historial-avances.component';
 import { MapasAvancesConfigDialogoComponent } from './components/residente/mapas-avances-config-dialogo/mapas-avances-config-dialogo.component';
+import { TareasComponent } from './components/admin/tareas/tareas.component';
 
 
 
@@ -398,6 +399,7 @@ export function getToken() {
     EditarPagoTrabajadorDialogoComponent,
     HistorialAvancesComponent,
     MapasAvancesConfigDialogoComponent,
+    TareasComponent,
 
   ],
 
