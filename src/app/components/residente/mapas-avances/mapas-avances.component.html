@@ -1,7 +1,3 @@
-<!-- <button mat-fab class="img-btn" style="position:fixed; bottom:20px; right:160px; z-index:100" (click)="toggleEscala()">
-  <i class="material-icons">{{variableContinua?'apps':'all_inclusive'}}</i>
-  <i class="material-icons">apps</i>
-</button> -->
 <button mat-fab style="position:fixed; bottom:20px; right:160px; z-index:100" (click)="configMapa()">
   <mat-icon aria-label="fab-button">settings</mat-icon>
 </button>
@@ -11,29 +7,9 @@
 </button>
 <button mat-fab class="img-btn" [disabled]="!lote_selected" style="position:fixed; bottom:20px; right:20px; z-index:100"
   (click)="verImagenes()">
-  <!--   <mat-icon aria-label="fab-button">photo_camera</mat-icon> -->
-  <!--  <i class="fa fa-camera"></i> -->
   <div>{{lote_selected?.num_fotos||0}}</div>
   <small>{{lote_selected?.code}}</small>
 </button>
-
-<!-- <button mat-fab class="img-btn" style="position:fixed; bottom:20px; right:20px; z-index:100" [matMenuTriggerFor]="menu">
-  <mat-icon>more_vert</mat-icon>
-</button>
-<mat-menu #menu="matMenu">
-  <button mat-menu-item (click)="toggleEscala()">
-    <mat-icon>drag_indicator</mat-icon>
-    <span>Vista</span>
-  </button>
-  <button mat-menu-item (click)="verAvances(lote_selected)">
-    <mat-icon>show_chart</mat-icon>
-    <span>Avances</span>
-  </button>
-  <button mat-menu-item (click)="verImagenes()">
-    <mat-icon>photo_camera</mat-icon>
-    <span>Imágenes</span>
-  </button>
-</mat-menu> -->
 
 
 
@@ -91,15 +67,16 @@
           <div class="texto" *ngIf="lote_selected">{{lote_selected?.ultima_foto| date:'mediumDate':'':'es'}}</div>
         </div>
 
+        <div class="form-group">
+          <mat-slide-toggle [checked]="verLeyenda.toggle" (change)="toggleVerLeyenda($event)">Leyenda</mat-slide-toggle>
+        </div>
 
         <button mat-raised-button color="primary" class="btn-block" (click)="verImagenes()" [disabled]="!lote_selected">
           Imágenes {{lote_selected?.num_fotos||0}}</button>
         <button mat-raised-button color="primary" class="btn-block" (click)="verAvances(lote_selected)" [disabled]="!lote_selected">Avances</button>
 
-        <div class="form-group">
-          <mat-slide-toggle [checked]="verLeyenda.toggle" (change)="toggleVerLeyenda($event)">Leyenda</mat-slide-toggle>
-        </div>
-        
+
+
       </mat-card>
 
 

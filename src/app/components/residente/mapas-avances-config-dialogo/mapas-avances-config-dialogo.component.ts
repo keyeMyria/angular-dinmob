@@ -19,11 +19,20 @@ export class MapasAvancesConfigDialogoComponent implements OnInit {
   }
 
   toggleVerLeyenda(event) {
-    //console.log("ver leyenda", event.checked);
     this.data.verLeyenda.toggle = event.checked;
     $(".jvectormap-legend-cnt.jvectormap-legend-cnt-v").toggleClass("d-none");
-    //let items= $(".jvectormap-legend-cnt.jvectormap-legend-cnt-v");
-    //console.log(items);
+
+  }
+
+  escalaDiscreta() {
+    this.data.map.series.regions[1].setValues(this.data.valuesDiscretosLotes);
+    this.data.variableContinua.toggle = false;
+
+  }
+
+  escalaContinua() {
+    this.data.map.series.regions[0].setValues(this.data.valuesLotes);
+    this.data.variableContinua.toggle = true;
 
 
   }

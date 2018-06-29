@@ -32,10 +32,11 @@ export class MapasAvancesComponent implements OnInit {
   lote_selected: any = null;
   valuesLotes: any = {};
   valuesDiscretosLotes: any = {};
-  variableContinua: boolean = true;
+  //variableContinua: boolean = true;
 
   scalePctAvance: any = {};
   verLeyenda: any = { toggle: true };
+  variableContinua: any = { toggle: false };
 
 
   constructor(
@@ -99,7 +100,8 @@ export class MapasAvancesComponent implements OnInit {
 
 
         //creamos los valores para la escala de estados
-        this.variableContinua = true;
+        this.variableContinua.toggle = false;
+        this.verLeyenda.toggle = true;
         this.valuesLotes = {};
         this.valuesDiscretosLotes = {};
         this.lotes.forEach(lote => {
@@ -115,7 +117,7 @@ export class MapasAvancesComponent implements OnInit {
 
         if (this.jsonMap.mapa) {
           setTimeout(() => {
-            this.crearMapa(this.valuesLotes, this.scalePctAvance);
+            this.crearMapa(this.valuesDiscretosLotes, this.scalePctAvance);
             this.loading.stop();
           }, 100);
         } else {
@@ -144,46 +146,15 @@ export class MapasAvancesComponent implements OnInit {
       data: {
         map: this.map,
         verLeyenda: this.verLeyenda,
+        valuesDiscretosLotes: this.valuesDiscretosLotes,
+        valuesLotes: this.valuesLotes,
+        variableContinua: this.variableContinua
+
       },
       width: "400px"
     });
 
   }
-
-  toggleEscala() {
-
-    if (this.variableContinua) {
-
-      this.variableContinua = false;
-      this.escalaDiscreta();
-    } else {
-      this.variableContinua = true;
-      this.escalaContinua();
-    }
-
-  }
-
-  escalaDiscreta() {
-    //console.log("asignacion de la escala de prototipos");
-    // region 0 valor continuo
-    // region 1 valor discreto
-    // region 2 texto
-
-    this.map.series.regions[1].setValues(this.valuesDiscretosLotes);
-    //this.tipoMapa.disabled = true;
-
-  }
-  escalaContinua() {
-    //console.log("asignacion de la escala de prototipos");
-    // region 0 valor continuo
-    // region 1 valor discreto
-    // region 2 texto
-
-    this.map.series.regions[0].setValues(this.valuesLotes);
-    //this.tipoMapa.disabled = true;
-
-  }
-
 
 
   crearMapa(values, scalePctAvance) {
@@ -233,7 +204,7 @@ export class MapasAvancesComponent implements OnInit {
       series: {
         regions: [
           {
-            values: values,
+            values: {},
             scale: ['#C8EEFF', '#0071A4'],
             min: 0,
             max: 1,
@@ -241,7 +212,7 @@ export class MapasAvancesComponent implements OnInit {
 
           },
           {
-            values: {},
+            values: values,
             scale: scalePctAvance,
             /*     scale: {
                   '1': 'white',
