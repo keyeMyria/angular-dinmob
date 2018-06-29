@@ -9,88 +9,18 @@
 
   <div class="row">
 
-
-    <div class="col-12 col-md-6 col-lg-3 p-2">
-      <mat-card class="bg-libre text-white">
-        <h3>{{estadisticas.estados?.Libre || 0}}
-          <small>de {{estadisticas.estados?.Total||0}}</small>
+    <div class="col-12 col-md-6 col-lg-3 p-2" *ngFor="let lote of estadisticas.lotes">
+      <mat-card [style.background-color]="lote.color" [class.text-white]="lote.color">
+        <h3>{{lote.count || 0}}
+          <small>de {{estadisticas?.total_lotes||0}}</small>
         </h3>
-        <p>Libres</p>
+        <p>{{lote.descripcion}}</p>
         <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">pie_chart</i>
-        <!--      <mat-card-footer>
-          <button mat-button class="btn-block">
-            <span>Mas Información</span>
-            <mat-icon>chevron_right</mat-icon>
-          </button>
-        </mat-card-footer> -->
       </mat-card>
     </div>
 
-    <div class="col-12 col-md-6 col-lg-3 p-2">
-      <mat-card class="bg-apartado text-white">
-        <h3>{{estadisticas.estados?.Apartado || 0}}
-          <small>de {{estadisticas.estados?.Total||0}}</small>
-        </h3>
-        <p>Apartados</p>
-        <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">pie_chart</i>
-        <!--         <mat-card-footer>
-          <button mat-button class="btn-block">
-            <span>Mas Información</span>
-            <mat-icon>chevron_right</mat-icon>
-          </button>
-        </mat-card-footer> -->
-      </mat-card>
-    </div>
 
-    <div class="col-12 col-md-6 col-lg-3 p-2">
-      <mat-card class="bg-bloqueado text-white">
-        <h3>{{estadisticas.estados?.Bloqueado || 0}}
-          <small>de {{estadisticas.estados?.Total||0}}</small>
-        </h3>
-        <p>Bloqueados</p>
-        <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">pie_chart</i>
-        <!--        <mat-card-footer>
-          <button mat-button class="btn-block">
-            <span>Mas Información</span>
-            <mat-icon>chevron_right</mat-icon>
-          </button>
-        </mat-card-footer> -->
-      </mat-card>
-    </div>
-
-    <div class="col-12 col-md-6 col-lg-3 p-2">
-      <mat-card class="bg-contrato text-white">
-        <h3>{{estadisticas.estados?.Contrato || 0}}
-          <small>de {{estadisticas.estados?.Total||0}}</small>
-        </h3>
-        <p>Contrato</p>
-        <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">pie_chart</i>
-        <!--         <mat-card-footer>
-          <button mat-button class="btn-block">
-            <span>Mas Información</span>
-            <mat-icon>chevron_right</mat-icon>
-          </button>
-        </mat-card-footer> -->
-      </mat-card>
-    </div>
-
-    <div class="col-12 col-md-6 col-lg-3 p-2">
-      <mat-card class="bg-escriturado text-white">
-        <h3>{{estadisticas.estados?.Escriturado || 0}}
-          <small>de {{estadisticas.estados?.Total||0}}</small>
-        </h3>
-        <p>Escriturados</p>
-        <i class="material-icons" style="font-size: 90px; position:absolute; right:0; top:0;color:rgba(0, 0, 0, 0.15)">pie_chart</i>
-        <!--        <mat-card-footer>
-          <button mat-button class="btn-block">
-            <span>Mas Información</span>
-            <mat-icon>chevron_right</mat-icon>
-          </button>
-        </mat-card-footer> -->
-      </mat-card>
-    </div>
-
-   <!-- <div class="col-12 col-md-6 col-lg-3 p-2">
+    <!-- <div class="col-12 col-md-6 col-lg-3 p-2">
       <mat-card class="">
         <h3>{{(estadisticas?.valor_base || 0) |currency }}</h3>
         <p>TOTAL</p>
@@ -131,36 +61,6 @@
         </mat-card-footer>
       </mat-card>
     </div> -->
-
-
-
-
-
-
-
-
-
-    <!--     <div class="col-12 col-md-6 col-lg-3 p-2">
-      <div class="d-flex flex-column mat-elevation-z6 bg-primary text-white">
-        <div class="d-flex justify-content-between p-2">
-          <div>
-            <h3>19</h3>
-            <p>Apartados</p>
-          </div>
-          <div>
-            <i class="material-icons" style="font-size: 90px; color:rgba(0, 0, 0, 0.15)">pie_chart</i>
-          </div>
-        </div>
-        <div class="text-center">
-          Más info
-          <i class="fa fa-arrow-circle-right"></i>
-        </div>
-      </div>
-    </div> -->
-
-
-
-
 
   </div>
 
