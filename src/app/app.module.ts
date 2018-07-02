@@ -247,6 +247,8 @@ import { EditarPagoTrabajadorDialogoComponent } from './components/admin/editar-
 import { HistorialAvancesComponent } from './components/residente/historial-avances/historial-avances.component';
 import { MapasAvancesConfigDialogoComponent } from './components/residente/mapas-avances-config-dialogo/mapas-avances-config-dialogo.component';
 import { TareasComponent } from './components/admin/tareas/tareas.component';
+import { AsignarTareaDialogoComponent } from './components/admin/asignar-tarea-dialogo/asignar-tarea-dialogo.component';
+import { EditarTareaDialogoComponent } from './components/admin/editar-tarea-dialogo/editar-tarea-dialogo.component';
 
 
 
@@ -400,6 +402,8 @@ export function getToken() {
     HistorialAvancesComponent,
     MapasAvancesConfigDialogoComponent,
     TareasComponent,
+    AsignarTareaDialogoComponent,
+    EditarTareaDialogoComponent,
 
   ],
 
@@ -483,7 +487,11 @@ export function getToken() {
     EditarCargoAbonoCreditoDialogoComponent,
     SaldoVentaClienteDialogoComponent,
     EditarPagoTrabajadorDialogoComponent,
-    MapasAvancesConfigDialogoComponent
+    MapasAvancesConfigDialogoComponent,
+    AsignarTareaDialogoComponent,
+    EditarTareaDialogoComponent,
+    
+
   
 
   ],
