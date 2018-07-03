@@ -60,11 +60,22 @@
 
             <!-- asignar valor terreno -->
             <div class="form-group">
-                <label class="form-label">Valor Terreno</label>
+                <label class="form-label">Valor Terreno ($)</label>
                 <div class="input-group">
                     <input name="valor_terreno" [textMask]="{mask: numbermask}" type="text" class="form-control" [formControl]="opValorTerreno">
                     <div class="input-group-append">
                         <button class="btn btn-primary" (click)="updateValorTerreno()" [disabled]=" manzana_selected==null || !selection[manzana_selected].selected.length  || opValorTerreno.errors">Asignar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- asignar valor terreno -->
+            <div class="form-group">
+                <label class="form-label">Valor Terreno (%)</label>
+                <div class="input-group">
+                    <input name="valor_terreno" [textMask]="{mask: numbermask}" type="text" class="form-control" [formControl]="opPctTerreno">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" (click)="updatePctTerreno()" [disabled]=" manzana_selected==null || !selection[manzana_selected].selected.length  || opPctTerreno.errors">Asignar</button>
                     </div>
                 </div>
             </div>
@@ -226,7 +237,8 @@
                                                     <th class="d-none d-md-table-cell">Código</th>
                                                     <th>Prototipos</th>
                                                     <th>Base</th>
-                                                    <th>Terreno</th>
+                                                    <th>Terreno($)</th>
+                                                    <th>Terreno(%)</th>
                                                     <th>EnVenta</th>
                                                     <th>Tipo</th>
                                                     <th>Excedente(m)</th>
@@ -255,6 +267,7 @@
                                                     </td>
                                                     <td>{{lote.valor_base|currency}}</td>
                                                     <td>{{lote.valor_terreno|currency}}</td>
+                                                    <td>{{lote.pct_terreno|number}}</td>
                                                     <td>{{lote.en_venta| numberToYesNo}}</td>
                                                     <td>{{lote.irregular| numberToYesNo:'RI'}}</td>
                                                     <td>{{lote.metros_excedente| number}}</td>

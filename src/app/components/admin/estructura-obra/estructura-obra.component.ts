@@ -62,6 +62,7 @@ export class EstructuraObraComponent implements OnInit, OnDestroy {
   opEnVenta = new FormControl("", Validators.required);
   opValorBase = new FormControl("", Validators.required);
   opValorTerreno = new FormControl("", Validators.required);
+  opPctTerreno = new FormControl("", Validators.required);
   opTipo = new FormControl("", Validators.required);
   opMetrosExcedente = new FormControl("", Validators.required);
   opPrecioExcedente = new FormControl("", Validators.required);
@@ -574,7 +575,7 @@ export class EstructuraObraComponent implements OnInit, OnDestroy {
     });
 
     let valor = this.opValorTerreno.value.replace(/,/g, "");
-    this.loteSrv.bulkUpdate(id_lotes, { valor_terreno: valor })
+    this.loteSrv.bulkUpdate(id_lotes, { valor_terreno: valor, pct_terreno: null })
       .subscribe((res: any) => {
 
         if (res.count) {
@@ -583,6 +584,61 @@ export class EstructuraObraComponent implements OnInit, OnDestroy {
           //actualizamos la vista
           this.selection[this.manzana_selected].selected.forEach(lote => {
             lote.valor_terreno = valor;
+            lote.pct_terreno = null;
+          });
+
+          //eliminamos la seleccion
+          this.selection[this.manzana_selected].clear();
+
+
+          this.snackBar.open("Actualización completada", "", {
+            duration: 2000,
+            panelClass: ["bg-success", "text-white"]
+          });
+
+        } else {
+          //error o count==0          
+          this.snackBar.open("Su solicitud no se ha podido completar.", "", {
+            duration: 3000,
+            panelClass: ["bg-danger", "text-white"]
+          });
+
+        }
+
+
+      },
+        (error) => {
+
+          this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde.", "", {
+            duration: 3000,
+            panelClass: ["bg-danger", "text-white"]
+          });
+
+        });
+
+
+  }
+
+  /* actualizamos la propiedad pct_terreno a los lotes seleccionados */
+  updatePctTerreno() {
+
+    let id_lotes = [];
+
+    this.selection[this.manzana_selected].selected.forEach(lote => {
+      id_lotes.push(lote.id_lote);
+    });
+
+    let valor = this.opPctTerreno.value.replace(/,/g, "");
+    this.loteSrv.bulkUpdate(id_lotes, { pct_terreno: valor, valor_terreno: null })
+      .subscribe((res: any) => {
+
+        if (res.count) {
+          //todo ok
+
+          //actualizamos la vista
+          this.selection[this.manzana_selected].selected.forEach(lote => {
+            lote.pct_terreno = valor;
+            lote.valor_terreno = null;
           });
 
           //eliminamos la seleccion

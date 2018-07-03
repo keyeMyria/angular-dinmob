@@ -41,12 +41,31 @@ export class EditarLoteDialogoComponent implements OnInit {
       prototipos: this.fb.array([], this.checkRepetidos),
       comision_vendedor: this.data.lote.comision_vendedor,
       comision_gerente: this.data.lote.comision_gerente,
-      comision_expediente: this.data.lote.comision_expediente
+      comision_expediente: this.data.lote.comision_expediente,
+      pct_terreno: this.data.lote.pct_terreno,
+      tipo_terreno: ""
     });
 
     this.data.lote.prototipos.forEach(prototipo => {
       (<FormArray>this.form.controls["prototipos"]).push(new FormControl(prototipo.id_prototipo, Validators.required));
     });
+
+    this.form.controls["tipo_terreno"].valueChanges
+      .subscribe((value) => {
+        //console.log("valueChanges", value);
+
+        if (value == "fijo") {
+          this.form.controls["pct_terreno"].disable();
+          this.form.controls["valor_terreno"].enable();
+
+        } else {/* pct*/
+          this.form.controls["pct_terreno"].enable();
+          this.form.controls["valor_terreno"].disable();
+        }
+
+      });
+
+    this.form.patchValue({ "tipo_terreno": this.data.lote.pct_terreno == null ? 'fijo' : 'pct' });
 
 
 
@@ -94,7 +113,14 @@ export class EditarLoteDialogoComponent implements OnInit {
 
     let lote = this.clonar(this.form.value);
     lote.valor_base = lote.valor_base.replace(/,/g, "");
-    lote.valor_terreno = lote.valor_terreno.replace(/,/g, "");
+
+    if (lote.valor_terreno) {
+      lote.valor_terreno = lote.valor_terreno.replace(/,/g, "");
+    }
+
+    if (lote.pct_terreno) {
+      lote.pct_terreno = lote.pct_terreno.replace(/,/g, "");
+    }
 
     this.loteSrv.updateLoteConPrototipos(this.data.lote.id_lote, lote)
       .subscribe(lote => {
