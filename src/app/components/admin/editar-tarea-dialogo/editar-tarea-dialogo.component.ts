@@ -16,7 +16,6 @@ export class EditarTareaDialogoComponent implements OnInit {
     private fb: FormBuilder,
   ) { 
     this.form = this.fb.group({
-
     });
   }
 

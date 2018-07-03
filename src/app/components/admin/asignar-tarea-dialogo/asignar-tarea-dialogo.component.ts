@@ -9,6 +9,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 })
 export class AsignarTareaDialogoComponent implements OnInit {
   form: FormGroup;
+  
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -16,7 +17,6 @@ export class AsignarTareaDialogoComponent implements OnInit {
     private fb: FormBuilder,
   ) {
     this.form = this.fb.group({
-
     });
   }
 
