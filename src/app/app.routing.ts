@@ -796,6 +796,9 @@ export const ROUTES: Routes = [
             {
                 path: 'tareas', component: TareasComponent,
                 canActivate: [AuthGuard],
+                resolve: {
+                    usuarios: UsuariosResolverService
+                },
                 data: {
                     permisos: [Rol.Administrador]
                 }

@@ -33,6 +33,7 @@ import { ComisionService } from './services/comision.service';
 import { GastoService } from './services/gasto.service';
 import { ProveedorService } from './services/proveedor.service';
 import { VendedorService } from './services/vendedor.service';
+import { TareaService } from './services/tarea.service';
 
 //helpers
 import { ClienteHelperService } from 'app/utils/cliente-helper.service';
@@ -562,7 +563,8 @@ export function getToken() {
     ObraMaterialesTrabajadoresResidentesResolverService,
     ReportesResolverService,
     EstadisticasAdminResolverService,
-    ManzanasResolverService
+    ManzanasResolverService,
+    TareaService
 
   ],
   bootstrap: [AppComponent]

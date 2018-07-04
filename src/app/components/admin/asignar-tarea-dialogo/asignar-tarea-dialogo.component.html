@@ -3,29 +3,35 @@
 
 
 
-  <form>
+  <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
     <div class="form-group">
-      <label for="inputState">A quién</label>
-      <select id="inputState" class="form-control">
-        <option selected>Choose...</option>
-        <option>...</option>
+      <label for="id_usuario" class="form-label">A quién</label>
+      <select class="form-control" id="id_usuario" name="id_usuario" formControlName="id_usuario" [ngClass]="{'is-invalid': form.get('id_usuario').invalid  && (form.get('id_usuario').dirty || form.get('id_usuario').touched )}">
+        <option value="">Seleccionar...</option>
+        <option [value]="usuario.id_usuario" *ngFor="let usuario of data.usuarios">{{usuario.nombre}}</option>
       </select>
+      <div class="invalid-feedback">Asigne un receptor</div>
     </div>
-    <div class="form-group ">
-      <label>Fecha</label>
+
+    <div class="form-group">
+      <label for="fecha" class="form-label">Fecha</label>
       <div class="input-group">
-        <input class="form-control" placeholder="yyyy-mm-dd" type="text" placement="bottom-left" [matDatepicker]="dpFecha">
+        <input id="fecha" name="fecha" formControlName="fecha" class="form-control" placeholder="yyyy-mm-dd" type="text" placement="bottom-left"
+          [matDatepicker]="dpFecha" [ngClass]="{'is-invalid': form.get('fecha').invalid  && (form.get('fecha').dirty || form.get('fecha').touched )}">
         <span class="input-group-append">
           <button class="btn btn-secondary" type="button" (click)="dpFecha.open()">
             <i class="fa fa-calendar"></i>
           </button>
         </span>
+        <div class="invalid-feedback">Asigne una fecha</div>
       </div>
       <mat-datepicker touchUi="true" #dpFecha></mat-datepicker>
     </div>
+
     <div class="form-group">
-      <label for="inputCity">Mensaje</label>
-      <textarea type="text" class="form-control"></textarea>
+      <label for="mensaje_tarea">Mensaje</label>
+      <textarea id="mensaje_tarea" name="mensaje_tarea" formControlName="mensaje_tarea" type="text" class="form-control" [ngClass]="{'is-invalid': form.get('mensaje_tarea').invalid  && (form.get('mensaje_tarea').dirty || form.get('mensaje_tarea').touched )}"></textarea>
+      <div class="invalid-feedback">Escriba la tarea por hacer</div>
     </div>
   </form>
 
@@ -37,6 +43,6 @@
 
 </div>
 <div mat-dialog-actions>
-  <button mat-button type="button" [mat-dialog-close]="false">CANCELAR</button>
-  <button type="submit" mat-button color="primary">GUARDAR</button>
+  <button mat-button type="button" [mat-dialog-close]="false">CERRAR</button>
+  <button mat-button type="submit" form="id_form" [disabled]="form.invalid" color="primary">GUARDAR</button>
 </div>
