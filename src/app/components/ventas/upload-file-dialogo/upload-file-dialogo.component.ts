@@ -40,8 +40,9 @@ export class UploadFileDialogoComponent {
       //se añaden parametros
       this.uploader.options.additionalParameter = {
         id_pago: this.data.pago.id_pago,
-        id_cliente: this.data.pago.id_cliente,
-        id_lote: this.data.pago.id_lote
+        id_compra:this.data.pago.id_compra
+        //id_cliente: this.data.pago.id_cliente,
+        //id_lote: this.data.pago.id_lote
 
       };
 
