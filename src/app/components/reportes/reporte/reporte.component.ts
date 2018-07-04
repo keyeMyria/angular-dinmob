@@ -16,10 +16,10 @@ export class ReporteComponent implements OnInit {
 
   form: FormGroup;
   obras: any = [];
-  obra_selected: string = "";
+  //obra_selected: string = "";
   tipos: any = [];
-  tipo_selected: string = "";
-  ambito_selected: string = "";
+  //tipo_selected: string = "";
+  //ambito_selected: string = "";
   trabajadores: any = [];
   manzanas: any = [];
   ultimo_avance: string = "";
@@ -37,9 +37,9 @@ export class ReporteComponent implements OnInit {
     private reporteSrv: ReporteService
   ) {
     this.form = this.fb.group({
-      id_obra: [null, Validators.required],
-      reporte: [null, Validators.required],
-      ambito: [null, Validators.required],
+      id_obra: ["", Validators.required],
+      reporte: ["", Validators.required],
+      ambito: ["", Validators.required],
       inicio_obra: [false],
       fecha_ini: [moment(), Validators.required],
       fecha_fin: [moment(), Validators.required]
@@ -67,6 +67,35 @@ export class ReporteComponent implements OnInit {
       .subscribe((data: { obras: any[], tipos: any }) => {
         this.obras = data.obras;
         this.tipos = data.tipos;
+
+
+        this.tipos.forEach(reporte => {
+          switch (reporte.id_reporte) {
+            case "ACU":
+              reporte.ambito = [];
+              break;
+            case "AVN":
+              reporte.ambito = [{ value: "O", text: "Obra" }, { value: "L", text: "Lote" }, { value: "T", text: "Trabajador" }];
+              break;
+            case "ENT":
+              reporte.ambito = [];
+              break;
+            case "HPT":
+              reporte.ambito = [{ value: "O", text: "Obra" }, { value: "T", text: "Trabajador" }];
+              break;
+            case "INV":
+              reporte.ambito = [];
+              break;
+            case "SAL":
+              reporte.ambito = [];
+              break;
+
+          }
+        });
+
+        //console.log("tipos", this.tipos);
+
+
       });
   }
 
@@ -86,7 +115,7 @@ export class ReporteComponent implements OnInit {
     this.manzanas = [];
     if (id_obra != "") {
       this.obrasSrv.getManzanasTrabajadores(id_obra)
-        .subscribe((res:any) => {
+        .subscribe((res: any) => {
           this.trabajadores = res.trabajadores;
           this.manzanas = res.manzanas;
           this.ultimo_avance = res.ultimo_avance;
@@ -114,7 +143,9 @@ export class ReporteComponent implements OnInit {
     let trabajadores = [];
     let lotes = [];
     let date = new Date().toDateString();
-    switch (this.tipo_selected) {
+    this.form.controls["inicio_obra"]
+    //this.tipo_selected
+    switch (this.form.controls["reporte"].value.id_reporte) {
       case "ACU":
         this.reporteSrv.getReporteAcumulado(this.form.get("id_obra").value, this.form.get("fecha_ini").value, this.form.get("fecha_fin").value, this.form.get("inicio_obra").value)
           .subscribe(data => this.downloadFile(data, `ReporteAcumulado_${date}`));
@@ -133,11 +164,11 @@ export class ReporteComponent implements OnInit {
         });
 
         this.reporteSrv.getReporteAvances(this.form.get("id_obra").value, this.form.get("fecha_ini").value, this.form.get("fecha_fin").value, this.form.get("inicio_obra").value, this.form.get("ambito").value, lotes, lotes)
-          .subscribe(data => this.downloadFile(data, `ReporteEntradas_${date}`));
+          .subscribe(data => this.downloadFile(data, `ReporteAvances_${date}`));
         break;
       case "ENT":
         this.reporteSrv.getReporteEntradas(this.form.get("id_obra").value, this.form.get("fecha_ini").value, this.form.get("fecha_fin").value, this.form.get("inicio_obra").value)
-          .subscribe(data => this.downloadFile(data, `ReporteEntradas_${date}`));
+          .subscribe(data => this.downloadFile(data, `ReporteAvances_${date}`));
 
         break;
       case "HPT":
@@ -154,7 +185,7 @@ export class ReporteComponent implements OnInit {
           .subscribe(data => this.downloadFile(data, `ReporteInventario_${date}`));
         break;
       case "PAT":
-        console.log("PAT");
+        //console.log("PAT");
         break;
       case "SAL":
         this.reporteSrv.getReporteSalidas(this.form.get("id_obra").value, this.form.get("fecha_ini").value, this.form.get("fecha_fin").value, this.form.get("inicio_obra").value)
@@ -162,7 +193,7 @@ export class ReporteComponent implements OnInit {
         break;
 
       default:
-        console.log("Seleccione un tipo de reporte");
+      //console.log("Seleccione un tipo de reporte");
     }
   }
 

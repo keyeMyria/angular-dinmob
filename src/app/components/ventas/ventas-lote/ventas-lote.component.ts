@@ -42,7 +42,7 @@ export class VentasLoteComponent implements OnInit {
       id_estado_venta: null,
       fecha_cambio_estado: null,
       valor_base: null,
-      valor_ampliacion: null
+      //valor_ampliacion: null
     });
 
 
@@ -76,9 +76,13 @@ export class VentasLoteComponent implements OnInit {
   }
 
   guardar() {
+    
     let lote = this.clonar(this.form.value);
-    lote.valor_base = lote.valor_base.replace(/,/g, "");
-    lote.valor_ampliacion = lote.valor_ampliacion.replace(/,/g, "");
+
+    if(lote.valor_base){
+      lote.valor_base = lote.valor_base.replace(/,/g, "");
+    }
+    //lote.valor_ampliacion = lote.valor_ampliacion.replace(/,/g, "");
 
 
     this.loteSrv.updateLote(this.lote.id_lote, lote)

@@ -6,6 +6,7 @@
 
 
   <div class="container-fluid">
+
     <div class="form-row">
 
       <div class="col-12 col-sm-4 py-3">
@@ -36,6 +37,38 @@
       </div>
 
     </div>
+
+    <div class="form-row">
+
+      <div class="col-12 col-sm-4 py-3">
+        <div class="text-center">
+          <h4 class="text-primary">
+            {{(data.compra.valor_escrituracion|| 0) |unmaskNumber |currency }}
+          </h4>
+          <span>VALOR ESCRITURACIÓN</span>
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-4 py-3">
+        <div class="text-center">
+          <h4 class="text-success">
+            {{data.compra.valor_operacion - data.compra.valor_escrituracion | currency}}
+          </h4>
+          <span>DIFERENCIA</span>
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-4 py-3">
+        <div class="text-center">
+          <h4 class="text-danger">
+            {{0 | currency}}
+          </h4>
+          <span>=DEVOLUCIONES</span>
+        </div>
+      </div>
+
+    </div>
+
   </div>
 
   <!-- pagos -->

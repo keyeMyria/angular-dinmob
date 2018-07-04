@@ -11,8 +11,8 @@
           <form [formGroup]="form" (ngSubmit)="getReporte()" id="id_form">
             <div class="form-group">
               <label for="obra" class="form-label">Obra</label>
-              <select class="form-control" [(ngModel)]="obra_selected" (change)="getManzanasTrabajadores(obra_selected)" formControlName="id_obra"
-                [ngClass]="{'is-invalid': form.get('id_obra').invalid  && (form.get('id_obra').dirty || form.get('id_obra').touched )}">
+              <!-- [(ngModel)]="obra_selected" -->
+              <select class="form-control" (change)="getManzanasTrabajadores(form.get('id_obra').value)" formControlName="id_obra" [ngClass]="{'is-invalid': form.get('id_obra').invalid  && (form.get('id_obra').dirty || form.get('id_obra').touched )}">
                 <option value="">Seleccionar...</option>
                 <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>
               </select>
@@ -21,20 +21,23 @@
 
             <div class="form-group">
               <label for="obra" class="form-label">Reporte</label>
-              <select [(ngModel)]="tipo_selected" class="form-control" formControlName="reporte" [ngClass]="{'is-invalid': form.get('reporte').invalid  && (form.get('reporte').dirty || form.get('reporte').touched )}">
+              <!-- [(ngModel)]="tipo_selected"  -->
+              <select class="form-control" formControlName="reporte" [ngClass]="{'is-invalid': form.get('reporte').invalid  && (form.get('reporte').dirty || form.get('reporte').touched )}">
                 <option value="">Seleccionar...</option>
-                <option *ngFor="let tipo of tipos" [value]="tipo.id_reporte">{{tipo.nombre}}</option>
+                <option *ngFor="let tipo of tipos" [ngValue]="tipo">{{tipo.nombre}}</option>
               </select>
               <div class="invalid-feedback">Seleccione un reporte</div>
             </div>
 
             <div class="form-group">
               <label for="obra" class="form-label">Ámbito</label>
-              <select [(ngModel)]="ambito_selected" class="form-control" formControlName="ambito" [ngClass]="{'is-invalid': form.get('ambito').invalid  && (form.get('ambito').dirty || form.get('ambito').touched )}">
+              <!-- [(ngModel)]="ambito_selected"  -->
+              <select class="form-control" formControlName="ambito" [ngClass]="{'is-invalid': form.get('ambito').invalid  && (form.get('ambito').dirty || form.get('ambito').touched )}">
                 <option value="">Seleccionar...</option>
-                <option value="O">Obra</option>
+                <!--  <option value="O">Obra</option>
                 <option value="L">Lote</option>
-                <option value="T">Trabajador</option>
+                <option value="T">Trabajador</option> -->
+                <option [value]="opt.value" *ngFor="let opt of  form.get('reporte').value.ambito">{{opt.text}}</option>
               </select>
               <div class="invalid-feedback">Seleccione un Ámbito</div>
             </div>
@@ -121,7 +124,7 @@
     <div class="col-6 ">
 
       <!-- LOTES -->
-      <div *ngIf="ambito_selected == 'L' " class="card mt-2 ">
+      <div *ngIf="form.get('ambito').value == 'L' " class="card mt-2 ">
         <div class="card-header ">Lotes</div>
         <!-- acordeon de manzanas -->
         <div class="acordeon-prototipo">
@@ -200,7 +203,7 @@
       </div>
 
       <!-- TRABAJADORES -->
-      <div *ngIf="ambito_selected == 'T' " class="card mt-2 ">
+      <div *ngIf="form.get('ambito').value == 'T' " class="card mt-2 ">
 
         <div class="">
           <!-- tabla de trabajadores -->
