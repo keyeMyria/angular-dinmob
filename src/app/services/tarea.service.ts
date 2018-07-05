@@ -22,8 +22,8 @@ export class TareaService {
   }
 
   //ok
-  getTarea(id_tarea) {
-    return this.http.get(this.url + "get_tarea/" + id_tarea)
+  getTareas() {
+    return this.http.get(this.url + "get_tarea/")
       .pipe(catchError(this.handleError("getTarea")));
   }
 

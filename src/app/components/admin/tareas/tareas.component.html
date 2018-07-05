@@ -3,6 +3,7 @@
     <div class="col-12">
 
       <div class="card mt-2">
+
         <div class="card-header">
           Tareas Pendientes
         </div>
@@ -29,6 +30,7 @@
       </div>
 
       <div class="card mt-2">
+
         <div class="card-header padding-card-header">
           <div class="d-flex">
             <div class="align-self-center">Tareas Asignadas</div>
@@ -41,60 +43,20 @@
           </div>
         </div>
 
-        <!--         <mat-selection-list>
-          <mat-list-option>
-            <h4 mat-line>
-              Entregar cotizaciones de la obra "Tres Marias"
-            </h4>
-            <p mat-line>Emilio Sol</p>
-            <p mat-line>29.JUN.2018</p>
-            <button type="button" class="btn btn-link align-self-start" (click)="editarTarea($event)">Editar</button>
-            <hr>
-          </mat-list-option>
-      
-          <mat-list-option>
-            <h4 mat-line>
-              Entregar cotizaciones de la obra "Tres Marias"
-            </h4>
-            <p mat-line>Ramiro Arechar</p>
-            <p mat-line>29.JUN.2018</p>
-            <button type="button" class="btn-sm btn btn-link align-self-start" (click)="editarTarea($event)">Editar</button>
-          </mat-list-option>
-        </mat-selection-list> -->
-
         <div class="list-group">
 
-
-
-<!--           <div class="list-group-item list-group-item-action">
+<!--           <div class="list-group-item" *ngFor="let tarea of tareas">
             <div class="d-flex flex-row">
-              <div class="d-flex flex-column">
-                <p class="mb-1">Entregar cotizaciones de la obra "Tres Marias" con el Ing. Pedro Almodovar y llamarme cuando este se entregue
-                  para darte las siguientes cotizaciones.</p>
-                <small>Emilio Sol</small>
-                <small class="text-muted">29.JUN.2018</small>
+              <div class="d-flex flex-column flex-grow-1">
+                <p class="mb-1">{{tarea.mensaje_tarea}}</p>
+                <small>{{tarea.usuario}}</small>
+                <small class="text-muted">{{tarea.fecha}}</small>
               </div>
               <div class="d-flex flex-column align-items-center justify-content-between">
-                <button mat-icon-button (click)="editarTarea($event)">
+                <mat-checkbox></mat-checkbox>
+                <button mat-icon-button (click)="editarTarea($event, tarea)">
                   <i class="fa fa-pencil"></i>
                 </button>
-                <mat-checkbox></mat-checkbox>
-              </div>
-            </div>
-          </div>
-          <div class="list-group-item list-group-item-action">
-            <div class="d-flex flex-row">
-              <div class="d-flex flex-column align-items-center justify-content-between">
-                <button mat-icon-button (click)="editarTarea($event)">
-                  <i class="fa fa-pencil"></i>
-                </button>
-                <mat-checkbox></mat-checkbox>
-              </div>
-              <div class="d-flex flex-column ml-3">
-                <p class="mb-1">Entregar cotizaciones de la obra "Tres Marias" con el Ing. Pedro Almodovar y llamarme cuando este se entregue
-                  para darte las siguientes cotizaciones.</p>
-                <small>Emilio Sol</small>
-                <small class="text-muted">29.JUN.2018</small>
               </div>
             </div>
           </div> -->
@@ -115,68 +77,46 @@
               </div>
             </div>
           </div>
-
           <div class="list-group-item">
-              <div class="d-flex flex-row">
-                <div class="d-flex flex-column flex-grow-1">
-                  <p class="mb-1">Entregar cotizaciones de la obra "Tres Marias".</p>
-                  <small>Emilio Sol</small>
-                  <small class="text-muted">29.JUN.2018</small>
-                </div>
-                <div class="d-flex flex-column align-items-center justify-content-between">
-                  <mat-checkbox></mat-checkbox>
-                  <button mat-icon-button (click)="editarTarea($event)">
-                    <i class="fa fa-pencil"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="list-group-item">
-                <div class="d-flex flex-row">
-                  <div class="d-flex flex-column flex-grow-1">
-                    <p class="mb-1">Entregar cotizaciones de la obra "Tres Marias" con el Ing. Pedro Almodovar y llamarme cuando este se entregue
-                      para darte las siguientes cotizaciones. Subir al sistema los prototipos de la nueva obra y agregar los nuevos créditos. Relizar los pagos pendientes. Todo se tiene que realizar el dia de hoy o hasta mañana hasta las 12 de dia.</p>
-                    <small>Emilio Sol</small>
-                    <small class="text-muted">29.JUN.2018</small>
-                  </div>
-                  <div class="d-flex flex-column align-items-center justify-content-between">
-                    <mat-checkbox></mat-checkbox>
-                    <button mat-icon-button (click)="editarTarea($event)">
-                      <i class="fa fa-pencil"></i>
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-
-          <!--           <div class="list-group-item list-group">
             <div class="d-flex flex-row">
-              <div class="d-flex flex-column align-items-center justify-content-center">
-                <mat-checkbox></mat-checkbox>
-              </div>
-              <div class="d-flex flex-column ml-3">
-                <p class="mb-1">Entregar cotizaciones de la obra "Tres Marias" con el Ing. Pedro Almodovar y llamarme cuando este se entregue
-                  para darte las siguientes cotizaciones.</p>
+              <div class="d-flex flex-column flex-grow-1">
+                <p class="mb-1">Entregar cotizaciones de la obra "Tres Marias".</p>
                 <small>Emilio Sol</small>
                 <small class="text-muted">29.JUN.2018</small>
               </div>
-              <div class="d-flex flex-column">
-                <button type="button" class="btn btn-link btn-sm align-self-start" (click)="editarTarea($event)">
+              <div class="d-flex flex-column align-items-center justify-content-between">
+                <mat-checkbox></mat-checkbox>
+                <button mat-icon-button (click)="editarTarea($event)">
                   <i class="fa fa-pencil"></i>
                 </button>
               </div>
             </div>
-          </div> -->
-
-
+          </div>
+          <div class="list-group-item">
+            <div class="d-flex flex-row">
+              <div class="d-flex flex-column flex-grow-1">
+                <p class="mb-1">Entregar cotizaciones de la obra "Tres Marias" con el Ing. Pedro Almodovar y llamarme cuando este se entregue
+                  para darte las siguientes cotizaciones. Subir al sistema los prototipos de la nueva obra y agregar los
+                  nuevos créditos. Relizar los pagos pendientes. Todo se tiene que realizar el dia de hoy o hasta mañana
+                  hasta las 12 de dia.</p>
+                <small>Emilio Sol</small>
+                <small class="text-muted">29.JUN.2018</small>
+              </div>
+              <div class="d-flex flex-column align-items-center justify-content-between">
+                <mat-checkbox></mat-checkbox>
+                <button mat-icon-button (click)="editarTarea($event)">
+                  <i class="fa fa-pencil"></i>
+                </button>
+              </div>
+            </div>
+          </div>
 
         </div>
 
 
 
         <div class="card-footer text-center">
-          <button mat-raised-button>Eliminar</button>
+          <button mat-raised-button (click)="delTarea(tarea)">Eliminar</button>
           <button mat-raised-button color="primary">Finalizar</button>
         </div>
 

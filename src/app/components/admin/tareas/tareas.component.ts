@@ -13,6 +13,7 @@ import { TareaService } from '../../../services/tarea.service';
 })
 export class TareasComponent implements OnInit {
   usuarios: any = [];
+  tareas: any;
 
   constructor(
     private dialog: MatDialog,
@@ -27,6 +28,11 @@ export class TareasComponent implements OnInit {
         //console.log("resultado resolve ", data);
         this.usuarios = data.usuarios;
       });
+
+/*     this.tareaSrv.getTareas()
+      .subscribe(res => {
+        this.tareas = res;
+      }); */
   }
 
   editarTarea($event, tarea) {
@@ -89,7 +95,7 @@ export class TareasComponent implements OnInit {
 
     });
   }
-/* 
+
   delTarea(tarea) {
     let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
       data: {
@@ -132,7 +138,7 @@ export class TareasComponent implements OnInit {
 
       }
     });
-  } */
+  }
 
 
 
