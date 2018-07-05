@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./saldo-venta-cliente-dialogo.component.scss']
 })
 export class SaldoVentaClienteDialogoComponent implements OnInit {
+  showEscrituracion: boolean = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -31,6 +32,23 @@ export class SaldoVentaClienteDialogoComponent implements OnInit {
         } else if (pago.id_tipo_pago == 101) {
           // restamos las devoluciones
           total = total - pago.monto;
+        }
+
+      });
+    }
+    return total;
+  }
+
+
+  totalPagosDevoluciones() {
+    let total = 0;
+
+    if (this.data.compra.pagos) {
+      this.data.compra.pagos.forEach(pago => {
+
+        if (pago.id_tipo_pago == 101) {
+          // devoluciones
+          total = total + pago.monto;
         }
 
       });

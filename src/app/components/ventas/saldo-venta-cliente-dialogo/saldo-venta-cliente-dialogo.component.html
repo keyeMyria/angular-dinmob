@@ -38,7 +38,14 @@
 
     </div>
 
-    <div class="form-row">
+    <div class="hr-sect py-3">
+      <span class="text-muted pointer" style="font-size: 1rem" (click)="showEscrituracion=!showEscrituracion">Escrituración
+        <i class="fa" [ngClass]="{'fa-chevron-down': !showEscrituracion , 'fa-chevron-up': showEscrituracion}" style="font-size: 0.9rem"
+          aria-hidden="true"></i>
+      </span>
+    </div>
+
+    <div class="form-row" *ngIf="showEscrituracion">
 
       <div class="col-12 col-sm-4 py-3">
         <div class="text-center">
@@ -54,14 +61,14 @@
           <h4 class="text-success">
             {{data.compra.valor_operacion - data.compra.valor_escrituracion | currency}}
           </h4>
-          <span>DIFERENCIA</span>
+          <span>OPERACIÓN - ESCRITURACIÓN</span>
         </div>
       </div>
 
       <div class="col-12 col-sm-4 py-3">
         <div class="text-center">
-          <h4 class="text-danger">
-            {{0 | currency}}
+          <h4 class="text-primary">
+            {{totalPagosDevoluciones() | currency}}
           </h4>
           <span>=DEVOLUCIONES</span>
         </div>
