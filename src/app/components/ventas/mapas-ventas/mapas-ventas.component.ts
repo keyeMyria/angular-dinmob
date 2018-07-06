@@ -7,12 +7,13 @@ import { MapasService } from "app/services/mapas.service";
 import 'jvectormap';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { ClientesLoteDialogoComponent } from 'app/components/ventas/clientes-lote-dialogo/clientes-lote-dialogo.component';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatDialog, MatSnackBar, MatBottomSheet } from '@angular/material';
 import { CurrencyPipe } from '@angular/common';
 import { LotesService } from 'app/services/lotes.service';
 import { MapasVentasConfigDialogoComponent } from 'app/components/ventas/mapas-ventas-config-dialogo/mapas-ventas-config-dialogo.component';
 import { TIPO_MAPA } from '../../../constantes/tipo_mapa';
 import { LoadingService } from '../../../services/loading.service';
+import { OpcionesMapaVentasBottomSheetComponent } from '../opciones-mapa-ventas-bottom-sheet/opciones-mapa-ventas-bottom-sheet.component';
 
 
 declare var jQuery: any;
@@ -56,8 +57,9 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
     private mapaSrv: MapasService,
     private loteSrv: LotesService,
     private route: ActivatedRoute,
-    public dialog: MatDialog,
-    public snackBar: MatSnackBar,
+    private dialog: MatDialog,
+    private bottomSheet: MatBottomSheet,
+    private snackBar: MatSnackBar,
     private currecyPipe: CurrencyPipe,
     private loading: LoadingService
 
@@ -168,17 +170,16 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
         if (this.jsonMap.mapa) {
 
           setTimeout(() => {
-            //console.log("inicio creación mapa");
+
             this.crearMapa(this.valuesEstadosVenta, this.scaleEstadoVenta, this.scalePrototipos, this.scaleFormaPago, this.scaleLoteTipo);
-            //console.log("mapa creado");
+
             //detenemos el loading spinner
             this.loading.stop();
           }, 100);
         } else {
-          //setTimeout(() => {
+
           this.loading.stop();
-          //console.log("loading stop");
-          //}, 3000);
+
         }
 
 
@@ -285,6 +286,30 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
     this.map.series.regions[0].setValues(this.valuesEstadosVenta);
     this.tipoMapa.disabled = false;
 
+  }
+
+  verOpciones() {
+    const opciones = this.bottomSheet.open(OpcionesMapaVentasBottomSheetComponent, {
+      data: {
+        lote: this.lote_selected
+      }
+    });
+    opciones.afterDismissed().subscribe(opcion => {
+
+      console.log("opcion seleccionada", opcion);
+
+      switch (opcion) {
+        case 1: //ver clientes
+          this.verClientes();
+          break;
+        case 2: //agregar cliente
+          break;
+        case 3: // cambiar estado
+          break
+        default:
+      }
+
+    });
   }
 
 
@@ -456,6 +481,7 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
 
         this.lote_selected = this.lotes.find(lote => lote.code == code);
         //console.log("find on click", this.lote_selected);
+        this.verOpciones();
 
       },
 

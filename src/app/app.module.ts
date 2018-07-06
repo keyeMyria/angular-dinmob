@@ -250,6 +250,7 @@ import { MapasAvancesConfigDialogoComponent } from './components/residente/mapas
 import { TareasComponent } from './components/admin/tareas/tareas.component';
 import { AsignarTareaDialogoComponent } from './components/admin/asignar-tarea-dialogo/asignar-tarea-dialogo.component';
 import { EditarTareaDialogoComponent } from './components/admin/editar-tarea-dialogo/editar-tarea-dialogo.component';
+import { OpcionesMapaVentasBottomSheetComponent } from './components/ventas/opciones-mapa-ventas-bottom-sheet/opciones-mapa-ventas-bottom-sheet.component';
 
 
 
@@ -405,6 +406,7 @@ export function getToken() {
     TareasComponent,
     AsignarTareaDialogoComponent,
     EditarTareaDialogoComponent,
+    OpcionesMapaVentasBottomSheetComponent,
 
   ],
 
@@ -491,9 +493,7 @@ export function getToken() {
     MapasAvancesConfigDialogoComponent,
     AsignarTareaDialogoComponent,
     EditarTareaDialogoComponent,
-    
-
-  
+    OpcionesMapaVentasBottomSheetComponent 
 
   ],
 
