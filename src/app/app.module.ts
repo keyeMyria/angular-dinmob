@@ -251,6 +251,8 @@ import { TareasComponent } from './components/admin/tareas/tareas.component';
 import { AsignarTareaDialogoComponent } from './components/admin/asignar-tarea-dialogo/asignar-tarea-dialogo.component';
 import { EditarTareaDialogoComponent } from './components/admin/editar-tarea-dialogo/editar-tarea-dialogo.component';
 import { OpcionesMapaVentasBottomSheetComponent } from './components/ventas/opciones-mapa-ventas-bottom-sheet/opciones-mapa-ventas-bottom-sheet.component';
+import { AgregarClienteLoteDialogoComponent } from './components/ventas/agregar-cliente-lote-dialogo/agregar-cliente-lote-dialogo.component';
+import { CambiarEstadoVentasLoteDialogoComponent } from './components/ventas/cambiar-estado-ventas-lote-dialogo/cambiar-estado-ventas-lote-dialogo.component';
 
 
 
@@ -407,6 +409,8 @@ export function getToken() {
     AsignarTareaDialogoComponent,
     EditarTareaDialogoComponent,
     OpcionesMapaVentasBottomSheetComponent,
+    AgregarClienteLoteDialogoComponent,
+    CambiarEstadoVentasLoteDialogoComponent,
 
   ],
 
@@ -426,7 +430,7 @@ export function getToken() {
     BrowserAnimationsModule,
     //AuthModule,
     AngularMaterialModule,
-    TextMaskModule,    
+    TextMaskModule,
     RoutingModule,
     ColorPickerModule
 
@@ -493,7 +497,9 @@ export function getToken() {
     MapasAvancesConfigDialogoComponent,
     AsignarTareaDialogoComponent,
     EditarTareaDialogoComponent,
-    OpcionesMapaVentasBottomSheetComponent 
+    OpcionesMapaVentasBottomSheetComponent,
+    AgregarClienteLoteDialogoComponent,
+    CambiarEstadoVentasLoteDialogoComponent
 
   ],
 

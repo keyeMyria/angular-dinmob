@@ -1,0 +1,52 @@
+<h1 mat-dialog-title>Agregar Cliente</h1>
+<div mat-dialog-content>
+
+
+
+  <!-- Persona Fisica/Moral -->
+
+  <div class="form-group row">
+    <label class="col-form-label col-sm-3">Actividad Económica</label>
+    <div class="col-sm-9">
+      <select class="form-control">
+        <option value="0">Persona Física</option>
+        <option value="1">Persona Moral</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-form-label col-sm-3">Nombre completo</label>
+    <label class="col-form-label col-sm-3">Razón Social</label>
+    <div class="col-sm-9">
+      <input type="text" class="form-control">
+    </div>
+  </div>
+
+
+
+
+
+  <div class="form-group row">
+    <label class="col-form-label col-sm-3">Número de celular</label>
+    <div class="col-sm-9">
+      <input [textMask]="{mask: maskPhone}" type="text" class="form-control" name="celular_persona_fisica">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-form-label col-sm-3">Correo eletrónico</label>
+    <div class="col-sm-9">
+      <input type="text" class="form-control" name="email_persona_fisica">
+    </div>
+  </div>
+
+
+
+
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="false">CERRAR</button>
+  <button mat-button [mat-dialog-close]="true">AGREGAR</button>
+</div>

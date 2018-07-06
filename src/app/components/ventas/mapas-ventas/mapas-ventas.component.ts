@@ -14,6 +14,8 @@ import { MapasVentasConfigDialogoComponent } from 'app/components/ventas/mapas-v
 import { TIPO_MAPA } from '../../../constantes/tipo_mapa';
 import { LoadingService } from '../../../services/loading.service';
 import { OpcionesMapaVentasBottomSheetComponent } from '../opciones-mapa-ventas-bottom-sheet/opciones-mapa-ventas-bottom-sheet.component';
+import { AgregarClienteLoteDialogoComponent } from '../agregar-cliente-lote-dialogo/agregar-cliente-lote-dialogo.component';
+import { CambiarEstadoVentasLoteDialogoComponent } from '../cambiar-estado-ventas-lote-dialogo/cambiar-estado-ventas-lote-dialogo.component';
 
 
 declare var jQuery: any;
@@ -233,6 +235,25 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
 
   }
 
+  agregarCliente() {
+    let dialogRef = this.dialog.open(AgregarClienteLoteDialogoComponent, {
+      data: {
+
+      },
+      width: "500px"
+    });
+
+  }
+
+  cambiarEstado() {
+    let dialogRef = this.dialog.open(CambiarEstadoVentasLoteDialogoComponent, {
+      data: {
+
+      },
+      width: "500px"
+    });
+  }
+
   ngOnDestroy() {
     if (this.map) {
       this.map.remove();
@@ -302,9 +323,9 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
         case 1: //ver clientes
           this.verClientes();
           break;
-        case 2: //agregar cliente
+        case 2: this.agregarCliente();
           break;
-        case 3: // cambiar estado
+        case 3: this.cambiarEstado();
           break
         default:
       }
