@@ -48,7 +48,7 @@ export class SaldoVentaClienteDialogoComponent implements OnInit {
 
         if (pago.id_tipo_pago == 101) {
           // devoluciones
-          total = total + pago.monto;
+          total += +pago.monto;
         }
 
       });

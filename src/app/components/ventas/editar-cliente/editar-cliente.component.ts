@@ -44,6 +44,8 @@ export class EditarClienteComponent implements OnInit {
   documentos_cliente: any[] = [];
   documentos_conyuge: any[] = [];
 
+  showEscrituracion: boolean = false;
+
 
   //catalogos para los selects
   //mediante resolvers
@@ -767,7 +769,7 @@ export class EditarClienteComponent implements OnInit {
 
         if (pago.id_tipo_pago == 101) {
           // devoluciones
-          total = total + pago.monto;
+          total += +pago.monto;
         }
 
       });

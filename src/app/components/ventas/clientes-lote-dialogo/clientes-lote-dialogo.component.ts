@@ -50,7 +50,7 @@ export class ClientesLoteDialogoComponent implements OnInit {
     let total = 0;
 
     if (this.cliente_selected.pagos) {
-      this.cliente_selected.pagos.forEach(pago => {     
+      this.cliente_selected.pagos.forEach(pago => {
 
         //solo sumamos los pagos con id_tipo_pago < 100
         if (pago.id_tipo_pago < 100) {
@@ -65,7 +65,7 @@ export class ClientesLoteDialogoComponent implements OnInit {
     return total;
   }
 
-  
+
   totalPagosDevoluciones() {
     let total = 0;
 
@@ -74,7 +74,7 @@ export class ClientesLoteDialogoComponent implements OnInit {
 
         if (pago.id_tipo_pago == 101) {
           // devoluciones
-          total = total + pago.monto;
+          total += +pago.monto;
         }
 
       });
