@@ -33,7 +33,7 @@ export class EditarObraDialogoComponent implements OnInit {
 
       nombre: [data.obra.nombre, Validators.required],
       fecha_ini: [moment(data.obra.fecha_ini, "YYYY-MM-DD"), Validators.required],
-      credito: [data.obra.credito],
+      //credito: [data.obra.credito],
       en_venta: data.obra.en_venta == "0" ? false : true,
       residentes: this.fb.array([], this.checkUsuariosRepetidos),
       control_almacen: this.fb.array([], this.checkUsuariosRepetidos),
@@ -123,9 +123,9 @@ export class EditarObraDialogoComponent implements OnInit {
 
 
     let obra = this.clonar(this.form.value);
-    if (obra.credito) {
+   /*  if (obra.credito) {
       obra.credito = obra.credito.replace(/,/g, "");
-    }
+    } */
 
     this.obraSrv.updateObra(this.data.obra.id_obra, obra)
       .subscribe(obra => {
