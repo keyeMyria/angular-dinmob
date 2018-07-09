@@ -267,7 +267,11 @@
                                                     </td>
                                                     <td>{{lote.valor_base|currency}}</td>
                                                     <td>{{lote.valor_terreno|currency}}</td>
-                                                    <td>{{lote.pct_terreno|number}}</td>
+                                                    <td>
+                                                        <span *ngIf="lote.pct_terreno">
+                                                            {{ (lote.pct_terreno?lote.valor_base*(lote.pct_terreno/100):'0') | currency}} ({{lote.pct_terreno|number}}%)
+                                                        </span>
+                                                    </td>
                                                     <td>{{lote.en_venta| numberToYesNo}}</td>
                                                     <td>{{lote.irregular| numberToYesNo:'RI'}}</td>
                                                     <td>{{lote.metros_excedente| number}}</td>
