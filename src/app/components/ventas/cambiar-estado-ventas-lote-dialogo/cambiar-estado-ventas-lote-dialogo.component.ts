@@ -16,11 +16,26 @@ export class CambiarEstadoVentasLoteDialogoComponent implements OnInit {
     private fb: FormBuilder,
   ) {
     this.form = this.fb.group({
-      id_estado_lote: null
+      id_estado_lote: data.lote.id_estado_venta
     });
   }
 
   ngOnInit() {
+  }
+
+  guardar() {
+
+    if (this.form.value.id_estado_lote != this.data.lote.id_estado_venta) {
+      //console.log("estados diferentes");
+      this.dialogRef.close(this.form.value.id_estado_lote);
+
+    } else {
+      //console.log("estados iguales");
+      this.dialogRef.close(false);
+    }
+
+
+
   }
 
 }

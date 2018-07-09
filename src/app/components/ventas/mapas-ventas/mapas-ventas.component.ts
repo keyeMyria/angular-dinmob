@@ -239,22 +239,59 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
 
   }
 
-  agregarCliente() {
+  agregarCliente(lote) {
     let dialogRef = this.dialog.open(AgregarClienteLoteDialogoComponent, {
       data: {
-
+        lote: lote
       },
       width: "500px"
     });
 
+
+
   }
 
-  cambiarEstado() {
+  cambiarEstado(lote) {
     let dialogRef = this.dialog.open(CambiarEstadoVentasLoteDialogoComponent, {
       data: {
-        estados: this.estados
+        estados: this.estados,
+        lote: lote
       },
       width: "500px"
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result) {
+
+        this.loteSrv.updateLote(this.lote_selected.id_lote, { id_estado_venta: result })
+          .subscribe((lote: any) => {
+
+           
+            this.lote_selected.id_estado_venta = lote.id_estado_venta;
+            this.valuesEstadosVenta[this.lote_selected.code] = lote.estado_venta;
+           
+            let value = {};
+            value[this.lote_selected.code] = lote.estado_venta;
+            this.map.series.regions[0].setValues(value);
+
+
+            this.snackBar.open("Lote Actualizado", "", {
+              duration: 2000,
+              panelClass: ["bg-success", "text-white"]
+            });
+
+
+
+          }, (error) => {
+            this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+              duration: 3000,
+              panelClass: ["bg-danger", "text-white"]
+            });
+          });
+
+      }
+
     });
   }
 
@@ -321,15 +358,17 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
     });
     opciones.afterDismissed().subscribe(opcion => {
 
-      console.log("opcion seleccionada", opcion);
+      //console.log("opcion seleccionada", opcion);
+      //console.log("lote selected", this.lote_selected);
+
 
       switch (opcion) {
-        case 1: //ver clientes
+        case 1: 
           this.verClientes();
           break;
-        case 2: this.agregarCliente();
+        case 2: this.agregarCliente(this.lote_selected);
           break;
-        case 3: this.cambiarEstado();
+        case 3: this.cambiarEstado(this.lote_selected);
           break
         default:
       }
