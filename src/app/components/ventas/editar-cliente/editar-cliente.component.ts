@@ -758,6 +758,23 @@ export class EditarClienteComponent implements OnInit {
     return total;
   }
 
+  //sumatoria de los pagos de devolucion
+  totalPagosDevoluciones() {
+    let total = 0;
+
+    if (this.compra_selected.pagos) {
+      this.compra_selected.pagos.forEach(pago => {
+
+        if (pago.id_tipo_pago == 101) {
+          // devoluciones
+          total = total + pago.monto;
+        }
+
+      });
+    }
+    return total;
+  }
+
   //sumatoria de pagos
   saldoPendiente() {
 
@@ -834,7 +851,7 @@ export class EditarClienteComponent implements OnInit {
       if (result === true) {
 
         this.clienteSrv.delCompra(compra.id_compra)
-          .subscribe((res:any) => {
+          .subscribe((res: any) => {
             if (res.count == 1) {
               let i = this.compras.indexOf(compra);
               this.compras.splice(i, 1);

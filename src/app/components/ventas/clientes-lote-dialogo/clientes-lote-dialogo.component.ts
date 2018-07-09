@@ -1,9 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material';
 import { Cliente } from 'app/model/cliente';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Router } from '@angular/router';
 import { ReporteService } from 'app/services/reporte.service';
+import { AgregarClienteLoteDialogoComponent } from 'app/components/ventas/agregar-cliente-lote-dialogo/agregar-cliente-lote-dialogo.component';
 
 @Component({
   selector: 'app-clientes-lote-dialogo',
@@ -17,11 +18,14 @@ export class ClientesLoteDialogoComponent implements OnInit {
   //selector de clientes
   selection = new SelectionModel<any>(false);
 
+  showEscrituracion: boolean = false;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<ClientesLoteDialogoComponent>,
     private router: Router,
-    private reporteSrv: ReporteService
+    private reporteSrv: ReporteService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -46,14 +50,7 @@ export class ClientesLoteDialogoComponent implements OnInit {
     let total = 0;
 
     if (this.cliente_selected.pagos) {
-      this.cliente_selected.pagos.forEach(pago => {
-
-        //total += +pago.monto;
-
-        //personalización CIVSA, para otras empresas sumar todo independiente del tipo 
-        /*     if (pago.tipo_pago != "Apartado" && pago.tipo_pago != "Avalúo") {
-              total += +pago.monto;
-            } */
+      this.cliente_selected.pagos.forEach(pago => {     
 
         //solo sumamos los pagos con id_tipo_pago < 100
         if (pago.id_tipo_pago < 100) {
@@ -61,6 +58,23 @@ export class ClientesLoteDialogoComponent implements OnInit {
         } else if (pago.id_tipo_pago == 101) {
           // restamos las devoluciones
           total = total - pago.monto;
+        }
+
+      });
+    }
+    return total;
+  }
+
+  
+  totalPagosDevoluciones() {
+    let total = 0;
+
+    if (this.cliente_selected.pagos) {
+      this.cliente_selected.pagos.forEach(pago => {
+
+        if (pago.id_tipo_pago == 101) {
+          // devoluciones
+          total = total + pago.monto;
         }
 
       });
@@ -90,6 +104,16 @@ export class ClientesLoteDialogoComponent implements OnInit {
     link.click();
 
   }
+
+  /* agregarCliente() {
+    let dialogRef = this.dialog.open(AgregarClienteLoteDialogoComponent, {
+      data: {
+        lote: this.data.lote
+      },
+      width: "500px"
+    });
+
+  } */
 
 
 }
