@@ -10,7 +10,7 @@ import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@ang
 export class AgregarClienteLoteDialogoComponent implements OnInit {
   public maskPhone = ['(', /\d/, /\d/, /\d/, ')', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
   form: FormGroup;
-  tab_selected: string = "Cliente";
+ /*  tab_selected: string = "Cliente"; */
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -21,13 +21,13 @@ export class AgregarClienteLoteDialogoComponent implements OnInit {
       //persona fisica
       persona_moral: ["0", Validators.required],
       nombre: ["", Validators.required],
-      celular_persona_fisica: null,
-      email_persona_fisica: null,
+      celular_persona_fisica: [null],
+      email_persona_fisica: [null],
 
 
       //persona moral
-      telefono_persona_moral: null,
-      email_persona_moral: null,
+      telefono_persona_moral: [null],
+      email_persona_moral: [null],
 
     });
   }
@@ -35,8 +35,8 @@ export class AgregarClienteLoteDialogoComponent implements OnInit {
   ngOnInit() {
   }
 
-  guardarGenerales() {
-    console.log("guardar datos generales", this.tab_selected);
+  guardar() {
+    console.log("guardar", this.form);
     console.log(this.form.value);
 
   }

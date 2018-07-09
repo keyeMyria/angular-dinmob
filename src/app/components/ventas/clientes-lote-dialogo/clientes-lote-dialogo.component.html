@@ -13,7 +13,11 @@
           <th>Estado</th>
           <th>Activación</th>
           <th>Cancelación</th>
-          <th class="text-right" style="width:66px"></th>
+          <th class="text-right" style="width:66px">
+            <!--   <button tabindex="-1" mat-icon-button (click)="agregarCliente()">
+              <mat-icon>add</mat-icon>
+            </button> -->
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -76,6 +80,45 @@
       </div>
 
     </div>
+
+    <div class="hr-sect py-3">
+      <span class="text-muted pointer" style="font-size: 1rem" (click)="showEscrituracion=!showEscrituracion">Escrituración
+        <i class="fa" [ngClass]="{'fa-chevron-down': !showEscrituracion , 'fa-chevron-up': showEscrituracion}" style="font-size: 0.9rem"
+          aria-hidden="true"></i>
+      </span>
+    </div>
+
+    <div class="form-row" *ngIf="showEscrituracion">
+
+      <div class="col-12 col-sm-4 py-3">
+        <div class="text-center">
+          <h4 class="text-primary">
+            {{(cliente_selected.valor_escrituracion|| 0) |unmaskNumber |currency }}
+          </h4>
+          <span>VALOR ESCRITURACIÓN</span>
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-4 py-3">
+        <div class="text-center">
+          <h4 class="text-success">
+            {{cliente_selected.valor_operacion - cliente_selected.valor_escrituracion | currency}}
+          </h4>
+          <span>OPERACIÓN - ESCRITURACIÓN</span>
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-4 py-3">
+        <div class="text-center">
+          <h4 class="text-primary">
+            {{totalPagosDevoluciones() | currency}}
+          </h4>
+          <span>=DEVOLUCIONES</span>
+        </div>
+      </div>
+
+    </div>
+
   </div>
 
   <!-- pagos -->

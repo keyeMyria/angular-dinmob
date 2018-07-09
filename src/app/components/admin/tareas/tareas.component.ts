@@ -35,7 +35,8 @@ export class TareasComponent implements OnInit {
       }); */
   }
 
-  editarTarea($event, tarea) {
+  editarTarea($event) {
+    let tarea;
     $event.stopPropagation();
     let dialogRef = this.dialog.open(EditarTareaDialogoComponent, {
       data: {
@@ -66,7 +67,8 @@ export class TareasComponent implements OnInit {
     });
   }
 
-  asignarTarea(tarea) {
+  asignarTarea() {
+    let tarea;
     let dialogRef = this.dialog.open(AsignarTareaDialogoComponent, {
       data: {
         usuarios: this.usuarios,
@@ -96,7 +98,8 @@ export class TareasComponent implements OnInit {
     });
   }
 
-  delTarea(tarea) {
+  delTarea() {
+    let tarea;
     let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
       data: {
         title: "Eliminar Tarea",
