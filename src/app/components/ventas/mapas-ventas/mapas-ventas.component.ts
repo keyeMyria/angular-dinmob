@@ -267,10 +267,10 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
         this.loteSrv.updateLote(this.lote_selected.id_lote, { id_estado_venta: result })
           .subscribe((lote: any) => {
 
-           
+
             this.lote_selected.id_estado_venta = lote.id_estado_venta;
             this.valuesEstadosVenta[this.lote_selected.code] = lote.estado_venta;
-           
+
             let value = {};
             value[this.lote_selected.code] = lote.estado_venta;
             this.map.series.regions[0].setValues(value);
@@ -350,30 +350,36 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
 
   }
 
-  verOpciones() {
-    const opciones = this.bottomSheet.open(OpcionesMapaVentasBottomSheetComponent, {
-      data: {
-        lote: this.lote_selected
-      }
-    });
-    opciones.afterDismissed().subscribe(opcion => {
+  verOpciones(lote_selected) {
+    
+    if (lote_selected) {
 
-      //console.log("opcion seleccionada", opcion);
-      //console.log("lote selected", this.lote_selected);
+      const opciones = this.bottomSheet.open(OpcionesMapaVentasBottomSheetComponent, {
+        data: {
+          lote: lote_selected
+        }
+      });
+      opciones.afterDismissed().subscribe(opcion => {
+
+        //console.log("opcion seleccionada", opcion);
+        //console.log("lote selected", this.lote_selected);
 
 
-      switch (opcion) {
-        case 1: 
-          this.verClientes();
-          break;
-        case 2: this.agregarCliente(this.lote_selected);
-          break;
-        case 3: this.cambiarEstado(this.lote_selected);
-          break
-        default:
-      }
+        switch (opcion) {
+          case 1:
+            this.verClientes();
+            break;
+          case 2: this.agregarCliente(lote_selected);
+            break;
+          case 3: this.cambiarEstado(lote_selected);
+            break
+          default:
+        }
 
-    });
+      });
+    }
+
+
   }
 
 
@@ -545,7 +551,7 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
 
         this.lote_selected = this.lotes.find(lote => lote.code == code);
         //console.log("find on click", this.lote_selected);
-        this.verOpciones();
+        this.verOpciones(this.lote_selected);
 
       },
 
