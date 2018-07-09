@@ -1,12 +1,16 @@
 <h1 mat-dialog-title>Cambiar Estado</h1>
 <div mat-dialog-content>
 
-  <div class="form-group">
-    <select class="form-control">
-      <option>Seleccionar</option>
-      <option value="0">Libre</option>
-    </select>
-  </div>
+  <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
+
+    <div class="form-group">
+      <select class="form-control" formControlName="id_estado_lote"  id="id_estado_lote" name="id_estado_lote">
+        <option value="">Todos</option>
+        <option [value]="e.id_estado_lote" *ngFor="let e of data.estados">{{e.descripcion}}</option>
+      </select>
+    </div>
+
+  </form>
 
 
 </div>

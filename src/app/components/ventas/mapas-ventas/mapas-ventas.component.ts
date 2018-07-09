@@ -43,6 +43,7 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
   obra_selected: any = "";
   lotes: any = [];
   obras: any = [];
+  estados: any = [];
   jsonMap: any = {};
   scalePrototipos: any = {};
   scaleLoteTipo: any = {};
@@ -53,6 +54,8 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
 
   valuesFormaPago: any = {};
   valuesLoteTipo: any = {};
+
+
 
   constructor(
     private router: Router,
@@ -69,8 +72,9 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.route.data
-      .subscribe((data: { obras: any }) => {
+      .subscribe((data: { obras: any, estados: any }) => {
         this.obras = data.obras;
+        this.estados = data.estados;
       });
 
 
@@ -248,7 +252,7 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
   cambiarEstado() {
     let dialogRef = this.dialog.open(CambiarEstadoVentasLoteDialogoComponent, {
       data: {
-
+        estados: this.estados
       },
       width: "500px"
     });

@@ -262,8 +262,7 @@ export const ROUTES: Routes = [
                 path: 'mapas-avances', component: MapasAvancesComponent,
                 canActivate: [AuthGuard],
                 resolve: {
-                    obras: MapasUsuarioResolverService,
-                    estados: EstadosPedidoResolverService
+                    obras: MapasUsuarioResolverService
                 },
                 data: {
                     permisos: [Rol.Administrador, Rol.ControlAlmacen, Rol.Residente]
@@ -273,7 +272,8 @@ export const ROUTES: Routes = [
                 path: 'mapas-ventas', component: MapasVentasComponent,
                 canActivate: [AuthGuard],
                 resolve: {
-                    obras: MapasUsuarioResolverService
+                    obras: MapasUsuarioResolverService,
+                    estados: EstadosVentaLoteResolverService,
                 },
                 data: {
                     permisos: [Rol.Administrador, Rol.Ventas, Rol.AsesorVentas]
