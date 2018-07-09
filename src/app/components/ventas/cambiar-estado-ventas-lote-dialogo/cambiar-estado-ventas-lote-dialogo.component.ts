@@ -16,7 +16,7 @@ export class CambiarEstadoVentasLoteDialogoComponent implements OnInit {
     private fb: FormBuilder,
   ) {
     this.form = this.fb.group({
-      id_estado: null
+      id_estado_lote: null
     });
   }
 
