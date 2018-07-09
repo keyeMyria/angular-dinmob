@@ -262,7 +262,8 @@ export const ROUTES: Routes = [
                 path: 'mapas-avances', component: MapasAvancesComponent,
                 canActivate: [AuthGuard],
                 resolve: {
-                    obras: MapasUsuarioResolverService
+                    obras: MapasUsuarioResolverService,
+                    estados: EstadosPedidoResolverService
                 },
                 data: {
                     permisos: [Rol.Administrador, Rol.ControlAlmacen, Rol.Residente]

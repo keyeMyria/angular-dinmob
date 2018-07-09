@@ -3,45 +3,68 @@
 
 
 
+
   <!-- Persona Fisica/Moral -->
 
-  <div class="form-group row">
-    <label class="col-form-label col-sm-3">Actividad Económica</label>
-    <div class="col-sm-9">
-      <select class="form-control">
-        <option value="0">Persona Física</option>
-        <option value="1">Persona Moral</option>
-      </select>
+  <form [formGroup]="form" (ngSubmit)="guardar()">
+
+
+    <div class="form-group row">
+      <label class="col-form-label col-sm-3">Actividad Económica</label>
+      <div class="col-sm-9">
+        <select class="form-control" formControlName="persona_moral">
+          <option value="0">Persona Física</option>
+          <option value="1">Persona Moral</option>
+        </select>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group row">
-    <label class="col-form-label col-sm-3">Nombre completo</label>
-    <label class="col-form-label col-sm-3">Razón Social</label>
-    <div class="col-sm-9">
-      <input type="text" class="form-control">
+    <div class="form-group row">
+      <label *ngIf="form.get('persona_moral').value === '0'" class="col-form-label col-sm-3">Nombre completo</label>
+      <label *ngIf="form.get('persona_moral').value === '1'" class="col-form-label col-sm-3">Razón Social</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" formControlName="nombre" [ngClass]="{'is-invalid':( form.get('nombre').invalid && ( form.get('nombre').dirty || form.get('nombre').touched ))}">
+        <div class="invalid-feedback">Escriba un nombre</div>
+      </div>
     </div>
-  </div>
 
+    <div *ngIf="form.get('persona_moral').value === '0'">
 
+      <div class="form-group row">
+        <label class="col-form-label col-sm-3">Número de celular</label>
+        <div class="col-sm-9">
+          <input [textMask]="{mask: maskPhone}" type="text" class="form-control" name="celular_persona_fisica">
+        </div>
+      </div>
 
+      <div class="form-group row">
+        <label class="col-form-label col-sm-3">Correo electrónico</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" name="email_persona_fisica">
+        </div>
+      </div>
 
-
-  <div class="form-group row">
-    <label class="col-form-label col-sm-3">Número de celular</label>
-    <div class="col-sm-9">
-      <input [textMask]="{mask: maskPhone}" type="text" class="form-control" name="celular_persona_fisica">
     </div>
-  </div>
 
-  <div class="form-group row">
-    <label class="col-form-label col-sm-3">Correo eletrónico</label>
-    <div class="col-sm-9">
-      <input type="text" class="form-control" name="email_persona_fisica">
+    <div *ngIf="form.get('persona_moral').value === '1'">
+
+      <div class="form-group row">
+        <label class="col-form-label col-sm-3">Número de teléfono</label>
+        <div class="col-sm-9">
+          <input [textMask]="{mask: maskPhone}" type="text" class="form-control" name="telefono_persona_moral" formControlName="telefono_persona_moral">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-form-label col-sm-3">Correo electrónico</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" name="email_persona_moral" formControlName="email_persona_moral">
+        </div>
+      </div>
+
     </div>
-  </div>
 
-
+  </form>
 
 
 

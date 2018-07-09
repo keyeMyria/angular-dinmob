@@ -19,8 +19,8 @@ export class AgregarClienteLoteDialogoComponent implements OnInit {
   ) {
     this.form = this.fb.group({
       //persona fisica
-      persona_moral: null,
-      nombre:null,
+      persona_moral: ["0", Validators.required],
+      nombre: ["", Validators.required],
       celular_persona_fisica: null,
       email_persona_fisica: null,
 
