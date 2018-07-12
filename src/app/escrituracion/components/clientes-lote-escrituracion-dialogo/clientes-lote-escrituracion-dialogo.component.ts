@@ -22,7 +22,7 @@ export class ClientesLoteEscrituracionDialogoComponent implements OnInit {
   public maskCURP = [/[A-Z0-9]/i, /[A-Z0-9]/i, /[A-Z0-9]/i, /[A-Z0-9]/i, '-', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /[A-Z]/i, '-', /[A-Z]/i, /[A-Z]/i, '-', /[A-Z0-9]/i, /[A-Z0-9]/i, /[A-Z0-9]/i, '-', /[A-Z0-9]/i, /[A-Z0-9]/i];
   public maskPhone = ['(', /\d/, /\d/, /\d/, ')', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
-  cliente_selected: any = { pagos: [] };
+  cliente_selected: any = null;
   formGenerales: FormGroup;
   formDocumentos: FormGroup;
   estados_selected: string;
@@ -37,18 +37,20 @@ export class ClientesLoteEscrituracionDialogoComponent implements OnInit {
     private fb: FormBuilder
   ) {
     this.formGenerales = this.fb.group({
-      fecha_apartado: [moment(), Validators.required],
-      fecha_documentos: [moment(), Validators.required],
-      fecha_escriturado: [moment(), Validators.required],
+      fecha_apartado: [moment(""), Validators.required],
+      fecha_checklist: [moment(""), Validators.required],
+      fecha_infonavit: [moment(""), Validators.required],
+      fecha_firma: [moment(""), Validators.required],
+      fecha_entregado: [moment(""), Validators.required],
       nombre: [null, Validators.required],
-      fecha_nacimiento: [moment(), Validators.required],
+      fecha_nacimiento: [moment(""), Validators.required],
       curp: [null, Validators.required],
       telefono: [null, Validators.required],
       precio_venta: [null, Validators.required],
       id_vendedor: [null, Validators.required],
       id_tipo_credito: [null, Validators.required],
       id_estado: [null, Validators.required],
-      dtu: [moment(), Validators.required],
+      dtu: [moment(""), Validators.required],
     });
     this.formDocumentos = this.fb.group({
       curp: null,

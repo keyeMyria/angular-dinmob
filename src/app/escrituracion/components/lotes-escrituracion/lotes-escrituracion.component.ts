@@ -41,7 +41,7 @@ export class LotesEscrituracionComponent implements OnInit {
     let dialogRef = this.dialog.open(EditarLoteEscrituracionDialogoComponent, {
       data: {
       },
-      width: '800px',
+      width: '900px',
 
     });
     dialogRef.afterClosed().subscribe(result => {
