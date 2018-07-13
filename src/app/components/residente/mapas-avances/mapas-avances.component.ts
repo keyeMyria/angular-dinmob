@@ -35,6 +35,7 @@ export class MapasAvancesComponent implements OnInit {
   //variableContinua: boolean = true;
 
   scalePctAvance: any = {};
+  legendPctAvance: any = {};  
   verLeyenda: any = { toggle: true };
   variableContinua: any = { toggle: false };
 
@@ -93,6 +94,7 @@ export class MapasAvancesComponent implements OnInit {
 
         this.lotes = res[0].lotes;
         this.scalePctAvance = res[0].scalePctAvance;
+        this.legendPctAvance=res[0].legendPctAvance;
 
         this.jsonMap = res[1];
 
@@ -117,7 +119,7 @@ export class MapasAvancesComponent implements OnInit {
 
         if (this.jsonMap.mapa) {
           setTimeout(() => {
-            this.crearMapa(this.valuesDiscretosLotes, this.scalePctAvance);
+            this.crearMapa(this.valuesDiscretosLotes, this.scalePctAvance, this.legendPctAvance);
             this.loading.stop();
           }, 100);
         } else {
@@ -157,7 +159,7 @@ export class MapasAvancesComponent implements OnInit {
   }
 
 
-  crearMapa(values, scalePctAvance) {
+  crearMapa(values, scalePctAvance, legendPctAvance) {
 
 
 
@@ -226,10 +228,14 @@ export class MapasAvancesComponent implements OnInit {
               vertical: true,
               title: 'Escala',
               labelRender: function (scale) {
+                return legendPctAvance[scale];
+                
                 //return scale;
-                if (scale == 1) {
+
+                /* if (scale == 1) {
                   return '0%';
-                } else if (scale == 2) {
+                } 
+                else if (scale == 2) {
                   return '0-20%';
                 }
                 else if (scale == 3) {
@@ -244,6 +250,11 @@ export class MapasAvancesComponent implements OnInit {
                 else if (scale == 6) {
                   return '80-100%';
                 }
+                else if (scale == 7) {
+                  return '100%';
+                } */
+
+
               }
             }
           },
