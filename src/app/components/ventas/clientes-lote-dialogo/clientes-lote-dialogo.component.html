@@ -13,10 +13,11 @@
           <th>Estado</th>
           <th>Activación</th>
           <th>Cancelación</th>
-          <th class="text-right" style="width:66px">
-            <!--   <button tabindex="-1" mat-icon-button (click)="agregarCliente()">
+          <!-- style="width:66px" -->
+          <th class="text-right">
+            <button tabindex="-1" mat-icon-button (click)="agregarCliente()">
               <mat-icon>add</mat-icon>
-            </button> -->
+            </button>
           </th>
         </tr>
       </thead>
@@ -31,7 +32,10 @@
           <td>{{cliente.activo|numberToYesNo:'AC'}}</td>
           <td class="ws-nowrap">{{cliente.fecha_activo| date:'mediumDate':'':'es'}}</td>
           <td class="ws-nowrap">{{cliente.fecha_cancelacion| date:'mediumDate':'':'es'}}</td>
-          <td class="text-right">
+          <td class="ws-nowrap text-right">
+            <button mat-icon-button (click)="$event.stopPropagation();editarCliente(cliente)">
+              <mat-icon>person</mat-icon>
+            </button>
             <button mat-icon-button (click)="$event.stopPropagation();reporteCliente(cliente)">
               <mat-icon>picture_as_pdf</mat-icon>
             </button>
@@ -81,8 +85,8 @@
 
     </div>
 
-    <div class="hr-sect py-3">
-      <span class="text-muted pointer" style="font-size: 1rem" (click)="showEscrituracion=!showEscrituracion">Escrituración
+    <div class="hr-sect py-3 pointer" (click)="showEscrituracion=!showEscrituracion">
+      <span class="text-muted" style="font-size: 1rem">Escrituración
         <i class="fa" [ngClass]="{'fa-chevron-down': !showEscrituracion , 'fa-chevron-up': showEscrituracion}" style="font-size: 0.9rem"
           aria-hidden="true"></i>
       </span>
@@ -102,7 +106,7 @@
       <div class="col-12 col-sm-4 py-3">
         <div class="text-center">
           <h4 class="text-success">
-            {{cliente_selected.valor_operacion - cliente_selected.valor_escrituracion | currency}}
+            {{((cliente_selected.valor_operacion - cliente_selected.valor_escrituracion||0)) | currency}}
           </h4>
           <span>OPERACIÓN - ESCRITURACIÓN</span>
         </div>
@@ -113,7 +117,7 @@
           <h4 class="text-primary">
             {{totalPagosDevoluciones() | currency}}
           </h4>
-          <span>=DEVOLUCIONES</span>
+          <span>DEVOLUCIONES</span>
         </div>
       </div>
 
