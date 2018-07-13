@@ -253,6 +253,8 @@ import { EditarTareaDialogoComponent } from './components/admin/editar-tarea-dia
 import { OpcionesMapaVentasBottomSheetComponent } from './components/ventas/opciones-mapa-ventas-bottom-sheet/opciones-mapa-ventas-bottom-sheet.component';
 import { AgregarClienteLoteDialogoComponent } from './components/ventas/agregar-cliente-lote-dialogo/agregar-cliente-lote-dialogo.component';
 import { CambiarEstadoVentasLoteDialogoComponent } from './components/ventas/cambiar-estado-ventas-lote-dialogo/cambiar-estado-ventas-lote-dialogo.component';
+import { EditarClienteDialogoComponent } from './components/ventas/editar-cliente-dialogo/editar-cliente-dialogo.component';
+import { NuevoClienteDialogoComponent } from './components/ventas/nuevo-cliente-dialogo/nuevo-cliente-dialogo.component';
 
 
 
@@ -286,12 +288,10 @@ export function getToken() {
     EstructuraObraComponent,
     PrototiposComponent,
     EditarPrototipoComponent,
-    UsuariosComponent,
-    //CrearUsuarioComponent,
+    UsuariosComponent,    
     CambiarPasswordDialogoComponent,
     ConfirmarBorradoDialogoComponent,
-    EditarUsuarioDialogoComponent,
-    //EditarClienteDialogoComponent,
+    EditarUsuarioDialogoComponent, 
     EditarClienteComponent,
     AgregarObraDialogoComponent,
     AgregarDocumentoDialogoComponent,
@@ -411,6 +411,8 @@ export function getToken() {
     OpcionesMapaVentasBottomSheetComponent,
     AgregarClienteLoteDialogoComponent,
     CambiarEstadoVentasLoteDialogoComponent,
+    EditarClienteDialogoComponent,
+    NuevoClienteDialogoComponent,
 
   ],
 
@@ -499,7 +501,9 @@ export function getToken() {
     EditarTareaDialogoComponent,
     OpcionesMapaVentasBottomSheetComponent,
     AgregarClienteLoteDialogoComponent,
-    CambiarEstadoVentasLoteDialogoComponent
+    CambiarEstadoVentasLoteDialogoComponent,
+    EditarClienteDialogoComponent,
+    NuevoClienteDialogoComponent
 
   ],
 
