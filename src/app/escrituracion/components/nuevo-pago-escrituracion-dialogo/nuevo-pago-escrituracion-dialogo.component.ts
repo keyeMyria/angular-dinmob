@@ -37,4 +37,8 @@ export class NuevoPagoEscrituracionDialogoComponent implements OnInit {
   ngOnInit() {
   }
 
+  guardar(){
+    
+  }
+
 }
