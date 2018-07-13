@@ -1,5 +1,5 @@
 
-import {throwError as observableThrowError,  Observable } from 'rxjs';
+import { throwError as observableThrowError, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ConfigService } from 'app/services/config.service';
@@ -21,6 +21,11 @@ export class InsumoService {
   getMaterialesObra(id_obra): Observable<any> {
     return this.http.get(this.url + 'get_materiales_obra/' + id_obra)
       .pipe(catchError(this.handleError("getMaterialesObra")));
+  }
+
+  getInsumosObra(id_obra): Observable<any> {
+    return this.http.get(this.url + 'get_insumos_obra/' + id_obra)
+      .pipe(catchError(this.handleError("getInsumosObra")));
   }
 
   getPartidaSalida(id_partida, id_obra, id_lote): Observable<any> {
