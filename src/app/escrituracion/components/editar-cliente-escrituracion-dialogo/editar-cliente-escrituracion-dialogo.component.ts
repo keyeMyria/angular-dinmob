@@ -1,11 +1,12 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
 import { MatDialog } from '@angular/material';
 import * as moment from 'moment';
 import { SelectionModel } from '@angular/cdk/collections';
+import { NuevaCompraDialogoComponent } from '../../../components/ventas/nueva-compra-dialogo/nueva-compra-dialogo.component';
 
 @Component({
   selector: 'app-editar-cliente-escrituracion-dialogo',
@@ -29,6 +30,7 @@ export class EditarClienteEscrituracionDialogoComponent implements OnInit {
   formDocumentos: FormGroup;
   formInmueble: FormGroup;
 
+
   selection = new SelectionModel<any>(false);
   cliente_selected: any = null;
   clientes: any = [{ obra: "Tres marias", manzana: "manzana1", lote: "lote 1" }];
@@ -38,6 +40,7 @@ export class EditarClienteEscrituracionDialogoComponent implements OnInit {
     public dialogRef: MatDialogRef<EditarClienteEscrituracionDialogoComponent>,
     private fb: FormBuilder,
     private dialog: MatDialog,
+    public snackBar: MatSnackBar,
   ) {
     this.formGenerales = this.fb.group({
       nombre: [null, Validators.required],
@@ -57,11 +60,13 @@ export class EditarClienteEscrituracionDialogoComponent implements OnInit {
       precio_lista: [null, Validators.required],
       id_vendedor: [null, Validators.required],
       tipo_credito: [null, Validators.required],
-      estado: [null, Validators.required],
+      id_estado: [null, Validators.required],
       dtu: [moment(), Validators.required],
       fecha_apartado: [moment(), Validators.required],
-      fecha_documentos: [moment(), Validators.required],
-      fecha_escriturado: [moment(), Validators.required],
+      fecha_checklist: [moment(), Validators.required],
+      fecha_infonavit: [moment(), Validators.required],
+      fecha_firma: [moment(), Validators.required],
+      fecha_entrega: [moment(), Validators.required],
 
 
     });
@@ -139,6 +144,32 @@ export class EditarClienteEscrituracionDialogoComponent implements OnInit {
 
   guardarInmueble() {
     console.log("guardar datos generales", this.tab_selected);
+  }
+
+  nuevaCompra() {
+    console.log();
+    let dialogRef = this.dialog.open(NuevaCompraDialogoComponent, {
+      width: '400px',
+      data: {
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result === true) {
+        this.snackBar.open("Cliente Actualizado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      } else if (result && result.error) {
+
+        this.snackBar.open(result.error, "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+      }
+
+    });
   }
 
 

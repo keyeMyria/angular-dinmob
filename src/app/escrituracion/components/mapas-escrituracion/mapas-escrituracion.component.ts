@@ -205,7 +205,7 @@ export class MapasEscrituracionComponent implements OnInit, OnDestroy {
             lote: res.lote,
             clientes: res.clientes
           },
-          width: "800px"
+          width: "900px"
         });
 
 

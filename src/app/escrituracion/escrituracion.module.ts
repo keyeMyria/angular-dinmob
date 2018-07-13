@@ -20,7 +20,7 @@ import { ClientesLoteEscrituracionDialogoComponent } from './components/clientes
 import { EditarClienteEscrituracionDialogoComponent } from './components/editar-cliente-escrituracion-dialogo/editar-cliente-escrituracion-dialogo.component';
 import { EditarLoteEscrituracionDialogoComponent } from './components/editar-lote-escrituracion-dialogo/editar-lote-escrituracion-dialogo.component';
 import { EditarEquipoDialogoComponent } from './components/editar-equipo-dialogo/editar-equipo-dialogo.component';
-import { NuevoPagoEscrituracionDialogoComponent } from './components/nuevo-pago-escrituracion-dialogo/nuevo-pago-escrituracion-dialogo.component';
+
 
 @NgModule({
   imports: [
@@ -47,7 +47,6 @@ import { NuevoPagoEscrituracionDialogoComponent } from './components/nuevo-pago-
     EditarClienteEscrituracionDialogoComponent,
     EditarLoteEscrituracionDialogoComponent,
     EditarEquipoDialogoComponent,
-    NuevoPagoEscrituracionDialogoComponent
 
   ],
   entryComponents: [
@@ -57,7 +56,6 @@ import { NuevoPagoEscrituracionDialogoComponent } from './components/nuevo-pago-
     EditarClienteEscrituracionDialogoComponent,
     EditarLoteEscrituracionDialogoComponent,
     EditarEquipoDialogoComponent,
-    NuevoPagoEscrituracionDialogoComponent
   ]
 })
 export class EscrituracionModule { }

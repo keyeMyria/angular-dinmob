@@ -1,10 +1,14 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatSnackBar } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { ReporteService } from 'app/services/reporte.service';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import * as moment from 'moment';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { NuevoPagoDialogoComponent } from '../../../components/ventas/nuevo-pago-dialogo/nuevo-pago-dialogo.component';
+import { EditarPagoDialogoComponent } from '../../../components/ventas/editar-pago-dialogo/editar-pago-dialogo.component';
+import { UploadFileDialogoComponent } from '../../../components/ventas/upload-file-dialogo/upload-file-dialogo.component';
+import { ConfirmarBorradoDialogoComponent } from '../../../components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
 
 @Component({
   selector: 'app-clientes-lote-escrituracion-dialogo',
@@ -34,7 +38,9 @@ export class ClientesLoteEscrituracionDialogoComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<ClientesLoteEscrituracionDialogoComponent>,
     private reporteSrv: ReporteService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {
     this.formGenerales = this.fb.group({
       fecha_apartado: [moment(""), Validators.required],
@@ -124,6 +130,97 @@ export class ClientesLoteEscrituracionDialogoComponent implements OnInit {
     link.target = "_blank";
     link.click();
 
+  }
+
+  nuevoPago() {
+    let dialogRef = this.dialog.open(NuevoPagoDialogoComponent, {
+      width: '400px',
+      data: {
+      },
+    });
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result === true) {
+
+        this.snackBar.open("Pago Agregado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      } else if (result && result.error) {
+
+        this.snackBar.open(result.error, "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+
+      }
+    });
+
+  }
+
+  editarPago() {
+
+    let dialogRef = this.dialog.open(EditarPagoDialogoComponent, {
+      width: '400px',
+      data: {
+      },
+    });
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result === true) {
+
+        this.snackBar.open("Pago Actualizado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      } else if (result && result.error) {
+
+        this.snackBar.open(result.error, "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+
+      }
+
+    });
+
+  }
+
+  cargarFicha() {
+
+    let dialogRef = this.dialog.open(UploadFileDialogoComponent, {
+      data: {
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == true) {
+        this.snackBar.open("Documento Agregado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+      } else if (result && result.error) {
+        this.snackBar.open(result.error, "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+      }
+
+    });
+  }
+
+  delPago() {
+    let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
+      data: {
+        title: "Eliminar Pago",
+        content: `¿Desea eliminar el pago?`
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+    })
   }
 
 }

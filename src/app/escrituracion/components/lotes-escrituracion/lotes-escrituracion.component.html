@@ -21,145 +21,57 @@
                 <tr>
                   <th>Manzana</th>
                   <th>Lote</th>
-                  <th>DTU</th>
+                  <th style="width: 60px">DTU</th>
                   <th>Apartado</th>
                   <th>Checklist</th>
                   <th>infonavit</th>
                   <th>Firma</th>
                   <th>Entrega</th>
-                  <th>Alerta</th>
+                  <th style="width: 40px"></th>
                   <th style="width: 50px"></th>
 
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Manzana 1</td>
-                  <td>Lote 1</td>
-                  <td class="ws-nowrap">20 ene. 2018</td>
-                  <td class="ws-nowrap">25 ene. 2018</td>
-                  <td class="ws-nowrap">18 feb. 2018</td>
-                  <td class="ws-nowrap">
-                    <span class="badge badge-primary">23 may. 2018</span>
+                <tr *ngFor="let lote of lotes">
+                  <td class="ws-nowrap">{{lote.manzana}}</td>
+                  <td class="ws-nowrap">{{lote.nombre}}</td>
+                  <td class="ws-nowrap text-center">
+                    <span *ngIf="lote.dtu; else elseDtu">{{lote.dtu}}</span>
+                    <!-- <i class="fa fa-check-square text-success" *ngIf="lote.dtu; else elseDtu"></i> -->
+                    <ng-template #elseDtu>
+                      <i class="fa fa-window-close text-secondary"></i>
+                    </ng-template>
                   </td>
-                  <td class="ws-nowrap">25 jun. 2018</td>
-                  <td class="ws-nowrap">25 jul. 2018</td>
-                  <td></td>
+                  <td class="ws-nowrap">
+                    <span class="badge badge-primary" *ngIf="lote.estado =='1'; else elseApartado">{{lote.apartado}}</span>
+                    <ng-template #elseApartado>{{lote.apartado}}</ng-template>
+                  </td>
+                  <td class="ws-nowrap">
+                    <span class="badge badge-primary" *ngIf="lote.estado =='2'; else elseChecklist">{{lote.checklist}}</span>
+                    <ng-template #elseChecklist>{{lote.checklist}}</ng-template>
+                  </td>
+                  <td class="ws-nowrap">
+                    <span class="badge badge-primary" *ngIf="lote.estado =='3'; else elseInfonavit">{{lote.infonavit}}</span>
+                    <ng-template #elseInfonavit>{{lote.infonavit}}</ng-template>
+                  </td>
+                  <td class="ws-nowrap">
+                    <span class="badge badge-primary" *ngIf="lote.estado =='4'; else elseFirma">{{lote.firma}}</span>
+                    <ng-template #elseFirma>{{lote.firma}}</ng-template>
+                  </td>
+                  <td class="ws-nowrap">
+                    <span class="badge badge-primary" *ngIf="lote.estado =='5'; else elseEntrega">{{lote.entrega}}</span>
+                    <ng-template #elseEntrega>{{lote.entrega}}</ng-template>
+                  </td>
+                  <td matTooltip="Alerta">
+                    <i class="fa fa-exclamation-circle text-danger" *ngIf="lote.alerta == '1'"></i>
+                  </td>
                   <td class="text-right">
                     <button mat-button class="no-min" (click)="editarLote()">
                       <i class="fa fa-pencil"></i>
                     </button>
                   </td>
                 </tr>
-                <tr>
-                  <td>Manzana 1</td>
-                  <td>Lote 1</td>
-                  <td class="ws-nowrap"></td>
-                  <td class="ws-nowrap">
-                    <span class="badge badge-primary">25 ene. 2018</span>
-                  </td>
-                  <td class="ws-nowrap">18 feb. 2018</td>
-                  <td class="ws-nowrap">23 may. 2018</td>
-                  <td class="ws-nowrap">25 jun. 2018</td>
-                  <td class="ws-nowrap">25 jul. 2018</td>
-                  <td></td>
-                  <td class="text-right">
-                    <button mat-button class="no-min" (click)="editarLote()">
-                      <i class="fa fa-pencil"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Manzana 1</td>
-                  <td>Lote 1</td>
-                  <td class="ws-nowrap">20 ene. 2018</td>
-                  <td class="ws-nowrap">25 ene. 2018</td>
-                  <td class="ws-nowrap">
-                    <span class="badge badge-primary">18 feb. 2018</span>
-                  </td>
-                  <td class="ws-nowrap">23 may. 2018</td>
-                  <td class="ws-nowrap">25 jun. 2018</td>
-                  <td class="ws-nowrap">25 jul. 2018</td>
-                  <td></td>
-                  <td class="text-right">
-                    <button mat-button class="no-min" (click)="editarLote()">
-                      <i class="fa fa-pencil"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Manzana 1</td>
-                  <td>Lote 1</td>
-                  <td class="ws-nowrap">20 ene. 2018</td>
-                  <td class="ws-nowrap">25 ene. 2018</td>
-                  <td class="ws-nowrap">18 feb. 2018</td>
-                  <td class="ws-nowrap">23 may. 2018 </td>
-                  <td class="ws-nowrap">25 jun. 2018</td>
-                  <td class="ws-nowrap">
-                    <span class="badge badge-primary">25 jul. 2018</span>
-                  </td>
-                  <td></td>
-                  <td class="text-right">
-                    <button mat-button class="no-min" (click)="editarLote()">
-                      <i class="fa fa-pencil"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Manzana 1</td>
-                  <td>Lote 1</td>
-                  <td class="ws-nowrap">20 ene. 2018</td>
-                  <td class="ws-nowrap">25 ene. 2018</td>
-                  <td class="ws-nowrap">18 feb. 2018</td>
-                  <td class="ws-nowrap">
-                    <span class="badge badge-primary">23 may. 2018</span>
-                  </td>
-                  <td class="ws-nowrap">25 jun. 2018</td>
-                  <td class="ws-nowrap">25 jul. 2018</td>
-                  <td></td>
-                  <td class="text-right">
-                    <button mat-button class="no-min" (click)="editarLote()">
-                      <i class="fa fa-pencil"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Manzana 1</td>
-                  <td>Lote 1</td>
-                  <td class="ws-nowrap">20 ene. 2018</td>
-                  <td class="ws-nowrap">25 ene. 2018</td>
-                  <td class="ws-nowrap">18 feb. 2018</td>
-                  <td class="ws-nowrap">23 may. 2018</td>
-                  <td class="ws-nowrap">
-                    <span class="badge badge-primary">25 jun. 2018</span>
-                  </td>
-                  <td class="ws-nowrap">25 jul. 2018</td>
-                  <td></td>
-                  <td class="text-right">
-                    <button mat-button class="no-min" (click)="editarLote()">
-                      <i class="fa fa-pencil"></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Manzana 1</td>
-                  <td>Lote 1</td>
-                  <td class="ws-nowrap">20 ene. 2018</td>
-                  <td class="ws-nowrap">
-                    <span class="badge badge-primary">25 ene. 2018</span>
-                  </td>
-                  <td class="ws-nowrap">18 feb. 2018</td>
-                  <td class="ws-nowrap">23 may. 2018</td>
-                  <td class="ws-nowrap">25 jun. 2018</td>
-                  <td class="ws-nowrap">25 jul. 2018</td>
-                  <td></td>
-                  <td class="text-right">
-                    <button mat-button class="no-min" (click)="editarLote()">
-                      <i class="fa fa-pencil"></i>
-                    </button>
-                  </td>
-                </tr>
-
               </tbody>
             </table>
           </div>
