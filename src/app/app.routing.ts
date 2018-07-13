@@ -296,7 +296,7 @@ export const ROUTES: Routes = [
                     tipos_operacion: TiposOperacionResolverService,
                     tipos_pago: TiposPagoResolverService,
                     estados: EstadosVentaLoteResolverService,
-                    asesores: UsuariosAsesoresResolverService
+                    //asesores: UsuariosAsesoresResolverService
                     //vendedores: VendedoresResolverService
                 },
                 data: {
