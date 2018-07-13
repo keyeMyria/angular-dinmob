@@ -6,9 +6,9 @@
 
     <div class="form-group">
       <label for="id_insumo" class="col-form-label">Nombre</label>
-      <select [(ngModel)]="insumo_selected" class="form-control" id="insumo" name="insumo"  formControlName="insumo" [ngClass]="{'is-invalid': form.get('insumo').invalid  && (form.get('insumo').dirty || form.get('insumo').touched )}">
+      <select [(ngModel)]="insumo_selected" class="form-control bold" id="insumo" name="insumo"  formControlName="insumo" [ngClass]="{'is-invalid': form.get('insumo').invalid  && (form.get('insumo').dirty || form.get('insumo').touched )}">
         <option value="">Seleccionar...</option>
-        <option [ngValue]="insumo" *ngFor="let insumo of data.insumos">{{insumo.insumo}}</option>
+        <option [ngValue]="insumo" *ngFor="let insumo of data.insumos" class="">({{insumo.codigo}}) {{insumo.insumo}}</option>
       </select>
       <div class="invalid-feedback">Seleccione un insumo.</div>
     </div>

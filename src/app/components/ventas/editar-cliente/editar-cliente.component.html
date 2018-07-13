@@ -1104,7 +1104,7 @@
             </div>
           </div>
 
-          <div class="form-group row">
+          <!-- <div class="form-group row">
             <label class="col-form-label col-sm-3">Asesor</label>
             <div class="col-sm-9">
               <select class="form-control" name="id_asesor" formControlName="id_asesor">
@@ -1112,7 +1112,7 @@
                 <option *ngFor="let a of asesores" [value]="a.id_usuario">{{a.nombre}}</option>
               </select>
             </div>
-          </div>
+          </div> -->
 
           <!-- *ngIf="formInmueble.get('id_estado_venta').value === '5'" -->
           <div class="form-group row">
@@ -1254,8 +1254,8 @@
 
       </div>
 
-      <div class="hr-sect py-3">
-        <span class="text-muted pointer" style="font-size: 1rem" (click)="showEscrituracion=!showEscrituracion">Escrituración
+      <div class="hr-sect py-3 pointer" (click)="showEscrituracion=!showEscrituracion">
+        <span class="text-muted" style="font-size: 1rem">Escrituración
           <i class="fa" [ngClass]="{'fa-chevron-down': !showEscrituracion , 'fa-chevron-up': showEscrituracion}" style="font-size: 0.9rem"
             aria-hidden="true"></i>
         </span>
@@ -1275,7 +1275,7 @@
         <div class="col-12 col-sm-4 py-3">
           <div class="text-center">
             <h4 class="text-success">
-              {{compra_selected.valor_operacion - compra_selected.valor_escrituracion | currency}}
+              {{((compra_selected.valor_operacion - compra_selected.valor_escrituracion)||0) | currency}}
             </h4>
             <span>OPERACIÓN - ESCRITURACIÓN</span>
           </div>
@@ -1286,7 +1286,7 @@
             <h4 class="text-primary">
               {{totalPagosDevoluciones() | currency}}
             </h4>
-            <span>=DEVOLUCIONES</span>
+            <span>DEVOLUCIONES</span>
           </div>
         </div>
 

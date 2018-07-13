@@ -1,20 +1,13 @@
-import { Component } from '@angular/core';
-import { ClientesService } from "app/services/clientes.service";
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { ObrasService } from 'app/services/obras.service';
-import { ActivatedRoute, Router } from '@angular/router';
-
+import { Component, OnInit, Inject } from '@angular/core';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
-  selector: 'app-nuevo-cliente',
-  templateUrl: './nuevo-cliente.component.html',
-  styleUrls: ['./nuevo-cliente.component.scss']
+  selector: 'app-nuevo-cliente-dialogo',
+  templateUrl: './nuevo-cliente-dialogo.component.html',
+  styleUrls: ['./nuevo-cliente-dialogo.component.scss']
 })
-export class NuevoClienteComponent {
-
-
-  manzanas: any = [];
-  obras: any = [];
+export class NuevoClienteDialogoComponent implements OnInit {
 
   public maskRFC = [/[A-Z0-9]/i, /[A-Z0-9]/i, /[A-Z0-9]/i, /[A-Z0-9]/i, '-', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /[A-Z0-9]/i, /[A-Z0-9]/i, /[A-Z0-9]/i,];
   public maskCURP = [/[A-Z0-9]/i, /[A-Z0-9]/i, /[A-Z0-9]/i, /[A-Z0-9]/i, '-', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /[A-Z]/i, '-', /[A-Z]/i, /[A-Z]/i, '-', /[A-Z0-9]/i, /[A-Z0-9]/i, /[A-Z0-9]/i, '-', /[A-Z0-9]/i, /[A-Z0-9]/i];
@@ -22,20 +15,12 @@ export class NuevoClienteComponent {
   public maskPhone = ['(', /\d/, /\d/, /\d/, ')', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
   public maskRFCM = [/[A-Z0-9]/i, /[A-Z0-9]/i, /[A-Z0-9]/i, '-', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /[A-Z0-9]/i, /[A-Z0-9]/i, /[A-Z0-9]/i,];
   form: FormGroup;
-  formInmueble: FormGroup;
 
   constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    public clienteSrv: ClientesService,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<NuevoClienteDialogoComponent>,
     private fb: FormBuilder,
-    private obraSrv: ObrasService,
   ) {
-    this.route.data
-      .subscribe((data: { obras: any[] }) => {
-        this.obras = data.obras;
-      });
-
 
     this.form = this.fb.group({
       //persona fisica
@@ -145,64 +130,13 @@ export class NuevoClienteComponent {
       curp_apoderado: null,
     });
 
-    this.formInmueble = this.fb.group({
-      obra: ["", Validators.required],
-      lote: ["", Validators.required]
-    });
-
   }
 
-  cargarObra(id_obra) {
-
-    //console.log("cargar obra", id_obra);
-
-    if (id_obra) {
-
-      this.obraSrv.getLotesEnVentaLibres(id_obra)
-        .subscribe((obra: any) => {
-          //console.log("getLotes", obra.manzanas);
-          this.manzanas = obra.manzanas;
-          this.formInmueble.get("lote").setValue("");
-
-        }, (error) => {
-
-        });
-
-    } else {
-      this.manzanas = [];
-    }
-
+  ngOnInit() {
   }
 
-
-
-
-  createCliente() {
-
-    //console.log("inmueble", this.formInmueble.value);
-
-
-    let id_obra = this.formInmueble.get('obra').value;
-
-    this.clienteSrv.createCliente(this.form.value, this.formInmueble.get('lote').value)
-      .subscribe((res: any) => {
-
-        //console.log("Cliente Creado", res);
-        if (res.compra) {
-          this.router.navigate(["clientes", { obra: id_obra }]);
-
-        } else {
-          this.router.navigate(["prospectos"]);
-        }
-
-      }, (error) => {
-
-        this.router.navigate(["prospectos"]);
-      });
-
-
+  guardar() {
+    this.dialogRef.close("guardar");
   }
-
-
 
 }

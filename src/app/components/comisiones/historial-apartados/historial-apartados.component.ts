@@ -126,12 +126,12 @@ export class HistorialApartadosComponent implements OnInit {
       // this.tabla_filtrada && !filtro
       if (!filtro) {
         //console.log("todos, no filtro");
-        
-        this.apartadosFiltrados = this.apartados.filter(item => item.id_vendedor);
+        // si no se ha aplicado ningún filtro entonces devolvemos toda la lista
+        this.apartadosFiltrados = this.apartados.slice();
       } else {
         //console.log("todos, filtro");
-        //ya se ha aplicado algún filtro de fechas
-        this.apartadosFiltrados = this.apartadosFiltrados.filter(item => item.id_vendedor);
+        //ya se ha aplicado algún filtro de fechas, no hacemos nada y se devuelve lo que ya está filtrado
+        
       }
 
     }

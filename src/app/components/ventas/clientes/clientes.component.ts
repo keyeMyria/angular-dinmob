@@ -101,7 +101,7 @@ export class ClientesComponent implements OnInit {
   }
 
   verCelulaFiscal(cliente: Cliente) {
-    console.log("cliente", cliente);
+    //console.log("cliente", cliente);
 
     let dialogRef = this.dialog.open(VerCedulaFiscalDialogoComponent, {
       data: {
@@ -117,7 +117,7 @@ export class ClientesComponent implements OnInit {
   }
 
   verDatosFirma(cliente) {
-    console.log("cliente", cliente);
+    //console.log("cliente", cliente);
     let dialogRef = this.dialog.open(VerDatosFirmaDialogoComponent, {
       data: {
         cliente: cliente

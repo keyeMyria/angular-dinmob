@@ -132,7 +132,7 @@ export class EditarPrototipoComponent implements OnInit {
 
     } else {
 
-      this.insumoSrv.getMaterialesObra(this.prototipo.id_obra)
+      this.insumoSrv.getInsumosObra(this.prototipo.id_obra)
         .subscribe(insumos => {
 
           this.insumos = insumos;

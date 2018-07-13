@@ -212,8 +212,8 @@ export class EditarClienteComponent implements OnInit {
       fecha_firma_contrato: null,
       fecha_entrega: null,
       asesor_inmobiliario: null,
-      id_asesor: null,
-      id_vendedor: null,
+     /*  id_asesor: null, */
+      id_vendedor: "",
       notas_escrituracion: null,
       notas_cancelacion: null,
       fecha_entrega_fisica: null,
@@ -240,7 +240,7 @@ export class EditarClienteComponent implements OnInit {
         this.tipos_operacion = data.tipos_operacion;
         this.tipos_pago = data.tipos_pago;
         this.estados = data.estados;
-        this.asesores = data.asesores;
+        //this.asesores = data.asesores;
         //this.vendedores=data.vendedores;
       });
 

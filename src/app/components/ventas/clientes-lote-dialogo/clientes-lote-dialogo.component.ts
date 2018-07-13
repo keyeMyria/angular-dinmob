@@ -1,10 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material';
-import { Cliente } from 'app/model/cliente';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Router } from '@angular/router';
 import { ReporteService } from 'app/services/reporte.service';
-import { AgregarClienteLoteDialogoComponent } from 'app/components/ventas/agregar-cliente-lote-dialogo/agregar-cliente-lote-dialogo.component';
+import { NuevoClienteDialogoComponent } from '../nuevo-cliente-dialogo/nuevo-cliente-dialogo.component';
 
 @Component({
   selector: 'app-clientes-lote-dialogo',
@@ -105,15 +104,25 @@ export class ClientesLoteDialogoComponent implements OnInit {
 
   }
 
-  /* agregarCliente() {
-    let dialogRef = this.dialog.open(AgregarClienteLoteDialogoComponent, {
+  agregarCliente() {
+    let dialogRef = this.dialog.open(NuevoClienteDialogoComponent, {
       data: {
         lote: this.data.lote
       },
-      width: "500px"
+      width: "700px"
     });
 
-  } */
+  }
+
+  editarCliente(cliente) {
+    let dialogRef = this.dialog.open(NuevoClienteDialogoComponent, {
+      data: {
+        lote: this.data.lote
+      },
+      width: "700px"
+    });
+
+  }
 
 
 }

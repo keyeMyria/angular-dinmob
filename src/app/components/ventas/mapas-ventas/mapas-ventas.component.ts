@@ -16,6 +16,8 @@ import { LoadingService } from '../../../services/loading.service';
 import { OpcionesMapaVentasBottomSheetComponent } from '../opciones-mapa-ventas-bottom-sheet/opciones-mapa-ventas-bottom-sheet.component';
 import { AgregarClienteLoteDialogoComponent } from '../agregar-cliente-lote-dialogo/agregar-cliente-lote-dialogo.component';
 import { CambiarEstadoVentasLoteDialogoComponent } from '../cambiar-estado-ventas-lote-dialogo/cambiar-estado-ventas-lote-dialogo.component';
+import { EditarClienteDialogoComponent } from '../editar-cliente-dialogo/editar-cliente-dialogo.component';
+import { NuevoClienteDialogoComponent } from '../nuevo-cliente-dialogo/nuevo-cliente-dialogo.component';
 
 
 declare var jQuery: any;
@@ -218,6 +220,28 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
       op = this.obras.findIndex(obra => obra.id_obra == id_obra);
     }
     return op;
+  }
+
+  editarCliente(){
+    let dialogRef = this.dialog.open(EditarClienteDialogoComponent, {
+      data: {
+        
+      },
+      width: "800px"
+    });
+
+
+  }
+
+  nuevoCliente(){
+    let dialogRef = this.dialog.open(NuevoClienteDialogoComponent, {
+      data: {
+        
+      },
+      width: "800px"
+    });
+
+
   }
 
   verClientes() {
