@@ -255,6 +255,7 @@ import { AgregarClienteLoteDialogoComponent } from './components/ventas/agregar-
 import { CambiarEstadoVentasLoteDialogoComponent } from './components/ventas/cambiar-estado-ventas-lote-dialogo/cambiar-estado-ventas-lote-dialogo.component';
 import { EditarClienteDialogoComponent } from './components/ventas/editar-cliente-dialogo/editar-cliente-dialogo.component';
 import { NuevoClienteDialogoComponent } from './components/ventas/nuevo-cliente-dialogo/nuevo-cliente-dialogo.component';
+import { InsumosAvanceDialogoComponent } from './components/residente/insumos-avance-dialogo/insumos-avance-dialogo.component';
 
 
 
@@ -413,6 +414,7 @@ export function getToken() {
     CambiarEstadoVentasLoteDialogoComponent,
     EditarClienteDialogoComponent,
     NuevoClienteDialogoComponent,
+    InsumosAvanceDialogoComponent,
 
   ],
 
