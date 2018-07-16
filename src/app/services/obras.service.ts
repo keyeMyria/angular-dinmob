@@ -134,6 +134,11 @@ export class ObrasService {
       .pipe(catchError(this.handleError("getUltimosAvances")));
   }
 
+  //ok
+  getInsumosAvance(id_obra, fecha) {
+    return this.http.get(this.url + "get_insumos_avance/" + id_obra + "/" + fecha)
+      .pipe(catchError(this.handleError("getInsumosAvance")));
+  }
 
 
 
