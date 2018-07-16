@@ -30,12 +30,14 @@ export class MapasAvancesComponent implements OnInit {
   obra_selected: any = "";
   lotes: any = [];
   lote_selected: any = null;
-  valuesLotes: any = {};
+  //valuesLotes: any = {};
+  valuesVentas: any = {};
   valuesDiscretosLotes: any = {};
   //variableContinua: boolean = true;
 
   scalePctAvance: any = {};
-  legendPctAvance: any = {};  
+  scaleEstadoVenta: any = {};
+  legendPctAvance: any = {};
   verLeyenda: any = { toggle: true };
   variableContinua: any = { toggle: false };
 
@@ -94,7 +96,8 @@ export class MapasAvancesComponent implements OnInit {
 
         this.lotes = res[0].lotes;
         this.scalePctAvance = res[0].scalePctAvance;
-        this.legendPctAvance=res[0].legendPctAvance;
+        this.scaleEstadoVenta = res[0].scaleEstadoVenta;
+        this.legendPctAvance = res[0].legendPctAvance;
 
         this.jsonMap = res[1];
 
@@ -104,22 +107,30 @@ export class MapasAvancesComponent implements OnInit {
         //creamos los valores para la escala de estados
         this.variableContinua.toggle = false;
         this.verLeyenda.toggle = true;
-        this.valuesLotes = {};
+        //this.valuesLotes = {};
+        this.valuesVentas = {};
         this.valuesDiscretosLotes = {};
         this.lotes.forEach(lote => {
           // comprobar luego con datos
-          this.valuesLotes[lote.code] = lote.valor ? lote.valor : 0;
+          //this.valuesLotes[lote.code] = lote.valor ? lote.valor : 0;
+
+          //escala ventas
+          this.valuesVentas[lote.code] = lote.estado_venta;
+
+
           // escala personalizada
           this.valuesDiscretosLotes[lote.code] = lote.valor_discreto ? lote.valor_discreto : 1;
         });
         //console.log("values discretos", this.valuesDiscretosLotes);
+        console.log("values ventas", this.valuesVentas);
+
 
 
 
 
         if (this.jsonMap.mapa) {
           setTimeout(() => {
-            this.crearMapa(this.valuesDiscretosLotes, this.scalePctAvance, this.legendPctAvance);
+            this.crearMapa(this.valuesDiscretosLotes, this.scalePctAvance, this.legendPctAvance, this.scaleEstadoVenta);
             this.loading.stop();
           }, 100);
         } else {
@@ -149,7 +160,8 @@ export class MapasAvancesComponent implements OnInit {
         map: this.map,
         verLeyenda: this.verLeyenda,
         valuesDiscretosLotes: this.valuesDiscretosLotes,
-        valuesLotes: this.valuesLotes,
+        //valuesLotes: this.valuesLotes,
+        valuesVentas: this.valuesVentas,
         variableContinua: this.variableContinua
 
       },
@@ -159,7 +171,7 @@ export class MapasAvancesComponent implements OnInit {
   }
 
 
-  crearMapa(values, scalePctAvance, legendPctAvance) {
+  crearMapa(values, scalePctAvance, legendPctAvance, scaleEstadoVenta) {
 
 
 
@@ -205,56 +217,33 @@ export class MapasAvancesComponent implements OnInit {
 
       series: {
         regions: [
+          /*  {
+             values: {},
+             scale: ['#C8EEFF', '#0071A4'],
+             min: 0,
+             max: 1,
+             normalizeFunction: 'polynomial'
+ 
+           }, */
           {
             values: {},
-            scale: ['#C8EEFF', '#0071A4'],
-            min: 0,
-            max: 1,
-            normalizeFunction: 'polynomial'
-
+            scale: scaleEstadoVenta,
+            legend: {
+              vertical: true,
+              title: 'Ventas',
+              labelRender: function (scale) {
+                return scale;
+              }
+            }
           },
           {
             values: values,
             scale: scalePctAvance,
-            /*     scale: {
-                  '1': 'white',
-                  '2': '#00a65a', // green
-                  '3': '#f39c12', // amarillo
-                  '4': '#d81b60', //maroon
-                  '5': '#00c0ef', // aqua
-                  '6': '#605ca8'  //purple
-                }, */
             legend: {
               vertical: true,
-              title: 'Escala',
+              title: 'Avances',
               labelRender: function (scale) {
                 return legendPctAvance[scale];
-                
-                //return scale;
-
-                /* if (scale == 1) {
-                  return '0%';
-                } 
-                else if (scale == 2) {
-                  return '0-20%';
-                }
-                else if (scale == 3) {
-                  return '20-40%';
-                }
-                else if (scale == 4) {
-                  return '40-60%';
-                }
-                else if (scale == 5) {
-                  return '60-80%';
-                }
-                else if (scale == 6) {
-                  return '80-100%';
-                }
-                else if (scale == 7) {
-                  return '100%';
-                } */
-
-
               }
             }
           },
@@ -282,6 +271,9 @@ export class MapasAvancesComponent implements OnInit {
 
           let tooltip = lote.manzana + " " + lote.nombre;
 
+          tooltip += "<br> " + lote.estado_venta;
+
+
           if (lote.prototipos) {
             for (let i = 0; i < lote.prototipos.length; i++) {
               tooltip += " <br> " + lote.prototipos[i].nombre;
@@ -289,6 +281,10 @@ export class MapasAvancesComponent implements OnInit {
           }
 
           tooltip += " <br> Avance: " + (lote.ultimo_avance ? lote.ultimo_avance : "-");
+
+          if (lote.fecha_entrega) {
+            tooltip += " <br> Entrega: " + lote.fecha_entrega;
+          }
 
           let num_partidas = lote.num_partidas ? lote.num_partidas : 0;
 
@@ -324,6 +320,10 @@ export class MapasAvancesComponent implements OnInit {
 
 
     });
+
+    let items = $(".jvectormap-legend-cnt.jvectormap-legend-cnt-v .jvectormap-legend");
+    //$(items[0]).removeClass("d-none");
+    $(items[0]).addClass("d-none");
 
     this.map = $("#map").vectorMap('get', 'mapObject');
 

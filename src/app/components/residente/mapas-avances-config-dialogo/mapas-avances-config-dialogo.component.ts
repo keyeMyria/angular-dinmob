@@ -27,14 +27,23 @@ export class MapasAvancesConfigDialogoComponent implements OnInit {
   escalaDiscreta() {
     this.data.map.series.regions[1].setValues(this.data.valuesDiscretosLotes);
     this.data.variableContinua.toggle = false;
+    let items = $(".jvectormap-legend-cnt.jvectormap-legend-cnt-v .jvectormap-legend");
+    $(items[0]).addClass("d-none");
+    $(items[1]).removeClass("d-none");
 
   }
 
-  escalaContinua() {
-    this.data.map.series.regions[0].setValues(this.data.valuesLotes);
+  /*  escalaContinua() {
+     this.data.map.series.regions[0].setValues(this.data.valuesLotes); 
+     this.data.variableContinua.toggle = true;
+   } */
+
+  escalaVentas() {
+    this.data.map.series.regions[0].setValues(this.data.valuesVentas);
     this.data.variableContinua.toggle = true;
-
-
+    let items = $(".jvectormap-legend-cnt.jvectormap-legend-cnt-v .jvectormap-legend");
+    $(items[0]).removeClass("d-none");
+    $(items[1]).addClass("d-none");
   }
 
 
