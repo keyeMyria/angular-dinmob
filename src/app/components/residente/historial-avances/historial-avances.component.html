@@ -19,10 +19,14 @@
 
       <div class="" *ngFor="let fecha of fechas">
 
-        <div class="hr-sect py-3">
-          <span class="badge badge-pill badge-primary">{{fecha.fecha_fin|date:'mediumDate':'':'es'}}</span>
+        <div style="display: flex; align-items: center">
+          <div class="hr-sect py-3">
+            <span class="badge badge-pill badge-primary">{{fecha.fecha_fin|date:'mediumDate':'':'es'}}</span>
+          </div>
+          <button type="button" mat-button class="no-min" (click)="verInsumos(fecha)">
+            <i class="fa fa-wrench"></i>
+          </button>
         </div>
-
         <mat-accordion [displayMode]="'default'" multi="true">
 
           <mat-expansion-panel [hideToggle]="true" #panel *ngFor="let ubicacion of fecha.lotes">

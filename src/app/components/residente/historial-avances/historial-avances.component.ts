@@ -53,6 +53,10 @@ export class HistorialAvancesComponent implements OnInit {
 
   }
 
+  verInsumos(fecha) {
+
+  }
+
 
 
 }
