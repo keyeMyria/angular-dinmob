@@ -22,6 +22,7 @@ import { EditarLoteEscrituracionDialogoComponent } from './components/editar-lot
 import { EditarEquipoDialogoComponent } from './components/editar-equipo-dialogo/editar-equipo-dialogo.component';
 
 
+
 @NgModule({
   imports: [
     CommonModule,

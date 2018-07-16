@@ -127,6 +127,19 @@ export class EditarLoteEscrituracionDialogoComponent implements OnInit {
     return suma;
   }
 
+  saldoPendiente() {
+
+    let pendiente = 0;
+
+    if (this.cliente_selected.valor_operacion) {
+
+      pendiente = +this.cliente_selected.valor_operacion - this.sumaPagos();
+
+    }
+    return pendiente;
+
+  }
+
 
 
   editarPago() {

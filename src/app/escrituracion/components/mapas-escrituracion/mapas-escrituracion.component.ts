@@ -47,6 +47,9 @@ export class MapasEscrituracionComponent implements OnInit, OnDestroy {
   valuesFormaPago: any = {};
   valuesLoteTipo: any = {};
 
+  clientes: any;
+  lote: any;
+
   constructor(
     private router: Router,
     private mapaSrv: MapasService,
@@ -56,7 +59,10 @@ export class MapasEscrituracionComponent implements OnInit, OnDestroy {
     public snackBar: MatSnackBar,
     private currecyPipe: CurrencyPipe,
     private loading: LoadingService
-  ) { }
+  ) {
+
+  }
+
 
   ngOnInit() {
     this.route.data
@@ -205,7 +211,7 @@ export class MapasEscrituracionComponent implements OnInit, OnDestroy {
             lote: res.lote,
             clientes: res.clientes
           },
-          width: "900px"
+          width: "1000px"
         });
 
 

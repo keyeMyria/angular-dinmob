@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-insumos-avance-dialogo',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InsumosAvanceDialogoComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<InsumosAvanceDialogoComponent>
+  ) { }
 
   ngOnInit() {
   }

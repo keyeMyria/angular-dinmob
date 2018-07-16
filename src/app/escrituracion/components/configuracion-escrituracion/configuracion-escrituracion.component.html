@@ -8,9 +8,9 @@
       <form [formGroup]="form" (ngSubmit)="guardar()">
 
         <div class="form-group row">
-          <label for="etapa_uno" class="col-form-label col-sm-6">Apartado
+          <label for="etapa_uno" class="col-form-label col-sm-4">Apartado
             <i class="fa fa-arrow-right" aria-hidden="true"></i> Checklist</label>
-          <div class="input-group col-sm-6">
+          <div class="input-group col-sm-8">
             <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="etapa_uno" name="etapa_uno" placement="bottom-left"
               [matDatepicker]="dpApartado" formControlName="etapa_uno">
             <span class="input-group-append">
@@ -23,9 +23,9 @@
         </div>
 
         <div class="form-group row">
-          <label for="etapa_dos" class="col-form-label col-sm-6">Checklist
+          <label for="etapa_dos" class="col-form-label col-sm-4">Checklist
             <i class="fa fa-arrow-right" aria-hidden="true"></i> Infonavit</label>
-          <div class="input-group col-sm-6">
+          <div class="input-group col-sm-8">
             <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="etapa_dos" name="etapa_dos" placement="bottom-left"
               [matDatepicker]="dpChecklist" formControlName="etapa_dos">
             <span class="input-group-append">
@@ -38,9 +38,9 @@
         </div>
 
         <div class="form-group row">
-          <label for="etapa_tres" class="col-form-label col-sm-6">Infonavit
+          <label for="etapa_tres" class="col-form-label col-sm-4">Infonavit
             <i class="fa fa-arrow-right" aria-hidden="true"></i> Firma</label>
-          <div class="input-group col-sm-6">
+          <div class="input-group col-sm-8">
             <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="etapa_tres" name="etapa_tres" placement="bottom-left"
               [matDatepicker]="dpInfonavit" formControlName="etapa_tres">
             <span class="input-group-append">
@@ -53,9 +53,9 @@
         </div>
 
         <div class="form-group row">
-          <label for="etapa_tres" class="col-form-label col-sm-6">Firma
+          <label for="etapa_tres" class="col-form-label col-sm-4">Firma
             <i class="fa fa-arrow-right" aria-hidden="true"></i> Entrega</label>
-          <div class="input-group col-sm-6">
+          <div class="input-group col-sm-8">
             <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="etapa_tres" name="etapa_tres" placement="bottom-left"
               [matDatepicker]="dpFirma" formControlName="etapa_tres">
             <span class="input-group-append">

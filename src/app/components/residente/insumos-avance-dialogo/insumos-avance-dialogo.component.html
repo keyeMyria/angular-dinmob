@@ -1,3 +1,32 @@
-<p>
-  insumos-avance-dialogo works!
-</p>
+<h1 mat-dialog-title>Insumos</h1>
+<div mat-dialog-content>
+
+
+
+
+  <div class="table-responsive">
+    <table class="table table-hover table-striped table-align-middle">
+      <thead>
+        <tr>
+          <th>Insumo</th>
+          <th>Unidad</th>
+          <th>Cantidad</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let insumo of data.insumos">
+          <td>{{insumo.insumo}}</td>
+          <td class="text-center">{{insumo.unidad}}</td>
+          <td class="text-right">{{insumo.cantidad | number:'.2-2'}}</td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="false" class="btn-block">CERRAR</button>
+</div>

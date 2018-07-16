@@ -4,7 +4,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { ReporteService } from 'app/services/reporte.service';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import * as moment from 'moment';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { NuevoPagoDialogoComponent } from '../../../components/ventas/nuevo-pago-dialogo/nuevo-pago-dialogo.component';
 import { EditarPagoDialogoComponent } from '../../../components/ventas/editar-pago-dialogo/editar-pago-dialogo.component';
 import { UploadFileDialogoComponent } from '../../../components/ventas/upload-file-dialogo/upload-file-dialogo.component';
@@ -48,6 +48,7 @@ export class ClientesLoteEscrituracionDialogoComponent implements OnInit {
       fecha_infonavit: [moment(""), Validators.required],
       fecha_firma: [moment(""), Validators.required],
       fecha_entregado: [moment(""), Validators.required],
+
       nombre: [null, Validators.required],
       fecha_nacimiento: [moment(""), Validators.required],
       curp: [null, Validators.required],
@@ -79,6 +80,7 @@ export class ClientesLoteEscrituracionDialogoComponent implements OnInit {
     this.selection.toggle(cliente);
     if (this.selection.selected.length > 0) {
       this.cliente_selected = this.selection.selected[0];
+      this.formGenerales.patchValue(cliente);
 
     } else {
       this.cliente_selected = {};
@@ -86,27 +88,14 @@ export class ClientesLoteEscrituracionDialogoComponent implements OnInit {
 
   }
 
-  totalPagosRealizados() {
-    let total = 0;
+  sumaPagos() {
+    let suma = 0;
 
-    if (this.cliente_selected.pagos) {
-      this.cliente_selected.pagos.forEach(pago => {
+    this.cliente_selected.pagos.forEach(pago => {
+      suma += +pago.monto;
+    });
 
-        //total += +pago.monto;
-
-        //personalización CIVSA, para otras empresas sumar todo independiente del tipo 
-        /*     if (pago.tipo_pago != "Apartado" && pago.tipo_pago != "Avalúo") {
-              total += +pago.monto;
-            } */
-
-        //solo sumamos los pagos con id_tipo_pago < 100
-        if (pago.id_tipo_pago < 100) {
-          total += +pago.monto;
-        }
-
-      });
-    }
-    return total;
+    return suma;
   }
 
   saldoPendiente() {
@@ -115,7 +104,7 @@ export class ClientesLoteEscrituracionDialogoComponent implements OnInit {
 
     if (this.cliente_selected.valor_operacion) {
 
-      pendiente = +this.cliente_selected.valor_operacion - this.totalPagosRealizados();
+      pendiente = +this.cliente_selected.valor_operacion - this.sumaPagos();
 
     }
     return pendiente;

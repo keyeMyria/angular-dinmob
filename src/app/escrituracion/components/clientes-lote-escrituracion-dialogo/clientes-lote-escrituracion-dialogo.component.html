@@ -65,7 +65,6 @@
               </div>
             </div>
           </div>
-
           <div class="form-group row" *ngIf="estados_selected == '1'">
             <label for="fecha_apartado" class="col-form-label col-sm-3">Fecha Apartado</label>
             <div class="input-group col-sm-9">
@@ -83,7 +82,6 @@
             </div>
             <mat-datepicker touchUi="true" #dpFechaApartado></mat-datepicker>
           </div>
-
           <div class="form-group row" *ngIf="estados_selected == '2'">
             <label for="fecha_checklist" class="col-form-label col-sm-3">Fecha Checklist</label>
             <div class="input-group col-sm-9">
@@ -101,7 +99,6 @@
             </div>
             <mat-datepicker touchUi="true" #dpFechaDocumentos></mat-datepicker>
           </div>
-
           <div class="form-group row" *ngIf="estados_selected == '3'">
             <label for="fecha_infonavit" class="col-form-label col-sm-3">Fecha Infonavit</label>
             <div class="input-group col-sm-9">
@@ -119,7 +116,6 @@
             </div>
             <mat-datepicker touchUi="true" #dpFechaEscriturado></mat-datepicker>
           </div>
-
           <div class="form-group row" *ngIf="estados_selected == '4'">
             <label for="fecha_firma" class="col-form-label col-sm-3">Fecha Firma</label>
             <div class="input-group col-sm-9">
@@ -137,7 +133,6 @@
             </div>
             <mat-datepicker touchUi="true" #dpFechaEscriturado></mat-datepicker>
           </div>
-
           <div class="form-group row" *ngIf="estados_selected == '5'">
             <label for="fecha_entregado" class="col-form-label col-sm-3">Fecha Entregado</label>
             <div class="input-group col-sm-9">
@@ -166,7 +161,6 @@
               </div>
             </div>
           </div>
-
 
           <div class="form-group row">
             <label class="col-form-label col-sm-3" for="fecha_nacimiento">Fecha de nacimiento</label>
@@ -276,8 +270,6 @@
 
     </mat-tab>
 
-
-
     <!-- <Documentos> -->
     <mat-tab label="Documentos">
       <div class="container py-3">
@@ -302,7 +294,7 @@
           <div class="col-12 col-sm-4 py-3">
             <div class="text-center">
               <h4 class="text-primary">
-                $0.00
+                {{cliente_selected.valor_operacion |currency }}
               </h4>
               <span>VALOR OPERACIÓN</span>
             </div>
@@ -311,7 +303,7 @@
           <div class="col-12 col-sm-4 py-3">
             <div class="text-center">
               <h4 class="text-success">
-                $0.00
+                {{sumaPagos()|currency}}
               </h4>
               <span>-PAGOS REALIZADOS</span>
             </div>
@@ -320,7 +312,7 @@
           <div class="col-12 col-sm-4 py-3">
             <div class="text-center">
               <h4 class="text-danger">
-                $0.00
+                {{saldoPendiente()| currency}}
               </h4>
               <span>=SALDO PENDIENTE</span>
             </div>
@@ -389,15 +381,17 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td class="ws-nowrap">27 dic. 2018</td>
-                <td class="ws-nowrap">27 dic. 2018</td>
-                <td>$61,000.00</td>
+              <tr *ngFor="let pago of cliente_selected.pagos">
+                <td class="ws-nowrap">{{pago.fecha_programada| date:'mediumDate':'':'es'}}</td>
+                <td class="ws-nowrap">{{pago.fecha_pago| date:'mediumDate':'':'es'}}</td>
+                <td>{{pago.monto | currency}}</td>
                 <td>Finiquito</td>
                 <td>Efectivo</td>
-                <td>Factura:04</td>
+                <td>{{pago.nota}}</td>
                 <td>
-                  <span class="badge badge-primary">No valido</span>
+<!--                   <span class="badge" [ngClass]="pago.validado=='1'?'badge-success':'badge-secondary'">
+                    {{pago.validado|numberToYesNo:'VAL'}}
+                  </span>  -->
                 </td>
                 <td>
                   <a target="_blank">

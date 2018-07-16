@@ -505,7 +505,8 @@ export function getToken() {
     AgregarClienteLoteDialogoComponent,
     CambiarEstadoVentasLoteDialogoComponent,
     EditarClienteDialogoComponent,
-    NuevoClienteDialogoComponent
+    NuevoClienteDialogoComponent,
+    InsumosAvanceDialogoComponent
 
   ],
 
