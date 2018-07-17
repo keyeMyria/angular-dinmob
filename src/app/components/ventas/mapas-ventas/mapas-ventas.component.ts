@@ -222,10 +222,10 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
     return op;
   }
 
-  editarCliente(){
+  editarCliente() {
     let dialogRef = this.dialog.open(EditarClienteDialogoComponent, {
       data: {
-        
+
       },
       width: "800px"
     });
@@ -233,10 +233,10 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
 
   }
 
-  nuevoCliente(){
+  nuevoCliente() {
     let dialogRef = this.dialog.open(NuevoClienteDialogoComponent, {
       data: {
-        
+
       },
       width: "800px"
     });
@@ -275,7 +275,7 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
 
   }
 
-  cambiarEstado(lote) {
+  editarLote(lote) {
     let dialogRef = this.dialog.open(CambiarEstadoVentasLoteDialogoComponent, {
       data: {
         estados: this.estados,
@@ -284,16 +284,33 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
       width: "500px"
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(form => {
 
-      if (result) {
+      if (form) {
 
-        this.loteSrv.updateLote(this.lote_selected.id_lote, { id_estado_venta: result })
+        console.log("form", form);
+        
+
+        /* { id_estado_venta: form } */
+        this.loteSrv.updateLote(this.lote_selected.id_lote, form)
           .subscribe((lote: any) => {
 
 
             this.lote_selected.id_estado_venta = lote.id_estado_venta;
+            this.lote_selected.estado_venta=lote.estado_venta;
+            this.lote_selected.valor_base= lote.valor_base;
+            this.lote_selected.fecha_cambio_estado= lote.fecha_cambio_estado;
+
+            /* let update= this.lotes.find(lote=>lote.id_lote== lote.id_lote);
+            //console.log("lote", update);
+            update.id_estado_venta=lote.id_estado_venta;
+            update.estado_venta=lote.estado_venta;
+            update.fecha_cambio_estado= lote.fecha_cambio_estado;
+            update.valor_base=lote.valor_base; */
+
+
             this.valuesEstadosVenta[this.lote_selected.code] = lote.estado_venta;
+
 
             let value = {};
             value[this.lote_selected.code] = lote.estado_venta;
@@ -375,7 +392,7 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
   }
 
   verOpciones(lote_selected) {
-    
+
     if (lote_selected) {
 
       const opciones = this.bottomSheet.open(OpcionesMapaVentasBottomSheetComponent, {
@@ -395,7 +412,7 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
             break;
           case 2: this.agregarCliente(lote_selected);
             break;
-          case 3: this.cambiarEstado(lote_selected);
+          case 3: this.editarLote(lote_selected);
             break
           default:
         }

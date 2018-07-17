@@ -24,7 +24,7 @@ export class ClientesLoteDialogoComponent implements OnInit {
     public dialogRef: MatDialogRef<ClientesLoteDialogoComponent>,
     private router: Router,
     private reporteSrv: ReporteService,
-    private dialog: MatDialog
+    private dialog: MatDialog,  
   ) { }
 
   ngOnInit() {
@@ -109,7 +109,7 @@ export class ClientesLoteDialogoComponent implements OnInit {
       data: {
         lote: this.data.lote
       },
-      width: "700px"
+      width: "500px"
     });
 
   }
