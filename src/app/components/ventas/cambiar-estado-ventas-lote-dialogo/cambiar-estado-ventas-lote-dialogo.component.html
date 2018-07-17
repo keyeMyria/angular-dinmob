@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Cambiar Estado</h1>
+<h1 mat-dialog-title>Editar lote</h1>
 <div mat-dialog-content>
 
   <h6>{{data.lote.manzana}} {{data.lote.nombre}}</h6>
@@ -6,11 +6,31 @@
   <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
 
     <div class="form-group">
-      <select class="form-control" formControlName="id_estado_lote"  id="id_estado_lote" name="id_estado_lote">
-       <!--  <option value="">Seleccionar</option> -->
+      <select class="form-control" formControlName="id_estado_venta" id="id_estado_venta" name="id_estado_venta">
         <option [value]="estado.id_estado_lote" *ngFor="let estado of data.estados">{{estado.descripcion}}</option>
       </select>
     </div>
+
+    <div class="form-group">
+      <label class="col-form-label">Fecha estado</label>
+      <div class="input-group">
+        <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="fecha_cambio_estado" placement="bottom-left" [matDatepicker]="dpFechaEstado"
+          formControlName="fecha_cambio_estado" [ngClass]="{'is-invalid':form.get('fecha_cambio_estado').invalid && (form.get('fecha_cambio_estado').dirty || form.get('fecha_cambio_estado').touched) }">
+        <span class="input-group-append">
+          <button class="btn btn-secondary" type="button" (click)="dpFechaEstado.open()">
+            <i class="fa fa-calendar"></i>
+          </button>
+        </span>
+      </div>
+
+      <mat-datepicker touchUi="true" #dpFechaEstado></mat-datepicker>
+    </div>
+
+    <div class="form-group">
+      <label class="col-form-label">Valor base</label>
+      <input [textMask]="{mask: numberMask}" type="text" class="form-control" formControlName="valor_base" name="valor_base">
+    </div>
+
 
   </form>
 
