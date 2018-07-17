@@ -155,7 +155,10 @@ export class ClientesLoteEscrituracionDialogoComponent implements OnInit {
     let dialogRef = this.dialog.open(EditarPagoDialogoComponent, {
       width: '500px',
       data: {
-        pago: pago
+        pago: pago,
+        formas: this.data.formas_pago,
+        tipos: this.data.tipos_pago
+        
       },
     });
     dialogRef.afterClosed().subscribe(result => {
