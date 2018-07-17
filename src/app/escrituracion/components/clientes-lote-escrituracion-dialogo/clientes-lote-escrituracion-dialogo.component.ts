@@ -30,6 +30,8 @@ export class ClientesLoteEscrituracionDialogoComponent implements OnInit {
   formGenerales: FormGroup;
   formDocumentos: FormGroup;
   estados_selected: string;
+  tipos: any;
+  formas: any
 
   //selector de clientes
   selection = new SelectionModel<any>(false);
@@ -148,11 +150,12 @@ export class ClientesLoteEscrituracionDialogoComponent implements OnInit {
 
   }
 
-  editarPago() {
+  editarPago(pago) {    
 
     let dialogRef = this.dialog.open(EditarPagoDialogoComponent, {
-      width: '400px',
+      width: '500px',
       data: {
+        pago: pago
       },
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -199,12 +202,13 @@ export class ClientesLoteEscrituracionDialogoComponent implements OnInit {
     });
   }
 
-  delPago() {
+  delPago(pago) {
     let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
       data: {
         title: "Eliminar Pago",
-        content: `¿Desea eliminar el pago?`
-      }
+        content: `¿Desea eliminar el pago del ${pago.fecha_pago}?`
+      },
+      width: '500px',
     });
 
     dialogRef.afterClosed().subscribe(result => {

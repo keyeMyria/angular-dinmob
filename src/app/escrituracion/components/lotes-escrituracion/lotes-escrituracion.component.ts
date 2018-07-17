@@ -177,7 +177,7 @@ export class LotesEscrituracionComponent implements OnInit {
 
       if (result === true) {
 
-        this.snackBar.open("Equipo Agregado", "", {
+        this.snackBar.open("Lote Actualizado", "", {
           duration: 2000,
           panelClass: ["bg-success", "text-white"]
         });

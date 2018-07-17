@@ -1,6 +1,4 @@
-
 import { forkJoin as observableForkJoin, of } from 'rxjs';
-
 import { switchMap } from 'rxjs/operators';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MapasService } from "app/services/mapas.service";
@@ -43,6 +41,8 @@ export class MapasEscrituracionComponent implements OnInit, OnDestroy {
   scaleFormaPago: any = {};
   valuesPrototipos: any = {};
   valuesEstadosVenta: any = {};
+  formas_pago: any[] = [];
+  tipos_pago: any[] = [];
 
   valuesFormaPago: any = {};
   valuesLoteTipo: any = {};
@@ -66,8 +66,10 @@ export class MapasEscrituracionComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.route.data
-      .subscribe((data: { obras: any }) => {
+      .subscribe((data: { obras: any[], formas_pago: any[], tipos_pago: any[] }) => {
         this.obras = data.obras;
+        this.formas_pago = data.formas_pago;
+        this.tipos_pago = data.tipos_pago;
       });
 
 
@@ -209,7 +211,9 @@ export class MapasEscrituracionComponent implements OnInit, OnDestroy {
         let dialogRef = this.dialog.open(ClientesLoteEscrituracionDialogoComponent, {
           data: {
             lote: res.lote,
-            clientes: res.clientes
+            clientes: res.clientes,
+            formas_pago: this.formas_pago,
+            tipos_pago: this.tipos_pago
           },
           width: "1000px"
         });

@@ -18,6 +18,10 @@ export class ClientesEscrituracionComponent implements OnInit {
   ngOnInit() {
   }
 
+  agregarCliente() {
+
+  }
+
 
   editarCliente() {
     let dialogRef = this.dialog.open(EditarClienteEscrituracionDialogoComponent, {

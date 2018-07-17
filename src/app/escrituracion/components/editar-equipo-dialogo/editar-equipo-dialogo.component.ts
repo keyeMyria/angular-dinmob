@@ -16,15 +16,14 @@ export class EditarEquipoDialogoComponent implements OnInit {
     private fb: FormBuilder,
   ) {
     this.form = this.fb.group({
-      equipo_nombre: [null, Validators.required],
+      nombre_equipo: [data.equipo.nombre_equipo, Validators.required]
     });
   }
 
   ngOnInit() {
   }
 
-  guardar(){
-    
+  guardar() {
   }
 
 }

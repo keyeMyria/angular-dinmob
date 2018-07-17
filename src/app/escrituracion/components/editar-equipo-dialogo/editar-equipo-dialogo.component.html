@@ -3,10 +3,10 @@
 
   <form [formGroup]="form" (ngSubmit)="guardar()">
     <div class="form-group">
-      <label for="equipo_nombre">Equipo (nombre)</label>
-      <input type="text" placeholder="ej. Equipo 1" class="form-control" id="equipo_nombre" name="equipo_nombre" formControlName="equipo_nombre"
-        [ngClass]="{'is-invalid':form.get('equipo_nombre').invalid && (form.get('equipo_nombre').dirty || form.get('equipo_nombre').touched )}">
-      <div *ngIf="form.get('equipo_nombre').invalid && (form.get('equipo_nombre').dirty || form.get('equipo_nombre').touched )"
+      <label for="nombre_equipo">Equipo (nombre)</label>
+      <input type="text" placeholder="ej. Equipo 1" class="form-control" id="nombre_equipo" name="nombre_equipo" formControlName="nombre_equipo"
+        [ngClass]="{'is-invalid':form.get('nombre_equipo').invalid && (form.get('nombre_equipo').dirty || form.get('nombre_equipo').touched )}">
+      <div *ngIf="form.get('nombre_equipo').invalid && (form.get('nombre_equipo').dirty || form.get('nombre_equipo').touched )"
         class="visible invalid-feedback">
         Escriba un nombre
       </div>

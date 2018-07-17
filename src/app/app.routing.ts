@@ -292,9 +292,9 @@ export const ROUTES: Routes = [
                 resolve: {
                     obras: ObrasUsuarioResolverService,
                     formas_pago: FormasPagoResolverService,
-                    instituciones_credito: InstitucionesCreditoResolverService,
-                    tipos_operacion: TiposOperacionResolverService,
                     tipos_pago: TiposPagoResolverService,
+                    instituciones_credito: InstitucionesCreditoResolverService,
+                    tipos_operacion: TiposOperacionResolverService,                    
                     estados: EstadosVentaLoteResolverService,
                     //asesores: UsuariosAsesoresResolverService
                     //vendedores: VendedoresResolverService

@@ -4,7 +4,7 @@ import { ObrasService } from "app/services/obras.service";
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { of } from "rxjs"
 import { InsumosAvanceDialogoComponent } from '../insumos-avance-dialogo/insumos-avance-dialogo.component';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-historial-avances',
@@ -42,7 +42,6 @@ export class HistorialAvancesComponent implements OnInit {
         }
       })).subscribe(avances => {
         this.fechas = avances;
-      }, (error) => {
       });
 
   }
@@ -70,8 +69,6 @@ export class HistorialAvancesComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
 
         });
-
-      }, (error) => {
 
       });
 

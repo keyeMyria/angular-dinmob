@@ -13,6 +13,8 @@ import { LotesEscrituracionComponent } from './components/lotes-escrituracion/lo
 import { MapasEscrituracionComponent } from './components/mapas-escrituracion/mapas-escrituracion.component';
 import { MapasUsuarioResolverService } from 'app/resolvers/mapas-usuario-resolver.service';
 import { EditarClienteEscrituracionComponent } from './components/editar-cliente-escrituracion/editar-cliente-escrituracion.component';
+import { FormasPagoResolverService } from '../resolvers/formas-pago-resolver.service';
+import { TiposPagoResolverService } from '../resolvers/tipos-pago-resolver.service';
 
 
 
@@ -82,7 +84,9 @@ const routes: Routes = [
     path: 'mapas', component: MapasEscrituracionComponent,
     canActivate: [AuthGuard],
     resolve: {
-      obras: MapasUsuarioResolverService
+      obras: MapasUsuarioResolverService,
+      formas_pago: FormasPagoResolverService,
+      tipos_pago: TiposPagoResolverService,
     },
     data: {
       permisos: [Rol.Administrador, Rol.Contabilidad]
