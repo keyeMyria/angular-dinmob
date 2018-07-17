@@ -4,6 +4,7 @@ import { MatDialog, MatSnackBar, MatDrawer } from '@angular/material';
 import { AgregarVendedorEquipoDialogoComponent } from '../agregar-vendedor-equipo-dialogo/agregar-vendedor-equipo-dialogo.component';
 import { EditarEquipoDialogoComponent } from '../editar-equipo-dialogo/editar-equipo-dialogo.component';
 import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
+import { validateVerticalPosition } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-equipos-ventas-escrituracion',
@@ -12,10 +13,73 @@ import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar
 })
 export class EquiposVentasEscrituracionComponent implements OnInit {
 
+  equipos: any;
+
   constructor(
     private dialog: MatDialog,
     private snackBar: MatSnackBar
-  ) { }
+  ) {
+    this.equipos = [
+      {
+        nombre_equipo: "Equipo 1",
+        length: "3",
+        vendedores: [
+          {
+            vendedor: "Julio Cortázar"
+          },
+          {
+            vendedor: "Rosario Castellano"
+          },
+          {
+            vendedor: "Roberto Bolaños"
+          }
+        ]
+      },
+      {
+        nombre_equipo: "Equipo 2",
+        length: "2",
+        vendedores: [
+          {
+            vendedor: "José Vasconcelos"
+          },
+          {
+            vendedor: "José Borges"
+          }
+        ]
+      },
+      {
+        nombre_equipo: "Equipo 3",
+        length: "3",
+        vendedores: [
+          {
+            vendedor: "Jorge Volpi"
+          },
+          {
+            vendedor: "Gioconda Belli"
+          },
+          {
+            vendedor: "Juan José Arreola"
+          }
+        ]
+      },
+      {
+        nombre_equipo: "Equipo 4",
+        length: "3",
+        vendedores: [
+          {
+            vendedor: "Hector Herrera",
+          },
+          {
+            vendedor: "Javier Rodriguez"
+          },
+          {
+            vendedor: "Pedro Paramo"
+          }
+        ]
+      }
+    ]
+
+  }
 
   ngOnInit() {
   }
@@ -76,9 +140,11 @@ export class EquiposVentasEscrituracionComponent implements OnInit {
     });
   }
 
-  editarEquipo() {
+  editarEquipo(equipo) {
     let dialogRef = this.dialog.open(EditarEquipoDialogoComponent, {
       data: {
+        equipos: this.equipos,
+        equipo: equipo
       },
       width: '500px',
 
@@ -104,12 +170,12 @@ export class EquiposVentasEscrituracionComponent implements OnInit {
     });
   }
 
-  delVendedor() {
+  delVendedor(v) {
 
     let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
       data: {
         title: "Eliminar Vendedor",
-        content: `¿Desea eliminar el vendedor?`
+        content: `¿Desea eliminar el vendedor: ${v.vendedor}?`
       },
       width: "500px"
     });
@@ -121,12 +187,12 @@ export class EquiposVentasEscrituracionComponent implements OnInit {
 
   }
 
-  delEquipo() {
+  delEquipo(equipo) {
 
     let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
       data: {
         title: "Eliminar Equipo",
-        content: `¿Desea eliminar el equipo?`
+        content: `¿Desea eliminar el ${equipo.nombre_equipo}?`
       },
       width: "500px"
     });
