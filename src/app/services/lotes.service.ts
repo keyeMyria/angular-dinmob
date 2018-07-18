@@ -1,5 +1,5 @@
 
-import {throwError as observableThrowError,  Observable } from 'rxjs';
+import { throwError as observableThrowError, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { ConfigService } from 'app/services/config.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
@@ -140,7 +140,7 @@ export class LotesService {
 
   //ok
   girarFoto(id_imagen, grados) {
-    return this.http.post(this.url + 'girar_foto/' + id_imagen, {grados: grados})
+    return this.http.post(this.url + 'girar_foto/' + id_imagen, { grados: grados })
       .pipe(catchError(this.handleError("girarFoto")));
   }
 
@@ -148,6 +148,18 @@ export class LotesService {
   delFoto(id_imagen) {
     return this.http.post(this.url + 'del_foto/' + id_imagen, {})
       .pipe(catchError(this.handleError("delFoto")));
+  }
+
+  //ok
+  addArranquePartidas(id_lote, ids_partidas) {
+    return this.http.post(this.url + 'del_arranque_partidas', { ids_partidas: ids_partidas, id_lote: id_lote })
+      .pipe(catchError(this.handleError("addArranquePartidas")));
+  }
+
+  //ok
+  delArranquePartidas(id_lote, ids_partidas) {
+    return this.http.post(this.url + 'add_arranque_partidas', { ids_partidas: ids_partidas, id_lote: id_lote })
+      .pipe(catchError(this.handleError("delArranquePartidas")));
   }
 
 

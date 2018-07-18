@@ -105,7 +105,7 @@ export class ArranqueComponent implements OnInit {
       ids.push(partida.id_partida);
     });
 
-    this.loteSrv.addAvancePartida(ids, this.lote.id_lote)
+    this.loteSrv.addArranquePartidas(this.lote.id_lote, ids)
       .subscribe(partidas => {
         console.log("partidas", partidas);
 
@@ -119,7 +119,7 @@ export class ArranqueComponent implements OnInit {
 
         this.selection.clear();
 
-        this.snackBar.open("Avance Agregado", "", {
+        this.snackBar.open("Arranque Agregado", "", {
           duration: 2000,
           panelClass: ["bg-success", "text-white"]
         });
@@ -143,7 +143,7 @@ export class ArranqueComponent implements OnInit {
       ids.push(partida.id_partida);
     });
 
-    this.loteSrv.delAvancePartida(ids, this.lote.id_lote)
+    this.loteSrv.delArranquePartidas(this.lote.id_lote, ids)
       .subscribe((res: any) => {
         //console.log("partidas", res.count);
 
@@ -156,7 +156,7 @@ export class ArranqueComponent implements OnInit {
 
         this.selection.clear();
 
-        this.snackBar.open("Avance Eliminado", "", {
+        this.snackBar.open("Arranque Eliminado", "", {
           duration: 2000,
           panelClass: ["bg-success", "text-white"]
         });
@@ -170,51 +170,6 @@ export class ArranqueComponent implements OnInit {
       });
 
   }
-
-
-  /*   numSubpartidasFinalizadas(partida) {
-      console.log("numSubpartidasFinalizadas" + partida.id_partida);
-      var count = 0;
-  
-      //tiene subpartidas
-      if (partida.subpartidas.length) {
-  
-        for (var i = 0; i < partida.subpartidas.length; i++) {
-  
-          if (partida.subpartidas[i].fecha_fin !== null) {
-            count++;
-          }
-        }
-  
-      } else {
-        count = partida.fecha_fin !== null ? 1 : 0;
-      }
-  
-      return count;
-  
-    } */
-
-  /*   partidaFinalizada(partida) {
-      console.log("partidaFinalizada" + partida.id_partida);
-      var finalizada = true;
-  
-      //tiene subpartidas
-      if (partida.subpartidas.length) {
-  
-        for (var i = 0; i < partida.subpartidas.length; i++) {
-          //si encontramos alguna sin finalizar devolvemos false
-          if (partida.subpartidas[i].fecha_fin === null) {
-            return false;
-          }
-        }
-  
-      } else {
-        finalizada = partida.fecha_fin !== null;
-      }
-  
-      return finalizada;
-  
-    } */
 
   getArranqueLote(lote) {
     //console.log("getArranqueLote", lote);
@@ -237,7 +192,6 @@ export class ArranqueComponent implements OnInit {
 
 
   }
-
 
 
   ngOnDestroy(): void {
