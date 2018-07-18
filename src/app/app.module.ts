@@ -257,11 +257,9 @@ import { EditarClienteDialogoComponent } from './components/ventas/editar-client
 import { NuevoClienteDialogoComponent } from './components/ventas/nuevo-cliente-dialogo/nuevo-cliente-dialogo.component';
 import { InsumosAvanceDialogoComponent } from './components/residente/insumos-avance-dialogo/insumos-avance-dialogo.component';
 import { TableroJefeFrenteComponent } from './components/tablero-jefe-frente/tablero-jefe-frente.component';
-
 import { SalidaAlertaComponent } from './components/almacen/salida-alerta/salida-alerta.component';
 import { AceptarSalidaAlertaDialogoComponent } from './components/almacen/aceptar-salida-alerta-dialogo/aceptar-salida-alerta-dialogo.component';
 import { SaldoProveedoresComponent } from './components/admin/saldo-proveedores/saldo-proveedores.component';
-import { NuevaOperacionDialogoComponent } from './components/admin/nueva-operacion-dialogo/nueva-operacion-dialogo.component';
 import { CargoAbonoProveedoresDialogoComponent } from './components/admin/cargo-abono-proveedores-dialogo/cargo-abono-proveedores-dialogo.component';
 import { EditarCargoAbonoProveedoresDialogoComponent } from './components/admin/editar-cargo-abono-proveedores-dialogo/editar-cargo-abono-proveedores-dialogo.component';
 
@@ -428,7 +426,6 @@ export function getToken() {
     SalidaAlertaComponent,
     AceptarSalidaAlertaDialogoComponent,
     SaldoProveedoresComponent,
-    NuevaOperacionDialogoComponent,
     CargoAbonoProveedoresDialogoComponent,
     EditarCargoAbonoProveedoresDialogoComponent
 
@@ -524,7 +521,6 @@ export function getToken() {
     NuevoClienteDialogoComponent,
     InsumosAvanceDialogoComponent,
     AceptarSalidaAlertaDialogoComponent,
-    NuevaOperacionDialogoComponent,
     CargoAbonoProveedoresDialogoComponent,
     EditarCargoAbonoProveedoresDialogoComponent
 
