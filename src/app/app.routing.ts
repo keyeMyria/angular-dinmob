@@ -824,6 +824,9 @@ export const ROUTES: Routes = [
             {
                 path: 'saldo-proveedores', component: SaldoProveedoresComponent,
                 canActivate: [AuthGuard],
+                resolve: {
+                    obras: ObrasUsuarioResolverService
+                },
                 data: {
                     permisos: [Rol.Administrador, Rol.Contabilidad]
                 }

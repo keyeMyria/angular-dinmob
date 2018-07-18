@@ -1,3 +1,81 @@
-<p>
-  saldo-proveedores works!
-</p>
+<div class="container mt-3 mb-5">
+  <div class="row">
+    <div class="col-12">
+
+      <div>
+        <mat-form-field class="w-100">
+          <mat-select placeholder="Obra" [(ngModel)]="obra_selected" (selectionChange)="cargarObra(obra_selected)">
+            <mat-option *ngFor="let obra of obras" [value]="obra.id_obra">{{ obra.nombre }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="card mb-2">
+        <div class="card-body">
+          <div class="text-right">
+            <span>SALDO: </span>
+            <span class="ml-1 h5">{{totalSaldo() | currency}}</span>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header padding-card-header">
+          <div class="d-flex">
+            <div class="align-self-center">Saldo Proveedores</div>
+            <div class="spacer"></div>
+            <div>
+              <button mat-icon-button (click)="cargoAbono()">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="table-responsive">
+            <table class="table table-hover table-striped table-align-middle">
+              <thead>
+                <tr>
+                  <th>Fecha</th>
+                  <th>Cargo</th>
+                  <th>Abono</th>
+                  <th>Nota</th>
+                  <th></th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let proveedor of proveedores">
+                  <td class="ws-nowrap">{{proveedor.fecha}}</td>
+                  <td>{{proveedor.cargo|currency}}</td>
+                  <td>{{proveedor.abono|currency}}</td>
+                  <td>{{proveedor.nota}}</td>
+                  <td class="text-right">
+                    <button mat-button class="no-min" matTooltip="Editar" (click)="editarCargo(proveedor)">
+                      <i class="fa fa-pencil"></i>
+                    </button>
+                    <button mat-button class="no-min" matTooltip="Eliminar" (click)="delCargo(proveedor)">
+                      <i class="fa fa-times"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr class="">
+                  <th>TOTALES</th>
+                  <th>{{totalCargo() | currency}}</th>
+                  <th>{{totalAbono() | currency}}</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+
+</div>
