@@ -256,6 +256,15 @@ import { CambiarEstadoVentasLoteDialogoComponent } from './components/ventas/cam
 import { EditarClienteDialogoComponent } from './components/ventas/editar-cliente-dialogo/editar-cliente-dialogo.component';
 import { NuevoClienteDialogoComponent } from './components/ventas/nuevo-cliente-dialogo/nuevo-cliente-dialogo.component';
 import { InsumosAvanceDialogoComponent } from './components/residente/insumos-avance-dialogo/insumos-avance-dialogo.component';
+import { TableroJefeFrenteComponent } from './components/tablero-jefe-frente/tablero-jefe-frente.component';
+
+import { SalidaAlertaComponent } from './components/almacen/salida-alerta/salida-alerta.component';
+import { AceptarSalidaAlertaDialogoComponent } from './components/almacen/aceptar-salida-alerta-dialogo/aceptar-salida-alerta-dialogo.component';
+import { SaldoProveedoresComponent } from './components/admin/saldo-proveedores/saldo-proveedores.component';
+import { NuevaOperacionDialogoComponent } from './components/admin/nueva-operacion-dialogo/nueva-operacion-dialogo.component';
+import { CargoAbonoProveedoresDialogoComponent } from './components/admin/cargo-abono-proveedores-dialogo/cargo-abono-proveedores-dialogo.component';
+import { EditarCargoAbonoProveedoresDialogoComponent } from './components/admin/editar-cargo-abono-proveedores-dialogo/editar-cargo-abono-proveedores-dialogo.component';
+
 
 
 
@@ -415,6 +424,13 @@ export function getToken() {
     EditarClienteDialogoComponent,
     NuevoClienteDialogoComponent,
     InsumosAvanceDialogoComponent,
+    TableroJefeFrenteComponent,
+    SalidaAlertaComponent,
+    AceptarSalidaAlertaDialogoComponent,
+    SaldoProveedoresComponent,
+    NuevaOperacionDialogoComponent,
+    CargoAbonoProveedoresDialogoComponent,
+    EditarCargoAbonoProveedoresDialogoComponent
 
   ],
 
@@ -506,7 +522,11 @@ export function getToken() {
     CambiarEstadoVentasLoteDialogoComponent,
     EditarClienteDialogoComponent,
     NuevoClienteDialogoComponent,
-    InsumosAvanceDialogoComponent
+    InsumosAvanceDialogoComponent,
+    AceptarSalidaAlertaDialogoComponent,
+    NuevaOperacionDialogoComponent,
+    CargoAbonoProveedoresDialogoComponent,
+    EditarCargoAbonoProveedoresDialogoComponent
 
   ],
 

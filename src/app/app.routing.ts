@@ -105,6 +105,9 @@ import { UsuariosAsesoresResolverService } from './resolvers/usuarios-asesores-r
 import { HistorialAvancesComponent } from './components/residente/historial-avances/historial-avances.component';
 import { ManzanasResolverService } from 'app/resolvers/manzanas-resolver.service';
 import { TareasComponent } from './components/admin/tareas/tareas.component';
+import { TableroJefeFrenteComponent } from './components/tablero-jefe-frente/tablero-jefe-frente.component';
+import { SalidaAlertaComponent } from './components/almacen/salida-alerta/salida-alerta.component';
+import { SaldoProveedoresComponent } from './components/admin/saldo-proveedores/saldo-proveedores.component';
 
 
 export const ROUTES: Routes = [
@@ -294,7 +297,7 @@ export const ROUTES: Routes = [
                     formas_pago: FormasPagoResolverService,
                     tipos_pago: TiposPagoResolverService,
                     instituciones_credito: InstitucionesCreditoResolverService,
-                    tipos_operacion: TiposOperacionResolverService,                    
+                    tipos_operacion: TiposOperacionResolverService,
                     estados: EstadosVentaLoteResolverService,
                     //asesores: UsuariosAsesoresResolverService
                     //vendedores: VendedoresResolverService
@@ -802,6 +805,27 @@ export const ROUTES: Routes = [
                 },
                 data: {
                     permisos: [Rol.Administrador]
+                }
+            },
+            {
+                path: 'tablero-jefe-frente', component: TableroJefeFrenteComponent,
+                canActivate: [AuthGuard],
+                data: {
+                    permisos: [Rol.Administrador]
+                }
+            },
+            {
+                path: 'salida-alerta', component: SalidaAlertaComponent,
+                canActivate: [AuthGuard],
+                data: {
+                    permisos: [Rol.Administrador, Rol.Contabilidad]
+                }
+            },
+            {
+                path: 'saldo-proveedores', component: SaldoProveedoresComponent,
+                canActivate: [AuthGuard],
+                data: {
+                    permisos: [Rol.Administrador, Rol.Contabilidad]
                 }
             },
 
