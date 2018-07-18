@@ -1,7 +1,7 @@
 
-import {of as observableOf,  Observable } from 'rxjs';
+import { of as observableOf, Observable } from 'rxjs';
 
-import {switchMap} from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { LotesService } from 'app/services/lotes.service';
 import { ComentarioAvancesDialogoComponent } from 'app/components/residente/comentario-avances-dialogo/comentario-avances-dialogo.component';
@@ -12,6 +12,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { FotoPartidaDialogoComponent } from 'app/components/residente/foto-partida-dialogo/foto-partida-dialogo.component';
 import { SelectionModel } from '@angular/cdk/collections';
+import { Rol } from "../../../constantes/roles";
 
 
 @Component({
@@ -20,6 +21,8 @@ import { SelectionModel } from '@angular/cdk/collections';
   styleUrls: ['./arranque.component.scss']
 })
 export class ArranqueComponent implements OnInit {
+  num_partidas_finalizadas: any;
+  num_partidas: any;
   @ViewChild(MatDrawer) drawer: MatDrawer;
 
   mobileQuery: MediaQueryList;
@@ -31,6 +34,9 @@ export class ArranqueComponent implements OnInit {
   obra: any;
   obra_selected: string = "";
   obras: any = [];
+  Rol = Rol;
+  usuario: any;
+
   trackByIndex = (index, item) => item.id_partida;
 
   selection: SelectionModel<any>;
@@ -45,7 +51,7 @@ export class ArranqueComponent implements OnInit {
     private obraSrv: ObrasService,
     private loteSrv: LotesService,
     public dialog: MatDialog,
-    private auth: AuthService,
+    private authSrv: AuthService,
     public snackBar: MatSnackBar
   ) {
 
@@ -56,6 +62,9 @@ export class ArranqueComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.usuario = this.authSrv.usuario;
+
     this.route.data
       .subscribe((data: { obras: any[] }) => {
         //console.log("resusltado resolve ", data);
@@ -163,64 +172,68 @@ export class ArranqueComponent implements OnInit {
   }
 
 
-  numSubpartidasFinalizadas(partida) {
-    console.log("numSubpartidasFinalizadas" + partida.id_partida);
-    var count = 0;
-
-    //tiene subpartidas
-    if (partida.subpartidas.length) {
-
-      for (var i = 0; i < partida.subpartidas.length; i++) {
-
-        if (partida.subpartidas[i].fecha_fin !== null) {
-          count++;
+  /*   numSubpartidasFinalizadas(partida) {
+      console.log("numSubpartidasFinalizadas" + partida.id_partida);
+      var count = 0;
+  
+      //tiene subpartidas
+      if (partida.subpartidas.length) {
+  
+        for (var i = 0; i < partida.subpartidas.length; i++) {
+  
+          if (partida.subpartidas[i].fecha_fin !== null) {
+            count++;
+          }
         }
+  
+      } else {
+        count = partida.fecha_fin !== null ? 1 : 0;
       }
+  
+      return count;
+  
+    } */
 
-    } else {
-      count = partida.fecha_fin !== null ? 1 : 0;
-    }
-
-    return count;
-
-  }
-
-  partidaFinalizada(partida) {
-    console.log("partidaFinalizada" + partida.id_partida);
-    var finalizada = true;
-
-    //tiene subpartidas
-    if (partida.subpartidas.length) {
-
-      for (var i = 0; i < partida.subpartidas.length; i++) {
-        //si encontramos alguna sin finalizar devolvemos false
-        if (partida.subpartidas[i].fecha_fin === null) {
-          return false;
+  /*   partidaFinalizada(partida) {
+      console.log("partidaFinalizada" + partida.id_partida);
+      var finalizada = true;
+  
+      //tiene subpartidas
+      if (partida.subpartidas.length) {
+  
+        for (var i = 0; i < partida.subpartidas.length; i++) {
+          //si encontramos alguna sin finalizar devolvemos false
+          if (partida.subpartidas[i].fecha_fin === null) {
+            return false;
+          }
         }
+  
+      } else {
+        finalizada = partida.fecha_fin !== null;
       }
-
-    } else {
-      finalizada = partida.fecha_fin !== null;
-    }
-
-    return finalizada;
-
-  }
+  
+      return finalizada;
+  
+    } */
 
   getArranqueLote(lote) {
-    //console.log("getAvancesLote", lote);
+    //console.log("getArranqueLote", lote);
+    if (this.mobileQuery.matches) {
+      this.drawer.close();
+    }
 
     this.loteSrv.getAvances(lote.id_lote)
       .subscribe((response: any) => {
         this.lote = response.lote;
         this.acordeon = response.acordeon;
+        this.num_partidas = +response.num_partidas;
+        this.num_partidas_finalizadas = +response.num_partidas_finalizadas;
         this.selection = new SelectionModel<any>(true, []);
-
       });
 
-    if (this.mobileQuery.matches) {
+  /*   if (this.mobileQuery.matches) {
       this.drawer.close();
-    }
+    } */
 
 
   }
@@ -228,7 +241,7 @@ export class ArranqueComponent implements OnInit {
 
 
   ngOnDestroy(): void {
-    this.mobileQuery.removeListener(this._mobileQueryListener)
+    this.mobileQuery.removeListener(this._mobileQueryListener);
 
   }
 
