@@ -60,10 +60,13 @@
                 </button>
               </span>
             </div>
+
             <ol class="breadcrumb colorBread mt-3">
+              <li class="breadcrumb-item text-primary">{{lotePedido_selected?.obra}}</li>
               <li class="breadcrumb-item text-primary">{{lotePedido_selected?.manzana}}</li>
               <li class="breadcrumb-item text-primary">{{lotePedido_selected?.nombre}}</li>
             </ol>
+
             <!-- partidas -->
             <div class="acordeon-prototipo">
               <mat-accordion [displayMode]="'default'">
@@ -210,7 +213,7 @@
 
         <mat-tab label="Pedido">
 
-          <div class="container-fluid py-3">            
+          <div class="container-fluid py-3">
 
             <!--insumos pedido-->
             <div class="card mb-3">
