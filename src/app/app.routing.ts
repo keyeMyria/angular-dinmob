@@ -810,13 +810,20 @@ export const ROUTES: Routes = [
             {
                 path: 'tablero-jefe-frente', component: TableroJefeFrenteComponent,
                 canActivate: [AuthGuard],
+                resolve: {
+                    /*                     obras: ObrasUsuarioResolverService,
+                                        usuario: UsuarioLoggedResolverService */
+                },
                 data: {
-                    permisos: [Rol.Administrador]
+                    permisos: [Rol.Administrador, Rol.ControlAlmacen, Rol.Residente]
                 }
             },
             {
-                path: 'salida-alerta', component: SalidaAlertaComponent,
+                path: 'salidas-alerta', component: SalidaAlertaComponent,
                 canActivate: [AuthGuard],
+                resolve: {
+                    obras: ObrasUsuarioResolverService,
+                },
                 data: {
                     permisos: [Rol.Administrador, Rol.Contabilidad]
                 }
@@ -824,6 +831,9 @@ export const ROUTES: Routes = [
             {
                 path: 'saldo-proveedores', component: SaldoProveedoresComponent,
                 canActivate: [AuthGuard],
+                resolve: {
+                    obras: ObrasUsuarioResolverService,
+                },
                 data: {
                     permisos: [Rol.Administrador, Rol.Contabilidad]
                 }
