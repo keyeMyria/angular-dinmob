@@ -24,11 +24,15 @@ export class ClientesLoteDialogoComponent implements OnInit {
     public dialogRef: MatDialogRef<ClientesLoteDialogoComponent>,
     private router: Router,
     private reporteSrv: ReporteService,
-    private dialog: MatDialog,  
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit() {
-
+    //seleccionamos el primero de la lista si está activo
+    // porque la lista ya viene ordenada
+    if (this.data.clientes.length > 0 && this.data.clientes[0].activo == 1) {
+      this.selectCliente(this.data.clientes[0]);
+    }
   }
   selectCliente(cliente) {
 
