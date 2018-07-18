@@ -1,7 +1,7 @@
 
-import {of as observableOf,  Observable } from 'rxjs';
+import { of as observableOf, Observable } from 'rxjs';
 
-import {switchMap} from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { Component, OnInit, ViewChild, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { LotesService } from 'app/services/lotes.service';
 import { ComentarioAvancesDialogoComponent } from 'app/components/residente/comentario-avances-dialogo/comentario-avances-dialogo.component';
@@ -285,8 +285,7 @@ export class AvancesComponent implements OnInit {
 
   }
 
-  comentarioAvances():
-    void {
+  comentarioAvances() {
     let dialogRef = this.dialog.open(ComentarioAvancesDialogoComponent, {
       width: '500px',
       data: {}
