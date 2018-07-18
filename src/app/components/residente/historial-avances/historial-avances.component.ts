@@ -42,6 +42,7 @@ export class HistorialAvancesComponent implements OnInit {
         }
       })).subscribe(avances => {
         this.fechas = avances;
+      }, (error) => {
       });
 
   }
@@ -69,7 +70,7 @@ export class HistorialAvancesComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
 
         });
-
+      }, (error) => {
       });
 
   }

@@ -29,7 +29,7 @@ export class EditarPagoDialogoComponent implements OnInit {
 
 
     this.form = this.fb.group({
-      id_cliente: "",
+      
       monto: [data.pago.monto, Validators.required],
       fecha_programada: [moment(data.pago.fecha_programada, "YYYY-MM-DD"), Validators.required],
       fecha_pago: moment(data.pago.fecha_pago, "YYYY-MM-DD"),
