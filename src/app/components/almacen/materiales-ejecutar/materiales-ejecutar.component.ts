@@ -10,7 +10,6 @@ import { ObrasService } from '../../../services/obras.service';
 })
 export class MaterialesEjecutarComponent implements OnInit {
   obras: any = [];
-  obra_selected: string = "";
   form: FormGroup;
   insumos: any;
   manzanas: any;
@@ -23,9 +22,9 @@ export class MaterialesEjecutarComponent implements OnInit {
     private obrasSrv: ObrasService,
   ) {
     this.form = this.fb.group({
-      id_obra: [null],
-      id_lote: [null],
-      id_insumo: [null],
+      id_obra: [""],
+      id_lote: [""],
+      id_insumo: [""],
       all_insumos: [false],
       all_obra: [false]
     });
@@ -42,7 +41,7 @@ export class MaterialesEjecutarComponent implements OnInit {
 
   getManzanasMateriales(id_obra) {
     if (id_obra) {
-      this.obrasSrv.getManzanasMateriales(this.obra_selected)
+      this.obrasSrv.getManzanasMateriales(id_obra)
         .subscribe((res: any) => {
           this.insumos = res.insumos;
           this.manzanas = res.manzanas;
@@ -73,6 +72,11 @@ export class MaterialesEjecutarComponent implements OnInit {
       this.router.navigate([".", {}]);
 
     }
+
+  }
+
+  getReporteMateriales() {
+    console.log("form", this.form.value);
 
   }
 

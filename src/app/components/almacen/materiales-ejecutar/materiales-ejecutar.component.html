@@ -7,11 +7,11 @@
 
           <h5 class="card-title">Materiales por Ejecutar</h5>
 
-          <form [formGroup]="form" (ngSubmit)="getReporteSalidas()" id="id_formReporteSalidas">
+          <form [formGroup]="form" (ngSubmit)="getReporteMateriales()" id="id_formReporteSalidas">
 
             <div class="form-group">
               <label for="obra" class="form-label">Obra</label>
-              <select class="form-control" [(ngModel)]="obra_selected" (change)="getManzanasMateriales(obra_selected)" formControlName="id_obra"
+              <select class="form-control" (change)="getManzanasMateriales(form.get('id_obra').value)" formControlName="id_obra"
                 [ngClass]="{'is-invalid': form.get('id_obra').invalid  && (form.get('id_obra').dirty || form.get('id_obra').touched )}">
                 <option value="">Seleccionar...</option>
                 <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>
@@ -22,7 +22,7 @@
             <div class="form-row">
               <div class="form-group col-md-6">
                 <mat-checkbox formControlName="all_obra">Toda la obra</mat-checkbox>
-                <select [(ngModel)]="lote_selected" class="form-control" formControlName="id_lote" [ngClass]="{'is-invalid': form.get('id_lote').invalid  && (form.get('id_lote').dirty || form.get('id_lote').touched )}">
+                <select class="form-control" formControlName="id_lote" [ngClass]="{'is-invalid': form.get('id_lote').invalid  && (form.get('id_lote').dirty || form.get('id_lote').touched )}">
                   <option value="">Seleccionar...</option>
                   <ng-container *ngFor="let manzana of manzanas">
                     <option *ngFor="let lote of manzana.lotes" [value]="lote.id_lote">{{manzana.nombre + ' - ' + lote.nombre}}</option>
@@ -33,7 +33,7 @@
 
               <div class="form-group col-md-6">
                 <mat-checkbox formControlName="all_insumos">Todos los insumos</mat-checkbox>
-                <select [(ngModel)]="insumo_selected" class="form-control" formControlName="id_insumo" [ngClass]="{'is-invalid': form.get('id_insumo').invalid  && (form.get('id_insumo').dirty || form.get('id_insumo').touched )}">
+                <select class="form-control" formControlName="id_insumo" [ngClass]="{'is-invalid': form.get('id_insumo').invalid  && (form.get('id_insumo').dirty || form.get('id_insumo').touched )}">
                   <option value="">Seleccionar...</option>
                   <option *ngFor="let insumo of insumos" [value]="insumo.id_insumo">{{insumo.insumo}}</option>
                 </select>
