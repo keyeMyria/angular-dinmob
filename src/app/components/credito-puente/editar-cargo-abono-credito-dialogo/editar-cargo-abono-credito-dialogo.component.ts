@@ -40,7 +40,7 @@ export class EditarCargoAbonoCreditoDialogoComponent implements OnInit {
   }
 
   guardar() {
-    console.log("datos", this.form.value);
+    //console.log("datos", this.form.value);
     this.form.value.monto = this.form.value.monto.replace(/,/g, "");
     this.creditoSrv.updateMovimiento(this.data.mov.id_movimiento, this.form.value)
       .subscribe(movimiento => {
