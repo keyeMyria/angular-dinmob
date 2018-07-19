@@ -169,8 +169,8 @@
     <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-2">
       <div class="card mat-elevation-z2 border-danger" style="border-width: 2px">
         <div class="card-body">
-          <h3>0</h3>
-          <p>LIB PARTIDAS PENDIENTES</p>
+          <h3>{{(estadisticas?.total_retenciones_mo || 0) |currency }}</h3>
+          <p>RETENCIÓN PARTIDAS</p>
           <i class="material-icons mat-icon-card">attach_money</i>
         </div>
       </div>
