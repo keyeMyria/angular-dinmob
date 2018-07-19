@@ -14,6 +14,7 @@ export class MaterialesEjecutarComponent implements OnInit {
   insumos: any;
   manzanas: any;
   datos_obra: any;
+  pendientes: any = [];
 
   constructor(
     private router: Router,
@@ -77,6 +78,10 @@ export class MaterialesEjecutarComponent implements OnInit {
 
   getReporteMateriales() {
     console.log("form", this.form.value);
+    this.obrasSrv.getInsumosPendientes(this.form.get('id_obra').value)
+      .subscribe(insumos => {
+        this.pendientes = insumos;
+      })
 
   }
 

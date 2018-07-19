@@ -11,8 +11,7 @@
 
             <div class="form-group">
               <label for="obra" class="form-label">Obra</label>
-              <select class="form-control" (change)="getManzanasMateriales(form.get('id_obra').value)" formControlName="id_obra"
-                [ngClass]="{'is-invalid': form.get('id_obra').invalid  && (form.get('id_obra').dirty || form.get('id_obra').touched )}">
+              <select class="form-control" (change)="getManzanasMateriales(form.get('id_obra').value)" formControlName="id_obra" [ngClass]="{'is-invalid': form.get('id_obra').invalid  && (form.get('id_obra').dirty || form.get('id_obra').touched )}">
                 <option value="">Seleccionar...</option>
                 <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>
               </select>
@@ -64,19 +63,14 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td class="text-right ws-nowrap">
-                    <button mat-button class="no-min">
-                      <i class="fa fa-pencil"></i>
-                    </button>
-                    <button mat-button class="no-min">
-                      <i class="fa fa-times"></i>
-                    </button>
+                <tr *ngFor="let insumo of pendientes">
+                  <td>{{insumo.codigo}}</td>
+                  <td>{{insumo.insumo}}</td>
+                  <td>{{insumo.unidad}}</td>
+                  <td>{{insumo.existencias}}</td>
+                  <td>{{insumo.pendiente}}</td>
+                  <td >
+                  
                   </td>
                 </tr>
               </tbody>
