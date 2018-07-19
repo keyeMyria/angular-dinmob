@@ -24,7 +24,6 @@ export class SalidasService {
       .pipe(catchError(this.handleError("createSalida")));
   }
 
-
   //ok
   getSalidasObra(id_obra) {
     return this.http.get(this.url + 'obra/' + id_obra)
@@ -38,9 +37,21 @@ export class SalidasService {
   }
 
   //ok
+  getCountSalidasAlertaObra(id_obra): Observable<any> {
+    return this.http.post(this.url + 'count_alerta_obra/' + id_obra, {})
+      .pipe(catchError(this.handleError("getCountSalidasAlertaObra")));
+  }
+
+  //ok
   getPageSalidasObra(id_obra, page_size, page, tipo_salida): Observable<any> {
     return this.http.post(this.url + 'page_obra/' + id_obra, { page_size: page_size, page: page, tipo_salida: tipo_salida })
       .pipe(catchError(this.handleError("getPageSalidasObra")));
+  }
+
+  //ok
+  getPageSalidasAlertaObra(id_obra, page_size, page): Observable<any> {
+    return this.http.post(this.url + 'page_alerta_obra/' + id_obra, { page_size: page_size, page: page })
+      .pipe(catchError(this.handleError("getPageSalidasAlertaObra")));
   }
 
   //ok

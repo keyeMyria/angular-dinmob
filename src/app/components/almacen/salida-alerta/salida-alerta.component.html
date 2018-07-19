@@ -11,15 +11,9 @@
       </div>
 
       <div class="card">
-        <div class="card-header padding-card-header">
+        <div class="card-header">
           <div class="d-flex">
             <div class="align-self-center">Salidas con Alerta</div>
-            <div class="spacer"></div>
-            <div>
-              <button mat-icon-button>
-                <mat-icon>add</mat-icon>
-              </button>
-            </div>
           </div>
         </div>
 
@@ -34,6 +28,7 @@
                   <th>Lote</th>
                   <th>Partida</th>
                   <th>Recibió</th>
+                  <th>Nota</th>
                   <th>Estado</th>
                   <th></th>
 
@@ -42,12 +37,13 @@
 
               <tbody>
                 <tr *ngFor="let salida of salidas">
-                  <td>{{salida.vale}}</td>
-                  <td class="ws-nowrap">{{salida.fecha}}</td>
+                  <td>{{salida.num_vale}}</td>
+                  <td class="ws-nowrap">{{salida.fecha|dateToIso| date:'medium':'':'es'}}</td>
                   <td class="ws-nowrap">{{salida.manzana}}</td>
-                  <td class="ws-nowrap">{{salida.lote}}</td>
-                  <td>{{salida.partida}}</td>
-                  <td>{{salida.recibio}}</td>
+                  <td class="ws-nowrap">{{salida.nombre_lote}}</td>
+                  <td>{{(salida.nombre_partida_padre? salida.nombre_partida_padre + " / ": "") + salida.nombre_partida}}</td>
+                  <td>{{salida.nombre_trabajador}}</td>
+                  <td>{{salida.notas}}</td>
                   <td>
                     <span class="badge" [ngClass]="salida.aceptada=='1'?'badge-success':'badge-secondary'" *ngIf="salida.tiene_alerta=='1'">
                       {{salida.aceptada|numberToYesNo:'SAL'}}
@@ -71,7 +67,7 @@
                         <mat-icon>block</mat-icon>
                         <span>Rechazar</span>
                       </button>
-                      
+
                       <button mat-menu-item>
                         <mat-icon>file_download</mat-icon>
                         <span>Reporte</span>
@@ -87,7 +83,7 @@
               </tbody>
             </table>
           </div>
-          <mat-paginator>
+          <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChange($event)">
           </mat-paginator>
         </div>
       </div>

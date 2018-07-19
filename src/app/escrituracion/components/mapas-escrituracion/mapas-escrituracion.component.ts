@@ -39,6 +39,7 @@ export class MapasEscrituracionComponent implements OnInit, OnDestroy {
   scalePrototipos: any = {};
   scaleLoteTipo: any = {};
   scaleFormaPago: any = {};
+  scaleEscrituracion: any = {};
   valuesPrototipos: any = {};
   valuesEstadosVenta: any = {};
   formas_pago: any[] = [];
@@ -86,7 +87,7 @@ export class MapasEscrituracionComponent implements OnInit, OnDestroy {
 
           //unimos la consulta de los valores y el mapa
           return observableForkJoin(
-            this.mapaSrv.getVentasLotesObra(obra.id_obra),
+            this.mapaSrv.getEscrituracionLotesObra(obra.id_obra),
             this.mapaSrv.getMapaObra(obra.mapa)
           )
 
@@ -100,7 +101,7 @@ export class MapasEscrituracionComponent implements OnInit, OnDestroy {
 
           //unimos la consulta de los valores y el mapa
           return observableForkJoin(
-            this.mapaSrv.getVentasLotesObra(obra.id_obra),
+            this.mapaSrv.getEscrituracionLotesObra(obra.id_obra),
             this.mapaSrv.getMapaObra(obra.mapa)
           )
 
@@ -119,6 +120,7 @@ export class MapasEscrituracionComponent implements OnInit, OnDestroy {
         this.scalePrototipos = res[0].scalePrototipos;
         this.scaleLoteTipo = res[0].scaleLotesTipo;
         this.scaleFormaPago = res[0].scaleFormasPago;
+        this.scaleEscrituracion = res[0].scaleEstadoEscrituracion;
         this.jsonMap = res[1];
 
         //console.log("escala", this.scalePrototipos, this.scaleLoteTipo, this.scaleFormaPago);
@@ -165,7 +167,7 @@ export class MapasEscrituracionComponent implements OnInit, OnDestroy {
         if (this.jsonMap.mapa) {
 
           setTimeout(() => {
-            this.crearMapa(this.valuesEstadosVenta, this.scalePrototipos, this.scaleFormaPago, this.scaleLoteTipo);
+            this.crearMapa(this.valuesEstadosVenta, this.scalePrototipos, this.scaleFormaPago, this.scaleLoteTipo, this.scaleEscrituracion);
             this.loading.stop();
           }, 100);
 
@@ -281,7 +283,7 @@ export class MapasEscrituracionComponent implements OnInit, OnDestroy {
   }
 
 
-  crearMapa(values, scalePrototipos, scaleFormaPago, scaleLoteTipo) {
+  crearMapa(values, scalePrototipos, scaleFormaPago, scaleLoteTipo, scaleEscrituracion) {
 
     this.verLeyenda.toggle = true;
 
@@ -330,14 +332,7 @@ export class MapasEscrituracionComponent implements OnInit, OnDestroy {
         regions: [
           {
             values: values,
-            scale: {
-              'Libre': '#00a65a', //green
-              'Apartado': '#f39c12', //amarillo     
-              'Bloqueado': '#d81b60', //maroon 
-              'Contrato': '#00c0ef', //aqua        
-              'Escriturado': '#605ca8' //purple
-
-            },
+            scale: scaleEscrituracion,
             legend: {
               vertical: true,
               title: 'Estado',
