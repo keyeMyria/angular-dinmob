@@ -262,6 +262,7 @@ import { AceptarSalidaAlertaDialogoComponent } from './components/almacen/acepta
 import { SaldoProveedoresComponent } from './components/admin/saldo-proveedores/saldo-proveedores.component';
 import { CargoAbonoProveedoresDialogoComponent } from './components/admin/cargo-abono-proveedores-dialogo/cargo-abono-proveedores-dialogo.component';
 import { EditarCargoAbonoProveedoresDialogoComponent } from './components/admin/editar-cargo-abono-proveedores-dialogo/editar-cargo-abono-proveedores-dialogo.component';
+import { MaterialesEjecutarComponent } from './components/almacen/materiales-ejecutar/materiales-ejecutar.component';
 
 
 
@@ -427,7 +428,8 @@ export function getToken() {
     AceptarSalidaAlertaDialogoComponent,
     SaldoProveedoresComponent,
     CargoAbonoProveedoresDialogoComponent,
-    EditarCargoAbonoProveedoresDialogoComponent
+    EditarCargoAbonoProveedoresDialogoComponent,
+    MaterialesEjecutarComponent,
 
   ],
 

@@ -108,6 +108,7 @@ import { TareasComponent } from './components/admin/tareas/tareas.component';
 import { TableroJefeFrenteComponent } from './components/tablero-jefe-frente/tablero-jefe-frente.component';
 import { SalidaAlertaComponent } from './components/almacen/salida-alerta/salida-alerta.component';
 import { SaldoProveedoresComponent } from './components/admin/saldo-proveedores/saldo-proveedores.component';
+import { MaterialesEjecutarComponent } from './components/almacen/materiales-ejecutar/materiales-ejecutar.component';
 
 
 export const ROUTES: Routes = [
@@ -838,6 +839,16 @@ export const ROUTES: Routes = [
                     permisos: [Rol.Administrador, Rol.Contabilidad]
                 }
             },
+       {
+                path: 'materiales-ejecutar', component: MaterialesEjecutarComponent,
+                canActivate: [AuthGuard],
+                resolve: {
+                    obras: ObrasUsuarioResolverService,
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.Contabilidad]
+                }
+            }, 
 
 
         ]
