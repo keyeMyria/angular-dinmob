@@ -1,3 +1,18 @@
-<p>
-  aceptar-salida-alerta-dialogo works!
-</p>
+<h1 mat-dialog-title>Autorizar</h1>
+<div mat-dialog-content>
+
+  <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
+
+    <div class="form-group">
+      <label for="motivo" class="col-form-label">Motivo</label>
+      <textarea class="form-control" rows="3" type="text" name="motivo" id="motivo" formControlName="motivo" [ngClass]="{'is-invalid': form.get('motivo').invalid  && (form.get('motivo').dirty || form.get('motivo').touched )}"></textarea>
+      <div class="invalid-feedback">Proporcione un motivo</div>
+    </div>
+
+  </form>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="false">CANCELAR</button>
+  <button mat-button [mat-dialog-close]="true" form="id_form" [disabled]="form.invalid" color="primary">ACEPTAR</button>
+</div>

@@ -1,3 +1,99 @@
-<p>
-  salida-alerta works!
-</p>
+<div class="container-fluid mt-2 mb-5">
+  <div class="row">
+    <div class="col-12">
+
+      <div>
+        <mat-form-field class="w-100">
+          <mat-select placeholder="Obra" [(ngModel)]="obra_selected" (selectionChange)="cargarObra(obra_selected)">
+            <mat-option *ngFor="let obra of obras" [value]="obra.id_obra">{{ obra.nombre }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="card">
+        <div class="card-header padding-card-header">
+          <div class="d-flex">
+            <div class="align-self-center">Salidas con Alerta</div>
+            <div class="spacer"></div>
+            <div>
+              <button mat-icon-button>
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="table-responsive">
+            <table class="table-align-middle table table-hover table-striped">
+              <thead>
+                <tr>
+                  <th>Vale</th>
+                  <th>Fecha</th>
+                  <th>Manzana</th>
+                  <th>Lote</th>
+                  <th>Partida</th>
+                  <th>Recibió</th>
+                  <th>Estado</th>
+                  <th></th>
+
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let salida of salidas">
+                  <td>{{salida.vale}}</td>
+                  <td class="ws-nowrap">{{salida.fecha}}</td>
+                  <td class="ws-nowrap">{{salida.manzana}}</td>
+                  <td class="ws-nowrap">{{salida.lote}}</td>
+                  <td>{{salida.partida}}</td>
+                  <td>{{salida.recibio}}</td>
+                  <td>
+                    <span class="badge" [ngClass]="salida.aceptada=='1'?'badge-success':'badge-secondary'" *ngIf="salida.tiene_alerta=='1'">
+                      {{salida.aceptada|numberToYesNo:'SAL'}}
+                    </span>
+                  </td>
+                  <td class="text-right">
+                    <button mat-icon-button [matMenuTriggerFor]="menu">
+                      <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                      <button mat-menu-item (click)="verSalida(salida)">
+                        <mat-icon>visibility</mat-icon>
+                        <span>Ver Salida</span>
+                      </button>
+
+                      <button mat-menu-item *ngIf="salida.aceptada=='0'" (click)="setValidacionAceptada(salida)">
+                        <mat-icon>done</mat-icon>
+                        <span>Autorizar</span>
+                      </button>
+                      <button mat-menu-item *ngIf="salida.aceptada=='1'">
+                        <mat-icon>block</mat-icon>
+                        <span>Rechazar</span>
+                      </button>
+                      
+                      <button mat-menu-item>
+                        <mat-icon>file_download</mat-icon>
+                        <span>Reporte</span>
+                      </button>
+                      <button mat-menu-item (click)="delSalida(salida)">
+                        <mat-icon>delete</mat-icon>
+                        <span>Eliminar</span>
+                      </button>
+                    </mat-menu>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+          <mat-paginator>
+          </mat-paginator>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+</div>
