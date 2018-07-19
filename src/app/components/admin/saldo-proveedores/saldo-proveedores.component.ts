@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '../../../../../node_modules/@angular/router';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { CargoAbonoProveedoresDialogoComponent } from '../cargo-abono-proveedores-dialogo/cargo-abono-proveedores-dialogo.component';
-import { MatDialog, MatSnackBar } from '../../../../../node_modules/@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
 import { EditarCargoAbonoProveedoresDialogoComponent } from '../editar-cargo-abono-proveedores-dialogo/editar-cargo-abono-proveedores-dialogo.component';
-
+import { switchMap } from 'rxjs/operators';
+import { of } from "rxjs";
+import { ProveedorService } from '../../../services/proveedor.service';
 @Component({
   selector: 'app-saldo-proveedores',
   templateUrl: './saldo-proveedores.component.html',
@@ -13,47 +15,34 @@ import { EditarCargoAbonoProveedoresDialogoComponent } from '../editar-cargo-abo
 export class SaldoProveedoresComponent implements OnInit {
   obras: any = [];
   obra_selected: string = "";
-  proveedores: any;
+  movimientos: any = [];
 
   constructor(
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
     private route: ActivatedRoute,
     private router: Router,
-  ) {
-    this.proveedores = [
-      {
-        fecha: "21 jun. 2018",
-        cargo: "1000",
-        abono: "500",
-        nota: "Folio 02"
-      },
-      {
-        fecha: "2 ene. 2018",
-        cargo: "5000",
-        abono: "",
-        nota: "Folio 04"
-      },
-      {
-        fecha: "10 jul. 2018",
-        cargo: "500",
-        abono: "",
-        nota: "Folio 06"
-      },
-      {
-        fecha: "21 ago. 2018",
-        cargo: "100000",
-        abono: "1000",
-        nota: "Folio 08"
-      }
-    ]
-  }
+    private proveedorSrv: ProveedorService
+  ) { }
 
   ngOnInit() {
     this.route.data
       .subscribe((data: { obras: any[] }) => {
         //console.log("resultado resolve ", data);
         this.obras = data.obras;
+      });
+
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
+        if (params.has("obra")) {
+          this.obra_selected = params.get("obra");
+          return this.proveedorSrv.getMovimientos(params.get("obra"));
+        } else {
+          return of([]);
+        }
+      })).subscribe(movimientos => {
+        this.movimientos = movimientos;
+      }, (error) => {
       });
   }
 
@@ -69,36 +58,55 @@ export class SaldoProveedoresComponent implements OnInit {
   }
 
 
-  totalCargo() {
+  totalCargos() {
     let suma = 0;
-    this.proveedores.forEach(pago => {
-      suma += +pago.cargo;
+    this.movimientos.forEach(mov => {
+
+      if (mov.es_cargo === "1") {
+        suma += +mov.monto;
+      }
+
     });
     return suma;
   }
 
-  totalAbono() {
+  totalAbonos() {
     let total = 0;
-    this.proveedores.forEach(pagoAbono => {
-      total += +pagoAbono.abono;
+    this.movimientos.forEach(mov => {
+
+      if (mov.es_cargo === "0") {
+        total += +mov.monto;
+      }
+
     });
     return total;
   }
 
   totalSaldo() {
-    let saldo = 0;
-    if (this.proveedores) {
-      saldo = +this.totalCargo() + this.totalAbono();
+    let total = 0;
+
+    if (this.movimientos) {
+      this.movimientos.forEach(mov => {
+
+        if (mov.es_cargo === "1") {
+          total += +mov.monto;
+
+        } else {
+          total -= +mov.monto
+        }
+
+      });
     }
-    return saldo;
+    return total;
   }
 
 
-  cargoAbono() {
+  nuevoMovimiento() {
 
     let dialogRef = this.dialog.open(CargoAbonoProveedoresDialogoComponent, {
       data: {
-        proveedores: this.proveedores
+        id_obra: this.obra_selected,
+        movimientos: this.movimientos
       },
       width: "500px"
     });
@@ -123,11 +131,12 @@ export class SaldoProveedoresComponent implements OnInit {
 
   }
 
-  editarCargo(proveedor) {
+  editarMovimiento(mov) {
 
     let dialogRef = this.dialog.open(EditarCargoAbonoProveedoresDialogoComponent, {
       data: {
-        proveedor: proveedor
+        mov: mov,
+        movimientos: this.movimientos
       },
       width: "500px"
     });
@@ -152,13 +161,19 @@ export class SaldoProveedoresComponent implements OnInit {
 
   }
 
-  delCargo(proveedor) {
+  delMovimiento(mov) {
 
+    let tipo;
+    if (mov.es_cargo == "1") {
+      tipo = "Cargo";
+    } else {
+      tipo = "Abono";
+    }
 
     let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
       data: {
         title: "Eliminar Movimiento",
-        content: `¿Desea eliminar el movimiento del ${proveedor.fecha}?`
+        content: `¿Desea eliminar el ${tipo} del ${mov.fecha}?`
       },
       width: "500px"
     });
@@ -166,6 +181,32 @@ export class SaldoProveedoresComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
 
+        this.proveedorSrv.delMovimiento(mov.id_movimiento)
+          .subscribe((res: any) => {
+            if (res.count === 1) {
+
+              let i = this.movimientos.indexOf(mov);
+              this.movimientos.splice(i, 1);
+
+
+              this.snackBar.open("Movimiento Eliminado", "", {
+                duration: 2000,
+                panelClass: ["bg-success", "text-white"]
+              });
+
+            } else {
+              this.snackBar.open("Ha ocurrido un error", "", {
+                duration: 3000,
+                panelClass: ["bg-danger", "text-white"]
+              });
+            }
+
+          }, (error) => {
+            this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+              duration: 3000,
+              panelClass: ["bg-danger", "text-white"]
+            });
+          });
 
 
       }

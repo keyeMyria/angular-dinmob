@@ -26,7 +26,7 @@
             <div class="align-self-center">Saldo Proveedores</div>
             <div class="spacer"></div>
             <div>
-              <button mat-icon-button (click)="cargoAbono()">
+              <button mat-icon-button (click)="nuevoMovimiento()">
                 <mat-icon>add</mat-icon>
               </button>
             </div>
@@ -46,24 +46,28 @@
               </thead>
 
               <tbody>
-                <tr *ngFor="let proveedor of proveedores">
-                  <td class="ws-nowrap">{{proveedor.fecha}}</td>
-                  <td>{{proveedor.cargo|currency}}</td>
-                  <td>{{proveedor.abono|currency}}</td>
-                  <td>{{proveedor.nota}}</td>
+                <tr *ngFor="let movimiento of movimientos">
+                  <td class="ws-nowrap">{{movimiento.fecha| date:'mediumDate':'':'es'}}</td>
+                  <td>
+                    <span *ngIf="movimiento.es_cargo=='1'">{{movimiento.monto|currency}}</span>
+                  </td>
+                  <td>
+                    <span *ngIf="movimiento.es_cargo=='0'">{{movimiento.monto|currency}}</span>
+                  </td>
+                  <td>{{movimiento.nota}}</td>
                   <td class="text-right">
-                    <button mat-button class="no-min" matTooltip="Editar" (click)="editarCargo(proveedor)">
+                    <button mat-button class="no-min" matTooltip="Editar" (click)="editarMovimiento(movimiento)">
                       <i class="fa fa-pencil"></i>
                     </button>
-                    <button mat-button class="no-min" matTooltip="Eliminar" (click)="delCargo(proveedor)">
+                    <button mat-button class="no-min" matTooltip="Eliminar" (click)="delMovimiento(movimiento)">
                       <i class="fa fa-times"></i>
                     </button>
                   </td>
                 </tr>
                 <tr class="">
                   <th>TOTALES</th>
-                  <th>{{totalCargo() | currency}}</th>
-                  <th>{{totalAbono() | currency}}</th>
+                  <th>{{totalCargos() | currency}}</th>
+                  <th>{{totalAbonos() | currency}}</th>
                   <th></th>
                   <th></th>
                 </tr>
