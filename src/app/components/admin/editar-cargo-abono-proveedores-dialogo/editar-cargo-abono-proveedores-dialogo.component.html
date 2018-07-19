@@ -1,3 +1,47 @@
-<p>
-  editar-cargo-abono-proveedores-dialogo works!
-</p>
+<h1 mat-dialog-title>Saldo Proveedor</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form" (ngSubmit)="guardar()" id="id_form">
+
+
+    <div class="form-group row">
+      <label for="fecha" class="col-sm-3 col-form-label">Fecha</label>
+      <div class="input-group col-sm-9">
+        <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="fecha" placement="bottom-left" [matDatepicker]="dpFechaProgramada"
+          formControlName="fecha" [ngClass]="{'is-invalid':form.get('fecha').invalid && (form.get('fecha').dirty || form.get('fecha').touched) }">
+        <span class="input-group-append">
+          <button class="btn btn-secondary" type="button" (click)="dpFechaProgramada.open()">
+            <i class="fa fa-calendar"></i>
+          </button>
+        </span>
+        <div *ngIf="form.get('fecha').invalid && (form.get('fecha').dirty || form.get('fecha').touched)" class="visible invalid-feedback">
+          Seleccione una fecha
+        </div>
+      </div>
+      <mat-datepicker touchUi="true" #dpFechaProgramada></mat-datepicker>
+    </div>
+
+    <div class="form-group row">
+      <label for="monto" class="col-sm-3 col-form-label">Monto</label>
+      <div class="input-group col-sm-9">
+        <input [textMask]="{mask: numberMask}" class="form-control" type="text" id="monto" name="monto" formControlName="monto" [ngClass]="{'is-invalid': form.get('monto').invalid  && (form.get('monto').dirty || form.get('monto').touched )}">
+        <div class="invalid-feedback">Proporcione un monto válido</div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="nota" class="col-sm-3 col-form-label">Nota</label>
+      <div class="input-group col-sm-9">
+        <textarea class="form-control" type="text" id="nota" name="nota" formControlName="nota" row="3"></textarea>
+      </div>
+    </div>
+
+
+
+  </form>
+
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button type="button" [mat-dialog-close]="false">CERRAR</button>
+  <button mat-button type="submit" form="id_form" [disabled]="form.invalid" color="primary">GUARDAR</button>
+</div>
