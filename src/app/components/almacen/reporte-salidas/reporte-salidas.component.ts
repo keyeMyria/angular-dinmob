@@ -15,9 +15,7 @@ import { VerSalidaDialogoComponent } from 'app/components/almacen/ver-salida-dia
 })
 export class ReporteSalidasComponent implements OnInit {
   obras: any = [];
-  obra_selected: string = "";
-  insumo_selected: string = "";
-  lote_selected: string = "";
+
   form: FormGroup;
   toda_obra_selected: any;
   insumos: any;
@@ -40,12 +38,12 @@ export class ReporteSalidasComponent implements OnInit {
     public dialog: MatDialog,
   ) {
     this.form = this.fb.group({
-      id_obra: [null],
+      id_obra: [""],
       fecha_ini: [moment(), Validators.required],
       fecha_fin: [moment(), Validators.required],
       inicio: [false],
-      id_lote: [null],
-      id_insumo: [null],
+      id_lote: [""],
+      id_insumo: [""],
       all_insumos: [false],
       all_obra: [false]
     });
@@ -87,7 +85,7 @@ export class ReporteSalidasComponent implements OnInit {
   }
 
   getReporteSalidas() {
-    console.log("reporte", this.form.value);
+    //console.log("reporte", this.form.value);
     this.otras_obras = [];
     this.paquetes = [];
     this.partidas = [];
@@ -108,7 +106,7 @@ export class ReporteSalidasComponent implements OnInit {
 
   getManzanasMateriales(id_obra) {
     if (id_obra) {
-      this.obrasSrv.getManzanasMateriales(this.obra_selected)
+      this.obrasSrv.getManzanasMateriales(id_obra)
         .subscribe((res: any) => {
           this.insumos = res.insumos;
           this.manzanas = res.manzanas;

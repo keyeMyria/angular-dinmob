@@ -11,8 +11,7 @@
 
             <div class="form-group">
               <label for="obra" class="form-label">Obra</label>
-              <select class="form-control" [(ngModel)]="obra_selected" (change)="getManzanasMateriales(obra_selected)" formControlName="id_obra"
-                [ngClass]="{'is-invalid': form.get('id_obra').invalid  && (form.get('id_obra').dirty || form.get('id_obra').touched )}">
+              <select class="form-control" (change)="getManzanasMateriales(form.get('id_obra').value)" formControlName="id_obra" [ngClass]="{'is-invalid': form.get('id_obra').invalid  && (form.get('id_obra').dirty || form.get('id_obra').touched )}">
                 <option value="">Seleccionar...</option>
                 <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>
               </select>
@@ -22,7 +21,7 @@
             <div class="form-row">
               <div class="form-group col-md-6">
                 <mat-checkbox formControlName="all_obra">Toda la obra</mat-checkbox>
-                <select [(ngModel)]="lote_selected" class="form-control" formControlName="id_lote" [ngClass]="{'is-invalid': form.get('id_lote').invalid  && (form.get('id_lote').dirty || form.get('id_lote').touched )}">
+                <select class="form-control" formControlName="id_lote" [ngClass]="{'is-invalid': form.get('id_lote').invalid  && (form.get('id_lote').dirty || form.get('id_lote').touched )}">
                   <option value="">Seleccionar...</option>
                   <ng-container *ngFor="let manzana of manzanas">
                     <option *ngFor="let lote of manzana.lotes" [value]="lote.id_lote">{{manzana.nombre + ' - ' + lote.nombre}}</option>
@@ -35,7 +34,7 @@
 
               <div class="form-group col-md-6">
                 <mat-checkbox formControlName="all_insumos">Todos los insumos</mat-checkbox>
-                <select [(ngModel)]="insumo_selected" class="form-control" formControlName="id_insumo" [ngClass]="{'is-invalid': form.get('id_insumo').invalid  && (form.get('id_insumo').dirty || form.get('id_insumo').touched )}">
+                <select class="form-control" formControlName="id_insumo" [ngClass]="{'is-invalid': form.get('id_insumo').invalid  && (form.get('id_insumo').dirty || form.get('id_insumo').touched )}">
                   <option value="">Seleccionar...</option>
                   <option *ngFor="let insumo of insumos" [value]="insumo.id_insumo">{{insumo.insumo}}</option>
                 </select>
@@ -91,8 +90,10 @@
       <div class="card mt-2">
         <div class="card-body">
           <mat-tab-group>
+            
             <mat-tab label="Consumido">
 
+              <!-- un lote -->
               <div *ngIf="partidas.length && !form.get('all_obra').value">
                 <h5 class="text-center pt-3">CONSUMIDO EN LOTE</h5>
                 <div class="table-responsive">
@@ -118,6 +119,7 @@
                 </div>
               </div>
 
+              <!-- toda la obra -->
               <div *ngIf="partidas.length && form.get('all_obra').value">
                 <h5 class="text-center pt-3">CONSUMIDO EN OBRA</h5>
                 <div class="table-responsive">
@@ -143,6 +145,7 @@
                 </div>
               </div>
 
+              <!-- un lote -->
               <div *ngIf="paquetes.length && !form.get('all_obra').value">
                 <h5 class="text-center pt-3">CONSUMIDO EN PAQUETES</h5>
                 <div class="table-responsive">
@@ -170,6 +173,7 @@
                 </div>
               </div>
 
+              <!-- toda la obra -->
               <div *ngIf="paquetes.length && form.get('all_obra').value">
                 <h5 class="text-center pt-3">CONSUMIDO EN PAQUETES</h5>
                 <div class="table-responsive">
@@ -228,7 +232,7 @@
                   <table class="table table-hover table-striped table-align-middle">
                     <thead>
                       <tr>
-                        <th>Insumo</th>
+                        <th>Destino</th>
                         <th>Consumido</th>
                       </tr>
                     </thead>
@@ -244,6 +248,7 @@
               </div>
 
             </mat-tab>
+
             <mat-tab label="Salidas">
               <div class="table-responsive">
                 <table class="table table-hover table-striped table-align-middle">
@@ -282,6 +287,7 @@
                 </table>
               </div>
             </mat-tab>
+
           </mat-tab-group>
         </div>
       </div>
