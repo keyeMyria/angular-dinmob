@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { AceptarSalidaAlertaDialogoComponent } from '../aceptar-salida-alerta-dialogo/aceptar-salida-alerta-dialogo.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog, PageEvent } from '@angular/material';
 import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
+import { Rol } from "../../../constantes/roles";
+import { AuthService } from '../../../services/auth.service';
+import { SalidasService } from 'app/services/salidas.service';
+import { switchMap } from 'rxjs/operators';
+import { forkJoin as observableForkJoin, of, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-salida-alerta',
@@ -12,61 +17,48 @@ import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar
 export class SalidaAlertaComponent implements OnInit {
   obras: any = [];
   obra_selected: string = "";
-  salidas: any;
+  salidas: any = [];
+  Rol = Rol;
+  usuario: any;
+
+  // MatPaginator Inputs
+  length: number; // = 100;
+  pageSize = 10;
+  pageSizeOptions = [5, 10, 25, 100];
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     public dialog: MatDialog,
-  ) {
-    this.salidas = [
-      {
-        vale: "0002",
-        fecha: "10 ene. 2018",
-        manzana: "Manzana 1",
-        lote: "Lote 1",
-        partida: "CIMENTACION",
-        recibio: "",
-        estado: "",
-        aceptada: "0"
-      },
-      {
-        vale: "0003",
-        fecha: "10 ene. 2018",
-        manzana: "Manzana 2",
-        lote: "Lote 2",
-        partida: "CIMENTACION",
-        recibio: "",
-        estado: "",
-        aceptada: "1"
-      },
-      {
-        vale: "0004",
-        fecha: "10 ene. 2018",
-        manzana: "Manzana 3",
-        lote: "Lote 3",
-        partida: "CIMENTACION",
-        recibio: "",
-        estado: "",
-        aceptada: "0"
-      },
-      {
-        vale: "0005",
-        fecha: "10 ene. 2018",
-        manzana: "Manzana 4",
-        lote: "Lote 4",
-        partida: "CIMENTACION",
-        recibio: "",
-        estado: "",
-        aceptada: "1"
-      }
-    ]
-  }
+    private salidaSrv: SalidasService,
+    private authSrv: AuthService,
+  ) { }
 
   ngOnInit() {
+
+
+    this.usuario = this.authSrv.usuario;
+
     this.route.data
       .subscribe((data: { obras: any[], usuario: any }) => {
         this.obras = data.obras;
+      });
+
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
+        if (params.has("obra")) {
+          this.obra_selected = params.get("obra");
+          return observableForkJoin(
+            this.salidaSrv.getCountSalidasAlertaObra(params.get("obra")),
+            this.salidaSrv.getPageSalidasAlertaObra(params.get("obra"), this.pageSize, 0)
+          );
+        } else {
+          return of([0, []]);
+        }
+      })).subscribe((res: any) => {
+        this.length = res[0].count;
+        this.salidas = res[1];
+
       });
   }
 
@@ -78,6 +70,16 @@ export class SalidaAlertaComponent implements OnInit {
       this.router.navigate([".", {}]);
 
     }
+
+  }
+
+  onPageChange(event: PageEvent) {
+    //console.log("pageChange", event);
+
+    this.salidaSrv.getPageSalidasAlertaObra(this.obra_selected, event.pageSize, event.pageIndex)
+      .subscribe(salidas => {
+        this.salidas = salidas;
+      });
 
   }
 
