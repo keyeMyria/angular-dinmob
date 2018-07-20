@@ -78,7 +78,7 @@ export class MaterialesEjecutarComponent implements OnInit {
 
   getReporteMateriales() {
     console.log("form", this.form.value);
-    this.obrasSrv.getInsumosPendientes(this.form.get('id_obra').value)
+    this.obrasSrv.getInsumosPendientes(this.form.get('id_obra').value, this.form.value)
       .subscribe(insumos => {
         this.pendientes = insumos;
       })

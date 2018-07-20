@@ -56,9 +56,9 @@
                 <tr>
                   <th>Código</th>
                   <th>Insumo</th>
-                  <th>Unidad</th>
-                  <th>Existencias</th>
-                  <th>Cantidad</th>
+                  <th class="text-center">Unidad</th>
+                  <th class="text-right">Existencias</th>
+                  <th class="text-right">Cantidad</th>
                   <th></th>
                 </tr>
               </thead>
@@ -66,11 +66,11 @@
                 <tr *ngFor="let insumo of pendientes">
                   <td>{{insumo.codigo}}</td>
                   <td>{{insumo.insumo}}</td>
-                  <td>{{insumo.unidad}}</td>
-                  <td>{{insumo.existencias}}</td>
-                  <td>{{insumo.pendiente}}</td>
-                  <td >
-                  
+                  <td class="text-center">{{insumo.unidad}}</td>
+                  <td class="text-right">{{insumo.existencias | number:'.2-2'}}</td>
+                  <td class="text-right">{{insumo.pendiente | number:'.2-2'}}</td>
+                  <td>
+
                   </td>
                 </tr>
               </tbody>
