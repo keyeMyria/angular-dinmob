@@ -140,6 +140,12 @@ export class ObrasService {
       .pipe(catchError(this.handleError("getInsumosAvance")));
   }
 
+  //ok
+  getInsumosPendientes(id_obra) {
+    return this.http.get(this.url + "get_insumos_pendientes/" + id_obra)
+      .pipe(catchError(this.handleError("getInsumosPendientes")));
+  }
+
 
 
 
