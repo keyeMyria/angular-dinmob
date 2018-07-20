@@ -141,8 +141,8 @@ export class ObrasService {
   }
 
   //ok
-  getInsumosPendientes(id_obra) {
-    return this.http.get(this.url + "get_insumos_pendientes/" + id_obra)
+  getInsumosPendientes(id_obra, params) {
+    return this.http.post(this.url + "get_insumos_pendientes/" + id_obra, { params: params })
       .pipe(catchError(this.handleError("getInsumosPendientes")));
   }
 
