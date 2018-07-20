@@ -101,26 +101,19 @@ export class ClientesLoteEscrituracionDialogoComponent implements OnInit {
   }
 
   saldoPendiente() {
-
     let pendiente = 0;
-
     if (this.cliente_selected.valor_operacion) {
-
       pendiente = +this.cliente_selected.valor_operacion - this.sumaPagos();
-
     }
     return pendiente;
-
   }
 
   reporteCliente(cliente) {
-
     let url = this.reporteSrv.getUrlReporteCompra(cliente.id_cliente, cliente.id_lote, cliente.id_compra);
     let link = document.createElement("a");
     link.href = url;
     link.target = "_blank";
     link.click();
-
   }
 
   nuevoPago() {

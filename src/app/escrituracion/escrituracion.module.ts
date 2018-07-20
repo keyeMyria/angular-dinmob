@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextMaskModule } from 'angular2-text-mask';
 
+
+/* Componentes */
+
 import { EscrituracionRoutingModule } from './escrituracion-routing.module';
 import { TableroComponent } from './components/tablero/tablero.component';
 import { HomeComponent } from './components/home/home.component';
