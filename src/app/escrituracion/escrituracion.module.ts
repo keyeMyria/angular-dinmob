@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextMaskModule } from 'angular2-text-mask';
 
+
+/* Componentes */
+
 import { EscrituracionRoutingModule } from './escrituracion-routing.module';
 import { TableroComponent } from './components/tablero/tablero.component';
 import { HomeComponent } from './components/home/home.component';
@@ -20,6 +23,15 @@ import { ClientesLoteEscrituracionDialogoComponent } from './components/clientes
 import { EditarClienteEscrituracionDialogoComponent } from './components/editar-cliente-escrituracion-dialogo/editar-cliente-escrituracion-dialogo.component';
 import { EditarLoteEscrituracionDialogoComponent } from './components/editar-lote-escrituracion-dialogo/editar-lote-escrituracion-dialogo.component';
 import { EditarEquipoDialogoComponent } from './components/editar-equipo-dialogo/editar-equipo-dialogo.component';
+import { GraficasVentasComponent } from './components/graficas-ventas/graficas-ventas.component';
+import { HistorialVentasComponent } from './components/historial-ventas/historial-ventas.component';
+import { LotesInfonavitComponent } from './components/lotes-infonavit/lotes-infonavit.component';
+import { LotesFovisssteComponent } from './components/lotes-fovissste/lotes-fovissste.component';
+import { ComentariosPosventasComponent } from './components/comentarios-posventas/comentarios-posventas.component';
+import { EncuestaSatisfaccionComponent } from './components/encuesta-satisfaccion/encuesta-satisfaccion.component';
+import { ProyeccionFinancieraComponent } from './components/proyeccion-financiera/proyeccion-financiera.component';
+import { LotesPorVenderComponent } from './components/lotes-por-vender/lotes-por-vender.component';
+import { LotesEnTramiteComponent } from './components/lotes-en-tramite/lotes-en-tramite.component';
 
 
 
@@ -48,6 +60,15 @@ import { EditarEquipoDialogoComponent } from './components/editar-equipo-dialogo
     EditarClienteEscrituracionDialogoComponent,
     EditarLoteEscrituracionDialogoComponent,
     EditarEquipoDialogoComponent,
+    GraficasVentasComponent,
+    HistorialVentasComponent,
+    LotesInfonavitComponent,
+    LotesFovisssteComponent,
+    ComentariosPosventasComponent,
+    EncuestaSatisfaccionComponent,
+    ProyeccionFinancieraComponent,
+    LotesPorVenderComponent,
+    LotesEnTramiteComponent,
 
   ],
   entryComponents: [
