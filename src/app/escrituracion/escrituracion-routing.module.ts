@@ -15,6 +15,15 @@ import { MapasUsuarioResolverService } from 'app/resolvers/mapas-usuario-resolve
 import { EditarClienteEscrituracionComponent } from './components/editar-cliente-escrituracion/editar-cliente-escrituracion.component';
 import { FormasPagoResolverService } from '../resolvers/formas-pago-resolver.service';
 import { TiposPagoResolverService } from '../resolvers/tipos-pago-resolver.service';
+import { GraficasVentasComponent } from './components/graficas-ventas/graficas-ventas.component';
+import { HistorialVentasComponent } from './components/historial-ventas/historial-ventas.component';
+import { LotesInfonavitComponent } from './components/lotes-infonavit/lotes-infonavit.component';
+import { LotesFovisssteComponent } from './components/lotes-fovissste/lotes-fovissste.component';
+import { ComentariosPosventasComponent } from './components/comentarios-posventas/comentarios-posventas.component';
+import { EncuestaSatisfaccionComponent } from './components/encuesta-satisfaccion/encuesta-satisfaccion.component';
+import { ProyeccionFinancieraComponent } from './components/proyeccion-financiera/proyeccion-financiera.component';
+import { LotesPorVenderComponent } from './components/lotes-por-vender/lotes-por-vender.component';
+import { LotesEnTramiteComponent } from './components/lotes-en-tramite/lotes-en-tramite.component';
 
 
 
@@ -94,7 +103,70 @@ const routes: Routes = [
   },
   {
     path: 'editar', component: EditarClienteEscrituracionComponent
-  }
+  },
+  {
+    path: 'graficas-ventas', component: GraficasVentasComponent,
+    canActivate: [AuthGuard],
+    data: {
+      permisos: [Rol.Administrador, Rol.Contabilidad]
+    }
+  },
+  {
+    path: 'historial-ventas', component: HistorialVentasComponent,
+    canActivate: [AuthGuard],
+    data: {
+      permisos: [Rol.Administrador, Rol.Contabilidad]
+    }
+  },
+  {
+    path: 'lotes-infonavit', component: LotesInfonavitComponent,
+    canActivate: [AuthGuard],
+    data: {
+      permisos: [Rol.Administrador, Rol.Contabilidad]
+    }
+  },
+  {
+    path: 'lotes-fovissste', component: LotesFovisssteComponent,
+    canActivate: [AuthGuard],
+    data: {
+      permisos: [Rol.Administrador, Rol.Contabilidad]
+    }
+  },
+  {
+    path: 'comentarios-posventa', component: ComentariosPosventasComponent,
+    canActivate: [AuthGuard],
+    data: {
+      permisos: [Rol.Administrador, Rol.Contabilidad]
+    }
+  },
+  {
+    path: 'encuesta-satisfaccion', component: EncuestaSatisfaccionComponent,
+    canActivate: [AuthGuard],
+    data: {
+      permisos: [Rol.Administrador, Rol.Contabilidad]
+    }
+  },
+  {
+    path: 'proyeccion-financiera', component: ProyeccionFinancieraComponent,
+    canActivate: [AuthGuard],
+    data: {
+      permisos: [Rol.Administrador, Rol.Contabilidad]
+    }
+  },
+  {
+    path: 'lotes-por-vender', component: LotesPorVenderComponent,
+    canActivate: [AuthGuard],
+    data: {
+      permisos: [Rol.Administrador, Rol.Contabilidad]
+    }
+  },
+  {
+    path: 'lotes-en-tramite', component: LotesEnTramiteComponent,
+    canActivate: [AuthGuard],
+    data: {
+      permisos: [Rol.Administrador, Rol.Contabilidad]
+    }
+  },
 
 
   /*     ]
