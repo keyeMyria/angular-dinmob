@@ -42,6 +42,16 @@
     </div>
 
     <div class="col-12 col-md-6 col-lg-4 p-2">
+      <a class="no-decoration" [routerLink]="['/salidas-alerta',obra_default]">
+        <mat-card class="d-flex align-items-center card-tablero">
+          <mat-card-title class="mb-0">Salidas con Alerta</mat-card-title>
+          <span class="spacer"></span>
+          <i class="material-icons icono-tablero">notifications</i>
+        </mat-card>
+      </a>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-4 p-2">
       <a class="no-decoration" [routerLink]="['/nueva-salida',obra_default]">
         <mat-card class="d-flex align-items-center card-tablero">
           <mat-card-title class="mb-0">
@@ -105,10 +115,10 @@
       <a class="no-decoration" [routerLink]="['/materiales-ejecutar',obra_default]">
         <mat-card class="d-flex align-items-center card-tablero">
           <mat-card-title class="mb-0">
-              <div>Materiales</div>
-              <div>
-                <small>Por ejecutar</small>
-              </div>
+            <div>Materiales</div>
+            <div>
+              <small>Por ejecutar</small>
+            </div>
           </mat-card-title>
           <span class="spacer"></span>
           <i class="fa fa-list icono-tablero" aria-hidden="true"></i>
