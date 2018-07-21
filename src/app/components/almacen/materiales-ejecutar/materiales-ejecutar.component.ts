@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ObrasService } from '../../../services/obras.service';
 
@@ -23,14 +23,16 @@ export class MaterialesEjecutarComponent implements OnInit {
     private obrasSrv: ObrasService,
   ) {
     this.form = this.fb.group({
-      id_obra: [""],
-      id_lote: [""],
-      id_insumo: [""],
-      all_insumos: [false],
-      all_obra: [false]
+      id_obra: ["", Validators.required],
+      id_lote: ["", Validators.required],
+      id_insumo: ["", Validators.required],
+      all_insumos: [true],
+      all_obra: [true]
     });
     this.disableSelect("all_insumos", "id_insumo");
     this.disableSelect("all_obra", "id_lote");
+
+    this.form.patchValue({ all_insumos: true, all_obra: true });
   }
 
   ngOnInit() {
