@@ -826,7 +826,7 @@ export const ROUTES: Routes = [
                     obras: ObrasUsuarioResolverService,
                 },
                 data: {
-                    permisos: [Rol.Administrador, Rol.Contabilidad]
+                    permisos: [Rol.Administrador, Rol.ControlAlmacen]
                 }
             },
             {
@@ -846,7 +846,7 @@ export const ROUTES: Routes = [
                     obras: ObrasUsuarioResolverService,
                 },
                 data: {
-                    permisos: [Rol.Administrador, Rol.Contabilidad]
+                    permisos: [Rol.Administrador, Rol.Contabilidad, Rol.ControlAlmacen]
                 }
             }, 
 
