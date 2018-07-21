@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextMaskModule } from 'angular2-text-mask';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 /* Componentes */
@@ -42,7 +43,8 @@ import { LotesEnTramiteComponent } from './components/lotes-en-tramite/lotes-en-
     ReactiveFormsModule,
     TextMaskModule,
     AngularMaterialModule,
-    EscrituracionRoutingModule
+    EscrituracionRoutingModule,
+    NgxChartsModule
   ],
   declarations: [
     HomeComponent,
