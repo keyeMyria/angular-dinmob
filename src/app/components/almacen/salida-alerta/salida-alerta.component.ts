@@ -8,6 +8,9 @@ import { AuthService } from '../../../services/auth.service';
 import { SalidasService } from 'app/services/salidas.service';
 import { switchMap } from 'rxjs/operators';
 import { forkJoin as observableForkJoin, of, Observable } from 'rxjs';
+import { VerSalidaDialogoComponent } from '../ver-salida-dialogo/ver-salida-dialogo.component';
+import { ReporteService } from 'app/services/reporte.service';
+import * as FileSaver from "file-saver";
 
 @Component({
   selector: 'app-salida-alerta',
@@ -32,6 +35,7 @@ export class SalidaAlertaComponent implements OnInit {
     public dialog: MatDialog,
     private salidaSrv: SalidasService,
     private authSrv: AuthService,
+    private reporteSrv: ReporteService
   ) { }
 
   ngOnInit() {
@@ -110,5 +114,37 @@ export class SalidaAlertaComponent implements OnInit {
     });
 
   }
+
+  verSalida(salida) {
+
+    this.salidaSrv.getSalida(salida.id_salida)
+      .subscribe((res: any) => {
+        //console.log("salida OK", res);
+        let dialogRef = this.dialog.open(VerSalidaDialogoComponent, {
+          data: {
+            datos: res.datos,
+            insumos: res.insumos
+          },
+          width: '800px'
+        });
+
+      });
+
+
+  }
+
+  getReporteSalida(salida) {
+    this.reporteSrv.getReporteSalidaAlmacen(salida.id_salida)
+      .subscribe(data => this.downloadFile(data, `ReporteSalida_${salida.num_vale}`));
+
+
+  }
+
+  downloadFile(data, filename) {
+    let contentType = "application/pdf";
+    let blob = new Blob([data], { type: contentType });
+    FileSaver.saveAs(blob, filename);
+  }
+
 
 }
