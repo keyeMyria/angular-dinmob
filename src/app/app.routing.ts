@@ -109,6 +109,8 @@ import { TableroJefeFrenteComponent } from './components/tablero-jefe-frente/tab
 import { SalidaAlertaComponent } from './components/almacen/salida-alerta/salida-alerta.component';
 import { SaldoProveedoresComponent } from './components/admin/saldo-proveedores/saldo-proveedores.component';
 import { MaterialesEjecutarComponent } from './components/almacen/materiales-ejecutar/materiales-ejecutar.component';
+import { TableroGraficasComponent } from './components/admin/tablero-graficas/tablero-graficas.component';
+import { GraficasVentasComponent } from './components/admin/graficas-ventas/graficas-ventas.component';
 
 
 export const ROUTES: Routes = [
@@ -152,6 +154,26 @@ export const ROUTES: Routes = [
                     datos: EstadisticasAdminResolverService
                     //estadisticas: EstadisticasAdminResolverService,
                     //obras: ObrasUsuarioResolverService,
+                },
+                data: {
+                    permisos: [Rol.Administrador]
+                }
+            },
+            {
+                path: 'tablero-graficas', component: TableroGraficasComponent,
+                canActivate: [AuthGuard],
+                resolve: {
+                    obras: ObrasUsuarioResolverService,
+                },
+                data: {
+                    permisos: [Rol.Administrador]
+                }
+            },
+            {
+                path: 'graficas-ventas', component: GraficasVentasComponent,
+                canActivate: [AuthGuard],
+                resolve: {
+                    obras: ObrasUsuarioResolverService,
                 },
                 data: {
                     permisos: [Rol.Administrador]
@@ -839,7 +861,7 @@ export const ROUTES: Routes = [
                     permisos: [Rol.Administrador, Rol.Contabilidad]
                 }
             },
-       {
+            {
                 path: 'materiales-ejecutar', component: MaterialesEjecutarComponent,
                 canActivate: [AuthGuard],
                 resolve: {
@@ -848,7 +870,7 @@ export const ROUTES: Routes = [
                 data: {
                     permisos: [Rol.Administrador, Rol.Contabilidad, Rol.ControlAlmacen]
                 }
-            }, 
+            },
 
 
         ]

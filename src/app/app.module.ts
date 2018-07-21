@@ -263,6 +263,9 @@ import { SaldoProveedoresComponent } from './components/admin/saldo-proveedores/
 import { CargoAbonoProveedoresDialogoComponent } from './components/admin/cargo-abono-proveedores-dialogo/cargo-abono-proveedores-dialogo.component';
 import { EditarCargoAbonoProveedoresDialogoComponent } from './components/admin/editar-cargo-abono-proveedores-dialogo/editar-cargo-abono-proveedores-dialogo.component';
 import { MaterialesEjecutarComponent } from './components/almacen/materiales-ejecutar/materiales-ejecutar.component';
+import { GraficasVentasComponent } from './components/admin/graficas-ventas/graficas-ventas.component';
+import { TableroGraficasComponent } from './components/admin/tablero-graficas/tablero-graficas.component';
+import { NgxChartsModule } from '../../node_modules/@swimlane/ngx-charts';
 
 
 
@@ -430,6 +433,8 @@ export function getToken() {
     CargoAbonoProveedoresDialogoComponent,
     EditarCargoAbonoProveedoresDialogoComponent,
     MaterialesEjecutarComponent,
+    GraficasVentasComponent,
+    TableroGraficasComponent,
 
   ],
 
@@ -451,7 +456,8 @@ export function getToken() {
     AngularMaterialModule,
     TextMaskModule,
     RoutingModule,
-    ColorPickerModule
+    ColorPickerModule,
+    NgxChartsModule
 
   ],
 

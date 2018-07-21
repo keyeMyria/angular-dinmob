@@ -1,0 +1,60 @@
+<div class="container-fluid mt-2 mb-5">
+  
+  <div class="row">
+    <div class="col-12">
+
+        <div>
+            <mat-form-field class="w-100">
+              <mat-select placeholder="Obra" [(ngModel)]="obra_selected" (selectionChange)="cargarObra(obra_selected)">
+                <mat-option *ngFor="let obra of obras" [value]="obra.id_obra">{{ obra.nombre }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+    </div>
+
+  </div>
+
+  <div class="row" style="height: 400px;">
+
+    <div class="col-12 col-lg-8">
+
+      <ngx-charts-bar-vertical 
+      [view]="view" 
+      [scheme]="colorScheme" 
+      [results]="year" 
+      [gradient]="gradient" 
+      [xAxis]="showXAxis" 
+      [yAxis]="showYAxis"
+      [legend]="showLegend" 
+      [showXAxisLabel]="showXAxisLabel" 
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel" 
+      (select)="onSelect($event)">
+      </ngx-charts-bar-vertical>
+
+    </div>
+
+    <div class="col-12 col-lg-4">
+
+        <ngx-charts-bar-vertical 
+        [view]="view" 
+        [scheme]="colorScheme" 
+        [results]="totales" 
+        [gradient]="gradient" 
+        [xAxis]="showXAxis" 
+        [yAxis]="showYAxis"
+        [legend]="showLegend" 
+        [showXAxisLabel]="showXAxisLabel" 
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel" 
+        (select)="selectYear($event)">
+        </ngx-charts-bar-vertical>
+  
+      </div>
+
+  </div>
+
+</div>
