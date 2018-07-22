@@ -3,7 +3,8 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { of } from "rxjs";
 import { VentasPagosService } from '../../../services/ventas-pagos.service';
-
+import { colorSets } from '@swimlane/ngx-charts/release/utils/color-sets';
+//import{ colorSets} from '@swimlane/ngx-charts'
 @Component({
   selector: 'app-graficas-ventas',
   templateUrl: './graficas-ventas.component.html',
@@ -11,6 +12,7 @@ import { VentasPagosService } from '../../../services/ventas-pagos.service';
 })
 export class GraficasVentasComponent implements OnInit {
 
+  temas:any= colorSets;
 
   view: any;
   // options
@@ -23,10 +25,11 @@ export class GraficasVentasComponent implements OnInit {
   xAxisLabel = '';
   showYAxisLabel = false;
   yAxisLabel = 'Ventas';
-
-  colorScheme = {
+  name:string="natural";
+  colorScheme = //this.temas.find(s => s.name === this.name);
+   {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
-  };
+  }; 
 
   obras: any = [];
   obra_selected: string = "";
@@ -85,9 +88,13 @@ export class GraficasVentasComponent implements OnInit {
   }
 
   selectYear(event) {
-    console.log("select year",event);
+    //console.log("select year",event);
     this.year = this.meses[event.name];
     this.xAxisLabel= event.name;
+  }
+
+  onSelect(event){
+    //console.log("onSelect");    
   }
 
 }
