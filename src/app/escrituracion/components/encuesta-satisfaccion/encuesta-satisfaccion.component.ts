@@ -7,6 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EncuestaSatisfaccionComponent implements OnInit {
 
+  encuestas = [
+    {
+      pregunta: "¿Te gustó el servicio que se te brindó?"
+    },
+    {
+      pregunta: "¿El vendedor que lo atendió le dio un buen servicio?"
+    },
+    {
+      pregunta: "¿Cómo calificaría el recorrido del inmueble?"
+    },
+    {
+      pregunta: "¿Cómo calificaría el proceso de entrega del inmueble?"
+    }
+  ]
+
   constructor() { }
 
   ngOnInit() {

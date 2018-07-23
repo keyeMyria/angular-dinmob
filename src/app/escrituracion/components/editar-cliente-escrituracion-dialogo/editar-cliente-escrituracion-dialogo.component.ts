@@ -46,7 +46,8 @@ export class EditarClienteEscrituracionDialogoComponent implements OnInit {
       nombre: [null, Validators.required],
       fecha_nacimiento: [moment(), Validators.required],
       curp_cliente: [null, Validators.required],
-      telefono_cliente: [null, Validators.required]
+      telefono_cliente: [null, Validators.required],
+      seguro_social: [null, Validators.required],
     });
 
     this.formDocumentos = this.fb.group({
@@ -58,15 +59,25 @@ export class EditarClienteEscrituracionDialogoComponent implements OnInit {
 
     this.formInmueble = this.fb.group({
       precio_lista: [null, Validators.required],
+      precio_escrituracion: [null, Validators.required],
+      monto_credito: [null, Validators.required],
       id_vendedor: [null, Validators.required],
-      tipo_credito: [null, Validators.required],
       id_estado: [null, Validators.required],
       dtu: [moment(), Validators.required],
-      fecha_apartado: [moment(), Validators.required],
-      fecha_checklist: [moment(), Validators.required],
-      fecha_infonavit: [moment(), Validators.required],
-      fecha_firma: [moment(), Validators.required],
-      fecha_entrega: [moment(), Validators.required],
+
+      id_tipo_credito: [null, Validators.required],
+      id_estado_infonavit: [null, Validators.required],
+      id_estado_fovissste: [null, Validators.required],
+      id_estado_contado: [null, Validators.required],
+      id_estado_banco: [null, Validators.required],
+      id_estado_confinanciamiento: [null, Validators.required],
+
+      fecha_apartado: [moment(""), Validators.required],
+      fecha_checklist: [moment(""), Validators.required],
+      fecha_infonavit: [moment(""), Validators.required],
+      fecha_firma: [moment(""), Validators.required],
+      fecha_entregado: [moment(""), Validators.required],
+
 
 
     });

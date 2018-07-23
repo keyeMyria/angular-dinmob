@@ -41,7 +41,12 @@ export class EditarLoteEscrituracionDialogoComponent implements OnInit {
     private snackBar: MatSnackBar
   ) {
     this.formGenerales = this.fb.group({
-      id_estado: [null, Validators.required],
+      id_tipo_credito: [null, Validators.required],
+      id_estado_infonavit: [null, Validators.required],
+      id_estado_fovissste: [null, Validators.required],
+      id_estado_contado: [null, Validators.required],
+      id_estado_banco: [null, Validators.required],
+      id_estado_confinanciamiento: [null, Validators.required],
 
       fecha_apartado: [moment(""), Validators.required],
       fecha_checklist: [moment(""), Validators.required],
@@ -49,12 +54,16 @@ export class EditarLoteEscrituracionDialogoComponent implements OnInit {
       fecha_firma: [moment(""), Validators.required],
       fecha_entregado: [moment(""), Validators.required],
 
+      seguro_social: [null, Validators.required],
+      expediente_completo: null;
       nombre: [null, Validators.required],
       fecha_nacimiento: [moment(""), Validators.required],
       dtu: [moment(""), Validators.required],
       curp: [null, Validators.required],
       telefono: [null, Validators.required],
       precio_venta: [null, Validators.required],
+      precio_escrituracion: [null, Validators.required],
+      monto_credito: [null, Validators.required],
       id_vendedor: [null, Validators.required],
       id_tipo_credito: [null, Validators.required],
     });
