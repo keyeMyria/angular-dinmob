@@ -3,14 +3,18 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { of } from "rxjs";
 import { VentasPagosService } from '../../../services/ventas-pagos.service';
+import { colorSets } from '@swimlane/ngx-charts/release/utils/color-sets';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-graficas-ventas',
   templateUrl: './graficas-ventas.component.html',
-  styleUrls: ['./graficas-ventas.component.scss']
+  styleUrls: ['./graficas-ventas.component.scss'],
+  providers: [CurrencyPipe]
 })
 export class GraficasVentasComponent implements OnInit {
 
+  temas: any = colorSets;
 
   view: any;
   // options
@@ -20,13 +24,16 @@ export class GraficasVentasComponent implements OnInit {
   showLegend = false;
   showDataLabel = true;
   showXAxisLabel = true;
-  xAxisLabel = '';
+  xAxisLabelYear = '';
+  xAxisLabelTotales = '';
   showYAxisLabel = false;
-  yAxisLabel = 'Ventas';
-
-  colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
-  };
+  yAxisLabelYear = 'Ventas';
+  yAxisLabelTotales = 'Ventas';
+  name: string = "natural";
+  colorScheme = //this.temas.find(s => s.name === this.name);
+    {
+      domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+    };
 
   obras: any = [];
   obra_selected: string = "";
@@ -39,7 +46,8 @@ export class GraficasVentasComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private pagoSrv: VentasPagosService
+    private pagoSrv: VentasPagosService,
+    private currecyPipe: CurrencyPipe,
   ) { }
 
   ngOnInit() {
@@ -64,9 +72,14 @@ export class GraficasVentasComponent implements OnInit {
         this.meses = data.meses;
         this.years = data.years
 
-        if (data.years.length > 0) {
-          this.year = data.meses[data.years[0]];
-          this.xAxisLabel = data.years[0];
+        let count = data.years.length;
+        if (count > 0) {
+          let year = data.years[count - 1];
+          let totalYear = this.totales.find(total => total.name == year);
+
+          this.year = data.meses[year];
+          this.xAxisLabelYear = "(" + year + ") " + this.currecyPipe.transform(totalYear.value);
+          this.xAxisLabelTotales = this.currecyPipe.transform(data.total);
         }
 
       }, (error) => {
@@ -85,9 +98,13 @@ export class GraficasVentasComponent implements OnInit {
   }
 
   selectYear(event) {
-    console.log("select year",event);
+    //console.log("select year",event);
     this.year = this.meses[event.name];
-    this.xAxisLabel= event.name;
+    this.xAxisLabelYear = "(" + event.name + ") " + this.currecyPipe.transform(event.value);
+  }
+
+  onSelect(event) {
+    //console.log("onSelect");    
   }
 
 }

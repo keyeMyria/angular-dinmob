@@ -266,6 +266,7 @@ import { MaterialesEjecutarComponent } from './components/almacen/materiales-eje
 import { GraficasVentasComponent } from './components/admin/graficas-ventas/graficas-ventas.component';
 import { TableroGraficasComponent } from './components/admin/tablero-graficas/tablero-graficas.component';
 import { NgxChartsModule } from '../../node_modules/@swimlane/ngx-charts';
+import { GraficasVentasVendedorComponent } from './components/admin/graficas-ventas-vendedor/graficas-ventas-vendedor.component';
 
 
 
@@ -435,6 +436,7 @@ export function getToken() {
     MaterialesEjecutarComponent,
     GraficasVentasComponent,
     TableroGraficasComponent,
+    GraficasVentasVendedorComponent,
 
   ],
 

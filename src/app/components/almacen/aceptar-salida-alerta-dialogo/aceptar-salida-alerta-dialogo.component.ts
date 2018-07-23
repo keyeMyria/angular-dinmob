@@ -24,4 +24,8 @@ export class AceptarSalidaAlertaDialogoComponent implements OnInit {
   ngOnInit() {
   }
 
+  guardar(){
+    
+  }
+
 }
