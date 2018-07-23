@@ -107,6 +107,9 @@ const routes: Routes = [
   {
     path: 'graficas-ventas', component: GraficasVentasComponent,
     canActivate: [AuthGuard],
+    resolve: {
+      obras: ObrasUsuarioResolverService,
+    },
     data: {
       permisos: [Rol.Administrador, Rol.Contabilidad]
     }

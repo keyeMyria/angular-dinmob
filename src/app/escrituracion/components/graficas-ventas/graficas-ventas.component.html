@@ -1,60 +1,76 @@
-<div class="container">
+<div class="container-fluid  drawer-content  pt-2 pb-5" style="display: flex; flex-direction: column">
+   
   <div class="row">
     <div class="col-12">
 
-      <form class="mt-2">
-
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">Tipo</label>
-          <div class="col-sm-9">
-            <select class="form-control">
-              <option>Seleccionar</option>
-              <option value="0">Vendedor</option>
-              <option value="1">Equipo Venta</option>
-              <option value="2">Empresa</option>
-            </select>
+        <div>
+            <mat-form-field class="w-100">
+              <mat-select placeholder="Obra" [(ngModel)]="obra_selected" (selectionChange)="cargarObra(obra_selected)">
+                <mat-option *ngFor="let obra of obras" [value]="obra.id_obra">{{ obra.nombre }}</mat-option>
+              </mat-select>
+            </mat-form-field>
           </div>
-        </div>
-
-        <div class="form-group row">
-          <label class="col-form-label col-sm-3">Vendedor</label>
-          <div class="col-sm-9">
-            <select class="form-control">
-              <option>Seleccionar</option>
-              <option value="0">Vendedor 1</option>
-              <option value="1">Vendedor 2</option>
-              <option value="2">Vendedor 3</option>
-            </select>
-          </div>
-        </div>
-
-      </form>
 
     </div>
-
-    </div>
-
-    <div class="row justify-content-center" style="height: 400px;">
-
-        <div class="col-12">
-
-            <ngx-charts-line-chart 
-            [view]="view" 
-            [scheme]="colorScheme" 
-            [results]="data2" 
-            [gradient]="gradient" 
-            [xAxis]="showXAxis"
-            [yAxis]="showYAxis" 
-            [legend]="showLegend" 
-            [showXAxisLabel]="showXAxisLabel" 
-            [showYAxisLabel]="showYAxisLabel" 
-            [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel" 
-            
-            (select)="onSelect($event)">
-            </ngx-charts-line-chart>
-            
-          </div>
 
   </div>
+
+
+  <div class="row" style="flex-grow: 1" >
+
+    <div class="col-12 col-lg-8">
+
+      <div class="card mat-elevation-z5" style="height: 99%;">
+
+      <ngx-charts-bar-vertical-stacked
+      [view]="view" 
+      [scheme]="colorScheme" 
+      [results]="year" 
+      [gradient]="gradient" 
+      [xAxis]="showXAxis" 
+      [yAxis]="showYAxis"
+      [legend]="showLegend" 
+      [showXAxisLabel]="showXAxisLabel" 
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxisLabel]="xAxisLabelYear"
+      [yAxisLabel]="yAxisLabelYear" 
+      (select)="onSelect($event)">
+      <ng-template #tooltipTemplate let-model="model">
+        <span class="tooltip-label">{{model.name}}</span>
+        <span class="tooltip-val">{{model.value}}</span>
+      </ng-template>
+      </ngx-charts-bar-vertical-stacked>
+      </div>
+
+    </div>
+
+    <div class="col-12 col-lg-4">
+
+      <div class="card mat-elevation-z5" style="height: 99%;">
+
+        <ngx-charts-bar-vertical-stacked 
+        [view]="view" 
+        [scheme]="colorScheme" 
+        [results]="totales" 
+        [gradient]="gradient" 
+        [xAxis]="showXAxis" 
+        [yAxis]="showYAxis"
+        [legend]="showLegend" 
+        [showXAxisLabel]="showXAxisLabel" 
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabelTotales"
+        [yAxisLabel]="yAxisLabelTotales" 
+       
+        (select)="selectYear($event)">
+        <ng-template #tooltipTemplate let-model="model">
+          <span class="tooltip-label">{{model.name}}</span>
+          <span class="tooltip-val">{{model.value}}</span>
+        </ng-template>
+        </ngx-charts-bar-vertical-stacked>
+      </div>
+
+      </div>
+
+  </div>
+
 </div>

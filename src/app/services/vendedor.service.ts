@@ -1,5 +1,5 @@
 
-import {throwError as observableThrowError,  Observable } from 'rxjs';
+import { throwError as observableThrowError, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ConfigService } from 'app/services/config.service';
@@ -42,6 +42,12 @@ export class VendedorService {
   delVendedor(id) {
     return this.http.post(this.url + "del_vendedor/" + id, {})
       .pipe(catchError(this.handleError("delVendedor")));
+  }
+
+  //ok
+  getGraficasVendedores(id_obra) {
+    return this.http.get(this.url + 'get_graficas_vendedores/' + id_obra)
+      .pipe(catchError(this.handleError("getGraficasVendedores")));
   }
 
   private handleError<T>(operation = 'operation') {
