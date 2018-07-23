@@ -55,7 +55,7 @@ export class EditarLoteEscrituracionDialogoComponent implements OnInit {
       fecha_entregado: [moment(""), Validators.required],
 
       seguro_social: [null, Validators.required],
-      expediente_completo: null;
+      expediente_completo: null,
       nombre: [null, Validators.required],
       fecha_nacimiento: [moment(""), Validators.required],
       dtu: [moment(""), Validators.required],
@@ -64,8 +64,8 @@ export class EditarLoteEscrituracionDialogoComponent implements OnInit {
       precio_venta: [null, Validators.required],
       precio_escrituracion: [null, Validators.required],
       monto_credito: [null, Validators.required],
-      id_vendedor: [null, Validators.required],
-      id_tipo_credito: [null, Validators.required],
+      id_vendedor: [null, Validators.required]
+      
     });
     this.formDocumentos = this.fb.group({
       curp: null,
