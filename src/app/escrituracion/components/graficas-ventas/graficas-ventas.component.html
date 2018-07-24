@@ -19,38 +19,43 @@
   <div class="row" style="flex-grow: 1" >
 
     <div class="col-12 col-lg-8">
+      <div class="d-flex flex-column" style="height: 99%;">
+        <h6 class="align-self-center">Ventas Mensuales x Vendedor</h6>
 
-      <div class="card mat-elevation-z5" style="height: 99%;">
+          <div class="card mat-elevation-z5 flex-grow-1" >
 
-      <ngx-charts-bar-vertical-stacked
-      [view]="view" 
-      [scheme]="colorScheme" 
-      [results]="year" 
-      [gradient]="gradient" 
-      [xAxis]="showXAxis" 
-      [yAxis]="showYAxis"
-      [legend]="showLegend" 
-      [showXAxisLabel]="showXAxisLabel" 
-      [showYAxisLabel]="showYAxisLabel"
-      [xAxisLabel]="xAxisLabelYear"
-      [yAxisLabel]="yAxisLabelYear" 
-      (select)="onSelect($event)">
-      <ng-template #tooltipTemplate let-model="model">
-        <span class="tooltip-label">{{model.name}}</span>
-        <span class="tooltip-val">{{model.value}}</span>
-      </ng-template>
-      </ngx-charts-bar-vertical-stacked>
+            <ngx-charts-bar-vertical-stacked
+            [view]="view" 
+            [scheme]="colorSchemeYear" 
+            [results]="year" 
+            [gradient]="gradient" 
+            [xAxis]="showXAxis" 
+            [yAxis]="showYAxis"
+            [legend]="showLegend" 
+            [showXAxisLabel]="showXAxisLabel" 
+            [showYAxisLabel]="showYAxisLabel"
+            [xAxisLabel]="xAxisLabelYear"
+            [yAxisLabel]="yAxisLabelYear" 
+            (select)="onSelect($event)">
+            <ng-template #tooltipTemplate let-model="model">
+              <span class="tooltip-label">{{model.name}}</span>
+              <span class="tooltip-val">{{model.value}}</span>
+            </ng-template>
+            </ngx-charts-bar-vertical-stacked>
+        </div>
       </div>
 
     </div>
 
     <div class="col-12 col-lg-4">
+      <div class="d-flex flex-column" style="height: 99%;">
+        <h6 class="align-self-center">Ventas Anuales x Equipo</h6>
 
-      <div class="card mat-elevation-z5" style="height: 99%;">
+        <div class="card mat-elevation-z5 flex-grow-1" >         
 
         <ngx-charts-bar-vertical-stacked 
         [view]="view" 
-        [scheme]="colorScheme" 
+        [scheme]="colorSchemeTotales" 
         [results]="totales" 
         [gradient]="gradient" 
         [xAxis]="showXAxis" 
@@ -61,16 +66,16 @@
         [xAxisLabel]="xAxisLabelTotales"
         [yAxisLabel]="yAxisLabelTotales" 
        
-        (select)="selectYear($event)">
+        (select)="selectYearEquipo($event)">
         <ng-template #tooltipTemplate let-model="model">
           <span class="tooltip-label">{{model.name}}</span>
           <span class="tooltip-val">{{model.value}}</span>
         </ng-template>
         </ngx-charts-bar-vertical-stacked>
-      </div>
+        </div>
 
       </div>
-
+    </div>
   </div>
 
 </div>

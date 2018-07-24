@@ -29,11 +29,13 @@ export class GraficasVentasComponent implements OnInit {
   showYAxisLabel = false;
   yAxisLabelYear = 'Ventas';
   yAxisLabelTotales = 'Ventas';
-  name: string = "natural";
-  colorScheme = //this.temas.find(s => s.name === this.name);
-    {
+  name: string = "cool";
+  colorSchemeYear = this.temas.find(s => s.name === this.name);
+  /*   {
       domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
-    };
+    }; */
+
+  colorSchemeTotales = this.temas.find(s => s.name === "vivid");
 
   obras: any = [];
   obra_selected: string = "";
@@ -41,6 +43,7 @@ export class GraficasVentasComponent implements OnInit {
   meses: any = [];
   years: any = [];
   year: any = [];
+  equipos: any = [];
 
 
   constructor(
@@ -62,27 +65,36 @@ export class GraficasVentasComponent implements OnInit {
 
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
-  /*       if (params.has("obra")) {
+        if (params.has("obra")) {
           this.obra_selected = params.get("obra");
           return this.vendedorSrv.getGraficasVendedores(params.get("obra"));
         } else {
           return of({});
-        } */
-        return this.vendedorSrv.getGraficasVendedores(84);
+        }
       })).subscribe((data: any) => {
+
+       
         this.totales = data.totales;
- /*        this.meses = data.meses;
-        this.years = data.years
+        this.meses = data.meses;
+        this.equipos = data.equipos;
 
-        let count = data.years.length;
+        let keys = Object.keys(this.meses).sort();
+        //console.log("claves", keys);
+
+        let count = keys.length;
         if (count > 0) {
-          let year = data.years[count - 1];
-          let totalYear = this.totales.find(total => total.name == year);
+          let yearEquipo = keys[count - 1];
+          let year_equipo = yearEquipo.split("-");
+          let equipo = this.equipos.find(equipo => equipo.id_equipo == year_equipo[1]);
 
-          this.year = data.meses[year];
-          this.xAxisLabelYear = "(" + year + ") " + this.currecyPipe.transform(totalYear.value);
-          this.xAxisLabelTotales = this.currecyPipe.transform(data.total);
-        } */
+          this.year = data.meses[yearEquipo];
+          this.xAxisLabelYear = year_equipo[0] + " " + equipo.nombre;
+          this.xAxisLabelTotales = "Total: " + data.total;
+        } else {
+          this.year=[];
+          this.xAxisLabelYear = "";
+          this.xAxisLabelTotales = "";
+        }
 
       }, (error) => {
       });
@@ -92,17 +104,19 @@ export class GraficasVentasComponent implements OnInit {
   cargarObra(id_obra) {
 
     if (id_obra) {
-      this.router.navigate([".", { obra: id_obra }]);
+      this.router.navigate(["/escrituracion/graficas-ventas", { obra: id_obra }]);
     } else {
-      this.router.navigate([".", {}]);
+      this.router.navigate(["/escrituracion/graficas-ventas", {}]);
     }
 
   }
 
-  selectYear(event) {
-    //console.log("select year",event);
-    this.year = this.meses[event.name];
-    this.xAxisLabelYear = "(" + event.name + ") " + this.currecyPipe.transform(event.value);
+  selectYearEquipo(event) {
+    //console.log("select year", event);
+    let equipo = this.equipos.find(equipo => equipo.nombre == event.name);
+    let key = event.series + "-" + equipo.id_equipo;
+    this.year = this.meses[key];
+    this.xAxisLabelYear = event.series + " " + event.name;
   }
 
   onSelect(event) {
