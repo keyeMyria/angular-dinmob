@@ -59,14 +59,11 @@
                         <span>Ver Salida</span>
                       </button>
 
-                      <button mat-menu-item *ngIf="salida.aceptada=='0'" (click)="setValidacionAceptada(salida)">
+                      <button mat-menu-item (click)="setValidacion(salida)">
                         <mat-icon>done</mat-icon>
-                        <span>Autorizar</span>
-                      </button>
-                      <button mat-menu-item *ngIf="salida.aceptada=='1'">
-                        <mat-icon>block</mat-icon>
-                        <span>Rechazar</span>
-                      </button>
+                        <span *ngIf="salida.aceptada=='1'">Rechazar</span>
+                        <span *ngIf="salida.aceptada=='0'">Autorizar</span>
+                      </button>                 
 
                       <button mat-menu-item (click)="getReporteSalida(salida)">
                         <mat-icon>file_download</mat-icon>

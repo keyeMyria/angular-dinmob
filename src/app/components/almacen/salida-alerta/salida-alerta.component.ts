@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { AceptarSalidaAlertaDialogoComponent } from '../aceptar-salida-alerta-dialogo/aceptar-salida-alerta-dialogo.component';
-import { MatDialog, PageEvent } from '@angular/material';
+import { MatDialog, PageEvent, MatSnackBar } from '@angular/material';
 import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
 import { Rol } from "../../../constantes/roles";
 import { AuthService } from '../../../services/auth.service';
@@ -33,6 +33,7 @@ export class SalidaAlertaComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     public dialog: MatDialog,
+    public snackBar: MatSnackBar,
     private salidaSrv: SalidasService,
     private authSrv: AuthService,
     private reporteSrv: ReporteService
@@ -87,17 +88,63 @@ export class SalidaAlertaComponent implements OnInit {
 
   }
 
-  setValidacionAceptada(salida) {
-    let dialogRef = this.dialog.open(AceptarSalidaAlertaDialogoComponent, {
-      data: {
-        salida: salida
-      },
-      width: '500px'
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === true) {
-      }
-    });
+  setValidacion(salida) {
+    let aceptada = 0;
+    let motivo=null;
+    if (salida.aceptada == "0") {
+      aceptada = 1;
+
+      let dialogRef = this.dialog.open(AceptarSalidaAlertaDialogoComponent, {
+        data: {
+          salida: salida
+        },
+        width: '500px'
+      });
+
+
+      dialogRef.afterClosed().subscribe(motivo => {
+
+        if (motivo) {
+
+          this.salidaSrv.updateValidacion(salida.id_salida, aceptada, motivo)
+            .subscribe(aceptada => {
+              salida.aceptada = aceptada;
+              this.snackBar.open("Salida Actualizada", "", {
+                duration: 2000,
+                panelClass: ["bg-success", "text-white"]
+              });
+
+            }, (error) => {
+              this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+                duration: 3000,
+                panelClass: ["bg-danger", "text-white"]
+              });
+            });
+        }
+      });
+
+    } else {
+
+      this.salidaSrv.updateValidacion(salida.id_salida, aceptada, motivo)
+        .subscribe(aceptada => {
+          salida.aceptada = aceptada;
+          this.snackBar.open("Salida Actualizada", "", {
+            duration: 2000,
+            panelClass: ["bg-success", "text-white"]
+          });
+
+        }, (error) => {
+          this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+            duration: 3000,
+            panelClass: ["bg-danger", "text-white"]
+          });
+        });
+
+    }
+
+
+
+
   }
 
   delSalida(salida) {

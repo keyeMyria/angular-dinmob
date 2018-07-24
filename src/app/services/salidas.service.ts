@@ -65,8 +65,8 @@ export class SalidasService {
       .pipe(catchError(this.handleError("getPartidasUrbanizacion")));
   }
 
-  updateValidacion(id_salida, value) {
-    return this.http.post(this.url + 'update_validacion_salida/' + id_salida, { value: value })
+  updateValidacion(id_salida, value, motivo) {
+    return this.http.post(this.url + 'update_validacion_salida/' + id_salida, { value: value, motivo:motivo })
       .pipe(catchError(this.handleError("updateValidacion")));
   }
 

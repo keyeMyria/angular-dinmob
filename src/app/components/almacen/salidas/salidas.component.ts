@@ -88,11 +88,12 @@ export class SalidasComponent implements OnInit {
   setValidacion(salida) {
 
     let aceptada = 0;
+    let motivo=null;
     if (salida.aceptada == "0") {
       aceptada = 1;
     }
 
-    this.salidaSrv.updateValidacion(salida.id_salida, aceptada)
+    this.salidaSrv.updateValidacion(salida.id_salida, aceptada, motivo)
       .subscribe(aceptada => {
         salida.aceptada = aceptada;
         this.snackBar.open("Salida Actualizada", "", {
