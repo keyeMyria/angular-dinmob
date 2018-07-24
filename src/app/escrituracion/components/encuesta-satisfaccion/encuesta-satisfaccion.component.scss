@@ -1,0 +1,24 @@
+@media only screen and (max-width: 600px) {
+    .content{
+        //3rem del pb-5, .5rem del pt-2
+        min-height: calc(100vh - 56px);
+    }
+
+    .fab-t1 {
+      
+        top:59px !important; 
+        right:4px !important; 
+      
+    }
+
+
+    
+}
+
+.fab-t1 {
+    position:fixed; 
+    top:67px; 
+    right:20px; 
+    z-index:100;
+}
+

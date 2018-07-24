@@ -33,6 +33,10 @@ import { EncuestaSatisfaccionComponent } from './components/encuesta-satisfaccio
 import { ProyeccionFinancieraComponent } from './components/proyeccion-financiera/proyeccion-financiera.component';
 import { LotesPorVenderComponent } from './components/lotes-por-vender/lotes-por-vender.component';
 import { LotesEnTramiteComponent } from './components/lotes-en-tramite/lotes-en-tramite.component';
+import { EditarComentarioPosventaDialogoComponent } from './components/editar-comentario-posventa-dialogo/editar-comentario-posventa-dialogo.component';
+import { AgregarComentarioPosventaDialogoComponent } from './components/agregar-comentario-posventa-dialogo/agregar-comentario-posventa-dialogo.component';
+import { AgregarFotoLotePosventaDialogoComponent } from './components/agregar-foto-lote-posventa-dialogo/agregar-foto-lote-posventa-dialogo.component';
+
 
 
 
@@ -71,6 +75,10 @@ import { LotesEnTramiteComponent } from './components/lotes-en-tramite/lotes-en-
     ProyeccionFinancieraComponent,
     LotesPorVenderComponent,
     LotesEnTramiteComponent,
+    EditarComentarioPosventaDialogoComponent,
+    AgregarComentarioPosventaDialogoComponent,
+    AgregarFotoLotePosventaDialogoComponent,
+
 
   ],
   entryComponents: [
@@ -80,6 +88,9 @@ import { LotesEnTramiteComponent } from './components/lotes-en-tramite/lotes-en-
     EditarClienteEscrituracionDialogoComponent,
     EditarLoteEscrituracionDialogoComponent,
     EditarEquipoDialogoComponent,
+    EditarComentarioPosventaDialogoComponent,
+    AgregarComentarioPosventaDialogoComponent,
+    AgregarFotoLotePosventaDialogoComponent,
   ]
 })
 export class EscrituracionModule { }
