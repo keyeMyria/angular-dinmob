@@ -47,6 +47,11 @@ export class EncuestaSatisfaccionComponent implements OnInit {
     }
   ]
 
+  vendedor =
+    {
+      nombre: "Pedro Paramo"
+    }
+
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private router: Router,
