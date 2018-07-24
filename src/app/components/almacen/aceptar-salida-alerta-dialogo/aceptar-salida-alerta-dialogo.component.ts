@@ -25,7 +25,7 @@ export class AceptarSalidaAlertaDialogoComponent implements OnInit {
   }
 
   guardar(){
-    
+    this.dialogRef.close(this.form.value.motivo)
   }
 
 }
