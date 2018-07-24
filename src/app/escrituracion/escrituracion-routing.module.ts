@@ -138,6 +138,9 @@ const routes: Routes = [
   {
     path: 'comentarios-posventa', component: ComentariosPosventasComponent,
     canActivate: [AuthGuard],
+    resolve: {
+      obras: ObrasUsuarioResolverService
+    },
     data: {
       permisos: [Rol.Administrador, Rol.Contabilidad]
     }
@@ -145,6 +148,9 @@ const routes: Routes = [
   {
     path: 'encuesta-satisfaccion', component: EncuestaSatisfaccionComponent,
     canActivate: [AuthGuard],
+    resolve: {
+      obras: ObrasUsuarioResolverService
+    },
     data: {
       permisos: [Rol.Administrador, Rol.Contabilidad]
     }

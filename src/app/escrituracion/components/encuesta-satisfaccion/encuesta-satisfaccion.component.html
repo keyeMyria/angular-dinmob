@@ -1,18 +1,73 @@
-<div class="container mt-2 mb-5">
-  <div class="row">
-    <div class="col-12">
-
-      <div class="card">
-        <div class="card-header">
-          Encuenta Satisfacción
-        </div>
+<button mat-fab class="fab-t1" class="fab-t1" (click)="drawer.opened= !drawer.opened">
+  <mat-icon aria-label="toggle side drawer">format_align_left</mat-icon>
+</button>
 
 
-        <div class="container mt-2">
-          <form>
+
+<mat-drawer-container class="drawer-container">
+  <mat-drawer class="estructura" #drawer [mode]="mobileQuery.matches ? 'over':'side'" [opened]="!mobileQuery.matches" style="width:250px">
+    <mat-card class="estructura">
+      <div class="mb-2">
+        <select class="form-control" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)" tabindex="-1">
+          <option value="">Seleccionar...</option>
+          <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>
+        </select>
+      </div>
+    </mat-card>
+    <div class="mb-3">
+      <mat-accordion>
+        <mat-expansion-panel class="manzanas" *ngFor="let manzana of obra?.manzanas" [hideToggle]="false">
+          <mat-expansion-panel-header>
+            <span>{{manzana.nombre}}</span>
+            <div class="spacer"></div>
+            <span class="badge badge-pill badge-primary align-self-center mr-2">{{manzana.lotes?.length || "0"}}</span>
+
+          </mat-expansion-panel-header>
+
+          <ul class="list-group">
+            <button type="button" class="list-group-item list-group-item-action" *ngFor="let lote of manzana.lotes" (click)="getAvancesLote(lote)">({{lote.prototipos?.length || "0"}}) {{lote.nombre}}</button>
+          </ul>
+
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </mat-drawer>
+
+  <mat-drawer-content>
+
+    <div class="container-fluid content">
+      <div class="row">
+        <div class="col">
+
+          <ol class="breadcrumb colorBread d-none d-md-flex" style="margin-top: 3.5rem">
+            <li class="breadcrumb-item text-primary">
+              {{lote?.obra}}
+            </li>
+            <li class="breadcrumb-item text-primary">
+              {{lote?.manzana}}
+            </li>
+            <li class="breadcrumb-item text-primary">{{lote?.nombre}}</li>
+          </ol>
+
+          <!-- mostramos solo la manzana y el lote -->
+          <ol class="breadcrumb colorBread d-flex d-md-none" style="margin-top: 3.5rem">
+            <li class="breadcrumb-item text-primary">
+              {{lote?.manzana}}
+            </li>
+            <li class="breadcrumb-item text-primary">{{lote?.nombre}}</li>
+          </ol>
+
+          <div *ngIf="lote  text-right">
+            <span class="ml-1 h6">Vendedor:</span>
+            <span class="mr-2">{{vendedor.nombre}}</span>
+          </div>
+
+
+
+          <form class="mt-2">
             <div class="form-group" *ngFor="let encuesta of encuestas">
               <label for="">{{encuesta.pregunta}}</label>
-              <select class="form-control" id="">
+              <select class="form-control col-auto" id="">
                 <option>Seleccione Respuesta</option>
                 <option>Mala</option>
                 <option>Regular</option>
@@ -20,10 +75,12 @@
               </select>
             </div>
           </form>
+
+
+
         </div>
-
-
       </div>
     </div>
-  </div>
-</div>
+
+  </mat-drawer-content>
+</mat-drawer-container>

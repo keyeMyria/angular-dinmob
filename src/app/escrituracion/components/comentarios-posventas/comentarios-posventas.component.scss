@@ -1,0 +1,49 @@
+@media only screen and (max-width: 600px) {
+    .content{
+        //3rem del pb-5, .5rem del pt-2
+        min-height: calc(100vh - 56px);
+    }
+
+    .fab-t1 {
+      
+        top:59px !important; 
+        right:4px !important; 
+      
+    }
+    .fab-t2 {
+      
+        top:59px !important; 
+        right:66px !important; 
+      
+    }
+
+    .fab-t3 {
+      
+        top:59px !important; 
+        right:128px !important; 
+      
+    }
+
+
+    
+}
+
+.fab-t1 {
+    position:fixed; 
+    top:67px; 
+    right:20px; 
+    z-index:100;
+}
+.fab-t2 {
+    position:fixed; 
+    top:67px; 
+    right:85px; 
+    z-index:100;
+}
+.fab-t3 {
+    position:fixed; 
+    top:67px; 
+    right:150px; 
+    z-index:100;
+}
+

@@ -1,73 +1,99 @@
-<div class="container">
-    <div class="row">
-      <div class="col-12">
-        <div class="card mt-2">
-  
-          <div class="card-header padding-card-header">
-            <div class="d-flex">
-              <div class="align-self-center">Manzana 1/Lote 1</div>
-              <div class="spacer"></div>
-              <div>
-                <button mat-icon-button>
-                  <mat-icon>add</mat-icon>
-                </button>
+<button mat-fab class="fab-t1" class="fab-t1" (click)="drawer.opened= !drawer.opened">
+  <mat-icon aria-label="toggle side drawer">format_align_left</mat-icon>
+</button>
+
+<button mat-fab class="fab-t2" *ngIf="lote" (click)="agregarComentario()" matTooltip="Avance">
+  <mat-icon aria-label="toggle side drawer">add</mat-icon>
+</button>
+
+<button mat-fab class="fab-t3" *ngIf="lote" (click)="addFoto()">
+  <mat-icon aria-label="toggle side drawer">camera_alt</mat-icon>
+</button>
+
+<mat-drawer-container class="drawer-container">
+  <mat-drawer class="estructura" #drawer [mode]="mobileQuery.matches ? 'over':'side'" [opened]="!mobileQuery.matches" style="width:250px">
+    <mat-card class="estructura">
+      <div class="mb-2">
+        <select class="form-control" [(ngModel)]="obra_selected" (change)="cargarObra(obra_selected)" tabindex="-1">
+          <option value="">Seleccionar...</option>
+          <option [value]="obra.id_obra" *ngFor="let obra of obras">{{obra.nombre}}</option>
+        </select>
+      </div>
+    </mat-card>
+    <div class="mb-3">
+      <mat-accordion>
+        <mat-expansion-panel class="manzanas" *ngFor="let manzana of obra?.manzanas" [hideToggle]="false">
+          <mat-expansion-panel-header>
+            <span>{{manzana.nombre}}</span>
+            <div class="spacer"></div>
+            <span class="badge badge-pill badge-primary align-self-center mr-2">{{manzana.lotes?.length || "0"}}</span>
+
+          </mat-expansion-panel-header>
+
+          <ul class="list-group">
+            <button type="button" class="list-group-item list-group-item-action" *ngFor="let lote of manzana.lotes" (click)="getAvancesLote(lote)">({{lote.prototipos?.length || "0"}}) {{lote.nombre}}</button>
+          </ul>
+
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </mat-drawer>
+
+  <mat-drawer-content>
+
+    <div class="container-fluid content">
+      <div class="row">
+        <div class="col">
+
+          <!-- mostramos el nombre de la obra a partir del tamaño md -->
+          <ol class="breadcrumb colorBread d-none d-md-flex" style="margin-top: 3.5rem">
+            <li class="breadcrumb-item text-primary">
+              {{lote?.obra}}
+            </li>
+            <li class="breadcrumb-item text-primary">
+              {{lote?.manzana}}
+            </li>
+            <li class="breadcrumb-item text-primary">{{lote?.nombre}}</li>
+          </ol>
+
+          <!-- mostramos solo la manzana y el lote -->
+          <ol class="breadcrumb colorBread d-flex d-md-none" style="margin-top: 3.5rem">
+            <li class="breadcrumb-item text-primary">
+              {{lote?.manzana}}
+            </li>
+            <li class="breadcrumb-item text-primary">{{lote?.nombre}}</li>
+          </ol>
+
+          <div *ngIf="lote">
+            <span class="ml-1 h6">Vendedor:</span>
+            <span class="mr-2">{{vendedor.nombre}}</span>
+          </div>
+
+
+          <div class="list-group mt-2" *ngIf="lote">
+            <div class="list-group-item" *ngFor="let c of comentarios">
+              <div class="d-flex flex-row">
+                <div class="d-flex flex-column flex-grow-1">
+                  <p class="mb-1">
+                    {{c.comentario}}
+                  </p>
+                  <small class="text-muted">{{c.fecha}}</small>
+                </div>
+                <div class="d-flex flex-column align-items-center justify-content-between">
+                  <button mat-icon-button (click)="editarComentario(c)">
+                    <i class="fa fa-pencil"></i>
+                  </button>
+                  <button mat-icon-button (click)="delComentario(c)">
+                    <i class="fa fa-times"></i>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-  
-          <div class="list-group">
-            <div class="list-group-item">
-              <div class="d-flex flex-row">
-                <div class="d-flex flex-column flex-grow-1">
-                  <p class="mb-1">Entregar cotizaciones de la obra "Tres Marias" con el Ing. Pedro Almodovar y llamarme cuando este se entregue
-                    para darte las siguientes cotizaciones.</p>
-                </div>
-                <div class="d-flex flex-column align-items-center justify-content-between">
-                  <button mat-icon-button>
-                    <i class="fa fa-times"></i>
-                  </button>
-                  <button mat-icon-button>
-                    <i class="fa fa-pencil"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="list-group-item">
-              <div class="d-flex flex-row">
-                <div class="d-flex flex-column flex-grow-1">
-                  <p class="mb-1">Entregar cotizaciones de la obra "Tres Marias".</p>
-                </div>
-                <div class="d-flex flex-column align-items-center justify-content-between">
-                  <button mat-icon-button>
-                    <i class="fa fa-times"></i>
-                  </button>
-                  <button mat-icon-button>
-                    <i class="fa fa-pencil"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="list-group-item">
-              <div class="d-flex flex-row">
-                <div class="d-flex flex-column flex-grow-1">
-                  <p class="mb-1">Entregar cotizaciones de la obra "Tres Marias" con el Ing. Pedro Almodovar y llamarme cuando este se entregue
-                    para darte las siguientes cotizaciones. Subir al sistema los prototipos de la nueva obra y agregar los
-                    nuevos créditos. Relizar los pagos pendientes. Todo se tiene que realizar el dia de hoy o hasta mañana
-                    hasta las 12 de dia.</p>
-                </div>
-                <div class="d-flex flex-column align-items-center justify-content-between">
-                  <button mat-icon-button>
-                    <i class="fa fa-times"></i>
-                  </button>
-                  <button mat-icon-button>
-                    <i class="fa fa-pencil"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-  
-          </div>
+
         </div>
       </div>
     </div>
-  </div>
+
+  </mat-drawer-content>
+</mat-drawer-container>
