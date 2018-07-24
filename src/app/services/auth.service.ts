@@ -151,7 +151,7 @@ export class AuthService {
 
     } else {
 
-      //console.log("NO tiene permiso");
+      //console.log("NO tiene permiso", id_tipo_usuario, roles);
     }
     return permiso;
   }

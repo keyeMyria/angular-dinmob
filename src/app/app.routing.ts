@@ -126,7 +126,7 @@ export const ROUTES: Routes = [
          }, */
         canActivate: [AuthGuard],
         data: {
-            permisos: [Rol.Administrador, Rol.Almacenista, Rol.AsesorVentas, Rol.Contabilidad, Rol.Control, Rol.ControlAlmacen, Rol.Creditos, Rol.Recepcion, Rol.Residente, Rol.Ventas]
+            permisos: [Rol.Administrador, Rol.Almacenista, Rol.AsesorVentas, Rol.Contabilidad, Rol.Control, Rol.ControlAlmacen, Rol.Creditos, Rol.Recepcion, Rol.Residente, Rol.Ventas, Rol.JefeFrente]
         },
         children: [
             //{ path: '', redirectTo: 'tablero', pathMatch: 'full' },
@@ -291,7 +291,7 @@ export const ROUTES: Routes = [
                     obras: MapasUsuarioResolverService
                 },
                 data: {
-                    permisos: [Rol.Administrador, Rol.ControlAlmacen, Rol.Residente]
+                    permisos: [Rol.Administrador, Rol.ControlAlmacen, Rol.Residente, Rol.JefeFrente]
                 }
             },
             {
@@ -832,13 +832,9 @@ export const ROUTES: Routes = [
             },
             {
                 path: 'tablero-jefe-frente', component: TableroJefeFrenteComponent,
-                canActivate: [AuthGuard],
-                resolve: {
-                    /*                     obras: ObrasUsuarioResolverService,
-                                        usuario: UsuarioLoggedResolverService */
-                },
+                canActivate: [AuthGuard],              
                 data: {
-                    permisos: [Rol.Administrador, Rol.ControlAlmacen, Rol.Residente]
+                    permisos: [Rol.Administrador, Rol.JefeFrente]
                 }
             },
             {
@@ -848,7 +844,7 @@ export const ROUTES: Routes = [
                     obras: ObrasUsuarioResolverService,
                 },
                 data: {
-                    permisos: [Rol.Administrador, Rol.ControlAlmacen]
+                    permisos: [Rol.Administrador, Rol.ControlAlmacen, Rol.JefeFrente, Rol.Residente]
                 }
             },
             {

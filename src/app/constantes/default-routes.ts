@@ -9,6 +9,7 @@ export const RolRoute = {
     AsesorVentas: "/tablero-asesor",
     Creditos: "/tablero-ventas",
     Recepcion: "/tablero-pedidos",
-    ControlAlmacen: "/tablero-control-almacen"
+    ControlAlmacen: "/tablero-control-almacen",
+    JefeFrente: "/tablero-jefe-frente"
 
 }
