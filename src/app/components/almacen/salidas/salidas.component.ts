@@ -12,6 +12,7 @@ import { Rol } from "../../../constantes/roles";
 import { AuthService } from '../../../services/auth.service';
 import { ReporteService } from '../../../services/reporte.service';
 import * as FileSaver from "file-saver";
+import { AceptarSalidaAlertaDialogoComponent } from 'app/components/almacen/aceptar-salida-alerta-dialogo/aceptar-salida-alerta-dialogo.component';
 
 @Component({
   selector: 'app-salidas',
@@ -88,25 +89,55 @@ export class SalidasComponent implements OnInit {
   setValidacion(salida) {
 
     let aceptada = 0;
-    let motivo=null;
+    let motivo = null;
     if (salida.aceptada == "0") {
       aceptada = 1;
-    }
 
-    this.salidaSrv.updateValidacion(salida.id_salida, aceptada, motivo)
-      .subscribe(aceptada => {
-        salida.aceptada = aceptada;
-        this.snackBar.open("Salida Actualizada", "", {
-          duration: 2000,
-          panelClass: ["bg-success", "text-white"]
-        });
-
-      }, (error) => {
-        this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
-          duration: 3000,
-          panelClass: ["bg-danger", "text-white"]
-        });
+      let dialogRef = this.dialog.open(AceptarSalidaAlertaDialogoComponent, {
+        data: {
+          salida: salida
+        },
+        width: '500px'
       });
+
+      dialogRef.afterClosed().subscribe(motivo => {
+
+        if (motivo) {
+
+          this.salidaSrv.updateValidacion(salida.id_salida, aceptada, motivo)
+            .subscribe(aceptada => {
+              salida.aceptada = aceptada;
+              this.snackBar.open("Salida Actualizada", "", {
+                duration: 2000,
+                panelClass: ["bg-success", "text-white"]
+              });
+
+            }, (error) => {
+              this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+                duration: 3000,
+                panelClass: ["bg-danger", "text-white"]
+              });
+            });
+        }
+      });
+
+    } else {
+
+      this.salidaSrv.updateValidacion(salida.id_salida, aceptada, motivo)
+        .subscribe(aceptada => {
+          salida.aceptada = aceptada;
+          this.snackBar.open("Salida Actualizada", "", {
+            duration: 2000,
+            panelClass: ["bg-success", "text-white"]
+          });
+
+        }, (error) => {
+          this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
+            duration: 3000,
+            panelClass: ["bg-danger", "text-white"]
+          });
+        });
+    }
   }
 
 
