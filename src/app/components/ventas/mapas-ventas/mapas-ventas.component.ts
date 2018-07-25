@@ -288,18 +288,18 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
 
       if (form) {
 
-        console.log("form", form);
-        
+        //console.log("form", form);
 
-        /* { id_estado_venta: form } */
+
+        form.valor_base= form.valor_base.replace(/,/g, "");
         this.loteSrv.updateLote(this.lote_selected.id_lote, form)
           .subscribe((lote: any) => {
 
 
             this.lote_selected.id_estado_venta = lote.id_estado_venta;
-            this.lote_selected.estado_venta=lote.estado_venta;
-            this.lote_selected.valor_base= lote.valor_base;
-            this.lote_selected.fecha_cambio_estado= lote.fecha_cambio_estado;
+            this.lote_selected.estado_venta = lote.estado_venta;
+            this.lote_selected.valor_base = lote.valor_base;
+            this.lote_selected.fecha_cambio_estado = lote.fecha_cambio_estado;
 
             /* let update= this.lotes.find(lote=>lote.id_lote== lote.id_lote);
             //console.log("lote", update);
@@ -308,13 +308,23 @@ export class MapasVentasComponent implements OnInit, OnDestroy {
             update.fecha_cambio_estado= lote.fecha_cambio_estado;
             update.valor_base=lote.valor_base; */
 
+            // si el estado de venta es diferente del actual entonces actualizamos el mapa
+            if (lote.estado_venta != this.valuesEstadosVenta[this.lote_selected.code]) {
+              //console.log("el estado es diferente");
 
-            this.valuesEstadosVenta[this.lote_selected.code] = lote.estado_venta;
 
+              this.valuesEstadosVenta[this.lote_selected.code] = lote.estado_venta;
 
-            let value = {};
-            value[this.lote_selected.code] = lote.estado_venta;
-            this.map.series.regions[0].setValues(value);
+              let value = {};
+              value[this.lote_selected.code] = lote.estado_venta;
+              // función que cambia el color del mapa
+              this.map.series.regions[0].setValues(value);
+
+            } 
+            /* else {
+              console.log("el estado es igual");
+            } */
+
 
 
             this.snackBar.open("Lote Actualizado", "", {
