@@ -35,7 +35,7 @@
 
   <mat-drawer-content>
 
-    <div class="container-fluid content">
+    <div class="container-fluid">
       <div class="row">
         <div class="col">
 
@@ -57,17 +57,22 @@
             <li class="breadcrumb-item text-primary">{{lote?.nombre}}</li>
           </ol>
 
-          <div *ngIf="lote  text-right">
+          <div class="  text-right" *ngIf="lote">
             <span class="ml-1 h6">Vendedor:</span>
             <span class="mr-2">{{vendedor.nombre}}</span>
           </div>
 
-
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col">
 
           <form class="mt-2">
             <div class="form-group" *ngFor="let encuesta of encuestas">
               <label for="">{{encuesta.pregunta}}</label>
-              <select class="form-control col-auto" id="">
+              <select class="form-control" id="">
                 <option>Seleccione Respuesta</option>
                 <option>Mala</option>
                 <option>Regular</option>
