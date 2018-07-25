@@ -3,6 +3,7 @@ import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { PrototiposService } from '../../../services/prototipos.service';
+import { TypeaheadMatch } from 'ngx-bootstrap/typeahead';
 
 @Component({
   selector: 'app-agregar-insumo-dialogo',
@@ -24,6 +25,7 @@ export class AgregarInsumoDialogoComponent implements OnInit {
   });
 
   insumo_selected: any = "";
+  buscarInsumo: string = "";
 
 
   constructor(
@@ -43,23 +45,27 @@ export class AgregarInsumoDialogoComponent implements OnInit {
 
   ngOnInit() {
   }
-  /* 
-    private clonar(objeto): any {
-  
-      let strObject = JSON.stringify(objeto);
-      return JSON.parse(strObject);
-  
+ 
+
+  onSelect(event: TypeaheadMatch): void {
+    this.insumo_selected = event.item;
+  }
+
+  typeaheadNoResults(event: boolean): void {
+    if (event) {
+      this.insumo_selected = "";
     }
-   */
+
+  }
 
   guardar() {
     let insumo = {
-      id_insumo: this.form.value['insumo'].id_insumo,
+      id_insumo: this.insumo_selected.id_insumo,//this.form.value['insumo'].id_insumo,
       id_partida: this.data.partida.id_partida,
       cantidad: this.form.value['cantidad'],
       precio: this.form.value['precio']
     };
-    console.log("insumo", insumo);
+    //console.log("insumo", insumo);
 
     if (insumo.cantidad) {
       insumo.cantidad = insumo.cantidad.replace(/,/g, "");
