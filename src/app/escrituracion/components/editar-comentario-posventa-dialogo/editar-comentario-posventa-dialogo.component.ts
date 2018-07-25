@@ -23,4 +23,8 @@ export class EditarComentarioPosventaDialogoComponent implements OnInit {
   ngOnInit() {
   }
 
+  guardar(){
+    
+  }
+
 }
