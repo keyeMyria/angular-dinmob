@@ -9,6 +9,7 @@ export enum Rol {
     AsesorVentas = 7,
     Creditos = 8,
     Recepcion = 9,
-    ControlAlmacen = 10
+    ControlAlmacen = 10,
+    JefeFrente = 11
 
 }

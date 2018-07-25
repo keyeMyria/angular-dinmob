@@ -199,6 +199,16 @@
 
       </mat-nav-list>
 
+      <mat-nav-list class="mb-5" *ngIf="usuario.id_tipo_usuario==Rol.JefeFrente">
+
+        <h3 class="sidenav-title">Jefe Frente</h3>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/salidas-alerta', obra_default]" routerLinkActive="active">Salidas</a>
+
+        <a mat-list-item (click)="gotoRoute($event)" [routerLink]="['/mapas-avances', obra_default]" routerLinkActive="active">Mapas Avances</a>
+
+      </mat-nav-list>
+
       <mat-nav-list class="mb-5" *ngIf="usuario.id_tipo_usuario==Rol.Contabilidad">
 
         <h3 class="sidenav-title">Contabilidad</h3>

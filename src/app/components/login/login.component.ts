@@ -29,13 +29,13 @@ export class LoginComponent {
     this.auth.login(usuario)
       .subscribe((res: any) => {
         //console.log("login");
-        
+
         this.loading = false;
 
         //guardamos el token el el localStorage
         this.auth.setToken(res.token);
         //guardamos el usuario en memoria
-        this.auth.usuario= res.usuario;
+        this.auth.usuario = res.usuario;
 
         // reset form properties
         //this.usuario = { email: "", password: "" };
@@ -83,12 +83,16 @@ export class LoginComponent {
             this.router.navigate([RolRoute.Ventas]);
             break;
 
+          case Rol.JefeFrente:           
+            this.router.navigate([RolRoute.JefeFrente]);
+            break;
+
           default:
             this.router.navigate(['/login']);
             break;
         }
 
-        
+
       }, (error: any) => {
         this.loading = false;
         if (error.status == 401 /* Unauthorized */) {

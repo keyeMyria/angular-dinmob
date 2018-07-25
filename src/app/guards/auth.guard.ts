@@ -14,9 +14,9 @@ export class AuthGuard implements CanActivate {
     //console.log("canActivateGuard");
 
 
-    //console.log("next", next);
-    //console.log("state", state);
-    //console.log("url", state.url);
+    /* console.log("next", next);
+    console.log("state", state);
+    console.log("url", state.url); */
 
     let url: string = state.url;
    
@@ -34,7 +34,7 @@ export class AuthGuard implements CanActivate {
           return this.authSrv.tienePermisoAsync(next.data.permisos);
         }
       } else {
-        //console.log("NO TIENE PERMISOS");
+        //console.log("NO TIENE PERMISOS 1");
 
         //guardamos la ruta para una posterior redireccion
         //despues de hacer login
@@ -45,7 +45,7 @@ export class AuthGuard implements CanActivate {
         return false;
       }
     } else {
-      //console.log("NO TIENE PERMISOS");
+      //console.log("NO TIENE PERMISOS 2");
       return false;
     }
 

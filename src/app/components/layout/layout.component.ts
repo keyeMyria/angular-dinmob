@@ -104,6 +104,10 @@ export class LayoutComponent implements OnInit {
         this.router.navigate([RolRoute.Ventas]);
         break;
 
+      case Rol.JefeFrente:
+        this.router.navigate([RolRoute.JefeFrente]);
+        break;
+
       default:
         this.router.navigate(['/login']);
         break;
