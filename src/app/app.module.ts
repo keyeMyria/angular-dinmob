@@ -9,6 +9,7 @@ import { TextMaskModule } from "angular2-text-mask";
 import { FileUploadModule } from 'ng2-file-upload/file-upload/file-upload.module';
 import { JwtModule } from '@auth0/angular-jwt';
 import { ColorPickerModule } from 'ngx-color-picker';
+import { TypeaheadModule } from "ngx-bootstrap/typeahead";
 
 //servicios
 import { LoadingService } from 'app/services/loading.service';
@@ -459,7 +460,8 @@ export function getToken() {
     TextMaskModule,
     RoutingModule,
     ColorPickerModule,
-    NgxChartsModule
+    NgxChartsModule,
+    TypeaheadModule.forRoot()
 
   ],
 
