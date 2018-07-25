@@ -17,4 +17,8 @@ export class AgregarFotoLotePosventaDialogoComponent implements OnInit {
   ngOnInit() {
   }
 
+  uploadImage() {
+
+  }
+
 }

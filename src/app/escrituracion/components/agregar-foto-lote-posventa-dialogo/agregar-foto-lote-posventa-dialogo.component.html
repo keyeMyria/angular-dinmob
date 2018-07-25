@@ -6,14 +6,14 @@
 
     <div class="form-group">
       <div class="custom-file">
-        <input type="file" accept="image/*;capture=camera" #inputFile class="custom-file-input" id="customFileLang" lang="es" (change)="changeImage($event, inputFile.files)">
+        <input type="file" accept="image/*;capture=camera" #inputFile class="custom-file-input" id="customFileLang" lang="es">
         <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
       </div>
       <small class="form-text text-muted">Extensiones permitidas: png, jpg, jpeg</small>
     </div>
 
     <div class="form-group">
-      <textarea rows="2" class="form-control" tabindex="-1" placeholder="Descripción" name="descripcion" [(ngModel)]="descripcion"></textarea>
+      <textarea rows="2" class="form-control" tabindex="-1" placeholder="Descripción" name="descripcion"></textarea>
     </div>
 
 <!-- 
@@ -40,6 +40,6 @@
 
   <button mat-button type="button" [mat-dialog-close]="false">CERRAR</button>
   <!-- <button mat-button type="button" (click)="uploader.uploadAll()" color="primary" [disabled]="!uploader.getNotUploadedItems().length">GUARDAR</button> -->
-  <button mat-button type="button" (click)="uploadImage()" color="primary" [disabled]="!currentFile">GUARDAR</button>
+  <button mat-button type="button" (click)="uploadImage()" color="primary">GUARDAR</button>
 
 </div>
