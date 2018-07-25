@@ -1,78 +1,115 @@
 <div class="container mt-2 mb-5">
   <div class="row">
-    <div class="col-12 mt-2">
+    <div class="col-6 mt-2">
 
-      <h5 class="">Notificaciones</h5>
-      <hr>
+      <mat-card class="mt-3">
 
-      <form [formGroup]="form" (ngSubmit)="guardar()">
+        <mat-card-title>
+          Estados Infonavit
+        </mat-card-title>
 
-        <div class="form-group row">
-          <label for="etapa_uno" class="col-form-label col-sm-4">Apartado
-            <i class="fa fa-arrow-right" aria-hidden="true"></i> Checklist</label>
-          <div class="input-group col-sm-8">
-            <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="etapa_uno" name="etapa_uno" placement="bottom-left"
-              [matDatepicker]="dpApartado" formControlName="etapa_uno">
-            <span class="input-group-append">
-              <button class="btn btn-secondary" type="button" (click)="dpApartado.open()">
-                <i class="fa fa-calendar"></i>
-              </button>
-            </span>
+        <div class="form-group row" *ngFor="let estado_infonavit of estados_infonavit">
+          <label class="col-form-label col-sm-5">{{estado_infonavit.nombre}}</label>
+          <div class="col-sm-7">
+            <div class="input-group">
+              <input type="text" class="form-control">
+              <div class="input-group-append">
+                <span class="input-group-text" id="basic-addon2">dias</span>
+              </div>
+            </div>
           </div>
-          <mat-datepicker touchUi="true" #dpApartado></mat-datepicker>
-        </div>
-
-        <div class="form-group row">
-          <label for="etapa_dos" class="col-form-label col-sm-4">Checklist
-            <i class="fa fa-arrow-right" aria-hidden="true"></i> Infonavit</label>
-          <div class="input-group col-sm-8">
-            <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="etapa_dos" name="etapa_dos" placement="bottom-left"
-              [matDatepicker]="dpChecklist" formControlName="etapa_dos">
-            <span class="input-group-append">
-              <button class="btn btn-secondary" type="button" (click)="dpChecklist.open()">
-                <i class="fa fa-calendar"></i>
-              </button>
-            </span>
-          </div>
-          <mat-datepicker touchUi="true" #dpChecklist></mat-datepicker>
-        </div>
-
-        <div class="form-group row">
-          <label for="etapa_tres" class="col-form-label col-sm-4">Infonavit
-            <i class="fa fa-arrow-right" aria-hidden="true"></i> Firma</label>
-          <div class="input-group col-sm-8">
-            <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="etapa_tres" name="etapa_tres" placement="bottom-left"
-              [matDatepicker]="dpInfonavit" formControlName="etapa_tres">
-            <span class="input-group-append">
-              <button class="btn btn-secondary" type="button" (click)="dpInfonavit.open()">
-                <i class="fa fa-calendar"></i>
-              </button>
-            </span>
-          </div>
-          <mat-datepicker touchUi="true" #dpInfonavit></mat-datepicker>
-        </div>
-
-        <div class="form-group row">
-          <label for="etapa_tres" class="col-form-label col-sm-4">Firma
-            <i class="fa fa-arrow-right" aria-hidden="true"></i> Entrega</label>
-          <div class="input-group col-sm-8">
-            <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="etapa_tres" name="etapa_tres" placement="bottom-left"
-              [matDatepicker]="dpFirma" formControlName="etapa_tres">
-            <span class="input-group-append">
-              <button class="btn btn-secondary" type="button" (click)="dpFirma.open()">
-                <i class="fa fa-calendar"></i>
-              </button>
-            </span>
-          </div>
-          <mat-datepicker touchUi="true" #dpFirma></mat-datepicker>
         </div>
 
 
-        <button type="button" class="btn btn-primary">Guardar</button>
+      </mat-card>
 
-      </form>
+      <mat-card class="mt-3">
+
+        <mat-card-title>
+          Estados Fovisste
+        </mat-card-title>
+
+        <div class="form-group row" *ngFor="let estado_fovissste of estados_fovissste">
+          <label class="col-form-label col-sm-5">{{estado_fovissste.nombre}}</label>
+          <div class="col-sm-7">
+            <div class="input-group">
+              <input type="text" class="form-control">
+              <div class="input-group-append">
+                <span class="input-group-text" id="basic-addon2">dias</span>
+              </div>
+            </div>
+          </div>
+        </div>
 
 
+      </mat-card>
+
+      <mat-card class="mt-3">
+
+        <mat-card-title>
+          Estados Contado
+        </mat-card-title>
+
+        <div class="form-group row" *ngFor="let estado_contado of estados_contado">
+          <label class="col-form-label col-sm-5">{{estado_contado.nombre}}</label>
+          <div class="col-sm-7">
+            <div class="input-group">
+              <input type="text" class="form-control">
+              <div class="input-group-append">
+                <span class="input-group-text" id="basic-addon2">dias</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </mat-card>
+
+    </div>
+
+    <div class="col-6 mt-2">
+
+      <mat-card class="mt-3">
+
+        <mat-card-title>
+          Estados Bancos
+        </mat-card-title>
+
+        <div class="form-group row" *ngFor="let estado_bancos of estados_bancos">
+          <label class="col-form-label col-sm-5">{{estado_bancos.nombre}}</label>
+          <div class="col-sm-7">
+            <div class="input-group">
+              <input type="text" class="form-control">
+              <div class="input-group-append">
+                <span class="input-group-text" id="basic-addon2">dias</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </mat-card>
+
+      <mat-card class="mt-3">
+
+        <mat-card-title>
+          Estados Cofinanciamiento
+        </mat-card-title>
+
+        <div class="form-group row" *ngFor="let estado_cofinanciamiento of estados_cofinanciamiento">
+          <label class="col-form-label col-sm-5">{{estado_cofinanciamiento.nombre}}</label>
+          <div class="col-sm-7">
+            <div class="input-group">
+              <input type="text" class="form-control">
+              <div class="input-group-append">
+                <span class="input-group-text" id="basic-addon2">dias</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </mat-card>
 
     </div>
   </div>
