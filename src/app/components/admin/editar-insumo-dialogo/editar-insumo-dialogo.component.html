@@ -29,13 +29,15 @@
       </div>
     </div>
 
-    <mat-slide-toggle name="cambiar_precios">
-      Cambiar precio en todas las partidas
-    </mat-slide-toggle>
-
-
-
   </form>
+
+  <mat-slide-toggle name="cambiar_precios" [(ngModel)]="todas_ocurrencias">
+    Cambiar precio en todas las partidas
+  </mat-slide-toggle>
+
+
+
+
 </div>
 
 <div mat-dialog-actions>
