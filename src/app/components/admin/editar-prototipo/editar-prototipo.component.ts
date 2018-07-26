@@ -1,5 +1,5 @@
 
-import {switchMap} from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { EditarNombrePrototipoDialogoComponent } from 'app/components/admin/editar-nombre-prototipo-dialogo/editar-nombre-prototipo-dialogo.component';
 import { MatDialog, MatSnackBar } from '@angular/material';
@@ -51,8 +51,6 @@ export class EditarPrototipoComponent implements OnInit {
         this.partidas = res.partidas;
 
         //this.changeDetectorRef.markForCheck();
-
-
 
       }, (error) => {
         this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
@@ -270,10 +268,16 @@ export class EditarPrototipoComponent implements OnInit {
 
   editarInsumo(insumo) {
 
+    //console.log("editar insumo", insumo);
+    //console.log("prototipo", this.prototipo);
+
+
 
     let dialogRef = this.dialog.open(EditarInsumoDialogoComponent, {
       data: {
-        insumo: insumo
+        insumo: insumo,
+        id_prototipo: this.prototipo.id_prototipo,
+        partidas: this.partidas
       },
       width: '500px',
     });

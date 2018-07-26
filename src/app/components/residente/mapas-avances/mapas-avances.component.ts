@@ -122,7 +122,7 @@ export class MapasAvancesComponent implements OnInit {
           this.valuesDiscretosLotes[lote.code] = lote.valor_discreto ? lote.valor_discreto : 1;
         });
         //console.log("values discretos", this.valuesDiscretosLotes);
-        console.log("values ventas", this.valuesVentas);
+        //console.log("values ventas", this.valuesVentas);
 
 
 

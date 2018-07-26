@@ -66,8 +66,8 @@
           </ol>
 
           <div class="text-right" *ngIf="lote">
-            <span>{{num_partidas_finalizadas||0}} de {{num_partidas||0}} partidas</span>
-            <span class="ml-1 h5">{{ num_partidas_finalizadas/num_partidas |percent:'.2-2'}}</span>
+            <span>{{num_partidas_arrancadas||0}} de {{num_partidas||0}} partidas</span>
+            <span class="ml-1 h5">{{ num_partidas_arrancadas/num_partidas |percent:'.2-2'}}</span>
           </div>
 
           <div class="avances pb-5">
@@ -75,15 +75,14 @@
             <mat-accordion>
 
               <mat-expansion-panel *ngFor="let partida of acordeon; trackBy: trackByIndex" [hideToggle]="true">
-                <mat-expansion-panel-header [ngClass]="{'bg-info text-white': partida.subpartidas.length==0? (partida.fecha_fin != null) : (partida.subpartidas.length - partida.num_subpartidas_finalizadas==0)}">
+                <mat-expansion-panel-header [ngClass]="{'bg-info text-white': partida.subpartidas.length==0? (partida.fecha_arranque != null) : (partida.subpartidas.length - partida.num_subpartidas_arrancadas==0)}">
                   <span>{{partida.nombre}}</span>
                   <div class="spacer"></div>
                   <div class="collapse-header-btns">
-                    <small class="d-none d-md-inline-block">{{partida.subpartidas.length==0? (partida.fecha_fin? 1:0) : partida.num_subpartidas_finalizadas}}
+                    <small class="d-none d-md-inline-block">{{partida.subpartidas.length==0? (partida.fecha_arranque? 1:0) : partida.num_subpartidas_arrancadas}}
                       <span class="">de {{partida.subpartidas.length || "1"}}</span>
                     </small>
-                    <small class="d-md-none">{{ partida.subpartidas.length==0? (partida.fecha_fin? 0:1) : partida.subpartidas.length
-                      - partida.num_subpartidas_finalizadas}}</small>
+                    <small class="d-md-none">{{ partida.subpartidas.length==0? (partida.fecha_arranque? 0:1) : partida.subpartidas.length - partida.num_subpartidas_arrancadas}}</small>
                   </div>
                 </mat-expansion-panel-header>
 
@@ -102,8 +101,8 @@
                               <i class="fa fa-legal"></i>{{subpartida.fecha_fin|| "No terminada"}}</span>
                             <span class="badge mx-1" [ngClass]="{'badge-secondary':!subpartida.fecha_liberacion, 'badge-success':subpartida.fecha_liberacion}">
                               <i class="fa fa-usd"></i>{{subpartida.fecha_liberacion|| "No liberada"}}</span>
-                            <span class="badge" [ngClass]="{'badge-secondary':!subpartida.fecha_liberacion, 'badge-success':subpartida.fecha_liberacion}">
-                              <i class="fa fa-check"></i>Sin arranque</span>
+                            <span class="badge" [ngClass]="{'badge-secondary':!subpartida.fecha_arranque, 'badge-success':subpartida.fecha_arranque}">
+                              <i class="fa fa-check"></i>{{subpartida.fecha_arranque|| "Sin arranque"}}</span>
                           </div>
                         </div>
                       </div>
@@ -123,8 +122,8 @@
                               <i class="fa fa-legal"></i>{{partida.fecha_fin || "No terminada"}}</span>
                             <span class="badge mx-1" [ngClass]="{'badge-secondary':!partida.fecha_liberacion, 'badge-success':partida.fecha_liberacion}">
                               <i class="fa fa-usd"></i>{{partida.fecha_liberacion || "No liberada"}}</span>
-                            <span class="badge" [ngClass]="{'badge-secondary':!partida.fecha_liberacion, 'badge-success':partida.fecha_liberacion}">
-                              <i class="fa fa-check"></i>Sin arranque</span>
+                            <span class="badge" [ngClass]="{'badge-secondary':!partida.fecha_arranque, 'badge-success':partida.fecha_arranque}">
+                              <i class="fa fa-check"></i>{{partida.fecha_arranque|| "Sin arranque"}}</span>
                           </div>
                         </div>
                       </div>

@@ -6,16 +6,28 @@
 
     <div class="form-group">
       <label for="id_insumo" class="col-form-label">Nombre</label>
-      <select [(ngModel)]="insumo_selected" class="form-control bold" id="insumo" name="insumo"  formControlName="insumo" [ngClass]="{'is-invalid': form.get('insumo').invalid  && (form.get('insumo').dirty || form.get('insumo').touched )}">
+      <!--    <select [(ngModel)]="insumo_selected" class="form-control bold" id="insumo" name="insumo"  formControlName="insumo" [ngClass]="{'is-invalid': form.get('insumo').invalid  && (form.get('insumo').dirty || form.get('insumo').touched )}">
         <option value="">Seleccionar...</option>
         <option [ngValue]="insumo" *ngFor="let insumo of data.insumos" class="">({{insumo.codigo}}) {{insumo.insumo}}</option>
-      </select>
+      </select>-->
+      <input formControlName="insumo" [typeahead]="data.insumos" [typeaheadScrollable]="true" [typeaheadOptionsInScrollableView]="7"
+      typeaheadOptionField="insumo" (typeaheadOnSelect)="onSelect($event)" [typeaheadItemTemplate]="customItemTemplate" placeholder="Buscar..."
+      (typeaheadNoResults)="typeaheadNoResults($event)" class="form-control"
+      [ngClass]="{'is-invalid': !insumo_selected  && (form.get('insumo').dirty || form.get('insumo').touched )}">
       <div class="invalid-feedback">Seleccione un insumo.</div>
     </div>
+    <ng-template #customItemTemplate let-model="item" let-index="index">
+      <span class="font-weight-bold">({{model.codigo}}) </span>
+      <span>{{ model.insumo }}</span>
+    </ng-template>
+
+    <!-- <div> insumo: {{form.get('insumo').value |json}}</div>
+    <div> insumo_selected: {{insumo_selected |json}}</div> -->
 
     <div class="form-group">
       <label for="unidad" class="col-form-label">Unidad</label>
-      <input type="text" class="form-control" name="unidad" id="unidad" [(ngModel)]="insumo_selected.unidad" [ngModelOptions]="{standalone: true}" readonly>
+      <input type="text" class="form-control" name="unidad" id="unidad" [(ngModel)]="insumo_selected.unidad" [ngModelOptions]="{standalone: true}"
+        readonly>
     </div>
 
     <div class="form-group">
@@ -39,5 +51,5 @@
 
 <div mat-dialog-actions>
   <button mat-button type="button" [mat-dialog-close]="false">CERRAR</button>
-  <button mat-button type="submit" form="id_form" [disabled]="form.invalid" color="primary">GUARDAR</button>
+  <button mat-button type="submit" form="id_form" [disabled]="form.invalid || !insumo_selected" color="primary">GUARDAR</button>
 </div>

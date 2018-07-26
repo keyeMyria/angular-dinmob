@@ -8,6 +8,9 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '../../../../../node_modules/@angu
 })
 export class AgregarFotoLotePosventaDialogoComponent implements OnInit {
 
+  descripcion:string;
+  currentFile:any;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<AgregarFotoLotePosventaDialogoComponent>,
@@ -17,7 +20,10 @@ export class AgregarFotoLotePosventaDialogoComponent implements OnInit {
   ngOnInit() {
   }
 
-  uploadImage() {
+  uploadImage(){
+
+  }
+  changeImage(event, files){
 
   }
 

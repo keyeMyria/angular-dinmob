@@ -21,7 +21,7 @@ import { Rol } from "../../../constantes/roles";
   styleUrls: ['./arranque.component.scss']
 })
 export class ArranqueComponent implements OnInit {
-  num_partidas_finalizadas: any;
+  num_partidas_arrancadas: any;
   num_partidas: any;
   @ViewChild(MatDrawer) drawer: MatDrawer;
 
@@ -107,13 +107,23 @@ export class ArranqueComponent implements OnInit {
 
     this.loteSrv.addArranquePartidas(this.lote.id_lote, ids)
       .subscribe(partidas => {
-        console.log("partidas", partidas);
+        //console.log("partidas", partidas);
+
+        let count = Object.keys(partidas).length;
+        this.num_partidas_arrancadas += count;
 
         this.selection.selected.forEach(partida => {
+          //console.log("buscamos la partida", partida);
+
 
           if (partidas[partida.id_partida]) {
-            partida.fecha_fin = partidas[partida.id_partida];
+            partida.fecha_arranque = partidas[partida.id_partida];
+            //console.log("si está", partidas[partida.id_partida]);
+
           }
+          /*   else {
+              console.log("no se logró el arranque");            
+            } */
 
         });
 
@@ -144,13 +154,15 @@ export class ArranqueComponent implements OnInit {
     });
 
     this.loteSrv.delArranquePartidas(this.lote.id_lote, ids)
-      .subscribe((res: any) => {
-        //console.log("partidas", res.count);
+      .subscribe((partidas: any) => {
+        //console.log("partidas", partidas.count);
+        this.num_partidas_arrancadas = partidas.num_partidas_arrancadas;
 
         this.selection.selected.forEach(partida => {
 
-          partida.fecha_fin = null;
-          partida.fecha_liberacion = null;
+          if (partidas.arranque[partida.id_partida]) {
+            partida.fecha_arranque = null;
+          }
 
         });
 
@@ -177,18 +189,18 @@ export class ArranqueComponent implements OnInit {
       this.drawer.close();
     }
 
-    this.loteSrv.getAvances(lote.id_lote)
+    this.loteSrv.getArranque(lote.id_lote)
       .subscribe((response: any) => {
         this.lote = response.lote;
         this.acordeon = response.acordeon;
         this.num_partidas = +response.num_partidas;
-        this.num_partidas_finalizadas = +response.num_partidas_finalizadas;
+        this.num_partidas_arrancadas = +response.num_partidas_arrancadas;
         this.selection = new SelectionModel<any>(true, []);
       });
 
-  /*   if (this.mobileQuery.matches) {
-      this.drawer.close();
-    } */
+    /*   if (this.mobileQuery.matches) {
+        this.drawer.close();
+      } */
 
 
   }

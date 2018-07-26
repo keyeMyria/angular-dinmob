@@ -38,8 +38,14 @@ export class InsumoService {
       .pipe(catchError(this.handleError("updateInsumo")));
   }
 
-  updateInsumoPartida(id, insumo) {
-    return this.http.post(this.url + 'update_insumo_partida/' + id, { insumo: insumo })
+  updateInsumoPartida(id_insumo_partida, insumo, todas_ocurrencias, id_prototipo, id_insumo) {
+    return this.http.post(this.url + 'update_insumo_partida/' + id_insumo_partida,
+      {
+        insumo: insumo,
+        todas_ocurrencias: todas_ocurrencias,
+        id_prototipo: id_prototipo,
+        id_insumo: id_insumo
+      })
       .pipe(catchError(this.handleError("updateInsumoPartida")));
   }
 
