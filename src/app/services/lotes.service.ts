@@ -151,6 +151,12 @@ export class LotesService {
   }
 
   //ok
+  getArranque(id_lote) {
+    return this.http.get(this.url + "get_arranque/" + id_lote)
+      .pipe(catchError(this.handleError("getArranque")));
+  }
+
+  //ok
   addArranquePartidas(id_lote, ids_partidas) {
     return this.http.post(this.url + 'add_arranque_partidas', { ids_partidas: ids_partidas, id_lote: id_lote })
       .pipe(catchError(this.handleError("addArranquePartidas")));
