@@ -1,5 +1,5 @@
 
-import {switchMap} from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { EditarDocumentoDialogoComponent } from 'app/components/ventas/editar-documento-dialogo/editar-documento-dialogo.component';
@@ -80,7 +80,7 @@ export class InventarioComponent implements OnInit {
           panelClass: ["bg-success", "text-white"]
         });
 
-      } else if (result.error) {
+      } else if (result && result.error) {
 
         this.snackBar.open(result.error, "", {
           duration: 3000,
