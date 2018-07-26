@@ -63,7 +63,7 @@
                   <td class="ws-nowrap">{{salida.manzana}}</td>
                   <td class="ws-nowrap">{{salida.nombre_lote}}</td>
                   <td>
-                    <span *ngIf="salida.id_tipo_salida=='P'">
+                    <span *ngIf="salida.id_tipo_salida=='P' || salida.id_tipo_salida=='A'">
                       {{salida.nombre_partida_padre?salida.nombre_partida_padre + ' / ' + salida.nombre_partida: salida.nombre_partida }}
                     </span>
                     <span *ngIf="salida.id_tipo_salida=='U'">
