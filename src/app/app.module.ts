@@ -132,6 +132,7 @@ import { TiposGastosResolverService } from './resolvers/tipos-gastos-resolver.se
 import { TrabajadoresResolverService } from './resolvers/trabajadores-resolver.service';
 import { ResidentesObraResolverService } from './resolvers/residentes-obra-resolver.service';
 import { ManzanasResolverService } from './resolvers/manzanas-resolver.service';
+import { FamiliasInsumosResolverService } from './resolvers/familias-insumos-resolver.service';
 
 
 //components
@@ -267,6 +268,10 @@ import { GraficasVentasComponent } from './components/admin/graficas-ventas/graf
 import { TableroGraficasComponent } from './components/admin/tablero-graficas/tablero-graficas.component';
 import { NgxChartsModule } from '../../node_modules/@swimlane/ngx-charts';
 import { GraficasVentasVendedorComponent } from './components/admin/graficas-ventas-vendedor/graficas-ventas-vendedor.component';
+import { CatalogoInsumoComponent } from './components/admin/catalogo-insumo/catalogo-insumo.component';
+import { EditarInsumoCatalogoDialogoComponent } from './components/admin/editar-insumo-catalogo-dialogo/editar-insumo-catalogo-dialogo.component';
+import { NuevoInsumoCatalogoDialogoComponent } from './components/admin/nuevo-insumo-catalogo-dialogo/nuevo-insumo-catalogo-dialogo.component';
+
 
 
 
@@ -301,10 +306,10 @@ export function getToken() {
     EstructuraObraComponent,
     PrototiposComponent,
     EditarPrototipoComponent,
-    UsuariosComponent,    
+    UsuariosComponent,
     CambiarPasswordDialogoComponent,
     ConfirmarBorradoDialogoComponent,
-    EditarUsuarioDialogoComponent, 
+    EditarUsuarioDialogoComponent,
     EditarClienteComponent,
     AgregarObraDialogoComponent,
     AgregarDocumentoDialogoComponent,
@@ -437,6 +442,9 @@ export function getToken() {
     GraficasVentasComponent,
     TableroGraficasComponent,
     GraficasVentasVendedorComponent,
+    CatalogoInsumoComponent,
+    EditarInsumoCatalogoDialogoComponent,
+    NuevoInsumoCatalogoDialogoComponent,
 
   ],
 
@@ -532,7 +540,9 @@ export function getToken() {
     InsumosAvanceDialogoComponent,
     AceptarSalidaAlertaDialogoComponent,
     CargoAbonoProveedoresDialogoComponent,
-    EditarCargoAbonoProveedoresDialogoComponent
+    EditarCargoAbonoProveedoresDialogoComponent,
+    EditarInsumoCatalogoDialogoComponent,
+    NuevoInsumoCatalogoDialogoComponent
 
   ],
 
@@ -603,7 +613,8 @@ export function getToken() {
     ReportesResolverService,
     EstadisticasAdminResolverService,
     ManzanasResolverService,
-    TareaService
+    TareaService,
+    FamiliasInsumosResolverService
 
   ],
   bootstrap: [AppComponent]
