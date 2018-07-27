@@ -50,6 +50,12 @@ export class VendedorService {
       .pipe(catchError(this.handleError("getGraficasVendedores")));
   }
 
+  //ok
+  getEquiposConVendedores() {
+    return this.http.get(this.url + 'get_equipos_con_vendedores/')
+      .pipe(catchError(this.handleError("getEquiposConVendedores")));
+  }
+
   private handleError<T>(operation = 'operation') {
     return (error: HttpErrorResponse) => {
 

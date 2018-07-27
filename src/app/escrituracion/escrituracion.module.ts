@@ -37,6 +37,7 @@ import { EditarComentarioPosventaDialogoComponent } from './components/editar-co
 import { AgregarComentarioPosventaDialogoComponent } from './components/agregar-comentario-posventa-dialogo/agregar-comentario-posventa-dialogo.component';
 import { AgregarFotoLotePosventaDialogoComponent } from './components/agregar-foto-lote-posventa-dialogo/agregar-foto-lote-posventa-dialogo.component';
 import { EstadoService } from './services/estado.service';
+import { DocumentoService } from './services/documento.service';
 
 
 
@@ -83,7 +84,8 @@ import { EstadoService } from './services/estado.service';
 
   ],
   providers: [
-    EstadoService
+    EstadoService,
+    DocumentoService
   ],
   entryComponents: [
     AgregarVendedorEquipoDialogoComponent,
