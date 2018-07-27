@@ -112,19 +112,27 @@ export class ArranqueComponent implements OnInit {
         let count = Object.keys(partidas).length;
         this.num_partidas_arrancadas += count;
 
+        let update = new Set();
         this.selection.selected.forEach(partida => {
           //console.log("buscamos la partida", partida);
 
 
+          // comprobamos que la partida haya sido devuelta
           if (partidas[partida.id_partida]) {
             partida.fecha_arranque = partidas[partida.id_partida];
-            //console.log("si está", partidas[partida.id_partida]);
 
+            if (partida.partida) {
+              //añadimos el id de la partida padre
+              //porque no podemos pasar la referencia
+              update.add(partida.partida);
+            }
           }
-          /*   else {
-              console.log("no se logró el arranque");            
-            } */
 
+        });
+
+        update.forEach(id_partida => {
+          let i = this.acordeon.findIndex(partida => partida.id_partida == id_partida);
+          this.updateSubpartidasArrancadas(this.acordeon[i]);
         });
 
         this.selection.clear();
@@ -158,12 +166,25 @@ export class ArranqueComponent implements OnInit {
         //console.log("partidas", partidas.count);
         this.num_partidas_arrancadas = partidas.num_partidas_arrancadas;
 
+        let update = new Set();
         this.selection.selected.forEach(partida => {
 
+          // comprobamos que la partida haya sido devuelta
           if (partidas.arranque[partida.id_partida]) {
             partida.fecha_arranque = null;
+
+            if (partida.partida) {
+              //añadimos el id de la partida padre
+              //porque no podemos pasar la referencia
+              update.add(partida.partida);
+            }
           }
 
+        });
+
+        update.forEach(id_partida => {
+          let i = this.acordeon.findIndex(partida => partida.id_partida == id_partida);
+          this.updateSubpartidasArrancadas(this.acordeon[i]);
         });
 
         this.selection.clear();
@@ -180,6 +201,19 @@ export class ArranqueComponent implements OnInit {
           panelClass: ["bg-danger", "text-white"]
         });
       });
+
+  }
+
+  updateSubpartidasArrancadas(partida) {
+    //console.log("updatePartida", partida.id_partida);
+    var count = 0;
+    for (var i = 0; i < partida.subpartidas.length; i++) {
+
+      if (partida.subpartidas[i].fecha_arranque !== null) {
+        count++;
+      }
+    }
+    partida.num_subpartidas_arrancadas = count;
 
   }
 
