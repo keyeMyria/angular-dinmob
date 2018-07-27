@@ -5,6 +5,7 @@ import { AgregarVendedorEquipoDialogoComponent } from '../agregar-vendedor-equip
 import { EditarEquipoDialogoComponent } from '../editar-equipo-dialogo/editar-equipo-dialogo.component';
 import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
 import { validateVerticalPosition } from '@angular/cdk/overlay';
+import { VendedorService } from '../../../services/vendedor.service';
 
 @Component({
   selector: 'app-equipos-ventas-escrituracion',
@@ -17,7 +18,8 @@ export class EquiposVentasEscrituracionComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private vendedorSrv: VendedorService
   ) {
     this.equipos = [
       {
@@ -82,6 +84,14 @@ export class EquiposVentasEscrituracionComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.vendedorSrv.getEquiposConVendedores()
+      .subscribe((equipos: any) => {
+
+      }, (error) => {
+
+      });
+
   }
 
   agregarEquipo() {
