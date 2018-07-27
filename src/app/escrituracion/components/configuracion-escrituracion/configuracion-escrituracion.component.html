@@ -8,18 +8,25 @@
           Estados Infonavit
         </mat-card-title>
 
-        <div class="form-group row" *ngFor="let estado_infonavit of estados_infonavit">
-          <label class="col-form-label col-sm-5">{{estado_infonavit.nombre}}</label>
-          <div class="col-sm-7">
-            <div class="input-group">
-              <input type="text" class="form-control">
-              <div class="input-group-append">
-                <span class="input-group-text" id="basic-addon2">días</span>
+        <form [formGroup]="formInfonavit" (ngSubmit)="guardarInfonavit()" id="id_formInfonavit">
+          <div class="form-group row" *ngFor="let estado_infonavit of estados.infonavit">
+            <label class="col-form-label col-sm-5">{{estado_infonavit.nombre}}</label>
+            <div class="col-sm-7">
+              <div class="input-group">
+                <input type="text" class="form-control">
+                <div class="input-group-append">
+                  <span class="input-group-text" id="basic-addon2">días</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </form>
 
+        <div class="form-group">
+          <div>
+            <button mat-raised-button class="btn-block" type="submit" color="primary" form="id_formInfonavit">GUARDAR</button>
+          </div>
+        </div>
 
       </mat-card>
 
@@ -29,18 +36,25 @@
           Estados Contado
         </mat-card-title>
 
-        <div class="form-group row" *ngFor="let estado_contado of estados_contado">
-          <label class="col-form-label col-sm-5">{{estado_contado.nombre}}</label>
-          <div class="col-sm-7">
-            <div class="input-group">
-              <input type="text" class="form-control">
-              <div class="input-group-append">
-                <span class="input-group-text" id="basic-addon2">días</span>
+        <form [formGroup]="formContado" (ngSubmit)="guardarContado()" id="id_formContado">
+          <div class="form-group row" *ngFor="let estado_contado of estados.contado">
+            <label class="col-form-label col-sm-5">{{estado_contado.nombre}}</label>
+            <div class="col-sm-7">
+              <div class="input-group">
+                <input type="text" class="form-control">
+                <div class="input-group-append">
+                  <span class="input-group-text" id="basic-addon2">días</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </form>
 
+        <div class="form-group">
+          <div>
+            <button mat-raised-button class="btn-block" type="submit" color="primary" form="id_formContado">GUARDAR</button>
+          </div>
+        </div>
 
       </mat-card>
 
@@ -50,18 +64,25 @@
           Estados Fovisste
         </mat-card-title>
 
-        <div class="form-group row" *ngFor="let estado_fovissste of estados_fovissste">
-          <label class="col-form-label col-sm-5">{{estado_fovissste.nombre}}</label>
-          <div class="col-sm-7">
-            <div class="input-group">
-              <input type="text" class="form-control">
-              <div class="input-group-append">
-                <span class="input-group-text" id="basic-addon2">días</span>
+        <form [formGroup]="formFovissste" (ngSubmit)="guardarFovissste()" id="id_formFovissste">
+          <div class="form-group row" *ngFor="let estado_fovissste of estados.fovissste">
+            <label class="col-form-label col-sm-5">{{estado_fovissste.nombre}}</label>
+            <div class="col-sm-7">
+              <div class="input-group">
+                <input type="text" class="form-control">
+                <div class="input-group-append">
+                  <span class="input-group-text" id="basic-addon2">días</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </form>
 
+        <div class="form-group">
+          <div>
+            <button mat-raised-button class="btn-block" type="submit" color="primary" form="id_formFovissste">GUARDAR</button>
+          </div>
+        </div>
 
       </mat-card>
 
@@ -75,18 +96,25 @@
           Estados Bancos
         </mat-card-title>
 
-        <div class="form-group row" *ngFor="let estado_bancos of estados_bancos">
-          <label class="col-form-label col-sm-5">{{estado_bancos.nombre}}</label>
-          <div class="col-sm-7">
-            <div class="input-group">
-              <input type="text" class="form-control">
-              <div class="input-group-append">
-                <span class="input-group-text" id="basic-addon2">días</span>
+        <form [formGroup]="formBancos" (ngSubmit)="guardarBancos()" id="id_formBancos">
+          <div class="form-group row" *ngFor="let estado_banco of estados.banco">
+            <label class="col-form-label col-sm-5">{{estado_banco.nombre}}</label>
+            <div class="col-sm-7">
+              <div class="input-group">
+                <input type="text" class="form-control">
+                <div class="input-group-append">
+                  <span class="input-group-text" id="basic-addon2">días</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </form>
 
+        <div class="form-group">
+          <div>
+            <button mat-raised-button class="btn-block" type="submit" color="primary" form="id_formBancos">GUARDAR</button>
+          </div>
+        </div>
 
       </mat-card>
 
@@ -96,18 +124,25 @@
           Estados Cofinanciamiento
         </mat-card-title>
 
-        <div class="form-group row" *ngFor="let estado_cofinanciamiento of estados_cofinanciamiento">
-          <label class="col-form-label col-sm-5">{{estado_cofinanciamiento.nombre}}</label>
-          <div class="col-sm-7">
-            <div class="input-group">
-              <input type="text" class="form-control">
-              <div class="input-group-append">
-                <span class="input-group-text" id="basic-addon2">días</span>
+        <form [formGroup]="formConfinanciamiento" (ngSubmit)="guardarCofinanciamiento()" id="id_formConfinanciamiento">
+          <div class="form-group row" *ngFor="let estado_cofinanciamiento of estados.cofinanciamiento">
+            <label class="col-form-label col-sm-5">{{estado_cofinanciamiento.nombre}}</label>
+            <div class="col-sm-7">
+              <div class="input-group">
+                <input type="text" class="form-control">
+                <div class="input-group-append">
+                  <span class="input-group-text" id="basic-addon2">días</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </form>
 
+        <div class="form-group">
+          <div>
+            <button mat-raised-button class="btn-block" type="submit" color="primary" form="id_formConfinanciamiento">GUARDAR</button>
+          </div>
+        </div>
 
       </mat-card>
 
