@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import * as moment from 'moment';
+import { EstadoService } from '../../services/estado.service';
 
 @Component({
   selector: 'app-configuracion-escrituracion',
@@ -173,13 +174,20 @@ export class ConfiguracionEscrituracionComponent implements OnInit {
     }
   ]
 
-
+  estados: any = [];
   constructor(
     private fb: FormBuilder,
+    private estadoSrv: EstadoService
   ) {
   }
 
   ngOnInit() {
+    this.estadoSrv.getTodosEstadosEscrituracion()
+      .subscribe((estados: any) => {
+        this.estados = estados;
+      }, (error) => {
+
+      });
   }
 
   guardar() {
