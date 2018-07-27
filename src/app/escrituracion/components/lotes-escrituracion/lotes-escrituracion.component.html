@@ -21,12 +21,9 @@
                 <tr>
                   <th>Manzana</th>
                   <th>Lote</th>
-                  <th style="width: 60px">DTU</th>
-                  <th>Apartado</th>
-                  <th>Checklist</th>
-                  <th>infonavit</th>
-                  <th>Firma</th>
-                  <th>Entrega</th>
+                  <th>DTU</th>
+                  <th>Estado</th>
+                  <th>Fecha estado</th>
                   <th style="width: 40px"></th>
                   <th style="width: 50px"></th>
 
@@ -34,35 +31,20 @@
               </thead>
               <tbody>
                 <tr *ngFor="let lote of lotes">
-                  <td class="ws-nowrap">{{lote.manzana}}</td>
-                  <td class="ws-nowrap">{{lote.nombre}}</td>
-                  <td class="ws-nowrap text-center">
+                  <td>{{lote.manzana}}</td>
+                  <td>{{lote.nombre}}</td>
+                  <td class="ws-nowrap">
                     <span *ngIf="lote.dtu; else elseDtu">{{lote.dtu}}</span>
                     <!-- <i class="fa fa-check-square text-success" *ngIf="lote.dtu; else elseDtu"></i> -->
                     <ng-template #elseDtu>
                       <i class="fa fa-window-close text-secondary"></i>
                     </ng-template>
                   </td>
-                  <td class="ws-nowrap">
-                    <span class="badge badge-primary" *ngIf="lote.estado =='1'; else elseApartado">{{lote.apartado}}</span>
-                    <ng-template #elseApartado>{{lote.apartado}}</ng-template>
+                  <td>
+                    <span class="badge badge-primary">Apartado</span>
+                    <!-- <ng-template #elseApartado>{{lote.apartado}}</ng-template> -->
                   </td>
-                  <td class="ws-nowrap">
-                    <span class="badge badge-primary" *ngIf="lote.estado =='2'; else elseChecklist">{{lote.checklist}}</span>
-                    <ng-template #elseChecklist>{{lote.checklist}}</ng-template>
-                  </td>
-                  <td class="ws-nowrap">
-                    <span class="badge badge-primary" *ngIf="lote.estado =='3'; else elseInfonavit">{{lote.infonavit}}</span>
-                    <ng-template #elseInfonavit>{{lote.infonavit}}</ng-template>
-                  </td>
-                  <td class="ws-nowrap">
-                    <span class="badge badge-primary" *ngIf="lote.estado =='4'; else elseFirma">{{lote.firma}}</span>
-                    <ng-template #elseFirma>{{lote.firma}}</ng-template>
-                  </td>
-                  <td class="ws-nowrap">
-                    <span class="badge badge-primary" *ngIf="lote.estado =='5'; else elseEntrega">{{lote.entrega}}</span>
-                    <ng-template #elseEntrega>{{lote.entrega}}</ng-template>
-                  </td>
+                  <td>{{lote.apartado}}</td>
                   <td matTooltip="Alerta">
                     <i class="fa fa-exclamation-circle text-danger" *ngIf="lote.alerta == '1'"></i>
                   </td>
