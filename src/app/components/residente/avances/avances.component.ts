@@ -127,6 +127,8 @@ export class AvancesComponent implements OnInit {
             partida.fecha_liberacion = null;
 
             if (partida.partida) {
+              //añadimos el id de la partida padre
+              //porque no podemos pasar la referencia
               update.add(partida.partida);
             }
           }
@@ -217,6 +219,8 @@ export class AvancesComponent implements OnInit {
             partida.fecha_liberacion = null;
 
             if (partida.partida) {
+              //añadimos el id de la partida padre
+              //porque no podemos pasar la referencia
               update.add(partida.partida);
             }
 
