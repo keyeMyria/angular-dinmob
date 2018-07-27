@@ -21,19 +21,18 @@
                 <tr>
                   <th>Manzana</th>
                   <th>Lote</th>
-                  <th>DTU</th>
+                  <th class="text-center">DTU</th>
                   <th>Estado</th>
                   <th>Fecha estado</th>
                   <th style="width: 40px"></th>
-                  <th style="width: 50px"></th>
-
+                  <th style="width: 40px"></th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let lote of lotes">
-                  <td>{{lote.manzana}}</td>
-                  <td>{{lote.nombre}}</td>
-                  <td class="ws-nowrap">
+                  <td class="ws-nowrap">{{lote.manzana}}</td>
+                  <td class="ws-nowrap">{{lote.nombre}}</td>
+                  <td class="ws-nowrap text-center">
                     <span *ngIf="lote.dtu; else elseDtu">{{lote.dtu}}</span>
                     <!-- <i class="fa fa-check-square text-success" *ngIf="lote.dtu; else elseDtu"></i> -->
                     <ng-template #elseDtu>
@@ -44,7 +43,7 @@
                     <span class="badge badge-primary">Apartado</span>
                     <!-- <ng-template #elseApartado>{{lote.apartado}}</ng-template> -->
                   </td>
-                  <td>{{lote.apartado}}</td>
+                  <td class="ws-nowrap">{{lote.apartado}}</td>
                   <td matTooltip="Alerta">
                     <i class="fa fa-exclamation-circle text-danger" *ngIf="lote.alerta == '1'"></i>
                   </td>
