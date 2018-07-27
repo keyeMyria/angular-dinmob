@@ -36,6 +36,7 @@ import { LotesEnTramiteComponent } from './components/lotes-en-tramite/lotes-en-
 import { EditarComentarioPosventaDialogoComponent } from './components/editar-comentario-posventa-dialogo/editar-comentario-posventa-dialogo.component';
 import { AgregarComentarioPosventaDialogoComponent } from './components/agregar-comentario-posventa-dialogo/agregar-comentario-posventa-dialogo.component';
 import { AgregarFotoLotePosventaDialogoComponent } from './components/agregar-foto-lote-posventa-dialogo/agregar-foto-lote-posventa-dialogo.component';
+import { EstadoService } from './services/estado.service';
 
 
 
@@ -80,6 +81,9 @@ import { AgregarFotoLotePosventaDialogoComponent } from './components/agregar-fo
     AgregarFotoLotePosventaDialogoComponent,
 
 
+  ],
+  providers: [
+    EstadoService
   ],
   entryComponents: [
     AgregarVendedorEquipoDialogoComponent,
