@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material'
 import { EditarClienteEscrituracionDialogoComponent } from '../editar-cliente-escrituracion-dialogo/editar-cliente-escrituracion-dialogo.component';
 import { ConfirmarBorradoDialogoComponent } from "app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component";
+import { DocumentoService } from '../../services/documento.service';
 
 @Component({
   selector: 'app-clientes-escrituracion',
@@ -172,12 +173,22 @@ export class ClientesEscrituracionComponent implements OnInit {
     }
   ]
 
+
+  
   constructor(
     private dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private docSrv: DocumentoService
   ) { }
 
   ngOnInit() {
+
+    this.docSrv.getChecklist()
+      .subscribe((docs: any) => {
+
+      }, (error) => {
+
+      });
   }
 
   agregarCliente() {
