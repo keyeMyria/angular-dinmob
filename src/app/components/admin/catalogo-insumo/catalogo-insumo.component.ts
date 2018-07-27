@@ -36,9 +36,10 @@ export class CatalogoInsumoComponent implements OnInit {
     this.usuario = this.authSrv.usuario;
 
     this.route.data
-      .subscribe((data: { obras: any[], usuario: any }) => {
+      .subscribe((data: { obras: any[], usuario: any, familias: any[] }) => {
         //console.log("resultado resolve ", data);
         this.obras = data.obras;
+        this.familias = data.familias
         //this.usuario = data.usuario;
       });
 
@@ -46,7 +47,7 @@ export class CatalogoInsumoComponent implements OnInit {
       switchMap((params: ParamMap) => {
         if (params.has("obra")) {
           this.obra_selected = params.get("obra");
-          return this.insumoSrv.getMaterialesObra(params.get("obra"));
+          return this.insumoSrv.getInsumosObra(params.get("obra"));
         } else {
           return of([]);
         }

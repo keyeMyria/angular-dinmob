@@ -41,7 +41,8 @@
               <tr>
                 <th>Extra</th>
                 <th mat-sort-header="codigo">Código</th>
-                <th>Familia</th>
+                <th class="text-center">Familia</th>
+                <!-- <th>Especialidad</th> -->
                 <th mat-sort-header="insumo">Insumo</th>
                 <th>Unidad</th>
                 <th>Precio</th>
@@ -57,7 +58,12 @@
                   <i *ngIf="(material.extra === '0')" class="fa fa-window-minimize"></i>
                 </td>
                 <td>{{material.codigo}}</td>
-                <td>{{material.id_familia}}</td>
+                <td class="text-center">
+                  <span>{{material.familia}}</span>
+                  <br>
+                  <span>{{material.especialidad}}</span>
+                </td>
+                <!-- <td class="ws-nowrap">{{material.especialidad}}</td> -->
                 <td>{{material.insumo}}</td>
                 <td>{{material.unidad}}</td>
                 <td>{{material.precio | currency}}</td>

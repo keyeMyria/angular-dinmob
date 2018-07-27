@@ -874,7 +874,7 @@ export const ROUTES: Routes = [
                 canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService,
-                    //familias: FamiliasInsumosResolverService
+                    familias: FamiliasInsumosResolverService
                 },
                 data: {
                     permisos: [Rol.Administrador, Rol.Contabilidad, Rol.ControlAlmacen]

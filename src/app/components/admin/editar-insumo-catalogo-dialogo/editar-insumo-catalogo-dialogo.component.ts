@@ -24,7 +24,7 @@ export class EditarInsumoCatalogoDialogoComponent implements OnInit {
     private insumoSrv: InsumoService
   ) {
     this.form = this.fb.group({
-      id_familia: [null, Validators.required],
+      id_familia: [data.material.id_familia],
       codigo: [data.material.codigo, Validators.required],
       insumo: [data.material.insumo, Validators.required],
       unidad: [data.material.unidad, Validators.required],
@@ -44,7 +44,7 @@ export class EditarInsumoCatalogoDialogoComponent implements OnInit {
   }
 
   guardar() {
-    //console.log("ok", this.form.value);
+    console.log("ok", this.form.value);
 
     let insumo = this.clonar(this.form.value);
     if (insumo.precio) {

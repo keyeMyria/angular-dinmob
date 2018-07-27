@@ -40,13 +40,26 @@ export class NuevoInsumoCatalogoDialogoComponent implements OnInit {
   ngOnInit() {
   }
 
+  private clonar(objeto): any {
+
+    let strObject = JSON.stringify(objeto);
+    return JSON.parse(strObject);
+
+  }
+
   guardar() {
     //comprobamos que el código no exista
     let existe = this.data.materiales.find(mat => mat.codigo == this.form.value.codigo);
 
     //si no existe podemos crearlo
     if (existe == undefined) {
-      this.insumoSrv.createMaterial(this.form.value, this.data.obra)
+
+      let insumo = this.clonar(this.form.value);
+      if (insumo.precio) {
+        insumo.precio = insumo.precio.replace(/,/g, "");
+      }
+
+      this.insumoSrv.createMaterial(insumo, this.data.obra)
         .subscribe(insumo => {
           this.data.materiales.unshift(insumo);
           this.data.materiales.sort((a, b) => a.insumo > b.insumo ? 1 : -1);

@@ -6,7 +6,7 @@
       <label for="id_familia" class="col-form-label">Familia</label>
       <select id="id_familia" name="id_familia" formControlName="id_familia" class="form-control" disabled>
         <option [value]="">Seleccione familia</option>
-        <option [value]="familia.id_familia" *ngFor="let familia of data.familias">{{familia.tipo_familia}}</option>
+        <option [value]="f.id_familia" *ngFor="let f of data.familias">{{f.familia}} {{f.especialidad}}</option>
       </select>
     </div>
 
