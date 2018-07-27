@@ -1,30 +1,27 @@
-
 import { switchMap } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { EditarDocumentoDialogoComponent } from 'app/components/ventas/editar-documento-dialogo/editar-documento-dialogo.component';
-import { EditarMaterialDialogoComponent } from 'app/components/almacen/editar-material-dialogo/editar-material-dialogo.component';
 import { MatDialog, MatSnackBar, Sort } from '@angular/material';
-import { NuevoMaterialDialogoComponent } from 'app/components/almacen/nuevo-material-dialogo/nuevo-material-dialogo.component';
 import { InsumoService } from 'app/services/insumo.service';
 import { of } from "rxjs";
-import { ConfirmarBorradoDialogoComponent } from 'app/components/admin/confirmar-borrado-dialogo/confirmar-borrado-dialogo.component';
 import { Rol } from "../../../constantes/roles";
 import { AuthService } from '../../../services/auth.service';
+import { EditarInsumoCatalogoDialogoComponent } from '../editar-insumo-catalogo-dialogo/editar-insumo-catalogo-dialogo.component';
+import { NuevoInsumoCatalogoDialogoComponent } from '../nuevo-insumo-catalogo-dialogo/nuevo-insumo-catalogo-dialogo.component';
 
 @Component({
-  selector: 'app-inventario',
-  templateUrl: './inventario.component.html',
-  styleUrls: ['./inventario.component.scss']
+  selector: 'app-catalogo-insumo',
+  templateUrl: './catalogo-insumo.component.html',
+  styleUrls: ['./catalogo-insumo.component.scss']
 })
-export class InventarioComponent implements OnInit {
+export class CatalogoInsumoComponent implements OnInit {
   obras: any[] = [];
+  familias: any[] = [];
   obra_selected: string = "";
   materiales: any = [];
   materiales_filtrados: any = [];
   Rol = Rol;
   usuario: any;
-
 
   constructor(
     private route: ActivatedRoute,
@@ -36,7 +33,6 @@ export class InventarioComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
     this.usuario = this.authSrv.usuario;
 
     this.route.data
@@ -59,94 +55,15 @@ export class InventarioComponent implements OnInit {
         this.materiales = materiales;
         this.materiales_filtrados = this.materiales.slice();
       });
-
   }
 
-  editarMaterial(material) {
-    let dialogRef = this.dialog.open(EditarMaterialDialogoComponent, {
-      data: {
-        material: material,
-        materiales: this.materiales,
-        materiales_filtrados: this.materiales_filtrados
-      },
-      width: '500px'
-    });
-    dialogRef.afterClosed().subscribe(result => {
-
-      if (result === true) {
-
-        this.snackBar.open("Inventario Actualizado", "", {
-          duration: 2000,
-          panelClass: ["bg-success", "text-white"]
-        });
-
-      } else if (result && result.error) {
-
-        this.snackBar.open(result.error, "", {
-          duration: 3000,
-          panelClass: ["bg-danger", "text-white"]
-        });
-
-      }
-
-    });
-  }
-
-  delInventario(material) {
-    let dialogRef = this.dialog.open(ConfirmarBorradoDialogoComponent, {
-      data: {
-        title: "Eliminar Insumo",
-        content: `¿Desea eliminar el Insumo: ${material.insumo}?`
-      },
-      width: '500px',
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === true) {
-
-        this.insumoSrv.delInsumo(material.id_insumo)
-          .subscribe((res: any) => {
-
-            if (res.count === 1) {
-
-              let i = this.materiales.indexOf(material);
-              this.materiales.splice(i, 1);
-
-              let j = this.materiales_filtrados.indexOf(material);
-              this.materiales_filtrados.splice(j, 1);
-
-
-              this.snackBar.open("Material Eliminado", "", {
-                duration: 2000,
-                panelClass: ["bg-success", "text-white"]
-              });
-
-            } else {
-              this.snackBar.open("Ha ocurrido un error", "", {
-                duration: 3000,
-                panelClass: ["bg-danger", "text-white"]
-              });
-            }
-
-          }, (error) => {
-
-            this.snackBar.open("Ha ocurrido un error de conexión. Inténtelo más tarde", "", {
-              duration: 3000,
-              panelClass: ["bg-danger", "text-white"]
-            });
-
-          });
-      }
-    });
-
-  }
-
-  nuevoMaterial() {
-    let dialogRef = this.dialog.open(NuevoMaterialDialogoComponent, {
+  nuevoInsumo() {
+    let dialogRef = this.dialog.open(NuevoInsumoCatalogoDialogoComponent, {
       data: {
         materiales: this.materiales,
         materiales_filtrados: this.materiales_filtrados,
-        obra: this.obra_selected
+        obra: this.obra_selected,
+        familias: this.familias
       },
       width: '500px'
     });
@@ -172,6 +89,36 @@ export class InventarioComponent implements OnInit {
     });
   }
 
+  editarInsumo(material) {
+    let dialogRef = this.dialog.open(EditarInsumoCatalogoDialogoComponent, {
+      data: {
+        material: material,
+        materiales: this.materiales,
+        materiales_filtrados: this.materiales_filtrados,
+        familias: this.familias
+      },
+      width: '500px'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result === true) {
+
+        this.snackBar.open("Insumo Actualizado", "", {
+          duration: 2000,
+          panelClass: ["bg-success", "text-white"]
+        });
+
+      } else if (result && result.error) {
+
+        this.snackBar.open(result.error, "", {
+          duration: 3000,
+          panelClass: ["bg-danger", "text-white"]
+        });
+
+      }
+
+    });
+  }
 
   cargarObra(id_obra) {
 

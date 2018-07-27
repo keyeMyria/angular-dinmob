@@ -111,6 +111,8 @@ import { SaldoProveedoresComponent } from './components/admin/saldo-proveedores/
 import { MaterialesEjecutarComponent } from './components/almacen/materiales-ejecutar/materiales-ejecutar.component';
 import { TableroGraficasComponent } from './components/admin/tablero-graficas/tablero-graficas.component';
 import { GraficasVentasComponent } from './components/admin/graficas-ventas/graficas-ventas.component';
+import { CatalogoInsumoComponent } from './components/admin/catalogo-insumo/catalogo-insumo.component';
+import { FamiliasInsumosResolverService } from './resolvers/familias-insumos-resolver.service';
 
 
 export const ROUTES: Routes = [
@@ -832,7 +834,7 @@ export const ROUTES: Routes = [
             },
             {
                 path: 'tablero-jefe-frente', component: TableroJefeFrenteComponent,
-                canActivate: [AuthGuard],              
+                canActivate: [AuthGuard],
                 data: {
                     permisos: [Rol.Administrador, Rol.JefeFrente]
                 }
@@ -862,6 +864,17 @@ export const ROUTES: Routes = [
                 canActivate: [AuthGuard],
                 resolve: {
                     obras: ObrasUsuarioResolverService,
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.Contabilidad, Rol.ControlAlmacen]
+                }
+            },
+            {
+                path: 'catalogo-insumo', component: CatalogoInsumoComponent,
+                canActivate: [AuthGuard],
+                resolve: {
+                    obras: ObrasUsuarioResolverService,
+                    //familias: FamiliasInsumosResolverService
                 },
                 data: {
                     permisos: [Rol.Administrador, Rol.Contabilidad, Rol.ControlAlmacen]
