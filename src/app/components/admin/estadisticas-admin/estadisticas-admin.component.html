@@ -129,6 +129,16 @@
     <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-2">
       <div class="card mat-elevation-z2 border-danger" style="border-width: 2px">
         <div class="card-body">
+          <h3>{{(estadisticas?.devoluciones_cancelados || 0) |currency }}</h3>
+          <p>DEVOLUCIONES CANCELADOS</p>
+          <i class="material-icons mat-icon-card">attach_money</i>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 p-2">
+      <div class="card mat-elevation-z2 border-danger" style="border-width: 2px">
+        <div class="card-body">
           <h3>{{(estadisticas?.devoluciones_pendientes || 0) |currency }}</h3>
           <p>DEVOLUCIONES PENDIENTES</p>
           <i class="material-icons mat-icon-card">attach_money</i>
