@@ -113,6 +113,8 @@ import { TableroGraficasComponent } from './components/admin/tablero-graficas/ta
 import { GraficasVentasComponent } from './components/admin/graficas-ventas/graficas-ventas.component';
 import { CatalogoInsumoComponent } from './components/admin/catalogo-insumo/catalogo-insumo.component';
 import { FamiliasInsumosResolverService } from './resolvers/familias-insumos-resolver.service';
+import { DevolucionesCanceladosComponent } from './components/ventas/devoluciones-cancelados/devoluciones-cancelados.component';
+import { DevolucionesPendientesComponent } from './components/ventas/devoluciones-pendientes/devoluciones-pendientes.component';
 
 
 export const ROUTES: Routes = [
@@ -132,11 +134,11 @@ export const ROUTES: Routes = [
         },
         children: [
             //{ path: '', redirectTo: 'tablero', pathMatch: 'full' },
-            {
+           /*  {
                 path: 'escrituracion',
                 loadChildren: 'app/escrituracion/escrituracion.module#EscrituracionModule',
                 data: { preload: true }
-            },
+            }, */
             {
                 path: 'clientes', component: ClientesComponent,
                 canActivate: [AuthGuard],
@@ -655,6 +657,28 @@ export const ROUTES: Routes = [
                 resolve: {
                     obras: ObrasUsuarioResolverService,
                     tipos: TiposPagoResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.Ventas, Rol.Contabilidad]
+                }
+            },
+            {
+                path: 'devoluciones-cancelados', component: DevolucionesCanceladosComponent,
+                canActivate: [AuthGuard],
+                resolve: {
+                    obras: ObrasUsuarioResolverService,
+                    //tipos: TiposPagoResolverService
+                },
+                data: {
+                    permisos: [Rol.Administrador, Rol.Ventas, Rol.Contabilidad]
+                }
+            },
+            {
+                path: 'devoluciones-pendientes', component: DevolucionesPendientesComponent,
+                canActivate: [AuthGuard],
+                resolve: {
+                    obras: ObrasUsuarioResolverService,
+                    //tipos: TiposPagoResolverService
                 },
                 data: {
                     permisos: [Rol.Administrador, Rol.Ventas, Rol.Contabilidad]

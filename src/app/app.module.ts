@@ -272,6 +272,8 @@ import { GraficasVentasVendedorComponent } from './components/admin/graficas-ven
 import { CatalogoInsumoComponent } from './components/admin/catalogo-insumo/catalogo-insumo.component';
 import { EditarInsumoCatalogoDialogoComponent } from './components/admin/editar-insumo-catalogo-dialogo/editar-insumo-catalogo-dialogo.component';
 import { NuevoInsumoCatalogoDialogoComponent } from './components/admin/nuevo-insumo-catalogo-dialogo/nuevo-insumo-catalogo-dialogo.component';
+import { DevolucionesCanceladosComponent } from './components/ventas/devoluciones-cancelados/devoluciones-cancelados.component';
+import { DevolucionesPendientesComponent } from './components/ventas/devoluciones-pendientes/devoluciones-pendientes.component';
 
 
 
@@ -446,6 +448,8 @@ export function getToken() {
     CatalogoInsumoComponent,
     EditarInsumoCatalogoDialogoComponent,
     NuevoInsumoCatalogoDialogoComponent,
+    DevolucionesCanceladosComponent,
+    DevolucionesPendientesComponent,
 
   ],
 

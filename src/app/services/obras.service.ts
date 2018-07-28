@@ -33,7 +33,6 @@ export class ObrasService {
   }
 
 
-
   //ok
   getAcordeonManzanas(id_obra) {
     return this.http.get(this.url + 'get_manzanas_lotes/' + id_obra)
@@ -144,6 +143,18 @@ export class ObrasService {
   getInsumosPendientes(id_obra, params) {
     return this.http.post(this.url + "get_insumos_pendientes/" + id_obra, { params: params })
       .pipe(catchError(this.handleError("getInsumosPendientes")));
+  }
+
+  //ok
+  getVentasDevolucionesPendientes(id_obra) {
+    return this.http.get(this.url + "get_devoluciones_pendientes/" + id_obra, {})
+      .pipe(catchError(this.handleError("getVentasDevolucionesPendientes")));
+  }
+
+  //ok
+  getVentasCanceladasDevoluciones(id_obra) {
+    return this.http.get(this.url + "get_devoluciones_cancelados/" + id_obra, {})
+      .pipe(catchError(this.handleError("getVentasCanceladasDevoluciones")));
   }
 
 

@@ -1,0 +1,100 @@
+<div class="container-fluid mt-2 mb-5">
+    <div class="row">
+      <div class="col-12">
+  
+  
+        <div>
+          <mat-form-field class="w-100">
+            <mat-select placeholder="Obra" [(ngModel)]="obra_selected" (selectionChange)="cargarObra(obra_selected)">
+              <mat-option *ngFor="let obra of obras" [value]="obra.id_obra">{{ obra.nombre }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+  
+  
+  
+        <div class="card">
+          <div class="card-header">
+            Devoluciones Pendientes Lotes Cancelados
+          </div>
+  
+          <div class="container-fluid">
+  
+            <div class="form-row">
+  
+              <div class="col-12 col-sm-4 py-3">
+                <div class="text-center">
+                  <h4 class="text-primary">
+                    {{(totales?.por_devolver||0) |currency}}
+                  </h4>
+                  <span>POR DEVOLVER</span>
+                </div>
+              </div>
+  
+              <div class="col-12 col-sm-4 py-3">
+                <div class="text-center">
+                  <h4 class="text-success">
+                    {{(totales?.devuelto||0) |currency}}
+                  </h4>
+                  <span>-DEVUELTO</span>
+                </div>
+              </div>
+  
+              <div class="col-12 col-sm-4 py-3">
+                <div class="text-center">
+                  <h4 class="text-danger">
+                    {{(totales?.pendiente||0 )|currency}}
+                  </h4>
+                  <span>=PENDIENTE</span>
+                </div>
+              </div>
+  
+            </div>
+  
+          </div>
+  
+          <div>
+            <div class="table-responsive">
+              <table class="table table-hover table-striped table-align-middle">
+                <thead>
+                  <tr>
+                    <th>Manzana</th>
+                    <th>Lote</th>
+                    <th>Cliente</th>
+                    <th>Valor Opereción</th>
+                    <th>Pagado</th>                    
+                    <th>Devuelto</th>
+                    <th>Pendiente</th>
+                    <th></th>
+                  </tr>
+                </thead>
+  
+                <tbody>
+                  <tr *ngFor="let venta of ventas">
+                    <td class="ws-nowrap">{{venta.manzana}}</td>
+                    <td class="ws-nowrap">{{venta.lote}}</td>
+                    <td>{{venta.cliente}}</td>
+                    <td>{{venta.valor_operacion|currency}}</td> 
+                    <td class="table-primary">{{venta.pagado|currency}}</td>
+                    <td class="table-success">{{venta.devuelto|currency}}</td>
+                    <td class="table-danger">{{venta.pendiente|currency}}</td>
+                    <td class="text-right ws-nowrap">
+                      <button class="btn btn-sm btn-outline-dark" (click)="resumenVenta(venta.id_compra)">
+                          <i class="fa fa-eye"></i>
+                      </button>
+                    </td>
+                  </tr>
+  
+                </tbody>
+              </table>
+            </div>
+          </div>
+  
+  
+        </div>
+  
+  
+      </div>
+    </div>
+  
+  </div>

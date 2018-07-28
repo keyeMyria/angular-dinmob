@@ -122,6 +122,26 @@
     </div>
 
     <div class="col-12 col-md-6 col-lg-4 p-2">
+      <a class="no-decoration" [routerLink]="['/devoluciones-cancelados',obra_default]">
+        <mat-card class="d-flex align-items-center card-tablero">
+          <mat-card-title class="mb-0">Devoluciones Lotes Cancelados</mat-card-title>
+          <span class="spacer"></span>
+          <i class="material-icons icono-tablero">attach_money</i>
+        </mat-card>
+      </a>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-4 p-2">
+      <a class="no-decoration" [routerLink]="['/devoluciones-pendientes',obra_default]">
+        <mat-card class="d-flex align-items-center card-tablero">
+          <mat-card-title class="mb-0">Devoluciones Pendientes</mat-card-title>
+          <span class="spacer"></span>
+          <i class="material-icons icono-tablero">attach_money</i>
+        </mat-card>
+      </a>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-4 p-2">
       <a class="no-decoration" [routerLink]="['/reportes',obra_default]">
         <mat-card class="d-flex align-items-center card-tablero">
           <mat-card-title class="mb-0">Reportes</mat-card-title>
